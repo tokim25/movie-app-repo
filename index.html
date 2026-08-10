@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Movie Night</title>
+<style>
+  :root{
+    --bg:#ffffff;
+    --bg-sub:#f5f5f7;
+    --ink:#1d1d1f;
+    --ink-soft:#6e6e73;
+    --ink-faint:#86868b;
+    --line:#e5e5e5;
+    --blue:#0071e3;
+    --check:#1d1d1f;
+  }
+  *{box-sizing:border-box; -webkit-font-smoothing:antialiased;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    min-height:100vh;
+    padding-bottom:60px;
+  }
+  @media (prefers-reduced-motion: no-preference){
+    .row{ transition: opacity 0.25s ease; }
+  }
+
+  header{
+    padding:64px 20px 28px;
+    text-align:center;
+    max-width:680px;
+    margin:0 auto;
+  }
+  h1{
+    font-size:clamp(34px,7vw,48px);
+    font-weight:700;
+    letter-spacing:-0.02em;
+    margin:0 0 8px;
+    color:var(--ink);
+  }
+  .subtitle{
+    color:var(--ink-soft);
+    font-size:17px;
+    line-height:1.4;
+    max-width:440px;
+    margin:0 auto;
+    font-weight:400;
+  }
+  .stats{
+    display:flex;
+    justify-content:center;
+    gap:28px;
+    margin-top:24px;
+    font-size:13px;
+    color:var(--ink-faint);
+  }
+  .stats b{
+    display:block;
+    color:var(--ink);
+    font-size:22px;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+
+  .divider{
+    max-width:680px;
+    margin:32px auto 0;
+    border:none;
+    border-top:1px solid var(--line);
+  }
+
+  .controls{
+    max-width:680px;
+    margin:24px auto 0;
+    padding:0 20px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .controls input[type="text"]{
+    flex:1 1 180px;
+    background:var(--bg-sub);
+    border:1px solid transparent;
+    color:var(--ink);
+    padding:11px 14px;
+    border-radius:10px;
+    font-family:inherit;
+    font-size:15px;
+  }
+  .controls input[type="text"]:focus{
+    outline:2px solid var(--blue);
+    outline-offset:1px;
+    background:var(--bg);
+  }
+  .seg{
+    display:flex;
+    background:var(--bg-sub);
+    border-radius:10px;
+    overflow:hidden;
+  }
+  .seg button{
+    background:none;
+    border:none;
+    color:var(--ink-soft);
+    padding:11px 14px;
+    font-family:inherit;
+    font-size:14px;
+    cursor:pointer;
+    font-weight:500;
+  }
+  .seg button.active{ background:var(--bg); color:var(--ink); box-shadow:0 1px 3px rgba(0,0,0,0.08); border-radius:8px; margin:2px; padding:9px 12px; }
+
+  .sortbar{
+    max-width:680px;
+    margin:16px auto 0;
+    padding:0 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:13px;
+    color:var(--ink-faint);
+    gap:8px;
+  }
+  .sortbar button{
+    background:none;
+    border:none;
+    color:var(--blue);
+    padding:4px 0;
+    font-family:inherit;
+    font-size:13px;
+    cursor:pointer;
+    font-weight:500;
+  }
+
+  ul#list{
+    list-style:none;
+    max-width:680px;
+    margin:8px auto 0;
+    padding:0 20px;
+  }
+  .row{
+    border-bottom:1px solid var(--line);
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    padding:16px 0;
+  }
+  .row.checked .title{ color:var(--ink-faint); }
+  .row.checked .num{ color:#d2d2d7; }
+
+  .num{
+    font-size:15px;
+    font-weight:400;
+    color:#c7c7cc;
+    width:24px;
+    text-align:right;
+    flex-shrink:0;
+    padding-top:2px;
+    font-variant-numeric:tabular-nums;
+  }
+  .check{
+    width:24px; height:24px;
+    border-radius:50%;
+    border:1.5px solid #c7c7cc;
+    flex-shrink:0;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:transparent;
+    padding:0;
+    margin-top:1px;
+  }
+  .check.on{ background:var(--check); border-color:var(--check); }
+  .check.on::after{ content:"\2713"; color:#fff; font-size:13px; font-weight:700; }
+  .info{ flex:1; min-width:0; }
+  .title{
+    font-weight:600;
+    font-size:17px;
+    line-height:1.35;
+    letter-spacing:-0.01em;
+    cursor:pointer;
+  }
+  .meta{
+    font-size:13px;
+    color:var(--ink-faint);
+    margin-top:4px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  .badge{
+    color:var(--ink-soft);
+  }
+  .badge.csm{ color:var(--ink); font-weight:500; }
+  .detailLink{
+    background:none;
+    border:none;
+    color:var(--blue);
+    font-family:inherit;
+    font-size:13px;
+    font-weight:500;
+    cursor:pointer;
+    padding:0;
+  }
+
+  .moves{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+    flex-shrink:0;
+  }
+  .moves button{
+    width:26px; height:22px;
+    background:none;
+    border:none;
+    color:var(--ink-faint);
+    font-size:12px;
+    cursor:pointer;
+    line-height:1;
+    padding:0;
+  }
+  .moves button:hover:not(:disabled){ color:var(--blue); }
+  .moves button:disabled{ opacity:0.2; cursor:default; }
+
+  .detail{
+    max-width:680px;
+    margin:0 auto;
+    padding:0 20px 16px 58px;
+    font-size:14.5px;
+    color:var(--ink-soft);
+    line-height:1.6;
+    display:none;
+    border-bottom:1px solid var(--line);
+  }
+  .detail.open{ display:block; }
+
+  .empty{
+    text-align:center;
+    color:var(--ink-faint);
+    padding:60px 20px;
+    font-size:15px;
+  }
+  .reset{
+    display:block;
+    margin:32px auto 0;
+    background:none;
+    border:none;
+    color:var(--ink-faint);
+    padding:8px 16px;
+    font-family:inherit;
+    font-size:13px;
+    cursor:pointer;
+    text-align:center;
+    width:100%;
+  }
+  .reset:hover{ color:var(--blue); }
+  .toast{
+    position:fixed;
+    bottom:24px; left:50%;
+    transform:translateX(-50%);
+    background:var(--ink);
+    color:#fff;
+    padding:10px 18px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:500;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 0.3s;
+    z-index:10;
+  }
+  .toast.show{ opacity:1; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Movie Night.</h1>
+  <div class="subtitle">136 family favorites from two curated lists, with what to expect from Common Sense Media before you press play.</div>
+  <div class="stats">
+    <div><b id="statChecked">0</b>Watched</div>
+    <div><b id="statLeft">136</b>To watch</div>
+  </div>
+</header>
+
+<hr class="divider">
+
+<div class="controls">
+  <input type="text" id="search" placeholder="Search">
+  <div class="seg" id="filterSeg">
+    <button data-filter="all" class="active">All</button>
+    <button data-filter="todo">To watch</button>
+    <button data-filter="done">Watched</button>
+  </div>
+</div>
+<div class="sortbar">
+  <span>Saved privately to this device</span>
+  <button id="resortBtn">Reset order</button>
+</div>
+
+<ul id="list"></ul>
+<div class="empty" id="emptyMsg" style="display:none;">No movies match your search.</div>
+
+<button class="reset" id="clearAllBtn">Clear all watched marks</button>
+
+<div class="toast" id="toast"></div>
+
+<script src="data.js"></script>
+<script src="data-rt.js"></script>
+<script>
+const MOVIES = MOVIES_BASE.concat(typeof MOVIES_RT !== 'undefined' ? MOVIES_RT : []);
+const STORAGE_KEY = "family-movie-watchlist-v1";
+let state = { order: MOVIES.map((_,i)=>i), checked: {} };
+let filter = "all";
+let query = "";
+let openDetail = null;
+
+const listEl = document.getElementById('list');
+const emptyMsg = document.getElementById('emptyMsg');
+const toastEl = document.getElementById('toast');
+
+function showToast(msg){
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(()=>toastEl.classList.remove('show'), 1400);
+}
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw){
+      const parsed = JSON.parse(raw);
+      if(parsed.order && parsed.order.length === MOVIES.length){
+        state = parsed;
+      } else if (parsed.checked) {
+        state.checked = parsed.checked;
+      }
+    }
+  }catch(e){ /* no saved state yet, or storage unavailable */ }
+  render();
+}
+
+function saveState(){
+  try{
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }catch(e){ console.error('save failed', e); }
+}
+
+function toggleCheck(idx){
+  state.checked[idx] = !state.checked[idx];
+  saveState();
+  render();
+}
+
+function move(idx, dir){
+  const pos = state.order.indexOf(idx);
+  const newPos = pos + dir;
+  if(newPos < 0 || newPos >= state.order.length) return;
+  const arr = state.order;
+  [arr[pos], arr[newPos]] = [arr[newPos], arr[pos]];
+  saveState();
+  render();
+}
+
+function toggleDetail(idx){
+  openDetail = openDetail === idx ? null : idx;
+  render();
+}
+
+function resetOrder(){
+  state.order = MOVIES.map((_,i)=>i);
+  saveState();
+  render();
+  showToast('Order reset');
+}
+
+function clearAllChecks(){
+  state.checked = {};
+  saveState();
+  render();
+  showToast('Watched marks cleared');
+}
+
+function render(){
+  const q = query.trim().toLowerCase();
+  let visibleOrder = state.order.filter(idx=>{
+    const m = MOVIES[idx];
+    if(q && !m.t.toLowerCase().includes(q)) return false;
+    const isChecked = !!state.checked[idx];
+    if(filter === 'todo' && isChecked) return false;
+    if(filter === 'done' && !isChecked) return false;
+    return true;
+  });
+
+  listEl.innerHTML = '';
+  emptyMsg.style.display = visibleOrder.length ? 'none' : 'block';
+
+  visibleOrder.forEach((idx) => {
+    const m = MOVIES[idx];
+    const isChecked = !!state.checked[idx];
+    const globalPos = state.order.indexOf(idx);
+
+    const li = document.createElement('li');
+    li.className = 'row' + (isChecked ? ' checked' : '');
+
+    const num = document.createElement('div');
+    num.className = 'num';
+    num.textContent = (globalPos+1);
+
+    const check = document.createElement('button');
+    check.className = 'check' + (isChecked ? ' on' : '');
+    check.setAttribute('aria-label', 'Mark watched');
+    check.onclick = () => toggleCheck(idx);
+
+    const info = document.createElement('div');
+    info.className = 'info';
+    const title = document.createElement('div');
+    title.className = 'title';
+    title.textContent = `${m.t} (${m.y})`;
+    title.onclick = () => toggleDetail(idx);
+    const meta = document.createElement('div');
+    meta.className = 'meta';
+    const listLabel = m.source === 'RT' ? 'RT' : 'List';
+    meta.innerHTML = `<span class="badge">${listLabel} ${m.la}</span><span class="badge csm">CSM ${m.ca}</span><button class="detailLink">${openDetail===idx ? 'Hide' : 'Details'}</button>`;
+    meta.querySelector('.detailLink').onclick = () => toggleDetail(idx);
+    info.appendChild(title);
+    info.appendChild(meta);
+
+    const moves = document.createElement('div');
+    moves.className = 'moves';
+    const up = document.createElement('button');
+    up.textContent = '\u25b2';
+    up.disabled = globalPos === 0;
+    up.onclick = () => move(idx, -1);
+    const down = document.createElement('button');
+    down.textContent = '\u25bc';
+    down.disabled = globalPos === state.order.length - 1;
+    down.onclick = () => move(idx, 1);
+    moves.appendChild(up);
+    moves.appendChild(down);
+
+    li.appendChild(num);
+    li.appendChild(check);
+    li.appendChild(info);
+    li.appendChild(moves);
+    listEl.appendChild(li);
+
+    if(openDetail === idx){
+      const detail = document.createElement('div');
+      detail.className = 'detail open';
+      detail.textContent = m.full;
+      listEl.appendChild(detail);
+    }
+  });
+
+  const checkedCount = Object.values(state.checked).filter(Boolean).length;
+  document.getElementById('statChecked').textContent = checkedCount;
+  document.getElementById('statLeft').textContent = MOVIES.length - checkedCount;
+}
+
+document.getElementById('search').addEventListener('input', e=>{
+  query = e.target.value;
+  render();
+});
+
+document.querySelectorAll('#filterSeg button').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('#filterSeg button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    filter = btn.dataset.filter;
+    render();
+  });
+});
+
+document.getElementById('resortBtn').addEventListener('click', resetOrder);
+document.getElementById('clearAllBtn').addEventListener('click', clearAllChecks);
+
+loadState();
+</script>
+</body>
+</html>
