@@ -13,6 +13,12 @@ code (copy it) and a box to paste a code from elsewhere (load it) — a manual,
 no-account, no-backend way to move your watched list and ordering between
 devices.
 
+Every movie also carries `genre` (1-3 tags from a fixed list) and `studio`
+(the real production studio, not just which curated list it came from), on
+top of the existing `y` (year) and `ca` (Common Sense Media recommended age).
+The app filters on all four: decade, max recommended age, genre, and studio,
+combinable and cleared with one button.
+
 ## Files
 
 - `index.html` — the entire UI (HTML/CSS/JS in one file, Apple-inspired design system)
