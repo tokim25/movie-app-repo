@@ -5,6 +5,13 @@ A static web app pairing a family movie list with Common Sense Media's
 per-device persistence (localStorage) and no backend.
 
 **Live app:** https://family-movie-watchlist-kim-family-projects.vercel.app
+**Also linked (unlisted) from:** https://tonykim.io/movies
+
+Progress lives in localStorage per device/browser, same as always. To carry
+progress to another device, use "Sync across devices" in the app: it shows a
+code (copy it) and a box to paste a code from elsewhere (load it) — a manual,
+no-account, no-backend way to move your watched list and ordering between
+devices.
 
 ## Files
 
@@ -28,6 +35,20 @@ in `index.html`, and merged client-side into the single `MOVIES` array.
 
 ## Deploying
 
-Deployed via Vercel (`vercel --prod` if the CLI is linked, or push to the
-connected git branch if this repo is connected to the Vercel project in the
-dashboard under Project Settings → Git).
+The Vercel project ("family-movie-watchlist") is not connected to this repo's
+git history via Vercel's Git integration, so pushing here does not by itself
+redeploy the live app. Two ways to update the live site:
+
+- `vercel --prod` from this directory, if the CLI is linked to an account with
+  access to the project.
+- Redeploy `index.html` directly (e.g. via the Vercel MCP tools), since it's the
+  only file actually hosted on Vercel: the seven `data-*.js` files are loaded
+  at runtime from jsDelivr's GitHub mirror
+  (`https://cdn.jsdelivr.net/gh/tokim25/movie-app-repo@master/<file>`), so a
+  plain `git push` here updates the data files on the live site on its own
+  (once jsDelivr's cache for `@master` refreshes) — only changes to
+  `index.html` itself need a fresh Vercel deploy.
+
+To make `git push` alone update everything, connect the repo to the Vercel
+project's Git integration in the dashboard (Project Settings → Git) and this
+whole workaround goes away.

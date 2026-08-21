@@ -135,6 +135,53 @@
     font-weight:500;
   }
 
+  .syncPanel{
+    max-width:680px;
+    margin:12px auto 0;
+    padding:16px 20px;
+  }
+  .syncRow{ margin-bottom:14px; }
+  .syncRow:last-child{ margin-bottom:0; }
+  .syncRow label{
+    display:block;
+    font-size:13px;
+    color:var(--ink-soft);
+    margin-bottom:6px;
+  }
+  .syncCodeRow{
+    display:flex;
+    gap:8px;
+    align-items:flex-start;
+  }
+  .syncCodeRow textarea{
+    flex:1;
+    background:var(--bg-sub);
+    border:1px solid transparent;
+    color:var(--ink);
+    padding:8px 10px;
+    border-radius:8px;
+    font-family:ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size:12px;
+    line-height:1.4;
+    resize:vertical;
+  }
+  .syncCodeRow textarea:focus{
+    outline:2px solid var(--blue);
+    outline-offset:1px;
+  }
+  .syncCodeRow button{
+    background:var(--bg-sub);
+    border:none;
+    color:var(--blue);
+    padding:8px 14px;
+    border-radius:8px;
+    font-family:inherit;
+    font-size:13px;
+    font-weight:500;
+    cursor:pointer;
+    flex-shrink:0;
+  }
+
   ul#list{
     list-style:none;
     max-width:680px;
@@ -299,8 +346,24 @@
   </div>
 </div>
 <div class="sortbar">
-  <span>Saved privately to this device</span>
+  <button id="syncToggleBtn">Sync across devices</button>
   <button id="resortBtn">Reset order</button>
+</div>
+<div class="syncPanel" id="syncPanel" style="display:none;">
+  <div class="syncRow">
+    <label>Your code — copy it, then paste it into this app on another device to load your progress there.</label>
+    <div class="syncCodeRow">
+      <textarea id="syncCodeOut" readonly rows="3"></textarea>
+      <button id="syncCopyBtn">Copy</button>
+    </div>
+  </div>
+  <div class="syncRow">
+    <label>Paste a code from another device here to load it on this one.</label>
+    <div class="syncCodeRow">
+      <textarea id="syncCodeIn" rows="3" placeholder="Paste code here"></textarea>
+      <button id="syncLoadBtn">Load</button>
+    </div>
+  </div>
 </div>
 
 <ul id="list"></ul>
@@ -398,6 +461,18 @@ function clearAllChecks(){
   showToast('Watched marks cleared');
 }
 
+function encodeState(){
+  return btoa(JSON.stringify({ o: state.order, c: state.checked }));
+}
+
+function decodeState(code){
+  const parsed = JSON.parse(atob(code.trim()));
+  if(!parsed || !Array.isArray(parsed.o) || parsed.o.length !== MOVIES.length){
+    throw new Error('invalid sync code');
+  }
+  return { order: parsed.o, checked: parsed.c || {} };
+}
+
 function render(){
   const q = query.trim().toLowerCase();
   let visibleOrder = state.order.filter(idx=>{
@@ -474,6 +549,11 @@ function render(){
   const checkedCount = Object.values(state.checked).filter(Boolean).length;
   document.getElementById('statChecked').textContent = checkedCount;
   document.getElementById('statLeft').textContent = MOVIES.length - checkedCount;
+
+  const syncPanel = document.getElementById('syncPanel');
+  if(syncPanel.style.display !== 'none'){
+    document.getElementById('syncCodeOut').value = encodeState();
+  }
 }
 
 document.getElementById('search').addEventListener('input', e=>{
@@ -492,6 +572,38 @@ document.querySelectorAll('#filterSeg button').forEach(btn=>{
 
 document.getElementById('resortBtn').addEventListener('click', resetOrder);
 document.getElementById('clearAllBtn').addEventListener('click', clearAllChecks);
+
+document.getElementById('syncToggleBtn').addEventListener('click', ()=>{
+  const panel = document.getElementById('syncPanel');
+  const opening = panel.style.display === 'none';
+  panel.style.display = opening ? 'block' : 'none';
+  if(opening) document.getElementById('syncCodeOut').value = encodeState();
+});
+
+document.getElementById('syncCopyBtn').addEventListener('click', async ()=>{
+  const out = document.getElementById('syncCodeOut');
+  try{
+    await navigator.clipboard.writeText(out.value);
+    showToast('Code copied');
+  }catch(e){
+    out.select();
+    showToast('Copy not available — select the code manually');
+  }
+});
+
+document.getElementById('syncLoadBtn').addEventListener('click', ()=>{
+  const input = document.getElementById('syncCodeIn');
+  if(!input.value.trim()) return;
+  try{
+    state = decodeState(input.value);
+    saveState();
+    input.value = '';
+    render();
+    showToast('Synced from code');
+  }catch(e){
+    showToast("That code doesn't look right");
+  }
+});
 
 loadState();
 </script>
