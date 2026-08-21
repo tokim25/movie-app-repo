@@ -14,6 +14,7 @@
     --line:#e5e5e5;
     --blue:#0071e3;
     --check:#1d1d1f;
+    --star:#ff9500;
   }
   *{box-sizing:border-box; -webkit-font-smoothing:antialiased;}
   html,body{margin:0;padding:0;}
@@ -148,6 +149,16 @@
     cursor:pointer;
     flex-shrink:0;
   }
+  .filterRow button.priorityToggle{
+    background:var(--bg-sub);
+    padding:9px 14px;
+    border-radius:10px;
+    color:var(--ink-soft);
+  }
+  .filterRow button.priorityToggle.on{
+    background:var(--star);
+    color:#fff;
+  }
 
   .sortbar{
     max-width:680px;
@@ -259,6 +270,22 @@
   }
   .check.on{ background:var(--check); border-color:var(--check); }
   .check.on::after{ content:"\2713"; color:#fff; font-size:13px; font-weight:700; }
+  .star{
+    width:24px; height:24px;
+    border:none;
+    flex-shrink:0;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:transparent;
+    padding:0;
+    margin-top:1px;
+    font-size:17px;
+    line-height:1;
+    color:#d2d2d7;
+  }
+  .star.on{ color:var(--star); }
   .info{ flex:1; min-width:0; }
   .title{
     font-weight:600;
@@ -368,6 +395,7 @@
   <div class="stats">
     <div><b id="statChecked">0</b>Watched</div>
     <div><b id="statLeft">576</b>To watch</div>
+    <div><b id="statPriority">0</b>Want to watch</div>
   </div>
 </header>
 
@@ -386,6 +414,7 @@
   <select id="ageFilter"><option value="">Any age</option></select>
   <select id="genreFilter"><option value="">Any genre</option></select>
   <select id="studioFilter"><option value="">Any studio</option></select>
+  <button id="priorityToggleBtn" class="priorityToggle">&#9733; Want to watch</button>
   <button id="clearFiltersBtn">Clear filters</button>
 </div>
 <div class="sortbar">
@@ -432,8 +461,9 @@ const MOVIES = MOVIES_BASE
   .concat(typeof MOVIES_DREAMWORKS !== 'undefined' ? MOVIES_DREAMWORKS : [])
   .concat(typeof MOVIES_NICK !== 'undefined' ? MOVIES_NICK : []);
 const STORAGE_KEY = "family-movie-watchlist-v1";
-let state = { order: MOVIES.map((_,i)=>i), checked: {} };
+let state = { order: MOVIES.map((_,i)=>i), checked: {}, priority: {} };
 let filter = "all";
+let priorityOnly = false;
 let query = "";
 let openDetail = null;
 let decadeFilter = "";
@@ -470,8 +500,10 @@ function loadState(){
       const parsed = JSON.parse(raw);
       if(parsed.order && parsed.order.length === MOVIES.length){
         state = parsed;
+        if(!state.priority) state.priority = {};
       } else if (parsed.checked) {
         state.checked = parsed.checked;
+        if(parsed.priority) state.priority = parsed.priority;
       }
     }
   }catch(e){ /* no saved state yet, or storage unavailable */ }
@@ -486,6 +518,12 @@ function saveState(){
 
 function toggleCheck(idx){
   state.checked[idx] = !state.checked[idx];
+  saveState();
+  render();
+}
+
+function togglePriority(idx){
+  state.priority[idx] = !state.priority[idx];
   saveState();
   render();
 }
@@ -520,7 +558,7 @@ function clearAllChecks(){
 }
 
 function encodeState(){
-  return btoa(JSON.stringify({ o: state.order, c: state.checked }));
+  return btoa(JSON.stringify({ o: state.order, c: state.checked, p: state.priority }));
 }
 
 function decodeState(code){
@@ -528,7 +566,7 @@ function decodeState(code){
   if(!parsed || !Array.isArray(parsed.o) || parsed.o.length !== MOVIES.length){
     throw new Error('invalid sync code');
   }
-  return { order: parsed.o, checked: parsed.c || {} };
+  return { order: parsed.o, checked: parsed.c || {}, priority: parsed.p || {} };
 }
 
 function render(){
@@ -546,6 +584,7 @@ function render(){
     }
     if(genreFilter && !(m.genre || []).includes(genreFilter)) return false;
     if(studioFilter && m.studio !== studioFilter) return false;
+    if(priorityOnly && !state.priority[idx]) return false;
     return true;
   });
 
@@ -568,6 +607,13 @@ function render(){
     check.className = 'check' + (isChecked ? ' on' : '');
     check.setAttribute('aria-label', 'Mark watched');
     check.onclick = () => toggleCheck(idx);
+
+    const isPriority = !!state.priority[idx];
+    const star = document.createElement('button');
+    star.className = 'star' + (isPriority ? ' on' : '');
+    star.innerHTML = isPriority ? '&#9733;' : '&#9734;';
+    star.setAttribute('aria-label', 'Want to watch');
+    star.onclick = () => togglePriority(idx);
 
     const info = document.createElement('div');
     info.className = 'info';
@@ -599,6 +645,7 @@ function render(){
 
     li.appendChild(num);
     li.appendChild(check);
+    li.appendChild(star);
     li.appendChild(info);
     li.appendChild(moves);
     listEl.appendChild(li);
@@ -614,6 +661,7 @@ function render(){
   const checkedCount = Object.values(state.checked).filter(Boolean).length;
   document.getElementById('statChecked').textContent = checkedCount;
   document.getElementById('statLeft').textContent = MOVIES.length - checkedCount;
+  document.getElementById('statPriority').textContent = Object.values(state.priority).filter(Boolean).length;
 
   const syncPanel = document.getElementById('syncPanel');
   if(syncPanel.style.display !== 'none'){
@@ -726,12 +774,19 @@ document.getElementById('studioFilter').addEventListener('change', e=>{
   studioFilter = e.target.value;
   render();
 });
+document.getElementById('priorityToggleBtn').addEventListener('click', ()=>{
+  priorityOnly = !priorityOnly;
+  document.getElementById('priorityToggleBtn').classList.toggle('on', priorityOnly);
+  render();
+});
+
 document.getElementById('clearFiltersBtn').addEventListener('click', ()=>{
-  decadeFilter = ''; ageFilter = ''; genreFilter = ''; studioFilter = '';
+  decadeFilter = ''; ageFilter = ''; genreFilter = ''; studioFilter = ''; priorityOnly = false;
   document.getElementById('decadeFilter').value = '';
   document.getElementById('ageFilter').value = '';
   document.getElementById('genreFilter').value = '';
   document.getElementById('studioFilter').value = '';
+  document.getElementById('priorityToggleBtn').classList.remove('on');
   render();
 });
 

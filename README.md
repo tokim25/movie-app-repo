@@ -19,6 +19,11 @@ top of the existing `y` (year) and `ca` (Common Sense Media recommended age).
 The app filters on all four: decade, max recommended age, genre, and studio,
 combinable and cleared with one button.
 
+Each row also has a star toggle, independent of the watched checkbox, for
+flagging movies you want to prioritize — a "Want to watch" filter button and
+header count go with it. Priority marks travel through "Sync across devices"
+alongside watched status and custom order.
+
 ## Files
 
 - `index.html` — the entire UI (HTML/CSS/JS in one file, Apple-inspired design system)
