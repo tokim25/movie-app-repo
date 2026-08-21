@@ -12,8 +12,12 @@ per-device persistence (localStorage) and no backend.
 - `data.js` — the original 100 movies (Big Life Journal's "100 Best Family Movies")
 - `data-rt.js` — 36 additional movies from Rotten Tomatoes' "50 Essential Movies For Kids"
 - `data-dcom.js` — 116 movies: all 115 official Disney Channel Original Movies (1997-2022) plus The Magic Faraway Tree (2026)
+- `data-disney.js` — 231 movies: the Walt Disney Animation Studios canon, Disneytoon direct-to-video sequels, Disneynature documentaries, and Disney live-action family films spanning 1937-2025
+- `data-pixar.js` — 15 additional Pixar features not already covered elsewhere
+- `data-dreamworks.js` — 44 DreamWorks Animation theatrical films (1998-2024)
+- `data-nickelodeon.js` — 34 Nickelodeon Movies theatrical and streaming films (1996-2023)
 
-**252 movies total.**
+**576 movies total.**
 
 ## Adding more movies
 

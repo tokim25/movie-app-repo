@@ -281,10 +281,10 @@
 
 <header>
   <h1>Movie Night.</h1>
-  <div class="subtitle">252 family favorites from three curated lists, with what to expect from Common Sense Media before you press play.</div>
+  <div class="subtitle">576 family favorites from seven curated lists, with what to expect from Common Sense Media before you press play.</div>
   <div class="stats">
     <div><b id="statChecked">0</b>Watched</div>
-    <div><b id="statLeft">252</b>To watch</div>
+    <div><b id="statLeft">576</b>To watch</div>
   </div>
 </header>
 
@@ -313,8 +313,18 @@
 <script src="data.js"></script>
 <script src="data-rt.js"></script>
 <script src="data-dcom.js"></script>
+<script src="data-disney.js"></script>
+<script src="data-pixar.js"></script>
+<script src="data-dreamworks.js"></script>
+<script src="data-nickelodeon.js"></script>
 <script>
-const MOVIES = MOVIES_BASE.concat(typeof MOVIES_RT !== 'undefined' ? MOVIES_RT : []).concat(typeof MOVIES_DCOM !== 'undefined' ? MOVIES_DCOM : []);
+const MOVIES = MOVIES_BASE
+  .concat(typeof MOVIES_RT !== 'undefined' ? MOVIES_RT : [])
+  .concat(typeof MOVIES_DCOM !== 'undefined' ? MOVIES_DCOM : [])
+  .concat(typeof MOVIES_DISNEY !== 'undefined' ? MOVIES_DISNEY : [])
+  .concat(typeof MOVIES_PIXAR !== 'undefined' ? MOVIES_PIXAR : [])
+  .concat(typeof MOVIES_DREAMWORKS !== 'undefined' ? MOVIES_DREAMWORKS : [])
+  .concat(typeof MOVIES_NICK !== 'undefined' ? MOVIES_NICK : []);
 const STORAGE_KEY = "family-movie-watchlist-v1";
 let state = { order: MOVIES.map((_,i)=>i), checked: {} };
 let filter = "all";
@@ -427,7 +437,8 @@ function render(){
     title.onclick = () => toggleDetail(idx);
     const meta = document.createElement('div');
     meta.className = 'meta';
-    const listLabel = m.source === 'RT' ? 'RT' : (m.source === 'DCOM' ? 'DCOM' : 'List');
+    const sourceLabels = { RT: 'RT', DCOM: 'DCOM', DISNEY: 'Disney', PIXAR: 'Pixar', DREAMWORKS: 'DreamWorks', NICK: 'Nickelodeon' };
+    const listLabel = sourceLabels[m.source] || 'List';
     meta.innerHTML = `<span class="badge">${listLabel} ${m.la}</span><span class="badge csm">CSM ${m.ca}</span><button class="detailLink">${openDetail===idx ? 'Hide' : 'Details'}</button>`;
     meta.querySelector('.detailLink').onclick = () => toggleDetail(idx);
     info.appendChild(title);
