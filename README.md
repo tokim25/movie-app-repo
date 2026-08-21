@@ -11,6 +11,9 @@ per-device persistence (localStorage) and no backend.
 - `index.html` — the entire UI (HTML/CSS/JS in one file, Apple-inspired design system)
 - `data.js` — the original 100 movies (Big Life Journal's "100 Best Family Movies")
 - `data-rt.js` — 36 additional movies from Rotten Tomatoes' "50 Essential Movies For Kids"
+- `data-dcom.js` — 116 movies: all 115 official Disney Channel Original Movies (1997-2022) plus The Magic Faraway Tree (2026)
+
+**252 movies total.**
 
 ## Adding more movies
 
