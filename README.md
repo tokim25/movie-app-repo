@@ -50,7 +50,7 @@ redeploy the live app. Two ways to update the live site:
 - Redeploy `index.html` directly (e.g. via the Vercel MCP tools), since it's the
   only file actually hosted on Vercel: the seven `data-*.js` files are loaded
   at runtime from jsDelivr's GitHub mirror
-  (`https://cdn.jsdelivr.net/gh/tokim25/movie-app-repo@master/<file>`), so a
+  (`https://cdn.jsdelivr.net/gh/tokim25/movie-app-repo@master/<file>?v=2`), so a
   plain `git push` here updates the data files on the live site on its own
   (once jsDelivr's cache for `@master` refreshes) — only changes to
   `index.html` itself need a fresh Vercel deploy.
@@ -58,3 +58,12 @@ redeploy the live app. Two ways to update the live site:
 To make `git push` alone update everything, connect the repo to the Vercel
 project's Git integration in the dashboard (Project Settings → Git) and this
 whole workaround goes away.
+
+**Updating a data file's content?** jsDelivr caches each file for 7 days in
+visitors' own browsers, keyed by the full URL including the `?v=` query string
+in `index.html`. Bump that number (`?v=2` → `?v=3`, etc.) for every file whose
+content actually changed, or returning visitors won't see the update for up to
+a week. jsDelivr's edge cache can also lag a few minutes behind a fresh push —
+purging (`https://purge.jsdelivr.net/gh/tokim25/movie-app-repo@master/<file>`)
+reporting `"status":"finished"` doesn't guarantee the content is live yet;
+confirm with a byte-size check against the local file before trusting it.
