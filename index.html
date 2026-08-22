@@ -265,6 +265,24 @@
   .row.checked .title{ color:var(--ink-faint); }
   .row.checked .num{ color:#d2d2d7; }
 
+  .poster{
+    width:42px;
+    aspect-ratio:2 / 3;
+    border-radius:5px;
+    overflow:hidden;
+    background:var(--bg-sub);
+    flex-shrink:0;
+  }
+  .poster img{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+  }
+  .poster.safeBetPoster{
+    width:38px;
+  }
+
   .num{
     font-size:15px;
     font-weight:400;
@@ -360,7 +378,7 @@
   .detail{
     max-width:680px;
     margin:0 auto;
-    padding:0 20px 16px 58px;
+    padding:0 20px 16px 114px;
     font-size:14.5px;
     color:var(--ink-soft);
     line-height:1.6;
@@ -368,6 +386,9 @@
     border-bottom:1px solid var(--line);
   }
   .detail.open{ display:block; }
+  .noPosterDetail{
+    padding-left:58px;
+  }
 
   .empty{
     text-align:center;
@@ -491,6 +512,12 @@
     gap:12px;
     padding:8px 0;
   }
+  .safeBetDetail{
+    padding:0 0 8px 110px;
+  }
+  .safeBetDetail.noPosterDetail{
+    padding-left:46px;
+  }
   .safeBetEmpty{
     color:var(--ink-faint);
     font-size:14px;
@@ -522,6 +549,38 @@
     font-size:13px;
     font-weight:500;
     cursor:pointer;
+  }
+
+  @media (max-width:430px){
+    .row{
+      gap:10px;
+    }
+    .poster{
+      width:36px;
+      border-radius:4px;
+    }
+    .poster.safeBetPoster{
+      width:34px;
+    }
+    .num{
+      width:20px;
+      font-size:13px;
+    }
+    .moves button{
+      width:22px;
+    }
+    .detail{
+      padding-left:92px;
+    }
+    .noPosterDetail{
+      padding-left:58px;
+    }
+    .safeBetDetail{
+      padding-left:104px;
+    }
+    .safeBetDetail.noPosterDetail{
+      padding-left:46px;
+    }
   }
 </style>
 </head>
@@ -609,6 +668,7 @@
 <script src="data-csm.js"></script>
 <script src="data-mcudc.js"></script>
 <script src="data-ghibli.js"></script>
+<script src="data-posters.js"></script>
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <script>
 const MOVIES = MOVIES_BASE
@@ -664,6 +724,27 @@ function showToast(msg){
   toastEl.classList.add('show');
   clearTimeout(showToast._t);
   showToast._t = setTimeout(()=>toastEl.classList.remove('show'), 1400);
+}
+
+function createPoster(m, className){
+  const posters = typeof MOVIE_POSTERS !== 'undefined' ? MOVIE_POSTERS : {};
+  const poster = posters[m.num];
+  if(!poster || !poster.u) return null;
+
+  const wrap = document.createElement('div');
+  wrap.className = 'poster' + (className ? ' ' + className : '');
+
+  const img = document.createElement('img');
+  img.src = poster.u;
+  img.alt = `Poster for ${m.t}`;
+  img.loading = 'lazy';
+  img.decoding = 'async';
+  img.width = poster.w || 200;
+  img.height = poster.h || 300;
+  img.onerror = () => wrap.remove();
+
+  wrap.appendChild(img);
+  return wrap;
 }
 
 function loadState(){
@@ -858,6 +939,8 @@ function renderGroupedView(){
           star.setAttribute('aria-label', 'Want to watch');
           star.onclick = () => togglePriority(idx);
 
+          const poster = createPoster(m, 'safeBetPoster');
+
           const info = document.createElement('div');
           info.className = 'info';
           const title = document.createElement('div');
@@ -873,13 +956,13 @@ function renderGroupedView(){
 
           row.appendChild(check);
           row.appendChild(star);
+          if(poster) row.appendChild(poster);
           row.appendChild(info);
           body.appendChild(row);
 
           if(openDetail === idx){
             const detail = document.createElement('div');
-            detail.className = 'detail open';
-            detail.style.padding = '0 0 8px 46px';
+            detail.className = 'detail open safeBetDetail' + (poster ? '' : ' noPosterDetail');
             detail.textContent = m.full;
             body.appendChild(detail);
           }
@@ -1084,6 +1167,8 @@ function render(){
     star.setAttribute('aria-label', 'Want to watch');
     star.onclick = () => togglePriority(idx);
 
+    const poster = createPoster(m);
+
     const info = document.createElement('div');
     info.className = 'info';
     const title = document.createElement('div');
@@ -1115,13 +1200,14 @@ function render(){
     li.appendChild(num);
     li.appendChild(check);
     li.appendChild(star);
+    if(poster) li.appendChild(poster);
     li.appendChild(info);
     li.appendChild(moves);
     listEl.appendChild(li);
 
     if(openDetail === idx){
       const detail = document.createElement('div');
-      detail.className = 'detail open';
+      detail.className = 'detail open' + (poster ? '' : ' noPosterDetail');
       detail.textContent = m.full;
       listEl.appendChild(detail);
     }
