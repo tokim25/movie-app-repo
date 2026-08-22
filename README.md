@@ -38,8 +38,9 @@ maintainer — no backend, no accounts, just `mailto:`.
 - `data-dreamworks.js` — 44 DreamWorks Animation theatrical films (1998-2024)
 - `data-nickelodeon.js` — 34 Nickelodeon Movies theatrical and streaming films (1996-2023)
 - `data-extra.js` — 30 movies requested directly (e.g. via "Request a movie") rather than pulled from a curated external list: the Free Willy and Air Bud franchises, the Sony Spider-Man live-action run plus Across the Spider-Verse, and a batch of best-of-90s live-action kids films
+- `data-csm.js` — 73 movies for ages 5-9, sourced from Common Sense Media's own curated age-based lists ("50 Movies All Kids Should Watch Before They're 12," "Best Kids and Family Movies," and similar) and deduped against everything already in the app
 
-**606 movies total.**
+**679 movies total.**
 
 ## Adding more movies
 
@@ -59,7 +60,7 @@ redeploy the live app. Two ways to update the live site:
 - `vercel --prod` from this directory, if the CLI is linked to an account with
   access to the project.
 - Redeploy `index.html` directly (e.g. via the Vercel MCP tools), since it's the
-  only file actually hosted on Vercel: the seven `data-*.js` files are loaded
+  only file actually hosted on Vercel: the nine `data-*.js` files are loaded
   at runtime from jsDelivr's GitHub mirror
   (`https://cdn.jsdelivr.net/gh/tokim25/movie-app-repo@master/<file>?v=2`), so a
   plain `git push` here updates the data files on the live site on its own
