@@ -24,6 +24,9 @@ flagging movies you want to prioritize — a "Want to watch" filter button and
 header count go with it. Priority marks travel through "Sync across devices"
 alongside watched status and custom order.
 
+A "Request a movie" link at the bottom opens a pre-filled email to the
+maintainer — no backend, no accounts, just `mailto:`.
+
 ## Files
 
 - `index.html` — the entire UI (HTML/CSS/JS in one file, Apple-inspired design system)
@@ -34,15 +37,18 @@ alongside watched status and custom order.
 - `data-pixar.js` — 15 additional Pixar features not already covered elsewhere
 - `data-dreamworks.js` — 44 DreamWorks Animation theatrical films (1998-2024)
 - `data-nickelodeon.js` — 34 Nickelodeon Movies theatrical and streaming films (1996-2023)
+- `data-extra.js` — one-off additions requested directly (e.g. via "Request a movie"), not tied to any curated list; currently just Free Willy 2: The Adventure Home
 
-**576 movies total.**
+**577 movies total.**
 
 ## Adding more movies
 
 See the `movie-watchlist-updater` Claude skill for the full research → write-up →
 deploy pipeline. In short: each new source list gets its own `data-<source>.js`
 file (never edit the existing ones), referenced with an additional `<script>` tag
-in `index.html`, and merged client-side into the single `MOVIES` array.
+in `index.html`, and merged client-side into the single `MOVIES` array. One-off
+single-title requests (as opposed to a whole new curated list) go in
+`data-extra.js` instead of spawning a new file each time.
 
 ## Deploying
 
