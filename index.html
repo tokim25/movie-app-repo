@@ -393,10 +393,10 @@
 
 <header>
   <h1>Movie Night.</h1>
-  <div class="subtitle">679 family favorites from nine curated lists, with what to expect from Common Sense Media before you press play.</div>
+  <div class="subtitle">837 family favorites from eleven curated lists, with what to expect from Common Sense Media before you press play.</div>
   <div class="stats">
     <div><b id="statChecked">0</b>Watched</div>
-    <div><b id="statLeft">679</b>To watch</div>
+    <div><b id="statLeft">837</b>To watch</div>
     <div><b id="statPriority">0</b>Want to watch</div>
   </div>
 </header>
@@ -457,6 +457,8 @@
 <script src="data-nickelodeon.js"></script>
 <script src="data-extra.js"></script>
 <script src="data-csm.js"></script>
+<script src="data-mcudc.js"></script>
+<script src="data-ghibli.js"></script>
 <script>
 const MOVIES = MOVIES_BASE
   .concat(typeof MOVIES_RT !== 'undefined' ? MOVIES_RT : [])
@@ -466,7 +468,9 @@ const MOVIES = MOVIES_BASE
   .concat(typeof MOVIES_DREAMWORKS !== 'undefined' ? MOVIES_DREAMWORKS : [])
   .concat(typeof MOVIES_NICK !== 'undefined' ? MOVIES_NICK : [])
   .concat(typeof MOVIES_EXTRA !== 'undefined' ? MOVIES_EXTRA : [])
-  .concat(typeof MOVIES_CSM !== 'undefined' ? MOVIES_CSM : []);
+  .concat(typeof MOVIES_CSM !== 'undefined' ? MOVIES_CSM : [])
+  .concat(typeof MOVIES_MCUDC !== 'undefined' ? MOVIES_MCUDC : [])
+  .concat(typeof MOVIES_GHIBLI !== 'undefined' ? MOVIES_GHIBLI : []);
 const STORAGE_KEY = "family-movie-watchlist-v1";
 let state = { order: MOVIES.map((_,i)=>i), checked: {}, priority: {} };
 let filter = "all";
@@ -630,7 +634,7 @@ function render(){
     title.onclick = () => toggleDetail(idx);
     const meta = document.createElement('div');
     meta.className = 'meta';
-    const sourceLabels = { RT: 'RT', DCOM: 'DCOM', DISNEY: 'Disney', PIXAR: 'Pixar', DREAMWORKS: 'DreamWorks', NICK: 'Nickelodeon', EXTRA: 'Added', CSM: 'CSM Picks' };
+    const sourceLabels = { RT: 'RT', DCOM: 'DCOM', DISNEY: 'Disney', PIXAR: 'Pixar', DREAMWORKS: 'DreamWorks', NICK: 'Nickelodeon', EXTRA: 'Added', CSM: 'CSM Picks', MCUDC: 'Marvel/DC', GHIBLI: 'Ghibli' };
     const listLabel = sourceLabels[m.source] || 'List';
     meta.innerHTML = `<span class="badge">${listLabel} ${m.la}</span><span class="badge csm">CSM ${m.ca}</span><button class="detailLink">${openDetail===idx ? 'Hide' : 'Details'}</button>`;
     meta.querySelector('.detailLink').onclick = () => toggleDetail(idx);
