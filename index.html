@@ -566,7 +566,7 @@
 </div>
 <div class="syncPanel" id="syncPanel" style="display:none;">
   <div class="syncRow" id="googleSyncRow" style="display:none;">
-    <label>Sync automatically with your Google account — stores your list in a private, hidden Google Drive file that nothing else in your Drive can see.</label>
+    <label>Sync automatically with your Google account — saves your list as a small file in your Google Drive that only this app can read or edit.</label>
     <div class="googleSyncControls">
       <button id="googleSignInBtn">Sign in with Google</button>
       <span id="googleSyncStatus" style="display:none;"></span>
@@ -636,7 +636,7 @@ let viewMode = "grouped";
 let groupedExpanded = {};
 let groupedSafeBets = {};
 
-const GOOGLE_CLIENT_ID = ""; // set once a Google Cloud OAuth client exists; blank hides the feature
+const GOOGLE_CLIENT_ID = "987776124251-t4skn7ia6qd1r88ftass906jinm98v1q.apps.googleusercontent.com";
 const DRIVE_FILE_NAME = "movie-night-state.json";
 const GOOGLE_SYNC_FLAG = "movie-night-google-sync-enabled";
 let googleTokenClient = null;
@@ -943,7 +943,7 @@ function initGoogleSync(){
   document.getElementById('googleSyncRow').style.display = 'block';
   googleTokenClient = google.accounts.oauth2.initTokenClient({
     client_id: GOOGLE_CLIENT_ID,
-    scope: 'https://www.googleapis.com/auth/drive.appdata',
+    scope: 'https://www.googleapis.com/auth/drive.file',
     callback: onGoogleToken
   });
   if(localStorage.getItem(GOOGLE_SYNC_FLAG) === '1'){
@@ -969,7 +969,7 @@ async function driveFetch(url, opts){
 
 async function findDriveFile(){
   const q = encodeURIComponent(`name='${DRIVE_FILE_NAME}' and trashed=false`);
-  const res = await driveFetch(`https://www.googleapis.com/drive/v3/files?spaces=appDataFolder&q=${q}&fields=files(id)`);
+  const res = await driveFetch(`https://www.googleapis.com/drive/v3/files?q=${q}&fields=files(id)`);
   const data = await res.json();
   return (data.files && data.files[0]) ? data.files[0].id : null;
 }
@@ -981,7 +981,7 @@ async function readDriveFile(fileId){
 
 async function writeDriveFile(fileId, body){
   const boundary = 'movienightboundary';
-  const metadata = fileId ? {} : { name: DRIVE_FILE_NAME, parents: ['appDataFolder'] };
+  const metadata = fileId ? {} : { name: DRIVE_FILE_NAME };
   const multipartBody =
     `--${boundary}\r\nContent-Type: application/json\r\n\r\n${JSON.stringify(metadata)}\r\n` +
     `--${boundary}\r\nContent-Type: application/json\r\n\r\n${JSON.stringify(body)}\r\n` +
