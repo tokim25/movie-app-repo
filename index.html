@@ -228,6 +228,26 @@
     cursor:pointer;
     flex-shrink:0;
   }
+  .googleSyncControls{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .googleSyncControls button{
+    background:var(--bg-sub);
+    border:none;
+    color:var(--blue);
+    padding:8px 14px;
+    border-radius:8px;
+    font-family:inherit;
+    font-size:13px;
+    font-weight:500;
+    cursor:pointer;
+  }
+  .googleSyncControls #googleSyncStatus{
+    font-size:13px;
+    color:var(--ink-soft);
+  }
 
   ul#list{
     list-style:none;
@@ -545,8 +565,16 @@
   <button id="resortBtn">Reset order</button>
 </div>
 <div class="syncPanel" id="syncPanel" style="display:none;">
+  <div class="syncRow" id="googleSyncRow" style="display:none;">
+    <label>Sync automatically with your Google account — stores your list in a private, hidden Google Drive file that nothing else in your Drive can see.</label>
+    <div class="googleSyncControls">
+      <button id="googleSignInBtn">Sign in with Google</button>
+      <span id="googleSyncStatus" style="display:none;"></span>
+      <button id="googleSignOutBtn" style="display:none;">Disconnect</button>
+    </div>
+  </div>
   <div class="syncRow">
-    <label>Your code — copy it, then paste it into this app on another device to load your progress there.</label>
+    <label>Or copy a code — paste it into this app on another device to load your progress there.</label>
     <div class="syncCodeRow">
       <textarea id="syncCodeOut" readonly rows="3"></textarea>
       <button id="syncCopyBtn">Copy</button>
@@ -581,6 +609,7 @@
 <script src="data-csm.js"></script>
 <script src="data-mcudc.js"></script>
 <script src="data-ghibli.js"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <script>
 const MOVIES = MOVIES_BASE
   .concat(typeof MOVIES_RT !== 'undefined' ? MOVIES_RT : [])
@@ -606,6 +635,14 @@ let studioFilter = "";
 let viewMode = "grouped";
 let groupedExpanded = {};
 let groupedSafeBets = {};
+
+const GOOGLE_CLIENT_ID = ""; // set once a Google Cloud OAuth client exists; blank hides the feature
+const DRIVE_FILE_NAME = "movie-night-state.json";
+const GOOGLE_SYNC_FLAG = "movie-night-google-sync-enabled";
+let googleTokenClient = null;
+let googleAccessToken = null;
+let googleDriveFileId = null;
+let googleSyncBusy = false;
 
 function parseAge(ca){
   const m = /^~?(\d+)\+/.exec((ca || '').trim());
@@ -650,6 +687,10 @@ function saveState(){
   try{
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   }catch(e){ console.error('save failed', e); }
+  if(googleAccessToken){
+    clearTimeout(saveState._t);
+    saveState._t = setTimeout(pushToGoogleDrive, 800);
+  }
 }
 
 function toggleCheck(idx){
@@ -880,6 +921,123 @@ function decodeState(code){
   return { order: parsed.o, checked: parsed.c || {}, priority: parsed.p || {} };
 }
 
+function setGoogleSyncUI(connected){
+  document.getElementById('googleSignInBtn').style.display = connected ? 'none' : 'inline-block';
+  const statusEl = document.getElementById('googleSyncStatus');
+  statusEl.style.display = connected ? 'inline' : 'none';
+  statusEl.textContent = connected ? 'Synced with Google' : '';
+  document.getElementById('googleSignOutBtn').style.display = connected ? 'inline-block' : 'none';
+}
+
+function tryInitGoogleSync(attempts){
+  if(!GOOGLE_CLIENT_ID) return;
+  attempts = attempts || 0;
+  if(window.google && window.google.accounts && window.google.accounts.oauth2){
+    initGoogleSync();
+  } else if(attempts < 20){
+    setTimeout(()=>tryInitGoogleSync(attempts+1), 250);
+  }
+}
+
+function initGoogleSync(){
+  document.getElementById('googleSyncRow').style.display = 'block';
+  googleTokenClient = google.accounts.oauth2.initTokenClient({
+    client_id: GOOGLE_CLIENT_ID,
+    scope: 'https://www.googleapis.com/auth/drive.appdata',
+    callback: onGoogleToken
+  });
+  if(localStorage.getItem(GOOGLE_SYNC_FLAG) === '1'){
+    googleTokenClient.requestAccessToken({ prompt: '' });
+  }
+}
+
+function onGoogleToken(resp){
+  if(resp.error){
+    setGoogleSyncUI(false);
+    return;
+  }
+  googleAccessToken = resp.access_token;
+  localStorage.setItem(GOOGLE_SYNC_FLAG, '1');
+  syncFromGoogleDrive();
+}
+
+async function driveFetch(url, opts){
+  opts = opts || {};
+  opts.headers = Object.assign({}, opts.headers, { Authorization: 'Bearer ' + googleAccessToken });
+  return fetch(url, opts);
+}
+
+async function findDriveFile(){
+  const q = encodeURIComponent(`name='${DRIVE_FILE_NAME}' and trashed=false`);
+  const res = await driveFetch(`https://www.googleapis.com/drive/v3/files?spaces=appDataFolder&q=${q}&fields=files(id)`);
+  const data = await res.json();
+  return (data.files && data.files[0]) ? data.files[0].id : null;
+}
+
+async function readDriveFile(fileId){
+  const res = await driveFetch(`https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`);
+  return res.json();
+}
+
+async function writeDriveFile(fileId, body){
+  const boundary = 'movienightboundary';
+  const metadata = fileId ? {} : { name: DRIVE_FILE_NAME, parents: ['appDataFolder'] };
+  const multipartBody =
+    `--${boundary}\r\nContent-Type: application/json\r\n\r\n${JSON.stringify(metadata)}\r\n` +
+    `--${boundary}\r\nContent-Type: application/json\r\n\r\n${JSON.stringify(body)}\r\n` +
+    `--${boundary}--`;
+  const url = fileId
+    ? `https://www.googleapis.com/upload/drive/v3/files/${fileId}?uploadType=multipart`
+    : `https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart`;
+  const res = await driveFetch(url, {
+    method: fileId ? 'PATCH' : 'POST',
+    headers: { 'Content-Type': `multipart/related; boundary=${boundary}` },
+    body: multipartBody
+  });
+  return res.json();
+}
+
+function mergeState(local, remote){
+  const checked = Object.assign({}, local.checked, remote.checked || {});
+  const priority = Object.assign({}, local.priority, remote.priority || {});
+  const order = (remote.order && remote.order.length === MOVIES.length) ? remote.order : local.order;
+  return { order, checked, priority };
+}
+
+async function syncFromGoogleDrive(){
+  if(googleSyncBusy) return;
+  googleSyncBusy = true;
+  try{
+    let fileId = googleDriveFileId || await findDriveFile();
+    googleDriveFileId = fileId;
+    if(fileId){
+      const remote = await readDriveFile(fileId);
+      state = mergeState(state, remote);
+      saveState();
+    }
+    const uploaded = await writeDriveFile(googleDriveFileId, state);
+    if(uploaded && uploaded.id) googleDriveFileId = uploaded.id;
+    setGoogleSyncUI(true);
+    renderCurrentView();
+    showToast('Synced with Google');
+  }catch(e){
+    console.error('Google sync failed', e);
+    showToast('Google sync failed — try again');
+  }finally{
+    googleSyncBusy = false;
+  }
+}
+
+async function pushToGoogleDrive(){
+  if(!googleAccessToken) return;
+  try{
+    const uploaded = await writeDriveFile(googleDriveFileId, state);
+    if(uploaded && uploaded.id) googleDriveFileId = uploaded.id;
+  }catch(e){
+    console.error('Google push failed', e);
+  }
+}
+
 function render(){
   const q = query.trim().toLowerCase();
   let visibleOrder = state.order.filter(idx=>{
@@ -1018,6 +1176,21 @@ document.getElementById('syncCopyBtn').addEventListener('click', async ()=>{
   }
 });
 
+document.getElementById('googleSignInBtn').addEventListener('click', ()=>{
+  if(googleTokenClient) googleTokenClient.requestAccessToken({ prompt: 'consent' });
+});
+
+document.getElementById('googleSignOutBtn').addEventListener('click', ()=>{
+  if(googleAccessToken){
+    google.accounts.oauth2.revoke(googleAccessToken, ()=>{});
+  }
+  googleAccessToken = null;
+  googleDriveFileId = null;
+  localStorage.removeItem(GOOGLE_SYNC_FLAG);
+  setGoogleSyncUI(false);
+  showToast('Disconnected from Google');
+});
+
 document.getElementById('syncLoadBtn').addEventListener('click', ()=>{
   const input = document.getElementById('syncCodeIn');
   if(!input.value.trim()) return;
@@ -1106,6 +1279,7 @@ document.getElementById('clearFiltersBtn').addEventListener('click', ()=>{
 });
 
 loadState();
+tryInitGoogleSync();
 </script>
 </body>
 </html>
