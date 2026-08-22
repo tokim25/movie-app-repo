@@ -387,6 +387,122 @@
     z-index:10;
   }
   .toast.show{ opacity:1; }
+
+  .viewSwitch{
+    max-width:680px;
+    margin:14px auto 0;
+    padding:0 20px;
+    display:flex;
+    justify-content:flex-end;
+  }
+  .viewSwitch button{
+    background:none;
+    border:none;
+    color:var(--blue);
+    font-family:inherit;
+    font-size:13px;
+    font-weight:500;
+    cursor:pointer;
+    padding:4px 0;
+  }
+  .backLink{
+    max-width:680px;
+    margin:0 auto;
+    padding:0 20px;
+  }
+  .backLink button{
+    background:none;
+    border:none;
+    color:var(--blue);
+    font-family:inherit;
+    font-size:13px;
+    font-weight:500;
+    cursor:pointer;
+    padding:12px 0;
+  }
+  .groupedView{
+    max-width:680px;
+    margin:8px auto 0;
+    padding:0 20px;
+  }
+  .studioGroup{
+    border-bottom:1px solid var(--line);
+  }
+  .studioHeader{
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:none;
+    border:none;
+    padding:14px 0;
+    cursor:pointer;
+    font-family:inherit;
+    text-align:left;
+  }
+  .studioHeader .chev{
+    color:var(--ink-faint);
+    font-size:11px;
+    display:inline-block;
+    transition:transform 0.15s;
+    flex-shrink:0;
+  }
+  .studioHeader.expanded .chev{ transform:rotate(90deg); }
+  .studioHeader .studioName{
+    font-weight:600;
+    font-size:15px;
+    flex:1;
+  }
+  .studioHeader .studioCount{
+    font-size:13px;
+    color:var(--ink-faint);
+  }
+  .studioBody{ padding:0 0 18px; }
+  .safeBetsLabel{
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.03em;
+    color:var(--ink-faint);
+    margin:0 0 10px;
+  }
+  .safeBetRow{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    padding:8px 0;
+  }
+  .safeBetEmpty{
+    color:var(--ink-faint);
+    font-size:14px;
+    padding:8px 0;
+  }
+  .shuffleBtn{
+    display:block;
+    width:100%;
+    background:var(--bg-sub);
+    border:none;
+    color:var(--ink-soft);
+    padding:10px;
+    border-radius:10px;
+    font-family:inherit;
+    font-size:13px;
+    font-weight:500;
+    cursor:pointer;
+    margin-top:4px;
+  }
+  .browseAllLink{
+    text-align:center;
+    margin-top:10px;
+  }
+  .browseAllLink button{
+    background:none;
+    border:none;
+    color:var(--blue);
+    font-family:inherit;
+    font-size:13px;
+    font-weight:500;
+    cursor:pointer;
+  }
 </style>
 </head>
 <body>
@@ -403,6 +519,11 @@
 
 <hr class="divider">
 
+<div class="viewSwitch" id="toFlatWrap"><button id="toFlatBtn">Browse all movies &rarr;</button></div>
+<div id="groupedView" class="groupedView"></div>
+
+<div id="flatView" style="display:none;">
+<div class="backLink"><button id="backToGroupsBtn">&larr; Back to browse by studio</button></div>
 <div class="controls">
   <input type="text" id="search" placeholder="Search">
   <div class="seg" id="filterSeg">
@@ -442,6 +563,7 @@
 
 <ul id="list"></ul>
 <div class="empty" id="emptyMsg" style="display:none;">No movies match your search.</div>
+</div>
 
 <button class="reset" id="clearAllBtn">Clear all watched marks</button>
 <a class="reset" id="requestMovieLink" href="mailto:tokim25@gmail.com?subject=Movie%20Night%3A%20request%20a%20movie&body=I'd%20like%20to%20request%3A%0A%0A(title%2C%20year%20if%20you%20know%20it)%0A%0AWhy%3A%0A">Request a movie</a>
@@ -481,6 +603,9 @@ let decadeFilter = "";
 let ageFilter = "";
 let genreFilter = "";
 let studioFilter = "";
+let viewMode = "grouped";
+let groupedExpanded = {};
+let groupedSafeBets = {};
 
 function parseAge(ca){
   const m = /^~?(\d+)\+/.exec((ca || '').trim());
@@ -518,7 +643,7 @@ function loadState(){
       }
     }
   }catch(e){ /* no saved state yet, or storage unavailable */ }
-  render();
+  renderCurrentView();
 }
 
 function saveState(){
@@ -530,13 +655,13 @@ function saveState(){
 function toggleCheck(idx){
   state.checked[idx] = !state.checked[idx];
   saveState();
-  render();
+  renderCurrentView();
 }
 
 function togglePriority(idx){
   state.priority[idx] = !state.priority[idx];
   saveState();
-  render();
+  renderCurrentView();
 }
 
 function move(idx, dir){
@@ -546,26 +671,201 @@ function move(idx, dir){
   const arr = state.order;
   [arr[pos], arr[newPos]] = [arr[newPos], arr[pos]];
   saveState();
-  render();
+  renderCurrentView();
 }
 
 function toggleDetail(idx){
   openDetail = openDetail === idx ? null : idx;
-  render();
+  renderCurrentView();
 }
 
 function resetOrder(){
   state.order = MOVIES.map((_,i)=>i);
   saveState();
-  render();
+  renderCurrentView();
   showToast('Order reset');
 }
 
 function clearAllChecks(){
   state.checked = {};
   saveState();
-  render();
+  renderCurrentView();
   showToast('Watched marks cleared');
+}
+
+function pickSafeBets(studio){
+  const pool = MOVIES.map((m,i)=>i).filter(i => MOVIES[i].studio === studio && !state.checked[i]);
+  const shuffled = pool.slice();
+  for(let i = shuffled.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i+1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled.slice(0, 3);
+}
+
+function toggleStudioGroup(studio){
+  groupedExpanded[studio] = !groupedExpanded[studio];
+  if(groupedExpanded[studio] && !groupedSafeBets[studio]){
+    groupedSafeBets[studio] = pickSafeBets(studio);
+  }
+  renderGroupedView();
+}
+
+function shuffleStudio(studio){
+  groupedSafeBets[studio] = pickSafeBets(studio);
+  renderGroupedView();
+}
+
+function browseStudio(studio){
+  decadeFilter = ''; ageFilter = ''; genreFilter = ''; priorityOnly = false; query = '';
+  document.getElementById('decadeFilter').value = '';
+  document.getElementById('ageFilter').value = '';
+  document.getElementById('genreFilter').value = '';
+  document.getElementById('search').value = '';
+  document.getElementById('priorityToggleBtn').classList.remove('on');
+  studioFilter = studio;
+  document.getElementById('studioFilter').value = studio;
+  switchToFlat();
+}
+
+function switchToFlat(){
+  viewMode = 'flat';
+  document.getElementById('groupedView').style.display = 'none';
+  document.getElementById('toFlatWrap').style.display = 'none';
+  document.getElementById('flatView').style.display = 'block';
+  render();
+}
+
+function switchToGrouped(){
+  viewMode = 'grouped';
+  document.getElementById('flatView').style.display = 'none';
+  document.getElementById('groupedView').style.display = 'block';
+  document.getElementById('toFlatWrap').style.display = 'flex';
+  renderGroupedView();
+}
+
+function renderCurrentView(){
+  if(viewMode === 'grouped') renderGroupedView();
+  else render();
+}
+
+function updateStats(){
+  const checkedCount = Object.values(state.checked).filter(Boolean).length;
+  document.getElementById('statChecked').textContent = checkedCount;
+  document.getElementById('statLeft').textContent = MOVIES.length - checkedCount;
+  document.getElementById('statPriority').textContent = Object.values(state.priority).filter(Boolean).length;
+
+  const syncPanel = document.getElementById('syncPanel');
+  if(syncPanel && syncPanel.style.display !== 'none'){
+    document.getElementById('syncCodeOut').value = encodeState();
+  }
+}
+
+function renderGroupedView(){
+  const groupedEl = document.getElementById('groupedView');
+  groupedEl.innerHTML = '';
+
+  const studioCounts = {};
+  MOVIES.forEach(m => { if(m.studio) studioCounts[m.studio] = (studioCounts[m.studio] || 0) + 1; });
+  const studios = Object.keys(studioCounts).sort((a,b) => studioCounts[b] - studioCounts[a]);
+
+  studios.forEach(studio=>{
+    const indices = MOVIES.map((m,i)=>i).filter(i => MOVIES[i].studio === studio);
+
+    const group = document.createElement('div');
+    group.className = 'studioGroup';
+
+    const header = document.createElement('button');
+    header.className = 'studioHeader' + (groupedExpanded[studio] ? ' expanded' : '');
+    header.innerHTML = `<span class="chev">&#9656;</span><span class="studioName">${studio}</span><span class="studioCount">${indices.length}</span>`;
+    header.onclick = () => toggleStudioGroup(studio);
+    group.appendChild(header);
+
+    if(groupedExpanded[studio]){
+      const body = document.createElement('div');
+      body.className = 'studioBody';
+
+      const label = document.createElement('p');
+      label.className = 'safeBetsLabel';
+      label.textContent = 'Safe bets tonight';
+      body.appendChild(label);
+
+      const bets = groupedSafeBets[studio] || [];
+      if(bets.length === 0){
+        const empty = document.createElement('p');
+        empty.className = 'safeBetEmpty';
+        const unwatchedCount = indices.filter(i => !state.checked[i]).length;
+        empty.textContent = unwatchedCount === 0 ? "You've watched everything here." : 'Nothing to show.';
+        body.appendChild(empty);
+      } else {
+        bets.forEach(idx=>{
+          const m = MOVIES[idx];
+          const isChecked = !!state.checked[idx];
+
+          const row = document.createElement('div');
+          row.className = 'safeBetRow';
+
+          const check = document.createElement('button');
+          check.className = 'check' + (isChecked ? ' on' : '');
+          check.setAttribute('aria-label', 'Mark watched');
+          check.onclick = () => toggleCheck(idx);
+
+          const isPriority = !!state.priority[idx];
+          const star = document.createElement('button');
+          star.className = 'star' + (isPriority ? ' on' : '');
+          star.innerHTML = isPriority ? '&#9733;' : '&#9734;';
+          star.setAttribute('aria-label', 'Want to watch');
+          star.onclick = () => togglePriority(idx);
+
+          const info = document.createElement('div');
+          info.className = 'info';
+          const title = document.createElement('div');
+          title.className = 'title';
+          title.textContent = `${m.t} (${m.y})`;
+          title.onclick = () => toggleDetail(idx);
+          const meta = document.createElement('div');
+          meta.className = 'meta';
+          meta.innerHTML = `<span class="badge csm">CSM ${m.ca}</span><button class="detailLink">${openDetail===idx ? 'Hide' : 'Details'}</button>`;
+          meta.querySelector('.detailLink').onclick = () => toggleDetail(idx);
+          info.appendChild(title);
+          info.appendChild(meta);
+
+          row.appendChild(check);
+          row.appendChild(star);
+          row.appendChild(info);
+          body.appendChild(row);
+
+          if(openDetail === idx){
+            const detail = document.createElement('div');
+            detail.className = 'detail open';
+            detail.style.padding = '0 0 8px 46px';
+            detail.textContent = m.full;
+            body.appendChild(detail);
+          }
+        });
+
+        const shuffleBtn = document.createElement('button');
+        shuffleBtn.className = 'shuffleBtn';
+        shuffleBtn.textContent = 'Shuffle these';
+        shuffleBtn.onclick = () => shuffleStudio(studio);
+        body.appendChild(shuffleBtn);
+      }
+
+      const browseWrap = document.createElement('p');
+      browseWrap.className = 'browseAllLink';
+      const browseBtn = document.createElement('button');
+      browseBtn.textContent = `Browse all ${indices.length} →`;
+      browseBtn.onclick = () => browseStudio(studio);
+      browseWrap.appendChild(browseBtn);
+      body.appendChild(browseWrap);
+
+      group.appendChild(body);
+    }
+
+    groupedEl.appendChild(group);
+  });
+
+  updateStats();
 }
 
 function encodeState(){
@@ -669,20 +969,12 @@ function render(){
     }
   });
 
-  const checkedCount = Object.values(state.checked).filter(Boolean).length;
-  document.getElementById('statChecked').textContent = checkedCount;
-  document.getElementById('statLeft').textContent = MOVIES.length - checkedCount;
-  document.getElementById('statPriority').textContent = Object.values(state.priority).filter(Boolean).length;
-
-  const syncPanel = document.getElementById('syncPanel');
-  if(syncPanel.style.display !== 'none'){
-    document.getElementById('syncCodeOut').value = encodeState();
-  }
+  updateStats();
 }
 
 document.getElementById('search').addEventListener('input', e=>{
   query = e.target.value;
-  render();
+  renderCurrentView();
 });
 
 document.querySelectorAll('#filterSeg button').forEach(btn=>{
@@ -690,12 +982,23 @@ document.querySelectorAll('#filterSeg button').forEach(btn=>{
     document.querySelectorAll('#filterSeg button').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
     filter = btn.dataset.filter;
-    render();
+    renderCurrentView();
   });
 });
 
 document.getElementById('resortBtn').addEventListener('click', resetOrder);
 document.getElementById('clearAllBtn').addEventListener('click', clearAllChecks);
+document.getElementById('toFlatBtn').addEventListener('click', ()=>{
+  decadeFilter = ''; ageFilter = ''; genreFilter = ''; studioFilter = ''; priorityOnly = false; query = '';
+  document.getElementById('decadeFilter').value = '';
+  document.getElementById('ageFilter').value = '';
+  document.getElementById('genreFilter').value = '';
+  document.getElementById('studioFilter').value = '';
+  document.getElementById('search').value = '';
+  document.getElementById('priorityToggleBtn').classList.remove('on');
+  switchToFlat();
+});
+document.getElementById('backToGroupsBtn').addEventListener('click', switchToGrouped);
 
 document.getElementById('syncToggleBtn').addEventListener('click', ()=>{
   const panel = document.getElementById('syncPanel');
@@ -722,7 +1025,8 @@ document.getElementById('syncLoadBtn').addEventListener('click', ()=>{
     state = decodeState(input.value);
     saveState();
     input.value = '';
-    render();
+    groupedSafeBets = {};
+    renderCurrentView();
     showToast('Synced from code');
   }catch(e){
     showToast("That code doesn't look right");
@@ -771,24 +1075,24 @@ populateFilterOptions();
 
 document.getElementById('decadeFilter').addEventListener('change', e=>{
   decadeFilter = e.target.value;
-  render();
+  renderCurrentView();
 });
 document.getElementById('ageFilter').addEventListener('change', e=>{
   ageFilter = e.target.value;
-  render();
+  renderCurrentView();
 });
 document.getElementById('genreFilter').addEventListener('change', e=>{
   genreFilter = e.target.value;
-  render();
+  renderCurrentView();
 });
 document.getElementById('studioFilter').addEventListener('change', e=>{
   studioFilter = e.target.value;
-  render();
+  renderCurrentView();
 });
 document.getElementById('priorityToggleBtn').addEventListener('click', ()=>{
   priorityOnly = !priorityOnly;
   document.getElementById('priorityToggleBtn').classList.toggle('on', priorityOnly);
-  render();
+  renderCurrentView();
 });
 
 document.getElementById('clearFiltersBtn').addEventListener('click', ()=>{
@@ -798,7 +1102,7 @@ document.getElementById('clearFiltersBtn').addEventListener('click', ()=>{
   document.getElementById('genreFilter').value = '';
   document.getElementById('studioFilter').value = '';
   document.getElementById('priorityToggleBtn').classList.remove('on');
-  render();
+  renderCurrentView();
 });
 
 loadState();
