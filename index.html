@@ -1203,8 +1203,9 @@ function render(){
     const sourceLabels = { RT: 'RT', DCOM: 'DCOM', DISNEY: 'Disney', PIXAR: 'Pixar', DREAMWORKS: 'DreamWorks', NICK: 'Nickelodeon', EXTRA: 'Added', CSM: 'CSM Picks', MCUDC: 'Marvel/DC', GHIBLI: 'Ghibli' };
     const listLabel = sourceLabels[m.source] || 'List';
     const listTitle = m.source === 'DCOM' ? ' title="Disney Channel Original Movie"' : '';
+    const listAge = (m.la && m.la !== listLabel && m.la !== 'N/A') ? ` ${m.la}` : '';
     const sourceLinkHtml = m.srcUrl ? `<a class="sourceLink" href="${m.srcUrl}" target="_blank" rel="noopener">Source</a>` : '';
-    meta.innerHTML = `<span class="badge"${listTitle}>${listLabel} ${m.la}</span><span class="badge csm" title="Common Sense Media">CSM ${m.ca}</span><button class="detailLink">${openDetail===idx ? 'Hide' : 'Details'}</button>${sourceLinkHtml}`;
+    meta.innerHTML = `<span class="badge"${listTitle}>${listLabel}${listAge}</span><span class="badge csm" title="Common Sense Media">CSM ${m.ca}</span><button class="detailLink">${openDetail===idx ? 'Hide' : 'Details'}</button>${sourceLinkHtml}`;
     meta.querySelector('.detailLink').onclick = () => toggleDetail(idx);
     info.appendChild(title);
     info.appendChild(meta);
