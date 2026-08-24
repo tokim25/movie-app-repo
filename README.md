@@ -4,7 +4,7 @@ A static web app pairing a family movie list with Common Sense Media's
 "what parents need to know" content, built as a personal checklist with
 per-device persistence (localStorage) and no backend.
 
-**Live app:** https://family-movie-watchlist-kim-family-projects.vercel.app
+**Live app:** https://movies.tonykim.io
 **Also linked (unlisted) from:** https://tonykim.io/movies
 
 Progress lives in localStorage per device/browser, same as always. To carry
@@ -17,8 +17,9 @@ Optional Google sync uses the Google Identity Services token flow and stores a
 single `family-feature-state-v3.json` file in the user's Google Drive
 `appDataFolder` with the limited `drive.appdata` scope. The OAuth consent screen
 should use the public app name "Family Feature" and point to the live policy pages:
-`https://family-movie-watchlist-kim-family-projects.vercel.app/privacy.html`
-and `https://family-movie-watchlist-kim-family-projects.vercel.app/terms.html`.
+`https://movies.tonykim.io/privacy.html`
+and `https://movies.tonykim.io/terms.html`. The OAuth client should include
+`https://movies.tonykim.io` as an authorized JavaScript origin.
 
 Every movie also carries `genre` (1-3 tags from a fixed list) and `studio`
 (the real production studio, not just which curated list it came from), on
