@@ -24,10 +24,12 @@
     --ink-soft:#7d6c5c;
     --ink-faint:#a89985;
     --line:#e6dbc9;
-    --blue:#bd5b3a;
-    --check:#332821;
+    --accent:#bd5b3a;
+    --check:var(--ink);
     --star:#d9932f;
-    --new:#7c8f5e;
+    --new:#3d5f68;
+    --new-bg:#e2ecec;
+    --error:#9c3b3b;
   }
   *{box-sizing:border-box; -webkit-font-smoothing:antialiased;}
   html,body{margin:0;padding:0;}
@@ -70,7 +72,7 @@
     gap:28px;
     margin-top:24px;
     font-size:13px;
-    color:var(--ink-faint);
+    color:var(--ink-soft);
   }
   .stats b{
     display:block;
@@ -106,7 +108,7 @@
     font-size:15px;
   }
   .controls input[type="text"]:focus{
-    outline:2px solid var(--blue);
+    outline:2px solid var(--accent);
     outline-offset:1px;
     background:var(--bg);
   }
@@ -126,7 +128,7 @@
     cursor:pointer;
     font-weight:500;
   }
-  .seg button.active{ background:var(--bg); color:var(--ink); box-shadow:0 1px 3px rgba(0,0,0,0.08); border-radius:8px; margin:2px; padding:9px 12px; }
+  .seg button.active{ background:var(--bg); color:var(--ink); box-shadow:0 1px 3px rgba(51,40,33,0.08); border-radius:8px; margin:2px; padding:9px 12px; }
 
   .filterRow{
     max-width:680px;
@@ -149,13 +151,13 @@
     flex:1 1 130px;
   }
   .filterRow select:focus{
-    outline:2px solid var(--blue);
+    outline:2px solid var(--accent);
     outline-offset:1px;
   }
   .filterRow button{
     background:none;
     border:none;
-    color:var(--blue);
+    color:var(--accent);
     padding:9px 4px;
     font-family:inherit;
     font-size:13px;
@@ -171,7 +173,7 @@
   }
   .filterRow button.priorityToggle.on{
     background:var(--star);
-    color:#fff;
+    color:var(--ink);
   }
 
   .sortbar{
@@ -188,7 +190,7 @@
   .sortbar button{
     background:none;
     border:none;
-    color:var(--blue);
+    color:var(--accent);
     padding:4px 0;
     font-family:inherit;
     font-size:13px;
@@ -233,13 +235,13 @@
     resize:vertical;
   }
   .syncCodeRow textarea:focus{
-    outline:2px solid var(--blue);
+    outline:2px solid var(--accent);
     outline-offset:1px;
   }
   .syncCodeRow button{
     background:var(--bg-sub);
     border:none;
-    color:var(--blue);
+    color:var(--accent);
     padding:8px 14px;
     border-radius:8px;
     font-family:inherit;
@@ -256,7 +258,7 @@
   .googleSyncControls button{
     background:var(--bg-sub);
     border:none;
-    color:var(--blue);
+    color:var(--accent);
     padding:8px 14px;
     border-radius:8px;
     font-family:inherit;
@@ -269,7 +271,7 @@
     color:var(--ink-soft);
   }
   .googleSyncControls #googleSyncStatus.syncError{
-    color:var(--blue);
+    color:var(--error);
   }
 
   ul#list{
@@ -286,7 +288,7 @@
     padding:16px 0;
   }
   .row.checked .title{ color:var(--ink-faint); }
-  .row.checked .num{ color:#d2d2d7; }
+  .row.checked .num{ color:var(--ink-faint); }
 
   .poster{
     position:relative;
@@ -312,8 +314,8 @@
     position:absolute;
     top:4px;
     left:4px;
-    background:var(--new);
-    color:#fff;
+    background:var(--new-bg);
+    color:var(--new);
     font-size:9px;
     font-weight:700;
     text-transform:uppercase;
@@ -326,7 +328,7 @@
   .num{
     font-size:15px;
     font-weight:400;
-    color:#c7c7cc;
+    color:var(--ink-faint);
     width:24px;
     text-align:right;
     flex-shrink:0;
@@ -336,7 +338,7 @@
   .check{
     width:24px; height:24px;
     border-radius:50%;
-    border:1.5px solid #c7c7cc;
+    border:1.5px solid var(--ink-faint);
     flex-shrink:0;
     cursor:pointer;
     display:flex;
@@ -361,7 +363,7 @@
     margin-top:1px;
     font-size:17px;
     line-height:1;
-    color:#d2d2d7;
+    color:var(--ink-faint);
   }
   .star.on{ color:var(--star); }
   .info{ flex:1; min-width:0; }
@@ -388,7 +390,7 @@
   .detailLink{
     background:none;
     border:none;
-    color:var(--blue);
+    color:var(--accent);
     font-family:inherit;
     font-size:13px;
     font-weight:500;
@@ -396,7 +398,7 @@
     padding:0;
   }
   .sourceLink{
-    color:var(--blue);
+    color:var(--accent);
     font-size:13px;
     font-weight:500;
     text-decoration:none;
@@ -419,7 +421,7 @@
     line-height:1;
     padding:0;
   }
-  .moves button:hover:not(:disabled){ color:var(--blue); }
+  .moves button:hover:not(:disabled){ color:var(--accent); }
   .moves button:disabled{ opacity:0.2; cursor:default; }
 
   .detail{
@@ -439,7 +441,7 @@
 
   .empty{
     text-align:center;
-    color:var(--ink-faint);
+    color:var(--ink-soft);
     padding:60px 20px;
     font-size:15px;
   }
@@ -448,7 +450,7 @@
     margin:32px auto 0;
     background:none;
     border:none;
-    color:var(--ink-faint);
+    color:var(--ink-soft);
     padding:8px 16px;
     font-family:inherit;
     font-size:13px;
@@ -458,10 +460,10 @@
     width:100%;
     box-sizing:border-box;
   }
-  .reset:hover{ color:var(--blue); }
+  .reset:hover{ color:var(--accent); }
   .glossary{
     text-align:center;
-    color:var(--ink-faint);
+    color:var(--ink-soft);
     font-size:12px;
     margin:20px auto 0;
     padding:0 20px;
@@ -486,14 +488,14 @@
     font-size:14px;
   }
   .requestForm input[type="text"]:focus{
-    outline:2px solid var(--blue);
+    outline:2px solid var(--accent);
     outline-offset:1px;
     background:var(--bg);
   }
   .requestForm button{
     background:var(--bg-sub);
     border:none;
-    color:var(--blue);
+    color:var(--accent);
     padding:9px 16px;
     border-radius:10px;
     font-family:inherit;
@@ -547,7 +549,7 @@
   }
   .newTag{
     font-size:12px;
-    color:var(--ink-faint);
+    color:var(--ink-soft);
     margin-top:2px;
   }
 
@@ -561,7 +563,7 @@
   .viewSwitch button{
     background:none;
     border:none;
-    color:var(--blue);
+    color:var(--accent);
     font-family:inherit;
     font-size:13px;
     font-weight:500;
@@ -576,7 +578,7 @@
   .backLink button{
     background:none;
     border:none;
-    color:var(--blue);
+    color:var(--accent);
     font-family:inherit;
     font-size:13px;
     font-weight:500;
@@ -618,14 +620,14 @@
   }
   .studioHeader .studioCount{
     font-size:13px;
-    color:var(--ink-faint);
+    color:var(--ink-soft);
   }
   .studioBody{ padding:0 0 18px; }
   .safeBetsLabel{
     font-size:11px;
     text-transform:uppercase;
     letter-spacing:0.03em;
-    color:var(--ink-faint);
+    color:var(--ink-soft);
     margin:0 0 10px;
   }
   .safeBetRow{
@@ -641,7 +643,7 @@
     padding-left:46px;
   }
   .safeBetEmpty{
-    color:var(--ink-faint);
+    color:var(--ink-soft);
     font-size:14px;
     padding:8px 0;
   }
@@ -666,7 +668,7 @@
   .browseAllLink button{
     background:none;
     border:none;
-    color:var(--blue);
+    color:var(--accent);
     font-family:inherit;
     font-size:13px;
     font-weight:500;
