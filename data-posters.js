@@ -818,5 +818,6 @@ const MOVIE_POSTERS = Object.freeze({
   835: {"u":"https://upload.wikimedia.org/wikipedia/en/a/a7/When_Marnie_Was_There.png","w":270,"h":380,"p":"When Marnie Was There (film)"},
   836: {"u":"https://upload.wikimedia.org/wikipedia/en/f/fe/The_Red_Turtle.png","w":258,"h":344,"p":"The Red Turtle"},
   837: {"u":"https://upload.wikimedia.org/wikipedia/en/4/41/How_Do_You_Live_poster.jpg","w":220,"h":311,"p":"The Boy and the Heron"},
-  838: {"u":"https://upload.wikimedia.org/wikipedia/en/8/8f/The_Sheep_Detectives_poster.jpg","w":260,"h":385,"p":"The Sheep Detectives"}
+  838: {"u":"https://upload.wikimedia.org/wikipedia/en/8/8f/The_Sheep_Detectives_poster.jpg","w":260,"h":385,"p":"The Sheep Detectives"},
+  839: {"u":"https://upload.wikimedia.org/wikipedia/en/c/c1/Moana_%282026_film%29_poster.jpg","w":250,"h":372,"p":"Moana (2026 film)"}
 });
