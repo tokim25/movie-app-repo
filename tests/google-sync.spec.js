@@ -142,6 +142,40 @@ test('remembered Google sync shows reconnect when silent auth is unavailable', a
   expect(syncFlag).toBe('1');
 });
 
+test('unfinished Google sign-in shows a reconnect warning and toast', async ({ page }) => {
+  await page.route('https://accounts.google.com/gsi/client', async (route) => {
+    return route.fulfill({
+      status: 200,
+      contentType: 'text/javascript',
+      body: `
+        window.google = {
+          accounts: {
+            oauth2: {
+              initTokenClient: () => ({
+                requestAccessToken: () => {}
+              }),
+              revoke: () => {}
+            }
+          }
+        };
+      `,
+    });
+  });
+
+  await page.goto('/');
+  await switchToFlatView(page);
+  await page.clock.install();
+  await page.locator('#syncToggleBtn').click();
+  await page.locator('#googleSignInBtn').click();
+  await expect(page.locator('#googleSyncStatus')).toHaveText('Connecting to Google…');
+
+  await page.clock.fastForward(7100);
+
+  await expect(page.locator('#googleSyncStatus')).toHaveText('Google sync paused — sign in again');
+  await expect(page.locator('#syncToggleBtn')).toHaveText('Sync needs reconnect');
+  await expect(page.locator('#toast')).toHaveText('Google sign-in did not finish — try again');
+});
+
 test('failed writes back off instead of retrying aggressively, and a later success clears the warning', async ({ page }) => {
   await page.goto('/');
   const mock = await mockDrive(page, '500');

@@ -879,6 +879,7 @@ const GOOGLE_CLIENT_ID = "987776124251-t4skn7ia6qd1r88ftass906jinm98v1q.apps.goo
 const DRIVE_FILE_NAME = "family-feature-state-v3.json";
 const GOOGLE_SYNC_FLAG = "family-feature-google-sync-v3-enabled";
 const GOOGLE_SYNC_META_KEY = "family-feature-google-sync-v3-meta";
+const GOOGLE_TOKEN_TIMEOUT_MS = 7000;
 let googleTokenClient = null;
 let googleAccessToken = null;
 let googleDriveFileId = null;
@@ -888,7 +889,9 @@ let googleSyncPending = false;
 let googleSyncLastOkAt = 0;
 let googleSyncRetryDelay = 1600;
 let googleSyncRetryTimer = null;
+let googleTokenRequestTimer = null;
 let deferredInstallPrompt = null;
+let posterEagerBudget = 24;
 
 function parseAge(ca){
   const m = /^~?(\d+)\+/.exec((ca || '').trim());
@@ -1213,18 +1216,21 @@ function createPoster(m, className, isNew){
   const posters = typeof MOVIE_POSTERS !== 'undefined' ? MOVIE_POSTERS : {};
   const poster = posters[m.num];
   if(!poster || !poster.u) return null;
+  const shouldLoadEagerly = posterEagerBudget > 0;
+  if(shouldLoadEagerly) posterEagerBudget -= 1;
 
   const wrap = document.createElement('div');
   wrap.className = 'poster' + (className ? ' ' + className : '');
 
   const img = document.createElement('img');
-  img.src = poster.u;
   img.alt = `Poster for ${m.t}`;
-  img.loading = 'lazy';
+  img.loading = shouldLoadEagerly ? 'eager' : 'lazy';
   img.decoding = 'async';
+  img.fetchPriority = shouldLoadEagerly ? 'high' : 'low';
   img.width = poster.w || 200;
   img.height = poster.h || 300;
   img.onerror = () => wrap.remove();
+  img.src = poster.u;
 
   wrap.appendChild(img);
 
@@ -1257,6 +1263,9 @@ function saveState(){
     googleSyncPending = true;
     setGoogleSyncStatus(navigator.onLine ? 'Saving to Google…' : 'Saved here — waiting for connection');
     saveState._t = setTimeout(pushToGoogleDrive, 800);
+  }else if(googleSyncIntent){
+    setGoogleSyncUI(false, 'Google sync paused — sign in again', true);
+    showToast('Google sync paused — sign in again');
   }
 }
 
@@ -1341,6 +1350,7 @@ function switchToGrouped(){
 }
 
 function renderCurrentView(){
+  posterEagerBudget = 24;
   renderNewSection();
   if(viewMode === 'grouped') renderGroupedView();
   else render();
@@ -1423,6 +1433,7 @@ function updateStats(){
 }
 
 function renderGroupedView(){
+  posterEagerBudget = 24;
   const groupedEl = document.getElementById('groupedView');
   groupedEl.replaceChildren();
 
@@ -1560,6 +1571,7 @@ function setGoogleSyncError(message){
   googleAccessToken = null;
   googleSyncPending = false;
   clearTimeout(googleSyncRetryTimer);
+  clearTimeout(googleTokenRequestTimer);
   if(googleSyncIntent || readGoogleSyncMeta().enabled){
     writeGoogleSyncMeta({
       enabled: true,
@@ -1569,6 +1581,29 @@ function setGoogleSyncError(message){
     setGoogleSyncUI(false, 'Google sync paused — sign in again', true);
   }else{
     setGoogleSyncUI(false);
+  }
+}
+
+function requestGoogleAccessToken(options){
+  if(!googleTokenClient){
+    setGoogleSyncError('Google sign-in unavailable');
+    showToast('Google sign-in is unavailable — try again');
+    return;
+  }
+
+  clearTimeout(googleTokenRequestTimer);
+  const silent = options && options.prompt === '';
+  googleTokenRequestTimer = setTimeout(()=>{
+    if(googleAccessToken) return;
+    setGoogleSyncError(silent ? 'Google silent sign-in timed out' : 'Google sign-in timed out');
+    if(!silent) showToast('Google sign-in did not finish — try again');
+  }, GOOGLE_TOKEN_TIMEOUT_MS);
+
+  try{
+    googleTokenClient.requestAccessToken(options || {});
+  }catch(e){
+    setGoogleSyncError('Google sign-in failed');
+    showToast('Google sign-in failed — try again');
   }
 }
 
@@ -1598,13 +1633,14 @@ function initGoogleSync(){
   });
   googleSyncIntent = !!readGoogleSyncMeta().enabled;
   if(googleSyncIntent){
-    googleTokenClient.requestAccessToken({ prompt: '' });
+    requestGoogleAccessToken({ prompt: '' });
   }else{
     setGoogleSyncUI(false);
   }
 }
 
 function onGoogleToken(resp){
+  clearTimeout(googleTokenRequestTimer);
   if(resp.error){
     if(googleSyncIntent) setGoogleSyncError(resp.error);
     else setGoogleSyncUI(false);
@@ -1799,6 +1835,7 @@ async function pushToGoogleDrive(){
 }
 
 function render(){
+  posterEagerBudget = 24;
   const q = query.trim().toLowerCase();
   const orderPosition = new Map(state.order.map((idx, pos) => [idx, pos]));
   let visibleOrder = state.order.filter(idx=>{
@@ -1946,9 +1983,10 @@ document.getElementById('googleSignInBtn').addEventListener('click', ()=>{
   googleSyncIntent = true;
   if(googleTokenClient){
     setGoogleSyncUI(false, 'Connecting to Google…');
-    googleTokenClient.requestAccessToken({ prompt: 'consent' });
+    requestGoogleAccessToken({ prompt: 'consent' });
   }else{
     setGoogleSyncError('Google sign-in unavailable');
+    showToast('Google sign-in is unavailable — try again');
   }
 });
 
