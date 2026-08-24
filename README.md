@@ -26,6 +26,11 @@ metadata and icons, while `sw.js` caches the app shell, data files, icons, and
 policy pages for offline loading. Google sync keeps local changes saved first,
 then queues and retries Drive writes when the device comes back online or the
 tab becomes visible again.
+The app also remembers that Google sync was enabled separately from Google's
+short-lived access token. After reloads, installs, or app updates it attempts to
+reconnect silently; if Google auth is unavailable or expires, the sync panel
+shows "Google sync paused — sign in again" instead of silently looking
+disconnected.
 
 Every movie also carries `genre` (1-3 tags from a fixed list) and `studio`
 (the real production studio, not just which curated list it came from), on
@@ -90,7 +95,9 @@ source URLs, allowed genres, and orphan poster keys.
 A small Playwright suite in `tests/` covers regression-prone behavior: catalog
 rendering, watched/priority persistence, clearing watched marks, manual sync
 code export/import, the PWA manifest and service worker, offline app-shell
-reloads, and Google Drive sync failure/retry handling.
+reloads, Google Drive sync failure/retry handling, and the reconnect prompt
+shown when a previously enabled Google sync session can no longer silently
+refresh.
 
 Install once, then run:
 

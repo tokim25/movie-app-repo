@@ -197,6 +197,9 @@
     cursor:pointer;
     font-weight:500;
   }
+  .sortbar button.syncWarning{
+    color:var(--error);
+  }
   .sortSelect{
     background:var(--bg-sub);
     border:1px solid transparent;
@@ -875,9 +878,11 @@ let groupedExpanded = {};
 const GOOGLE_CLIENT_ID = "987776124251-t4skn7ia6qd1r88ftass906jinm98v1q.apps.googleusercontent.com";
 const DRIVE_FILE_NAME = "family-feature-state-v3.json";
 const GOOGLE_SYNC_FLAG = "family-feature-google-sync-v3-enabled";
+const GOOGLE_SYNC_META_KEY = "family-feature-google-sync-v3-meta";
 let googleTokenClient = null;
 let googleAccessToken = null;
 let googleDriveFileId = null;
+let googleSyncIntent = false;
 let googleSyncBusy = false;
 let googleSyncPending = false;
 let googleSyncLastOkAt = 0;
@@ -975,6 +980,33 @@ function getDeviceId(){
 }
 
 const DEVICE_ID = getDeviceId();
+
+function readGoogleSyncMeta(){
+  const fallback = { enabled: localStorage.getItem(GOOGLE_SYNC_FLAG) === '1' };
+  try{
+    const raw = localStorage.getItem(GOOGLE_SYNC_META_KEY);
+    return raw ? Object.assign(fallback, JSON.parse(raw)) : fallback;
+  }catch(e){
+    return fallback;
+  }
+}
+
+function writeGoogleSyncMeta(patch){
+  try{
+    const meta = Object.assign({}, readGoogleSyncMeta(), patch);
+    googleSyncIntent = !!meta.enabled;
+    if(meta.enabled) localStorage.setItem(GOOGLE_SYNC_FLAG, '1');
+    localStorage.setItem(GOOGLE_SYNC_META_KEY, JSON.stringify(meta));
+  }catch(e){ /* storage may be unavailable */ }
+}
+
+function clearGoogleSyncMeta(){
+  googleSyncIntent = false;
+  try{
+    localStorage.removeItem(GOOGLE_SYNC_FLAG);
+    localStorage.removeItem(GOOGLE_SYNC_META_KEY);
+  }catch(e){ /* storage may be unavailable */ }
+}
 
 function defaultOrder(){
   return sortMovieIndices(MOVIES.map((_,i)=>i), 'year');
@@ -1512,28 +1544,48 @@ function setGoogleSyncStatus(message, isError){
   statusEl.textContent = message || '';
   statusEl.style.display = message ? 'inline' : 'none';
   statusEl.classList.toggle('syncError', !!isError);
+  statusEl.setAttribute('aria-live', isError ? 'assertive' : 'polite');
 }
 
-function setGoogleSyncUI(connected, message){
+function setGoogleSyncUI(connected, message, isError){
   document.getElementById('googleSignInBtn').style.display = connected ? 'none' : 'inline-block';
-  setGoogleSyncStatus(connected ? (message || 'Synced with Google') : '');
+  setGoogleSyncStatus(connected ? (message || 'Synced with Google') : (message || ''), isError);
   document.getElementById('googleSignOutBtn').style.display = connected ? 'inline-block' : 'none';
+  const toggleBtn = document.getElementById('syncToggleBtn');
+  toggleBtn.textContent = isError ? 'Sync needs reconnect' : 'Sync across devices';
+  toggleBtn.classList.toggle('syncWarning', !!isError);
 }
 
-function setGoogleSyncError(){
+function setGoogleSyncError(message){
   googleAccessToken = null;
   googleSyncPending = false;
-  setGoogleSyncUI(false);
-  localStorage.removeItem(GOOGLE_SYNC_FLAG);
+  clearTimeout(googleSyncRetryTimer);
+  if(googleSyncIntent || readGoogleSyncMeta().enabled){
+    writeGoogleSyncMeta({
+      enabled: true,
+      disconnectedAt: now(),
+      lastError: message || 'Google sync needs reconnect'
+    });
+    setGoogleSyncUI(false, 'Google sync paused — sign in again', true);
+  }else{
+    setGoogleSyncUI(false);
+  }
 }
 
 function tryInitGoogleSync(attempts){
   if(!GOOGLE_CLIENT_ID) return;
   attempts = attempts || 0;
+  document.getElementById('googleSyncRow').style.display = 'block';
+  if(attempts === 0){
+    googleSyncIntent = !!readGoogleSyncMeta().enabled;
+    if(googleSyncIntent) setGoogleSyncUI(false, 'Connecting to Google…');
+  }
   if(window.google && window.google.accounts && window.google.accounts.oauth2){
     initGoogleSync();
   } else if(attempts < 20){
     setTimeout(()=>tryInitGoogleSync(attempts+1), 250);
+  } else if(googleSyncIntent && !googleAccessToken){
+    setGoogleSyncError('Google sign-in unavailable');
   }
 }
 
@@ -1544,18 +1596,27 @@ function initGoogleSync(){
     scope: 'https://www.googleapis.com/auth/drive.appdata',
     callback: onGoogleToken
   });
-  if(localStorage.getItem(GOOGLE_SYNC_FLAG) === '1'){
+  googleSyncIntent = !!readGoogleSyncMeta().enabled;
+  if(googleSyncIntent){
     googleTokenClient.requestAccessToken({ prompt: '' });
+  }else{
+    setGoogleSyncUI(false);
   }
 }
 
 function onGoogleToken(resp){
   if(resp.error){
-    setGoogleSyncUI(false);
+    if(googleSyncIntent) setGoogleSyncError(resp.error);
+    else setGoogleSyncUI(false);
     return;
   }
   googleAccessToken = resp.access_token;
-  localStorage.setItem(GOOGLE_SYNC_FLAG, '1');
+  writeGoogleSyncMeta({
+    enabled: true,
+    connectedAt: now(),
+    disconnectedAt: 0,
+    lastError: ''
+  });
   syncFromGoogleDrive();
 }
 
@@ -1577,7 +1638,7 @@ async function driveJson(res, action){
   }
 
   if(!res.ok){
-    if(res.status === 401 || res.status === 403) setGoogleSyncError();
+    if(res.status === 401 || res.status === 403) setGoogleSyncError('Google authorization expired');
     const message = data.error && data.error.message ? data.error.message : `${res.status} ${res.statusText}`;
     throw new Error(`${action} failed: ${message}`);
   }
@@ -1680,6 +1741,12 @@ async function syncFromGoogleDrive(){
     const uploaded = await writeDriveFile(googleDriveFileId, serializeState());
     if(uploaded && uploaded.id) googleDriveFileId = uploaded.id;
     googleSyncLastOkAt = now();
+    writeGoogleSyncMeta({
+      enabled: true,
+      lastOkAt: googleSyncLastOkAt,
+      disconnectedAt: 0,
+      lastError: ''
+    });
     googleSyncRetryDelay = 1600;
     setGoogleSyncUI(true);
     renderCurrentView();
@@ -1712,6 +1779,12 @@ async function pushToGoogleDrive(){
     const uploaded = await writeDriveFile(googleDriveFileId, serializeState());
     if(uploaded && uploaded.id) googleDriveFileId = uploaded.id;
     googleSyncLastOkAt = now();
+    writeGoogleSyncMeta({
+      enabled: true,
+      lastOkAt: googleSyncLastOkAt,
+      disconnectedAt: 0,
+      lastError: ''
+    });
     googleSyncRetryDelay = 1600;
     setGoogleSyncUI(true);
   }catch(e){
@@ -1870,7 +1943,13 @@ document.getElementById('syncCopyBtn').addEventListener('click', async ()=>{
 });
 
 document.getElementById('googleSignInBtn').addEventListener('click', ()=>{
-  if(googleTokenClient) googleTokenClient.requestAccessToken({ prompt: 'consent' });
+  googleSyncIntent = true;
+  if(googleTokenClient){
+    setGoogleSyncUI(false, 'Connecting to Google…');
+    googleTokenClient.requestAccessToken({ prompt: 'consent' });
+  }else{
+    setGoogleSyncError('Google sign-in unavailable');
+  }
 });
 
 document.getElementById('googleSignOutBtn').addEventListener('click', ()=>{
@@ -1881,7 +1960,7 @@ document.getElementById('googleSignOutBtn').addEventListener('click', ()=>{
   googleDriveFileId = null;
   googleSyncPending = false;
   clearTimeout(googleSyncRetryTimer);
-  localStorage.removeItem(GOOGLE_SYNC_FLAG);
+  clearGoogleSyncMeta();
   setGoogleSyncUI(false);
   showToast('Disconnected from Google');
 });
@@ -1982,11 +2061,14 @@ window.addEventListener('online', ()=>{
   if(googleAccessToken && googleSyncPending){
     setGoogleSyncUI(true, 'Syncing with Google…');
     pushToGoogleDrive();
+  }else if(googleSyncIntent && !googleAccessToken){
+    setGoogleSyncUI(false, 'Google sync paused — sign in again', true);
   }
 });
 
 window.addEventListener('offline', ()=>{
   if(googleAccessToken) setGoogleSyncUI(true, 'Saved here — waiting for connection');
+  else if(googleSyncIntent) setGoogleSyncUI(false, 'Google sync paused — sign in again', true);
 });
 
 document.addEventListener('visibilitychange', ()=>{

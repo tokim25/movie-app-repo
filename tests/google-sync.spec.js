@@ -78,6 +78,7 @@ test('a 401 response disconnects sync and stops retrying', async ({ page }) => {
   await page.goto('/');
   await page.evaluate(() => {
     googleAccessToken = 'fake-token';
+    googleSyncIntent = true;
   });
 
   await page.evaluate(() => pushToGoogleDrive());
@@ -92,6 +93,53 @@ test('a 401 response disconnects sync and stops retrying', async ({ page }) => {
   expect(pending).toBe(false);
   const signInDisplay = await page.evaluate(() => document.getElementById('googleSignInBtn').style.display);
   expect(signInDisplay).toBe('inline-block');
+  await expect(page.locator('#googleSyncStatus')).toHaveText('Google sync paused — sign in again');
+  await expect(page.locator('#googleSyncStatus')).toHaveClass(/syncError/);
+  await expect(page.locator('#syncToggleBtn')).toHaveText('Sync needs reconnect');
+  await expect(page.locator('#syncToggleBtn')).toHaveClass(/syncWarning/);
+  const syncMeta = await page.evaluate(() =>
+    JSON.parse(localStorage.getItem('family-feature-google-sync-v3-meta'))
+  );
+  expect(syncMeta.enabled).toBe(true);
+  expect(syncMeta.lastError).toBe('Google authorization expired');
+});
+
+test('remembered Google sync shows reconnect when silent auth is unavailable', async ({ page }) => {
+  await page.route('https://accounts.google.com/gsi/client', async (route) => {
+    return route.fulfill({
+      status: 200,
+      contentType: 'text/javascript',
+      body: `
+        window.google = {
+          accounts: {
+            oauth2: {
+              initTokenClient: ({ callback }) => ({
+                requestAccessToken: () => callback({ error: 'interaction_required' })
+              }),
+              revoke: () => {}
+            }
+          }
+        };
+      `,
+    });
+  });
+
+  await page.addInitScript(() => {
+    localStorage.setItem('family-feature-google-sync-v3-enabled', '1');
+  });
+
+  await page.goto('/');
+
+  await expect(page.locator('#googleSyncStatus')).toHaveText('Google sync paused — sign in again');
+  await expect(page.locator('#googleSyncStatus')).toHaveClass(/syncError/);
+  await expect(page.locator('#syncToggleBtn')).toHaveText('Sync needs reconnect');
+  await expect(page.locator('#syncToggleBtn')).toHaveClass(/syncWarning/);
+  const signInDisplay = await page.evaluate(() => document.getElementById('googleSignInBtn').style.display);
+  expect(signInDisplay).toBe('inline-block');
+  const signOutDisplay = await page.evaluate(() => document.getElementById('googleSignOutBtn').style.display);
+  expect(signOutDisplay).toBe('none');
+  const syncFlag = await page.evaluate(() => localStorage.getItem('family-feature-google-sync-v3-enabled'));
+  expect(syncFlag).toBe('1');
 });
 
 test('failed writes back off instead of retrying aggressively, and a later success clears the warning', async ({ page }) => {
