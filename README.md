@@ -33,6 +33,10 @@ top of the existing `y` (year) and `ca` (Common Sense Media recommended age).
 The app filters on all four: decade, max recommended age, genre, and studio,
 combinable and cleared with one button.
 
+Studio sections list movies chronologically by release year by default. The
+full browser also defaults to release-year order and can switch to recommended
+age, title, or the saved custom order.
+
 Each row also has a star toggle, independent of the watched checkbox, for
 flagging movies you want to prioritize — a "Want to watch" filter button and
 header count go with it. Priority marks travel through "Sync across devices"

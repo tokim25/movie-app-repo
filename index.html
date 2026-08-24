@@ -197,6 +197,20 @@
     cursor:pointer;
     font-weight:500;
   }
+  .sortSelect{
+    background:var(--bg-sub);
+    border:1px solid transparent;
+    color:var(--ink);
+    padding:7px 10px;
+    border-radius:8px;
+    font-family:inherit;
+    font-size:13px;
+    cursor:pointer;
+  }
+  .sortSelect:focus{
+    outline:2px solid var(--blue);
+    outline-offset:1px;
+  }
   #installAppBtn{
     display:none;
   }
@@ -636,6 +650,12 @@
     gap:12px;
     padding:8px 0;
   }
+  .studioMovieRow{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    padding:8px 0;
+  }
   .safeBetDetail{
     padding:0 0 8px 110px;
   }
@@ -747,6 +767,12 @@
 </div>
 <div class="sortbar">
   <button id="syncToggleBtn">Sync across devices</button>
+  <select id="sortMode" class="sortSelect" aria-label="Sort movies">
+    <option value="year">Sort by year</option>
+    <option value="age">Sort by recommended age</option>
+    <option value="title">Sort by title</option>
+    <option value="custom">Custom order</option>
+  </select>
   <button id="installAppBtn">Install app</button>
   <button id="resortBtn">Reset order</button>
 </div>
@@ -825,7 +851,7 @@ const MOVIES_BY_STUDIO = MOVIES.reduce((groups, movie, idx)=>{
   groups.get(movie.studio).push(idx);
   return groups;
 }, new Map());
-let state = { order: MOVIES.map((_,i)=>i), orderUpdatedAt: 0, orderDevice: '', checked: {}, priority: {} };
+let state = { order: defaultOrder(), orderUpdatedAt: 0, orderDevice: '', checked: {}, priority: {} };
 let filter = "all";
 let priorityOnly = false;
 let query = "";
@@ -834,9 +860,9 @@ let decadeFilter = "";
 let ageFilter = "";
 let genreFilter = "";
 let studioFilter = "";
+let sortMode = "year";
 let viewMode = "grouped";
 let groupedExpanded = {};
-let groupedSafeBets = {};
 
 const GOOGLE_CLIENT_ID = "987776124251-t4skn7ia6qd1r88ftass906jinm98v1q.apps.googleusercontent.com";
 const DRIVE_FILE_NAME = "family-feature-state-v3.json";
@@ -854,6 +880,36 @@ let deferredInstallPrompt = null;
 function parseAge(ca){
   const m = /^~?(\d+)\+/.exec((ca || '').trim());
   return m ? parseInt(m[1], 10) : null;
+}
+
+function movieYear(idx){
+  const year = parseInt(MOVIES[idx].y, 10);
+  return Number.isFinite(year) ? year : 9999;
+}
+
+function movieAge(idx){
+  const age = parseAge(MOVIES[idx].ca);
+  return age === null ? 999 : age;
+}
+
+function titleCompare(a, b){
+  return MOVIES[a].t.localeCompare(MOVIES[b].t, undefined, { sensitivity: 'base' });
+}
+
+function compareByYear(a, b){
+  return movieYear(a) - movieYear(b) || titleCompare(a, b);
+}
+
+function compareByAge(a, b){
+  return movieAge(a) - movieAge(b) || compareByYear(a, b);
+}
+
+function sortMovieIndices(indices, mode){
+  if(mode === 'custom') return indices.slice();
+  const sorted = indices.slice();
+  if(mode === 'age') return sorted.sort(compareByAge);
+  if(mode === 'title') return sorted.sort(titleCompare);
+  return sorted.sort(compareByYear);
 }
 
 function decadeOf(y){
@@ -909,7 +965,7 @@ function getDeviceId(){
 const DEVICE_ID = getDeviceId();
 
 function defaultOrder(){
-  return MOVIES.map((_,i)=>i);
+  return sortMovieIndices(MOVIES.map((_,i)=>i), 'year');
 }
 
 function isDefaultOrder(order){
@@ -1188,7 +1244,7 @@ function toggleDetail(idx){
 }
 
 function resetOrder(){
-  state.order = MOVIES.map((_,i)=>i);
+  state.order = defaultOrder();
   state.orderUpdatedAt = now();
   state.orderDevice = DEVICE_ID;
   saveState();
@@ -1203,26 +1259,8 @@ function clearAllChecks(){
   showToast('Watched marks cleared');
 }
 
-function pickSafeBets(studio){
-  const pool = (MOVIES_BY_STUDIO.get(studio) || []).filter(i => !markValue(state.checked, i));
-  const shuffled = pool.slice();
-  for(let i = shuffled.length - 1; i > 0; i--){
-    const j = Math.floor(Math.random() * (i+1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled.slice(0, 3);
-}
-
 function toggleStudioGroup(studio){
   groupedExpanded[studio] = !groupedExpanded[studio];
-  if(groupedExpanded[studio] && !groupedSafeBets[studio]){
-    groupedSafeBets[studio] = pickSafeBets(studio);
-  }
-  renderGroupedView();
-}
-
-function shuffleStudio(studio){
-  groupedSafeBets[studio] = pickSafeBets(studio);
   renderGroupedView();
 }
 
@@ -1233,6 +1271,8 @@ function browseStudio(studio){
   document.getElementById('genreFilter').value = '';
   document.getElementById('search').value = '';
   document.getElementById('priorityToggleBtn').classList.remove('on');
+  sortMode = 'year';
+  document.getElementById('sortMode').value = sortMode;
   studioFilter = studio;
   document.getElementById('studioFilter').value = studio;
   switchToFlat();
@@ -1371,23 +1411,23 @@ function renderGroupedView(){
 
       const label = document.createElement('p');
       label.className = 'safeBetsLabel';
-      label.textContent = 'Safe bets tonight';
+      label.textContent = 'Chronological';
       body.appendChild(label);
 
-      const bets = groupedSafeBets[studio] || [];
-      if(bets.length === 0){
+      const studioMovies = sortMovieIndices(indices, 'year');
+      if(studioMovies.length === 0){
         const empty = document.createElement('p');
         empty.className = 'safeBetEmpty';
         const unwatchedCount = indices.filter(i => !markValue(state.checked, i)).length;
         empty.textContent = unwatchedCount === 0 ? "You've watched everything here." : 'Nothing to show.';
         body.appendChild(empty);
       } else {
-        bets.forEach(idx=>{
+        studioMovies.forEach(idx=>{
           const m = MOVIES[idx];
           const isChecked = markValue(state.checked, idx);
 
           const row = document.createElement('div');
-          row.className = 'safeBetRow';
+          row.className = 'studioMovieRow';
 
           const check = document.createElement('button');
           check.className = 'check' + (isChecked ? ' on' : '');
@@ -1422,12 +1462,6 @@ function renderGroupedView(){
             body.appendChild(detail);
           }
         });
-
-        const shuffleBtn = document.createElement('button');
-        shuffleBtn.className = 'shuffleBtn';
-        shuffleBtn.textContent = 'Shuffle these';
-        shuffleBtn.onclick = () => shuffleStudio(studio);
-        body.appendChild(shuffleBtn);
       }
 
       const browseWrap = document.createElement('p');
@@ -1696,11 +1730,12 @@ function render(){
     if(priorityOnly && !markValue(state.priority, idx)) return false;
     return true;
   });
+  visibleOrder = sortMovieIndices(visibleOrder, sortMode);
 
   listEl.replaceChildren();
   emptyMsg.style.display = visibleOrder.length ? 'none' : 'block';
 
-  visibleOrder.forEach((idx) => {
+  visibleOrder.forEach((idx, visiblePos) => {
     const m = MOVIES[idx];
     const isChecked = markValue(state.checked, idx);
     const globalPos = orderPosition.get(idx);
@@ -1710,7 +1745,7 @@ function render(){
 
     const num = document.createElement('div');
     num.className = 'num';
-    num.textContent = (globalPos+1);
+    num.textContent = (sortMode === 'custom' ? globalPos : visiblePos) + 1;
 
     const check = document.createElement('button');
     check.className = 'check' + (isChecked ? ' on' : '');
@@ -1748,6 +1783,7 @@ function render(){
     down.onclick = () => move(idx, 1);
     moves.appendChild(up);
     moves.appendChild(down);
+    moves.style.display = sortMode === 'custom' ? 'flex' : 'none';
 
     li.appendChild(num);
     li.appendChild(check);
@@ -1771,6 +1807,11 @@ function render(){
 document.getElementById('search').addEventListener('input', e=>{
   query = e.target.value;
   renderCurrentView();
+});
+
+document.getElementById('sortMode').addEventListener('change', e=>{
+  sortMode = e.target.value;
+  render();
 });
 
 document.querySelectorAll('#filterSeg button').forEach(btn=>{
@@ -1844,7 +1885,6 @@ document.getElementById('syncLoadBtn').addEventListener('click', ()=>{
     state = decodeState(input.value);
     saveState();
     input.value = '';
-    groupedSafeBets = {};
     renderCurrentView();
     showToast('Synced from code');
   }catch(e){
