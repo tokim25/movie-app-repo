@@ -60,7 +60,7 @@ titles waiting to be added live in `PENDING_REQUESTS.md`.
 ## Deploying
 
 The Vercel project ("family-movie-watchlist") is connected to this repo via
-Vercel's Git integration (as of 2026-08-23) — **a plain `git push` to `master`
+Vercel's Git integration (as of 2026-08-24) — **a plain `git push` to `master`
 (or a merged PR) redeploys the whole site automatically**, every file in the repo
 including all `data-*.js` files. There is no manual deploy step anymore. The
 project used to route data files through jsDelivr's CDN with manual

@@ -9,7 +9,7 @@ Adds new titles to family-movie-watchlist (github.com/tokim25/movie-app-repo). R
 this whole file before starting; it's the whole pipeline in one place so a future
 session doesn't have to reconstruct it from scratch.
 
-## Deploy architecture (read this first, it changed 2026-08-22/23)
+## Deploy architecture (read this first, it changed 2026-08-24)
 
 Vercel's Git integration is connected to this repo now. **A push to `master` (or a
 merged PR) deploys the whole site automatically** -- every file in the repo,
