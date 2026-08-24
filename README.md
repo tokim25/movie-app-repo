@@ -81,6 +81,44 @@ Run `node scripts/validate-data.mjs` after catalog edits. It checks duplicate
 movie numbers, required fields, HTTPS source URLs, allowed genres, and orphan
 poster keys.
 
+## Testing
+
+A small Playwright suite in `tests/` covers regression-prone behavior: catalog
+rendering, watched/priority persistence, clearing watched marks, manual sync
+code export/import, the PWA manifest and service worker, offline app-shell
+reloads, and Google Drive sync failure/retry handling.
+
+Install once, then run:
+
+```bash
+npm install
+npx playwright install chromium
+npm test
+```
+
+`npm test` starts a plain static file server (`tests/static-server.mjs`) on
+`http://127.0.0.1:4319`, points Playwright at it, and runs headless Chromium.
+No build step, backend, or real Google account is required. Everything runs
+against the repo's static files as-is.
+
+`index.html` is a single classic (non-module) `<script>` tag, so its top-level
+`let`/`const`/`function` declarations are already reachable from Playwright's
+`page.evaluate()`, the same way they'd be reachable from the browser's dev
+console. The Google Drive sync tests use this directly: they set the app's own
+`googleAccessToken` variable and call its `pushToGoogleDrive()` /
+`syncFromGoogleDrive()` functions, while mocking the Drive REST calls with
+`page.route()`, to exercise the real save-first/offline-status/backoff-retry
+code paths without a real OAuth flow. No helper extraction from `index.html`
+was needed for this.
+
+Useful variants:
+
+```bash
+npx playwright test tests/google-sync.spec.js   # one file
+npx playwright test --ui                        # interactive runner
+npx playwright show-report                       # HTML report after a run
+```
+
 ## Deploying
 
 The Vercel project ("family-movie-watchlist") is connected to this repo via
