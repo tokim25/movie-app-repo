@@ -4,17 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Movie Night</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#ffffff;
-    --bg-sub:#f5f5f7;
-    --ink:#1d1d1f;
-    --ink-soft:#6e6e73;
-    --ink-faint:#86868b;
-    --line:#e5e5e5;
-    --blue:#0071e3;
-    --check:#1d1d1f;
-    --star:#ff9500;
+    --bg:#faf5ee;
+    --bg-sub:#f1e7d8;
+    --ink:#332821;
+    --ink-soft:#7d6c5c;
+    --ink-faint:#a89985;
+    --line:#e6dbc9;
+    --blue:#bd5b3a;
+    --check:#332821;
+    --star:#d9932f;
   }
   *{box-sizing:border-box; -webkit-font-smoothing:antialiased;}
   html,body{margin:0;padding:0;}
@@ -36,9 +39,10 @@
     margin:0 auto;
   }
   h1{
+    font-family:"Fraunces", Georgia, "Times New Roman", serif;
     font-size:clamp(34px,7vw,48px);
-    font-weight:700;
-    letter-spacing:-0.02em;
+    font-weight:600;
+    letter-spacing:-0.01em;
     margin:0 0 8px;
     color:var(--ink);
   }
@@ -268,9 +272,11 @@
   .poster{
     width:42px;
     aspect-ratio:2 / 3;
-    border-radius:5px;
+    border-radius:6px;
     overflow:hidden;
     background:var(--bg-sub);
+    box-shadow:0 1px 3px rgba(51,40,33,0.22);
+    border:1px solid rgba(51,40,33,0.08);
     flex-shrink:0;
   }
   .poster img{
