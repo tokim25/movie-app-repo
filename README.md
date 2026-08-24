@@ -13,6 +13,13 @@ code (copy it) and a box to paste a code from elsewhere (load it) — a manual,
 no-account, no-backend way to move your watched list and ordering between
 devices.
 
+Optional Google sync uses the Google Identity Services token flow and stores a
+single `family-feature-state-v2.json` file in the user's own Google Drive with
+the limited `drive.file` scope. The OAuth consent screen should use the public
+app name "Family Feature" and point to the live policy pages:
+`https://family-movie-watchlist-kim-family-projects.vercel.app/privacy.html`
+and `https://family-movie-watchlist-kim-family-projects.vercel.app/terms.html`.
+
 Every movie also carries `genre` (1-3 tags from a fixed list) and `studio`
 (the real production studio, not just which curated list it came from), on
 top of the existing `y` (year) and `ca` (Common Sense Media recommended age).
@@ -44,9 +51,9 @@ scheduled update job reads.
 - `data-csm.js` — 73 movies for ages 5-9, sourced from Common Sense Media's own curated age-based lists ("50 Movies All Kids Should Watch Before They're 12," "Best Kids and Family Movies," and similar) and deduped against everything already in the app
 - `data-mcudc.js` — 140 movies: the Marvel Cinematic Universe, legacy Marvel (Fox's X-Men series, Sony's Venom/Morbius/Madame Web, Fantastic Four, Ghost Rider, Elektra), and DC films across every era including the full DC Universe Animated Original Movies line, with R-rated titles (Deadpool & Wolverine, Logan, Zack Snyder's Justice League, and similar) left out by request
 - `data-ghibli.js` — 18 movies: the rest of the Studio Ghibli theatrical catalog not already covered elsewhere in the app, added unfiltered by content/rating per request (including Grave of the Fireflies)
-- `data-posters.js` — poster artwork for 818 of 837 movies, sourced from Wikipedia poster thumbnails, keyed by each movie's `num`
+- `data-posters.js` — poster artwork for 817 of 836 movies, sourced from Wikipedia poster thumbnails, keyed by each movie's `num`
 
-**837 movies total.**
+**836 movies total.**
 
 ## Adding more movies
 

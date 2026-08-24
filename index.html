@@ -653,7 +653,7 @@
   <div class="subtitle">Find the right movie for tonight, pre-screened for the stuff that actually matters.</div>
   <div class="stats">
     <div><b id="statChecked">0</b>Watched</div>
-    <div><b id="statLeft">837</b>To watch</div>
+    <div><b id="statLeft">836</b>To watch</div>
     <div><b id="statPriority">0</b>Want to watch</div>
   </div>
 </header>
@@ -687,7 +687,7 @@
 </div>
 <div class="syncPanel" id="syncPanel" style="display:none;">
   <div class="syncRow" id="googleSyncRow" style="display:none;">
-    <label>Sync automatically with your Google account — saves your list as a small file in your Google Drive that only this app can read or edit.</label>
+    <label>Sync automatically with your Google account — saves your list as a small file in your Google Drive that only this app can read or edit. See our <a href="/privacy.html">Privacy Policy</a> and <a href="/terms.html">Terms</a>.</label>
     <div class="googleSyncControls">
       <button id="googleSignInBtn">Sign in with Google</button>
       <span id="googleSyncStatus" style="display:none;"></span>
@@ -764,8 +764,8 @@ let groupedExpanded = {};
 let groupedSafeBets = {};
 
 const GOOGLE_CLIENT_ID = "987776124251-t4skn7ia6qd1r88ftass906jinm98v1q.apps.googleusercontent.com";
-const DRIVE_FILE_NAME = "movie-night-state.json";
-const GOOGLE_SYNC_FLAG = "movie-night-google-sync-enabled";
+const DRIVE_FILE_NAME = "family-feature-state-v2.json";
+const GOOGLE_SYNC_FLAG = "family-feature-google-sync-enabled";
 let googleTokenClient = null;
 let googleAccessToken = null;
 let googleDriveFileId = null;
@@ -785,6 +785,85 @@ function decadeOf(y){
 const listEl = document.getElementById('list');
 const emptyMsg = document.getElementById('emptyMsg');
 const toastEl = document.getElementById('toast');
+
+function movieKey(idx){
+  return String(MOVIES[idx].num);
+}
+
+function defaultOrder(){
+  return MOVIES.map((_,i)=>i);
+}
+
+function isDefaultOrder(order){
+  return Array.isArray(order) && order.length === MOVIES.length && order.every((idx, pos) => idx === pos);
+}
+
+function normalizeOrder(rawOrder, version){
+  if(!Array.isArray(rawOrder)) return defaultOrder();
+
+  if(version === 2){
+    const byNum = new Map(MOVIES.map((movie, idx) => [String(movie.num), idx]));
+    const seen = new Set();
+    const ordered = [];
+    rawOrder.forEach(num=>{
+      const idx = byNum.get(String(num));
+      if(idx !== undefined && !seen.has(idx)){
+        ordered.push(idx);
+        seen.add(idx);
+      }
+    });
+    if(ordered.length){
+      defaultOrder().forEach(idx=>{
+        if(!seen.has(idx)) ordered.push(idx);
+      });
+      return ordered;
+    }
+  }
+
+  if(rawOrder.length === MOVIES.length && rawOrder.every(idx => Number.isInteger(idx) && idx >= 0 && idx < MOVIES.length)){
+    return rawOrder.slice();
+  }
+
+  return defaultOrder();
+}
+
+function normalizeMarks(rawMarks, version){
+  const marks = {};
+  if(!rawMarks || typeof rawMarks !== 'object') return marks;
+
+  Object.entries(rawMarks).forEach(([key, value])=>{
+    if(version === 2){
+      if(MOVIES.some(movie => String(movie.num) === key)) marks[key] = !!value;
+      return;
+    }
+
+    const idx = parseInt(key, 10);
+    if(Number.isInteger(idx) && idx >= 0 && idx < MOVIES.length){
+      marks[movieKey(idx)] = !!value;
+    }
+  });
+
+  return marks;
+}
+
+function normalizeState(raw){
+  const parsed = raw || {};
+  const version = parsed.v === 2 ? 2 : 1;
+  return {
+    order: normalizeOrder(parsed.order || parsed.o, version),
+    checked: normalizeMarks(parsed.checked || parsed.c, version),
+    priority: normalizeMarks(parsed.priority || parsed.p, version)
+  };
+}
+
+function serializeState(){
+  return {
+    v: 2,
+    order: state.order.map(idx => MOVIES[idx].num),
+    checked: state.checked,
+    priority: state.priority
+  };
+}
 
 function showToast(msg){
   toastEl.textContent = msg;
@@ -818,14 +897,7 @@ function loadState(){
   try{
     const raw = localStorage.getItem(STORAGE_KEY);
     if(raw){
-      const parsed = JSON.parse(raw);
-      if(parsed.order && parsed.order.length === MOVIES.length){
-        state = parsed;
-        if(!state.priority) state.priority = {};
-      } else if (parsed.checked) {
-        state.checked = parsed.checked;
-        if(parsed.priority) state.priority = parsed.priority;
-      }
+      state = normalizeState(JSON.parse(raw));
     }
   }catch(e){ /* no saved state yet, or storage unavailable */ }
   renderCurrentView();
@@ -833,7 +905,7 @@ function loadState(){
 
 function saveState(){
   try{
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(serializeState()));
   }catch(e){ console.error('save failed', e); }
   if(googleAccessToken){
     clearTimeout(saveState._t);
@@ -842,13 +914,15 @@ function saveState(){
 }
 
 function toggleCheck(idx){
-  state.checked[idx] = !state.checked[idx];
+  const key = movieKey(idx);
+  state.checked[key] = !state.checked[key];
   saveState();
   renderCurrentView();
 }
 
 function togglePriority(idx){
-  state.priority[idx] = !state.priority[idx];
+  const key = movieKey(idx);
+  state.priority[key] = !state.priority[key];
   saveState();
   renderCurrentView();
 }
@@ -883,7 +957,7 @@ function clearAllChecks(){
 }
 
 function pickSafeBets(studio){
-  const pool = MOVIES.map((m,i)=>i).filter(i => MOVIES[i].studio === studio && !state.checked[i]);
+  const pool = MOVIES.map((m,i)=>i).filter(i => MOVIES[i].studio === studio && !state.checked[movieKey(i)]);
   const shuffled = pool.slice();
   for(let i = shuffled.length - 1; i > 0; i--){
     const j = Math.floor(Math.random() * (i+1));
@@ -983,13 +1057,13 @@ function renderGroupedView(){
       if(bets.length === 0){
         const empty = document.createElement('p');
         empty.className = 'safeBetEmpty';
-        const unwatchedCount = indices.filter(i => !state.checked[i]).length;
+        const unwatchedCount = indices.filter(i => !state.checked[movieKey(i)]).length;
         empty.textContent = unwatchedCount === 0 ? "You've watched everything here." : 'Nothing to show.';
         body.appendChild(empty);
       } else {
         bets.forEach(idx=>{
           const m = MOVIES[idx];
-          const isChecked = !!state.checked[idx];
+          const isChecked = !!state.checked[movieKey(idx)];
 
           const row = document.createElement('div');
           row.className = 'safeBetRow';
@@ -999,7 +1073,7 @@ function renderGroupedView(){
           check.setAttribute('aria-label', 'Mark watched');
           check.onclick = () => toggleCheck(idx);
 
-          const isPriority = !!state.priority[idx];
+          const isPriority = !!state.priority[movieKey(idx)];
           const star = document.createElement('button');
           star.className = 'star' + (isPriority ? ' on' : '');
           star.innerHTML = isPriority ? '&#9733;' : '&#9734;';
@@ -1061,15 +1135,15 @@ function renderGroupedView(){
 }
 
 function encodeState(){
-  return btoa(JSON.stringify({ o: state.order, c: state.checked, p: state.priority }));
+  return btoa(JSON.stringify(serializeState()));
 }
 
 function decodeState(code){
-  const parsed = JSON.parse(atob(code.trim()));
-  if(!parsed || !Array.isArray(parsed.o) || parsed.o.length !== MOVIES.length){
+  const parsed = normalizeState(JSON.parse(atob(code.trim())));
+  if(!parsed || !Array.isArray(parsed.order) || parsed.order.length !== MOVIES.length){
     throw new Error('invalid sync code');
   }
-  return { order: parsed.o, checked: parsed.c || {}, priority: parsed.p || {} };
+  return parsed;
 }
 
 function setGoogleSyncUI(connected){
@@ -1149,9 +1223,10 @@ async function writeDriveFile(fileId, body){
 }
 
 function mergeState(local, remote){
-  const checked = Object.assign({}, local.checked, remote.checked || {});
-  const priority = Object.assign({}, local.priority, remote.priority || {});
-  const order = (remote.order && remote.order.length === MOVIES.length) ? remote.order : local.order;
+  const normalizedRemote = normalizeState(remote);
+  const checked = Object.assign({}, normalizedRemote.checked, local.checked || {});
+  const priority = Object.assign({}, normalizedRemote.priority, local.priority || {});
+  const order = isDefaultOrder(local.order) && !isDefaultOrder(normalizedRemote.order) ? normalizedRemote.order : local.order;
   return { order, checked, priority };
 }
 
@@ -1166,7 +1241,7 @@ async function syncFromGoogleDrive(){
       state = mergeState(state, remote);
       saveState();
     }
-    const uploaded = await writeDriveFile(googleDriveFileId, state);
+    const uploaded = await writeDriveFile(googleDriveFileId, serializeState());
     if(uploaded && uploaded.id) googleDriveFileId = uploaded.id;
     setGoogleSyncUI(true);
     renderCurrentView();
@@ -1182,7 +1257,7 @@ async function syncFromGoogleDrive(){
 async function pushToGoogleDrive(){
   if(!googleAccessToken) return;
   try{
-    const uploaded = await writeDriveFile(googleDriveFileId, state);
+    const uploaded = await writeDriveFile(googleDriveFileId, serializeState());
     if(uploaded && uploaded.id) googleDriveFileId = uploaded.id;
   }catch(e){
     console.error('Google push failed', e);
@@ -1194,7 +1269,7 @@ function render(){
   let visibleOrder = state.order.filter(idx=>{
     const m = MOVIES[idx];
     if(q && !m.t.toLowerCase().includes(q)) return false;
-    const isChecked = !!state.checked[idx];
+    const isChecked = !!state.checked[movieKey(idx)];
     if(filter === 'todo' && isChecked) return false;
     if(filter === 'done' && !isChecked) return false;
     if(decadeFilter && decadeOf(m.y) !== parseInt(decadeFilter, 10)) return false;
@@ -1204,7 +1279,7 @@ function render(){
     }
     if(genreFilter && !(m.genre || []).includes(genreFilter)) return false;
     if(studioFilter && m.studio !== studioFilter) return false;
-    if(priorityOnly && !state.priority[idx]) return false;
+    if(priorityOnly && !state.priority[movieKey(idx)]) return false;
     return true;
   });
 
@@ -1213,7 +1288,7 @@ function render(){
 
   visibleOrder.forEach((idx) => {
     const m = MOVIES[idx];
-    const isChecked = !!state.checked[idx];
+    const isChecked = !!state.checked[movieKey(idx)];
     const globalPos = state.order.indexOf(idx);
 
     const li = document.createElement('li');
@@ -1228,7 +1303,7 @@ function render(){
     check.setAttribute('aria-label', 'Mark watched');
     check.onclick = () => toggleCheck(idx);
 
-    const isPriority = !!state.priority[idx];
+    const isPriority = !!state.priority[movieKey(idx)];
     const star = document.createElement('button');
     star.className = 'star' + (isPriority ? ' on' : '');
     star.innerHTML = isPriority ? '&#9733;' : '&#9734;';

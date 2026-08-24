@@ -77,7 +77,6 @@ const MOVIE_POSTERS = Object.freeze({
   78: {"u":"https://upload.wikimedia.org/wikipedia/en/4/44/The_Boy_Who_Harnessed_the_Wind.jpg","w":182,"h":268,"p":"The Boy Who Harnessed the Wind"},
   79: {"u":"https://upload.wikimedia.org/wikipedia/en/1/15/If_You_Build_It_%28film%29_poster.jpg","w":259,"h":383,"p":"If You Build It"},
   80: {"u":"https://upload.wikimedia.org/wikipedia/en/9/90/Queen_of_Katwe_poster.jpg","w":259,"h":384,"p":"Queen of Katwe"},
-  81: {"u":"https://upload.wikimedia.org/wikipedia/en/1/1b/Out_for_Blood_in_Silicon_Valley.jpeg","w":259,"h":384,"p":"The Inventor: Out for Blood in Silicon Valley"},
   83: {"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Jeff_Orlowski_et_al._%2832870096216%29.jpg/330px-Jeff_Orlowski_et_al._%2832870096216%29.jpg","w":300,"h":225,"p":"Chasing Coral"},
   84: {"u":"https://upload.wikimedia.org/wikipedia/en/e/e0/He_Named_Me_Malala_Poster.jpg","w":250,"h":370,"p":"He Named Me Malala"},
   85: {"u":"https://upload.wikimedia.org/wikipedia/en/b/b3/Science_Fair_poster.jpg","w":259,"h":384,"p":"Science Fair (film)"},
