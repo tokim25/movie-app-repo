@@ -1303,7 +1303,7 @@ function renderNewSection(){
     title.onclick = () => toggleDetail(idx);
     const tag = document.createElement('div');
     tag.className = 'newTag';
-    tag.textContent = m.addedVia === 'request' ? 'You asked for this' : 'New release';
+    tag.textContent = m.addedVia === 'request' ? 'By request' : 'New release';
     const meta = createMeta(idx, m);
     info.appendChild(title);
     info.appendChild(tag);
