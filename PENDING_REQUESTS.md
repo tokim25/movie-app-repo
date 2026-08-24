@@ -12,3 +12,4 @@ Format: one line per processed row, `<timestamp> — <title> — added as num <N
 (or `— skipped: <reason>` if it wasn't added, e.g. already in the catalog).
 
 <!-- add processed rows below, oldest first -->
+8/24/2026 10:08:04 — The sheep detective — added as num 838
