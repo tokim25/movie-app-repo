@@ -545,7 +545,6 @@
   .newRow:not(:last-child){
     border-bottom:1px solid var(--line);
   }
-  .newRow .title{ cursor:default; }
   .newTag{
     font-size:12px;
     color:var(--ink-faint);
@@ -1299,17 +1298,27 @@ function renderNewSection(){
     const title = document.createElement('div');
     title.className = 'title';
     title.textContent = `${m.t} (${m.y})`;
+    title.onclick = () => toggleDetail(idx);
     const tag = document.createElement('div');
     tag.className = 'newTag';
     tag.textContent = m.addedVia === 'request' ? 'You asked for this' : 'New release';
+    const meta = createMeta(idx, m);
     info.appendChild(title);
     info.appendChild(tag);
+    info.appendChild(meta);
 
     row.appendChild(check);
     row.appendChild(star);
     if(poster) row.appendChild(poster);
     row.appendChild(info);
     section.appendChild(row);
+
+    if(openDetail === idx){
+      const detail = document.createElement('div');
+      detail.className = 'detail open safeBetDetail' + (poster ? '' : ' noPosterDetail');
+      detail.textContent = m.full;
+      section.appendChild(detail);
+    }
   });
 }
 
