@@ -433,6 +433,42 @@
     padding:0 20px;
     max-width:680px;
   }
+  .requestForm{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin:32px auto 0;
+    padding:0 20px;
+    max-width:420px;
+  }
+  .requestForm input[type="text"]{
+    flex:1;
+    background:var(--bg-sub);
+    border:1px solid transparent;
+    color:var(--ink);
+    padding:9px 14px;
+    border-radius:10px;
+    font-family:inherit;
+    font-size:14px;
+  }
+  .requestForm input[type="text"]:focus{
+    outline:2px solid var(--blue);
+    outline-offset:1px;
+    background:var(--bg);
+  }
+  .requestForm button{
+    background:var(--bg-sub);
+    border:none;
+    color:var(--blue);
+    padding:9px 16px;
+    border-radius:10px;
+    font-family:inherit;
+    font-size:14px;
+    font-weight:500;
+    cursor:pointer;
+    flex-shrink:0;
+  }
+  .requestForm button:hover{ background:var(--line); }
   .toast{
     position:fixed;
     bottom:24px; left:50%;
@@ -674,7 +710,11 @@
 </div>
 
 <button class="reset" id="clearAllBtn">Clear all watched marks</button>
-<a class="reset" id="requestMovieLink" href="mailto:tokim25@gmail.com?subject=Movie%20Night%3A%20request%20a%20movie&body=I'd%20like%20to%20request%3A%0A%0A(title%2C%20year%20if%20you%20know%20it)%0A%0AWhy%3A%0A">Request a movie</a>
+<iframe name="hiddenRequestFrame" style="display:none;" title="hidden"></iframe>
+<form id="requestMovieForm" class="requestForm" action="https://docs.google.com/forms/d/e/1FAIpQLSf6gLu-Z9LO-ZnPQ70yuOmYC8_9O1Jk7Kwsk0BF-FepiWH8tQ/formResponse" method="POST" target="hiddenRequestFrame">
+  <input type="text" name="entry.1104459577" id="requestMovieInput" placeholder="Request a movie…" autocomplete="off" required>
+  <button type="submit">Send</button>
+</form>
 <p class="glossary">CSM = Common Sense Media, the nonprofit whose age and content guidance powers every rating here. DCOM = Disney Channel Original Movie.</p>
 
 <div class="toast" id="toast"></div>
@@ -1301,6 +1341,12 @@ document.getElementById('googleSignOutBtn').addEventListener('click', ()=>{
   localStorage.removeItem(GOOGLE_SYNC_FLAG);
   setGoogleSyncUI(false);
   showToast('Disconnected from Google');
+});
+
+document.getElementById('requestMovieForm').addEventListener('submit', ()=>{
+  showToast("Thanks — we'll take a look!");
+  const input = document.getElementById('requestMovieInput');
+  setTimeout(()=>{ input.value = ''; }, 300);
 });
 
 document.getElementById('syncLoadBtn').addEventListener('click', ()=>{
