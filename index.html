@@ -845,6 +845,14 @@ const DEVICE_ID_KEY = "family-feature-device-id";
 const STATE_SCHEMA = 3;
 const MOVIE_NUMS = new Set(MOVIES.map(movie => String(movie.num)));
 const MOVIE_INDEX_BY_NUM = new Map(MOVIES.map((movie, idx) => [String(movie.num), idx]));
+const MERGED_MOVIE_NUMS = new Map([
+  ['648', '6'],
+  ['616', '36'],
+  ['611', '270'],
+  ['629', '282'],
+  ['614', '359'],
+  ['659', '450']
+]);
 const MOVIES_BY_STUDIO = MOVIES.reduce((groups, movie, idx)=>{
   if(!movie.studio) return groups;
   if(!groups.has(movie.studio)) groups.set(movie.studio, []);
@@ -943,6 +951,10 @@ function movieKey(idx){
   return String(MOVIES[idx].num);
 }
 
+function canonicalMovieKey(key){
+  return MERGED_MOVIE_NUMS.get(String(key)) || String(key);
+}
+
 function now(){
   return Date.now();
 }
@@ -978,7 +990,7 @@ function normalizeOrder(rawOrder, version){
     const seen = new Set();
     const ordered = [];
     rawOrder.forEach(num=>{
-      const idx = MOVIE_INDEX_BY_NUM.get(String(num));
+      const idx = MOVIE_INDEX_BY_NUM.get(canonicalMovieKey(num));
       if(idx !== undefined && !seen.has(idx)){
         ordered.push(idx);
         seen.add(idx);
@@ -1016,7 +1028,7 @@ function normalizeOrderMeta(rawOrder, version){
 }
 
 function normalizeMarkRecord(key, value, version){
-  if(!MOVIE_NUMS.has(String(key))) return null;
+  if(!MOVIE_NUMS.has(canonicalMovieKey(key))) return null;
 
   if(version >= 3 && value && typeof value === 'object' && 'value' in value){
     return {
@@ -1039,15 +1051,17 @@ function normalizeMarks(rawMarks, version){
 
   Object.entries(rawMarks).forEach(([key, value])=>{
     if(version >= 2){
-      const record = normalizeMarkRecord(key, value, version);
-      if(record) marks[String(key)] = record;
+      const canonicalKey = canonicalMovieKey(key);
+      const record = normalizeMarkRecord(canonicalKey, value, version);
+      if(record) marks[canonicalKey] = newestMark(marks[canonicalKey], record);
       return;
     }
 
     const idx = parseInt(key, 10);
     if(Number.isInteger(idx) && idx >= 0 && idx < MOVIES.length){
-      const record = normalizeMarkRecord(movieKey(idx), value, version);
-      if(record) marks[movieKey(idx)] = record;
+      const canonicalKey = canonicalMovieKey(movieKey(idx));
+      const record = normalizeMarkRecord(canonicalKey, value, version);
+      if(record) marks[canonicalKey] = newestMark(marks[canonicalKey], record);
     }
   });
 

@@ -57,6 +57,14 @@ const errors = [];
 const context = {};
 vm.createContext(context);
 
+function normalizeTitle(title) {
+  return String(title || '')
+    .toLowerCase()
+    .replace(/\s*\(\d{4}\)\s*$/, '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+}
+
 for (const file of dataFiles) {
   try {
     vm.runInContext(fs.readFileSync(file, 'utf8'), context, { filename: file });
@@ -74,6 +82,7 @@ vm.runInContext(`
 
 const movies = context.__MOVIES__;
 const seenNums = new Map();
+const seenTitleYears = new Map();
 
 for (const movie of movies) {
   const label = `${movie.num ?? 'missing-num'} ${movie.t ?? 'missing-title'}`;
@@ -84,6 +93,13 @@ for (const movie of movies) {
   if (!Number.isInteger(movie.num)) errors.push(`${label}: num must be an integer`);
   if (seenNums.has(movie.num)) errors.push(`${label}: duplicate num also used by ${seenNums.get(movie.num)}`);
   else seenNums.set(movie.num, movie.t);
+
+  const titleYearKey = `${normalizeTitle(movie.t)}|${movie.y}`;
+  if (seenTitleYears.has(titleYearKey)) {
+    errors.push(`${label}: duplicate title/year also used by ${seenTitleYears.get(titleYearKey)}`);
+  } else {
+    seenTitleYears.set(titleYearKey, `${movie.num} ${movie.t}`);
+  }
 
   if (!Array.isArray(movie.genre) || movie.genre.length === 0) {
     errors.push(`${label}: genre must be a non-empty array`);

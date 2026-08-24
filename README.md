@@ -60,12 +60,12 @@ scheduled update job reads.
 - `data-dreamworks.js` — 44 DreamWorks Animation theatrical films (1998-2024)
 - `data-nickelodeon.js` — 34 Nickelodeon Movies theatrical and streaming films (1996-2023)
 - `data-extra.js` — 31 movies requested directly (e.g. via "Request a movie") rather than pulled from a curated external list: the Free Willy and Air Bud franchises, the Sony Spider-Man live-action run plus Across the Spider-Verse, a batch of best-of-90s live-action kids films, and The Sheep Detectives
-- `data-csm.js` — 73 movies for ages 5-9, sourced from Common Sense Media's own curated age-based lists ("50 Movies All Kids Should Watch Before They're 12," "Best Kids and Family Movies," and similar) and deduped against everything already in the app
+- `data-csm.js` — 67 movies for ages 5-9, sourced from Common Sense Media's own curated age-based lists ("50 Movies All Kids Should Watch Before They're 12," "Best Kids and Family Movies," and similar) and deduped against everything already in the app
 - `data-mcudc.js` — 140 movies: the Marvel Cinematic Universe, legacy Marvel (Fox's X-Men series, Sony's Venom/Morbius/Madame Web, Fantastic Four, Ghost Rider, Elektra), and DC films across every era including the full DC Universe Animated Original Movies line, with R-rated titles (Deadpool & Wolverine, Logan, Zack Snyder's Justice League, and similar) left out by request
 - `data-ghibli.js` — 18 movies: the rest of the Studio Ghibli theatrical catalog not already covered elsewhere in the app, added unfiltered by content/rating per request (including Grave of the Fireflies)
-- `data-posters.js` — poster artwork for 818 of 837 movies, sourced from Wikipedia poster thumbnails, keyed by each movie's `num`
+- `data-posters.js` — poster artwork for 813 of 832 movies, sourced from Wikipedia poster thumbnails, keyed by each movie's `num`
 
-**837 movies total.**
+**832 movies total.**
 
 ## Adding more movies
 
@@ -82,8 +82,8 @@ Google Sheet (fed by the in-app request form); `PENDING_REQUESTS.md` is now a
 processed-log the skill writes to, not a queue.
 
 Run `node scripts/validate-data.mjs` after catalog edits. It checks duplicate
-movie numbers, required fields, HTTPS source URLs, allowed genres, and orphan
-poster keys.
+movie numbers, duplicate normalized title/year pairs, required fields, HTTPS
+source URLs, allowed genres, and orphan poster keys.
 
 ## Testing
 
