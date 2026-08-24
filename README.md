@@ -14,9 +14,9 @@ no-account, no-backend way to move your watched list and ordering between
 devices.
 
 Optional Google sync uses the Google Identity Services token flow and stores a
-single `family-feature-state-v2.json` file in the user's own Google Drive with
-the limited `drive.file` scope. The OAuth consent screen should use the public
-app name "Family Feature" and point to the live policy pages:
+single `family-feature-state-v3.json` file in the user's Google Drive
+`appDataFolder` with the limited `drive.appdata` scope. The OAuth consent screen
+should use the public app name "Family Feature" and point to the live policy pages:
 `https://family-movie-watchlist-kim-family-projects.vercel.app/privacy.html`
 and `https://family-movie-watchlist-kim-family-projects.vercel.app/terms.html`.
 
@@ -68,6 +68,10 @@ list) go in `data-extra.js` instead of spawning a new file each time. Requested
 titles waiting to be added live in the "Movie Night Requests (Responses)"
 Google Sheet (fed by the in-app request form); `PENDING_REQUESTS.md` is now a
 processed-log the skill writes to, not a queue.
+
+Run `node scripts/validate-data.mjs` after catalog edits. It checks duplicate
+movie numbers, required fields, HTTPS source URLs, allowed genres, and orphan
+poster keys.
 
 ## Deploying
 

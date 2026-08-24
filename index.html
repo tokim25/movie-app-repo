@@ -750,7 +750,17 @@ const MOVIES = MOVIES_BASE
   .concat(typeof MOVIES_MCUDC !== 'undefined' ? MOVIES_MCUDC : [])
   .concat(typeof MOVIES_GHIBLI !== 'undefined' ? MOVIES_GHIBLI : []);
 const STORAGE_KEY = "family-movie-watchlist-v1";
-let state = { order: MOVIES.map((_,i)=>i), checked: {}, priority: {} };
+const DEVICE_ID_KEY = "family-feature-device-id";
+const STATE_SCHEMA = 3;
+const MOVIE_NUMS = new Set(MOVIES.map(movie => String(movie.num)));
+const MOVIE_INDEX_BY_NUM = new Map(MOVIES.map((movie, idx) => [String(movie.num), idx]));
+const MOVIES_BY_STUDIO = MOVIES.reduce((groups, movie, idx)=>{
+  if(!movie.studio) return groups;
+  if(!groups.has(movie.studio)) groups.set(movie.studio, []);
+  groups.get(movie.studio).push(idx);
+  return groups;
+}, new Map());
+let state = { order: MOVIES.map((_,i)=>i), orderUpdatedAt: 0, orderDevice: '', checked: {}, priority: {} };
 let filter = "all";
 let priorityOnly = false;
 let query = "";
@@ -764,8 +774,8 @@ let groupedExpanded = {};
 let groupedSafeBets = {};
 
 const GOOGLE_CLIENT_ID = "987776124251-t4skn7ia6qd1r88ftass906jinm98v1q.apps.googleusercontent.com";
-const DRIVE_FILE_NAME = "family-feature-state-v2.json";
-const GOOGLE_SYNC_FLAG = "family-feature-google-sync-enabled";
+const DRIVE_FILE_NAME = "family-feature-state-v3.json";
+const GOOGLE_SYNC_FLAG = "family-feature-google-sync-v3-enabled";
 let googleTokenClient = null;
 let googleAccessToken = null;
 let googleDriveFileId = null;
@@ -790,6 +800,27 @@ function movieKey(idx){
   return String(MOVIES[idx].num);
 }
 
+function now(){
+  return Date.now();
+}
+
+function getDeviceId(){
+  try{
+    let deviceId = localStorage.getItem(DEVICE_ID_KEY);
+    if(!deviceId){
+      const bytes = new Uint8Array(16);
+      crypto.getRandomValues(bytes);
+      deviceId = Array.from(bytes, byte => byte.toString(16).padStart(2, '0')).join('');
+      localStorage.setItem(DEVICE_ID_KEY, deviceId);
+    }
+    return deviceId;
+  }catch(e){
+    return 'unknown-device';
+  }
+}
+
+const DEVICE_ID = getDeviceId();
+
 function defaultOrder(){
   return MOVIES.map((_,i)=>i);
 }
@@ -797,16 +828,14 @@ function defaultOrder(){
 function isDefaultOrder(order){
   return Array.isArray(order) && order.length === MOVIES.length && order.every((idx, pos) => idx === pos);
 }
-
 function normalizeOrder(rawOrder, version){
   if(!Array.isArray(rawOrder)) return defaultOrder();
 
-  if(version === 2){
-    const byNum = new Map(MOVIES.map((movie, idx) => [String(movie.num), idx]));
+  if(version >= 2){
     const seen = new Set();
     const ordered = [];
     rawOrder.forEach(num=>{
-      const idx = byNum.get(String(num));
+      const idx = MOVIE_INDEX_BY_NUM.get(String(num));
       if(idx !== undefined && !seen.has(idx)){
         ordered.push(idx);
         seen.add(idx);
@@ -827,19 +856,55 @@ function normalizeOrder(rawOrder, version){
   return defaultOrder();
 }
 
+function normalizeOrderMeta(rawOrder, version){
+  if(version >= 3 && rawOrder && typeof rawOrder === 'object' && Array.isArray(rawOrder.movieNums)){
+    return {
+      order: normalizeOrder(rawOrder.movieNums, 3),
+      orderUpdatedAt: Number(rawOrder.updatedAt) || 0,
+      orderDevice: rawOrder.device || ''
+    };
+  }
+
+  return {
+    order: normalizeOrder(rawOrder, version),
+    orderUpdatedAt: 0,
+    orderDevice: ''
+  };
+}
+
+function normalizeMarkRecord(key, value, version){
+  if(!MOVIE_NUMS.has(String(key))) return null;
+
+  if(version >= 3 && value && typeof value === 'object' && 'value' in value){
+    return {
+      value: !!value.value,
+      updatedAt: Number(value.updatedAt) || 0,
+      device: value.device || ''
+    };
+  }
+
+  return {
+    value: !!value,
+    updatedAt: now(),
+    device: DEVICE_ID
+  };
+}
+
 function normalizeMarks(rawMarks, version){
   const marks = {};
   if(!rawMarks || typeof rawMarks !== 'object') return marks;
 
   Object.entries(rawMarks).forEach(([key, value])=>{
-    if(version === 2){
-      if(MOVIES.some(movie => String(movie.num) === key)) marks[key] = !!value;
+    if(version >= 2){
+      const record = normalizeMarkRecord(key, value, version);
+      if(record) marks[String(key)] = record;
       return;
     }
 
     const idx = parseInt(key, 10);
     if(Number.isInteger(idx) && idx >= 0 && idx < MOVIES.length){
-      marks[movieKey(idx)] = !!value;
+      const record = normalizeMarkRecord(movieKey(idx), value, version);
+      if(record) marks[movieKey(idx)] = record;
     }
   });
 
@@ -848,9 +913,12 @@ function normalizeMarks(rawMarks, version){
 
 function normalizeState(raw){
   const parsed = raw || {};
-  const version = parsed.v === 2 ? 2 : 1;
+  const version = parsed.v === 3 ? 3 : parsed.v === 2 ? 2 : 1;
+  const orderMeta = normalizeOrderMeta(parsed.order || parsed.o, version);
   return {
-    order: normalizeOrder(parsed.order || parsed.o, version),
+    order: orderMeta.order,
+    orderUpdatedAt: orderMeta.orderUpdatedAt,
+    orderDevice: orderMeta.orderDevice,
     checked: normalizeMarks(parsed.checked || parsed.c, version),
     priority: normalizeMarks(parsed.priority || parsed.p, version)
   };
@@ -858,11 +926,91 @@ function normalizeState(raw){
 
 function serializeState(){
   return {
-    v: 2,
-    order: state.order.map(idx => MOVIES[idx].num),
+    v: STATE_SCHEMA,
+    updatedAt: now(),
+    device: DEVICE_ID,
+    moviesVersion: MOVIES.length,
+    order: {
+      movieNums: state.order.map(idx => MOVIES[idx].num),
+      updatedAt: state.orderUpdatedAt || 0,
+      device: state.orderDevice || DEVICE_ID
+    },
     checked: state.checked,
     priority: state.priority
   };
+}
+
+function markValue(collection, idx){
+  return !!(collection[movieKey(idx)] && collection[movieKey(idx)].value);
+}
+
+function markCount(collection){
+  return Object.values(collection).filter(record => record && record.value).length;
+}
+
+function setMark(collectionName, idx, value){
+  const key = movieKey(idx);
+  state[collectionName][key] = {
+    value: !!value,
+    updatedAt: now(),
+    device: DEVICE_ID
+  };
+}
+
+function safeSourceUrl(url){
+  try{
+    const parsed = new URL(url, window.location.href);
+    return parsed.protocol === 'https:' ? parsed.href : '';
+  }catch(e){
+    return '';
+  }
+}
+
+function createStarButton(idx, isPriority){
+  const star = document.createElement('button');
+  star.className = 'star' + (isPriority ? ' on' : '');
+  star.textContent = isPriority ? '\u2605' : '\u2606';
+  star.setAttribute('aria-label', 'Want to watch');
+  star.onclick = () => togglePriority(idx);
+  return star;
+}
+
+function createMeta(idx, m, options){
+  const meta = document.createElement('div');
+  meta.className = 'meta';
+
+  if(options && options.listLabel){
+    const badge = document.createElement('span');
+    badge.className = 'badge';
+    if(options.listTitle) badge.title = options.listTitle;
+    badge.textContent = options.listLabel + (options.listAge || '');
+    meta.appendChild(badge);
+  }
+
+  const csmBadge = document.createElement('span');
+  csmBadge.className = 'badge csm';
+  csmBadge.title = 'Common Sense Media';
+  csmBadge.textContent = 'CSM ' + m.ca;
+  meta.appendChild(csmBadge);
+
+  const detailBtn = document.createElement('button');
+  detailBtn.className = 'detailLink';
+  detailBtn.textContent = openDetail === idx ? 'Hide' : 'Details';
+  detailBtn.onclick = () => toggleDetail(idx);
+  meta.appendChild(detailBtn);
+
+  const sourceUrl = m.srcUrl ? safeSourceUrl(m.srcUrl) : '';
+  if(sourceUrl){
+    const sourceLink = document.createElement('a');
+    sourceLink.className = 'sourceLink';
+    sourceLink.href = sourceUrl;
+    sourceLink.target = '_blank';
+    sourceLink.rel = 'noopener';
+    sourceLink.textContent = 'Source';
+    meta.appendChild(sourceLink);
+  }
+
+  return meta;
 }
 
 function showToast(msg){
@@ -914,15 +1062,13 @@ function saveState(){
 }
 
 function toggleCheck(idx){
-  const key = movieKey(idx);
-  state.checked[key] = !state.checked[key];
+  setMark('checked', idx, !markValue(state.checked, idx));
   saveState();
   renderCurrentView();
 }
 
 function togglePriority(idx){
-  const key = movieKey(idx);
-  state.priority[key] = !state.priority[key];
+  setMark('priority', idx, !markValue(state.priority, idx));
   saveState();
   renderCurrentView();
 }
@@ -933,6 +1079,8 @@ function move(idx, dir){
   if(newPos < 0 || newPos >= state.order.length) return;
   const arr = state.order;
   [arr[pos], arr[newPos]] = [arr[newPos], arr[pos]];
+  state.orderUpdatedAt = now();
+  state.orderDevice = DEVICE_ID;
   saveState();
   renderCurrentView();
 }
@@ -944,20 +1092,22 @@ function toggleDetail(idx){
 
 function resetOrder(){
   state.order = MOVIES.map((_,i)=>i);
+  state.orderUpdatedAt = now();
+  state.orderDevice = DEVICE_ID;
   saveState();
   renderCurrentView();
   showToast('Order reset');
 }
 
 function clearAllChecks(){
-  state.checked = {};
+  MOVIES.forEach((_, idx) => setMark('checked', idx, false));
   saveState();
   renderCurrentView();
   showToast('Watched marks cleared');
 }
 
 function pickSafeBets(studio){
-  const pool = MOVIES.map((m,i)=>i).filter(i => MOVIES[i].studio === studio && !state.checked[movieKey(i)]);
+  const pool = (MOVIES_BY_STUDIO.get(studio) || []).filter(i => !markValue(state.checked, i));
   const shuffled = pool.slice();
   for(let i = shuffled.length - 1; i > 0; i--){
     const j = Math.floor(Math.random() * (i+1));
@@ -1013,10 +1163,10 @@ function renderCurrentView(){
 }
 
 function updateStats(){
-  const checkedCount = Object.values(state.checked).filter(Boolean).length;
+  const checkedCount = markCount(state.checked);
   document.getElementById('statChecked').textContent = checkedCount;
   document.getElementById('statLeft').textContent = MOVIES.length - checkedCount;
-  document.getElementById('statPriority').textContent = Object.values(state.priority).filter(Boolean).length;
+  document.getElementById('statPriority').textContent = markCount(state.priority);
 
   const syncPanel = document.getElementById('syncPanel');
   if(syncPanel && syncPanel.style.display !== 'none'){
@@ -1026,21 +1176,30 @@ function updateStats(){
 
 function renderGroupedView(){
   const groupedEl = document.getElementById('groupedView');
-  groupedEl.innerHTML = '';
+  groupedEl.replaceChildren();
 
-  const studioCounts = {};
-  MOVIES.forEach(m => { if(m.studio) studioCounts[m.studio] = (studioCounts[m.studio] || 0) + 1; });
-  const studios = Object.keys(studioCounts).sort((a,b) => studioCounts[b] - studioCounts[a]);
+  const studios = [...MOVIES_BY_STUDIO.keys()].sort((a,b) => MOVIES_BY_STUDIO.get(b).length - MOVIES_BY_STUDIO.get(a).length);
 
   studios.forEach(studio=>{
-    const indices = MOVIES.map((m,i)=>i).filter(i => MOVIES[i].studio === studio);
+    const indices = MOVIES_BY_STUDIO.get(studio);
 
     const group = document.createElement('div');
     group.className = 'studioGroup';
 
     const header = document.createElement('button');
     header.className = 'studioHeader' + (groupedExpanded[studio] ? ' expanded' : '');
-    header.innerHTML = `<span class="chev">&#9656;</span><span class="studioName">${studio}</span><span class="studioCount">${indices.length}</span>`;
+    const chev = document.createElement('span');
+    chev.className = 'chev';
+    chev.textContent = '\u25b8';
+    const studioName = document.createElement('span');
+    studioName.className = 'studioName';
+    studioName.textContent = studio;
+    const studioCount = document.createElement('span');
+    studioCount.className = 'studioCount';
+    studioCount.textContent = indices.length;
+    header.appendChild(chev);
+    header.appendChild(studioName);
+    header.appendChild(studioCount);
     header.onclick = () => toggleStudioGroup(studio);
     group.appendChild(header);
 
@@ -1057,13 +1216,13 @@ function renderGroupedView(){
       if(bets.length === 0){
         const empty = document.createElement('p');
         empty.className = 'safeBetEmpty';
-        const unwatchedCount = indices.filter(i => !state.checked[movieKey(i)]).length;
+        const unwatchedCount = indices.filter(i => !markValue(state.checked, i)).length;
         empty.textContent = unwatchedCount === 0 ? "You've watched everything here." : 'Nothing to show.';
         body.appendChild(empty);
       } else {
         bets.forEach(idx=>{
           const m = MOVIES[idx];
-          const isChecked = !!state.checked[movieKey(idx)];
+          const isChecked = markValue(state.checked, idx);
 
           const row = document.createElement('div');
           row.className = 'safeBetRow';
@@ -1073,12 +1232,8 @@ function renderGroupedView(){
           check.setAttribute('aria-label', 'Mark watched');
           check.onclick = () => toggleCheck(idx);
 
-          const isPriority = !!state.priority[movieKey(idx)];
-          const star = document.createElement('button');
-          star.className = 'star' + (isPriority ? ' on' : '');
-          star.innerHTML = isPriority ? '&#9733;' : '&#9734;';
-          star.setAttribute('aria-label', 'Want to watch');
-          star.onclick = () => togglePriority(idx);
+          const isPriority = markValue(state.priority, idx);
+          const star = createStarButton(idx, isPriority);
 
           const poster = createPoster(m, 'safeBetPoster');
 
@@ -1088,11 +1243,7 @@ function renderGroupedView(){
           title.className = 'title';
           title.textContent = `${m.t} (${m.y})`;
           title.onclick = () => toggleDetail(idx);
-          const meta = document.createElement('div');
-          meta.className = 'meta';
-          const sourceLinkHtml = m.srcUrl ? `<a class="sourceLink" href="${m.srcUrl}" target="_blank" rel="noopener">Source</a>` : '';
-          meta.innerHTML = `<span class="badge csm" title="Common Sense Media">CSM ${m.ca}</span><button class="detailLink">${openDetail===idx ? 'Hide' : 'Details'}</button>${sourceLinkHtml}`;
-          meta.querySelector('.detailLink').onclick = () => toggleDetail(idx);
+          const meta = createMeta(idx, m);
           info.appendChild(title);
           info.appendChild(meta);
 
@@ -1154,6 +1305,12 @@ function setGoogleSyncUI(connected){
   document.getElementById('googleSignOutBtn').style.display = connected ? 'inline-block' : 'none';
 }
 
+function setGoogleSyncError(){
+  googleAccessToken = null;
+  setGoogleSyncUI(false);
+  localStorage.removeItem(GOOGLE_SYNC_FLAG);
+}
+
 function tryInitGoogleSync(attempts){
   if(!GOOGLE_CLIENT_ID) return;
   attempts = attempts || 0;
@@ -1168,7 +1325,7 @@ function initGoogleSync(){
   document.getElementById('googleSyncRow').style.display = 'block';
   googleTokenClient = google.accounts.oauth2.initTokenClient({
     client_id: GOOGLE_CLIENT_ID,
-    scope: 'https://www.googleapis.com/auth/drive.file',
+    scope: 'https://www.googleapis.com/auth/drive.appdata',
     callback: onGoogleToken
   });
   if(localStorage.getItem(GOOGLE_SYNC_FLAG) === '1'){
@@ -1192,42 +1349,88 @@ async function driveFetch(url, opts){
   return fetch(url, opts);
 }
 
+async function driveJson(res, action){
+  const text = await res.text();
+  let data = {};
+  if(text){
+    try{
+      data = JSON.parse(text);
+    }catch(e){
+      throw new Error(`${action} returned invalid JSON`);
+    }
+  }
+
+  if(!res.ok){
+    if(res.status === 401 || res.status === 403) setGoogleSyncError();
+    const message = data.error && data.error.message ? data.error.message : `${res.status} ${res.statusText}`;
+    throw new Error(`${action} failed: ${message}`);
+  }
+
+  return data;
+}
+
 async function findDriveFile(){
   const q = encodeURIComponent(`name='${DRIVE_FILE_NAME}' and trashed=false`);
-  const res = await driveFetch(`https://www.googleapis.com/drive/v3/files?q=${q}&fields=files(id)`);
-  const data = await res.json();
+  const res = await driveFetch(`https://www.googleapis.com/drive/v3/files?spaces=appDataFolder&q=${q}&fields=files(id,name)`);
+  const data = await driveJson(res, 'Find sync file');
   return (data.files && data.files[0]) ? data.files[0].id : null;
 }
 
 async function readDriveFile(fileId){
   const res = await driveFetch(`https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`);
-  return res.json();
+  return driveJson(res, 'Read sync file');
 }
 
 async function writeDriveFile(fileId, body){
-  const boundary = 'movienightboundary';
-  const metadata = fileId ? {} : { name: DRIVE_FILE_NAME };
+  const boundary = 'familyfeatureboundary';
+  const metadata = fileId ? {} : { name: DRIVE_FILE_NAME, parents: ['appDataFolder'] };
   const multipartBody =
     `--${boundary}\r\nContent-Type: application/json\r\n\r\n${JSON.stringify(metadata)}\r\n` +
     `--${boundary}\r\nContent-Type: application/json\r\n\r\n${JSON.stringify(body)}\r\n` +
     `--${boundary}--`;
   const url = fileId
-    ? `https://www.googleapis.com/upload/drive/v3/files/${fileId}?uploadType=multipart`
-    : `https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart`;
+    ? `https://www.googleapis.com/upload/drive/v3/files/${fileId}?uploadType=multipart&fields=id`
+    : `https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id`;
   const res = await driveFetch(url, {
     method: fileId ? 'PATCH' : 'POST',
     headers: { 'Content-Type': `multipart/related; boundary=${boundary}` },
     body: multipartBody
   });
-  return res.json();
+  const data = await driveJson(res, 'Write sync file');
+  if(!data.id) throw new Error('Write sync file failed: missing file id');
+  return data;
+}
+
+function newestMark(localRecord, remoteRecord){
+  if(!localRecord) return remoteRecord;
+  if(!remoteRecord) return localRecord;
+  const localTime = Number(localRecord.updatedAt) || 0;
+  const remoteTime = Number(remoteRecord.updatedAt) || 0;
+  if(remoteTime > localTime) return remoteRecord;
+  if(localTime > remoteTime) return localRecord;
+  return remoteRecord.device && remoteRecord.device > localRecord.device ? remoteRecord : localRecord;
+}
+
+function mergeMarks(localMarks, remoteMarks){
+  const merged = {};
+  const keys = new Set([...Object.keys(localMarks || {}), ...Object.keys(remoteMarks || {})]);
+  keys.forEach(key=>{
+    const record = newestMark(localMarks && localMarks[key], remoteMarks && remoteMarks[key]);
+    if(record) merged[key] = record;
+  });
+  return merged;
 }
 
 function mergeState(local, remote){
   const normalizedRemote = normalizeState(remote);
-  const checked = Object.assign({}, normalizedRemote.checked, local.checked || {});
-  const priority = Object.assign({}, normalizedRemote.priority, local.priority || {});
-  const order = isDefaultOrder(local.order) && !isDefaultOrder(normalizedRemote.order) ? normalizedRemote.order : local.order;
-  return { order, checked, priority };
+  const useRemoteOrder = (normalizedRemote.orderUpdatedAt || 0) > (local.orderUpdatedAt || 0);
+  return {
+    order: useRemoteOrder ? normalizedRemote.order : local.order,
+    orderUpdatedAt: useRemoteOrder ? normalizedRemote.orderUpdatedAt : local.orderUpdatedAt,
+    orderDevice: useRemoteOrder ? normalizedRemote.orderDevice : local.orderDevice,
+    checked: mergeMarks(local.checked, normalizedRemote.checked),
+    priority: mergeMarks(local.priority, normalizedRemote.priority)
+  };
 }
 
 async function syncFromGoogleDrive(){
@@ -1261,15 +1464,17 @@ async function pushToGoogleDrive(){
     if(uploaded && uploaded.id) googleDriveFileId = uploaded.id;
   }catch(e){
     console.error('Google push failed', e);
+    showToast(googleAccessToken ? 'Google sync failed — saved here' : 'Google sync needs reconnect');
   }
 }
 
 function render(){
   const q = query.trim().toLowerCase();
+  const orderPosition = new Map(state.order.map((idx, pos) => [idx, pos]));
   let visibleOrder = state.order.filter(idx=>{
     const m = MOVIES[idx];
     if(q && !m.t.toLowerCase().includes(q)) return false;
-    const isChecked = !!state.checked[movieKey(idx)];
+    const isChecked = markValue(state.checked, idx);
     if(filter === 'todo' && isChecked) return false;
     if(filter === 'done' && !isChecked) return false;
     if(decadeFilter && decadeOf(m.y) !== parseInt(decadeFilter, 10)) return false;
@@ -1279,17 +1484,17 @@ function render(){
     }
     if(genreFilter && !(m.genre || []).includes(genreFilter)) return false;
     if(studioFilter && m.studio !== studioFilter) return false;
-    if(priorityOnly && !state.priority[movieKey(idx)]) return false;
+    if(priorityOnly && !markValue(state.priority, idx)) return false;
     return true;
   });
 
-  listEl.innerHTML = '';
+  listEl.replaceChildren();
   emptyMsg.style.display = visibleOrder.length ? 'none' : 'block';
 
   visibleOrder.forEach((idx) => {
     const m = MOVIES[idx];
-    const isChecked = !!state.checked[movieKey(idx)];
-    const globalPos = state.order.indexOf(idx);
+    const isChecked = markValue(state.checked, idx);
+    const globalPos = orderPosition.get(idx);
 
     const li = document.createElement('li');
     li.className = 'row' + (isChecked ? ' checked' : '');
@@ -1303,12 +1508,8 @@ function render(){
     check.setAttribute('aria-label', 'Mark watched');
     check.onclick = () => toggleCheck(idx);
 
-    const isPriority = !!state.priority[movieKey(idx)];
-    const star = document.createElement('button');
-    star.className = 'star' + (isPriority ? ' on' : '');
-    star.innerHTML = isPriority ? '&#9733;' : '&#9734;';
-    star.setAttribute('aria-label', 'Want to watch');
-    star.onclick = () => togglePriority(idx);
+    const isPriority = markValue(state.priority, idx);
+    const star = createStarButton(idx, isPriority);
 
     const poster = createPoster(m);
 
@@ -1318,15 +1519,11 @@ function render(){
     title.className = 'title';
     title.textContent = `${m.t} (${m.y})`;
     title.onclick = () => toggleDetail(idx);
-    const meta = document.createElement('div');
-    meta.className = 'meta';
     const sourceLabels = { RT: 'RT', DCOM: 'DCOM', DISNEY: 'Disney', PIXAR: 'Pixar', DREAMWORKS: 'DreamWorks', NICK: 'Nickelodeon', EXTRA: 'Added', CSM: 'CSM Picks', MCUDC: 'Marvel/DC', GHIBLI: 'Ghibli' };
     const listLabel = sourceLabels[m.source] || 'List';
-    const listTitle = m.source === 'DCOM' ? ' title="Disney Channel Original Movie"' : '';
+    const listTitle = m.source === 'DCOM' ? 'Disney Channel Original Movie' : '';
     const listAge = (m.la && m.la !== listLabel && m.la !== 'N/A') ? ` ${m.la}` : '';
-    const sourceLinkHtml = m.srcUrl ? `<a class="sourceLink" href="${m.srcUrl}" target="_blank" rel="noopener">Source</a>` : '';
-    meta.innerHTML = `<span class="badge"${listTitle}>${listLabel}${listAge}</span><span class="badge csm" title="Common Sense Media">CSM ${m.ca}</span><button class="detailLink">${openDetail===idx ? 'Hide' : 'Details'}</button>${sourceLinkHtml}`;
-    meta.querySelector('.detailLink').onclick = () => toggleDetail(idx);
+    const meta = createMeta(idx, m, { listLabel, listTitle, listAge });
     info.appendChild(title);
     info.appendChild(meta);
 
