@@ -1,6 +1,6 @@
 {
-  "name": "Movie Night",
-  "short_name": "Movie Night",
+  "name": "Family Feature",
+  "short_name": "Feature",
   "description": "A family movie watchlist for choosing a cozy, age-aware movie night.",
   "start_url": "/",
   "scope": "/",

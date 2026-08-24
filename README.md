@@ -1,4 +1,4 @@
-# Movie Night — Family Watchlist
+# Family Feature — Family Watchlist
 
 A static web app pairing a family movie list with Common Sense Media's
 "what parents need to know" content, built as a personal checklist with
