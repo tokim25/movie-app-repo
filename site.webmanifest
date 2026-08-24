@@ -2,9 +2,12 @@
   "name": "Family Feature",
   "short_name": "Feature",
   "description": "A family movie watchlist for choosing a cozy, age-aware movie night.",
+  "id": "/",
   "start_url": "/",
   "scope": "/",
+  "categories": ["entertainment", "lifestyle"],
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
   "background_color": "#faf5ee",
   "theme_color": "#bd5b3a",
   "icons": [

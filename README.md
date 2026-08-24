@@ -21,6 +21,12 @@ should use the public app name "Family Feature" and point to the live policy pag
 and `https://movies.tonykim.io/terms.html`. The OAuth client should include
 `https://movies.tonykim.io` as an authorized JavaScript origin.
 
+The app is also installable as a PWA. `site.webmanifest` defines the install
+metadata and icons, while `sw.js` caches the app shell, data files, icons, and
+policy pages for offline loading. Google sync keeps local changes saved first,
+then queues and retries Drive writes when the device comes back online or the
+tab becomes visible again.
+
 Every movie also carries `genre` (1-3 tags from a fixed list) and `studio`
 (the real production studio, not just which curated list it came from), on
 top of the existing `y` (year) and `ca` (Common Sense Media recommended age).
@@ -41,6 +47,7 @@ scheduled update job reads.
 ## Files
 
 - `index.html` — the entire UI (HTML/CSS/JS in one file, Apple-inspired design system)
+- `sw.js` — PWA service worker for offline app-shell/data caching
 - `data.js` — the original 100 movies (Big Life Journal's "100 Best Family Movies")
 - `data-rt.js` — 36 additional movies from Rotten Tomatoes' "50 Essential Movies For Kids"
 - `data-dcom.js` — 116 movies: all 115 official Disney Channel Original Movies (1997-2022) plus The Magic Faraway Tree (2026)
