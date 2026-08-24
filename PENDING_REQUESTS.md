@@ -1,11 +1,14 @@
-# Pending movie requests
+# Movie request processing log
 
-One title per line. The `movie-watchlist-updater` skill (`.claude/skills/movie-watchlist-updater/`)
-reads this file when adding a new batch of movies, and clears each line once that
-title has been researched and added to the app. Add a year in parentheses if you
-know it and the title is ambiguous.
+This is no longer the request queue. Requests come from the in-app "Request a
+movie" form, which submits to a Google Form and lands as rows in the
+"Movie Night Requests (Responses)" Sheet
+(fileId `1zRCemYIpnMSoQer2vhi7nPQbQlY9bg2pRl0h983Gd_Q`).
 
-Requests from the in-app "Request a movie" link land in tokim25@gmail.com, not
-here automatically -- copy them into this file to get them into the pipeline.
+Since there's no reliable way to mark a row "processed" directly on the sheet,
+the `movie-watchlist-updater` skill logs each timestamped row here once it's
+been researched and added, so a future run doesn't reprocess the same title.
+Format: one line per processed row, `<timestamp> — <title> — added as num <N>`
+(or `— skipped: <reason>` if it wasn't added, e.g. already in the catalog).
 
-<!-- add requested titles below, one per line -->
+<!-- add processed rows below, oldest first -->

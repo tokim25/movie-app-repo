@@ -24,8 +24,11 @@ flagging movies you want to prioritize — a "Want to watch" filter button and
 header count go with it. Priority marks travel through "Sync across devices"
 alongside watched status and custom order.
 
-A "Request a movie" link at the bottom opens a pre-filled email to the
-maintainer — no backend, no accounts, just `mailto:`.
+A "Request a movie" form at the bottom (added 2026-08-24, replacing an earlier
+`mailto:` link) posts a single title straight to a Google Form in the
+background — no page navigation, no accounts, just a text field and a toast
+confirmation. Responses land in a linked Google Sheet, which the weekly
+scheduled update job reads.
 
 ## Files
 
@@ -55,7 +58,9 @@ the content came from. In short: each new curated source list gets its own
 additional `<script>` tag in `index.html`, and merged client-side into the single
 `MOVIES` array. One-off single-title requests (as opposed to a whole new curated
 list) go in `data-extra.js` instead of spawning a new file each time. Requested
-titles waiting to be added live in `PENDING_REQUESTS.md`.
+titles waiting to be added live in the "Movie Night Requests (Responses)"
+Google Sheet (fed by the in-app request form); `PENDING_REQUESTS.md` is now a
+processed-log the skill writes to, not a queue.
 
 ## Deploying
 

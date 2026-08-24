@@ -1,6 +1,6 @@
 ---
 name: movie-watchlist-updater
-description: Research and add new movies to the Movie Night watchlist app -- real CSM content, genre/studio, poster art, and a source link -- then commit so Vercel auto-deploys. Use for one-off "add movie X" requests, or to clear out PENDING_REQUESTS.md as a weekly batch.
+description: Research and add new movies to the Movie Night watchlist app -- real CSM content, genre/studio, poster art, and a source link -- then commit so Vercel auto-deploys. Use for one-off "add movie X" requests, or to clear out the movie-request Google Sheet as a weekly batch.
 ---
 
 # Movie Night — movie-watchlist-updater
@@ -22,12 +22,22 @@ purge-and-poll) is dead. Do not use it. If `index.html` still references
 
 ## Input: what to add
 
-Either the user names titles directly in the conversation, or check
-`PENDING_REQUESTS.md` at the repo root -- family members and the in-app "Request a
-movie" mailto link both land there (that file is the actual queue; the mailto link
-has no automated read path, someone has to copy the request in). If run on a
-schedule with no explicit titles given, process whatever's in that file and stop if
-it's empty -- don't invent titles to add.
+Either the user names titles directly in the conversation, or check the movie
+request Google Sheet (fileId `1zRCemYIpnMSoQer2vhi7nPQbQlY9bg2pRl0h983Gd_Q`, title
+"Movie Night Requests (Responses)") -- the in-app "Request a movie" form posts
+straight to a Google Form, which drops each submission into that sheet as a
+Timestamp + Movie title row (title only, no year/notes -- kept deliberately
+frictionless). Read it with the Drive connector's read-file tool. There's no
+reliable "mark as processed" mechanism against the sheet itself, so cross-check
+timestamps against the running log kept in `PENDING_REQUESTS.md` (repurposed as a
+processed-log, not a queue -- see that file) before treating a row as new. If run
+on a schedule with no explicit titles given, process whatever's new in the sheet
+and stop if there's nothing unprocessed -- don't invent titles to add.
+
+(Older versions of this file described a `mailto:` link and `PENDING_REQUESTS.md`
+as the request queue itself -- that flow was retired 2026-08-24 in favor of the
+in-app form above, specifically to remove the friction of leaving the app to
+compose an email.)
 
 ## Step 1 — Dedupe
 
