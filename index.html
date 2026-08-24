@@ -27,6 +27,7 @@
     --blue:#bd5b3a;
     --check:#332821;
     --star:#d9932f;
+    --new:#7c8f5e;
   }
   *{box-sizing:border-box; -webkit-font-smoothing:antialiased;}
   html,body{margin:0;padding:0;}
@@ -288,6 +289,7 @@
   .row.checked .num{ color:#d2d2d7; }
 
   .poster{
+    position:relative;
     width:42px;
     aspect-ratio:2 / 3;
     border-radius:6px;
@@ -305,6 +307,20 @@
   }
   .poster.safeBetPoster{
     width:38px;
+  }
+  .poster .ribbon{
+    position:absolute;
+    top:4px;
+    left:4px;
+    background:var(--new);
+    color:#fff;
+    font-size:9px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    padding:2px 5px;
+    border-radius:4px;
+    line-height:1.2;
   }
 
   .num{
@@ -504,6 +520,38 @@
   }
   .toast.show{ opacity:1; }
 
+  .newSection{
+    max-width:680px;
+    margin:20px auto 0;
+    padding:16px 20px;
+    background:var(--bg-sub);
+    border-radius:14px;
+    border-left:3px solid var(--new);
+  }
+  .newHeader{
+    font-size:12px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    color:var(--new);
+    margin:0 0 12px;
+  }
+  .newRow{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    padding:8px 0;
+  }
+  .newRow:not(:last-child){
+    border-bottom:1px solid var(--line);
+  }
+  .newRow .title{ cursor:default; }
+  .newTag{
+    font-size:12px;
+    color:var(--ink-faint);
+    margin-top:2px;
+  }
+
   .viewSwitch{
     max-width:680px;
     margin:14px auto 0;
@@ -673,6 +721,8 @@
 
 <hr class="divider">
 
+<div id="newSection" class="newSection" style="display:none;"></div>
+
 <div class="viewSwitch" id="toFlatWrap"><button id="toFlatBtn">Browse all movies &rarr;</button></div>
 <div id="groupedView" class="groupedView"></div>
 
@@ -809,6 +859,23 @@ function decadeOf(y){
   const n = parseInt(y, 10);
   if(isNaN(n)) return null;
   return Math.floor(n / 10) * 10;
+}
+
+const NEW_WINDOW_DAYS = 14;
+
+function isRecent(m){
+  if(!m.addedAt) return false;
+  const added = new Date(m.addedAt + 'T00:00:00');
+  if(isNaN(added.getTime())) return false;
+  const diffDays = (Date.now() - added.getTime()) / 86400000;
+  return diffDays >= 0 && diffDays <= NEW_WINDOW_DAYS;
+}
+
+function getNewIndices(){
+  return MOVIES
+    .map((m, i) => i)
+    .filter(i => isRecent(MOVIES[i]))
+    .sort((a, b) => (MOVIES[b].addedAt || '').localeCompare(MOVIES[a].addedAt || ''));
 }
 
 const listEl = document.getElementById('list');
@@ -1039,7 +1106,7 @@ function showToast(msg){
   showToast._t = setTimeout(()=>toastEl.classList.remove('show'), 1400);
 }
 
-function createPoster(m, className){
+function createPoster(m, className, isNew){
   const posters = typeof MOVIE_POSTERS !== 'undefined' ? MOVIE_POSTERS : {};
   const poster = posters[m.num];
   if(!poster || !poster.u) return null;
@@ -1057,6 +1124,14 @@ function createPoster(m, className){
   img.onerror = () => wrap.remove();
 
   wrap.appendChild(img);
+
+  if(isNew){
+    const ribbon = document.createElement('span');
+    ribbon.className = 'ribbon';
+    ribbon.textContent = 'New';
+    wrap.appendChild(ribbon);
+  }
+
   return wrap;
 }
 
@@ -1179,8 +1254,63 @@ function switchToGrouped(){
 }
 
 function renderCurrentView(){
+  renderNewSection();
   if(viewMode === 'grouped') renderGroupedView();
   else render();
+}
+
+function renderNewSection(){
+  const section = document.getElementById('newSection');
+  const indices = getNewIndices();
+
+  if(indices.length === 0){
+    section.style.display = 'none';
+    section.replaceChildren();
+    return;
+  }
+
+  section.style.display = 'block';
+  section.replaceChildren();
+
+  const header = document.createElement('p');
+  header.className = 'newHeader';
+  header.textContent = 'New this week';
+  section.appendChild(header);
+
+  indices.forEach(idx=>{
+    const m = MOVIES[idx];
+    const isChecked = markValue(state.checked, idx);
+    const isPriority = markValue(state.priority, idx);
+
+    const row = document.createElement('div');
+    row.className = 'newRow';
+
+    const check = document.createElement('button');
+    check.className = 'check' + (isChecked ? ' on' : '');
+    check.setAttribute('aria-label', 'Mark watched');
+    check.onclick = () => toggleCheck(idx);
+
+    const star = createStarButton(idx, isPriority);
+
+    const poster = createPoster(m, 'safeBetPoster', true);
+
+    const info = document.createElement('div');
+    info.className = 'info';
+    const title = document.createElement('div');
+    title.className = 'title';
+    title.textContent = `${m.t} (${m.y})`;
+    const tag = document.createElement('div');
+    tag.className = 'newTag';
+    tag.textContent = m.addedVia === 'request' ? 'You asked for this' : 'New release';
+    info.appendChild(title);
+    info.appendChild(tag);
+
+    row.appendChild(check);
+    row.appendChild(star);
+    if(poster) row.appendChild(poster);
+    row.appendChild(info);
+    section.appendChild(row);
+  });
 }
 
 function updateStats(){
@@ -1256,7 +1386,7 @@ function renderGroupedView(){
           const isPriority = markValue(state.priority, idx);
           const star = createStarButton(idx, isPriority);
 
-          const poster = createPoster(m, 'safeBetPoster');
+          const poster = createPoster(m, 'safeBetPoster', isRecent(m));
 
           const info = document.createElement('div');
           info.className = 'info';
@@ -1579,7 +1709,7 @@ function render(){
     const isPriority = markValue(state.priority, idx);
     const star = createStarButton(idx, isPriority);
 
-    const poster = createPoster(m);
+    const poster = createPoster(m, null, isRecent(m));
 
     const info = document.createElement('div');
     info.className = 'info';

@@ -132,6 +132,17 @@ Every entry needs: `num`, `t`, `y` (4-digit string), `la`, `ca`, `full`, `genre`
 Check for accidental duplicate `num` values and duplicate titles within the new
 batch itself, not just against the existing catalog.
 
+**Also set going forward (added 2026-08-24, powers the "New this week" section
+in the app):** `addedAt`, today's date as `"YYYY-MM-DD"`, and `addedVia`, either
+`"request"` (came from the movie-request Google Sheet) or `"discovery"` (came
+from the weekly new-release scan). Field order convention: place both right
+after `srcUrl` and before `source`. Older entries don't have these fields —
+don't backfill them; a missing `addedAt` just means the movie never shows in
+the "New this week" section, which is the correct behavior for anything not
+actually added recently. Run `node scripts/validate-data.mjs` after writing —
+it checks `addedAt` is a real date and `addedVia` is one of the two allowed
+values, among everything else it already checks.
+
 ## Step 5 — Assign nums and write the files
 
 Continue the `num` sequence from the current max across all data files (check all

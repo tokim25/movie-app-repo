@@ -101,6 +101,13 @@ for (const movie of movies) {
       errors.push(`${label}: invalid srcUrl`);
     }
   }
+
+  if (movie.addedAt !== undefined && !/^\d{4}-\d{2}-\d{2}$/.test(movie.addedAt)) {
+    errors.push(`${label}: addedAt must be YYYY-MM-DD`);
+  }
+  if (movie.addedVia !== undefined && movie.addedVia !== 'request' && movie.addedVia !== 'discovery') {
+    errors.push(`${label}: addedVia must be "request" or "discovery"`);
+  }
 }
 
 const posterKeys = Object.keys(context.__POSTERS__ || {});
