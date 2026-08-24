@@ -425,6 +425,14 @@
     box-sizing:border-box;
   }
   .reset:hover{ color:var(--blue); }
+  .glossary{
+    text-align:center;
+    color:var(--ink-faint);
+    font-size:12px;
+    margin:20px auto 0;
+    padding:0 20px;
+    max-width:680px;
+  }
   .toast{
     position:fixed;
     bottom:24px; left:50%;
@@ -667,6 +675,7 @@
 
 <button class="reset" id="clearAllBtn">Clear all watched marks</button>
 <a class="reset" id="requestMovieLink" href="mailto:tokim25@gmail.com?subject=Movie%20Night%3A%20request%20a%20movie&body=I'd%20like%20to%20request%3A%0A%0A(title%2C%20year%20if%20you%20know%20it)%0A%0AWhy%3A%0A">Request a movie</a>
+<p class="glossary">CSM = Common Sense Media, the nonprofit whose age and content guidance powers every rating here. DCOM = Disney Channel Original Movie.</p>
 
 <div class="toast" id="toast"></div>
 
@@ -963,7 +972,7 @@ function renderGroupedView(){
           const meta = document.createElement('div');
           meta.className = 'meta';
           const sourceLinkHtml = m.srcUrl ? `<a class="sourceLink" href="${m.srcUrl}" target="_blank" rel="noopener">Source</a>` : '';
-          meta.innerHTML = `<span class="badge csm">CSM ${m.ca}</span><button class="detailLink">${openDetail===idx ? 'Hide' : 'Details'}</button>${sourceLinkHtml}`;
+          meta.innerHTML = `<span class="badge csm" title="Common Sense Media">CSM ${m.ca}</span><button class="detailLink">${openDetail===idx ? 'Hide' : 'Details'}</button>${sourceLinkHtml}`;
           meta.querySelector('.detailLink').onclick = () => toggleDetail(idx);
           info.appendChild(title);
           info.appendChild(meta);
@@ -1193,8 +1202,9 @@ function render(){
     meta.className = 'meta';
     const sourceLabels = { RT: 'RT', DCOM: 'DCOM', DISNEY: 'Disney', PIXAR: 'Pixar', DREAMWORKS: 'DreamWorks', NICK: 'Nickelodeon', EXTRA: 'Added', CSM: 'CSM Picks', MCUDC: 'Marvel/DC', GHIBLI: 'Ghibli' };
     const listLabel = sourceLabels[m.source] || 'List';
+    const listTitle = m.source === 'DCOM' ? ' title="Disney Channel Original Movie"' : '';
     const sourceLinkHtml = m.srcUrl ? `<a class="sourceLink" href="${m.srcUrl}" target="_blank" rel="noopener">Source</a>` : '';
-    meta.innerHTML = `<span class="badge">${listLabel} ${m.la}</span><span class="badge csm">CSM ${m.ca}</span><button class="detailLink">${openDetail===idx ? 'Hide' : 'Details'}</button>${sourceLinkHtml}`;
+    meta.innerHTML = `<span class="badge"${listTitle}>${listLabel} ${m.la}</span><span class="badge csm" title="Common Sense Media">CSM ${m.ca}</span><button class="detailLink">${openDetail===idx ? 'Hide' : 'Details'}</button>${sourceLinkHtml}`;
     meta.querySelector('.detailLink').onclick = () => toggleDetail(idx);
     info.appendChild(title);
     info.appendChild(meta);
