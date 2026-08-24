@@ -41,43 +41,29 @@ maintainer — no backend, no accounts, just `mailto:`.
 - `data-csm.js` — 73 movies for ages 5-9, sourced from Common Sense Media's own curated age-based lists ("50 Movies All Kids Should Watch Before They're 12," "Best Kids and Family Movies," and similar) and deduped against everything already in the app
 - `data-mcudc.js` — 140 movies: the Marvel Cinematic Universe, legacy Marvel (Fox's X-Men series, Sony's Venom/Morbius/Madame Web, Fantastic Four, Ghost Rider, Elektra), and DC films across every era including the full DC Universe Animated Original Movies line, with R-rated titles (Deadpool & Wolverine, Logan, Zack Snyder's Justice League, and similar) left out by request
 - `data-ghibli.js` — 18 movies: the rest of the Studio Ghibli theatrical catalog not already covered elsewhere in the app, added unfiltered by content/rating per request (including Grave of the Fireflies)
+- `data-posters.js` — poster artwork for 818 of 837 movies, sourced from Wikipedia poster thumbnails, keyed by each movie's `num`
 
 **837 movies total.**
 
 ## Adding more movies
 
-See the `movie-watchlist-updater` Claude skill for the full research → write-up →
-deploy pipeline. In short: each new source list gets its own `data-<source>.js`
-file (never edit the existing ones), referenced with an additional `<script>` tag
-in `index.html`, and merged client-side into the single `MOVIES` array. One-off
-single-title requests (as opposed to a whole new curated list) go in
-`data-extra.js` instead of spawning a new file each time.
+Use the `movie-watchlist-updater` Claude skill
+(`.claude/skills/movie-watchlist-updater/`) for the full research → write-up →
+deploy pipeline, including poster art and a `srcUrl` link back to whatever page
+the content came from. In short: each new curated source list gets its own
+`data-<source>.js` file (never edit the existing ones), referenced with an
+additional `<script>` tag in `index.html`, and merged client-side into the single
+`MOVIES` array. One-off single-title requests (as opposed to a whole new curated
+list) go in `data-extra.js` instead of spawning a new file each time. Requested
+titles waiting to be added live in `PENDING_REQUESTS.md`.
 
 ## Deploying
 
-The Vercel project ("family-movie-watchlist") is not connected to this repo's
-git history via Vercel's Git integration, so pushing here does not by itself
-redeploy the live app. Two ways to update the live site:
-
-- `vercel --prod` from this directory, if the CLI is linked to an account with
-  access to the project.
-- Redeploy `index.html` directly (e.g. via the Vercel MCP tools), since it's the
-  only file actually hosted on Vercel: the eleven `data-*.js` files are loaded
-  at runtime from jsDelivr's GitHub mirror
-  (`https://cdn.jsdelivr.net/gh/tokim25/movie-app-repo@master/<file>?v=2`), so a
-  plain `git push` here updates the data files on the live site on its own
-  (once jsDelivr's cache for `@master` refreshes) — only changes to
-  `index.html` itself need a fresh Vercel deploy.
-
-To make `git push` alone update everything, connect the repo to the Vercel
-project's Git integration in the dashboard (Project Settings → Git) and this
-whole workaround goes away.
-
-**Updating a data file's content?** jsDelivr caches each file for 7 days in
-visitors' own browsers, keyed by the full URL including the `?v=` query string
-in `index.html`. Bump that number (`?v=2` → `?v=3`, etc.) for every file whose
-content actually changed, or returning visitors won't see the update for up to
-a week. jsDelivr's edge cache can also lag a few minutes behind a fresh push —
-purging (`https://purge.jsdelivr.net/gh/tokim25/movie-app-repo@master/<file>`)
-reporting `"status":"finished"` doesn't guarantee the content is live yet;
-confirm with a byte-size check against the local file before trusting it.
+The Vercel project ("family-movie-watchlist") is connected to this repo via
+Vercel's Git integration (as of 2026-08-23) — **a plain `git push` to `master`
+(or a merged PR) redeploys the whole site automatically**, every file in the repo
+including all `data-*.js` files. There is no manual deploy step anymore. The
+project used to route data files through jsDelivr's CDN with manual
+cache-busting to work around Vercel not being Git-connected; that workaround is
+gone and any reference to `cdn.jsdelivr.net` left in `index.html` is a bug, not
+the current design.

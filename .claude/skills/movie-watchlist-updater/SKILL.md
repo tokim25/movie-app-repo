@@ -1,0 +1,132 @@
+---
+name: movie-watchlist-updater
+description: Research and add new movies to the Movie Night watchlist app -- real CSM content, genre/studio, poster art, and a source link -- then commit so Vercel auto-deploys. Use for one-off "add movie X" requests, or to clear out PENDING_REQUESTS.md as a weekly batch.
+---
+
+# Movie Night — movie-watchlist-updater
+
+Adds new titles to family-movie-watchlist (github.com/tokim25/movie-app-repo). Read
+this whole file before starting; it's the whole pipeline in one place so a future
+session doesn't have to reconstruct it from scratch.
+
+## Deploy architecture (read this first, it changed 2026-08-22/23)
+
+Vercel's Git integration is connected to this repo now. **A push to `master` (or a
+merged PR) deploys the whole site automatically** -- every file in the repo,
+including all `data-*.js` files, is served directly by Vercel. The old jsDelivr-CDN
+workaround (cache-busting `?v=N` query strings, `deploy_to_vercel` MCP calls,
+purge-and-poll) is dead. Do not use it. If `index.html` still references
+`cdn.jsdelivr.net` anywhere, that's stale -- fix it to a plain relative path instead.
+
+**Deploy is just: commit, push, verify live.** No manual deploy step exists anymore.
+
+## Input: what to add
+
+Either the user names titles directly in the conversation, or check
+`PENDING_REQUESTS.md` at the repo root -- family members and the in-app "Request a
+movie" mailto link both land there (that file is the actual queue; the mailto link
+has no automated read path, someone has to copy the request in). If run on a
+schedule with no explicit titles given, process whatever's in that file and stop if
+it's empty -- don't invent titles to add.
+
+## Step 1 — Dedupe
+
+Extract `(title, year)` from every `data-*.js` file's `t`/`y` fields and drop
+anything already present (case-insensitive title match). Same method used all
+along: parse each file's array, build a set, filter.
+
+## Step 2 — Research each title
+
+For each surviving title, in parallel via the `Agent` tool if there are more than
+~6 (4 concurrent agents per wave, same caution as always -- more than that has
+tripped session limits before), or inline if it's a small batch:
+
+1. `WebSearch "<title> commonsensemedia.org"`, then `WebFetch` the real CSM page.
+   Pull: tagline, recommended age, concrete content concerns, positive
+   messages/role models. Write `full` in your own words, don't fabricate, don't
+   copy strings longer than ~5 words verbatim.
+2. **Capture `srcUrl`: the actual CSM review page URL you just fetched.** This is
+   new as of 2026-08-24 -- older entries don't have it, going forward every entry
+   must. If CSM has no review, fall back to the Wikipedia parents-guide-equivalent
+   or IMDb, set `ca` to `"Not on CSM; substitute source used"`, and set `srcUrl` to
+   that fallback page instead. Never leave `srcUrl` empty if any source was used --
+   if you truly can't find one, omit the field rather than guessing a URL.
+3. Classify `genre` (1-3 tags from the fixed closed list below, always including
+   `Animation` or `Live-Action`) and `studio` (the real studio, prefer names already
+   in use across the catalog for consistency, new values are fine).
+
+Closed genre vocabulary (case-sensitive, don't invent others): Animation,
+Live-Action, Comedy, Adventure, Fantasy, Musical, Drama, Sci-Fi, Action, Horror,
+Documentary, Sports, Holiday, Romance, Mystery, Superhero, Coming-of-Age, War,
+Western, Biography.
+
+## Step 3 — Poster art
+
+Same method the poster batch used (Wikipedia infobox thumbnails):
+
+1. `WebSearch "<title> <year> film wikipedia"`, `WebFetch` the Wikipedia article.
+2. Extract the infobox poster image URL (hosted at `upload.wikimedia.org`), plus
+   its width and height if shown.
+3. Verify the URL actually resolves before including it -- `curl -sI <url>` and
+   check for a 200 and an `image/*` content-type. A dead link here just means the
+   poster silently won't render (the app's `createPoster()` has an `onerror` that
+   removes the slot), but don't ship a URL you haven't checked.
+4. If no usable poster image exists, skip it -- the app already handles missing
+   posters gracefully, don't block the movie entry on it.
+
+## Step 4 — Validate the schema
+
+Every entry needs: `num`, `t`, `y` (4-digit string), `la`, `ca`, `full`, `genre`
+(non-empty array, valid tags only, includes Animation or Live-Action), `studio`,
+`source`. `srcUrl` should be present for anything added from this point forward.
+Check for accidental duplicate `num` values and duplicate titles within the new
+batch itself, not just against the existing catalog.
+
+## Step 5 — Assign nums and write the files
+
+Continue the `num` sequence from the current max across all data files (check all
+of them, the max isn't always in the most recently added file). Small batches
+(under ~15 titles, including one-off "Request a movie" adds) go into
+`data-extra.js`, appended to the existing array. Larger curated batches (a whole
+franchise, a whole studio, a themed list) get their own new `data-<source>.js`
+file, matching the existing convention -- if you add a new file, wire it into
+`index.html`: a new `<script src="data-<source>.js"></script>` tag (plain relative
+path, not jsDelivr), a new `.concat(...)` in the `MOVIES` array, and a new entry in
+the `sourceLabels` object used by `render()`/`renderGroupedView()`.
+
+Poster entries go into `data-posters.js`'s `MOVIE_POSTERS` object, keyed by the
+same `num`, in the `{u, w, h, p}` shape already established (url, width, height,
+Wikipedia page title).
+
+Update the header subtitle and the `statLeft` initial value in `index.html` to the
+new total movie count, and the "curated lists" count if a new file was added.
+
+## Step 6 — Commit, push, verify
+
+```bash
+git add -A
+git commit -m "..."
+git push
+```
+
+That's the whole deploy. Then verify on the live production URL
+(https://family-movie-watchlist-kim-family-projects.vercel.app/) -- open it, check
+`MOVIES.length` matches the new total, spot-check that a couple of the new titles
+are findable by search, confirm no console errors, confirm posters render for the
+titles that have them. Vercel deploys are fast (typically under a minute) but poll
+`get_deployment` if unsure rather than guessing it's live.
+
+**For anything larger than a small weekly batch, or anything run unattended on a
+schedule with nobody watching**, push to a feature branch and open a PR instead of
+pushing straight to `master`, so a human reviews before it goes live -- same
+pattern the poster-thumbnails addition used. For a small human-supervised batch in
+an interactive session, direct-to-`master` is fine, same as every batch before this
+one.
+
+## Displaying the source link to users
+
+`index.html`'s row-detail rendering (`render()` and `renderGroupedView()`) should
+show a "See the source →" link pointing at `m.srcUrl` when it's present, right
+after the CSM age badge, alongside the existing "Details" toggle. Older entries
+without `srcUrl` simply don't show the link -- don't fabricate URLs to backfill
+them.

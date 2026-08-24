@@ -355,6 +355,13 @@
     cursor:pointer;
     padding:0;
   }
+  .sourceLink{
+    color:var(--blue);
+    font-size:13px;
+    font-weight:500;
+    text-decoration:none;
+  }
+  .sourceLink:hover{ text-decoration:underline; }
 
   .moves{
     display:flex;
@@ -949,7 +956,8 @@ function renderGroupedView(){
           title.onclick = () => toggleDetail(idx);
           const meta = document.createElement('div');
           meta.className = 'meta';
-          meta.innerHTML = `<span class="badge csm">CSM ${m.ca}</span><button class="detailLink">${openDetail===idx ? 'Hide' : 'Details'}</button>`;
+          const sourceLinkHtml = m.srcUrl ? `<a class="sourceLink" href="${m.srcUrl}" target="_blank" rel="noopener">Source</a>` : '';
+          meta.innerHTML = `<span class="badge csm">CSM ${m.ca}</span><button class="detailLink">${openDetail===idx ? 'Hide' : 'Details'}</button>${sourceLinkHtml}`;
           meta.querySelector('.detailLink').onclick = () => toggleDetail(idx);
           info.appendChild(title);
           info.appendChild(meta);
@@ -1179,7 +1187,8 @@ function render(){
     meta.className = 'meta';
     const sourceLabels = { RT: 'RT', DCOM: 'DCOM', DISNEY: 'Disney', PIXAR: 'Pixar', DREAMWORKS: 'DreamWorks', NICK: 'Nickelodeon', EXTRA: 'Added', CSM: 'CSM Picks', MCUDC: 'Marvel/DC', GHIBLI: 'Ghibli' };
     const listLabel = sourceLabels[m.source] || 'List';
-    meta.innerHTML = `<span class="badge">${listLabel} ${m.la}</span><span class="badge csm">CSM ${m.ca}</span><button class="detailLink">${openDetail===idx ? 'Hide' : 'Details'}</button>`;
+    const sourceLinkHtml = m.srcUrl ? `<a class="sourceLink" href="${m.srcUrl}" target="_blank" rel="noopener">Source</a>` : '';
+    meta.innerHTML = `<span class="badge">${listLabel} ${m.la}</span><span class="badge csm">CSM ${m.ca}</span><button class="detailLink">${openDetail===idx ? 'Hide' : 'Details'}</button>${sourceLinkHtml}`;
     meta.querySelector('.detailLink').onclick = () => toggleDetail(idx);
     info.appendChild(title);
     info.appendChild(meta);
