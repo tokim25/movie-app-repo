@@ -1,6 +1,6 @@
 ---
 name: movie-watchlist-updater
-description: Research and add new movies to the Movie Night watchlist app -- real CSM content, genre/studio, poster art, and a source link -- then commit so Vercel auto-deploys. Use for one-off "add movie X" requests, or to clear out the movie-request Google Sheet as a weekly batch.
+description: Research and add new movies to the Movie Night watchlist app -- real CSM content, genre/studio, poster art, and a source link -- then commit so Vercel auto-deploys. Use for one-off "add movie X" requests, to clear out the movie-request Google Sheet, or to scan CSM/Rotten Tomatoes for that week's new family-friendly releases.
 ---
 
 # Movie Night — movie-watchlist-updater
@@ -22,22 +22,62 @@ purge-and-poll) is dead. Do not use it. If `index.html` still references
 
 ## Input: what to add
 
-Either the user names titles directly in the conversation, or check the movie
-request Google Sheet (fileId `1zRCemYIpnMSoQer2vhi7nPQbQlY9bg2pRl0h983Gd_Q`, title
-"Movie Night Requests (Responses)") -- the in-app "Request a movie" form posts
-straight to a Google Form, which drops each submission into that sheet as a
-Timestamp + Movie title row (title only, no year/notes -- kept deliberately
-frictionless). Read it with the Drive connector's read-file tool. There's no
-reliable "mark as processed" mechanism against the sheet itself, so cross-check
-timestamps against the running log kept in `PENDING_REQUESTS.md` (repurposed as a
-processed-log, not a queue -- see that file) before treating a row as new. If run
-on a schedule with no explicit titles given, process whatever's new in the sheet
-and stop if there's nothing unprocessed -- don't invent titles to add.
+Titles come from up to three places:
+
+1. **Direct request** -- the user names titles in the conversation.
+2. **The request form** -- check the movie request Google Sheet (fileId
+   `1zRCemYIpnMSoQer2vhi7nPQbQlY9bg2pRl0h983Gd_Q`, title "Movie Night Requests
+   (Responses)"). The in-app "Request a movie" form posts straight to a Google
+   Form, which drops each submission into that sheet as a Timestamp + Movie
+   title row (title only, no year/notes -- kept deliberately frictionless).
+   Read it with the Drive connector's read-file tool. There's no reliable
+   "mark as processed" mechanism against the sheet itself, so cross-check
+   timestamps against the running log kept in `PENDING_REQUESTS.md`
+   (repurposed as a processed-log, not a queue -- see that file) before
+   treating a row as new.
+3. **Weekly new-release discovery** (scheduled-task runs only -- see the
+   section below) -- proactively found titles, not requested by anyone.
+
+If run on a schedule with no explicit titles given, combine sources 2 and 3,
+dedupe the combined list once (so a proactively discovered title that also
+happens to be a pending request isn't processed twice), and stop cleanly if
+neither source has anything new -- don't invent titles to add.
 
 (Older versions of this file described a `mailto:` link and `PENDING_REQUESTS.md`
 as the request queue itself -- that flow was retired 2026-08-24 in favor of the
 in-app form above, specifically to remove the friction of leaving the app to
 compose an email.)
+
+## Weekly new-release discovery (scheduled-task runs only, added 2026-08-24)
+
+On top of checking the request sheet, each scheduled run should also
+proactively look for new family-friendly movies from roughly the past 7-10
+days, rather than only reacting to requests:
+
+1. **Common Sense Media**: search or browse for newly published reviews from
+   the past week -- e.g. `site:commonsensemedia.org movie review` narrowed to
+   the current date range, or CSM's own movie-reviews listing sorted by
+   newest. Note any titles that weren't already reviewed as of last week's
+   run.
+2. **Rotten Tomatoes**: check RT's new-releases / now-playing listing for the
+   same window.
+3. **Filter to family-friendly before adding anything to the pipeline**: MPAA
+   rating G, PG, or PG-13 (skip R-rated and unrated adult titles), or clearly
+   family/kids-oriented content (an animated feature, a studio already
+   represented in this catalog, a streaming original clearly aimed at kids)
+   even when an MPAA rating isn't easy to find. When genuinely unsure whether
+   a title fits, skip it rather than guess -- missing a good title one week
+   is cheap to fix the next week; adding something a parent didn't want
+   recommended is not.
+4. Dedupe discovered titles the same way as any other title (Step 1 below),
+   and against whatever's being pulled from the request sheet in the same
+   run, so nothing gets processed twice.
+5. Don't force a quota. Most weeks only turn up a handful of qualifying new
+   releases, some weeks none -- report what was found (or that nothing
+   qualified) rather than padding the batch to have something to show.
+
+This discovery step only applies to the weekly scheduled run. A one-off
+"add movie X" request in an interactive session should never trigger it.
 
 ## Step 1 — Dedupe
 
