@@ -219,6 +219,10 @@
     background:var(--star);
     color:var(--ink);
   }
+  .filterRow button.newToggle.on{
+    background:var(--new-bg);
+    color:var(--new);
+  }
 
   .sortbar{
     max-width:680px;
@@ -613,6 +617,21 @@
     color:var(--ink-soft);
     margin-top:2px;
   }
+  .newSeeAll{
+    display:block;
+    width:100%;
+    text-align:left;
+    background:none;
+    border:none;
+    border-top:1px solid var(--line);
+    margin-top:4px;
+    padding:12px 0 2px;
+    color:var(--new);
+    font-family:inherit;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+  }
 
   .viewSwitch{
     max-width:680px;
@@ -819,6 +838,7 @@
   <select id="ageFilter"><option value="">Any age</option></select>
   <select id="genreFilter"><option value="">Any genre</option></select>
   <select id="studioFilter"><option value="">Any studio</option></select>
+  <button id="newToggleBtn" class="priorityToggle newToggle">New this week</button>
   <button id="priorityToggleBtn" class="priorityToggle">&#9733; Want to watch</button>
   <button id="clearFiltersBtn">Clear filters</button>
 </div>
@@ -932,6 +952,7 @@ const MOVIES_BY_STUDIO = MOVIES.reduce((groups, movie, idx)=>{
 let state = { order: defaultOrder(), orderUpdatedAt: 0, orderDevice: '', checked: {}, priority: {} };
 let filter = "all";
 let priorityOnly = false;
+let newOnly = false;
 let query = "";
 let openDetail = null;
 let decadeFilter = "";
@@ -1002,6 +1023,7 @@ function decadeOf(y){
 }
 
 const NEW_WINDOW_DAYS = 14;
+const NEW_TEASER_CAP = 5;
 
 function isRecent(m){
   if(!m.addedAt) return false;
@@ -1387,16 +1409,32 @@ function toggleStudioGroup(studio){
 }
 
 function browseStudio(studio){
-  decadeFilter = ''; ageFilter = ''; genreFilter = ''; priorityOnly = false; query = '';
+  decadeFilter = ''; ageFilter = ''; genreFilter = ''; priorityOnly = false; newOnly = false; query = '';
   document.getElementById('decadeFilter').value = '';
   document.getElementById('ageFilter').value = '';
   document.getElementById('genreFilter').value = '';
   document.getElementById('search').value = '';
   document.getElementById('priorityToggleBtn').classList.remove('on');
+  document.getElementById('newToggleBtn').classList.remove('on');
   sortMode = 'year';
   document.getElementById('sortMode').value = sortMode;
   studioFilter = studio;
   document.getElementById('studioFilter').value = studio;
+  switchToFlat();
+}
+
+function browseNew(){
+  decadeFilter = ''; ageFilter = ''; genreFilter = ''; studioFilter = ''; priorityOnly = false; query = '';
+  document.getElementById('decadeFilter').value = '';
+  document.getElementById('ageFilter').value = '';
+  document.getElementById('genreFilter').value = '';
+  document.getElementById('studioFilter').value = '';
+  document.getElementById('search').value = '';
+  document.getElementById('priorityToggleBtn').classList.remove('on');
+  sortMode = 'year';
+  document.getElementById('sortMode').value = sortMode;
+  newOnly = true;
+  document.getElementById('newToggleBtn').classList.add('on');
   switchToFlat();
 }
 
@@ -1438,10 +1476,13 @@ function renderNewSection(){
 
   const header = document.createElement('p');
   header.className = 'newHeader';
-  header.textContent = 'New this week';
+  header.textContent = indices.length > NEW_TEASER_CAP
+    ? `New this week (${indices.length})`
+    : 'New this week';
   section.appendChild(header);
 
-  indices.forEach(idx=>{
+  const teaserIndices = indices.slice(0, NEW_TEASER_CAP);
+  teaserIndices.forEach(idx=>{
     const m = MOVIES[idx];
     const isChecked = markValue(state.checked, idx);
     const isPriority = markValue(state.priority, idx);
@@ -1485,6 +1526,14 @@ function renderNewSection(){
       section.appendChild(detail);
     }
   });
+
+  if(indices.length > NEW_TEASER_CAP){
+    const seeAll = document.createElement('button');
+    seeAll.className = 'newSeeAll';
+    seeAll.textContent = `See all ${indices.length} new →`;
+    seeAll.onclick = browseNew;
+    section.appendChild(seeAll);
+  }
 }
 
 function updateStats(){
@@ -1934,6 +1983,7 @@ function render(){
     if(genreFilter && !(m.genre || []).includes(genreFilter)) return false;
     if(studioFilter && m.studio !== studioFilter) return false;
     if(priorityOnly && !markValue(state.priority, idx)) return false;
+    if(newOnly && !isRecent(m)) return false;
     return true;
   });
   visibleOrder = sortMovieIndices(visibleOrder, sortMode);
@@ -2032,13 +2082,14 @@ document.querySelectorAll('#filterSeg button').forEach(btn=>{
 document.getElementById('resortBtn').addEventListener('click', resetOrder);
 document.getElementById('clearAllBtn').addEventListener('click', clearAllChecks);
 document.getElementById('toFlatBtn').addEventListener('click', ()=>{
-  decadeFilter = ''; ageFilter = ''; genreFilter = ''; studioFilter = ''; priorityOnly = false; query = '';
+  decadeFilter = ''; ageFilter = ''; genreFilter = ''; studioFilter = ''; priorityOnly = false; newOnly = false; query = '';
   document.getElementById('decadeFilter').value = '';
   document.getElementById('ageFilter').value = '';
   document.getElementById('genreFilter').value = '';
   document.getElementById('studioFilter').value = '';
   document.getElementById('search').value = '';
   document.getElementById('priorityToggleBtn').classList.remove('on');
+  document.getElementById('newToggleBtn').classList.remove('on');
   switchToFlat();
 });
 document.getElementById('backToGroupsBtn').addEventListener('click', switchToGrouped);
@@ -2182,13 +2233,20 @@ document.getElementById('priorityToggleBtn').addEventListener('click', ()=>{
   renderCurrentView();
 });
 
+document.getElementById('newToggleBtn').addEventListener('click', ()=>{
+  newOnly = !newOnly;
+  document.getElementById('newToggleBtn').classList.toggle('on', newOnly);
+  renderCurrentView();
+});
+
 document.getElementById('clearFiltersBtn').addEventListener('click', ()=>{
-  decadeFilter = ''; ageFilter = ''; genreFilter = ''; studioFilter = ''; priorityOnly = false;
+  decadeFilter = ''; ageFilter = ''; genreFilter = ''; studioFilter = ''; priorityOnly = false; newOnly = false;
   document.getElementById('decadeFilter').value = '';
   document.getElementById('ageFilter').value = '';
   document.getElementById('genreFilter').value = '';
   document.getElementById('studioFilter').value = '';
   document.getElementById('priorityToggleBtn').classList.remove('on');
+  document.getElementById('newToggleBtn').classList.remove('on');
   renderCurrentView();
 });
 
