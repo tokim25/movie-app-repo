@@ -968,7 +968,7 @@ const DRIVE_FILE_NAME = "family-feature-state-v3.json";
 const GOOGLE_SYNC_FLAG = "family-feature-google-sync-v3-enabled";
 const GOOGLE_SYNC_META_KEY = "family-feature-google-sync-v3-meta";
 const GOOGLE_TOKEN_TIMEOUT_MS = 7000;
-let googleTokenClient = null;
+let googleCodeClient = null;
 let googleAccessToken = null;
 let googleDriveFileId = null;
 let googleSyncIntent = false;
@@ -1715,27 +1715,57 @@ function setGoogleSyncError(message){
   }
 }
 
-function requestGoogleAccessToken(options){
-  if(!googleTokenClient){
+function requestGoogleAuthorization(){
+  if(!googleCodeClient){
     setGoogleSyncError('Google sign-in unavailable');
     showToast('Google sign-in is unavailable — try again');
     return;
   }
 
   clearTimeout(googleTokenRequestTimer);
-  const silent = options && options.prompt === '';
   googleTokenRequestTimer = setTimeout(()=>{
     if(googleAccessToken) return;
-    setGoogleSyncError(silent ? 'Google silent sign-in timed out' : 'Google sign-in timed out');
-    if(!silent) showToast('Google sign-in did not finish — try again');
+    setGoogleSyncError('Google sign-in timed out');
+    showToast('Google sign-in did not finish — try again');
   }, GOOGLE_TOKEN_TIMEOUT_MS);
 
   try{
-    googleTokenClient.requestAccessToken(options || {});
+    googleCodeClient.requestCode();
   }catch(e){
     setGoogleSyncError('Google sign-in failed');
     showToast('Google sign-in failed — try again');
   }
+}
+
+// Uses the server-held refresh token (see api/google-refresh.js) to mint a
+// fresh access token without ever bothering Google's client-side silent-auth
+// flow, which is what forced a real reconnect on every reload/deploy before.
+async function refreshAccessToken(){
+  try{
+    const res = await fetch('/api/google-refresh', { method: 'POST' });
+    if(!res.ok) return false;
+    const data = await res.json();
+    if(!data.access_token) return false;
+    googleAccessToken = data.access_token;
+    return true;
+  }catch(e){
+    return false;
+  }
+}
+
+async function trySilentReconnect(){
+  const ok = await refreshAccessToken();
+  if(!ok){
+    setGoogleSyncError('Google sign-in expired');
+    return;
+  }
+  writeGoogleSyncMeta({
+    enabled: true,
+    connectedAt: now(),
+    disconnectedAt: 0,
+    lastError: ''
+  });
+  syncFromGoogleDrive();
 }
 
 function tryInitGoogleSync(attempts){
@@ -1757,40 +1787,65 @@ function tryInitGoogleSync(attempts){
 
 function initGoogleSync(){
   document.getElementById('googleSyncRow').style.display = 'block';
-  googleTokenClient = google.accounts.oauth2.initTokenClient({
+  // access_type:'offline' + prompt:'consent' get us a refresh_token on this
+  // one call (Google only ever hands one out under those params); the server
+  // holds onto it (see api/google-exchange.js) so every later reconnect goes
+  // through refreshAccessToken() instead of asking the user again.
+  googleCodeClient = google.accounts.oauth2.initCodeClient({
     client_id: GOOGLE_CLIENT_ID,
     scope: 'https://www.googleapis.com/auth/drive.appdata',
-    callback: onGoogleToken
+    ux_mode: 'popup',
+    access_type: 'offline',
+    prompt: 'consent',
+    callback: onGoogleCode
   });
   googleSyncIntent = !!readGoogleSyncMeta().enabled;
   if(googleSyncIntent){
-    requestGoogleAccessToken({ prompt: '' });
+    trySilentReconnect();
   }else{
     setGoogleSyncUI(false);
   }
 }
 
-function onGoogleToken(resp){
+async function onGoogleCode(resp){
   clearTimeout(googleTokenRequestTimer);
   if(resp.error){
     if(googleSyncIntent) setGoogleSyncError(resp.error);
     else setGoogleSyncUI(false);
     return;
   }
-  googleAccessToken = resp.access_token;
-  writeGoogleSyncMeta({
-    enabled: true,
-    connectedAt: now(),
-    disconnectedAt: 0,
-    lastError: ''
-  });
-  syncFromGoogleDrive();
+  try{
+    const res = await fetch('/api/google-exchange', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code: resp.code })
+    });
+    if(!res.ok){
+      setGoogleSyncError('Google sign-in failed');
+      return;
+    }
+    const data = await res.json();
+    googleAccessToken = data.access_token;
+    writeGoogleSyncMeta({
+      enabled: true,
+      connectedAt: now(),
+      disconnectedAt: 0,
+      lastError: ''
+    });
+    syncFromGoogleDrive();
+  }catch(e){
+    setGoogleSyncError('Google sign-in failed');
+  }
 }
 
 async function driveFetch(url, opts){
   opts = opts || {};
-  opts.headers = Object.assign({}, opts.headers, { Authorization: 'Bearer ' + googleAccessToken });
-  return fetch(url, opts);
+  const authHeaders = extra => Object.assign({}, opts.headers, extra);
+  let res = await fetch(url, Object.assign({}, opts, { headers: authHeaders({ Authorization: 'Bearer ' + googleAccessToken }) }));
+  if(res.status === 401 && await refreshAccessToken()){
+    res = await fetch(url, Object.assign({}, opts, { headers: authHeaders({ Authorization: 'Bearer ' + googleAccessToken }) }));
+  }
+  return res;
 }
 
 async function driveJson(res, action){
@@ -2114,9 +2169,9 @@ document.getElementById('syncCopyBtn').addEventListener('click', async ()=>{
 
 document.getElementById('googleSignInBtn').addEventListener('click', ()=>{
   googleSyncIntent = true;
-  if(googleTokenClient){
+  if(googleCodeClient){
     setGoogleSyncUI(false, 'Connecting to Google…');
-    requestGoogleAccessToken({ prompt: 'consent' });
+    requestGoogleAuthorization();
   }else{
     setGoogleSyncError('Google sign-in unavailable');
     showToast('Google sign-in is unavailable — try again');
@@ -2129,9 +2184,9 @@ document.getElementById('googleSyncAlertBtn').addEventListener('click', ()=>{
   const panel = document.getElementById('syncPanel');
   panel.style.display = 'block';
   document.getElementById('syncCodeOut').value = encodeState();
-  if(googleTokenClient){
+  if(googleCodeClient){
     setGoogleSyncUI(false, 'Connecting to Google…');
-    requestGoogleAccessToken({ prompt: 'consent' });
+    requestGoogleAuthorization();
   }else{
     setGoogleSyncError('Google sign-in unavailable');
     showToast('Google sign-in is unavailable — try again');
@@ -2142,6 +2197,7 @@ document.getElementById('googleSignOutBtn').addEventListener('click', ()=>{
   if(googleAccessToken){
     google.accounts.oauth2.revoke(googleAccessToken, ()=>{});
   }
+  fetch('/api/google-logout', { method: 'POST' }).catch(()=>{});
   googleAccessToken = null;
   googleDriveFileId = null;
   googleSyncPending = false;
