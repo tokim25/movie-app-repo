@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'family-feature-v3-20260824';
+const CACHE_VERSION = 'family-feature-v4-20260824';
 const APP_SHELL = [
   '/',
   '/index.html',

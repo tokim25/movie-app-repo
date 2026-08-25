@@ -81,6 +81,50 @@
     font-weight:600;
     letter-spacing:-0.01em;
   }
+  .syncAlert{
+    max-width:680px;
+    margin:0 auto 18px;
+    padding:0 20px;
+  }
+  .syncAlertInner{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    background:#f7e8df;
+    border:1px solid rgba(156,59,59,0.18);
+    border-radius:10px;
+    padding:12px 14px;
+    color:var(--ink);
+  }
+  .syncAlertCopy{
+    flex:1;
+    min-width:0;
+  }
+  .syncAlertTitle{
+    display:block;
+    font-size:13px;
+    font-weight:600;
+    color:var(--error);
+  }
+  .syncAlertMessage{
+    display:block;
+    margin-top:2px;
+    font-size:13px;
+    line-height:1.35;
+    color:var(--ink-soft);
+  }
+  .syncAlert button{
+    background:var(--bg);
+    border:none;
+    border-radius:8px;
+    color:var(--accent);
+    cursor:pointer;
+    flex-shrink:0;
+    font-family:inherit;
+    font-size:13px;
+    font-weight:600;
+    padding:8px 12px;
+  }
 
   .divider{
     max-width:680px;
@@ -742,6 +786,16 @@
     <div><b id="statPriority">0</b>Want to watch</div>
   </div>
 </header>
+
+<div id="googleSyncAlert" class="syncAlert" style="display:none;" role="status" aria-live="polite">
+  <div class="syncAlertInner">
+    <div class="syncAlertCopy">
+      <span class="syncAlertTitle">Google sync needs attention</span>
+      <span id="googleSyncAlertMessage" class="syncAlertMessage"></span>
+    </div>
+    <button id="googleSyncAlertBtn" type="button">Reconnect</button>
+  </div>
+</div>
 
 <hr class="divider">
 
@@ -1571,6 +1625,20 @@ function setGoogleSyncStatus(message, isError){
   statusEl.setAttribute('aria-live', isError ? 'assertive' : 'polite');
 }
 
+function setGoogleSyncAlert(message, isError){
+  const alertEl = document.getElementById('googleSyncAlert');
+  const messageEl = document.getElementById('googleSyncAlertMessage');
+  if(isError && message){
+    messageEl.textContent = message;
+    alertEl.style.display = 'block';
+    alertEl.setAttribute('aria-live', 'assertive');
+  }else{
+    messageEl.textContent = '';
+    alertEl.style.display = 'none';
+    alertEl.setAttribute('aria-live', 'polite');
+  }
+}
+
 function setGoogleSyncUI(connected, message, isError){
   document.getElementById('googleSignInBtn').style.display = connected ? 'none' : 'inline-block';
   setGoogleSyncStatus(connected ? (message || 'Synced with Google') : (message || ''), isError);
@@ -1578,6 +1646,7 @@ function setGoogleSyncUI(connected, message, isError){
   const toggleBtn = document.getElementById('syncToggleBtn');
   toggleBtn.textContent = isError ? 'Sync needs reconnect' : 'Sync across devices';
   toggleBtn.classList.toggle('syncWarning', !!isError);
+  setGoogleSyncAlert(message, isError);
 }
 
 function setGoogleSyncError(message){
@@ -1994,6 +2063,21 @@ document.getElementById('syncCopyBtn').addEventListener('click', async ()=>{
 
 document.getElementById('googleSignInBtn').addEventListener('click', ()=>{
   googleSyncIntent = true;
+  if(googleTokenClient){
+    setGoogleSyncUI(false, 'Connecting to Google…');
+    requestGoogleAccessToken({ prompt: 'consent' });
+  }else{
+    setGoogleSyncError('Google sign-in unavailable');
+    showToast('Google sign-in is unavailable — try again');
+  }
+});
+
+document.getElementById('googleSyncAlertBtn').addEventListener('click', ()=>{
+  googleSyncIntent = true;
+  switchToFlat();
+  const panel = document.getElementById('syncPanel');
+  panel.style.display = 'block';
+  document.getElementById('syncCodeOut').value = encodeState();
   if(googleTokenClient){
     setGoogleSyncUI(false, 'Connecting to Google…');
     requestGoogleAccessToken({ prompt: 'consent' });

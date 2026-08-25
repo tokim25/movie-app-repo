@@ -97,6 +97,8 @@ test('a 401 response disconnects sync and stops retrying', async ({ page }) => {
   await expect(page.locator('#googleSyncStatus')).toHaveClass(/syncError/);
   await expect(page.locator('#syncToggleBtn')).toHaveText('Sync needs reconnect');
   await expect(page.locator('#syncToggleBtn')).toHaveClass(/syncWarning/);
+  await expect(page.locator('#googleSyncAlert')).toBeVisible();
+  await expect(page.locator('#googleSyncAlertMessage')).toHaveText('Google sync paused — sign in again');
   const syncMeta = await page.evaluate(() =>
     JSON.parse(localStorage.getItem('family-feature-google-sync-v3-meta'))
   );
@@ -130,6 +132,8 @@ test('remembered Google sync shows reconnect when silent auth is unavailable', a
 
   await page.goto('/');
 
+  await expect(page.locator('#googleSyncAlert')).toBeVisible();
+  await expect(page.locator('#googleSyncAlertMessage')).toHaveText('Google sync paused — sign in again');
   await expect(page.locator('#googleSyncStatus')).toHaveText('Google sync paused — sign in again');
   await expect(page.locator('#googleSyncStatus')).toHaveClass(/syncError/);
   await expect(page.locator('#syncToggleBtn')).toHaveText('Sync needs reconnect');
@@ -173,6 +177,8 @@ test('unfinished Google sign-in shows a reconnect warning and toast', async ({ p
 
   await expect(page.locator('#googleSyncStatus')).toHaveText('Google sync paused — sign in again');
   await expect(page.locator('#syncToggleBtn')).toHaveText('Sync needs reconnect');
+  await expect(page.locator('#googleSyncAlert')).toBeVisible();
+  await expect(page.locator('#googleSyncAlertMessage')).toHaveText('Google sync paused — sign in again');
   await expect(page.locator('#toast')).toHaveText('Google sign-in did not finish — try again');
 });
 

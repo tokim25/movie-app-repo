@@ -32,6 +32,9 @@ short-lived access token. After reloads, installs, or app updates it attempts to
 reconnect silently; if Google auth is unavailable or expires, the sync panel
 shows "Google sync paused — sign in again" instead of silently looking
 disconnected.
+That reconnect state also appears as a top-level alert near the app header, so
+users do not have to open the full movie browser or sync panel to discover that
+Google sync needs attention.
 
 Every movie also carries `genre` (1-3 tags from a fixed list) and `studio`
 (the real production studio, not just which curated list it came from), on
