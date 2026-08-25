@@ -1,8 +1,11 @@
 # Family Feature — Family Watchlist
 
-A static web app pairing a family movie list with Common Sense Media's
+A web app pairing a family movie list with Common Sense Media's
 "what parents need to know" content, built as a personal checklist with
-per-device persistence (localStorage) and no backend.
+per-device persistence (localStorage). The UI is a static page with no
+build step; the only backend is a handful of small Vercel serverless
+functions under `api/` that broker Google's OAuth refresh token for
+sync (see "Optional Google sync" below) — everything else is static files.
 
 **Live app:** https://movies.tonykim.io
 **Also linked (unlisted) from:** https://tonykim.io/movies
@@ -14,24 +17,52 @@ code (copy it) and a box to paste a code from elsewhere (load it) — a manual,
 no-account, no-backend way to move your watched list and ordering between
 devices.
 
-Optional Google sync uses the Google Identity Services token flow and stores a
-single `family-feature-state-v3.json` file in the user's Google Drive
-`appDataFolder` with the limited `drive.appdata` scope. The OAuth consent screen
-should use the public app name "Family Feature" and point to the live policy pages:
+Optional Google sync stores a single `family-feature-state-v3.json` file in
+the user's Google Drive `appDataFolder` with the limited `drive.appdata`
+scope. The OAuth consent screen should use the public app name "Family
+Feature" and point to the live policy pages:
 `https://movies.tonykim.io/privacy.html`
 and `https://movies.tonykim.io/terms.html`. The OAuth client should include
-`https://movies.tonykim.io` as an authorized JavaScript origin.
+`https://movies.tonykim.io` as an authorized JavaScript origin. The consent
+screen's publishing status is **In production** (not Testing), which matters
+for the point below — Google caps refresh-token lifetime at 7 days for
+unverified/Testing apps, but production apps keep them until the user revokes
+access or leaves the app unused for 6+ months.
+
+**Sign-in uses the authorization-code flow, not the older implicit token
+flow**, specifically so it can get a refresh token: `google.accounts.oauth2.
+initCodeClient(...)` (with `access_type:'offline'`, `prompt:'consent'`) runs
+client-side and hands the resulting one-time code to
+`api/google-exchange.js`, a Vercel serverless function that exchanges it with
+Google for an access token *and* a refresh token. The refresh token is set as
+an `HttpOnly`/`Secure` cookie (`gsync_rt`, scoped to `/api`) — it's never
+readable from page JS, which keeps a client-side XSS bug from being able to
+steal it. On every later page load, `api/google-refresh.js` uses that cookie
+to mint a fresh access token with a same-origin `fetch`, no Google popup or
+account picker involved. `api/google-logout.js` clears the cookie and
+best-effort revokes the refresh token when the user disconnects.
+
+This needs a `GOOGLE_CLIENT_SECRET` environment variable set in the Vercel
+project (Project Settings → Environment Variables) — grab it from the same
+Google Cloud Console credentials page as the client ID. The client ID itself
+isn't secret (it's already public in `index.html`) and defaults in code if
+the env var is unset, but the token-exchange calls will 500 without the
+secret configured.
 
 The app is also installable as a PWA. `site.webmanifest` defines the install
 metadata and icons, while `sw.js` caches the app shell, data files, icons, and
 policy pages for offline loading. Google sync keeps local changes saved first,
 then queues and retries Drive writes when the device comes back online or the
-tab becomes visible again.
+tab becomes visible again. A Drive write that comes back `401` (access token
+expired mid-session, which happens every ~hour on a long-open tab) triggers
+one silent `api/google-refresh` call and retry before giving up — most
+mid-session expiries never surface to the user at all.
 The app also remembers that Google sync was enabled separately from Google's
-short-lived access token. After reloads, installs, or app updates it attempts to
-reconnect silently; if Google auth is unavailable or expires, the sync panel
-shows "Google sync paused — sign in again" instead of silently looking
-disconnected.
+short-lived access token. After reloads, installs, or app updates it silently
+re-derives a fresh access token from the refresh cookie; if that refresh
+itself fails (revoked access, or the refresh token going stale from 6+ months
+of disuse), the sync panel shows "Google sync paused — sign in again" instead
+of silently looking disconnected.
 That reconnect state also appears as a top-level alert near the app header, so
 users do not have to open the full movie browser or sync panel to discover that
 Google sync needs attention.
@@ -60,6 +91,7 @@ scheduled update job reads.
 ## Files
 
 - `index.html` — the entire UI (HTML/CSS/JS in one file, Apple-inspired design system)
+- `api/` — three Vercel serverless functions brokering the Google OAuth refresh token for sync (`google-exchange.js`, `google-refresh.js`, `google-logout.js`), plus a shared `_google.js` helper (the leading underscore keeps Vercel from routing it)
 - `sw.js` — PWA service worker for offline app-shell/data caching
 - `data.js` — the original 100 movies (Big Life Journal's "100 Best Family Movies")
 - `data-rt.js` — 36 additional movies from Rotten Tomatoes' "50 Essential Movies For Kids"
@@ -113,8 +145,11 @@ npm test
 
 `npm test` starts a plain static file server (`tests/static-server.mjs`) on
 `http://127.0.0.1:4319`, points Playwright at it, and runs headless Chromium.
-No build step, backend, or real Google account is required. Everything runs
-against the repo's static files as-is.
+No build step, running serverless function, or real Google account is
+required. Everything runs against the repo's static files as-is; the app's
+own `fetch` calls to `api/google-refresh.js` and friends just 404 against
+this static server (there's nothing at `/api` here), and the reconnect-path
+tests rely on exactly that — see `tests/google-sync.spec.js`.
 
 `index.html` is a single classic (non-module) `<script>` tag, so its top-level
 `let`/`const`/`function` declarations are already reachable from Playwright's
@@ -139,11 +174,19 @@ npx playwright show-report                       # HTML report after a run
 The Vercel project ("family-movie-watchlist") is connected to this repo via
 Vercel's Git integration (as of 2026-08-24) — **a plain `git push` to `master`
 (or a merged PR) redeploys the whole site automatically**, every file in the repo
-including all `data-*.js` files. There is no manual deploy step anymore. The
-project used to route data files through jsDelivr's CDN with manual
-cache-busting to work around Vercel not being Git-connected; that workaround is
-gone and any reference to `cdn.jsdelivr.net` left in `index.html` is a bug, not
-the current design.
+including all `data-*.js` files and the `api/` serverless functions. There is
+no manual deploy step anymore. The project used to route data files through
+jsDelivr's CDN with manual cache-busting to work around Vercel not being
+Git-connected; that workaround is gone and any reference to
+`cdn.jsdelivr.net` left in `index.html` is a bug, not the current design.
+
+The `api/` functions need a `GOOGLE_CLIENT_SECRET` environment variable set
+in the Vercel project (Project Settings → Environment Variables → all
+environments) — without it, `api/google-exchange.js` and
+`api/google-refresh.js` both return 500 and Google sync falls back to asking
+for a manual reconnect every time, the exact problem this architecture exists
+to avoid. This is a one-time, per-project setup step, not something a code
+push can carry.
 
 `vercel.json` redirects the original Vercel-generated app domain to
 `https://movies.tonykim.io/`. `index.html` also includes a client-side fallback

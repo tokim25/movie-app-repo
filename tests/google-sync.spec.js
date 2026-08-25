@@ -106,7 +106,12 @@ test('a 401 response disconnects sync and stops retrying', async ({ page }) => {
   expect(syncMeta.lastError).toBe('Google authorization expired');
 });
 
-test('remembered Google sync shows reconnect when silent auth is unavailable', async ({ page }) => {
+test('remembered Google sync shows reconnect when the server-side refresh fails', async ({ page }) => {
+  // The silent-reconnect path no longer goes through GIS at all — it calls
+  // api/google-refresh.js directly, which 404s against the plain static test
+  // server (no refresh cookie, no real endpoint). This mock only needs to
+  // exist so initGoogleSync()'s unconditional initCodeClient() call doesn't
+  // throw; nothing in this scenario ever calls requestCode().
   await page.route('https://accounts.google.com/gsi/client', async (route) => {
     return route.fulfill({
       status: 200,
@@ -115,9 +120,7 @@ test('remembered Google sync shows reconnect when silent auth is unavailable', a
         window.google = {
           accounts: {
             oauth2: {
-              initTokenClient: ({ callback }) => ({
-                requestAccessToken: () => callback({ error: 'interaction_required' })
-              }),
+              initCodeClient: () => ({ requestCode: () => {} }),
               revoke: () => {}
             }
           }
@@ -155,8 +158,8 @@ test('unfinished Google sign-in shows a reconnect warning and toast', async ({ p
         window.google = {
           accounts: {
             oauth2: {
-              initTokenClient: () => ({
-                requestAccessToken: () => {}
+              initCodeClient: () => ({
+                requestCode: () => {}
               }),
               revoke: () => {}
             }
