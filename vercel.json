@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "family-movie-watchlist-kim-family-projects.vercel.app"
+        }
+      ],
+      "destination": "https://movies.tonykim.io/:path*",
+      "permanent": true
+    }
+  ]
+}

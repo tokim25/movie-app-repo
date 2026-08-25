@@ -832,6 +832,19 @@
 <script src="data-posters.js"></script>
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <script>
+const CANONICAL_HOST = "movies.tonykim.io";
+function canonicalRedirectUrl(hostname, pathname, search, hash){
+  if(hostname.endsWith(".vercel.app") && hostname !== CANONICAL_HOST){
+    return "https://" + CANONICAL_HOST + pathname + search + hash;
+  }
+  return null;
+}
+function maybeRedirectToCanonicalHost(){
+  const redirectUrl = canonicalRedirectUrl(location.hostname, location.pathname, location.search, location.hash);
+  if(redirectUrl) location.replace(redirectUrl);
+}
+maybeRedirectToCanonicalHost();
+
 const MOVIES = MOVIES_BASE
   .concat(typeof MOVIES_RT !== 'undefined' ? MOVIES_RT : [])
   .concat(typeof MOVIES_DCOM !== 'undefined' ? MOVIES_DCOM : [])

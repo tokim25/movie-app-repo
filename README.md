@@ -6,6 +6,7 @@ per-device persistence (localStorage) and no backend.
 
 **Live app:** https://movies.tonykim.io
 **Also linked (unlisted) from:** https://tonykim.io/movies
+**Legacy Vercel URL:** https://family-movie-watchlist-kim-family-projects.vercel.app now redirects to the live app.
 
 Progress lives in localStorage per device/browser, same as always. To carry
 progress to another device, use "Sync across devices" in the app: it shows a
@@ -140,3 +141,8 @@ project used to route data files through jsDelivr's CDN with manual
 cache-busting to work around Vercel not being Git-connected; that workaround is
 gone and any reference to `cdn.jsdelivr.net` left in `index.html` is a bug, not
 the current design.
+
+`vercel.json` redirects the original Vercel-generated app domain to
+`https://movies.tonykim.io/`. `index.html` also includes a client-side fallback
+for `*.vercel.app` hosts so stale static copies still end up at the canonical
+domain.
