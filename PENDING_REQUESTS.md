@@ -245,3 +245,13 @@ Format: one line per processed row, `<timestamp> — <title> — added as num <N
 8/27/2026 — Wonder (2017) — skipped: already in catalog (num 98) — this one dodged the initial ad-hoc title/year dedupe pass (which only scanned the data-*.js source files, not data.js/MOVIES_BASE) and was caught by the schema validator instead; a future dedupe pass should include data.js too
 8/27/2026 — Alexander and the Terrible, Horrible, No Good, Very Bad Day (2014) — added as num 1034
 8/27/2026 — [discovery] Air Bud Returns (2026) — added as num 1035 — released 8/21/2026, PG family sports comedy, franchise reboot; no CSM review yet at time of writing so Wikipedia used as the source instead
+8/27/2026 — The Princess Bride (1987) — skipped: already in catalog (num 70)
+8/27/2026 — Jumanji 1995 — skipped: already in catalog (num 599)
+8/27/2026 — Nacho Libre (2006) — skipped: already in catalog (num 894)
+8/27/2026 — All the Harry Potter Movies — skipped: all 8 films already in catalog (Sorcerer's Stone num 39; Chamber of Secrets through Deathly Hallows Part 2 nums 854-860)
+8/27/2026 — Willy Wonka and the Chocolate Factory (1971) — skipped: already in catalog (num 67)
+8/27/2026 — The Borrowers (1997) — skipped: already in catalog (num 954)
+8/27/2026 — How to eat fried worms (2006) — skipped: already in catalog (num 1017)
+8/27/2026 — Nanny McPhee (2005) — skipped: already in catalog (num 867)
+8/27/2026 — Scooby Doo Monsters Unleashed (explicit row) — covered by the "All the Scooby-Doo movies" addition above (Scooby-Doo 2: Monsters Unleashed, num 1029); not double-processed
+8/28/2026 — "All the Scooby-Doo movies" (generic request, first processed 8/27 as the two live-action theatrical films) — a second run on 8/28 checked the catalog against the same request and found the 2020 animated reboot Scoob! still missing; added it as num 1036, extending the earlier live-action-only interpretation since the request said "all"
