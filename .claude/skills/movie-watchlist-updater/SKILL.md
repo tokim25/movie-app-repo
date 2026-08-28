@@ -20,6 +20,19 @@ purge-and-poll) is dead. Do not use it. If `index.html` still references
 
 **Deploy is just: commit, push, verify live.** No manual deploy step exists anymore.
 
+## Coordination across sessions (added 2026-08-28)
+
+This skill runs from more than one place: a scheduled multi-agent pipeline
+(PM/Coder/Reviewer/Tech Lead/Comms sessions, weekly) and interactive or
+locally-run sessions. Neither needs to know the other by name -- Step 1's
+`origin/master` + open-PR sync below is the actual coordination mechanism,
+and it applies automatically to whoever runs this file next. One asymmetry
+worth knowing: some sessions' network egress blocks
+`commonsensemedia.org`/`wikipedia.org`/`upload.wikimedia.org` and ship
+batches with posters omitted (Step 3's fallback). A session that *can* reach
+those hosts should treat backfilling those gaps as a normal part of its own
+run (see Step 3) -- not something that needs to be requested.
+
 ## Input: what to add
 
 Titles come from up to three places:
@@ -132,7 +145,20 @@ Western, Biography.
 
 ## Step 3 — Poster art
 
-Same method the poster batch used (Wikipedia infobox thumbnails):
+**First, check for backfill-eligible gaps left by a previous run.** Scan the
+`data-*.js` files for entries with `addedAt` set (i.e. added recently) whose
+`num` has no matching key in `data-posters.js`'s `MOVIE_POSTERS` -- these are
+titles a prior run couldn't fetch a poster for, usually because its network
+egress was blocked (see the coordination note above). If this session's
+network *can* reach `upload.wikimedia.org` -- try one quick `curl -sI` against
+it before deciding -- backfill those gaps first using the method below,
+commit them (can be the same commit as this run's own new titles, or a small
+standalone one if this run has no new titles to add), then continue. If this
+session's network is also blocked, skip the backfill; it's not blocking, and
+whichever run next has access will pick it up.
+
+Same method the poster batch used (Wikipedia infobox thumbnails), for both the
+backfill above and this run's own new titles:
 
 1. `WebSearch "<title> <year> film wikipedia"`, `WebFetch` the Wikipedia article.
 2. Extract the infobox poster image URL (hosted at `upload.wikimedia.org`), plus
@@ -194,6 +220,12 @@ git add -A
 git commit -m "..."
 git push
 ```
+
+If `git push` is rejected as non-fast-forward, that's the coordination
+mechanism working as intended, not an error to force past -- something landed
+on `origin/master` since the last sync. Re-fetch, re-run the dedupe check from
+Step 1 against the new tip, drop anything that's now a duplicate, and push
+again. Never `git push --force` here.
 
 That's the whole deploy. Then verify on the live production URL
 (https://family-movie-watchlist-kim-family-projects.vercel.app/) -- open it, check
