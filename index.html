@@ -978,6 +978,7 @@ let googleSyncLastOkAt = 0;
 let googleSyncRetryDelay = 1600;
 let googleSyncRetryTimer = null;
 let googleTokenRequestTimer = null;
+let hasShownInitialSyncToast = false;
 let deferredInstallPrompt = null;
 let posterEagerBudget = 24;
 
@@ -1343,10 +1344,14 @@ function loadState(){
   renderCurrentView();
 }
 
-function saveState(){
+function persistLocalState(){
   try{
     localStorage.setItem(STORAGE_KEY, JSON.stringify(serializeState()));
   }catch(e){ console.error('save failed', e); }
+}
+
+function saveState(){
+  persistLocalState();
   if(googleAccessToken){
     clearTimeout(saveState._t);
     googleSyncPending = true;
@@ -1701,6 +1706,7 @@ function setGoogleSyncUI(connected, message, isError){
 function setGoogleSyncError(message){
   googleAccessToken = null;
   googleSyncPending = false;
+  hasShownInitialSyncToast = false;
   clearTimeout(googleSyncRetryTimer);
   clearTimeout(googleTokenRequestTimer);
   if(googleSyncIntent || readGoogleSyncMeta().enabled){
@@ -1958,7 +1964,13 @@ async function syncFromGoogleDrive(){
     if(fileId){
       const remote = await readDriveFile(fileId);
       state = mergeState(state, remote);
-      saveState();
+      // Local-only write: this just persists the merged-in remote state to
+      // localStorage. Using the full saveState() here re-armed
+      // googleSyncPending and queued a redundant pushToGoogleDrive, which in
+      // turn kept scheduleGoogleSyncRetry() treating this sync as still
+      // "pending" after it succeeded -- creating a self-sustaining loop of
+      // full syncs (and a "Synced with Google" toast) every ~1.6s forever.
+      persistLocalState();
     }
     const uploaded = await writeDriveFile(googleDriveFileId, serializeState());
     if(uploaded && uploaded.id) googleDriveFileId = uploaded.id;
@@ -1972,7 +1984,10 @@ async function syncFromGoogleDrive(){
     googleSyncRetryDelay = 1600;
     setGoogleSyncUI(true);
     renderCurrentView();
-    showToast('Synced with Google');
+    if(!hasShownInitialSyncToast){
+      hasShownInitialSyncToast = true;
+      showToast('Synced with Google');
+    }
   }catch(e){
     console.error('Google sync failed', e);
     googleSyncPending = !!googleAccessToken;
@@ -2201,6 +2216,7 @@ document.getElementById('googleSignOutBtn').addEventListener('click', ()=>{
   googleAccessToken = null;
   googleDriveFileId = null;
   googleSyncPending = false;
+  hasShownInitialSyncToast = false;
   clearTimeout(googleSyncRetryTimer);
   clearGoogleSyncMeta();
   setGoogleSyncUI(false);

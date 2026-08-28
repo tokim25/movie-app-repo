@@ -44,6 +44,18 @@ async function mockDrive(page, mode) {
       });
     }
 
+    // readDriveFile()'s GET .../files/<id>?alt=media — needed for tests that
+    // call syncFromGoogleDrive() more than once, since after the first write
+    // googleDriveFileId is set and the second call reads it back before
+    // merging and re-uploading.
+    if (url.includes('/drive/v3/files/') && url.includes('alt=media')) {
+      return route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ checked: {}, priority: {}, order: [] }),
+      });
+    }
+
     return route.continue();
   });
   return state;
@@ -225,4 +237,80 @@ test('failed writes back off instead of retrying aggressively, and a later succe
 
   const pending = await page.evaluate(() => googleSyncPending);
   expect(pending).toBe(false);
+});
+
+test('the "Synced with Google" toast only fires on the first successful sync of a session', async ({ page }) => {
+  const mock = await mockDrive(page, 'ok');
+  await page.goto('/');
+
+  // Spy on showToast rather than reading #toast's text/class, since a second,
+  // silent sync should leave the toast element completely untouched -- not
+  // just re-show the same text.
+  await page.evaluate(() => {
+    window.__syncToasts = [];
+    const realShowToast = showToast;
+    showToast = (msg) => {
+      window.__syncToasts.push(msg);
+      realShowToast(msg);
+    };
+    googleAccessToken = 'fake-token';
+  });
+
+  await page.evaluate(() => syncFromGoogleDrive());
+  await expect(page.locator('#toast')).toHaveClass(/show/);
+  await expect(page.locator('#toast')).toHaveText('Synced with Google');
+  expect(mock.writeCount).toBe(1);
+  expect(await page.evaluate(() => window.__syncToasts)).toEqual(['Synced with Google']);
+  expect(await page.evaluate(() => hasShownInitialSyncToast)).toBe(true);
+
+  // A second, routine background sync in the same session (e.g. from an
+  // edit, a retry, or a reconnect) succeeds but must not toast again.
+  await page.evaluate(() => syncFromGoogleDrive());
+  await expect.poll(() => mock.writeCount).toBe(2);
+  expect(await page.evaluate(() => window.__syncToasts)).toEqual(['Synced with Google']);
+
+  // Signing out and back in starts a new sync session, so the next sync
+  // should toast again.
+  await page.evaluate(() => {
+    hasShownInitialSyncToast = false;
+  });
+  await page.evaluate(() => syncFromGoogleDrive());
+  await expect.poll(() => mock.writeCount).toBe(3);
+  expect(await page.evaluate(() => window.__syncToasts)).toEqual(['Synced with Google', 'Synced with Google']);
+});
+
+test('signing out resets the initial-sync-toast flag for the next connect', async ({ page }) => {
+  await mockDrive(page, 'ok');
+  // The sign-out handler calls google.accounts.oauth2.revoke(); mock the GIS
+  // script the same way the sign-in-timeout test does so that call is a no-op
+  // instead of throwing on an undefined `google`.
+  await page.route('https://accounts.google.com/gsi/client', async (route) => {
+    return route.fulfill({
+      status: 200,
+      contentType: 'text/javascript',
+      body: `
+        window.google = {
+          accounts: {
+            oauth2: {
+              initCodeClient: () => ({ requestCode: () => {} }),
+              revoke: () => {}
+            }
+          }
+        };
+      `,
+    });
+  });
+  await page.goto('/');
+
+  await page.evaluate(() => {
+    googleAccessToken = 'fake-token';
+    hasShownInitialSyncToast = true;
+  });
+
+  // Click via the DOM rather than a Playwright locator: the page's own
+  // tryInitGoogleSync() polling (unrelated to this fix) races with test setup
+  // and can leave #googleSignOutBtn hidden depending on timing, which isn't
+  // what this test is checking — it just needs the click handler to run.
+  await page.evaluate(() => document.getElementById('googleSignOutBtn').click());
+  expect(await page.evaluate(() => hasShownInitialSyncToast)).toBe(false);
 });
