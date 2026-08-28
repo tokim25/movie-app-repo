@@ -1005,4 +1005,19 @@ const MOVIE_POSTERS = Object.freeze({
   1033: {"u":"https://upload.wikimedia.org/wikipedia/en/4/44/Troop_Beverly_Hills.jpg","w":250,"h":375,"p":"Troop Beverly Hills"},
   1034: {"u":"https://upload.wikimedia.org/wikipedia/en/5/5f/Alexander_and_the_Terrible%2C_Horrible%2C_No_Good%2C_Very_Bad_Day_poster.jpg","w":260,"h":384,"p":"Alexander and the Terrible, Horrible, No Good, Very Bad Day (film)"},
   1036: {"u":"https://upload.wikimedia.org/wikipedia/en/c/ca/Scoob_poster.png","w":260,"h":385,"p":"Scoob!"}
+,
+  40: {"u":"https://upload.wikimedia.org/wikipedia/en/5/5b/Felix_and_the_Treasure_of_Morg%C3%A4a.jpg","w":267,"h":374,"p":"Felix and the Treasure of Morgäa"},
+  43: {"u":"https://upload.wikimedia.org/wikipedia/en/a/af/Strike_ver2.jpg","w":259,"h":384,"p":"Strike (2018 film)"},
+  97: {"u":"https://upload.wikimedia.org/wikipedia/en/8/89/Dhanak_theatrical_release_poster.jpg","w":266,"h":375,"p":"Dhanak"},
+  250: {"u":"https://upload.wikimedia.org/wikipedia/en/7/76/Christmas-again-poster.jpg","w":260,"h":384,"p":"Christmas...Again?!"},
+  312: {"u":"https://upload.wikimedia.org/wikipedia/en/d/d7/PeterPanPoster2.jpg","w":258,"h":387,"p":"Return to Never Land"},
+  558: {"u":"https://upload.wikimedia.org/wikipedia/en/4/42/AFairlyOddMoviePoster.jpg","w":258,"h":387,"p":"A Fairly Odd Movie: Grow Up, Timmy Turner!"},
+  672: {"u":"https://upload.wikimedia.org/wikipedia/en/d/d4/Marcel_the_Shell_with_Shoes_On_%282021_film%29.jpg","w":259,"h":385,"p":"Marcel the Shell with Shoes On (2021 film)"},
+  726: {"u":"https://upload.wikimedia.org/wikipedia/en/e/e9/Batman_The_Dark_Knight_Returns_%28film%29.jpg","w":258,"h":387,"p":"Batman: The Dark Knight Returns (film)"},
+  732: {"u":"https://upload.wikimedia.org/wikipedia/en/e/e9/Batman_The_Dark_Knight_Returns_%28film%29.jpg","w":258,"h":387,"p":"Batman: The Dark Knight Returns (film)"},
+  809: {"u":"https://upload.wikimedia.org/wikipedia/en/8/81/Justice_League_Crisis_on_Infinite_Earths_trilogy_poster.jpg","w":258,"h":387,"p":"Justice League: Crisis on Infinite Earths"},
+  810: {"u":"https://upload.wikimedia.org/wikipedia/en/8/81/Justice_League_Crisis_on_Infinite_Earths_trilogy_poster.jpg","w":258,"h":387,"p":"Justice League: Crisis on Infinite Earths"},
+  811: {"u":"https://upload.wikimedia.org/wikipedia/en/8/81/Justice_League_Crisis_on_Infinite_Earths_trilogy_poster.jpg","w":258,"h":387,"p":"Justice League: Crisis on Infinite Earths"},
+  1030: {"u":"https://upload.wikimedia.org/wikipedia/en/e/e7/How_the_Grinch_Stole_Christmas_film_poster.jpg","w":220,"h":326,"p":"How the Grinch Stole Christmas (2000 film)"},
+  1035: {"u":"https://upload.wikimedia.org/wikipedia/en/3/30/Air_Bud_Returns_poster.jpg","w":280,"h":357,"p":"Air Bud Returns"}
 });
