@@ -81,9 +81,29 @@ This discovery step only applies to the weekly scheduled run. A one-off
 
 ## Step 1 — Dedupe
 
-Extract `(title, year)` from every `data-*.js` file's `t`/`y` fields and drop
-anything already present (case-insensitive title match). Same method used all
-along: parse each file's array, build a set, filter.
+**Sync with `origin/master` first, before building the dedupe set.** Run
+`git fetch origin` and diff against `origin/master` (not just whatever the
+local checkout happens to have) -- another session can merge a batch between
+when this run started and when it gets to writing files, and a stale local
+`master` will miss it. This isn't hypothetical: on 2026-08-27/28 two sessions
+independently processed the same request-sheet rows, and the one that deduped
+against a local snapshot ended up researching and writing 14 titles that a
+parallel session had already merged, at colliding `num`s -- caught only by
+manually diffing against `origin/master` right before pushing. Also run
+`gh pr list` and skim any open PR that touches `data-extra.js` or the other
+data files -- an in-flight PR covering an overlapping batch is a second
+signal a local-only check won't see.
+
+Extract `(title, year)` from every `data-*.js` file's `t`/`y` fields (reading
+the synced `origin/master` versions of those files, not stale local copies)
+and drop anything already present (case-insensitive title match). Same method
+used all along: parse each file's array, build a set, filter.
+
+Research (Step 2 below) can take several minutes per title. If a run is large
+enough that meaningful time passes between this dedupe pass and Step 6's
+commit, re-fetch `origin/master` right before writing/committing and re-check
+the surviving title list against it -- cheap insurance against exactly the
+race above.
 
 ## Step 2 — Research each title
 
@@ -163,6 +183,11 @@ Update the header subtitle and the `statLeft` initial value in `index.html` to t
 new total movie count, and the "curated lists" count if a new file was added.
 
 ## Step 6 — Commit, push, verify
+
+**Before committing, re-fetch `origin/master` and confirm nothing landed there
+since Step 1's dedupe pass** (see the note there) -- if something did, diff it
+against the titles this run is about to write and drop anything that's now a
+duplicate before proceeding.
 
 ```bash
 git add -A
