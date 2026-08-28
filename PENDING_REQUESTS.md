@@ -223,3 +223,36 @@ Format: one line per processed row, `<timestamp> — <title> — added as num <N
 8/24/2026 18:56:31 — Casper — added as num 929
 8/24/2026 18:56:41 — Where the wild things are — added as num 1018
 8/24/2026 18:56:59 — A little princess — skipped: already in catalog (or duplicate of another row in this batch)
+8/27/2026 9:59:22 — The Corpse Bride — skipped: already in catalog (Corpse Bride, num 971)
+8/27/2026 9:59:26 — The Princess Bride — skipped: already in catalog
+8/27/2026 9:59:59 — Old Yeller — skipped: already in catalog
+8/27/2026 10:00:00 — Elf — skipped: already in catalog
+8/27/2026 10:00:04 — To Kill a Mockingbird — added as num 1031
+8/27/2026 10:00:22 — A Series of Unfortunate Events — added Lemony Snicket's A Series of Unfortunate Events (2004) as num 1032
+8/27/2026 10:00:25 — Spy Kids 2 — added Spy Kids 2: The Island of Lost Dreams as num 1026
+8/27/2026 10:00:28 — Spy Kids 3 — added Spy Kids 3-D: Game Over as num 1027
+8/27/2026 10:00:38 — Jumanji 1995 — skipped: already in catalog (num 599)
+8/27/2026 10:00:43 — Addams Family — skipped: already in catalog (The Addams Family 1991, num 601)
+8/27/2026 10:00:46 — Addams Family Values — added as num 1020
+8/27/2026 10:00:53 — High School Musical — skipped: already in catalog
+8/27/2026 10:00:54 — High School Musical 2 — skipped: already in catalog
+8/27/2026 10:00:56 — High School Musical 3 — added High School Musical 3: Senior Year as num 1028
+8/27/2026 10:01:04 — Chronices of Narnia — added the two sequels not yet in the catalog: Prince Caspian (num 1021) and The Voyage of the Dawn Treader (num 1022); the 2005 first film was already present (num 870)
+8/27/2026 10:01:13 — All the Scooby Doo movies — added the three mainstream theatrical entries: Scooby-Doo (num 1023), Scooby-Doo 2: Monsters Unleashed (num 1024), Scoob! (num 1025)
+8/27/2026 10:01:18 — Nacho Libre — skipped: already in catalog (num 894)
+8/27/2026 10:01:30 — All the Harry Potter Movies — skipped: all 8 films already in catalog (nums 39, 854-860)
+8/27/2026 10:01:38 — How the Grinch Stole Christmas — skipped: already in catalog (1966 version, num 864)
+8/27/2026 10:01:54 — Charlie and the Chocolate Factory — added as num 1033 (2005 Tim Burton version; distinct from Willy Wonka & the Chocolate Factory 1971 already in catalog)
+8/27/2026 10:02:04 — Willy Wonka and the Chocolate Factory — skipped: already in catalog (num 67)
+8/27/2026 10:02:07 — Swiss Family Robinson — skipped: already in catalog (num 341)
+8/27/2026 10:02:12 — Cheaper By the Dozen — added Cheaper by the Dozen (2003) as num 1029
+8/27/2026 10:02:16 — Troop Beverly Hills — added as num 1034
+8/27/2026 10:02:24 — Wonder — skipped: already in catalog (num 98)
+8/27/2026 10:02:35 — Scooby Doo Monsters Unleashed — added as num 1024 (same as "All the Scooby Doo movies" request above)
+8/27/2026 10:02:51 — The Borrowers — skipped: already in catalog (1997 film, num 954)
+8/27/2026 10:03:06 — Alexander and the Terrible Horrible No Good Very Bad Day — added as num 1030
+8/27/2026 10:03:09 — How to eat fried worms — skipped: already in catalog (num 1017)
+8/27/2026 10:03:18 — Nanny McPhee — skipped: already in catalog (num 867)
+
+<!-- Weekly new-release discovery, 2026-08-28 run: checked Common Sense Media's new-kids-movies list and Rotten Tomatoes' PG/G in-theaters listing for titles from roughly the past 7-10 days. Every candidate found (PAW Patrol: The Dino Movie, Moana (2026), Coyote vs. Acme, The Magic Faraway Tree, Toy Story 5, Minions & Monsters, The Last Whale Singer) was already in the catalog from a prior run. Nothing new qualified this week. -->
+

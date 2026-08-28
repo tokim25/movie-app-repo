@@ -989,4 +989,20 @@ const MOVIE_POSTERS = Object.freeze({
   1017: {"u":"https://upload.wikimedia.org/wikipedia/en/8/81/Friedworms.jpg","w":236,"h":349,"p":"How to Eat Fried Worms (film)"},
   1018: {"u":"https://upload.wikimedia.org/wikipedia/en/7/7b/Wherethewildthingsare.jpg","w":220,"h":325,"p":"Where the Wild Things Are (film)"},
   1019: {"u":"https://upload.wikimedia.org/wikipedia/en/thumb/8/88/Adventures_In_Babysitting.jpg/250px-Adventures_In_Babysitting.jpg","w":250,"h":390,"p":"Adventures in Babysitting"}
+,
+  1020: {"u":"https://upload.wikimedia.org/wikipedia/en/e/e9/Addams_family_values.jpg","w":250,"h":372,"p":"Addams Family Values"},
+  1021: {"u":"https://upload.wikimedia.org/wikipedia/en/c/c8/Principe_Caspain_poster.jpg","w":260,"h":384,"p":"The Chronicles of Narnia: Prince Caspian"},
+  1022: {"u":"https://upload.wikimedia.org/wikipedia/en/d/d4/The_Voyage_of_the_Dawn_Treader_poster.jpg","w":259,"h":383,"p":"The Chronicles of Narnia: The Voyage of the Dawn Treader"},
+  1023: {"u":"https://upload.wikimedia.org/wikipedia/en/a/ae/Scooby-Doo_poster.jpg","w":259,"h":383,"p":"Scooby-Doo (film)"},
+  1024: {"u":"https://upload.wikimedia.org/wikipedia/en/b/be/Scooby-Doo_2_-_Monsters_Unleashed_poster.png","w":250,"h":370,"p":"Scooby-Doo 2: Monsters Unleashed"},
+  1025: {"u":"https://upload.wikimedia.org/wikipedia/en/c/ca/Scoob_poster.png","w":260,"h":385,"p":"Scoob!"},
+  1026: {"u":"https://upload.wikimedia.org/wikipedia/en/5/59/Spy_Kids_2_-_The_Island_of_Lost_Dreams_official_poster.jpg","w":259,"h":384,"p":"Spy Kids 2: The Island of Lost Dreams"},
+  1027: {"u":"https://upload.wikimedia.org/wikipedia/en/0/01/Spy_Kids_3-D_movie_poster.jpg","w":259,"h":384,"p":"Spy Kids 3-D: Game Over"},
+  1028: {"u":"https://upload.wikimedia.org/wikipedia/en/a/af/HSM_3_Poster.JPG","w":250,"h":370,"p":"High School Musical 3: Senior Year"},
+  1029: {"u":"https://upload.wikimedia.org/wikipedia/en/e/ea/Cheaper_by_the_Dozen_2003_film_poster.jpg","w":220,"h":326,"p":"Cheaper by the Dozen (2003 film)"},
+  1030: {"u":"https://upload.wikimedia.org/wikipedia/en/5/5f/Alexander_and_the_Terrible%2C_Horrible%2C_No_Good%2C_Very_Bad_Day_poster.jpg","w":260,"h":384,"p":"Alexander and the Terrible, Horrible, No Good, Very Bad Day (film)"},
+  1031: {"u":"https://upload.wikimedia.org/wikipedia/commons/2/2f/To_Kill_a_Mockingbird_%281963_US_theatrical_poster%29.jpg","w":1884,"h":2911,"p":"To Kill a Mockingbird (film)"},
+  1032: {"u":"https://upload.wikimedia.org/wikipedia/en/c/cb/A_Series_Of_Unfortunate_Events_poster.jpg","w":259,"h":385,"p":"Lemony Snicket's A Series of Unfortunate Events"},
+  1033: {"u":"https://upload.wikimedia.org/wikipedia/en/1/17/Charlie_and_the_Chocolate_Factory_%28film%29.png","w":220,"h":329,"p":"Charlie and the Chocolate Factory (film)"},
+  1034: {"u":"https://upload.wikimedia.org/wikipedia/en/4/44/Troop_Beverly_Hills.jpg","w":250,"h":375,"p":"Troop Beverly Hills"}
 });
