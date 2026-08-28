@@ -223,3 +223,25 @@ Format: one line per processed row, `<timestamp> — <title> — added as num <N
 8/24/2026 18:56:31 — Casper — added as num 929
 8/24/2026 18:56:41 — Where the wild things are — added as num 1018
 8/24/2026 18:56:59 — A little princess — skipped: already in catalog (or duplicate of another row in this batch)
+8/27/2026 — The Corpse Bride (2005) — skipped: already in catalog as "Corpse Bride" (num 971, added 8/24) — the "The" prefix was a false non-match on a naive string check, caught on manual review
+8/27/2026 — Old Yeller (1957) — skipped: already in catalog (num 338)
+8/27/2026 — Elf (2003) — skipped: already in catalog (num 112)
+8/27/2026 — To Kill a Mockingbird (1962) — added as num 1020 — heavier themes than typical for this catalog (racial violence, false assault allegation, a shooting); `full` field written to reflect this honestly for parents rather than sanitized
+8/27/2026 — A Series of Unfortunate Events (2004) — added as num 1021
+8/27/2026 — Spy Kids 2: The Island of Lost Dreams (2002) — added as num 1022
+8/27/2026 — Spy Kids 3-D: Game Over (2003) — added as num 1023
+8/27/2026 — The Addams Family (1991) — skipped: already in catalog (num 601)
+8/27/2026 — Addams Family Values (1993) — added as num 1024
+8/27/2026 — High School Musical (2006) — skipped: already in catalog (num 140)
+8/27/2026 — High School Musical 2 (2007) — skipped: already in catalog (num 141)
+8/27/2026 — High School Musical 3: Senior Year (2008) — added as num 1025
+8/27/2026 — "Chronicles of Narnia" (generic request, LWW already at num 870) — interpreted as the two remaining trilogy films: added The Chronicles of Narnia: Prince Caspian as num 1026 and The Chronicles of Narnia: The Voyage of the Dawn Treader as num 1027
+8/27/2026 — "All the Scooby-Doo movies" (generic request) — interpreted as the two live-action theatrical films (no animated Scooby-Doo movies added): added Scooby-Doo (2002) as num 1028 and Scooby-Doo 2: Monsters Unleashed (2004) as num 1029; a separate explicit row requesting Scooby-Doo 2 by name was merged into this same addition rather than double-processed
+8/27/2026 — "How the Grinch Stole Christmas" (generic request) — the 1966 animated version is already at num 864 and the 2018 animated version is already at num 663 (as "Dr. Seuss' The Grinch"); added the 2000 live-action Jim Carrey version as num 1030
+8/27/2026 — Charlie and the Chocolate Factory (2005, Tim Burton) — added as num 1031
+8/27/2026 — Swiss Family Robinson (1960) — skipped: already in catalog (num 341)
+8/27/2026 — Cheaper by the Dozen (2003) — added as num 1032
+8/27/2026 — Troop Beverly Hills (1989) — added as num 1033
+8/27/2026 — Wonder (2017) — skipped: already in catalog (num 98) — this one dodged the initial ad-hoc title/year dedupe pass (which only scanned the data-*.js source files, not data.js/MOVIES_BASE) and was caught by the schema validator instead; a future dedupe pass should include data.js too
+8/27/2026 — Alexander and the Terrible, Horrible, No Good, Very Bad Day (2014) — added as num 1034
+8/27/2026 — [discovery] Air Bud Returns (2026) — added as num 1035 — released 8/21/2026, PG family sports comedy, franchise reboot; no CSM review yet at time of writing so Wikipedia used as the source instead
