@@ -38,7 +38,7 @@
     color:var(--ink);
     font-family:-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
     min-height:100vh;
-    padding-bottom:60px;
+    padding-bottom:calc(76px + env(safe-area-inset-bottom, 0px));
   }
   @media (prefers-reduced-motion: no-preference){
     .row{ transition: opacity 0.25s ease; }
@@ -572,7 +572,8 @@
   .requestForm button:hover{ background:var(--line); }
   .toast{
     position:fixed;
-    bottom:24px; left:50%;
+    bottom:calc(76px + env(safe-area-inset-bottom, 0px));
+    left:50%;
     transform:translateX(-50%);
     background:var(--ink);
     color:#fff;
@@ -585,6 +586,35 @@
     transition:opacity 0.3s;
     z-index:10;
   }
+
+  .quickBar{
+    position:fixed;
+    left:0; right:0; bottom:0;
+    z-index:20;
+    display:flex;
+    background:var(--bg);
+    border-top:1px solid var(--line);
+    padding:6px 6px calc(6px + env(safe-area-inset-bottom, 0px));
+    box-shadow:0 -2px 10px rgba(51,40,33,0.06);
+  }
+  .qbBtn{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:3px;
+    background:none;
+    border:none;
+    font-family:inherit;
+    color:var(--ink-soft);
+    padding:7px 4px 6px;
+    border-radius:10px;
+    cursor:pointer;
+  }
+  .qbBtn svg{ width:22px; height:22px; }
+  .qbBtn span{ font-size:11px; font-weight:500; letter-spacing:-0.01em; }
+  .qbBtn:active{ background:var(--bg-sub); }
+  .qbBtn.on{ color:var(--accent); }
   .toast.show{ opacity:1; }
 
   .newSection{
@@ -891,6 +921,21 @@
 <p class="glossary">CSM = Common Sense Media, the nonprofit whose age and content guidance powers every rating here. DCOM = Disney Channel Original Movie.</p>
 
 <div class="toast" id="toast"></div>
+
+<nav class="quickBar" id="quickBar" aria-label="Quick actions">
+  <button type="button" class="qbBtn" id="qbSearch">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="20" y1="20" x2="15.4" y2="15.4"/></svg>
+    <span>Search</span>
+  </button>
+  <button type="button" class="qbBtn" id="qbWatchlist">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 4l2.3 4.9 5.2.7-3.8 3.8.9 5.3L12 16.2 7.4 18.7l.9-5.3-3.8-3.8 5.2-.7z"/></svg>
+    <span>Want to Watch</span>
+  </button>
+  <button type="button" class="qbBtn" id="qbRequest">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    <span>Request</span>
+  </button>
+</nav>
 
 <script src="data.js"></script>
 <script src="data-rt.js"></script>
@@ -1420,6 +1465,7 @@ function browseStudio(studio){
   document.getElementById('genreFilter').value = '';
   document.getElementById('search').value = '';
   document.getElementById('priorityToggleBtn').classList.remove('on');
+  document.getElementById('qbWatchlist').classList.remove('on');
   document.getElementById('newToggleBtn').classList.remove('on');
   sortMode = 'year';
   document.getElementById('sortMode').value = sortMode;
@@ -1436,6 +1482,7 @@ function browseNew(){
   document.getElementById('studioFilter').value = '';
   document.getElementById('search').value = '';
   document.getElementById('priorityToggleBtn').classList.remove('on');
+  document.getElementById('qbWatchlist').classList.remove('on');
   sortMode = 'year';
   document.getElementById('sortMode').value = sortMode;
   newOnly = true;
@@ -2159,6 +2206,7 @@ document.getElementById('toFlatBtn').addEventListener('click', ()=>{
   document.getElementById('studioFilter').value = '';
   document.getElementById('search').value = '';
   document.getElementById('priorityToggleBtn').classList.remove('on');
+  document.getElementById('qbWatchlist').classList.remove('on');
   document.getElementById('newToggleBtn').classList.remove('on');
   switchToFlat();
 });
@@ -2302,7 +2350,29 @@ document.getElementById('studioFilter').addEventListener('change', e=>{
 document.getElementById('priorityToggleBtn').addEventListener('click', ()=>{
   priorityOnly = !priorityOnly;
   document.getElementById('priorityToggleBtn').classList.toggle('on', priorityOnly);
+  document.getElementById('qbWatchlist').classList.toggle('on', priorityOnly);
   renderCurrentView();
+});
+
+document.getElementById('qbSearch').addEventListener('click', ()=>{
+  if(document.getElementById('flatView').style.display === 'none'){
+    switchToFlat();
+  }
+  const search = document.getElementById('search');
+  search.scrollIntoView({behavior:'smooth', block:'center'});
+  search.focus();
+});
+document.getElementById('qbWatchlist').addEventListener('click', ()=>{
+  if(document.getElementById('flatView').style.display === 'none'){
+    switchToFlat();
+  }
+  document.getElementById('priorityToggleBtn').click();
+  document.getElementById('list').scrollIntoView({behavior:'smooth', block:'start'});
+});
+document.getElementById('qbRequest').addEventListener('click', ()=>{
+  const input = document.getElementById('requestMovieInput');
+  input.scrollIntoView({behavior:'smooth', block:'center'});
+  input.focus();
 });
 
 document.getElementById('newToggleBtn').addEventListener('click', ()=>{
@@ -2318,6 +2388,7 @@ document.getElementById('clearFiltersBtn').addEventListener('click', ()=>{
   document.getElementById('genreFilter').value = '';
   document.getElementById('studioFilter').value = '';
   document.getElementById('priorityToggleBtn').classList.remove('on');
+  document.getElementById('qbWatchlist').classList.remove('on');
   document.getElementById('newToggleBtn').classList.remove('on');
   renderCurrentView();
 });
