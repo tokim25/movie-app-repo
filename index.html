@@ -956,8 +956,17 @@
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <script>
 const CANONICAL_HOST = "movies.tonykim.io";
+// Only redirect the specific legacy hostnames someone might actually have
+// bookmarked from before the custom domain existed -- NOT every *.vercel.app
+// hostname, which used to also catch every PR preview build and per-deployment
+// URL, making it impossible to review a branch on a phone before merging.
+const LEGACY_HOSTS_TO_REDIRECT = new Set([
+  "family-movie-watchlist.vercel.app",
+  "family-movie-watchlist-kim-family-projects.vercel.app",
+  "family-movie-watchlist-git-master-kim-family-projects.vercel.app"
+]);
 function canonicalRedirectUrl(hostname, pathname, search, hash){
-  if(hostname.endsWith(".vercel.app") && hostname !== CANONICAL_HOST){
+  if(LEGACY_HOSTS_TO_REDIRECT.has(hostname) && hostname !== CANONICAL_HOST){
     return "https://" + CANONICAL_HOST + pathname + search + hash;
   }
   return null;
