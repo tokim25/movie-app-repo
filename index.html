@@ -621,74 +621,6 @@
   .qbBtn.on{ color:var(--accent); }
   .toast.show{ opacity:1; }
 
-  .homeScreen{
-    max-width:680px;
-    margin:0 auto;
-    padding:0 20px 24px;
-  }
-  .homeSection{
-    margin-top:28px;
-  }
-  .homeSectionHead{
-    display:flex;
-    align-items:baseline;
-    justify-content:space-between;
-    margin-bottom:10px;
-  }
-  .homeSectionLabel{
-    font-size:12px;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:0.04em;
-    color:var(--ink-faint);
-  }
-  .homeSeeAll{
-    font-family:inherit;
-    font-size:14px;
-    color:var(--ink-soft);
-    background:none;
-    border:none;
-    padding:0;
-    cursor:pointer;
-  }
-  .studioGrid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-  }
-  .studioTile{
-    display:block;
-    background:var(--bg-sub);
-    border:none;
-    border-radius:12px;
-    padding:14px;
-    text-align:left;
-    font-family:inherit;
-    cursor:pointer;
-  }
-  .studioTileName{
-    display:block;
-    font-weight:600;
-    color:var(--ink);
-    margin-bottom:2px;
-  }
-  .studioTileCount{
-    font-size:13px;
-    color:var(--ink-soft);
-  }
-  .moreStudiosTile{
-    grid-column:1 / -1;
-    background:none;
-    border:1px solid var(--line);
-    border-radius:12px;
-    padding:14px;
-    text-align:center;
-    font-family:inherit;
-    font-weight:600;
-    color:var(--ink-soft);
-    cursor:pointer;
-  }
-
   .newSection{
     max-width:680px;
     margin:20px auto 0;
@@ -918,21 +850,9 @@
   </div>
 </div>
 
-<div id="homeScreen" class="homeScreen">
-  <div id="newSection" class="newSection" style="display:none;"></div>
-
-  <div class="homeSection">
-    <div class="homeSectionHead">
-      <span class="homeSectionLabel">Studios</span>
-      <button type="button" class="homeSeeAll" id="homeBrowseLink">Browse tab &rarr;</button>
-    </div>
-    <div class="studioGrid" id="studioGrid"></div>
-  </div>
-</div>
-
-<div id="legacyScreen" style="display:none;">
-
 <hr class="divider">
+
+<div id="newSection" class="newSection" style="display:none;"></div>
 
 <div class="viewSwitch" id="toFlatWrap"><button id="toFlatBtn">Browse all movies &rarr;</button></div>
 <div id="groupedView" class="groupedView"></div>
@@ -1004,30 +924,20 @@
 </form>
 <p class="glossary">CSM = Common Sense Media, the nonprofit whose age and content guidance powers every rating here. DCOM = Disney Channel Original Movie.</p>
 
-</div>
-
 <div class="toast" id="toast"></div>
 
-<nav class="quickBar" id="quickBar" aria-label="Main navigation">
-  <button type="button" class="qbBtn" id="tabHome">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9h12v-9"/></svg>
-    <span>Home</span>
-  </button>
-  <button type="button" class="qbBtn" id="tabBrowse">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="14" y2="17"/></svg>
-    <span>Browse</span>
-  </button>
-  <button type="button" class="qbBtn" id="qbWatchlist">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 4l2.3 4.9 5.2.7-3.8 3.8.9 5.3L12 16.2 7.4 18.7l.9-5.3-3.8-3.8 5.2-.7z"/></svg>
-    <span>Watchlist</span>
-  </button>
+<nav class="quickBar" id="quickBar" aria-label="Quick actions">
   <button type="button" class="qbBtn" id="qbSearch">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="20" y1="20" x2="15.4" y2="15.4"/></svg>
     <span>Search</span>
   </button>
-  <button type="button" class="qbBtn" id="tabMore">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/></svg>
-    <span>More</span>
+  <button type="button" class="qbBtn" id="qbWatchlist">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 4l2.3 4.9 5.2.7-3.8 3.8.9 5.3L12 16.2 7.4 18.7l.9-5.3-3.8-3.8 5.2-.7z"/></svg>
+    <span>Want to Watch</span>
+  </button>
+  <button type="button" class="qbBtn" id="qbRequest">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    <span>Request</span>
   </button>
 </nav>
 
@@ -1603,57 +1513,6 @@ function switchToGrouped(){
   renderGroupedView();
 }
 
-function showHomeScreen(){
-  document.getElementById('homeScreen').style.display = 'block';
-  document.getElementById('legacyScreen').style.display = 'none';
-  document.getElementById('tabHome').classList.add('on');
-}
-
-function showLegacyScreen(){
-  document.getElementById('homeScreen').style.display = 'none';
-  document.getElementById('legacyScreen').style.display = 'block';
-  document.getElementById('tabHome').classList.remove('on');
-}
-
-function renderStudioGrid(){
-  const grid = document.getElementById('studioGrid');
-  grid.replaceChildren();
-
-  const realStudios = [...MOVIES_BY_STUDIO.entries()].filter(([studio]) => studio !== 'Other');
-  realStudios.sort((a, b) => b[1].length - a[1].length);
-  const top = realStudios.slice(0, 6);
-  const restStudioCount = MOVIES_BY_STUDIO.size - top.length;
-
-  top.forEach(([studio, indices]) => {
-    const tile = document.createElement('button');
-    tile.type = 'button';
-    tile.className = 'studioTile';
-    const name = document.createElement('span');
-    name.className = 'studioTileName';
-    name.textContent = studio;
-    const count = document.createElement('span');
-    count.className = 'studioTileCount';
-    count.textContent = `${indices.length} film${indices.length === 1 ? '' : 's'}`;
-    tile.appendChild(name);
-    tile.appendChild(count);
-    tile.onclick = () => {
-      showLegacyScreen();
-      browseStudio(studio);
-    };
-    grid.appendChild(tile);
-  });
-
-  const more = document.createElement('button');
-  more.type = 'button';
-  more.className = 'moreStudiosTile';
-  more.textContent = `More studios · ${restStudioCount} →`;
-  more.onclick = () => {
-    showLegacyScreen();
-    switchToGrouped();
-  };
-  grid.appendChild(more);
-}
-
 function renderCurrentView(){
   posterEagerBudget = 24;
   renderNewSection();
@@ -1731,7 +1590,7 @@ function renderNewSection(){
     const seeAll = document.createElement('button');
     seeAll.className = 'newSeeAll';
     seeAll.textContent = `See all ${indices.length} new →`;
-    seeAll.onclick = () => { showLegacyScreen(); browseNew(); };
+    seeAll.onclick = browseNew;
     section.appendChild(seeAll);
   }
 }
@@ -2498,23 +2357,7 @@ document.getElementById('priorityToggleBtn').addEventListener('click', ()=>{
   renderCurrentView();
 });
 
-document.getElementById('tabHome').addEventListener('click', ()=>{
-  showHomeScreen();
-});
-document.getElementById('homeBrowseLink').addEventListener('click', ()=>{
-  showLegacyScreen();
-});
-document.getElementById('tabBrowse').addEventListener('click', ()=>{
-  showLegacyScreen();
-  if(document.getElementById('flatView').style.display === 'none'){
-    switchToFlat();
-  }
-});
-document.getElementById('tabMore').addEventListener('click', ()=>{
-  showLegacyScreen();
-});
 document.getElementById('qbSearch').addEventListener('click', ()=>{
-  showLegacyScreen();
   if(document.getElementById('flatView').style.display === 'none'){
     switchToFlat();
   }
@@ -2523,12 +2366,16 @@ document.getElementById('qbSearch').addEventListener('click', ()=>{
   search.focus();
 });
 document.getElementById('qbWatchlist').addEventListener('click', ()=>{
-  showLegacyScreen();
   if(document.getElementById('flatView').style.display === 'none'){
     switchToFlat();
   }
   document.getElementById('priorityToggleBtn').click();
   document.getElementById('list').scrollIntoView({behavior:'smooth', block:'start'});
+});
+document.getElementById('qbRequest').addEventListener('click', ()=>{
+  const input = document.getElementById('requestMovieInput');
+  input.scrollIntoView({behavior:'smooth', block:'center'});
+  input.focus();
 });
 
 // The mobile keyboard resizing the viewport makes a raw `position:fixed` bar
@@ -2611,8 +2458,6 @@ if('serviceWorker' in navigator){
 
 loadState();
 tryInitGoogleSync();
-renderStudioGrid();
-showHomeScreen();
 </script>
 </body>
 </html>
