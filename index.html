@@ -1460,6 +1460,7 @@ function resetOrder(){
 }
 
 function clearAllChecks(){
+  if(!window.confirm('Clear all watched marks? This can\'t be undone.')) return;
   MOVIES.forEach((_, idx) => setMark('checked', idx, false));
   saveState();
   renderCurrentView();
