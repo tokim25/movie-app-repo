@@ -1019,5 +1019,21 @@ const MOVIE_POSTERS = Object.freeze({
   810: {"u":"https://upload.wikimedia.org/wikipedia/en/8/81/Justice_League_Crisis_on_Infinite_Earths_trilogy_poster.jpg","w":258,"h":387,"p":"Justice League: Crisis on Infinite Earths"},
   811: {"u":"https://upload.wikimedia.org/wikipedia/en/8/81/Justice_League_Crisis_on_Infinite_Earths_trilogy_poster.jpg","w":258,"h":387,"p":"Justice League: Crisis on Infinite Earths"},
   1030: {"u":"https://upload.wikimedia.org/wikipedia/en/e/e7/How_the_Grinch_Stole_Christmas_film_poster.jpg","w":220,"h":326,"p":"How the Grinch Stole Christmas (2000 film)"},
-  1035: {"u":"https://upload.wikimedia.org/wikipedia/en/3/30/Air_Bud_Returns_poster.jpg","w":280,"h":357,"p":"Air Bud Returns"}
+  1035: {"u":"https://upload.wikimedia.org/wikipedia/en/3/30/Air_Bud_Returns_poster.jpg","w":280,"h":357,"p":"Air Bud Returns"},
+  1037: {"u":"https://upload.wikimedia.org/wikipedia/en/1/10/The_Greatest_Showman_poster.png","w":220,"h":325,"p":"The Greatest Showman"},
+  1038: {"u":"https://upload.wikimedia.org/wikipedia/en/a/a5/Annie2014Poster.jpg","w":250,"h":370,"p":"Annie (2014 film)"},
+  1039: {"u":"https://upload.wikimedia.org/wikipedia/en/3/3c/Wicked_%282024_film%29_poster.png","w":259,"h":385,"p":"Wicked (2024 film)"},
+  1040: {"u":"https://upload.wikimedia.org/wikipedia/en/b/bf/Wicked_For_Good_poster.jpg","w":258,"h":387,"p":"Wicked: For Good"},
+  1041: {"u":"https://upload.wikimedia.org/wikipedia/en/e/e5/Pok%C3%A9mon_Detective_Pikachu_teaser_poster.jpg","w":260,"h":385,"p":"Detective Pikachu (film)"},
+  1042: {"u":"https://upload.wikimedia.org/wikipedia/en/1/19/Minions_%282015_film%29.jpg","w":220,"h":330,"p":"Minions (film)"},
+  1043: {"u":"https://upload.wikimedia.org/wikipedia/en/1/12/Saving_Bikini_Bottom_The_Sandy_Cheeks_Movie_poster.jpg","w":259,"h":384,"p":"Saving Bikini Bottom: The Sandy Cheeks Movie"},
+  1044: {"u":"https://upload.wikimedia.org/wikipedia/en/1/15/Plankton_The_Movie_poster.jpg","w":260,"h":385,"p":"Plankton: The Movie"},
+  1045: {"u":"https://upload.wikimedia.org/wikipedia/en/d/de/Extinct%28film%29poster.jpg","w":260,"h":383,"p":"Extinct (film)"},
+  1046: {"u":"https://upload.wikimedia.org/wikipedia/en/8/84/Pets_united_xlg.jpg","w":263,"h":379,"p":"Pets United"},
+  1047: {"u":"https://upload.wikimedia.org/wikipedia/en/9/96/Latte_and_the_magic_waterstone_ver2_xlg.jpg","w":265,"h":376,"p":"Latte and the Magic Waterstone"},
+  1048: {"u":"https://upload.wikimedia.org/wikipedia/en/1/10/Arlo_the_Alligator_Boy_Poster.jpg","w":259,"h":363,"p":"Arlo the Alligator Boy"},
+  1049: {"u":"https://upload.wikimedia.org/wikipedia/en/3/3e/Scrooge_A_Christmas_Carol_poster.png","w":282,"h":353,"p":"Scrooge: A Christmas Carol"},
+  1050: {"u":"https://upload.wikimedia.org/wikipedia/en/6/63/Hilda-and-the-mountain-king-movie-poster-md.jpg","w":258,"h":386,"p":"Hilda and the Mountain King"},
+  1051: {"u":"https://upload.wikimedia.org/wikipedia/en/5/56/Trouble_2019_poster.jpg","w":259,"h":383,"p":"Trouble (2019 film)"},
+  1052: {"u":"https://upload.wikimedia.org/wikipedia/en/b/b2/Orion_and_the_Dark_poster.jpg","w":259,"h":384,"p":"Orion and the Dark"}
 });
