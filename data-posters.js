@@ -647,7 +647,6 @@ const MOVIE_POSTERS = Object.freeze({
   663: {"u":"https://upload.wikimedia.org/wikipedia/en/4/4f/The_Grinch%2C_final_poster.jpg","w":220,"h":348,"p":"The Grinch (film)"},
   664: {"u":"https://upload.wikimedia.org/wikipedia/en/0/04/Early_Man_Poster.jpg","w":220,"h":326,"p":"Early Man (film)"},
   665: {"u":"https://upload.wikimedia.org/wikipedia/en/6/62/Shaun_the_Sheep_Movie_-_Farmageddon.jpg","w":259,"h":383,"p":"A Shaun the Sheep Movie: Farmageddon"},
-  666: {"u":"https://upload.wikimedia.org/wikipedia/en/8/89/Frozen_II_%282019_animated_film%29.jpg","w":250,"h":370,"p":"Frozen 2"},
   667: {"u":"https://upload.wikimedia.org/wikipedia/en/a/a9/Elleville_elfrid.jpg","w":273,"h":365,"p":"Ella Bella Bingo (film)"},
   668: {"u":"https://upload.wikimedia.org/wikipedia/en/4/48/Poster_for_Phineas_and_Ferb_The_Movie_Candace_Against_The_Universe.jpeg","w":220,"h":293,"p":"Phineas and Ferb the Movie: Candace Against the Universe"},
   669: {"u":"https://upload.wikimedia.org/wikipedia/en/a/aa/My_Little_Pony_A_New_Generation_film_poster.jpg","w":259,"h":384,"p":"My Little Pony: A New Generation"},
