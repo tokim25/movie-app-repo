@@ -255,3 +255,25 @@ Format: one line per processed row, `<timestamp> — <title> — added as num <N
 8/27/2026 — Nanny McPhee (2005) — skipped: already in catalog (num 867)
 8/27/2026 — Scooby Doo Monsters Unleashed (explicit row) — covered by the "All the Scooby-Doo movies" addition above (Scooby-Doo 2: Monsters Unleashed, num 1029); not double-processed
 8/28/2026 — "All the Scooby-Doo movies" (generic request, first processed 8/27 as the two live-action theatrical films) — a second run on 8/28 checked the catalog against the same request and found the 2020 animated reboot Scoob! still missing; added it as num 1036, extending the earlier live-action-only interpretation since the request said "all"
+9/4/2026 — Coyote vs. Acme (2026) — skipped: already in catalog (num 676) — request-sheet row also duplicated this week's discovery scan, so it was only checked once
+9/4/2026 — The Greatest Showman (2017) — added as num 1037
+9/4/2026 — Annie (2014) — added as num 1038
+9/4/2026 — Pinocchio (2022, Disney live-action remake) — skipped: already in catalog (num 474)
+9/4/2026 — Wicked (2024) — added as num 1039
+9/4/2026 — Wicked: For Good (2025) — added as num 1040
+9/4/2026 — "Octonauts movies" (generic request) — the franchise has exactly 3 Netflix feature-length specials, none previously in the catalog: added Octonauts & the Caves of Sac Actun (2020) as num 1053, Octonauts & the Ring of Fire (2021) as num 1054, and Octonauts & the Great Barrier Reef (2020) as num 1055
+9/4/2026 — "Minions movies" (generic request) — Minions: The Rise of Gru (num 977) and Minions & Monsters (num 677) were already in the catalog; added the original Minions (2015) as num 1042
+9/4/2026 — Saving Bikini Bottom: The Sandy Cheeks Movie (2024) — added as num 1043
+9/4/2026 — Plankton: The Movie (2025) — added as num 1044
+9/4/2026 — Extinct (2021) — added as num 1045
+9/4/2026 — Pets United (2019) — added as num 1046
+9/4/2026 — "Pokémon movies" (generic request) — the franchise runs 20+ mostly-annual anime tie-in films, out of scope for one batch; "Pokémon: The First Movie" was already in the catalog (num 948), so added the one clearly distinct, best-known entry not yet present: Pokémon Detective Pikachu (2019, live-action) as num 1041
+9/4/2026 — Latte and the Magic Waterstone (2019) — added as num 1047
+9/4/2026 — Arlo the Alligator Boy (2021) — added as num 1048
+9/4/2026 — Scrooge: A Christmas Carol (2022) — added as num 1049
+9/4/2026 — Hilda and the Mountain King (2021) — added as num 1050
+9/4/2026 — Dog Gone Trouble (2021) — added as num 1051
+9/4/2026 — Orion and the Dark (2024) — added as num 1052
+9/4/2026 — [discovery] The Magic Faraway Tree (2026) — skipped: already in catalog (num 137)
+9/4/2026 — Note on this run: this session's network egress policy hard-blocked commonsensemedia.org and wikipedia.org/wikimedia.org entirely (org policy denial, confirmed via the proxy status endpoint — not a transient failure). CSM content for all 19 additions above was written from WebSearch result snippets rather than a direct page fetch, then spot-verified by re-searching each srcUrl to confirm the page exists (all 19 confirmed reachable via search index). No poster art could be added this run since upload.wikimedia.org poster URLs couldn't be curl-verified per the skill's own anti-fabrication rule; the app handles missing posters gracefully, and a future poster-backfill pass (same pattern as the earlier "Backfill 14 missing posters" batch) should pick these 19 up once network access is available. Flagged to Tech Lead separately since this will affect every future run of this skill in this environment.
+9/4/2026 — Test run for this batch (PR #13): `node scripts/validate-data.mjs` passed clean. Playwright: 17/20 passed; the 3 failures (catalog.spec.js console-errors check, clear-watched.spec.js, sync-code.spec.js round-trip) were confirmed pre-existing and unrelated to this batch — reproduced identically (same `net::ERR_CONNECTION_RESET`/`ERR_TUNNEL_CONNECTION_FAILED` console errors from existing poster images hitting the same blocked upload.wikimedia.org host) on a clean checkout of origin/master in an isolated worktree, with no changes from this PR applied.
