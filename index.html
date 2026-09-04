@@ -1316,22 +1316,14 @@ function createStarButton(idx, isPriority){
   return star;
 }
 
-function createMeta(idx, m, options){
+function createMeta(idx, m){
   const meta = document.createElement('div');
   meta.className = 'meta';
-
-  if(options && options.listLabel){
-    const badge = document.createElement('span');
-    badge.className = 'badge';
-    if(options.listTitle) badge.title = options.listTitle;
-    badge.textContent = options.listLabel + (options.listAge || '');
-    meta.appendChild(badge);
-  }
 
   const csmBadge = document.createElement('span');
   csmBadge.className = 'badge csm';
   csmBadge.title = 'Common Sense Media';
-  csmBadge.textContent = 'CSM ' + m.ca;
+  csmBadge.textContent = `${m.studio} · CSM ${m.ca}`;
   meta.appendChild(csmBadge);
 
   const detailBtn = document.createElement('button');
@@ -2151,11 +2143,7 @@ function render(){
     title.className = 'title';
     title.textContent = `${m.t} (${m.y})`;
     title.onclick = () => toggleDetail(idx);
-    const sourceLabels = { RT: 'RT', DCOM: 'DCOM', DISNEY: 'Disney', PIXAR: 'Pixar', DREAMWORKS: 'DreamWorks', NICK: 'Nickelodeon', EXTRA: 'Added', CSM: 'CSM Picks', MCUDC: 'Marvel/DC', GHIBLI: 'Ghibli' };
-    const listLabel = sourceLabels[m.source] || 'List';
-    const listTitle = m.source === 'DCOM' ? 'Disney Channel Original Movie' : '';
-    const listAge = (m.la && m.la !== listLabel && m.la !== 'N/A') ? ` ${m.la}` : '';
-    const meta = createMeta(idx, m, { listLabel, listTitle, listAge });
+    const meta = createMeta(idx, m);
     info.appendChild(title);
     info.appendChild(meta);
 
