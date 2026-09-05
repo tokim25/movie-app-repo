@@ -8,7 +8,7 @@ test('renders without console errors and shows the full catalog', async ({ page 
   });
 
   await page.goto('/');
-  await expect(page.locator('h1')).toHaveText('Family Feature');
+  await expect(page.locator('#homeScreen h1')).toHaveText('Family Feature');
 
   const movieCount = await page.evaluate(() => MOVIES.length);
   expect(movieCount).toBeGreaterThan(500);
@@ -19,12 +19,12 @@ test('renders without console errors and shows the full catalog', async ({ page 
   const studioTileCount = await page.locator('#studioGrid .studioTile').count();
   expect(studioTileCount).toBeGreaterThan(0);
 
-  // The grouped browse-by-studio view (now reached via the "More studios"
-  // tile) should still have real content too.
+  // "More studios" hands off to the Browse tab, where the full catalog
+  // (and its studio filter) lives -- there's no separate grouped view.
   await page.locator('#studioGrid .moreStudiosTile').click();
-  await page.locator('#groupedView').waitFor({ state: 'visible' });
-  const studioGroupCount = await page.locator('#groupedView .studioGroup').count();
-  expect(studioGroupCount).toBeGreaterThan(0);
+  await page.locator('#browseScreen').waitFor({ state: 'visible' });
+  const rowCount = await page.locator('#list > li.row').count();
+  expect(rowCount).toBeGreaterThan(0);
 
   expect(errors, `Unexpected console errors:\n${errors.join('\n')}`).toEqual([]);
 });

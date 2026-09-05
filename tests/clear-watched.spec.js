@@ -14,6 +14,8 @@ test('clearing watched marks persists and does not resurrect on reload', async (
   }
   await expect(page.locator('#statChecked')).toHaveText('3');
 
+  await page.locator('#tabMore').click();
+  await page.locator('#moreScreen').waitFor({ state: 'visible' });
   await page.locator('#clearAllBtn').click();
   await expect(page.locator('#statChecked')).toHaveText('0');
 

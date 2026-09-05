@@ -1,6 +1,6 @@
 export async function switchToFlatView(page) {
   await page.locator('#tabBrowse').click();
-  await page.locator('#flatView').waitFor({ state: 'visible' });
+  await page.locator('#browseScreen').waitFor({ state: 'visible' });
 }
 
 export function rows(page) {
