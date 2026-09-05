@@ -2,6 +2,8 @@ import { test, expect } from '@playwright/test';
 import { switchToFlatView, rows } from './helpers.js';
 
 test('clearing watched marks persists and does not resurrect on reload', async ({ page }) => {
+  page.on('dialog', (dialog) => dialog.accept());
+
   await page.goto('/');
   await switchToFlatView(page);
 

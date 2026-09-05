@@ -65,6 +65,7 @@
     max-width:440px;
     margin:0 auto;
     font-weight:400;
+    text-wrap:pretty;
   }
   .stats{
     display:flex;
@@ -262,6 +263,11 @@
     outline:2px solid var(--accent);
     outline-offset:1px;
   }
+  #filterSheet #sortMode{
+    display:block;
+    width:100%;
+    margin:10px auto 0;
+  }
   #installAppBtn{
     display:none;
   }
@@ -446,11 +452,17 @@
     gap:10px;
     flex-wrap:wrap;
     align-items:center;
+    text-wrap:pretty;
   }
   .badge{
     color:var(--ink-soft);
   }
   .badge.csm{ color:var(--ink); font-weight:500; }
+  .metaLinks{
+    display:flex;
+    gap:10px;
+    align-items:center;
+  }
   .detailLink{
     background:none;
     border:none;
@@ -535,6 +547,7 @@
   }
   .requestForm{
     display:flex;
+    align-items:center;
     justify-content:center;
     gap:8px;
     margin:32px auto 0;
@@ -760,7 +773,18 @@
     display:flex;
     align-items:center;
     justify-content:space-between;
+    gap:12px;
     cursor:default;
+  }
+  .moreRowSplit > span{
+    flex:1 1 auto;
+    min-width:0;
+  }
+  .moreRowSplit > .reset{
+    display:inline-block;
+    width:auto;
+    margin:0;
+    flex-shrink:0;
   }
   .scrim{
     position:fixed;
@@ -1536,11 +1560,14 @@ function createMeta(idx, m){
   csmBadge.textContent = `${m.studio} · CSM ${m.ca}`;
   meta.appendChild(csmBadge);
 
+  const links = document.createElement('div');
+  links.className = 'metaLinks';
+
   const detailBtn = document.createElement('button');
   detailBtn.className = 'detailLink';
   detailBtn.textContent = openDetail === idx ? 'Hide' : 'Details';
   detailBtn.onclick = () => toggleDetail(idx);
-  meta.appendChild(detailBtn);
+  links.appendChild(detailBtn);
 
   const sourceUrl = m.srcUrl ? safeSourceUrl(m.srcUrl) : '';
   if(sourceUrl){
@@ -1550,8 +1577,10 @@ function createMeta(idx, m){
     sourceLink.target = '_blank';
     sourceLink.rel = 'noopener';
     sourceLink.textContent = 'Source';
-    meta.appendChild(sourceLink);
+    links.appendChild(sourceLink);
   }
+
+  meta.appendChild(links);
 
   return meta;
 }
@@ -1712,12 +1741,16 @@ let screens = {};
 let tabs = {};
 
 function showScreen(target){
+  const isSameScreen = target === currentScreen;
   currentScreen = target;
   SCREENS.forEach(name => {
     screens[name].style.display = name === target ? 'block' : 'none';
     tabs[name].classList.toggle('on', name === target);
   });
   renderCurrentView();
+  if(isSameScreen){
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
 }
 
 function initScreens(){
