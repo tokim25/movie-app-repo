@@ -184,6 +184,8 @@ test('unfinished Google sign-in shows a reconnect warning and toast', async ({ p
   await page.goto('/');
   await switchToFlatView(page);
   await page.clock.install();
+  await page.locator('#tabMore').click();
+  await page.locator('#moreScreen').waitFor({ state: 'visible' });
   await page.locator('#syncToggleBtn').click();
   await page.locator('#googleSignInBtn').click();
   await expect(page.locator('#googleSyncStatus')).toHaveText('Connecting to Google…');

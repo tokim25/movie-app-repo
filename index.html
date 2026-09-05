@@ -339,11 +339,10 @@
     color:var(--error);
   }
 
-  ul#list{
+  ul#list, #watchlistList, #searchResultsList{
     list-style:none;
-    max-width:680px;
-    margin:8px auto 0;
-    padding:0 20px;
+    margin:8px 0 0;
+    padding:0;
   }
   .row{
     border-bottom:1px solid var(--line);
@@ -689,6 +688,126 @@
     cursor:pointer;
   }
 
+  /* Browse / Watchlist / Search / More screens */
+  .screenWrap{
+    max-width:680px;
+    margin:0 auto;
+    padding:24px 20px 24px;
+  }
+  .screenTopBar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:16px;
+  }
+  .screenTopBar h1{
+    font-size:28px;
+    margin:0;
+  }
+  .iconBtn{
+    width:40px;
+    height:40px;
+    border-radius:10px;
+    background:var(--accent);
+    color:#fff;
+    border:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    flex-shrink:0;
+  }
+  .iconBtn svg{ width:20px; height:20px; }
+  .sortRow{
+    margin-bottom:14px;
+  }
+  .requestLink{
+    font-size:14px;
+    color:var(--ink-soft);
+    margin:14px 0;
+  }
+  .linkBtn{
+    background:none;
+    border:none;
+    font-family:inherit;
+    font-size:inherit;
+    font-weight:600;
+    color:var(--accent);
+    padding:0;
+    cursor:pointer;
+  }
+  .moreCard{
+    background:var(--bg-sub);
+    border-radius:12px;
+    overflow:hidden;
+  }
+  .moreRow{
+    display:block;
+    width:100%;
+    text-align:left;
+    background:none;
+    border:none;
+    font-family:inherit;
+    font-size:15px;
+    color:var(--ink);
+    padding:14px 16px;
+    cursor:pointer;
+  }
+  .moreRow:not(:last-child){
+    border-bottom:1px solid var(--line);
+  }
+  .moreRowSplit{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    cursor:default;
+  }
+  .scrim{
+    position:fixed;
+    inset:0;
+    background:rgba(51,40,33,0.32);
+    z-index:29;
+  }
+  .sheet{
+    position:fixed;
+    left:0; right:0; bottom:0;
+    z-index:30;
+    background:var(--bg);
+    border-radius:18px 18px 0 0;
+    padding:10px 20px calc(20px + env(safe-area-inset-bottom, 0px));
+    max-height:80vh;
+    overflow-y:auto;
+    box-shadow:0 -4px 20px rgba(51,40,33,0.16);
+  }
+  .sheetHandle{
+    width:36px;
+    height:4px;
+    border-radius:2px;
+    background:var(--line);
+    margin:0 auto 14px;
+  }
+  .sheetHeader{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    font-weight:600;
+    margin-bottom:14px;
+  }
+  .applyBtn{
+    display:block;
+    width:100%;
+    background:var(--accent);
+    color:#fff;
+    border:none;
+    border-radius:12px;
+    padding:14px;
+    font-family:inherit;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    margin-top:14px;
+  }
+
   .newSection{
     max-width:680px;
     margin:20px auto 0;
@@ -767,58 +886,7 @@
     cursor:pointer;
     padding:12px 0;
   }
-  .groupedView{
-    max-width:680px;
-    margin:8px auto 0;
-    padding:0 20px;
-  }
-  .studioGroup{
-    border-bottom:1px solid var(--line);
-  }
-  .studioHeader{
-    width:100%;
-    display:flex;
-    align-items:center;
-    gap:10px;
-    background:none;
-    border:none;
-    padding:14px 0;
-    cursor:pointer;
-    font-family:inherit;
-    text-align:left;
-  }
-  .studioHeader .chev{
-    color:var(--ink-faint);
-    font-size:11px;
-    display:inline-block;
-    transition:transform 0.15s;
-    flex-shrink:0;
-  }
-  .studioHeader.expanded .chev{ transform:rotate(90deg); }
-  .studioHeader .studioName{
-    font-weight:600;
-    font-size:15px;
-    flex:1;
-  }
-  .studioHeader .studioCount{
-    font-size:13px;
-    color:var(--ink-soft);
-  }
-  .studioBody{ padding:0 0 18px; }
-  .safeBetsLabel{
-    font-size:11px;
-    text-transform:uppercase;
-    letter-spacing:0.03em;
-    color:var(--ink-soft);
-    margin:0 0 10px;
-  }
   .safeBetRow{
-    display:flex;
-    align-items:flex-start;
-    gap:12px;
-    padding:8px 0;
-  }
-  .studioMovieRow{
     display:flex;
     align-items:flex-start;
     gap:12px;
@@ -829,11 +897,6 @@
   }
   .safeBetDetail.noPosterDetail{
     padding-left:46px;
-  }
-  .safeBetEmpty{
-    color:var(--ink-soft);
-    font-size:14px;
-    padding:8px 0;
   }
   .shuffleBtn{
     display:block;
@@ -848,19 +911,6 @@
     font-weight:500;
     cursor:pointer;
     margin-top:4px;
-  }
-  .browseAllLink{
-    text-align:center;
-    margin-top:10px;
-  }
-  .browseAllLink button{
-    background:none;
-    border:none;
-    color:var(--accent);
-    font-family:inherit;
-    font-size:13px;
-    font-weight:500;
-    cursor:pointer;
   }
 
   @media (max-width:430px){
@@ -898,16 +948,6 @@
 </head>
 <body>
 
-<header>
-  <h1>Family Feature</h1>
-  <div class="subtitle">Find the right movie for tonight, pre-screened for the stuff that actually matters.</div>
-  <div class="stats">
-    <div><b id="statChecked">0</b>Watched</div>
-    <div><b id="statLeft">1038</b>To watch</div>
-    <div><b id="statPriority">0</b>Want to watch</div>
-  </div>
-</header>
-
 <div id="googleSyncAlert" class="syncAlert" style="display:none;" role="status" aria-live="polite">
   <div class="syncAlertInner">
     <div class="syncAlertCopy">
@@ -919,6 +959,16 @@
 </div>
 
 <div id="homeScreen" class="homeScreen">
+  <header>
+    <h1>Family Feature</h1>
+    <div class="subtitle">Find the right movie for tonight, pre-screened for the stuff that actually matters.</div>
+    <div class="stats">
+      <div><b id="statChecked">0</b>Watched</div>
+      <div><b id="statLeft">1038</b>To watch</div>
+      <div><b id="statPriority">0</b>Want to watch</div>
+    </div>
+  </header>
+
   <div id="newSection" class="newSection" style="display:none;"></div>
 
   <div class="homeSection">
@@ -930,80 +980,151 @@
   </div>
 </div>
 
-<div id="legacyScreen" style="display:none;">
+<div id="browseScreen" class="screenWrap" style="display:none;">
+  <div class="screenTopBar">
+    <h1>Browse</h1>
+    <button type="button" class="iconBtn" id="filterSheetBtn" aria-label="Filter and sort">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><circle cx="9" cy="7" r="2" fill="currentColor" stroke="none"/><line x1="4" y1="17" x2="20" y2="17"/><circle cx="15" cy="17" r="2" fill="currentColor" stroke="none"/></svg>
+    </button>
+  </div>
+  <div class="controls">
+    <input type="text" id="search" placeholder="Search">
+    <div class="seg" id="filterSeg">
+      <button data-filter="all" class="active">All</button>
+      <button data-filter="todo">To watch</button>
+      <button data-filter="done">Watched</button>
+    </div>
+  </div>
+  <ul id="list"></ul>
+  <div class="empty" id="emptyMsg" style="display:none;">No movies match your search.</div>
+</div>
 
-<hr class="divider">
+<div id="watchlistScreen" class="screenWrap" style="display:none;">
+  <div class="screenTopBar">
+    <h1>Watchlist</h1>
+  </div>
+  <div class="subtitle" id="watchlistSubtitle" style="text-align:left;margin:0 0 14px;">0 movies you want to watch</div>
+  <div class="sortRow">
+    <select id="watchlistSortMode" class="sortSelect" aria-label="Sort watchlist">
+      <option value="year">Sort: Year</option>
+      <option value="age">Sort: Recommended age</option>
+      <option value="title">Sort: Title</option>
+    </select>
+  </div>
+  <ul id="watchlistList"></ul>
+  <div class="empty" id="watchlistEmptyMsg" style="display:none;">Tap the star on any movie to add it here.</div>
+</div>
 
-<div class="viewSwitch" id="toFlatWrap"><button id="toFlatBtn">Browse all movies &rarr;</button></div>
-<div id="groupedView" class="groupedView"></div>
+<div id="searchScreen" class="screenWrap" style="display:none;">
+  <div class="screenTopBar">
+    <h1>Search</h1>
+  </div>
+  <div class="controls">
+    <input type="text" id="searchScreenInput" placeholder="Search">
+  </div>
+  <p class="requestLink">Can't find a title? <button type="button" id="searchRequestLink" class="linkBtn">Request a movie</button></p>
+  <ul id="searchResultsList"></ul>
+  <div class="empty" id="searchEmptyMsg" style="display:none;"></div>
+</div>
 
-<div id="flatView" style="display:none;">
-<div class="backLink"><button id="backToGroupsBtn">&larr; Back to browse by studio</button></div>
-<div class="controls">
-  <input type="text" id="search" placeholder="Search">
-  <div class="seg" id="filterSeg">
-    <button data-filter="all" class="active">All</button>
-    <button data-filter="todo">To watch</button>
-    <button data-filter="done">Watched</button>
+<div id="moreScreen" class="screenWrap" style="display:none;">
+  <div class="screenTopBar">
+    <h1>More</h1>
+  </div>
+  <div class="stats">
+    <div><b id="statCheckedMore">0</b>Watched</div>
+    <div><b id="statLeftMore">1038</b>To watch</div>
+    <div><b id="statPriorityMore">0</b>Want to watch</div>
+  </div>
+
+  <div class="homeSection">
+    <span class="homeSectionLabel">Account &amp; sync</span>
+    <div class="moreCard">
+      <button id="syncToggleBtn" class="moreRow">Sync across devices</button>
+      <div class="syncPanel" id="syncPanel" style="display:none;">
+        <div class="syncRow" id="googleSyncRow" style="display:none;">
+          <label>Sync automatically with your Google account — saves your list as a small file in your Google Drive that only this app can read or edit. See our <a href="/privacy.html">Privacy Policy</a> and <a href="/terms.html">Terms</a>.</label>
+          <div class="googleSyncControls">
+            <button id="googleSignInBtn">Sign in with Google</button>
+            <span id="googleSyncStatus" style="display:none;"></span>
+            <button id="googleSignOutBtn" style="display:none;">Disconnect</button>
+          </div>
+        </div>
+        <div class="syncRow">
+          <label>Or copy a code — paste it into this app on another device to load your progress there.</label>
+          <div class="syncCodeRow">
+            <textarea id="syncCodeOut" readonly rows="3"></textarea>
+            <button id="syncCopyBtn">Copy</button>
+          </div>
+        </div>
+        <div class="syncRow">
+          <label>Paste a code from another device here to load it on this one.</label>
+          <div class="syncCodeRow">
+            <textarea id="syncCodeIn" rows="3" placeholder="Paste code here"></textarea>
+            <button id="syncLoadBtn">Load</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="homeSection">
+    <span class="homeSectionLabel">App</span>
+    <div class="moreCard">
+      <button id="installAppBtn" class="moreRow">Install app on this device</button>
+      <button id="resortBtn" class="moreRow">Reset custom order</button>
+    </div>
+  </div>
+
+  <div class="homeSection">
+    <span class="homeSectionLabel">Data</span>
+    <div class="moreCard">
+      <div class="moreRow moreRowSplit">
+        <span>Clear all watched marks</span>
+        <button class="reset" id="clearAllBtn">Clear</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="homeSection">
+    <span class="homeSectionLabel">About</span>
+    <div class="moreCard">
+      <iframe name="hiddenRequestFrame" style="display:none;" title="hidden"></iframe>
+      <form id="requestMovieForm" class="requestForm" action="https://docs.google.com/forms/d/e/1FAIpQLSf6gLu-Z9LO-ZnPQ70yuOmYC8_9O1Jk7Kwsk0BF-FepiWH8tQ/formResponse" method="POST" target="hiddenRequestFrame">
+        <input type="text" name="entry.1104459577" id="requestMovieInput" placeholder="Request a movie…" autocomplete="off" required>
+        <button type="submit">Send</button>
+      </form>
+      <p class="glossary">CSM = Common Sense Media, the nonprofit whose age and content guidance powers every rating here. DCOM = Disney Channel Original Movie.</p>
+    </div>
   </div>
 </div>
-<div class="filterRow">
-  <select id="decadeFilter"><option value="">Any decade</option></select>
-  <select id="ageFilter"><option value="">Any age</option></select>
-  <select id="genreFilter"><option value="">Any genre</option></select>
-  <select id="studioFilter"><option value="">Any studio</option></select>
-  <button id="newToggleBtn" class="priorityToggle newToggle">New this week</button>
-  <button id="priorityToggleBtn" class="priorityToggle">&#9733; Want to watch</button>
-  <button id="clearFiltersBtn">Clear filters</button>
-</div>
-<div class="sortbar">
-  <button id="syncToggleBtn">Sync across devices</button>
+
+<div class="scrim" id="filterScrim" style="display:none;"></div>
+<div class="sheet" id="filterSheet" style="display:none;">
+  <div class="sheetHandle"></div>
+  <div class="sheetHeader">
+    <span>Filter &amp; sort</span>
+    <button type="button" id="clearFiltersBtn" class="linkBtn">Clear</button>
+  </div>
+  <div class="filterRow">
+    <select id="decadeFilter"><option value="">Any decade</option></select>
+    <select id="ageFilter"><option value="">Any age</option></select>
+  </div>
+  <div class="filterRow">
+    <select id="genreFilter"><option value="">Any genre</option></select>
+    <select id="studioFilter"><option value="">Any studio</option></select>
+  </div>
+  <div class="filterRow">
+    <button id="newToggleBtn" class="priorityToggle newToggle">New this week</button>
+    <button id="priorityToggleBtn" class="priorityToggle">&#9733; Want to watch</button>
+  </div>
   <select id="sortMode" class="sortSelect" aria-label="Sort movies">
     <option value="year">Sort by year</option>
     <option value="age">Sort by recommended age</option>
     <option value="title">Sort by title</option>
     <option value="custom">Custom order</option>
   </select>
-  <button id="installAppBtn">Install app</button>
-  <button id="resortBtn">Reset order</button>
-</div>
-<div class="syncPanel" id="syncPanel" style="display:none;">
-  <div class="syncRow" id="googleSyncRow" style="display:none;">
-    <label>Sync automatically with your Google account — saves your list as a small file in your Google Drive that only this app can read or edit. See our <a href="/privacy.html">Privacy Policy</a> and <a href="/terms.html">Terms</a>.</label>
-    <div class="googleSyncControls">
-      <button id="googleSignInBtn">Sign in with Google</button>
-      <span id="googleSyncStatus" style="display:none;"></span>
-      <button id="googleSignOutBtn" style="display:none;">Disconnect</button>
-    </div>
-  </div>
-  <div class="syncRow">
-    <label>Or copy a code — paste it into this app on another device to load your progress there.</label>
-    <div class="syncCodeRow">
-      <textarea id="syncCodeOut" readonly rows="3"></textarea>
-      <button id="syncCopyBtn">Copy</button>
-    </div>
-  </div>
-  <div class="syncRow">
-    <label>Paste a code from another device here to load it on this one.</label>
-    <div class="syncCodeRow">
-      <textarea id="syncCodeIn" rows="3" placeholder="Paste code here"></textarea>
-      <button id="syncLoadBtn">Load</button>
-    </div>
-  </div>
-</div>
-
-<ul id="list"></ul>
-<div class="empty" id="emptyMsg" style="display:none;">No movies match your search.</div>
-</div>
-
-<button class="reset" id="clearAllBtn">Clear all watched marks</button>
-<iframe name="hiddenRequestFrame" style="display:none;" title="hidden"></iframe>
-<form id="requestMovieForm" class="requestForm" action="https://docs.google.com/forms/d/e/1FAIpQLSf6gLu-Z9LO-ZnPQ70yuOmYC8_9O1Jk7Kwsk0BF-FepiWH8tQ/formResponse" method="POST" target="hiddenRequestFrame">
-  <input type="text" name="entry.1104459577" id="requestMovieInput" placeholder="Request a movie…" autocomplete="off" required>
-  <button type="submit">Send</button>
-</form>
-<p class="glossary">CSM = Common Sense Media, the nonprofit whose age and content guidance powers every rating here. DCOM = Disney Channel Original Movie.</p>
-
+  <button type="button" id="applyFiltersBtn" class="applyBtn">Show movies</button>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -1014,7 +1135,7 @@
     <span>Home</span>
   </button>
   <button type="button" class="qbBtn" id="tabBrowse">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="14" y2="17"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>
     <span>Browse</span>
   </button>
   <button type="button" class="qbBtn" id="qbWatchlist">
@@ -1026,7 +1147,7 @@
     <span>Search</span>
   </button>
   <button type="button" class="qbBtn" id="tabMore">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><line x1="19" y1="12" x2="21" y2="12"/><line x1="16.95" y1="16.95" x2="18.36" y2="18.36"/><line x1="12" y1="19" x2="12" y2="21"/><line x1="7.05" y1="16.95" x2="5.64" y2="18.36"/><line x1="5" y1="12" x2="3" y2="12"/><line x1="7.05" y1="7.05" x2="5.64" y2="5.64"/><line x1="12" y1="5" x2="12" y2="3"/><line x1="16.95" y1="7.05" x2="18.36" y2="5.64"/></svg>
     <span>More</span>
   </button>
 </nav>
@@ -1109,8 +1230,7 @@ let ageFilter = "";
 let genreFilter = "";
 let studioFilter = "";
 let sortMode = "year";
-let viewMode = "grouped";
-let groupedExpanded = {};
+let currentScreen = "home";
 
 const GOOGLE_CLIENT_ID = "987776124251-t4skn7ia6qd1r88ftass906jinm98v1q.apps.googleusercontent.com";
 const DRIVE_FILE_NAME = "family-feature-state-v3.json";
@@ -1550,11 +1670,6 @@ function clearAllChecks(){
   showToast('Watched marks cleared');
 }
 
-function toggleStudioGroup(studio){
-  groupedExpanded[studio] = !groupedExpanded[studio];
-  renderGroupedView();
-}
-
 function browseStudio(studio){
   decadeFilter = ''; ageFilter = ''; genreFilter = ''; priorityOnly = false; newOnly = false; query = '';
   document.getElementById('decadeFilter').value = '';
@@ -1562,13 +1677,12 @@ function browseStudio(studio){
   document.getElementById('genreFilter').value = '';
   document.getElementById('search').value = '';
   document.getElementById('priorityToggleBtn').classList.remove('on');
-  document.getElementById('qbWatchlist').classList.remove('on');
   document.getElementById('newToggleBtn').classList.remove('on');
   sortMode = 'year';
   document.getElementById('sortMode').value = sortMode;
   studioFilter = studio;
   document.getElementById('studioFilter').value = studio;
-  switchToFlat();
+  showScreen('browse');
 }
 
 function browseNew(){
@@ -1579,40 +1693,42 @@ function browseNew(){
   document.getElementById('studioFilter').value = '';
   document.getElementById('search').value = '';
   document.getElementById('priorityToggleBtn').classList.remove('on');
-  document.getElementById('qbWatchlist').classList.remove('on');
   sortMode = 'year';
   document.getElementById('sortMode').value = sortMode;
   newOnly = true;
   document.getElementById('newToggleBtn').classList.add('on');
-  switchToFlat();
+  showScreen('browse');
 }
 
-function switchToFlat(){
-  viewMode = 'flat';
-  document.getElementById('groupedView').style.display = 'none';
-  document.getElementById('toFlatWrap').style.display = 'none';
-  document.getElementById('flatView').style.display = 'block';
-  render();
+// Exactly one function drives every tab switch -- not one per tab. It
+// always does all four steps below, for every screen, every time: no
+// tab-specific variant, and no screen is ever wired to another tab's
+// content (see Tab_State_Spec on the design canvas -- this replaced two
+// hand-written functions, showHomeScreen()/showLegacyScreen(), where the
+// second only ever removed Home's "on" class and never gave Browse/More
+// their own, and both tabs fell back to the same single legacy view).
+const SCREENS = ['home', 'browse', 'watchlist', 'search', 'more'];
+let screens = {};
+let tabs = {};
+
+function showScreen(target){
+  currentScreen = target;
+  SCREENS.forEach(name => {
+    screens[name].style.display = name === target ? 'block' : 'none';
+    tabs[name].classList.toggle('on', name === target);
+  });
+  renderCurrentView();
 }
 
-function switchToGrouped(){
-  viewMode = 'grouped';
-  document.getElementById('flatView').style.display = 'none';
-  document.getElementById('groupedView').style.display = 'block';
-  document.getElementById('toFlatWrap').style.display = 'flex';
-  renderGroupedView();
-}
-
-function showHomeScreen(){
-  document.getElementById('homeScreen').style.display = 'block';
-  document.getElementById('legacyScreen').style.display = 'none';
-  document.getElementById('tabHome').classList.add('on');
-}
-
-function showLegacyScreen(){
-  document.getElementById('homeScreen').style.display = 'none';
-  document.getElementById('legacyScreen').style.display = 'block';
-  document.getElementById('tabHome').classList.remove('on');
+function initScreens(){
+  SCREENS.forEach(name => {
+    screens[name] = document.getElementById(name + 'Screen');
+  });
+  tabs.home = document.getElementById('tabHome');
+  tabs.browse = document.getElementById('tabBrowse');
+  tabs.watchlist = document.getElementById('qbWatchlist');
+  tabs.search = document.getElementById('qbSearch');
+  tabs.more = document.getElementById('tabMore');
 }
 
 function renderStudioGrid(){
@@ -1636,10 +1752,7 @@ function renderStudioGrid(){
     count.textContent = `${indices.length} film${indices.length === 1 ? '' : 's'}`;
     tile.appendChild(name);
     tile.appendChild(count);
-    tile.onclick = () => {
-      showLegacyScreen();
-      browseStudio(studio);
-    };
+    tile.onclick = () => browseStudio(studio);
     grid.appendChild(tile);
   });
 
@@ -1647,18 +1760,17 @@ function renderStudioGrid(){
   more.type = 'button';
   more.className = 'moreStudiosTile';
   more.textContent = `More studios · ${restStudioCount} →`;
-  more.onclick = () => {
-    showLegacyScreen();
-    switchToGrouped();
-  };
+  more.onclick = () => showScreen('browse');
   grid.appendChild(more);
 }
 
 function renderCurrentView(){
   posterEagerBudget = 24;
   renderNewSection();
-  if(viewMode === 'grouped') renderGroupedView();
-  else render();
+  if(currentScreen === 'browse') render();
+  else if(currentScreen === 'watchlist') renderWatchlist();
+  else if(currentScreen === 'search') renderSearchScreen();
+  else updateStats();
 }
 
 function renderNewSection(){
@@ -1731,16 +1843,21 @@ function renderNewSection(){
     const seeAll = document.createElement('button');
     seeAll.className = 'newSeeAll';
     seeAll.textContent = `See all ${indices.length} new →`;
-    seeAll.onclick = () => { showLegacyScreen(); browseNew(); };
+    seeAll.onclick = () => browseNew();
     section.appendChild(seeAll);
   }
 }
 
 function updateStats(){
   const checkedCount = markCount(state.checked);
+  const leftCount = MOVIES.length - checkedCount;
+  const priorityCount = markCount(state.priority);
   document.getElementById('statChecked').textContent = checkedCount;
-  document.getElementById('statLeft').textContent = MOVIES.length - checkedCount;
-  document.getElementById('statPriority').textContent = markCount(state.priority);
+  document.getElementById('statLeft').textContent = leftCount;
+  document.getElementById('statPriority').textContent = priorityCount;
+  document.getElementById('statCheckedMore').textContent = checkedCount;
+  document.getElementById('statLeftMore').textContent = leftCount;
+  document.getElementById('statPriorityMore').textContent = priorityCount;
 
   const syncPanel = document.getElementById('syncPanel');
   if(syncPanel && syncPanel.style.display !== 'none'){
@@ -1748,110 +1865,93 @@ function updateStats(){
   }
 }
 
-function renderGroupedView(){
+function createSimpleRow(idx){
+  const m = MOVIES[idx];
+  const isChecked = markValue(state.checked, idx);
+
+  const li = document.createElement('li');
+  li.className = 'row' + (isChecked ? ' checked' : '');
+
+  const check = document.createElement('button');
+  check.className = 'check' + (isChecked ? ' on' : '');
+  check.setAttribute('aria-label', 'Mark watched');
+  check.onclick = () => toggleCheck(idx);
+
+  const isPriority = markValue(state.priority, idx);
+  const star = createStarButton(idx, isPriority);
+
+  const poster = createPoster(m, null, isRecent(m));
+
+  const info = document.createElement('div');
+  info.className = 'info';
+  const title = document.createElement('div');
+  title.className = 'title';
+  title.textContent = `${m.t} (${m.y})`;
+  title.onclick = () => toggleDetail(idx);
+  const meta = createMeta(idx, m);
+  info.appendChild(title);
+  info.appendChild(meta);
+
+  li.appendChild(check);
+  li.appendChild(star);
+  if(poster) li.appendChild(poster);
+  li.appendChild(info);
+
+  return li;
+}
+
+function appendSimpleRow(listEl, idx){
+  const row = createSimpleRow(idx);
+  listEl.appendChild(row);
+  if(openDetail === idx){
+    const hasPoster = !!row.querySelector('.poster');
+    const detail = document.createElement('div');
+    detail.className = 'detail open' + (hasPoster ? '' : ' noPosterDetail');
+    detail.textContent = MOVIES[idx].full;
+    listEl.appendChild(detail);
+  }
+}
+
+function renderWatchlist(){
   posterEagerBudget = 24;
-  const groupedEl = document.getElementById('groupedView');
-  groupedEl.replaceChildren();
+  const listEl = document.getElementById('watchlistList');
+  const emptyMsg = document.getElementById('watchlistEmptyMsg');
+  const subtitle = document.getElementById('watchlistSubtitle');
+  const watchlistSortMode = document.getElementById('watchlistSortMode').value;
 
-  const studios = [...MOVIES_BY_STUDIO.keys()].sort((a,b) => MOVIES_BY_STUDIO.get(b).length - MOVIES_BY_STUDIO.get(a).length);
+  const allIndices = MOVIES.map((m, idx) => idx).filter(idx => markValue(state.priority, idx));
+  const indices = sortMovieIndices(allIndices, watchlistSortMode);
 
-  studios.forEach(studio=>{
-    const indices = MOVIES_BY_STUDIO.get(studio);
+  subtitle.textContent = `${indices.length} movie${indices.length === 1 ? '' : 's'} you want to watch`;
+  listEl.replaceChildren();
+  emptyMsg.style.display = indices.length ? 'none' : 'block';
 
-    const group = document.createElement('div');
-    group.className = 'studioGroup';
+  indices.forEach(idx => appendSimpleRow(listEl, idx));
+}
 
-    const header = document.createElement('button');
-    header.className = 'studioHeader' + (groupedExpanded[studio] ? ' expanded' : '');
-    const chev = document.createElement('span');
-    chev.className = 'chev';
-    chev.textContent = '\u25b8';
-    const studioName = document.createElement('span');
-    studioName.className = 'studioName';
-    studioName.textContent = studio;
-    const studioCount = document.createElement('span');
-    studioCount.className = 'studioCount';
-    studioCount.textContent = indices.length;
-    header.appendChild(chev);
-    header.appendChild(studioName);
-    header.appendChild(studioCount);
-    header.onclick = () => toggleStudioGroup(studio);
-    group.appendChild(header);
+function renderSearchScreen(){
+  posterEagerBudget = 24;
+  const listEl = document.getElementById('searchResultsList');
+  const emptyMsg = document.getElementById('searchEmptyMsg');
+  const q = document.getElementById('searchScreenInput').value.trim().toLowerCase();
 
-    if(groupedExpanded[studio]){
-      const body = document.createElement('div');
-      body.className = 'studioBody';
+  listEl.replaceChildren();
 
-      const label = document.createElement('p');
-      label.className = 'safeBetsLabel';
-      label.textContent = 'Chronological';
-      body.appendChild(label);
+  if(!q){
+    emptyMsg.style.display = 'none';
+    return;
+  }
 
-      const studioMovies = sortMovieIndices(indices, 'year');
-      if(studioMovies.length === 0){
-        const empty = document.createElement('p');
-        empty.className = 'safeBetEmpty';
-        const unwatchedCount = indices.filter(i => !markValue(state.checked, i)).length;
-        empty.textContent = unwatchedCount === 0 ? "You've watched everything here." : 'Nothing to show.';
-        body.appendChild(empty);
-      } else {
-        studioMovies.forEach(idx=>{
-          const m = MOVIES[idx];
-          const isChecked = markValue(state.checked, idx);
+  const indices = MOVIES.map((m, idx) => idx).filter(idx => MOVIES[idx].t.toLowerCase().includes(q));
 
-          const row = document.createElement('div');
-          row.className = 'studioMovieRow';
+  if(indices.length === 0){
+    emptyMsg.textContent = `No matches for "${q}". Try a different spelling, or request it above.`;
+    emptyMsg.style.display = 'block';
+    return;
+  }
+  emptyMsg.style.display = 'none';
 
-          const check = document.createElement('button');
-          check.className = 'check' + (isChecked ? ' on' : '');
-          check.setAttribute('aria-label', 'Mark watched');
-          check.onclick = () => toggleCheck(idx);
-
-          const isPriority = markValue(state.priority, idx);
-          const star = createStarButton(idx, isPriority);
-
-          const poster = createPoster(m, 'safeBetPoster', isRecent(m));
-
-          const info = document.createElement('div');
-          info.className = 'info';
-          const title = document.createElement('div');
-          title.className = 'title';
-          title.textContent = `${m.t} (${m.y})`;
-          title.onclick = () => toggleDetail(idx);
-          const meta = createMeta(idx, m);
-          info.appendChild(title);
-          info.appendChild(meta);
-
-          row.appendChild(check);
-          row.appendChild(star);
-          if(poster) row.appendChild(poster);
-          row.appendChild(info);
-          body.appendChild(row);
-
-          if(openDetail === idx){
-            const detail = document.createElement('div');
-            detail.className = 'detail open safeBetDetail' + (poster ? '' : ' noPosterDetail');
-            detail.textContent = m.full;
-            body.appendChild(detail);
-          }
-        });
-      }
-
-      const browseWrap = document.createElement('p');
-      browseWrap.className = 'browseAllLink';
-      const browseBtn = document.createElement('button');
-      browseBtn.textContent = `Browse all ${indices.length} →`;
-      browseBtn.onclick = () => browseStudio(studio);
-      browseWrap.appendChild(browseBtn);
-      body.appendChild(browseWrap);
-
-      group.appendChild(body);
-    }
-
-    groupedEl.appendChild(group);
-  });
-
-  updateStats();
+  indices.forEach(idx => appendSimpleRow(listEl, idx));
 }
 
 function encodeState(){
@@ -2342,19 +2442,6 @@ document.querySelectorAll('#filterSeg button').forEach(btn=>{
 
 document.getElementById('resortBtn').addEventListener('click', resetOrder);
 document.getElementById('clearAllBtn').addEventListener('click', clearAllChecks);
-document.getElementById('toFlatBtn').addEventListener('click', ()=>{
-  decadeFilter = ''; ageFilter = ''; genreFilter = ''; studioFilter = ''; priorityOnly = false; newOnly = false; query = '';
-  document.getElementById('decadeFilter').value = '';
-  document.getElementById('ageFilter').value = '';
-  document.getElementById('genreFilter').value = '';
-  document.getElementById('studioFilter').value = '';
-  document.getElementById('search').value = '';
-  document.getElementById('priorityToggleBtn').classList.remove('on');
-  document.getElementById('qbWatchlist').classList.remove('on');
-  document.getElementById('newToggleBtn').classList.remove('on');
-  switchToFlat();
-});
-document.getElementById('backToGroupsBtn').addEventListener('click', switchToGrouped);
 
 document.getElementById('syncToggleBtn').addEventListener('click', ()=>{
   const panel = document.getElementById('syncPanel');
@@ -2387,7 +2474,7 @@ document.getElementById('googleSignInBtn').addEventListener('click', ()=>{
 
 document.getElementById('googleSyncAlertBtn').addEventListener('click', ()=>{
   googleSyncIntent = true;
-  switchToFlat();
+  showScreen('more');
   const panel = document.getElementById('syncPanel');
   panel.style.display = 'block';
   document.getElementById('syncCodeOut').value = encodeState();
@@ -2494,41 +2581,51 @@ document.getElementById('studioFilter').addEventListener('change', e=>{
 document.getElementById('priorityToggleBtn').addEventListener('click', ()=>{
   priorityOnly = !priorityOnly;
   document.getElementById('priorityToggleBtn').classList.toggle('on', priorityOnly);
-  document.getElementById('qbWatchlist').classList.toggle('on', priorityOnly);
   renderCurrentView();
 });
 
 document.getElementById('tabHome').addEventListener('click', ()=>{
-  showHomeScreen();
+  showScreen('home');
 });
 document.getElementById('homeBrowseLink').addEventListener('click', ()=>{
-  showLegacyScreen();
+  showScreen('browse');
 });
 document.getElementById('tabBrowse').addEventListener('click', ()=>{
-  showLegacyScreen();
-  if(document.getElementById('flatView').style.display === 'none'){
-    switchToFlat();
-  }
+  showScreen('browse');
 });
 document.getElementById('tabMore').addEventListener('click', ()=>{
-  showLegacyScreen();
+  showScreen('more');
 });
 document.getElementById('qbSearch').addEventListener('click', ()=>{
-  showLegacyScreen();
-  if(document.getElementById('flatView').style.display === 'none'){
-    switchToFlat();
-  }
-  const search = document.getElementById('search');
-  search.scrollIntoView({behavior:'smooth', block:'center'});
-  search.focus();
+  showScreen('search');
+  document.getElementById('searchScreenInput').focus();
 });
 document.getElementById('qbWatchlist').addEventListener('click', ()=>{
-  showLegacyScreen();
-  if(document.getElementById('flatView').style.display === 'none'){
-    switchToFlat();
-  }
-  document.getElementById('priorityToggleBtn').click();
-  document.getElementById('list').scrollIntoView({behavior:'smooth', block:'start'});
+  showScreen('watchlist');
+});
+
+document.getElementById('filterSheetBtn').addEventListener('click', ()=>{
+  document.getElementById('filterScrim').style.display = 'block';
+  document.getElementById('filterSheet').style.display = 'block';
+});
+
+function closeFilterSheet(){
+  document.getElementById('filterScrim').style.display = 'none';
+  document.getElementById('filterSheet').style.display = 'none';
+}
+
+document.getElementById('filterScrim').addEventListener('click', closeFilterSheet);
+document.getElementById('applyFiltersBtn').addEventListener('click', closeFilterSheet);
+
+document.getElementById('watchlistSortMode').addEventListener('change', renderWatchlist);
+
+document.getElementById('searchScreenInput').addEventListener('input', renderSearchScreen);
+
+document.getElementById('searchRequestLink').addEventListener('click', ()=>{
+  showScreen('more');
+  const input = document.getElementById('requestMovieInput');
+  input.scrollIntoView({behavior:'smooth', block:'center'});
+  input.focus();
 });
 
 // The mobile keyboard resizing the viewport makes a raw `position:fixed` bar
@@ -2558,7 +2655,6 @@ document.getElementById('clearFiltersBtn').addEventListener('click', ()=>{
   document.getElementById('genreFilter').value = '';
   document.getElementById('studioFilter').value = '';
   document.getElementById('priorityToggleBtn').classList.remove('on');
-  document.getElementById('qbWatchlist').classList.remove('on');
   document.getElementById('newToggleBtn').classList.remove('on');
   renderCurrentView();
 });
@@ -2612,7 +2708,8 @@ if('serviceWorker' in navigator){
 loadState();
 tryInitGoogleSync();
 renderStudioGrid();
-showHomeScreen();
+initScreens();
+showScreen('home');
 </script>
 </body>
 </html>
