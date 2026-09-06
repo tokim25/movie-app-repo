@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'family-feature-v9-20260906-logic-restore';
+const CACHE_VERSION = 'family-feature-v10-20260906-content-settings';
 const APP_SHELL = [
   '/',
   '/index.html',

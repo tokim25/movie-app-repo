@@ -951,6 +951,10 @@
     border-radius:13px;
     background:var(--bg-sub);
   }
+  .familyChild.active{
+    outline:2px solid rgba(42,91,76,0.34);
+    background:rgba(42,91,76,0.08);
+  }
   .familyTopline,
   .familyKid,
   .familyActions{
@@ -1018,6 +1022,11 @@
     padding:7px 11px;
     cursor:pointer;
   }
+  .familyEditBtn.primary{
+    background:var(--accent);
+    border-color:var(--accent);
+    color:#fff;
+  }
   .familySummary{
     margin-top:11px;
   }
@@ -1059,6 +1068,38 @@
     border:1px solid var(--line);
     background:var(--surface);
     overflow:hidden;
+  }
+  .settingsChildPicker{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin:14px 0 4px;
+  }
+  .settingsChildChip{
+    min-height:36px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    background:var(--surface);
+    color:var(--ink-soft);
+    font-family:inherit;
+    font-size:13px;
+    font-weight:650;
+    padding:8px 12px;
+    cursor:pointer;
+  }
+  .settingsChildChip.selected{
+    background:var(--ink);
+    border-color:var(--ink);
+    color:#fff;
+  }
+  .settingsIntro{
+    margin-top:10px;
+    padding:12px 14px;
+    border-radius:13px;
+    background:var(--bg-sub);
+    color:var(--ink-soft);
+    font-size:13px;
+    line-height:1.45;
   }
   .childEditor{
     display:grid;
@@ -1159,9 +1200,8 @@
   }
   .familySettingRow{
     display:grid;
-    grid-template-columns:minmax(0, 1fr) auto;
+    grid-template-columns:minmax(0, 1fr);
     gap:14px;
-    align-items:center;
     min-height:88px;
     padding:15px;
     border-top:1px solid var(--line);
@@ -1180,31 +1220,97 @@
     font-size:13px;
     line-height:1.42;
   }
+  .settingTopline{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    align-items:flex-start;
+  }
+  .settingStatus{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:6px;
+    flex:0 0 auto;
+  }
+  .settingBadge{
+    min-height:24px;
+    display:inline-flex;
+    align-items:center;
+    border-radius:999px;
+    padding:4px 9px;
+    background:var(--bg-sub);
+    color:var(--ink-soft);
+    font-size:12px;
+    font-weight:650;
+    white-space:nowrap;
+  }
+  .settingBadge.parent{
+    background:rgba(184,91,63,0.12);
+    color:var(--accent);
+  }
+  .settingCopy{
+    display:grid;
+    gap:8px;
+  }
+  .settingScaleHelp{
+    display:grid;
+    grid-template-columns:repeat(4, minmax(0, 1fr));
+    gap:8px;
+  }
+  .scaleCard{
+    border:1px solid var(--line);
+    border-radius:11px;
+    background:var(--bg-sub);
+    padding:9px;
+  }
+  .scaleCard.active{
+    border-color:rgba(42,91,76,0.42);
+    background:rgba(42,91,76,0.1);
+  }
+  .scaleCard strong{
+    margin:0 0 3px;
+    font-size:12px;
+  }
+  .scaleCard span,
+  .scaleCard em{
+    color:var(--ink-soft);
+    font-size:11.5px;
+    line-height:1.35;
+  }
+  .scaleCard em{
+    display:block;
+    margin-top:5px;
+    font-style:normal;
+    color:var(--ink-faint);
+  }
   .limitControl{
-    min-width:206px;
     display:grid;
     grid-template-columns:repeat(4, 1fr);
-    gap:4px;
-    padding:4px;
-    border-radius:12px;
+    gap:6px;
+    padding:5px;
+    border-radius:14px;
     background:var(--bg-sub);
   }
   .limitControl button{
-    width:46px;
-    height:38px;
+    min-width:0;
+    height:44px;
     border:0;
-    border-radius:9px;
+    border-radius:11px;
     background:transparent;
     color:var(--ink-soft);
     font-family:inherit;
-    font-size:13px;
-    font-weight:600;
+    font-size:15px;
+    font-weight:750;
     cursor:pointer;
   }
   .limitControl button.selected{
-    background:var(--surface);
-    color:var(--ink);
-    box-shadow:0 1px 4px rgba(21,25,22,0.08);
+    background:var(--ink);
+    color:#fff;
+    box-shadow:0 3px 10px rgba(21,25,22,0.18);
+  }
+  .limitControl button.starter{
+    box-shadow:inset 0 0 0 2px rgba(184,91,63,0.2);
   }
   .ageDefault{
     margin-top:10px;
@@ -1234,7 +1340,10 @@
       justify-content:flex-start;
     }
     .familySettingRow{ grid-template-columns:1fr; }
-    .limitControl{ width:100%; min-width:0; }
+    .settingTopline{ flex-direction:column; }
+    .settingStatus{ align-items:flex-start; }
+    .settingScaleHelp{ grid-template-columns:1fr 1fr; }
+    .limitControl{ width:100%; }
     .limitControl button{ width:100%; }
   }
   .moreRow{
@@ -1667,34 +1776,11 @@
   <div class="homeSection">
     <span class="homeSectionLabel">Content settings</span>
     <div class="familyCard" id="familySettingsPanel">
-      <h3 id="familySettingsChildName">Simon</h3>
-      <p>Adjust content limits here. Each setting keeps track of whether it follows starter settings or a parent change.</p>
-      <div class="familyRows">
-        <div class="familySettingRow">
-          <div><strong>Scary moments</strong><span>Parent-set. More cautious than the starter setting.</span><label class="ageDefault"><input type="checkbox"> Use starter setting</label></div>
-          <div class="limitControl" aria-label="Scary moments limit"><button type="button">1</button><button type="button" class="selected">2</button><button type="button">3</button><button type="button">4</button></div>
-        </div>
-        <div class="familySettingRow">
-          <div><strong>Violence</strong><span>Parent-set. More cautious than the starter setting.</span><label class="ageDefault"><input type="checkbox"> Use starter setting</label></div>
-          <div class="limitControl" aria-label="Violence limit"><button type="button">1</button><button type="button" class="selected">2</button><button type="button">3</button><button type="button">4</button></div>
-        </div>
-        <div class="familySettingRow">
-          <div><strong>Sad moments</strong><span>Using starter setting.</span><label class="ageDefault"><input type="checkbox" checked> Use starter setting</label></div>
-          <div class="limitControl" aria-label="Sad moments limit"><button type="button">1</button><button type="button">2</button><button type="button" class="selected">3</button><button type="button">4</button></div>
-        </div>
-        <div class="familySettingRow">
-          <div><strong>Language</strong><span>Using starter setting.</span><label class="ageDefault"><input type="checkbox" checked> Use starter setting</label></div>
-          <div class="limitControl" aria-label="Language limit"><button type="button">1</button><button type="button">2</button><button type="button" class="selected">3</button><button type="button">4</button></div>
-        </div>
-        <div class="familySettingRow">
-          <div><strong>Romance</strong><span>Using starter setting.</span><label class="ageDefault"><input type="checkbox" checked> Use starter setting</label></div>
-          <div class="limitControl" aria-label="Romance limit"><button type="button" class="selected">1</button><button type="button">2</button><button type="button">3</button><button type="button">4</button></div>
-        </div>
-        <div class="familySettingRow">
-          <div><strong>Drinking</strong><span>Using starter setting.</span><label class="ageDefault"><input type="checkbox" checked> Use starter setting</label></div>
-          <div class="limitControl" aria-label="Drinking limit"><button type="button" class="selected">1</button><button type="button">2</button><button type="button">3</button><button type="button">4</button></div>
-        </div>
-      </div>
+      <h3 id="familySettingsChildName">No children yet</h3>
+      <p>Adjust content limits for one child at a time. Starter settings come from the child's age; parent changes stay fixed until you switch them back.</p>
+      <div class="settingsChildPicker" id="familySettingsChildPicker" aria-label="Choose child for content settings"></div>
+      <div class="settingsIntro" id="familySettingsIntro"></div>
+      <div class="familyRows" id="familySettingsRows"></div>
     </div>
   </div>
 
@@ -1877,14 +1963,83 @@ const MOVIES_BY_STUDIO = MOVIES.reduce((groups, movie, idx)=>{
   groups.get(movie.studio).push(idx);
   return groups;
 }, new Map());
+const CONTENT_FLAGS = [
+  {
+    id: 'scary',
+    label: 'Scary moments',
+    plain: 'scary moments',
+    levels: [
+      { name: 'Very gentle', meaning: 'Brief surprise, quickly resolved.', example: 'Cars' },
+      { name: 'Mild tension', meaning: 'Some chase or peril, still playful.', example: 'Monsters University' },
+      { name: 'Moderate scares', meaning: 'Longer suspense or darker images.', example: 'Toy Story 3' },
+      { name: 'Big-kid scary', meaning: 'Horror flavor or sustained fear.', example: 'Night of the Zoopocalypse' }
+    ]
+  },
+  {
+    id: 'violence',
+    label: 'Violence',
+    plain: 'violence',
+    levels: [
+      { name: 'Slapstick', meaning: 'Bumps, falls, no lasting harm.', example: 'Cars' },
+      { name: 'Cartoon action', meaning: 'Chases or crashes with low stakes.', example: 'Toy Story 2' },
+      { name: 'Sustained action', meaning: 'Weapons, battles, or repeated peril.', example: 'The Incredibles' },
+      { name: 'Older-kid fights', meaning: 'More realistic threat or bullying.', example: 'The Karate Kid' }
+    ]
+  },
+  {
+    id: 'sad',
+    label: 'Sad moments',
+    plain: 'sad moments',
+    levels: [
+      { name: 'Light emotion', meaning: 'Small disappointments or worry.', example: 'Cars' },
+      { name: 'Tender scenes', meaning: 'Separation or loss is present but soft.', example: 'Toy Story 2' },
+      { name: 'Big feelings', meaning: 'Grief, anxiety, or family stress matters.', example: 'Inside Out 2' },
+      { name: 'Heavy themes', meaning: 'Sustained grief or hard real-world topics.', example: 'Wonder' }
+    ]
+  },
+  {
+    id: 'language',
+    label: 'Language',
+    plain: 'language',
+    levels: [
+      { name: 'Almost none', meaning: 'No real swearing; maybe silly words.', example: 'Finding Dory' },
+      { name: 'Mild words', meaning: 'Words like stupid, loser, or hell.', example: 'Ratatouille' },
+      { name: 'Frequent mild', meaning: 'More insults or repeated mild swears.', example: 'School of Rock' },
+      { name: 'Stronger edge', meaning: 'Older-kid language or dated insults.', example: 'Back to the Future' }
+    ]
+  },
+  {
+    id: 'romance',
+    label: 'Romance',
+    plain: 'romance',
+    levels: [
+      { name: 'Little to none', meaning: 'No real romance focus.', example: 'Finding Dory' },
+      { name: 'Brief affection', meaning: 'A crush, flirtation, or quick kiss.', example: 'Toy Story 2' },
+      { name: 'Story romance', meaning: 'Romance is a visible plot thread.', example: 'The Princess Bride' },
+      { name: 'Older-kid themes', meaning: 'More mature dating or innuendo.', example: 'Back to the Future' }
+    ]
+  },
+  {
+    id: 'drinking',
+    label: 'Drinking',
+    plain: 'drinking',
+    levels: [
+      { name: 'None shown', meaning: 'No meaningful substance content.', example: 'Cars' },
+      { name: 'Brief background', meaning: 'Adults or parties appear briefly.', example: 'Monsters University' },
+      { name: 'Noticeable', meaning: 'Alcohol, smoking, or partying is discussed.', example: 'The Sandlot' },
+      { name: 'Older-kid context', meaning: 'Substances are part of the world.', example: 'Back to the Future' }
+    ]
+  }
+];
+const CONTENT_FLAG_IDS = CONTENT_FLAGS.map(flag => flag.id);
 function defaultChildren(){
   return [];
 }
 
 function sampleChildren(){
   return [
-    { id: 'simon', name: 'Simon', age: 6 },
-    { id: 'nora', name: 'Nora', age: 3 }
+    createChild('Simon', 6, 'simon'),
+    createChild('Nora', 3, 'nora')
   ];
 }
 
@@ -1909,6 +2064,7 @@ let studioFilter = "";
 let sortMode = "year";
 let currentScreen = "setup";
 let tonightSelection = { childIds: new Set(), time: 90, mood: 'calm', currentPickIdx: null, amber: false };
+let selectedFamilyChildId = null;
 
 const GOOGLE_CLIENT_ID = "987776124251-t4skn7ia6qd1r88ftass906jinm98v1q.apps.googleusercontent.com";
 const DRIVE_FILE_NAME = "family-feature-state-v3.json";
@@ -2156,6 +2312,20 @@ function normalizeMarks(rawMarks, version){
   return marks;
 }
 
+function normalizeContentSettings(rawSettings){
+  const settings = {};
+  if(!rawSettings || typeof rawSettings !== 'object') return settings;
+  CONTENT_FLAG_IDS.forEach(flagId=>{
+    const raw = rawSettings[flagId];
+    if(!raw || typeof raw !== 'object') return;
+    const value = parseInt(raw.value, 10);
+    if(raw.source === 'parent' && value >= 1 && value <= 4){
+      settings[flagId] = { source: 'parent', value };
+    }
+  });
+  return settings;
+}
+
 function normalizeChild(raw){
   if(!raw || typeof raw !== 'object') return null;
   const name = typeof raw.name === 'string' ? raw.name.trim().slice(0, 60) : '';
@@ -2164,7 +2334,8 @@ function normalizeChild(raw){
   return {
     id: (typeof raw.id === 'string' && raw.id) ? raw.id : makeChildId(),
     name,
-    age: Number.isInteger(age) ? Math.min(Math.max(age, 3), 9) : 3
+    age: Number.isInteger(age) ? Math.min(Math.max(age, 3), 9) : 3,
+    settings: normalizeContentSettings(raw.settings)
   };
 }
 
@@ -2452,11 +2623,12 @@ function browseNew(){
 }
 
 function createChild(name, rawAge, id){
-  return { id: id || makeChildId(), name: name.trim().slice(0, 60), age: clampChildAge(rawAge) };
+  return { id: id || makeChildId(), name: name.trim().slice(0, 60), age: clampChildAge(rawAge), settings: {} };
 }
 
 function completeSetupWithChildren(children){
   state.children = children.filter(child => child && child.name);
+  selectedFamilyChildId = state.children[0] ? state.children[0].id : null;
   touchChildren();
   saveState();
   tonightSelection.childIds = new Set(state.children.map(child => child.id));
@@ -2474,10 +2646,67 @@ function setSelectedChoice(containerId, attr, value){
   });
 }
 
+function starterLimitForFlagAge(flagId, age){
+  const safeAge = clampChildAge(age);
+  const matrix = {
+    scary: [1, 1, 2, 2, 2, 3, 3],
+    violence: [1, 1, 2, 2, 3, 3, 3],
+    sad: [1, 1, 2, 2, 3, 3, 3],
+    language: [1, 1, 1, 2, 2, 2, 3],
+    romance: [1, 1, 1, 1, 2, 2, 2],
+    drinking: [1, 1, 1, 1, 2, 2, 2]
+  };
+  const values = matrix[flagId] || matrix.scary;
+  return values[safeAge - 3] || 1;
+}
+
 function starterLimitForAge(age){
-  if(age <= 4) return 1;
-  if(age <= 6) return 2;
-  return 3;
+  return starterLimitForFlagAge('scary', age);
+}
+
+function settingForChildFlag(child, flagId){
+  const starter = starterLimitForFlagAge(flagId, child.age);
+  const setting = child.settings && child.settings[flagId];
+  if(setting && setting.source === 'parent'){
+    return { source: 'parent', value: setting.value, starter };
+  }
+  return { source: 'starter', value: starter, starter };
+}
+
+function childPersonalizedFlagCount(child){
+  if(!child.settings || typeof child.settings !== 'object') return 0;
+  return CONTENT_FLAG_IDS.filter(flagId => child.settings[flagId] && child.settings[flagId].source === 'parent').length;
+}
+
+function setSelectedFamilyChild(id){
+  if(state.children.some(child => child.id === id)){
+    selectedFamilyChildId = id;
+  }else{
+    selectedFamilyChildId = state.children[0] ? state.children[0].id : null;
+  }
+  renderChildren();
+}
+
+function setChildFlagLimit(childId, flagId, rawValue){
+  const child = state.children.find(c => c.id === childId);
+  const value = parseInt(rawValue, 10);
+  if(!child || !CONTENT_FLAG_IDS.includes(flagId) || value < 1 || value > 4) return;
+  if(!child.settings) child.settings = {};
+  child.settings[flagId] = { source: 'parent', value };
+  touchChildren();
+  saveState();
+  renderChildren();
+  showToast(`${child.name}'s ${CONTENT_FLAGS.find(flag => flag.id === flagId).plain} setting saved`);
+}
+
+function useStarterForChildFlag(childId, flagId){
+  const child = state.children.find(c => c.id === childId);
+  if(!child || !CONTENT_FLAG_IDS.includes(flagId)) return;
+  if(child.settings) delete child.settings[flagId];
+  touchChildren();
+  saveState();
+  renderChildren();
+  showToast(`${child.name} now uses the age starter setting`);
 }
 
 function inferredMovieFlagLevel(movie){
@@ -2494,7 +2723,7 @@ function movieVerdictForKids(movie, kids){
   const amber = [];
   const red = [];
   kids.forEach(child=>{
-    const limit = starterLimitForAge(child.age);
+    const limit = settingForChildFlag(child, 'scary').value;
     if(level >= limit + 2) red.push(`${child.name}: ${flags[0]}`);
     else if(level === limit + 1) amber.push(`${child.name}: ${flags[0]}`);
   });
@@ -2970,7 +3199,7 @@ async function refreshAccessToken(){
 async function trySilentReconnect(){
   const ok = await refreshAccessToken();
   if(!ok){
-    setGoogleSyncError('Google sign-in expired');
+    setGoogleSyncError('Google authorization expired');
     return;
   }
   writeGoogleSyncMeta({
@@ -3396,6 +3625,7 @@ function removeChild(id){
   if(!child) return;
   if(!window.confirm(`Remove ${child.name}? This can't be undone.`)) return;
   state.children = state.children.filter(c => c.id !== id);
+  if(selectedFamilyChildId === id) selectedFamilyChildId = state.children[0] ? state.children[0].id : null;
   touchChildren();
   saveState();
   renderChildren();
@@ -3407,6 +3637,7 @@ function addChild(rawName, rawAge){
   if(!name){ showToast('Add a child name first'); return; }
   const child = createChild(name, rawAge);
   state.children.push(child);
+  selectedFamilyChildId = child.id;
   if(tonightSelection.childIds.size === 0) tonightSelection.childIds.add(child.id);
   touchChildren();
   saveState();
@@ -3416,9 +3647,136 @@ function addChild(rawName, rawAge){
   showToast(`${child.name} added with starter settings`);
 }
 
+function summarizeChildUnderstanding(child){
+  const personalized = CONTENT_FLAGS.filter(flag => {
+    const setting = child.settings && child.settings[flag.id];
+    return setting && setting.source === 'parent';
+  });
+  if(personalized.length === 0) return 'Using product-owned starter settings for this age.';
+  const names = personalized.map(flag => flag.plain);
+  const joined = names.length === 1 ? names[0] : names.length === 2 ? `${names[0]} and ${names[1]}` : `${names.slice(0, -1).join(', ')}, and ${names[names.length - 1]}`;
+  return `Personalized for ${joined}. Everything else follows starter settings for age ${child.age}.`;
+}
+
+function renderFamilySettings(){
+  const picker = document.getElementById('familySettingsChildPicker');
+  const rows = document.getElementById('familySettingsRows');
+  const intro = document.getElementById('familySettingsIntro');
+  const header = document.getElementById('familySettingsChildName');
+  if(!picker || !rows || !intro || !header) return;
+
+  picker.replaceChildren();
+  rows.replaceChildren();
+  if(!state.children.length){
+    selectedFamilyChildId = null;
+    header.textContent = 'No children yet';
+    intro.textContent = 'Add a child first. Starter settings are created from age, and parent changes can happen later.';
+    return;
+  }
+
+  if(!state.children.some(child => child.id === selectedFamilyChildId)){
+    selectedFamilyChildId = state.children[0].id;
+  }
+  const selectedChild = state.children.find(child => child.id === selectedFamilyChildId);
+  state.children.forEach(child=>{
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'settingsChildChip' + (child.id === selectedFamilyChildId ? ' selected' : '');
+    chip.textContent = child.name;
+    chip.addEventListener('click', () => setSelectedFamilyChild(child.id));
+    picker.appendChild(chip);
+  });
+
+  header.textContent = `${selectedChild.name}'s content settings`;
+  intro.textContent = `Age ${selectedChild.age} starter settings are shown with an outline. The numbered levels are product-owned calibration steps, not external ratings.`;
+
+  CONTENT_FLAGS.forEach(flag=>{
+    const effective = settingForChildFlag(selectedChild, flag.id);
+    const row = document.createElement('div');
+    row.className = 'familySettingRow';
+    row.dataset.flag = flag.id;
+
+    const top = document.createElement('div');
+    top.className = 'settingTopline';
+    const copy = document.createElement('div');
+    copy.className = 'settingCopy';
+    const title = document.createElement('strong');
+    title.textContent = flag.label;
+    const summary = document.createElement('span');
+    summary.textContent = effective.source === 'parent'
+      ? `Parent-set to ${effective.value}. Age ${selectedChild.age} starter is ${effective.starter}.`
+      : `Using the age ${selectedChild.age} starter setting: ${effective.starter}.`;
+    copy.appendChild(title);
+    copy.appendChild(summary);
+
+    const status = document.createElement('div');
+    status.className = 'settingStatus';
+    const badge = document.createElement('span');
+    badge.className = 'settingBadge' + (effective.source === 'parent' ? ' parent' : '');
+    badge.textContent = effective.source === 'parent' ? 'Parent-set' : 'Starter';
+    const starterLabel = document.createElement('label');
+    starterLabel.className = 'ageDefault';
+    const starterInput = document.createElement('input');
+    starterInput.type = 'checkbox';
+    starterInput.checked = effective.source !== 'parent';
+    starterInput.addEventListener('change', ()=>{
+      if(starterInput.checked) useStarterForChildFlag(selectedChild.id, flag.id);
+      else setChildFlagLimit(selectedChild.id, flag.id, effective.value);
+    });
+    starterLabel.appendChild(starterInput);
+    starterLabel.appendChild(document.createTextNode(' Use starter setting'));
+    status.appendChild(badge);
+    status.appendChild(starterLabel);
+    top.appendChild(copy);
+    top.appendChild(status);
+
+    const limitControl = document.createElement('div');
+    limitControl.className = 'limitControl';
+    limitControl.setAttribute('aria-label', `${flag.label} limit for ${selectedChild.name}`);
+    for(let level = 1; level <= 4; level++){
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.textContent = String(level);
+      btn.className = [
+        level === effective.value ? 'selected' : '',
+        level === effective.starter ? 'starter' : ''
+      ].filter(Boolean).join(' ');
+      btn.setAttribute('aria-pressed', level === effective.value ? 'true' : 'false');
+      btn.setAttribute('title', `${level}: ${flag.levels[level - 1].name}`);
+      btn.addEventListener('click', () => setChildFlagLimit(selectedChild.id, flag.id, level));
+      limitControl.appendChild(btn);
+    }
+
+    const scaleHelp = document.createElement('div');
+    scaleHelp.className = 'settingScaleHelp';
+    flag.levels.forEach((level, index)=>{
+      const card = document.createElement('div');
+      card.className = 'scaleCard' + (index + 1 === effective.value ? ' active' : '');
+      const levelTitle = document.createElement('strong');
+      levelTitle.textContent = `${index + 1}. ${level.name}`;
+      const meaning = document.createElement('span');
+      meaning.textContent = level.meaning;
+      const example = document.createElement('em');
+      example.textContent = `Example: ${level.example}`;
+      card.appendChild(levelTitle);
+      card.appendChild(meaning);
+      card.appendChild(example);
+      scaleHelp.appendChild(card);
+    });
+
+    row.appendChild(top);
+    row.appendChild(limitControl);
+    row.appendChild(scaleHelp);
+    rows.appendChild(row);
+  });
+}
+
 function renderChildren(){
   const container = document.getElementById('childEditorList');
   if(!container) return;
+  if(!state.children.some(child => child.id === selectedFamilyChildId)){
+    selectedFamilyChildId = state.children[0] ? state.children[0].id : null;
+  }
   container.replaceChildren();
   const landing = document.getElementById('familyChildrenList');
   if(landing) landing.replaceChildren();
@@ -3427,7 +3785,7 @@ function renderChildren(){
   state.children.forEach(child=>{
     if(landing){
       const article = document.createElement('article');
-      article.className = 'familyChild';
+      article.className = 'familyChild' + (child.id === selectedFamilyChildId ? ' active' : '');
 
       const top = document.createElement('div');
       top.className = 'familyTopline';
@@ -3453,7 +3811,17 @@ function renderChildren(){
       meta.className = 'familyMetaActions';
       const pill = document.createElement('span');
       pill.className = 'familyPill';
-      pill.textContent = child.id === 'simon' ? 'Personalized' : 'Starter settings';
+      const personalizedCount = childPersonalizedFlagCount(child);
+      pill.textContent = personalizedCount ? `${personalizedCount} parent-set` : 'Starter settings';
+      const settings = document.createElement('button');
+      settings.type = 'button';
+      settings.className = 'familyEditBtn primary';
+      settings.textContent = 'Settings';
+      settings.addEventListener('click', ()=>{
+        setSelectedFamilyChild(child.id);
+        const panel = document.getElementById('familySettingsPanel');
+        if(panel) panel.scrollIntoView({ behavior:'smooth', block:'start' });
+      });
       const edit = document.createElement('button');
       edit.type = 'button';
       edit.className = 'familyEditBtn';
@@ -3465,6 +3833,7 @@ function renderChildren(){
         if(target) setTimeout(()=>target.focus(), 260);
       });
       meta.appendChild(pill);
+      meta.appendChild(settings);
       meta.appendChild(edit);
 
       top.appendChild(kid);
@@ -3473,9 +3842,7 @@ function renderChildren(){
 
       const summary = document.createElement('p');
       summary.className = 'familySummary';
-      summary.textContent = child.id === 'simon'
-        ? 'More cautious about scary moments and violence. Everything else uses starter settings.'
-        : 'Using starter settings.';
+      summary.textContent = summarizeChildUnderstanding(child);
       article.appendChild(summary);
 
       const watchSignals = (state.events || []).filter(event => event.type === 'watch_anyway' && event.childId === child.id && event.flag === 'scary');
@@ -3555,15 +3922,14 @@ function renderChildren(){
   });
 
   const settingsHeader = document.getElementById('familySettingsChildName');
-  if(settingsHeader){
-    settingsHeader.textContent = state.children.length ? state.children[0].name : 'No children yet';
-  }
+  if(settingsHeader && !state.children.length) settingsHeader.textContent = 'No children yet';
   if(landing && state.children.length && activeSuggestionCount === 0){
     const quiet = document.createElement('div');
     quiet.className = 'logicNote';
     quiet.textContent = 'No suggestions to review right now.';
     landing.prepend(quiet);
   }
+  renderFamilySettings();
 }
 
 document.getElementById('addChildBtn').addEventListener('click', ()=>{

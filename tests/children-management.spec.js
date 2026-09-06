@@ -22,7 +22,7 @@ test('editing a child name and age persists after reload', async ({ page }) => {
   await page.locator('#familyScreen').waitFor({ state: 'visible' });
   await expect(page.locator('#childName-simon')).toHaveValue('Simone');
   await expect(page.locator('#childAge-simon')).toHaveValue('8');
-  await expect(page.locator('#familySettingsChildName')).toHaveText('Simone');
+  await expect(page.locator('#familySettingsChildName')).toHaveText("Simone's content settings");
 });
 
 test('adding a child appends a new row and persists after reload', async ({ page }) => {
@@ -45,6 +45,37 @@ test('adding a child appends a new row and persists after reload', async ({ page
   await page.locator('#familyScreen').waitFor({ state: 'visible' });
   await expect(page.locator('#childEditorList .childEditRow')).toHaveCount(before + 1);
   await expect(page.locator('#childEditorList .childEditRow').last().locator('input[type="text"]')).toHaveValue('Wes');
+});
+
+test('new child gets selectable adjustable content settings', async ({ page }) => {
+  await page.locator('#addChildBtn').click();
+  await page.locator('#newChildName').fill('Theo');
+  await page.locator('#newChildAge').selectOption('4');
+  await page.locator('#saveNewChildBtn').click();
+
+  await expect(page.locator('#familySettingsChildName')).toHaveText("Theo's content settings");
+  await expect(page.locator('#familySettingsIntro')).toContainText('Age 4 starter settings');
+  await expect(page.locator('#familySettingsChildPicker .settingsChildChip.selected')).toHaveText('Theo');
+  await expect(page.locator('#familySettingsRows .familySettingRow')).toHaveCount(6);
+  await expect(page.locator('#familySettingsRows .familySettingRow').first()).toContainText('Example: Cars');
+
+  const scaryRow = page.locator('#familySettingsRows .familySettingRow[data-flag="scary"]');
+  await expect(scaryRow.locator('.limitControl button.selected')).toHaveText('1');
+  await scaryRow.locator('.limitControl button').filter({ hasText: '3' }).click();
+  await expect(scaryRow.locator('.settingBadge')).toHaveText('Parent-set');
+  await expect(scaryRow).toContainText('Parent-set to 3. Age 4 starter is 1.');
+  await expect(scaryRow.locator('.limitControl button.selected')).toHaveText('3');
+
+  await page.reload();
+  await page.locator('#tabFamily').click();
+  await page.locator('#familyScreen').waitFor({ state: 'visible' });
+  await page.locator('#familySettingsChildPicker .settingsChildChip').filter({ hasText: 'Theo' }).click();
+  const reloadedScaryRow = page.locator('#familySettingsRows .familySettingRow[data-flag="scary"]');
+  await expect(reloadedScaryRow.locator('.limitControl button.selected')).toHaveText('3');
+
+  await reloadedScaryRow.locator('.ageDefault input').check();
+  await expect(reloadedScaryRow.locator('.settingBadge')).toHaveText('Starter');
+  await expect(reloadedScaryRow.locator('.limitControl button.selected')).toHaveText('1');
 });
 
 test('removing a child asks for confirmation and does not remove on cancel', async ({ page }) => {

@@ -21,8 +21,8 @@ test('first-run setup leads to Tonight, Shelf, and Family', async ({ page }) => 
   await expect(page.locator('#childrenSettingsPanel')).toContainText('Add a child or update their name and age');
   await expect(page.locator('#childrenSettingsPanel > .childEditor input[type="text"]')).toHaveCount(2);
   await expect(page.locator('#childrenSettingsPanel > .childEditor select')).toHaveCount(2);
-  await expect(page.locator('#familyChildrenList .familyEditBtn').first()).toBeVisible();
-  await page.locator('#familyChildrenList .familyEditBtn').first().click();
+  await expect(page.locator('#familyChildrenList .familyEditBtn').filter({ hasText: 'Edit' }).first()).toBeVisible();
+  await page.locator('#familyChildrenList .familyEditBtn').filter({ hasText: 'Edit' }).first().click();
   await expect(page.locator('#childName-simon')).toBeFocused();
   await page.locator('#addChildBtn').click();
   await expect(page.locator('#childOnboardingPanel')).toBeVisible();
