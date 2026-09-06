@@ -11,17 +11,17 @@ test('primary nav exposes Browse, request, and Family settings surfaces', async 
   await expect(page.locator('#familyScreen')).toBeVisible();
   await expect(page.locator('#homeScreen')).toBeHidden();
   await expect(page.locator('#tabFamily')).toHaveClass(/on/);
-  await expect(page.locator('#familyScreen')).toContainText('How Family understands each kid right now.');
+  await expect(page.locator('#familyScreen')).toContainText('Age guidance for each kid, yours to adjust');
   await expect(page.locator('#childrenSettingsPanel')).toContainText('Add a child or update their name and age');
   await expect(page.locator('#childrenSettingsPanel > .childEditor input[type="text"]')).toHaveCount(2);
   await expect(page.locator('#childrenSettingsPanel > .childEditor select')).toHaveCount(2);
-  await expect(page.locator('[data-edit-child="childNameSimon"]')).toBeVisible();
-  await page.locator('[data-edit-child="childNameSimon"]').click();
-  await expect(page.locator('#childNameSimon')).toBeFocused();
+  await expect(page.locator('[data-edit-child="childName-simon"]')).toBeVisible();
+  await page.locator('[data-edit-child="childName-simon"]').click();
+  await expect(page.locator('#childName-simon')).toBeFocused();
   await page.locator('#addChildBtn').click();
   await expect(page.locator('#childOnboardingPanel')).toBeVisible();
   await expect(page.locator('#newChildName')).toBeFocused();
-  await expect(page.locator('#childOnboardingPanel')).toContainText('Use age-based starter settings');
+  await expect(page.locator('#childOnboardingPanel')).toContainText('Starts with age-based guidance');
   await expect(page.locator('#familySettingsPanel')).toContainText('Adjust content limits');
   await expect(page.locator('#familySettingsPanel .limitControl')).toHaveCount(6);
 
