@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'family-feature-v18-20260906-dark-mode-fixes';
+const CACHE_VERSION = 'family-feature-v19-20260906-watch-button';
 const APP_SHELL = [
   '/',
   '/index.html',
