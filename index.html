@@ -881,6 +881,50 @@
     gap:14px;
     margin-top:18px;
   }
+  .tonightSummary{
+    display:grid;
+    grid-template-columns:minmax(0, 1fr) auto;
+    gap:12px;
+    align-items:center;
+    padding:14px;
+    border-radius:14px;
+    background:var(--bg-sub);
+    border:1px solid var(--line);
+  }
+  .tonightSummaryCopy{
+    min-width:0;
+  }
+  .tonightSummaryLabel{
+    color:var(--ink-faint);
+    font-size:12px;
+    font-weight:650;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+  }
+  .tonightSummaryText{
+    margin-top:4px;
+    color:var(--ink);
+    font-size:17px;
+    line-height:1.32;
+    font-weight:600;
+  }
+  .tonightEditPanel{
+    display:grid;
+    gap:14px;
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px solid var(--line);
+  }
+  .tonightEditPanel[hidden]{
+    display:none;
+  }
+  .tonightEditPanel h2,
+  .tonightEditPanel h3{
+    font-size:17px;
+  }
+  .tonightEditPanel .setupActions{
+    margin-top:0;
+  }
   .choiceGrid{
     display:flex;
     flex-wrap:wrap;
@@ -1399,6 +1443,13 @@
     .settingScaleHelp{ grid-template-columns:1fr 1fr; }
     .limitControl{ width:100%; }
     .limitControl button{ width:100%; }
+    .tonightSummary{
+      grid-template-columns:1fr;
+      align-items:start;
+    }
+    .tonightSummary .secondaryBtn{
+      width:100%;
+    }
   }
   .moreRow{
     display:block;
@@ -1680,10 +1731,19 @@
   <div class="homeSection">
     <span class="homeSectionLabel">Tonight ask</span>
     <div class="familyCard">
-      <h2>Who is watching?</h2>
-      <p>Pick any combination of kids. Choose nobody for an adults-only night.</p>
-      <div class="choiceGrid" id="tonightKidChoices"></div>
-      <div class="tonightAsk">
+      <div class="tonightSummary">
+        <div class="tonightSummaryCopy">
+          <div class="tonightSummaryLabel">Tonight ask</div>
+          <div class="tonightSummaryText" id="tonightAskSummary">Simon + Theo · About 90 minutes · Calm it down</div>
+        </div>
+        <button type="button" class="secondaryBtn" id="tonightChangeBtn" aria-expanded="false" aria-controls="tonightEditPanel">Change</button>
+      </div>
+      <div class="tonightEditPanel" id="tonightEditPanel" hidden>
+        <div>
+          <h2>Who is watching?</h2>
+          <p>Pick any combination of kids. Choose nobody for an adults-only night.</p>
+          <div class="choiceGrid" id="tonightKidChoices"></div>
+        </div>
         <div>
           <h3>How much time?</h3>
           <div class="choiceGrid" id="tonightTimeChoices">
@@ -1700,6 +1760,9 @@
             <button type="button" class="choiceChip" data-mood="new">Something new</button>
             <button type="button" class="choiceChip" data-mood="favorite">Old favourite</button>
           </div>
+        </div>
+        <div class="setupActions">
+          <button type="button" class="secondaryBtn" id="tonightDoneBtn">Done</button>
         </div>
       </div>
       <div class="setupActions">
@@ -2743,6 +2806,44 @@ function selectedKids(){
   return state.children.filter(child => tonightSelection.childIds.has(child.id));
 }
 
+function tonightTimeLabel(){
+  if(tonightSelection.time === 120) return 'Up to 2 hours';
+  if(tonightSelection.time === 999) return 'Any length';
+  return 'About 90 minutes';
+}
+
+function tonightMoodLabel(){
+  const labels = {
+    calm: 'Calm it down',
+    silly: 'Big and silly',
+    new: 'Something new',
+    favorite: 'Old favourite'
+  };
+  return labels[tonightSelection.mood] || 'Calm it down';
+}
+
+function tonightWatchingLabel(){
+  const kids = selectedKids();
+  if(!kids.length) return 'Adults only';
+  if(kids.length === state.children.length) return kids.map(child => child.name).join(' + ');
+  return kids.map(child => child.name).join(' + ');
+}
+
+function renderTonightSummary(){
+  const summary = document.getElementById('tonightAskSummary');
+  if(!summary) return;
+  summary.textContent = `${tonightWatchingLabel()} · ${tonightTimeLabel()} · ${tonightMoodLabel()}`;
+}
+
+function setTonightEditOpen(open){
+  const panel = document.getElementById('tonightEditPanel');
+  const button = document.getElementById('tonightChangeBtn');
+  if(!panel || !button) return;
+  panel.hidden = !open;
+  button.setAttribute('aria-expanded', open ? 'true' : 'false');
+  button.textContent = open ? 'Close' : 'Change';
+}
+
 function setSelectedChoice(containerId, attr, value){
   document.querySelectorAll(`#${containerId} .choiceChip`).forEach(btn=>{
     btn.classList.toggle('selected', btn.dataset[attr] === String(value));
@@ -3002,6 +3103,7 @@ function findTonightCandidate(){
 }
 
 function showTonightPick(){
+  setTonightEditOpen(false);
   const candidate = findTonightCandidate();
   if(!candidate) return;
   const idx = candidate.idx;
@@ -3081,6 +3183,7 @@ function renderTonightKidChoices(){
       else tonightSelection.childIds.add(child.id);
       resetTonightSkips();
       renderTonightKidChoices();
+      renderTonightSummary();
     });
     container.appendChild(btn);
   });
@@ -3092,8 +3195,10 @@ function renderTonightKidChoices(){
     tonightSelection.childIds.clear();
     resetTonightSkips();
     renderTonightKidChoices();
+    renderTonightSummary();
   });
   container.appendChild(adultsOnly);
+  renderTonightSummary();
 }
 
 // Exactly one function drives every tab switch -- not one per tab. It
@@ -4392,6 +4497,15 @@ document.getElementById('tonightShelfBtn').addEventListener('click', ()=>{
   showScreen('browse');
 });
 
+document.getElementById('tonightChangeBtn').addEventListener('click', ()=>{
+  const panel = document.getElementById('tonightEditPanel');
+  setTonightEditOpen(panel ? panel.hidden : true);
+});
+
+document.getElementById('tonightDoneBtn').addEventListener('click', ()=>{
+  setTonightEditOpen(false);
+});
+
 document.getElementById('findTonightPickBtn').addEventListener('click', ()=>{
   if(tonightSelection.currentPickIdx !== null && document.getElementById('tonightPickCard').style.display !== 'none'){
     skipCurrentTonightPick();
@@ -4421,6 +4535,8 @@ document.querySelectorAll('#tonightTimeChoices .choiceChip').forEach(btn=>{
     tonightSelection.time = parseInt(btn.dataset.time, 10);
     resetTonightSkips();
     setSelectedChoice('tonightTimeChoices', 'time', tonightSelection.time);
+    renderTonightSummary();
+    setTonightEditOpen(false);
   });
 });
 
@@ -4429,6 +4545,8 @@ document.querySelectorAll('#tonightMoodChoices .choiceChip').forEach(btn=>{
     tonightSelection.mood = btn.dataset.mood;
     resetTonightSkips();
     setSelectedChoice('tonightMoodChoices', 'mood', tonightSelection.mood);
+    renderTonightSummary();
+    setTonightEditOpen(false);
   });
 });
 

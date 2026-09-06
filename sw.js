@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'family-feature-v14-20260906-tonight-heuristics';
+const CACHE_VERSION = 'family-feature-v15-20260906-compact-tonight';
 const APP_SHELL = [
   '/',
   '/index.html',

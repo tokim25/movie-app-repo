@@ -6,6 +6,22 @@ test.beforeEach(async ({ page }) => {
   await setupSampleFamily(page);
 });
 
+async function openTonightAskEditor(page){
+  await page.locator('#tonightChangeBtn').click();
+  await expect(page.locator('#tonightEditPanel')).toBeVisible();
+}
+
+test('tonight ask starts compact and expands only when changing choices', async ({ page }) => {
+  await expect(page.locator('#tonightAskSummary')).toContainText('Simon + Nora · About 90 minutes · Calm it down');
+  await expect(page.locator('#tonightEditPanel')).toBeHidden();
+
+  await openTonightAskEditor(page);
+  await page.locator('#tonightMoodChoices .choiceChip').filter({ hasText: 'Big and silly' }).click();
+
+  await expect(page.locator('#tonightAskSummary')).toContainText('Simon + Nora · About 90 minutes · Big and silly');
+  await expect(page.locator('#tonightEditPanel')).toBeHidden();
+});
+
 test('skip advances to a different tonight pick', async ({ page }) => {
   await page.locator('#findTonightPickBtn').click();
   const firstPick = await page.locator('#tonightPickTitle').textContent();
@@ -43,10 +59,12 @@ test('night mood changes the selected movie', async ({ page }) => {
     toggleCheck(actionIdx);
   });
 
+  await openTonightAskEditor(page);
   await page.locator('#tonightMoodChoices .choiceChip').filter({ hasText: 'Calm it down' }).click();
   await page.locator('#findTonightPickBtn').click();
   await expect(page.locator('#tonightPickTitle')).toContainText('Winnie the Pooh');
 
+  await openTonightAskEditor(page);
   await page.locator('#tonightMoodChoices .choiceChip').filter({ hasText: 'Old favourite' }).click();
   await page.locator('#findTonightPickBtn').click();
   await expect(page.locator('#tonightPickTitle')).toContainText('The Incredibles');
@@ -76,6 +94,7 @@ test('adults-only new picks use recent releases instead of recently added titles
     return `${newest.movie.t} (${newest.movie.y})`;
   });
 
+  await openTonightAskEditor(page);
   await page.locator('#tonightKidChoices .choiceChip').filter({ hasText: 'Adults only' }).click();
   await page.locator('#tonightMoodChoices .choiceChip').filter({ hasText: 'Something new' }).click();
   await page.locator('#findTonightPickBtn').click();
