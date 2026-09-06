@@ -128,6 +128,15 @@ tripped session limits before), or inline if it's a small batch:
    Pull: tagline, recommended age, concrete content concerns, positive
    messages/role models. Write `full` in your own words, don't fabricate, don't
    copy strings longer than ~5 words verbatim.
+
+   **Prioritize surfacing sad/emotional content explicitly (added 2026-09-06).**
+   The app's Family content settings don't score "sad moments" as its own
+   category (CSM doesn't score it either -- it only ever showed up in prose),
+   so `full` is the *only* place this information reaches a parent. When CSM's
+   review calls out grief, loss, separation, death, or heavy emotional themes,
+   make sure that's stated plainly in `full` rather than folded into a vaguer
+   line about "content concerns" -- a parent screening for a sensitive kid
+   needs to be able to find it by reading the description, not by guessing.
 2. **Capture `srcUrl`: the actual CSM review page URL you just fetched.** This is
    new as of 2026-08-24 -- older entries don't have it, going forward every entry
    must. If CSM has no review, fall back to the Wikipedia parents-guide-equivalent
