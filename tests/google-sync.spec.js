@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { switchToFlatView, openSyncSettings, firstRow } from './helpers.js';
+import { switchToFlatView, openSyncSettings, firstRow, setupSampleFamily } from './helpers.js';
 
 // The Google sign-in flow itself needs a real Google account and can't be
 // driven headlessly, so these tests skip it entirely: they set the app's own
@@ -112,6 +112,7 @@ test('local state saves first, and the UI shows a waiting status while offline',
 test('a 401 response disconnects sync and stops retrying', async ({ page }) => {
   const mock = await mockDrive(page, '401');
   await page.goto('/');
+  await setupSampleFamily(page);
   await page.evaluate(() => {
     googleAccessToken = 'fake-token';
     googleSyncIntent = true;
@@ -171,6 +172,7 @@ test('remembered Google sync shows reconnect when the server-side refresh fails'
   });
 
   await page.goto('/');
+  await setupSampleFamily(page);
 
   await page.locator('#tabFamily').click();
   await expect(page.locator('#googleSyncAlert')).toBeVisible();

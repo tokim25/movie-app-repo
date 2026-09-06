@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { setupSampleFamily } from './helpers.js';
 
 test('renders without console errors and shows the full catalog', async ({ page }) => {
   const errors = [];
@@ -8,19 +9,20 @@ test('renders without console errors and shows the full catalog', async ({ page 
   });
 
   await page.goto('/');
-  await expect(page.locator('#homeScreen h1')).toHaveText('Family Feature');
+  await expect(page.locator('#setupScreen')).toBeVisible();
+  await setupSampleFamily(page);
+  await expect(page.locator('#homeScreen h1')).toHaveText('Tonight');
 
   const movieCount = await page.evaluate(() => MOVIES.length);
   expect(movieCount).toBeGreaterThan(500);
   await expect(page.locator('#statLeft')).toHaveText(String(movieCount));
 
-  // Home is the default landing screen: real catalog-driven studio tiles
-  // should render there without navigating anywhere first.
+  await page.locator('#tabBrowse').click();
+
+  // Shelf owns browsing and catalog facets.
   const studioTileCount = await page.locator('#studioGrid .studioTile').count();
   expect(studioTileCount).toBeGreaterThan(0);
 
-  // "More studios" hands off to the Browse tab, where the full catalog
-  // (and its studio filter) lives -- there's no separate grouped view.
   await page.locator('#studioGrid .moreStudiosTile').click();
   await page.locator('#browseScreen').waitFor({ state: 'visible' });
   const rowCount = await page.locator('#list > li.row').count();

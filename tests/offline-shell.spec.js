@@ -1,7 +1,9 @@
 import { test, expect } from '@playwright/test';
+import { setupSampleFamily } from './helpers.js';
 
 test('app shell reloads offline once the service worker is installed', async ({ page, context }) => {
   await page.goto('/');
+  await setupSampleFamily(page);
 
   // clients.claim() in sw.js means the current page becomes controlled
   // without a second navigation, once install/activate finish.
@@ -10,7 +12,7 @@ test('app shell reloads offline once the service worker is installed', async ({ 
   await context.setOffline(true);
   try {
     await page.reload();
-    await expect(page.locator('#homeScreen h1')).toHaveText('Family Feature');
+    await expect(page.locator('#homeScreen h1')).toHaveText('Tonight');
     expect(await page.evaluate(() => MOVIES.length)).toBeGreaterThan(500);
   } finally {
     await context.setOffline(false);

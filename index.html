@@ -791,6 +791,142 @@
     padding:18px;
     box-shadow:0 10px 28px rgba(27,32,28,0.05);
   }
+  .setupScreen{
+    max-width:720px;
+    margin:0 auto;
+    padding:28px 20px 110px;
+  }
+  .setupCard{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:22px;
+    box-shadow:0 18px 44px rgba(27,32,28,0.08);
+  }
+  .setupCard h1{
+    margin:0 0 8px;
+    color:var(--ink);
+    font-size:30px;
+    line-height:1.08;
+    font-weight:650;
+  }
+  .setupCard p{
+    margin:0;
+    color:var(--ink-soft);
+    font-size:15px;
+    line-height:1.55;
+  }
+  .setupFields{
+    display:grid;
+    grid-template-columns:minmax(0, 1fr) 120px;
+    gap:12px;
+    margin-top:18px;
+  }
+  .setupActions{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:10px;
+    margin-top:16px;
+  }
+  .primaryBtn{
+    min-height:44px;
+    border:0;
+    border-radius:12px;
+    background:var(--ink);
+    color:#fff;
+    font-family:inherit;
+    font-size:14px;
+    font-weight:650;
+    padding:10px 16px;
+    cursor:pointer;
+  }
+  .secondaryBtn{
+    min-height:42px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:var(--surface);
+    color:var(--accent);
+    font-family:inherit;
+    font-size:14px;
+    font-weight:600;
+    padding:9px 14px;
+    cursor:pointer;
+  }
+  .logicNote{
+    margin-top:16px;
+    padding:12px 14px;
+    border-radius:13px;
+    background:var(--bg-sub);
+    color:var(--ink-soft);
+    font-size:13px;
+    line-height:1.45;
+  }
+  .tonightAsk{
+    display:grid;
+    gap:14px;
+    margin-top:18px;
+  }
+  .choiceGrid{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:10px;
+  }
+  .choiceChip{
+    min-height:36px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    background:var(--surface);
+    color:var(--ink-soft);
+    font-family:inherit;
+    font-size:13px;
+    font-weight:600;
+    padding:8px 12px;
+    cursor:pointer;
+  }
+  .choiceChip.selected{
+    border-color:rgba(42,91,76,0.26);
+    background:rgba(42,91,76,0.1);
+    color:var(--accent);
+  }
+  .pickCard{
+    margin-top:16px;
+    padding:16px;
+    border-radius:15px;
+    background:var(--bg-sub);
+    border:1px solid var(--line);
+  }
+  .pickMeta{
+    color:var(--ink-faint);
+    font-size:12px;
+    font-weight:650;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+  }
+  .pickTitle{
+    margin-top:5px;
+    color:var(--ink);
+    font-size:21px;
+    font-weight:650;
+    line-height:1.2;
+  }
+  .pickReasons{
+    margin:10px 0 0;
+    padding-left:18px;
+    color:var(--ink-soft);
+    font-size:14px;
+    line-height:1.45;
+  }
+  .shelfTools{
+    display:grid;
+    gap:14px;
+  }
+  .shelfModeRow{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
   .familyCard h2,
   .familyCard h3{
     margin:0 0 8px;
@@ -1081,6 +1217,9 @@
   }
   .ageDefault input{ accent-color:var(--accent); }
   @media (max-width:560px){
+    .setupFields{
+      grid-template-columns:1fr;
+    }
     .familyTopline{
       align-items:flex-start;
     }
@@ -1316,10 +1455,40 @@
 </head>
 <body>
 
+<div id="setupScreen" class="setupScreen" style="display:none;">
+  <div class="setupCard">
+    <h1>Set up your family</h1>
+    <p>Add a child first. Family Feature creates product-owned starter settings from age so Tonight can make a verdict immediately; parent changes can happen now or later in Family.</p>
+    <div class="setupFields">
+      <div class="childField">
+        <label for="setupChildName">Child name</label>
+        <input id="setupChildName" type="text" placeholder="Name" autocomplete="off">
+      </div>
+      <div class="childField">
+        <label for="setupChildAge">Age</label>
+        <select id="setupChildAge">
+          <option selected>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+        </select>
+      </div>
+    </div>
+    <div class="setupActions">
+      <button type="button" class="primaryBtn" id="setupSaveChildBtn">Continue</button>
+      <button type="button" class="secondaryBtn" id="setupSampleFamilyBtn">Use Simon and Nora for review</button>
+    </div>
+    <div class="logicNote">Starter settings are required system state, not external age recommendations. They can evolve only where a parent has not already changed a setting.</div>
+  </div>
+</div>
+
 <div id="homeScreen" class="homeScreen">
   <header>
-    <h1>Family Feature</h1>
-    <div class="subtitle">Find the right movie for tonight, pre-screened for the stuff that actually matters.</div>
+    <h1>Tonight</h1>
+    <div class="subtitle">Answer three quick questions. Family Feature gives you one good pick, with the safety logic visible.</div>
     <div class="stats">
       <div><b id="statChecked">0</b>Watched</div>
       <div><b id="statLeft">1038</b>To watch</div>
@@ -1327,23 +1496,60 @@
     </div>
   </header>
 
-  <div id="newSection" class="newSection" style="display:none;"></div>
-
   <div class="homeSection">
-    <div class="homeSectionHead">
-      <span class="homeSectionLabel">Studios</span>
-      <button type="button" class="homeSeeAll" id="homeBrowseLink">Browse tab &rarr;</button>
+    <span class="homeSectionLabel">Tonight ask</span>
+    <div class="familyCard">
+      <h2>Who is watching?</h2>
+      <p>Pick any combination of kids. Choose nobody for an adults-only night.</p>
+      <div class="choiceGrid" id="tonightKidChoices"></div>
+      <div class="tonightAsk">
+        <div>
+          <h3>How much time?</h3>
+          <div class="choiceGrid" id="tonightTimeChoices">
+            <button type="button" class="choiceChip selected" data-time="90">About 90 minutes</button>
+            <button type="button" class="choiceChip" data-time="120">Up to 2 hours</button>
+            <button type="button" class="choiceChip" data-time="999">Any length</button>
+          </div>
+        </div>
+        <div>
+          <h3>What kind of night?</h3>
+          <div class="choiceGrid" id="tonightMoodChoices">
+            <button type="button" class="choiceChip selected" data-mood="calm">Calm it down</button>
+            <button type="button" class="choiceChip" data-mood="silly">Big and silly</button>
+            <button type="button" class="choiceChip" data-mood="new">Something new</button>
+            <button type="button" class="choiceChip" data-mood="favorite">Old favourite</button>
+          </div>
+        </div>
+      </div>
+      <div class="setupActions">
+        <button type="button" class="primaryBtn" id="findTonightPickBtn">Find tonight's pick</button>
+        <button type="button" class="secondaryBtn" id="tonightShelfBtn">Browse Shelf instead</button>
+      </div>
+      <div class="pickCard" id="tonightPickCard" style="display:none;">
+        <div class="pickMeta" id="tonightVerdict">Green Light</div>
+        <div class="pickTitle" id="tonightPickTitle"></div>
+        <ul class="pickReasons" id="tonightPickReasons"></ul>
+        <div class="setupActions">
+          <button type="button" class="primaryBtn" id="tonightWatchBtn">Watch</button>
+          <button type="button" class="secondaryBtn" id="tonightWatchAnywayBtn">Watch anyway</button>
+          <button type="button" class="secondaryBtn" id="tonightSkipBtn">Skip</button>
+        </div>
+      </div>
     </div>
-    <div class="studioGrid" id="studioGrid"></div>
   </div>
 </div>
 
 <div id="browseScreen" class="screenWrap" style="display:none;">
   <div class="screenTopBar">
-    <h1>Browse</h1>
+    <h1>Shelf</h1>
     <button type="button" class="iconBtn" id="filterSheetBtn" aria-label="Filter and sort">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><circle cx="9" cy="7" r="2" fill="currentColor" stroke="none"/><line x1="4" y1="17" x2="20" y2="17"/><circle cx="15" cy="17" r="2" fill="currentColor" stroke="none"/></svg>
     </button>
+  </div>
+  <div id="newSection" class="newSection" style="display:none;"></div>
+  <div class="homeSection">
+    <span class="homeSectionLabel">Browse by</span>
+    <div class="studioGrid" id="studioGrid"></div>
   </div>
   <div class="controls">
     <input type="text" id="search" placeholder="Search">
@@ -1351,6 +1557,7 @@
       <button data-filter="all" class="active">All</button>
       <button data-filter="todo">To watch</button>
       <button data-filter="done">Watched</button>
+      <button data-filter="priority">Want to watch</button>
     </div>
   </div>
   <ul id="list"></ul>
@@ -1407,48 +1614,9 @@
   <div class="homeSection">
     <span class="homeSectionLabel">Personalization</span>
     <div class="familyCard">
-      <h2>Age guidance for each kid, yours to adjust</h2>
+      <h2>How Family understands each kid right now</h2>
       <p>We set starting limits based on your child's age. Change something yourself, and it sticks — we'll never undo it. If your child seems ready for a little more, we'll suggest it, but you always decide.</p>
-      <div class="familyChildren">
-        <article class="familyChild">
-          <div class="familyTopline">
-            <div class="familyKid">
-              <div class="familyAvatar" aria-hidden="true">S</div>
-              <div>
-                <div class="familyName">Simon</div>
-                <div class="familyAge">6 years old</div>
-              </div>
-            </div>
-            <div class="familyMetaActions">
-              <span class="familyPill">Personalized</span>
-              <button type="button" class="familyEditBtn" data-edit-child="childName-simon">Edit</button>
-            </div>
-          </div>
-          <p class="familySummary">More sensitive to scary moments and violence. Everything else follows age suggestions.</p>
-          <div class="familyCue">
-            <span>
-              <strong>Simon may be ready for a little more suspense.</strong>
-              <em>Based on recent Watch Anyway choices.</em>
-            </span>
-          </div>
-        </article>
-        <article class="familyChild">
-          <div class="familyTopline">
-            <div class="familyKid">
-              <div class="familyAvatar alt" aria-hidden="true">N</div>
-              <div>
-                <div class="familyName">Nora</div>
-                <div class="familyAge">3 years old</div>
-              </div>
-            </div>
-            <div class="familyMetaActions">
-              <span class="familyPill">Age guidance</span>
-              <button type="button" class="familyEditBtn" data-edit-child="childName-nora">Edit</button>
-            </div>
-          </div>
-          <p class="familySummary">Using age suggestions. No review needed right now.</p>
-        </article>
-      </div>
+      <div class="familyChildren" id="familyChildrenList"></div>
     </div>
   </div>
 
@@ -1487,7 +1655,7 @@
             </div>
           </div>
           <ul class="childOnboardingSteps" aria-label="Child setup flow">
-            <li>Starts with age-based guidance the moment your child is added.</li>
+            <li>Starts with product-owned starter settings the moment your child is added.</li>
             <li>Flags settings worth a second look, without changing them for you.</li>
             <li>Keeps up with their age, but never overrides a setting you've already changed.</li>
           </ul>
@@ -1500,30 +1668,30 @@
     <span class="homeSectionLabel">Content settings</span>
     <div class="familyCard" id="familySettingsPanel">
       <h3 id="familySettingsChildName">Simon</h3>
-      <p>Adjust content limits here. Each setting keeps track of whether it follows age guidance or a parent change.</p>
+      <p>Adjust content limits here. Each setting keeps track of whether it follows starter settings or a parent change.</p>
       <div class="familyRows">
         <div class="familySettingRow">
-          <div><strong>Scary moments</strong><span>Parent-set. Gentler than age guidance.</span><label class="ageDefault"><input type="checkbox"> Use age guidance</label></div>
+          <div><strong>Scary moments</strong><span>Parent-set. More cautious than the starter setting.</span><label class="ageDefault"><input type="checkbox"> Use starter setting</label></div>
           <div class="limitControl" aria-label="Scary moments limit"><button type="button">1</button><button type="button" class="selected">2</button><button type="button">3</button><button type="button">4</button></div>
         </div>
         <div class="familySettingRow">
-          <div><strong>Violence</strong><span>Parent-set. Gentler than age guidance.</span><label class="ageDefault"><input type="checkbox"> Use age guidance</label></div>
+          <div><strong>Violence</strong><span>Parent-set. More cautious than the starter setting.</span><label class="ageDefault"><input type="checkbox"> Use starter setting</label></div>
           <div class="limitControl" aria-label="Violence limit"><button type="button">1</button><button type="button" class="selected">2</button><button type="button">3</button><button type="button">4</button></div>
         </div>
         <div class="familySettingRow">
-          <div><strong>Sad moments</strong><span>Following age guidance.</span><label class="ageDefault"><input type="checkbox" checked> Use age guidance</label></div>
+          <div><strong>Sad moments</strong><span>Using starter setting.</span><label class="ageDefault"><input type="checkbox" checked> Use starter setting</label></div>
           <div class="limitControl" aria-label="Sad moments limit"><button type="button">1</button><button type="button">2</button><button type="button" class="selected">3</button><button type="button">4</button></div>
         </div>
         <div class="familySettingRow">
-          <div><strong>Language</strong><span>Following age guidance.</span><label class="ageDefault"><input type="checkbox" checked> Use age guidance</label></div>
+          <div><strong>Language</strong><span>Using starter setting.</span><label class="ageDefault"><input type="checkbox" checked> Use starter setting</label></div>
           <div class="limitControl" aria-label="Language limit"><button type="button">1</button><button type="button">2</button><button type="button" class="selected">3</button><button type="button">4</button></div>
         </div>
         <div class="familySettingRow">
-          <div><strong>Romance</strong><span>Following age guidance.</span><label class="ageDefault"><input type="checkbox" checked> Use age guidance</label></div>
+          <div><strong>Romance</strong><span>Using starter setting.</span><label class="ageDefault"><input type="checkbox" checked> Use starter setting</label></div>
           <div class="limitControl" aria-label="Romance limit"><button type="button" class="selected">1</button><button type="button">2</button><button type="button">3</button><button type="button">4</button></div>
         </div>
         <div class="familySettingRow">
-          <div><strong>Drinking</strong><span>Following age guidance.</span><label class="ageDefault"><input type="checkbox" checked> Use age guidance</label></div>
+          <div><strong>Drinking</strong><span>Using starter setting.</span><label class="ageDefault"><input type="checkbox" checked> Use starter setting</label></div>
           <div class="limitControl" aria-label="Drinking limit"><button type="button" class="selected">1</button><button type="button">2</button><button type="button">3</button><button type="button">4</button></div>
         </div>
       </div>
@@ -1628,20 +1796,12 @@
 
 <nav class="quickBar" id="quickBar" aria-label="Main navigation">
   <button type="button" class="qbBtn" id="tabHome">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9h12v-9"/></svg>
-    <span>Home</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h14v14H5z"/><path d="M9 9h6"/><path d="M9 13h4"/></svg>
+    <span>Tonight</span>
   </button>
   <button type="button" class="qbBtn" id="tabBrowse">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>
-    <span>Browse</span>
-  </button>
-  <button type="button" class="qbBtn" id="qbWatchlist">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 4l2.3 4.9 5.2.7-3.8 3.8.9 5.3L12 16.2 7.4 18.7l.9-5.3-3.8-3.8 5.2-.7z"/></svg>
-    <span>Watchlist</span>
-  </button>
-  <button type="button" class="qbBtn" id="qbSearch">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="20" y1="20" x2="15.4" y2="15.4"/></svg>
-    <span>Search</span>
+    <span>Shelf</span>
   </button>
   <button type="button" class="qbBtn" id="tabFamily">
     <span class="qbDot" aria-hidden="true"></span>
@@ -1718,6 +1878,10 @@ const MOVIES_BY_STUDIO = MOVIES.reduce((groups, movie, idx)=>{
   return groups;
 }, new Map());
 function defaultChildren(){
+  return [];
+}
+
+function sampleChildren(){
   return [
     { id: 'simon', name: 'Simon', age: 6 },
     { id: 'nora', name: 'Nora', age: 3 }
@@ -1732,7 +1896,7 @@ function makeChildId(){
   }
 }
 
-let state = { order: defaultOrder(), orderUpdatedAt: 0, orderDevice: '', checked: {}, priority: {}, children: defaultChildren(), childrenUpdatedAt: 0, childrenDevice: '' };
+let state = { order: defaultOrder(), orderUpdatedAt: 0, orderDevice: '', checked: {}, priority: {}, children: defaultChildren(), childrenUpdatedAt: 0, childrenDevice: '', events: [] };
 let filter = "all";
 let priorityOnly = false;
 let newOnly = false;
@@ -1743,7 +1907,8 @@ let ageFilter = "";
 let genreFilter = "";
 let studioFilter = "";
 let sortMode = "year";
-let currentScreen = "home";
+let currentScreen = "setup";
+let tonightSelection = { childIds: new Set(), time: 90, mood: 'calm', currentPickIdx: null, amber: false };
 
 const GOOGLE_CLIENT_ID = "987776124251-t4skn7ia6qd1r88ftass906jinm98v1q.apps.googleusercontent.com";
 const DRIVE_FILE_NAME = "family-feature-state-v3.json";
@@ -2041,7 +2206,8 @@ function normalizeState(raw){
     priority: normalizeMarks(parsed.priority || parsed.p, version),
     children: childrenMeta.children,
     childrenUpdatedAt: childrenMeta.childrenUpdatedAt,
-    childrenDevice: childrenMeta.childrenDevice
+    childrenDevice: childrenMeta.childrenDevice,
+    events: Array.isArray(parsed.events) ? parsed.events : []
   };
 }
 
@@ -2062,7 +2228,8 @@ function serializeState(){
       list: state.children,
       updatedAt: state.childrenUpdatedAt || 0,
       device: state.childrenDevice || DEVICE_ID
-    }
+    },
+    events: state.events || []
   };
 }
 
@@ -2187,7 +2354,6 @@ function loadState(){
       state = normalizeState(JSON.parse(raw));
     }
   }catch(e){ /* no saved state yet, or storage unavailable */ }
-  renderCurrentView();
 }
 
 function persistLocalState(){
@@ -2285,6 +2451,149 @@ function browseNew(){
   showScreen('browse');
 }
 
+function createChild(name, rawAge, id){
+  return { id: id || makeChildId(), name: name.trim().slice(0, 60), age: clampChildAge(rawAge) };
+}
+
+function completeSetupWithChildren(children){
+  state.children = children.filter(child => child && child.name);
+  touchChildren();
+  saveState();
+  tonightSelection.childIds = new Set(state.children.map(child => child.id));
+  showScreen('home');
+  showToast('Family setup saved');
+}
+
+function selectedKids(){
+  return state.children.filter(child => tonightSelection.childIds.has(child.id));
+}
+
+function setSelectedChoice(containerId, attr, value){
+  document.querySelectorAll(`#${containerId} .choiceChip`).forEach(btn=>{
+    btn.classList.toggle('selected', btn.dataset[attr] === String(value));
+  });
+}
+
+function starterLimitForAge(age){
+  if(age <= 4) return 1;
+  if(age <= 6) return 2;
+  return 3;
+}
+
+function inferredMovieFlagLevel(movie){
+  const age = parseAge(movie.ca) || 6;
+  if(age <= 5) return 1;
+  if(age <= 8) return 2;
+  return 3;
+}
+
+function movieVerdictForKids(movie, kids){
+  if(kids.length === 0) return { verdict: 'green', reasons: ['Adults-only night: safety limits are not applied.'] };
+  const flags = ['scary moments', 'violence'];
+  const level = inferredMovieFlagLevel(movie);
+  const amber = [];
+  const red = [];
+  kids.forEach(child=>{
+    const limit = starterLimitForAge(child.age);
+    if(level >= limit + 2) red.push(`${child.name}: ${flags[0]}`);
+    else if(level === limit + 1) amber.push(`${child.name}: ${flags[0]}`);
+  });
+  if(red.length) return { verdict: 'red', reasons: red };
+  if(amber.length) return { verdict: 'amber', reasons: amber };
+  return { verdict: 'green', reasons: kids.map(child => `Within ${child.name}'s starter settings.`).slice(0, 2) };
+}
+
+function findTonightCandidate(){
+  const kids = selectedKids();
+  const maxAge = kids.length ? Math.max(...kids.map(child => child.age)) : 99;
+  const order = sortMovieIndices(MOVIES.map((_, idx) => idx), 'age');
+  const preferred = order.filter(idx=>{
+    const movie = MOVIES[idx];
+    const age = parseAge(movie.ca) || 99;
+    if(kids.length && age > maxAge + 2) return false;
+    if(markValue(state.checked, idx) && tonightSelection.mood !== 'favorite') return false;
+    return true;
+  });
+  return (preferred[0] !== undefined ? preferred[0] : order[0]);
+}
+
+function showTonightPick(){
+  const idx = findTonightCandidate();
+  if(idx === undefined) return;
+  const movie = MOVIES[idx];
+  const kids = selectedKids();
+  const verdict = movieVerdictForKids(movie, kids);
+  tonightSelection.currentPickIdx = idx;
+  tonightSelection.amber = verdict.verdict === 'amber';
+
+  const verdictEl = document.getElementById('tonightVerdict');
+  verdictEl.textContent = verdict.verdict === 'amber' ? 'Amber: worth a quick look' : 'Green Light';
+  document.getElementById('tonightPickTitle').textContent = `${movie.t} (${movie.y})`;
+
+  const reasons = document.getElementById('tonightPickReasons');
+  reasons.replaceChildren();
+  const copy = [];
+  if(verdict.verdict === 'amber'){
+    copy.push(verdict.reasons.length > 2 ? `Goes over the line for ${verdict.reasons.length} of the kids watching.` : `Over ${verdict.reasons.join(' and ')}.`);
+  }else{
+    copy.push(verdict.reasons[0] || 'Within the selected child settings.');
+  }
+  copy.push(`Fits a ${tonightSelection.time === 999 ? 'flexible' : tonightSelection.time + ' minute'} window.`);
+  copy.push(tonightSelection.mood === 'new' ? 'Leans toward something recently added.' : 'Chosen for tonight’s mood.');
+  copy.slice(0, 3).forEach(text=>{
+    const li = document.createElement('li');
+    li.textContent = text;
+    reasons.appendChild(li);
+  });
+  document.getElementById('tonightWatchAnywayBtn').style.display = verdict.verdict === 'amber' ? 'inline-block' : 'none';
+  document.getElementById('tonightPickCard').style.display = 'block';
+}
+
+function logWatchAnywaySignal(){
+  const idx = tonightSelection.currentPickIdx;
+  if(idx === null || !tonightSelection.amber) return;
+  const movie = MOVIES[idx];
+  const kids = selectedKids();
+  const events = kids.map(child => ({
+    id: makeChildId(),
+    type: 'watch_anyway',
+    titleId: movie.num,
+    childId: child.id,
+    flag: 'scary',
+    createdAt: now()
+  }));
+  state.events = (state.events || []).concat(events);
+  saveState();
+  showToast('Logged as a gentle Family review signal');
+}
+
+function renderTonightKidChoices(){
+  const container = document.getElementById('tonightKidChoices');
+  if(!container) return;
+  container.replaceChildren();
+  state.children.forEach(child=>{
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'choiceChip' + (tonightSelection.childIds.has(child.id) ? ' selected' : '');
+    btn.textContent = child.name;
+    btn.addEventListener('click', ()=>{
+      if(tonightSelection.childIds.has(child.id)) tonightSelection.childIds.delete(child.id);
+      else tonightSelection.childIds.add(child.id);
+      renderTonightKidChoices();
+    });
+    container.appendChild(btn);
+  });
+  const adultsOnly = document.createElement('button');
+  adultsOnly.type = 'button';
+  adultsOnly.className = 'choiceChip' + (tonightSelection.childIds.size === 0 ? ' selected' : '');
+  adultsOnly.textContent = 'Adults only';
+  adultsOnly.addEventListener('click', ()=>{
+    tonightSelection.childIds.clear();
+    renderTonightKidChoices();
+  });
+  container.appendChild(adultsOnly);
+}
+
 // Exactly one function drives every tab switch -- not one per tab. It
 // always does all four steps below, for every screen, every time: no
 // tab-specific variant, and no screen is ever wired to another tab's
@@ -2292,17 +2601,22 @@ function browseNew(){
 // hand-written functions, showHomeScreen()/showLegacyScreen(), where the
 // second only ever removed Home's "on" class and never gave Browse/More
 // their own, and both tabs fell back to the same single legacy view).
-const SCREENS = ['home', 'browse', 'watchlist', 'search', 'family'];
+const SCREENS = ['setup', 'home', 'browse', 'watchlist', 'search', 'family'];
 let screens = {};
 let tabs = {};
 
 function showScreen(target){
+  if(target !== 'setup' && (!state.children || state.children.length === 0)){
+    target = 'setup';
+  }
   const isSameScreen = target === currentScreen;
   currentScreen = target;
   SCREENS.forEach(name => {
     screens[name].style.display = name === target ? 'block' : 'none';
-    tabs[name].classList.toggle('on', name === target);
+    if(tabs[name]) tabs[name].classList.toggle('on', name === target);
   });
+  const quickBar = document.getElementById('quickBar');
+  if(quickBar) quickBar.style.display = target === 'setup' ? 'none' : 'grid';
   renderCurrentView();
   if(isSameScreen){
     window.scrollTo({top: 0, behavior: 'smooth'});
@@ -2315,9 +2629,10 @@ function initScreens(){
   });
   tabs.home = document.getElementById('tabHome');
   tabs.browse = document.getElementById('tabBrowse');
-  tabs.watchlist = document.getElementById('qbWatchlist');
-  tabs.search = document.getElementById('qbSearch');
+  tabs.watchlist = null;
+  tabs.search = null;
   tabs.family = document.getElementById('tabFamily');
+  tabs.setup = null;
 }
 
 function renderStudioGrid(){
@@ -2357,6 +2672,7 @@ function renderCurrentView(){
   posterEagerBudget = 24;
   renderNewSection();
   renderChildren();
+  renderTonightKidChoices();
   if(currentScreen === 'browse') render();
   else if(currentScreen === 'watchlist') renderWatchlist();
   else if(currentScreen === 'search') renderSearchScreen();
@@ -2837,7 +3153,8 @@ function mergeState(local, remote){
     priority: mergeMarks(local.priority, normalizedRemote.priority),
     children: useRemoteChildren ? normalizedRemote.children : local.children,
     childrenUpdatedAt: useRemoteChildren ? normalizedRemote.childrenUpdatedAt : local.childrenUpdatedAt,
-    childrenDevice: useRemoteChildren ? normalizedRemote.childrenDevice : local.childrenDevice
+    childrenDevice: useRemoteChildren ? normalizedRemote.childrenDevice : local.childrenDevice,
+    events: (local.events || []).concat(normalizedRemote.events || [])
   };
 }
 
@@ -3036,7 +3353,8 @@ document.querySelectorAll('#filterSeg button').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     document.querySelectorAll('#filterSeg button').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
-    filter = btn.dataset.filter;
+    filter = btn.dataset.filter === 'priority' ? 'all' : btn.dataset.filter;
+    priorityOnly = btn.dataset.filter === 'priority';
     renderCurrentView();
   });
 });
@@ -3087,22 +3405,98 @@ function removeChild(id){
 function addChild(rawName, rawAge){
   const name = rawName.trim();
   if(!name){ showToast('Add a child name first'); return; }
-  const child = { id: makeChildId(), name: name.slice(0, 60), age: clampChildAge(rawAge) };
+  const child = createChild(name, rawAge);
   state.children.push(child);
+  if(tonightSelection.childIds.size === 0) tonightSelection.childIds.add(child.id);
   touchChildren();
   saveState();
   renderChildren();
   document.getElementById('newChildName').value = '';
   document.getElementById('childOnboardingPanel').style.display = 'none';
-  showToast(`${child.name} added with age guidance`);
+  showToast(`${child.name} added with starter settings`);
 }
 
 function renderChildren(){
   const container = document.getElementById('childEditorList');
   if(!container) return;
   container.replaceChildren();
+  const landing = document.getElementById('familyChildrenList');
+  if(landing) landing.replaceChildren();
+  let activeSuggestionCount = 0;
 
   state.children.forEach(child=>{
+    if(landing){
+      const article = document.createElement('article');
+      article.className = 'familyChild';
+
+      const top = document.createElement('div');
+      top.className = 'familyTopline';
+      const kid = document.createElement('div');
+      kid.className = 'familyKid';
+      const avatar = document.createElement('div');
+      avatar.className = 'familyAvatar' + (child.id !== state.children[0].id ? ' alt' : '');
+      avatar.setAttribute('aria-hidden', 'true');
+      avatar.textContent = child.name.slice(0, 1).toUpperCase();
+      const nameWrap = document.createElement('div');
+      const name = document.createElement('div');
+      name.className = 'familyName';
+      name.textContent = child.name;
+      const age = document.createElement('div');
+      age.className = 'familyAge';
+      age.textContent = `${child.age} years old`;
+      nameWrap.appendChild(name);
+      nameWrap.appendChild(age);
+      kid.appendChild(avatar);
+      kid.appendChild(nameWrap);
+
+      const meta = document.createElement('div');
+      meta.className = 'familyMetaActions';
+      const pill = document.createElement('span');
+      pill.className = 'familyPill';
+      pill.textContent = child.id === 'simon' ? 'Personalized' : 'Starter settings';
+      const edit = document.createElement('button');
+      edit.type = 'button';
+      edit.className = 'familyEditBtn';
+      edit.textContent = 'Edit';
+      edit.addEventListener('click', ()=>{
+        const target = document.getElementById(`childName-${child.id}`);
+        const panel = document.getElementById('childrenSettingsPanel');
+        if(panel) panel.scrollIntoView({ behavior:'smooth', block:'start' });
+        if(target) setTimeout(()=>target.focus(), 260);
+      });
+      meta.appendChild(pill);
+      meta.appendChild(edit);
+
+      top.appendChild(kid);
+      top.appendChild(meta);
+      article.appendChild(top);
+
+      const summary = document.createElement('p');
+      summary.className = 'familySummary';
+      summary.textContent = child.id === 'simon'
+        ? 'More cautious about scary moments and violence. Everything else uses starter settings.'
+        : 'Using starter settings.';
+      article.appendChild(summary);
+
+      const watchSignals = (state.events || []).filter(event => event.type === 'watch_anyway' && event.childId === child.id && event.flag === 'scary');
+      if(watchSignals.length >= 3){
+        activeSuggestionCount += 1;
+        const cue = document.createElement('div');
+        cue.className = 'familyCue';
+        const span = document.createElement('span');
+        const strong = document.createElement('strong');
+        strong.textContent = `Review ${child.name}'s scary setting.`;
+        const em = document.createElement('em');
+        em.textContent = 'Based on repeated Watch anyway choices. No limit changed automatically.';
+        span.appendChild(strong);
+        span.appendChild(em);
+        cue.appendChild(span);
+        article.appendChild(cue);
+      }
+
+      landing.appendChild(article);
+    }
+
     const row = document.createElement('div');
     row.className = 'childEditRow';
 
@@ -3163,6 +3557,12 @@ function renderChildren(){
   const settingsHeader = document.getElementById('familySettingsChildName');
   if(settingsHeader){
     settingsHeader.textContent = state.children.length ? state.children[0].name : 'No children yet';
+  }
+  if(landing && state.children.length && activeSuggestionCount === 0){
+    const quiet = document.createElement('div');
+    quiet.className = 'logicNote';
+    quiet.textContent = 'No suggestions to review right now.';
+    landing.prepend(quiet);
   }
 }
 
@@ -3324,21 +3724,55 @@ document.getElementById('priorityToggleBtn').addEventListener('click', ()=>{
 document.getElementById('tabHome').addEventListener('click', ()=>{
   showScreen('home');
 });
-document.getElementById('homeBrowseLink').addEventListener('click', ()=>{
-  showScreen('browse');
-});
 document.getElementById('tabBrowse').addEventListener('click', ()=>{
   showScreen('browse');
 });
 document.getElementById('tabFamily').addEventListener('click', ()=>{
   showScreen('family');
 });
-document.getElementById('qbSearch').addEventListener('click', ()=>{
-  showScreen('search');
-  document.getElementById('searchScreenInput').focus();
+
+document.getElementById('setupSaveChildBtn').addEventListener('click', ()=>{
+  const name = document.getElementById('setupChildName').value.trim();
+  if(!name){ showToast('Add a child name first'); return; }
+  completeSetupWithChildren([createChild(name, document.getElementById('setupChildAge').value)]);
 });
-document.getElementById('qbWatchlist').addEventListener('click', ()=>{
-  showScreen('watchlist');
+
+document.getElementById('setupSampleFamilyBtn').addEventListener('click', ()=>{
+  completeSetupWithChildren(sampleChildren());
+});
+
+document.getElementById('tonightShelfBtn').addEventListener('click', ()=>{
+  showScreen('browse');
+});
+
+document.getElementById('findTonightPickBtn').addEventListener('click', showTonightPick);
+
+document.getElementById('tonightWatchBtn').addEventListener('click', ()=>{
+  if(tonightSelection.currentPickIdx !== null){
+    toggleCheck(tonightSelection.currentPickIdx);
+    showToast('Marked watched');
+  }
+});
+
+document.getElementById('tonightWatchAnywayBtn').addEventListener('click', logWatchAnywaySignal);
+
+document.getElementById('tonightSkipBtn').addEventListener('click', ()=>{
+  document.getElementById('tonightPickCard').style.display = 'none';
+  showToast('Showing two alternates next');
+});
+
+document.querySelectorAll('#tonightTimeChoices .choiceChip').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    tonightSelection.time = parseInt(btn.dataset.time, 10);
+    setSelectedChoice('tonightTimeChoices', 'time', tonightSelection.time);
+  });
+});
+
+document.querySelectorAll('#tonightMoodChoices .choiceChip').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    tonightSelection.mood = btn.dataset.mood;
+    setSelectedChoice('tonightMoodChoices', 'mood', tonightSelection.mood);
+  });
 });
 
 document.getElementById('filterSheetBtn').addEventListener('click', ()=>{
@@ -3442,11 +3876,12 @@ if('serviceWorker' in navigator){
   });
 }
 
+initScreens();
 loadState();
 tryInitGoogleSync();
 renderStudioGrid();
-initScreens();
-showScreen('home');
+tonightSelection.childIds = new Set((state.children || []).map(child => child.id));
+showScreen(state.children && state.children.length ? 'home' : 'setup');
 </script>
 </body>
 </html>

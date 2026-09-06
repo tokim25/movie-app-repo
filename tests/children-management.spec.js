@@ -1,7 +1,9 @@
 import { test, expect } from '@playwright/test';
+import { setupSampleFamily } from './helpers.js';
 
 test.beforeEach(async ({ page }) => {
   await page.goto('/');
+  await setupSampleFamily(page);
   await page.locator('#tabFamily').click();
   await page.locator('#familyScreen').waitFor({ state: 'visible' });
 });
@@ -30,7 +32,7 @@ test('adding a child appends a new row and persists after reload', async ({ page
   await page.locator('#newChildName').fill('Wes');
   await page.locator('#newChildAge').selectOption('4');
   await page.locator('#saveNewChildBtn').click();
-  await expect(page.locator('#toast')).toContainText('Wes added with age guidance');
+  await expect(page.locator('#toast')).toContainText('Wes added with starter settings');
   await expect(page.locator('#childOnboardingPanel')).toBeHidden();
 
   const rows = page.locator('#childEditorList .childEditRow');
