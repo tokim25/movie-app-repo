@@ -11,7 +11,7 @@ test('renders without console errors and shows the full catalog', async ({ page 
   await page.goto('/');
   await expect(page.locator('#setupScreen')).toBeVisible();
   await setupSampleFamily(page);
-  await expect(page.locator('#homeScreen h1')).toHaveText('Tonight');
+  await expect(page.locator('#homeScreen h1')).toHaveText('What should we watch tonight?');
 
   const movieCount = await page.evaluate(() => MOVIES.length);
   expect(movieCount).toBeGreaterThan(500);

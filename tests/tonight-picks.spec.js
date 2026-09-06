@@ -12,14 +12,33 @@ async function openTonightAskEditor(page){
 }
 
 test('tonight ask starts compact and expands only when changing choices', async ({ page }) => {
-  await expect(page.locator('#tonightAskSummary')).toContainText('Simon + Nora · About 90 minutes · Calm it down');
+  await expect(page.locator('#homeScreen h1')).toHaveText('What should we watch tonight?');
+  await expect(page.locator('#homeScreen')).not.toContainText('Tonight ask');
+  await expect(page.locator('#tonightAskSummary')).toContainText('Simon + Nora');
+  await expect(page.locator('#tonightAskSummary')).toContainText('About 90 minutes · Calm it down');
   await expect(page.locator('#tonightEditPanel')).toBeHidden();
 
   await openTonightAskEditor(page);
   await page.locator('#tonightMoodChoices .choiceChip').filter({ hasText: 'Big and silly' }).click();
 
-  await expect(page.locator('#tonightAskSummary')).toContainText('Simon + Nora · About 90 minutes · Big and silly');
+  await expect(page.locator('#tonightAskSummary')).toContainText('Simon + Nora');
+  await expect(page.locator('#tonightAskSummary')).toContainText('About 90 minutes · Big and silly');
   await expect(page.locator('#tonightEditPanel')).toBeHidden();
+});
+
+test('initial mobile tonight surface fits without scrolling', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.evaluate(() => window.scrollTo(0, 0));
+
+  const metrics = await page.evaluate(() => ({
+    scrollHeight: document.documentElement.scrollHeight,
+    clientHeight: document.documentElement.clientHeight,
+    homeBottom: document.getElementById('homeScreen').getBoundingClientRect().bottom,
+    navTop: document.querySelector('.quickBar').getBoundingClientRect().top
+  }));
+
+  expect(metrics.scrollHeight).toBeLessThanOrEqual(metrics.clientHeight);
+  expect(metrics.homeBottom).toBeLessThanOrEqual(metrics.navTop + 1);
 });
 
 test('skip advances to a different tonight pick', async ({ page }) => {

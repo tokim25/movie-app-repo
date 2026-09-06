@@ -12,7 +12,7 @@ test('app shell reloads offline once the service worker is installed', async ({ 
   await context.setOffline(true);
   try {
     await page.reload();
-    await expect(page.locator('#homeScreen h1')).toHaveText('Tonight');
+    await expect(page.locator('#homeScreen h1')).toHaveText('What should we watch tonight?');
     expect(await page.evaluate(() => MOVIES.length)).toBeGreaterThan(500);
   } finally {
     await context.setOffline(false);

@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'family-feature-v16-20260906-tonight-visual-polish';
+const CACHE_VERSION = 'family-feature-v17-20260906-tonight-dark-mode';
 const APP_SHELL = [
   '/',
   '/index.html',

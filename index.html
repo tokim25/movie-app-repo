@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#bd5b3a">
+<meta name="theme-color" content="#fbf7f1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#171411" media="(prefers-color-scheme: dark)">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Family Feature">
@@ -18,9 +19,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
 <style>
   :root{
+    color-scheme:light dark;
     --bg:#faf5ee;
     --bg-sub:#f1e7d8;
+    --surface:#fffdf8;
     --ink:#332821;
+    --on-ink:#fff;
     --ink-soft:#7d6c5c;
     --ink-faint:#a89985;
     --line:#e6dbc9;
@@ -30,6 +34,32 @@
     --new:#3d5f68;
     --new-bg:#e2ecec;
     --error:#9c3b3b;
+    --warning:#9a6a20;
+    --warning-soft:#f4ead2;
+    --shadow-soft:0 10px 28px rgba(27,32,28,0.05);
+    --shadow-card:0 14px 36px rgba(48,38,31,0.06);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#171411;
+      --bg-sub:#2b251f;
+      --surface:#211d19;
+      --ink:#f5eee5;
+      --on-ink:#171411;
+      --ink-soft:#c7b9aa;
+      --ink-faint:#948577;
+      --line:#3a332b;
+      --accent:#df8066;
+      --check:#f5eee5;
+      --star:#e0a34a;
+      --new:#83adb5;
+      --new-bg:#24343a;
+      --error:#e08b82;
+      --warning:#d8ad63;
+      --warning-soft:#3a2f1d;
+      --shadow-soft:0 10px 28px rgba(0,0,0,0.2);
+      --shadow-card:0 18px 44px rgba(0,0,0,0.28);
+    }
   }
   *{box-sizing:border-box; -webkit-font-smoothing:antialiased;}
   html{
@@ -68,9 +98,13 @@
     font-family:"Fraunces", Georgia, "Times New Roman", serif;
     font-size:clamp(34px,7vw,48px);
     font-weight:600;
-    letter-spacing:-0.01em;
+    letter-spacing:0;
     margin:0 0 8px;
     color:var(--ink);
+    text-wrap:balance;
+  }
+  .titleKeepTogether{
+    white-space:nowrap;
   }
   .subtitle{
     color:var(--ink-soft);
@@ -612,7 +646,7 @@
     left:50%;
     transform:translateX(-50%);
     background:var(--ink);
-    color:#fff;
+    color:var(--on-ink);
     padding:10px 18px;
     border-radius:20px;
     font-size:13px;
@@ -772,7 +806,7 @@
     border-radius:14px;
     background:var(--surface);
     border:1px solid var(--line);
-    box-shadow:0 10px 28px rgba(27,32,28,0.05);
+    box-shadow:var(--shadow-soft);
   }
   .requestPanel h2{
     margin:0 0 4px;
@@ -806,7 +840,7 @@
     border:1px solid var(--line);
     border-radius:16px;
     padding:18px;
-    box-shadow:0 10px 28px rgba(27,32,28,0.05);
+    box-shadow:var(--shadow-soft);
   }
   .setupScreen{
     max-width:720px;
@@ -818,7 +852,7 @@
     border:1px solid var(--line);
     border-radius:18px;
     padding:22px;
-    box-shadow:0 18px 44px rgba(27,32,28,0.08);
+    box-shadow:var(--shadow-card);
   }
   .setupCard h1{
     margin:0 0 8px;
@@ -851,7 +885,7 @@
     border:0;
     border-radius:12px;
     background:var(--ink);
-    color:#fff;
+    color:var(--on-ink);
     font-family:inherit;
     font-size:14px;
     font-weight:650;
@@ -885,7 +919,9 @@
     margin-top:18px;
   }
   .tonightCard{
-    padding:16px;
+    padding:20px;
+    border-radius:20px;
+    box-shadow:var(--shadow-card);
   }
   .tonightSummary{
     display:flex;
@@ -898,19 +934,23 @@
     flex:1 1 auto;
   }
   .tonightSummaryLabel{
-    color:var(--ink-faint);
-    font-size:12px;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:0.08em;
+    display:none;
   }
   .tonightSummaryText{
-    margin-top:7px;
+    margin-top:0;
     color:var(--ink);
-    font-size:20px;
-    line-height:1.22;
-    font-weight:650;
+    font-size:28px;
+    line-height:1.08;
+    font-weight:760;
     text-wrap:balance;
+  }
+  .tonightContext{
+    margin-top:7px;
+    color:var(--ink-soft);
+    font-size:17px;
+    line-height:1.3;
+    font-weight:540;
+    text-wrap:pretty;
   }
   .tonightChangeButton{
     min-height:34px;
@@ -940,14 +980,21 @@
     margin-top:0;
   }
   .tonightActions{
-    margin-top:18px;
+    margin-top:24px;
   }
   .tonightActions .primaryBtn{
-    min-height:48px;
+    min-height:58px;
+    border-radius:16px;
+    font-size:17px;
+    font-weight:720;
     padding-inline:20px;
   }
   .tonightActions .secondaryBtn{
     background:transparent;
+    min-height:54px;
+    border-radius:16px;
+    font-size:16px;
+    font-weight:670;
   }
   .choiceGrid{
     display:flex;
@@ -1446,33 +1493,33 @@
   .ageDefault input{ accent-color:var(--accent); }
   @media (max-width:560px){
     header{
-      padding:34px 20px 18px;
+      padding:28px 20px 14px;
       text-align:left;
     }
     h1{
       font-family:-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-      font-size:34px;
+      font-size:29px;
       line-height:1.08;
-      font-weight:700;
+      font-weight:680;
       margin-bottom:6px;
     }
     .subtitle{
       max-width:320px;
       margin:0;
-      font-size:15px;
+      font-size:14.5px;
       line-height:1.42;
     }
     .stats{
       justify-content:space-between;
       gap:12px;
-      margin-top:18px;
+      margin-top:15px;
     }
     .stats div{ text-align:left; }
     .stats b{
-      font-size:22px;
+      font-size:20px;
     }
     .homeSection.tight{
-      margin-top:14px;
+      margin-top:10px;
     }
     .setupFields{
       grid-template-columns:1fr;
@@ -1496,8 +1543,10 @@
     .settingScaleHelp{ grid-template-columns:1fr 1fr; }
     .limitControl{ width:100%; }
     .limitControl button{ width:100%; }
+    .tonightCard{ padding:18px; }
     .tonightSummary{ gap:10px; }
-    .tonightSummaryText{ font-size:18px; }
+    .tonightSummaryText{ font-size:24px; }
+    .tonightContext{ font-size:15px; }
     .tonightChangeButton{ flex:0 0 auto; }
     .tonightActions{
       display:grid;
@@ -1506,6 +1555,12 @@
     .tonightActions .primaryBtn,
     .tonightActions .secondaryBtn{
       width:100%;
+    }
+    .tonightActions .primaryBtn{
+      min-height:54px;
+    }
+    .tonightActions .secondaryBtn{
+      min-height:50px;
     }
   }
   .moreRow{
@@ -1776,7 +1831,7 @@
 
 <div id="homeScreen" class="homeScreen">
   <header>
-    <h1>Tonight</h1>
+    <h1>What should we <span class="titleKeepTogether">watch tonight?</span></h1>
     <div class="subtitle">One good pick for the people, time, and mood you have tonight.</div>
     <div class="stats">
       <div><b id="statChecked">0</b>Watched</div>
@@ -1789,8 +1844,11 @@
     <div class="familyCard tonightCard">
       <div class="tonightSummary">
         <div class="tonightSummaryCopy">
-          <div class="tonightSummaryLabel">Tonight ask</div>
-          <div class="tonightSummaryText" id="tonightAskSummary">Simon + Theo · About 90 minutes · Calm it down</div>
+          <div class="tonightSummaryLabel" aria-hidden="true"></div>
+          <div id="tonightAskSummary">
+            <div class="tonightSummaryText" id="tonightWatchingSummary">Simon + Theo</div>
+            <div class="tonightContext" id="tonightContextSummary">About 90 minutes · Calm it down</div>
+          </div>
         </div>
         <button type="button" class="tonightChangeButton" id="tonightChangeBtn" aria-expanded="false" aria-controls="tonightEditPanel">Change</button>
       </div>
@@ -2020,6 +2078,7 @@
     <div class="moreCard">
       <button id="installAppBtn" class="moreRow">Install app on this device</button>
       <button id="resortBtn" class="moreRow">Reset custom order</button>
+      <button id="reportBugBtn" class="moreRow">Report a bug</button>
     </div>
   </div>
 
@@ -2886,9 +2945,10 @@ function tonightWatchingLabel(){
 }
 
 function renderTonightSummary(){
-  const summary = document.getElementById('tonightAskSummary');
-  if(!summary) return;
-  summary.textContent = `${tonightWatchingLabel()} · ${tonightTimeLabel()} · ${tonightMoodLabel()}`;
+  const watching = document.getElementById('tonightWatchingSummary');
+  const context = document.getElementById('tonightContextSummary');
+  if(watching) watching.textContent = tonightWatchingLabel();
+  if(context) context.textContent = `${tonightTimeLabel()} · ${tonightMoodLabel()}`;
 }
 
 function setTonightEditOpen(open){
@@ -4029,6 +4089,24 @@ document.querySelectorAll('#filterSeg button').forEach(btn=>{
 });
 
 document.getElementById('resortBtn').addEventListener('click', resetOrder);
+
+document.getElementById('reportBugBtn').addEventListener('click', ()=>{
+  const subject = encodeURIComponent('Family Feature bug report');
+  const body = encodeURIComponent([
+    'What happened?',
+    '',
+    '',
+    'What did you expect?',
+    '',
+    '',
+    'Where were you in the app?',
+    currentScreen,
+    '',
+    `App URL: ${window.location.href}`,
+    `Browser: ${navigator.userAgent}`
+  ].join('\n'));
+  window.location.href = `mailto:tokim25@gmail.com?subject=${subject}&body=${body}`;
+});
 
 document.querySelectorAll('[data-edit-child]').forEach(btn=>{
   btn.addEventListener('click', ()=>{
