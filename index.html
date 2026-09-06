@@ -2159,6 +2159,10 @@ function getNewIndices(){
     .sort((a, b) => (MOVIES[b].addedAt || '').localeCompare(MOVIES[a].addedAt || ''));
 }
 
+function compareByAddedThenRelease(a, b){
+  return (MOVIES[b].addedAt || '').localeCompare(MOVIES[a].addedAt || '') || movieYear(b) - movieYear(a) || titleCompare(a, b);
+}
+
 const listEl = document.getElementById('list');
 const emptyMsg = document.getElementById('emptyMsg');
 const toastEl = document.getElementById('toast');
@@ -2755,15 +2759,21 @@ function isTonightEligible(idx, kids, maxAge, includeSkipped){
   return true;
 }
 
+function tonightSourceTiers(){
+  const ageSorted = sortMovieIndices(MOVIES.map((_, idx) => idx), 'age');
+  const newestSorted = MOVIES.map((_, idx) => idx).sort(compareByAddedThenRelease);
+  const shelfSorted = state.order && state.order.length ? state.order.slice() : ageSorted;
+  return [
+    { source: 'Want to watch', indices: shelfSorted.filter(idx => markValue(state.priority, idx)) },
+    { source: 'New this week', indices: newestSorted.filter(idx => !markValue(state.priority, idx) && isRecent(MOVIES[idx])) },
+    { source: 'Shelf', indices: ageSorted.filter(idx => !markValue(state.priority, idx) && !isRecent(MOVIES[idx])) }
+  ];
+}
+
 function findTonightCandidate(){
   const kids = selectedKids();
   const maxAge = kids.length ? Math.max(...kids.map(child => child.age)) : 99;
-  const order = sortMovieIndices(MOVIES.map((_, idx) => idx), 'age');
-  const tiered = [
-    { source: 'Want to watch', indices: order.filter(idx => markValue(state.priority, idx)) },
-    { source: 'New this week', indices: order.filter(idx => !markValue(state.priority, idx) && isRecent(MOVIES[idx])) },
-    { source: 'Shelf', indices: order.filter(idx => !markValue(state.priority, idx) && !isRecent(MOVIES[idx])) }
-  ];
+  const tiered = tonightSourceTiers();
 
   for(const tier of tiered){
     const idx = tier.indices.find(candidate => isTonightEligible(candidate, kids, maxAge, false));
@@ -2776,7 +2786,7 @@ function findTonightCandidate(){
     if(idx !== undefined) return { idx, source: tier.source };
   }
 
-  return order.length ? { idx: order[0], source: 'Shelf' } : null;
+  return MOVIES.length ? { idx: 0, source: 'Shelf' } : null;
 }
 
 function showTonightPick(){
