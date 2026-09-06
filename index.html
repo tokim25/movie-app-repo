@@ -2616,7 +2616,7 @@ function showScreen(target){
     if(tabs[name]) tabs[name].classList.toggle('on', name === target);
   });
   const quickBar = document.getElementById('quickBar');
-  if(quickBar) quickBar.style.display = target === 'setup' ? 'none' : 'grid';
+  if(quickBar) quickBar.style.display = target === 'setup' ? 'none' : 'flex';
   renderCurrentView();
   if(isSameScreen){
     window.scrollTo({top: 0, behavior: 'smooth'});
