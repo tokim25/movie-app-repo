@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { switchToFlatView, firstRow } from './helpers.js';
+import { switchToFlatView, openSyncSettings, firstRow } from './helpers.js';
 
 test('manual sync code export/import round-trips watched and priority state', async ({ page }) => {
   await page.goto('/');
@@ -12,7 +12,7 @@ test('manual sync code export/import round-trips watched and priority state', as
   await expect(page.locator('#statChecked')).toHaveText('1');
   await expect(page.locator('#statPriority')).toHaveText('1');
 
-  await page.locator('#syncToggleBtn').click();
+  await openSyncSettings(page);
   const code = await page.locator('#syncCodeOut').inputValue();
   expect(code.length).toBeGreaterThan(20);
 
@@ -22,7 +22,7 @@ test('manual sync code export/import round-trips watched and priority state', as
   await switchToFlatView(page);
   await expect(page.locator('#statChecked')).toHaveText('0');
 
-  await page.locator('#syncToggleBtn').click();
+  await openSyncSettings(page);
   await page.locator('#syncCodeIn').fill(code);
   await page.locator('#syncLoadBtn').click();
 
@@ -42,7 +42,7 @@ test('an invalid sync code is rejected without clearing existing state', async (
   await firstRow(page).locator('.check').click();
   await expect(page.locator('#statChecked')).toHaveText('1');
 
-  await page.locator('#syncToggleBtn').click();
+  await openSyncSettings(page);
   await page.locator('#syncCodeIn').fill('not-a-valid-code');
   await page.locator('#syncLoadBtn').click();
 

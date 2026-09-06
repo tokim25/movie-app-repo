@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#bd5b3a">
+<meta name="theme-color" content="#2f6f5e">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Family Feature">
@@ -18,18 +18,26 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#faf5ee;
-    --bg-sub:#f1e7d8;
-    --ink:#332821;
-    --ink-soft:#7d6c5c;
-    --ink-faint:#a89985;
-    --line:#e6dbc9;
-    --accent:#bd5b3a;
+    --bg:#f8f7f3;
+    --bg-sub:#f0f0ec;
+    --surface:#fff;
+    --ink:#151916;
+    --ink-soft:#68706b;
+    --ink-faint:#9aa19d;
+    --line:rgba(21,25,22,0.1);
+    --accent:#2f6f5e;
+    --accent-soft:#e5efeb;
+    --review:#9b6a2f;
+    --review-soft:#fdf9f1;
+    --warning:#9a514d;
+    --warning-soft:#f3e8e5;
     --check:var(--ink);
-    --star:#d9932f;
+    --star:var(--review);
     --new:#3d5f68;
     --new-bg:#e2ecec;
     --error:#9c3b3b;
+    --radius:16px;
+    --shadow:0 16px 56px rgba(27,32,28,0.09);
   }
   *{box-sizing:border-box; -webkit-font-smoothing:antialiased;}
   html,body{margin:0;padding:0;}
@@ -40,6 +48,7 @@
     min-height:100vh;
     padding-bottom:calc(84px + env(safe-area-inset-bottom, 0px));
   }
+  #catalogSurface.isHidden{ display:none; }
   @media (prefers-reduced-motion: no-preference){
     .row{ transition: opacity 0.25s ease; }
   }
@@ -51,7 +60,7 @@
     margin:0 auto;
   }
   h1{
-    font-family:"Fraunces", Georgia, "Times New Roman", serif;
+    font-family:inherit;
     font-size:clamp(34px,7vw,48px);
     font-weight:600;
     letter-spacing:-0.01em;
@@ -85,6 +94,11 @@
     max-width:680px;
     margin:0 auto 18px;
     padding:0 20px;
+  }
+  .familyPanel .syncAlert{
+    max-width:none;
+    margin:16px 0 0;
+    padding:0;
   }
   .syncAlertInner{
     display:flex;
@@ -245,8 +259,12 @@
     cursor:pointer;
     font-weight:500;
   }
-  .sortbar button.syncWarning{
+.sortbar button.syncWarning{
     color:var(--error);
+  }
+  .familyBtn.syncWarning{
+    color:var(--error);
+    background:var(--warning-soft);
   }
   .sortSelect{
     background:var(--bg-sub);
@@ -273,6 +291,12 @@
     max-width:680px;
     margin:12px auto 0;
     padding:16px 20px;
+  }
+  .familyPanel .syncPanel{
+    max-width:none;
+    margin:14px 0 0;
+    padding:16px 0 0;
+    border-top:1px solid var(--line);
   }
   .syncRow{ margin-bottom:14px; }
   .syncRow:last-child{ margin-bottom:0; }
@@ -538,9 +562,32 @@
     display:flex;
     justify-content:center;
     gap:8px;
-    margin:32px auto 0;
-    padding:0 20px;
-    max-width:420px;
+    margin:14px 0 0;
+    padding:0;
+    max-width:none;
+  }
+  .requestPanel{
+    max-width:680px;
+    margin:18px auto 0;
+    padding:18px 20px;
+    border-radius:16px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    box-shadow:0 10px 28px rgba(27,32,28,0.05);
+  }
+  .requestPanel h2{
+    margin:0 0 5px;
+    color:var(--ink);
+    font-size:18px;
+    line-height:1.25;
+    font-weight:600;
+    letter-spacing:0;
+  }
+  .requestPanel p{
+    margin:0;
+    color:var(--ink-soft);
+    font-size:13px;
+    line-height:1.45;
   }
   .requestForm input[type="text"]{
     flex:1;
@@ -587,6 +634,348 @@
     z-index:10;
   }
 
+  .familySurface{
+    max-width:1120px;
+    margin:0 auto;
+    padding:42px 20px 28px;
+  }
+  .familySurface[hidden]{ display:none; }
+  .familyShell{
+    display:grid;
+    grid-template-columns:minmax(300px, 390px) minmax(0, 1fr);
+    overflow:hidden;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+  }
+  .familyListPane{
+    background:var(--bg-sub);
+    border-right:1px solid var(--line);
+    padding:42px 36px;
+  }
+  .familyProfilePane{
+    padding:42px;
+    background:var(--surface);
+  }
+  .familyEyebrow{
+    margin:0 0 8px;
+    color:var(--accent);
+    font-size:12px;
+    font-weight:600;
+    text-transform:uppercase;
+  }
+  .familyTitle{
+    margin:0 0 11px;
+    color:var(--ink);
+    font-size:30px;
+    line-height:1.14;
+    font-weight:600;
+    letter-spacing:0;
+  }
+  .familyCopy{
+    margin:0;
+    color:var(--ink-soft);
+    font-size:14px;
+    line-height:1.55;
+  }
+  .familyChildren{
+    margin-top:30px;
+    border-radius:var(--radius);
+    background:var(--surface);
+    overflow:hidden;
+    box-shadow:0 1px 0 rgba(21,25,22,0.04);
+  }
+  .familyChild{
+    padding:20px;
+    border-top:1px solid var(--line);
+  }
+  .familyChild:first-child{ border-top:0; }
+  .familyChild.selected{
+    background:rgba(47,111,94,0.04);
+    box-shadow:inset 3px 0 0 var(--accent);
+  }
+  .familyTopline,
+  .familyKid,
+  .familyCue,
+  .familyProfileHead,
+  .familyActions{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .familyTopline,
+  .familyCue,
+  .familyProfileHead{
+    justify-content:space-between;
+  }
+  .familyAvatar{
+    width:46px;
+    height:46px;
+    border-radius:14px;
+    display:grid;
+    place-items:center;
+    background:#d8d2c6;
+    color:var(--ink);
+    font-size:16px;
+    font-weight:600;
+    flex:0 0 auto;
+  }
+  .familyAvatar.alt{ background:#dce8eb; }
+  .familyName{
+    color:var(--ink);
+    font-size:17px;
+    font-weight:600;
+  }
+  .familyAge{
+    margin-top:3px;
+    color:var(--ink-faint);
+    font-size:13px;
+  }
+  .familyPill,
+  .familyTag{
+    min-height:28px;
+    border-radius:999px;
+    display:inline-flex;
+    align-items:center;
+    padding:6px 10px;
+    background:rgba(21,25,22,0.045);
+    color:var(--ink-soft);
+    font-size:12px;
+    font-weight:500;
+    white-space:nowrap;
+  }
+  .familyTag.warning{
+    color:var(--warning);
+    background:var(--warning-soft);
+  }
+  .familySummary{ margin-top:13px; }
+  .familyCue{
+    min-height:46px;
+    margin-top:17px;
+    border-radius:12px;
+    padding:12px 14px;
+    background:var(--surface);
+    border:1px solid rgba(155,106,47,0.2);
+    color:var(--ink);
+    font-size:14px;
+    font-weight:500;
+  }
+  .familyCue::before{
+    content:"";
+    width:7px;
+    height:7px;
+    border-radius:999px;
+    background:var(--review);
+    flex:0 0 auto;
+  }
+  .familyCue span{ flex:1; }
+  .familyCue strong{
+    display:block;
+    color:var(--ink);
+    font-size:14px;
+    font-weight:500;
+  }
+  .familyCue em{
+    display:block;
+    margin-top:3px;
+    color:var(--ink-soft);
+    font-size:12px;
+    font-style:normal;
+    font-weight:400;
+  }
+  .familyCue small{
+    color:var(--ink-faint);
+    font-size:12px;
+    white-space:nowrap;
+  }
+  .familyProfileHead{
+    align-items:flex-start;
+    padding-bottom:28px;
+    margin-bottom:28px;
+    border-bottom:1px solid var(--line);
+  }
+  .familyProfileName{
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .familyGrid{
+    display:grid;
+    grid-template-columns:minmax(360px, 1fr) 300px;
+    gap:24px;
+    align-items:start;
+  }
+  .familyStack{
+    display:grid;
+    gap:18px;
+  }
+  .familyPanel{
+    border-radius:var(--radius);
+    background:#fbfbf9;
+    border:1px solid var(--line);
+    padding:22px;
+  }
+  .familyPanel.review{
+    background:var(--surface);
+    border-color:rgba(155,106,47,0.16);
+    border-left:4px solid var(--review);
+  }
+  .familyPanel h3{
+    margin:0 0 8px;
+    color:var(--ink);
+    font-size:21px;
+    line-height:1.25;
+    font-weight:600;
+    letter-spacing:0;
+  }
+  .familyBtn{
+    min-height:40px;
+    border:0;
+    border-radius:10px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 14px;
+    background:rgba(21,25,22,0.055);
+    color:var(--ink);
+    font-family:inherit;
+    font-size:14px;
+    font-weight:500;
+    cursor:pointer;
+  }
+  .familyBtn.primary{
+    background:var(--accent);
+    color:#fff;
+  }
+  .familyRows{
+    margin-top:15px;
+    border-radius:13px;
+    border:1px solid var(--line);
+    background:var(--surface);
+    overflow:hidden;
+  }
+  .familyRow{
+    min-height:70px;
+    display:grid;
+    grid-template-columns:1fr 36px;
+    gap:14px;
+    align-items:center;
+    padding:16px;
+    border-top:1px solid var(--line);
+  }
+  .familyRow:first-child{ border-top:0; }
+  .familyRow strong{
+    display:block;
+    margin-bottom:4px;
+    color:var(--ink);
+    font-size:15px;
+    font-weight:500;
+  }
+  .familyRow span{
+    color:var(--ink-soft);
+    font-size:13px;
+    line-height:1.42;
+  }
+  .familySettingRow{
+    min-height:92px;
+    display:grid;
+    grid-template-columns:minmax(0, 1fr) auto;
+    gap:18px;
+    align-items:center;
+    padding:18px 16px;
+    border-top:1px solid var(--line);
+  }
+  .familySettingRow:first-child{ border-top:0; }
+  .familySettingRow strong{
+    display:block;
+    margin-bottom:4px;
+    color:var(--ink);
+    font-size:15px;
+    font-weight:600;
+  }
+  .familySettingRow span{
+    display:block;
+    color:var(--ink-soft);
+    font-size:13px;
+    line-height:1.42;
+  }
+  .limitControl{
+    min-width:206px;
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:4px;
+    padding:4px;
+    border-radius:12px;
+    background:var(--bg-sub);
+  }
+  .limitControl button{
+    width:46px;
+    height:38px;
+    border:0;
+    border-radius:9px;
+    background:transparent;
+    color:var(--ink-soft);
+    font-family:inherit;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+  }
+  .limitControl button.selected{
+    background:var(--surface);
+    color:var(--ink);
+    box-shadow:0 1px 4px rgba(21,25,22,0.08);
+  }
+  .ageDefault{
+    margin-top:10px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    color:var(--accent);
+    font-size:13px;
+    font-weight:500;
+  }
+  .ageDefault input{
+    accent-color:var(--accent);
+  }
+  .familyLevel{
+    width:36px;
+    height:36px;
+    border-radius:10px;
+    display:grid;
+    place-items:center;
+    background:#eef0ec;
+    color:var(--ink);
+    border:1px solid var(--line);
+    font-weight:600;
+  }
+  .familyAsideNote{
+    padding-top:13px;
+    margin-top:14px;
+    border-top:1px solid var(--line);
+  }
+  .familyQuiet{
+    margin-top:28px;
+    border-radius:18px;
+    background:var(--surface);
+    border:1px solid rgba(21,25,22,0.08);
+    box-shadow:var(--shadow);
+    padding:24px;
+  }
+  .familyQuiet h3{
+    margin:0 0 8px;
+    color:var(--ink);
+    font-size:19px;
+    font-weight:600;
+    letter-spacing:0;
+  }
+  .familyQuiet p{
+    margin:0;
+    color:var(--ink-soft);
+    font-size:14px;
+    line-height:1.55;
+  }
+
   .quickBar{
     position:fixed;
     left:0; right:0; bottom:0;
@@ -606,19 +995,34 @@
     display:flex;
     flex-direction:column;
     align-items:center;
-    gap:3px;
+    gap:5px;
     background:none;
     border:none;
     font-family:inherit;
     color:var(--ink-soft);
-    padding:8px 4px 7px;
-    border-radius:10px;
+    min-height:62px;
+    padding:10px 4px 9px;
+    border-radius:13px;
     cursor:pointer;
+    position:relative;
   }
-  .qbBtn svg{ width:22px; height:22px; }
-  .qbBtn span{ font-size:11px; font-weight:500; letter-spacing:-0.01em; }
+  .qbBtn svg{ width:25px; height:25px; }
+  .qbBtn span{ font-size:12px; font-weight:600; letter-spacing:0; }
   .qbBtn:active{ background:var(--bg-sub); }
-  .qbBtn.on{ color:var(--accent); }
+  .qbBtn.on{
+    color:var(--accent);
+    background:rgba(47,111,94,0.08);
+  }
+  .qbDot{
+    position:absolute;
+    top:8px;
+    right:calc(50% - 22px);
+    width:7px;
+    height:7px;
+    border-radius:999px;
+    background:var(--review);
+    box-shadow:0 0 0 3px var(--bg);
+  }
   .toast.show{ opacity:1; }
 
   .newSection{
@@ -795,6 +1199,62 @@
     cursor:pointer;
   }
 
+  @media (max-width:860px){
+    .familySurface{
+      padding:18px 14px 22px;
+    }
+    .familyShell{
+      display:block;
+      border-radius:0;
+      border:0;
+      background:transparent;
+      box-shadow:none;
+      overflow:visible;
+    }
+    .familyListPane,
+    .familyProfilePane{
+      padding:24px 0;
+      background:transparent;
+      border:0;
+    }
+    .familyTitle{
+      font-size:27px;
+    }
+    .familyChildren,
+    .familyPanel,
+    .familyQuiet{
+      box-shadow:0 10px 32px rgba(27,32,28,0.06);
+    }
+    .familyProfileHead{
+      display:block;
+    }
+    .familyActions{
+      margin-top:18px;
+      flex-wrap:wrap;
+    }
+    .familyGrid{
+      grid-template-columns:1fr;
+    }
+    .familySettingRow{
+      grid-template-columns:1fr;
+    }
+    .limitControl{
+      width:100%;
+      min-width:0;
+    }
+    .limitControl button{
+      width:100%;
+    }
+    .familyCue{
+      display:grid;
+      grid-template-columns:7px 1fr;
+      align-items:center;
+    }
+    .familyCue small{
+      display:none;
+    }
+  }
+
   @media (max-width:430px){
     .row{
       gap:10px;
@@ -830,6 +1290,7 @@
 </head>
 <body>
 
+<main id="catalogSurface">
 <header>
   <h1>Family Feature</h1>
   <div class="subtitle">Find the right movie for tonight, pre-screened for the stuff that actually matters.</div>
@@ -839,16 +1300,6 @@
     <div><b id="statPriority">0</b>Want to watch</div>
   </div>
 </header>
-
-<div id="googleSyncAlert" class="syncAlert" style="display:none;" role="status" aria-live="polite">
-  <div class="syncAlertInner">
-    <div class="syncAlertCopy">
-      <span class="syncAlertTitle">Google sync needs attention</span>
-      <span id="googleSyncAlertMessage" class="syncAlertMessage"></span>
-    </div>
-    <button id="googleSyncAlertBtn" type="button">Reconnect</button>
-  </div>
-</div>
 
 <hr class="divider">
 
@@ -877,7 +1328,6 @@
   <button id="clearFiltersBtn">Clear filters</button>
 </div>
 <div class="sortbar">
-  <button id="syncToggleBtn">Sync across devices</button>
   <select id="sortMode" class="sortSelect" aria-label="Sort movies">
     <option value="year">Sort by year</option>
     <option value="age">Sort by recommended age</option>
@@ -887,57 +1337,264 @@
   <button id="installAppBtn">Install app</button>
   <button id="resortBtn">Reset order</button>
 </div>
-<div class="syncPanel" id="syncPanel" style="display:none;">
-  <div class="syncRow" id="googleSyncRow" style="display:none;">
-    <label>Sync automatically with your Google account — saves your list as a small file in your Google Drive that only this app can read or edit. See our <a href="/privacy.html">Privacy Policy</a> and <a href="/terms.html">Terms</a>.</label>
-    <div class="googleSyncControls">
-      <button id="googleSignInBtn">Sign in with Google</button>
-      <span id="googleSyncStatus" style="display:none;"></span>
-      <button id="googleSignOutBtn" style="display:none;">Disconnect</button>
-    </div>
-  </div>
-  <div class="syncRow">
-    <label>Or copy a code — paste it into this app on another device to load your progress there.</label>
-    <div class="syncCodeRow">
-      <textarea id="syncCodeOut" readonly rows="3"></textarea>
-      <button id="syncCopyBtn">Copy</button>
-    </div>
-  </div>
-  <div class="syncRow">
-    <label>Paste a code from another device here to load it on this one.</label>
-    <div class="syncCodeRow">
-      <textarea id="syncCodeIn" rows="3" placeholder="Paste code here"></textarea>
-      <button id="syncLoadBtn">Load</button>
-    </div>
-  </div>
-</div>
+<section class="requestPanel" id="requestMoviePanel" aria-labelledby="requestMovieTitle">
+  <h2 id="requestMovieTitle">Request a movie</h2>
+  <p>Ask for a title to be added to the shelf.</p>
+  <iframe name="hiddenRequestFrame" style="display:none;" title="hidden"></iframe>
+  <form id="requestMovieForm" class="requestForm" action="https://docs.google.com/forms/d/e/1FAIpQLSf6gLu-Z9LO-ZnPQ70yuOmYC8_9O1Jk7Kwsk0BF-FepiWH8tQ/formResponse" method="POST" target="hiddenRequestFrame">
+    <input type="text" name="entry.1104459577" id="requestMovieInput" placeholder="Movie title" autocomplete="off" required>
+    <button type="submit">Send</button>
+  </form>
+</section>
 
 <ul id="list"></ul>
 <div class="empty" id="emptyMsg" style="display:none;">No movies match your search.</div>
 </div>
 
 <button class="reset" id="clearAllBtn">Clear all watched marks</button>
-<iframe name="hiddenRequestFrame" style="display:none;" title="hidden"></iframe>
-<form id="requestMovieForm" class="requestForm" action="https://docs.google.com/forms/d/e/1FAIpQLSf6gLu-Z9LO-ZnPQ70yuOmYC8_9O1Jk7Kwsk0BF-FepiWH8tQ/formResponse" method="POST" target="hiddenRequestFrame">
-  <input type="text" name="entry.1104459577" id="requestMovieInput" placeholder="Request a movie…" autocomplete="off" required>
-  <button type="submit">Send</button>
-</form>
 <p class="glossary">CSM = Common Sense Media, the nonprofit whose age and content guidance powers every rating here. DCOM = Disney Channel Original Movie.</p>
+</main>
+
+<section id="familySurface" class="familySurface" hidden>
+  <div class="familyShell">
+    <section class="familyListPane" aria-labelledby="familyTitle">
+      <p class="familyEyebrow">Family</p>
+      <h2 class="familyTitle" id="familyTitle">How Family understands each kid right now.</h2>
+      <p class="familyCopy">Starter settings come from product-owned age guidance. Parent changes stay protected, and repeated Watch Anyway choices become gentle review suggestions.</p>
+
+      <div class="familyChildren">
+        <article class="familyChild selected">
+          <div class="familyTopline">
+            <div class="familyKid">
+              <div class="familyAvatar" aria-hidden="true">S</div>
+              <div>
+                <div class="familyName">Simon</div>
+                <div class="familyAge">6 years old</div>
+              </div>
+            </div>
+            <span class="familyPill">Personalized</span>
+          </div>
+          <p class="familyCopy familySummary">More sensitive to scary moments and violence. Everything else follows age suggestions.</p>
+          <div class="familyCue">
+            <span>
+              <strong>Simon may be ready for a little more suspense.</strong>
+              <em>Based on recent Watch Anyway choices.</em>
+            </span>
+            <small>Review</small>
+          </div>
+        </article>
+
+        <article class="familyChild">
+          <div class="familyTopline">
+            <div class="familyKid">
+              <div class="familyAvatar alt" aria-hidden="true">N</div>
+              <div>
+                <div class="familyName">Nora</div>
+                <div class="familyAge">3 years old</div>
+              </div>
+            </div>
+            <span class="familyPill">Age guidance</span>
+          </div>
+          <p class="familyCopy familySummary">Using age suggestions. No review needed right now.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="familyProfilePane" aria-labelledby="profileTitle">
+      <div class="familyProfileHead">
+        <div class="familyProfileName">
+          <div class="familyAvatar" aria-hidden="true">S</div>
+          <div>
+            <h2 class="familyTitle" id="profileTitle">Simon</h2>
+            <p class="familyCopy">6 years old</p>
+          </div>
+        </div>
+        <div class="familyActions">
+          <button class="familyBtn" id="familyEditBtn" type="button">Settings</button>
+          <button class="familyBtn primary" id="familyReviewBtn" type="button">Review suggestion</button>
+        </div>
+      </div>
+
+      <div class="familyGrid">
+        <div class="familyStack">
+          <article class="familyPanel">
+            <h3>How Family understands him</h3>
+            <p class="familyCopy">Simon is set a little gentler than age guidance for scary moments and violence. Other limits still follow product-owned starter settings for his age.</p>
+          </article>
+
+          <article class="familyPanel review">
+            <h3>Suggestion to review</h3>
+            <p class="familyCopy">Simon has watched through a few scary moments that were above his current limit. Keep the limit as-is, or review whether this one flag should change.</p>
+            <div class="familyActions" style="margin-top:16px;">
+              <button class="familyBtn primary" id="familyOpenReviewBtn" type="button">Open review</button>
+              <button class="familyBtn" type="button">Dismiss</button>
+            </div>
+          </article>
+
+          <article class="familyPanel" id="familySettingsPanel">
+            <h3>Settings</h3>
+            <p class="familyCopy">Adjust Simon's content limits here. Each setting keeps track of whether it follows age guidance or a parent change.</p>
+            <div class="familyRows">
+              <div class="familySettingRow">
+                <div>
+                  <strong>Scary moments</strong>
+                  <span>Parent-set. Gentler than age guidance.</span>
+                  <label class="ageDefault"><input type="checkbox"> Use age guidance</label>
+                </div>
+                <div class="limitControl" aria-label="Scary moments limit">
+                  <button type="button">1</button>
+                  <button type="button" class="selected">2</button>
+                  <button type="button">3</button>
+                  <button type="button">4</button>
+                </div>
+              </div>
+              <div class="familySettingRow">
+                <div>
+                  <strong>Violence</strong>
+                  <span>Parent-set. Gentler than age guidance.</span>
+                  <label class="ageDefault"><input type="checkbox"> Use age guidance</label>
+                </div>
+                <div class="limitControl" aria-label="Violence limit">
+                  <button type="button">1</button>
+                  <button type="button" class="selected">2</button>
+                  <button type="button">3</button>
+                  <button type="button">4</button>
+                </div>
+              </div>
+              <div class="familySettingRow">
+                <div>
+                  <strong>Sad moments</strong>
+                  <span>Following age guidance.</span>
+                  <label class="ageDefault"><input type="checkbox" checked> Use age guidance</label>
+                </div>
+                <div class="limitControl" aria-label="Sad moments limit">
+                  <button type="button">1</button>
+                  <button type="button">2</button>
+                  <button type="button" class="selected">3</button>
+                  <button type="button">4</button>
+                </div>
+              </div>
+              <div class="familySettingRow">
+                <div>
+                  <strong>Language</strong>
+                  <span>Following age guidance.</span>
+                  <label class="ageDefault"><input type="checkbox" checked> Use age guidance</label>
+                </div>
+                <div class="limitControl" aria-label="Language limit">
+                  <button type="button">1</button>
+                  <button type="button">2</button>
+                  <button type="button" class="selected">3</button>
+                  <button type="button">4</button>
+                </div>
+              </div>
+              <div class="familySettingRow">
+                <div>
+                  <strong>Romance</strong>
+                  <span>Following age guidance.</span>
+                  <label class="ageDefault"><input type="checkbox" checked> Use age guidance</label>
+                </div>
+                <div class="limitControl" aria-label="Romance limit">
+                  <button type="button" class="selected">1</button>
+                  <button type="button">2</button>
+                  <button type="button">3</button>
+                  <button type="button">4</button>
+                </div>
+              </div>
+              <div class="familySettingRow">
+                <div>
+                  <strong>Drinking</strong>
+                  <span>Following age guidance.</span>
+                  <label class="ageDefault"><input type="checkbox" checked> Use age guidance</label>
+                </div>
+                <div class="limitControl" aria-label="Drinking limit">
+                  <button type="button" class="selected">1</button>
+                  <button type="button">2</button>
+                  <button type="button">3</button>
+                  <button type="button">4</button>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <aside class="familyStack">
+          <article class="familyPanel">
+            <h3>Account & sync</h3>
+            <p class="familyCopy">Manage Google sync and device transfer from Family settings. Your family data stays in your Google Drive or on this device.</p>
+            <div id="googleSyncAlert" class="syncAlert" style="display:none;" role="status" aria-live="polite">
+              <div class="syncAlertInner">
+                <div class="syncAlertCopy">
+                  <span class="syncAlertTitle">Google sync needs attention</span>
+                  <span id="googleSyncAlertMessage" class="syncAlertMessage"></span>
+                </div>
+                <button id="googleSyncAlertBtn" type="button">Reconnect</button>
+              </div>
+            </div>
+            <div class="familyActions" style="margin-top:16px;">
+              <button class="familyBtn" id="familySyncBtn" type="button">Open sync settings</button>
+            </div>
+            <div class="syncPanel" id="syncPanel" style="display:none;">
+              <div class="syncRow" id="googleSyncRow" style="display:none;">
+                <label>Sync automatically with your Google account — saves your list as a small file in your Google Drive that only this app can read or edit. See our <a href="/privacy.html">Privacy Policy</a> and <a href="/terms.html">Terms</a>.</label>
+                <div class="googleSyncControls">
+                  <button id="googleSignInBtn">Sign in with Google</button>
+                  <span id="googleSyncStatus" style="display:none;"></span>
+                  <button id="googleSignOutBtn" style="display:none;">Disconnect</button>
+                </div>
+              </div>
+              <div class="syncRow">
+                <label>Or copy a code — paste it into this app on another device to load your progress there.</label>
+                <div class="syncCodeRow">
+                  <textarea id="syncCodeOut" readonly rows="3"></textarea>
+                  <button id="syncCopyBtn">Copy</button>
+                </div>
+              </div>
+              <div class="syncRow">
+                <label>Paste a code from another device here to load it on this one.</label>
+                <div class="syncCodeRow">
+                  <textarea id="syncCodeIn" rows="3" placeholder="Paste code here"></textarea>
+                  <button id="syncLoadBtn">Load</button>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="familyPanel">
+            <h3>Hard preferences</h3>
+            <p class="familyCopy">No hard opt-outs set. Parent-controlled hard preferences are never changed by age guidance or Watch Anyway patterns.</p>
+            <div class="familyAsideNote">
+              <span class="familyTag warning">Parent controlled</span>
+            </div>
+          </article>
+          <article class="familyPanel">
+            <h3>What changes automatically</h3>
+            <p class="familyCopy">Only age-based starter settings can mature over time. Parent-set limits stay exactly where the parent put them.</p>
+          </article>
+        </aside>
+      </div>
+    </section>
+  </div>
+
+  <section class="familyQuiet">
+    <h3>Quiet transparency, not alerts</h3>
+    <p>Family shows changes and suggestions here when they matter. It does not interrupt movie night, and it does not turn repeated Watch Anyway choices into automatic setting changes.</p>
+  </section>
+</section>
 
 <div class="toast" id="toast"></div>
 
-<nav class="quickBar" id="quickBar" aria-label="Quick actions">
-  <button type="button" class="qbBtn" id="qbSearch">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="20" y1="20" x2="15.4" y2="15.4"/></svg>
-    <span>Search</span>
+<nav class="quickBar" id="quickBar" aria-label="Primary sections">
+  <button type="button" class="qbBtn on" id="qbTonight" aria-current="page">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8z"/><path d="M8 4v4"/><path d="M16 4v4"/><path d="M4 12h16"/></svg>
+    <span>Tonight</span>
   </button>
-  <button type="button" class="qbBtn" id="qbWatchlist">
+  <button type="button" class="qbBtn" id="qbShelf">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 4l2.3 4.9 5.2.7-3.8 3.8.9 5.3L12 16.2 7.4 18.7l.9-5.3-3.8-3.8 5.2-.7z"/></svg>
-    <span>Want to Watch</span>
+    <span>Shelf</span>
   </button>
-  <button type="button" class="qbBtn" id="qbRequest">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-    <span>Request</span>
+  <button type="button" class="qbBtn" id="qbFamily">
+    <span class="qbDot" aria-hidden="true"></span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 11a4 4 0 1 0-8 0v3a4 4 0 0 0 8 0v-3z"/><path d="M7 21a7 7 0 0 1 10 0"/><path d="M4 12a3 3 0 0 1 2-2.8"/><path d="M20 12a3 3 0 0 0-2-2.8"/></svg>
+    <span>Family</span>
   </button>
 </nav>
 
@@ -1026,6 +1683,7 @@ const DRIVE_FILE_NAME = "family-feature-state-v3.json";
 const GOOGLE_SYNC_FLAG = "family-feature-google-sync-v3-enabled";
 const GOOGLE_SYNC_META_KEY = "family-feature-google-sync-v3-meta";
 const GOOGLE_TOKEN_TIMEOUT_MS = 7000;
+const GOOGLE_INITIAL_TOAST_SESSION_KEY = "family-feature-google-initial-toast-shown";
 let googleCodeClient = null;
 let googleAccessToken = null;
 let googleDriveFileId = null;
@@ -1156,6 +1814,21 @@ function clearGoogleSyncMeta(){
   try{
     localStorage.removeItem(GOOGLE_SYNC_FLAG);
     localStorage.removeItem(GOOGLE_SYNC_META_KEY);
+  }catch(e){ /* storage may be unavailable */ }
+}
+
+function hasShownGoogleInitialToast(){
+  try{
+    return hasShownInitialSyncToast || sessionStorage.getItem(GOOGLE_INITIAL_TOAST_SESSION_KEY) === '1';
+  }catch(e){
+    return hasShownInitialSyncToast;
+  }
+}
+
+function markGoogleInitialToastShown(){
+  hasShownInitialSyncToast = true;
+  try{
+    sessionStorage.setItem(GOOGLE_INITIAL_TOAST_SESSION_KEY, '1');
   }catch(e){ /* storage may be unavailable */ }
 }
 
@@ -1478,7 +2151,6 @@ function browseStudio(studio){
   document.getElementById('genreFilter').value = '';
   document.getElementById('search').value = '';
   document.getElementById('priorityToggleBtn').classList.remove('on');
-  document.getElementById('qbWatchlist').classList.remove('on');
   document.getElementById('newToggleBtn').classList.remove('on');
   sortMode = 'year';
   document.getElementById('sortMode').value = sortMode;
@@ -1495,7 +2167,6 @@ function browseNew(){
   document.getElementById('studioFilter').value = '';
   document.getElementById('search').value = '';
   document.getElementById('priorityToggleBtn').classList.remove('on');
-  document.getElementById('qbWatchlist').classList.remove('on');
   sortMode = 'year';
   document.getElementById('sortMode').value = sortMode;
   newOnly = true;
@@ -1503,27 +2174,75 @@ function browseNew(){
   switchToFlat();
 }
 
+function setActiveTab(tab){
+  const tabs = {
+    tonight: document.getElementById('qbTonight'),
+    shelf: document.getElementById('qbShelf'),
+    family: document.getElementById('qbFamily')
+  };
+  Object.entries(tabs).forEach(([name, button])=>{
+    if(!button) return;
+    const selected = name === tab;
+    button.classList.toggle('on', selected);
+    if(selected) button.setAttribute('aria-current', 'page');
+    else button.removeAttribute('aria-current');
+  });
+}
+
+function showCatalogSurface(){
+  document.getElementById('catalogSurface').classList.remove('isHidden');
+  document.getElementById('familySurface').hidden = true;
+}
+
+function showFamilySurface(){
+  document.getElementById('catalogSurface').classList.add('isHidden');
+  document.getElementById('familySurface').hidden = false;
+  setActiveTab('family');
+}
+
 function switchToFlat(){
   viewMode = 'flat';
+  showCatalogSurface();
   document.getElementById('groupedView').style.display = 'none';
   document.getElementById('toFlatWrap').style.display = 'none';
   document.getElementById('flatView').style.display = 'block';
+  setActiveTab('shelf');
   render();
 }
 
 function switchToGrouped(){
   viewMode = 'grouped';
+  showCatalogSurface();
   document.getElementById('flatView').style.display = 'none';
   document.getElementById('groupedView').style.display = 'block';
   document.getElementById('toFlatWrap').style.display = 'flex';
+  setActiveTab('tonight');
   renderGroupedView();
+}
+
+function switchToFamily(){
+  viewMode = 'family';
+  showFamilySurface();
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 function renderCurrentView(){
   posterEagerBudget = 24;
+  if(viewMode === 'family'){
+    updateStats();
+    showFamilySurface();
+    return;
+  }
+  showCatalogSurface();
   renderNewSection();
   if(viewMode === 'grouped') renderGroupedView();
   else render();
+}
+
+function refreshCatalogData(){
+  renderNewSection();
+  renderGroupedView();
+  render();
 }
 
 function renderNewSection(){
@@ -1757,8 +2476,8 @@ function setGoogleSyncUI(connected, message, isError){
   document.getElementById('googleSignInBtn').style.display = connected ? 'none' : 'inline-block';
   setGoogleSyncStatus(connected ? (message || 'Synced with Google') : (message || ''), isError);
   document.getElementById('googleSignOutBtn').style.display = connected ? 'inline-block' : 'none';
-  const toggleBtn = document.getElementById('syncToggleBtn');
-  toggleBtn.textContent = isError ? 'Sync needs reconnect' : 'Sync across devices';
+  const toggleBtn = document.getElementById('familySyncBtn');
+  toggleBtn.textContent = isError ? 'Sync needs reconnect' : 'Open sync settings';
   toggleBtn.classList.toggle('syncWarning', !!isError);
   setGoogleSyncAlert(message, isError);
 }
@@ -1766,7 +2485,6 @@ function setGoogleSyncUI(connected, message, isError){
 function setGoogleSyncError(message){
   googleAccessToken = null;
   googleSyncPending = false;
-  hasShownInitialSyncToast = false;
   clearTimeout(googleSyncRetryTimer);
   clearTimeout(googleTokenRequestTimer);
   if(googleSyncIntent || readGoogleSyncMeta().enabled){
@@ -2044,8 +2762,8 @@ async function syncFromGoogleDrive(){
     googleSyncRetryDelay = 1600;
     setGoogleSyncUI(true);
     renderCurrentView();
-    if(!hasShownInitialSyncToast){
-      hasShownInitialSyncToast = true;
+    if(!hasShownGoogleInitialToast()){
+      markGoogleInitialToastShown();
       showToast('Synced with Google');
     }
   }catch(e){
@@ -2219,18 +2937,10 @@ document.getElementById('toFlatBtn').addEventListener('click', ()=>{
   document.getElementById('studioFilter').value = '';
   document.getElementById('search').value = '';
   document.getElementById('priorityToggleBtn').classList.remove('on');
-  document.getElementById('qbWatchlist').classList.remove('on');
   document.getElementById('newToggleBtn').classList.remove('on');
   switchToFlat();
 });
 document.getElementById('backToGroupsBtn').addEventListener('click', switchToGrouped);
-
-document.getElementById('syncToggleBtn').addEventListener('click', ()=>{
-  const panel = document.getElementById('syncPanel');
-  const opening = panel.style.display === 'none';
-  panel.style.display = opening ? 'block' : 'none';
-  if(opening) document.getElementById('syncCodeOut').value = encodeState();
-});
 
 document.getElementById('syncCopyBtn').addEventListener('click', async ()=>{
   const out = document.getElementById('syncCodeOut');
@@ -2256,7 +2966,7 @@ document.getElementById('googleSignInBtn').addEventListener('click', ()=>{
 
 document.getElementById('googleSyncAlertBtn').addEventListener('click', ()=>{
   googleSyncIntent = true;
-  switchToFlat();
+  switchToFamily();
   const panel = document.getElementById('syncPanel');
   panel.style.display = 'block';
   document.getElementById('syncCodeOut').value = encodeState();
@@ -2278,6 +2988,9 @@ document.getElementById('googleSignOutBtn').addEventListener('click', ()=>{
   googleDriveFileId = null;
   googleSyncPending = false;
   hasShownInitialSyncToast = false;
+  try{
+    sessionStorage.removeItem(GOOGLE_INITIAL_TOAST_SESSION_KEY);
+  }catch(e){ /* storage may be unavailable */ }
   clearTimeout(googleSyncRetryTimer);
   clearGoogleSyncMeta();
   setGoogleSyncUI(false);
@@ -2297,7 +3010,12 @@ document.getElementById('syncLoadBtn').addEventListener('click', ()=>{
     state = decodeState(input.value);
     saveState();
     input.value = '';
-    renderCurrentView();
+    if(viewMode === 'family'){
+      refreshCatalogData();
+      showFamilySurface();
+    }else{
+      renderCurrentView();
+    }
     showToast('Synced from code');
   }catch(e){
     showToast("That code doesn't look right");
@@ -2363,29 +3081,31 @@ document.getElementById('studioFilter').addEventListener('change', e=>{
 document.getElementById('priorityToggleBtn').addEventListener('click', ()=>{
   priorityOnly = !priorityOnly;
   document.getElementById('priorityToggleBtn').classList.toggle('on', priorityOnly);
-  document.getElementById('qbWatchlist').classList.toggle('on', priorityOnly);
   renderCurrentView();
 });
 
-document.getElementById('qbSearch').addEventListener('click', ()=>{
-  if(document.getElementById('flatView').style.display === 'none'){
-    switchToFlat();
-  }
-  const search = document.getElementById('search');
-  search.scrollIntoView({behavior:'smooth', block:'center'});
-  search.focus();
+document.getElementById('qbTonight').addEventListener('click', ()=>{
+  switchToGrouped();
+  window.scrollTo({top:0, behavior:'smooth'});
 });
-document.getElementById('qbWatchlist').addEventListener('click', ()=>{
-  if(document.getElementById('flatView').style.display === 'none'){
-    switchToFlat();
-  }
-  document.getElementById('priorityToggleBtn').click();
+document.getElementById('qbShelf').addEventListener('click', ()=>{
+  switchToFlat();
   document.getElementById('list').scrollIntoView({behavior:'smooth', block:'start'});
 });
-document.getElementById('qbRequest').addEventListener('click', ()=>{
-  const input = document.getElementById('requestMovieInput');
-  input.scrollIntoView({behavior:'smooth', block:'center'});
-  input.focus();
+document.getElementById('qbFamily').addEventListener('click', switchToFamily);
+['familyEditBtn', 'familyReviewBtn', 'familyOpenReviewBtn'].forEach(id=>{
+  document.getElementById(id).addEventListener('click', ()=>{
+    document.getElementById('familySettingsPanel').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+});
+document.getElementById('familySyncBtn').addEventListener('click', ()=>{
+  const panel = document.getElementById('syncPanel');
+  const opening = panel.style.display === 'none';
+  panel.style.display = opening ? 'block' : 'none';
+  if(opening){
+    document.getElementById('syncCodeOut').value = encodeState();
+    panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
 });
 
 // The mobile keyboard resizing the viewport makes a raw `position:fixed` bar
@@ -2415,7 +3135,6 @@ document.getElementById('clearFiltersBtn').addEventListener('click', ()=>{
   document.getElementById('genreFilter').value = '';
   document.getElementById('studioFilter').value = '';
   document.getElementById('priorityToggleBtn').classList.remove('on');
-  document.getElementById('qbWatchlist').classList.remove('on');
   document.getElementById('newToggleBtn').classList.remove('on');
   renderCurrentView();
 });

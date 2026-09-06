@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { switchToFlatView, firstRow } from './helpers.js';
+import { switchToFlatView, openSyncSettings, firstRow } from './helpers.js';
 
 // The Google sign-in flow itself needs a real Google account and can't be
 // driven headlessly, so these tests skip it entirely: they set the app's own
@@ -7,6 +7,30 @@ import { switchToFlatView, firstRow } from './helpers.js';
 // reachable from page.evaluate) and mock the Drive REST calls with
 // page.route. That exercises the real save/retry/backoff code paths in
 // index.html without touching Google's servers.
+
+test.beforeEach(async ({ page }) => {
+  await page.route('https://accounts.google.com/gsi/client', async (route) => {
+    return route.fulfill({
+      status: 200,
+      contentType: 'text/javascript',
+      body: `
+        window.google = {
+          accounts: {
+            oauth2: {
+              initCodeClient: () => ({ requestCode: () => {} }),
+              revoke: () => {}
+            }
+          }
+        };
+      `,
+    });
+  });
+
+  await page.addInitScript(() => {
+    localStorage.removeItem('family-feature-google-sync-v3-enabled');
+    localStorage.removeItem('family-feature-google-sync-v3-meta');
+  });
+});
 
 async function mockDrive(page, mode) {
   const state = { writeCount: 0, mode };
@@ -107,8 +131,9 @@ test('a 401 response disconnects sync and stops retrying', async ({ page }) => {
   expect(signInDisplay).toBe('inline-block');
   await expect(page.locator('#googleSyncStatus')).toHaveText('Google sync paused — sign in again');
   await expect(page.locator('#googleSyncStatus')).toHaveClass(/syncError/);
-  await expect(page.locator('#syncToggleBtn')).toHaveText('Sync needs reconnect');
-  await expect(page.locator('#syncToggleBtn')).toHaveClass(/syncWarning/);
+  await expect(page.locator('#familySyncBtn')).toHaveText('Sync needs reconnect');
+  await expect(page.locator('#familySyncBtn')).toHaveClass(/syncWarning/);
+  await page.locator('#qbFamily').click();
   await expect(page.locator('#googleSyncAlert')).toBeVisible();
   await expect(page.locator('#googleSyncAlertMessage')).toHaveText('Google sync paused — sign in again');
   const syncMeta = await page.evaluate(() =>
@@ -147,12 +172,13 @@ test('remembered Google sync shows reconnect when the server-side refresh fails'
 
   await page.goto('/');
 
-  await expect(page.locator('#googleSyncAlert')).toBeVisible();
-  await expect(page.locator('#googleSyncAlertMessage')).toHaveText('Google sync paused — sign in again');
   await expect(page.locator('#googleSyncStatus')).toHaveText('Google sync paused — sign in again');
   await expect(page.locator('#googleSyncStatus')).toHaveClass(/syncError/);
-  await expect(page.locator('#syncToggleBtn')).toHaveText('Sync needs reconnect');
-  await expect(page.locator('#syncToggleBtn')).toHaveClass(/syncWarning/);
+  await expect(page.locator('#familySyncBtn')).toHaveText('Sync needs reconnect');
+  await expect(page.locator('#familySyncBtn')).toHaveClass(/syncWarning/);
+  await page.locator('#qbFamily').click();
+  await expect(page.locator('#googleSyncAlert')).toBeVisible();
+  await expect(page.locator('#googleSyncAlertMessage')).toHaveText('Google sync paused — sign in again');
   const signInDisplay = await page.evaluate(() => document.getElementById('googleSignInBtn').style.display);
   expect(signInDisplay).toBe('inline-block');
   const signOutDisplay = await page.evaluate(() => document.getElementById('googleSignOutBtn').style.display);
@@ -182,16 +208,15 @@ test('unfinished Google sign-in shows a reconnect warning and toast', async ({ p
   });
 
   await page.goto('/');
-  await switchToFlatView(page);
+  await openSyncSettings(page);
   await page.clock.install();
-  await page.locator('#syncToggleBtn').click();
   await page.locator('#googleSignInBtn').click();
   await expect(page.locator('#googleSyncStatus')).toHaveText('Connecting to Google…');
 
   await page.clock.fastForward(7100);
 
   await expect(page.locator('#googleSyncStatus')).toHaveText('Google sync paused — sign in again');
-  await expect(page.locator('#syncToggleBtn')).toHaveText('Sync needs reconnect');
+  await expect(page.locator('#familySyncBtn')).toHaveText('Sync needs reconnect');
   await expect(page.locator('#googleSyncAlert')).toBeVisible();
   await expect(page.locator('#googleSyncAlertMessage')).toHaveText('Google sync paused — sign in again');
   await expect(page.locator('#toast')).toHaveText('Google sign-in did not finish — try again');
@@ -240,6 +265,23 @@ test('failed writes back off instead of retrying aggressively, and a later succe
 });
 
 test('the "Synced with Google" toast only fires on the first successful sync of a session', async ({ page }) => {
+  await page.route('https://accounts.google.com/gsi/client', async (route) => {
+    return route.fulfill({
+      status: 200,
+      contentType: 'text/javascript',
+      body: `
+        window.google = {
+          accounts: {
+            oauth2: {
+              initCodeClient: () => ({ requestCode: () => {} }),
+              revoke: () => {}
+            }
+          }
+        };
+      `,
+    });
+  });
+
   const mock = await mockDrive(page, 'ok');
   await page.goto('/');
 
@@ -261,7 +303,6 @@ test('the "Synced with Google" toast only fires on the first successful sync of 
   await expect(page.locator('#toast')).toHaveText('Synced with Google');
   expect(mock.writeCount).toBe(1);
   expect(await page.evaluate(() => window.__syncToasts)).toEqual(['Synced with Google']);
-  expect(await page.evaluate(() => hasShownInitialSyncToast)).toBe(true);
 
   // A second, routine background sync in the same session (e.g. from an
   // edit, a retry, or a reconnect) succeeds but must not toast again.
@@ -273,6 +314,7 @@ test('the "Synced with Google" toast only fires on the first successful sync of 
   // should toast again.
   await page.evaluate(() => {
     hasShownInitialSyncToast = false;
+    sessionStorage.removeItem('family-feature-google-initial-toast-shown');
   });
   await page.evaluate(() => syncFromGoogleDrive());
   await expect.poll(() => mock.writeCount).toBe(3);
