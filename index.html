@@ -1910,8 +1910,9 @@
       <p>Family Feature combines the movie catalog, Common Sense Media age guidance, your watched and Want to watch marks, and each child's content settings.</p>
       <ul>
         <li>Tonight checks the selected kids first. Adults-only nights do not apply child safety limits.</li>
-        <li>Recommendations pull from Want to watch first, New this week second, and the rest of Shelf last.</li>
-        <li>The kind of night changes the order inside those pools: calm favors gentler picks, silly favors comedies, new favors recent additions, and old favourite favors watched titles.</li>
+        <li>Recommendations pull from Want to watch first, recent releases second, and the rest of Shelf last.</li>
+        <li>The kind of night changes the order inside those pools: calm favors lower energy and lower intensity, silly favors comedy and animation, something new favors recent release years, and old favourite favors watched titles.</li>
+        <li>Each movie gets a product-owned experience profile from its age guidance, genre, release year, description, watched state, and Want to watch state.</li>
         <li>Starter settings are product-owned age defaults. Parent-set limits stay fixed unless you switch them back to starter settings.</li>
         <li>CSM means Common Sense Media. DCOM means Disney Channel Original Movie.</li>
       </ul>
@@ -2199,6 +2200,7 @@ function decadeOf(y){
 
 const NEW_WINDOW_DAYS = 7;
 const NEW_TEASER_CAP = 5;
+const RECENT_RELEASE_YEAR_WINDOW = 3;
 
 function isRecent(m){
   if(!m.addedAt) return false;
@@ -2215,8 +2217,18 @@ function getNewIndices(){
     .sort((a, b) => (MOVIES[b].addedAt || '').localeCompare(MOVIES[a].addedAt || ''));
 }
 
-function compareByAddedThenRelease(a, b){
-  return (MOVIES[b].addedAt || '').localeCompare(MOVIES[a].addedAt || '') || movieYear(b) - movieYear(a) || titleCompare(a, b);
+function latestCatalogReleaseYear(){
+  return Math.max(...MOVIES.map((_, idx) => movieYear(idx)).filter(year => year < 9999));
+}
+
+function isRecentRelease(movie){
+  const year = parseInt(movie.y, 10);
+  if(!Number.isFinite(year)) return false;
+  return year >= latestCatalogReleaseYear() - RECENT_RELEASE_YEAR_WINDOW + 1;
+}
+
+function compareByReleaseThenAge(a, b){
+  return movieYear(b) - movieYear(a) || compareByAge(a, b);
 }
 
 const listEl = document.getElementById('list');
@@ -2822,6 +2834,56 @@ function movieContentProfile(movie){
   };
 }
 
+function clampScore(value, min, max){
+  return Math.min(max, Math.max(min, value));
+}
+
+function keywordCount(text, keywords){
+  return keywords.reduce((count, word) => count + (text.includes(word) ? 1 : 0), 0);
+}
+
+function movieExperienceProfile(idx){
+  const movie = MOVIES[idx];
+  const genres = movie.genre || [];
+  const text = `${movie.t || ''} ${movie.full || ''} ${genres.join(' ')}`.toLowerCase();
+  const age = parseAge(movie.ca) || 6;
+  const content = movieContentProfile(movie);
+  const comedy = genres.includes('Comedy') || keywordCount(text, ['funny', 'silly', 'goofy', 'slapstick', 'pratfall']) > 0;
+  const musical = genres.includes('Musical');
+  const action = genres.includes('Action') || genres.includes('Adventure') || genres.includes('Superhero') || keywordCount(text, ['chase', 'battle', 'explosion', 'mission']) > 0;
+  const emotional = genres.includes('Drama') || keywordCount(text, ['grief', 'loss', 'death', 'sad', 'emotional', 'separation']) > 0;
+  const tense = keywordCount(text, ['scary', 'frightening', 'peril', 'tense', 'horror', 'monster']) > 0;
+  const educational = genres.includes('Documentary') || keywordCount(text, ['documentary', 'educational', 'stem', 'science', 'history']) > 0;
+  const cozy = keywordCount(text, ['gentle', 'sweet', 'heartwarming', 'kindness', 'friendship', 'family']) > 0 && !tense;
+  const releaseYear = movieYear(idx);
+  const watched = markValue(state.checked, idx);
+  const wanted = markValue(state.priority, idx);
+  const intensity = Math.max(content.scary, content.violence, content.sad);
+  let energy = age <= 5 ? 1 : age <= 8 ? 2 : 3;
+  if(action) energy += 1;
+  if(comedy || musical) energy += 0.5;
+  if(educational || cozy) energy -= 0.5;
+
+  return {
+    releaseYear,
+    recentRelease: isRecentRelease(movie),
+    watched,
+    wanted,
+    energy: clampScore(energy, 1, 4),
+    intensity,
+    tone: {
+      cozy,
+      silly: comedy,
+      musical,
+      adventurous: action,
+      emotional,
+      tense,
+      educational
+    },
+    pace: action ? 'fast' : educational || emotional ? 'slow' : 'balanced'
+  };
+}
+
 function movieFitForKids(movie, kids){
   if(kids.length === 0) return { verdict: 'green', summary: 'Adults only', issues: [] };
   const profile = movieContentProfile(movie);
@@ -2863,29 +2925,43 @@ function isTonightEligible(idx, kids, maxAge, includeSkipped){
 }
 
 function moodScore(idx){
-  const movie = MOVIES[idx];
-  const genres = movie.genre || [];
-  const text = `${movie.t || ''} ${movie.full || ''}`.toLowerCase();
-  const age = parseAge(movie.ca) || 99;
+  const profile = movieExperienceProfile(idx);
+  const age = movieAge(idx);
   if(tonightSelection.mood === 'calm'){
-    let score = age;
-    if(genres.includes('Drama') || text.includes('scary') || text.includes('peril')) score += 3;
-    if(genres.includes('Comedy') || genres.includes('Musical')) score -= 1;
+    let score = 0;
+    score += profile.energy * 2;
+    score += profile.intensity * 3;
+    score += age * 0.35;
+    if(profile.tone.cozy) score -= 4;
+    if(profile.tone.silly || profile.tone.musical) score -= 1;
+    if(profile.tone.tense || profile.tone.emotional) score += 4;
+    if(profile.pace === 'fast') score += 2;
+    if(profile.watched) score -= 1;
     return score;
   }
   if(tonightSelection.mood === 'silly'){
-    let score = 10;
-    if(genres.includes('Comedy')) score -= 5;
-    if(genres.includes('Animation')) score -= 2;
-    if(genres.includes('Musical')) score -= 1;
-    if(genres.includes('Drama') || genres.includes('Documentary')) score += 3;
+    let score = 12;
+    if(profile.tone.silly) score -= 6;
+    if(profile.tone.musical) score -= 2;
+    if(profile.tone.adventurous) score -= 1;
+    score += profile.tone.emotional ? 4 : 0;
+    score += profile.tone.educational ? 3 : 0;
+    score += Math.max(0, profile.intensity - 2);
     return score;
   }
   if(tonightSelection.mood === 'favorite'){
-    return markValue(state.checked, idx) ? 0 : 8;
+    let score = profile.watched ? 0 : 10;
+    if(profile.wanted) score -= 3;
+    if(profile.tone.cozy || profile.tone.silly) score -= 1;
+    score += Math.max(0, profile.intensity - 2);
+    return score;
   }
   if(tonightSelection.mood === 'new'){
-    return 0;
+    let score = latestCatalogReleaseYear() - profile.releaseYear;
+    if(profile.watched) score += 4;
+    if(profile.recentRelease) score -= 3;
+    if(profile.wanted) score -= 1;
+    return score;
   }
   return 0;
 }
@@ -2896,13 +2972,13 @@ function sortForTonightMood(indices, baseCompare){
 
 function tonightSourceTiers(){
   const ageSorted = sortMovieIndices(MOVIES.map((_, idx) => idx), 'age');
-  const newestSorted = sortForTonightMood(MOVIES.map((_, idx) => idx), compareByAddedThenRelease);
+  const newestSorted = sortForTonightMood(MOVIES.map((_, idx) => idx), compareByReleaseThenAge);
   const shelfSorted = state.order && state.order.length ? state.order.slice() : ageSorted;
   const fallbackSorted = sortForTonightMood(ageSorted, compareByAge);
   return [
     { source: 'Want to watch', indices: sortForTonightMood(shelfSorted.filter(idx => markValue(state.priority, idx)), compareByAge) },
-    { source: 'New this week', indices: newestSorted.filter(idx => !markValue(state.priority, idx) && isRecent(MOVIES[idx])) },
-    { source: 'Shelf', indices: fallbackSorted.filter(idx => !markValue(state.priority, idx) && !isRecent(MOVIES[idx])) }
+    { source: 'Recent releases', indices: newestSorted.filter(idx => !markValue(state.priority, idx) && isRecentRelease(MOVIES[idx])) },
+    { source: 'Shelf', indices: fallbackSorted.filter(idx => !markValue(state.priority, idx) && !isRecentRelease(MOVIES[idx])) }
   ];
 }
 
@@ -2950,7 +3026,7 @@ function showTonightPick(){
     copy.push(verdict.reasons[0] || 'Within the selected child settings.');
   }
   copy.push(`Fits a ${tonightSelection.time === 999 ? 'flexible' : tonightSelection.time + ' minute'} window.`);
-  copy.push(candidate.source === 'Want to watch' ? 'Pulled from Want to watch.' : candidate.source === 'New this week' ? 'Pulled from new additions.' : 'Pulled from the rest of Shelf.');
+  copy.push(candidate.source === 'Want to watch' ? 'Pulled from Want to watch.' : candidate.source === 'Recent releases' ? 'Pulled from recent releases.' : 'Pulled from the rest of Shelf.');
   copy.slice(0, 3).forEach(text=>{
     const li = document.createElement('li');
     li.textContent = text;

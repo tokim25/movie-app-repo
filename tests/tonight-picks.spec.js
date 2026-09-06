@@ -66,13 +66,13 @@ test('tonight picks from want to watch before new and general shelf', async ({ p
   await expect(page.locator('#tonightPickReasons')).toContainText('Pulled from Want to watch.');
 });
 
-test('adults-only new picks use newest additions instead of youngest title', async ({ page }) => {
+test('adults-only new picks use recent releases instead of recently added titles', async ({ page }) => {
   const expected = await page.evaluate(() => {
     const newest = MOVIES
       .map((movie, idx) => ({ movie, idx }))
-      .filter(({ movie }) => isRecent(movie))
-      .sort((a, b) => (b.movie.addedAt || '').localeCompare(a.movie.addedAt || '') || Number(b.movie.y) - Number(a.movie.y) || MOVIES[a.idx].t.localeCompare(MOVIES[b.idx].t))[0];
-    if(!newest) throw new Error('No recent movies available');
+      .filter(({ movie }) => isRecentRelease(movie))
+      .sort((a, b) => movieYear(b.idx) - movieYear(a.idx) || movieAge(a.idx) - movieAge(b.idx) || MOVIES[a.idx].t.localeCompare(MOVIES[b.idx].t))[0];
+    if(!newest) throw new Error('No recent release movies available');
     return `${newest.movie.t} (${newest.movie.y})`;
   });
 
@@ -82,5 +82,18 @@ test('adults-only new picks use newest additions instead of youngest title', asy
 
   await expect(page.locator('#tonightPickTitle')).toHaveText(expected);
   await expect(page.locator('#tonightPickTitle')).not.toContainText('Winnie the Pooh');
-  await expect(page.locator('#tonightPickReasons')).toContainText('Pulled from new additions.');
+  await expect(page.locator('#tonightPickReasons')).toContainText('Pulled from recent releases.');
+});
+
+test('movie experience profile exposes scoring signals for moods', async ({ page }) => {
+  const profile = await page.evaluate(() => {
+    const idx = MOVIES.findIndex(movie => movie.t === 'The Incredibles');
+    if(idx < 0) throw new Error('Test movie missing');
+    return movieExperienceProfile(idx);
+  });
+
+  expect(profile.energy).toBeGreaterThan(1);
+  expect(profile.intensity).toBeGreaterThanOrEqual(2);
+  expect(profile.tone.adventurous).toBe(true);
+  expect(profile).toHaveProperty('recentRelease');
 });
