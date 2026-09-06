@@ -1405,10 +1405,10 @@
   </div>
 
   <div class="homeSection">
-    <span class="homeSectionLabel">Understanding</span>
+    <span class="homeSectionLabel">Personalization</span>
     <div class="familyCard">
-      <h2>How Family understands each kid right now.</h2>
-      <p>Starter settings come from product-owned age guidance. Parent changes stay protected, and repeated Watch Anyway choices become gentle review suggestions.</p>
+      <h2>Age guidance for each kid, yours to adjust</h2>
+      <p>We set starting limits based on your child's age. Change something yourself, and it sticks — we'll never undo it. If your child seems ready for a little more, we'll suggest it, but you always decide.</p>
       <div class="familyChildren">
         <article class="familyChild">
           <div class="familyTopline">
@@ -1421,7 +1421,7 @@
             </div>
             <div class="familyMetaActions">
               <span class="familyPill">Personalized</span>
-              <button type="button" class="familyEditBtn" data-edit-child="childNameSimon">Edit</button>
+              <button type="button" class="familyEditBtn" data-edit-child="childName-simon">Edit</button>
             </div>
           </div>
           <p class="familySummary">More sensitive to scary moments and violence. Everything else follows age suggestions.</p>
@@ -1443,7 +1443,7 @@
             </div>
             <div class="familyMetaActions">
               <span class="familyPill">Age guidance</span>
-              <button type="button" class="familyEditBtn" data-edit-child="childNameNora">Edit</button>
+              <button type="button" class="familyEditBtn" data-edit-child="childName-nora">Edit</button>
             </div>
           </div>
           <p class="familySummary">Using age suggestions. No review needed right now.</p>
@@ -1457,58 +1457,13 @@
     <div class="familyCard" id="childrenSettingsPanel">
       <h3>Children</h3>
       <p>Add a child or update their name and age. Age changes update starter guidance only where a parent has not already set a custom limit.</p>
-      <div class="childEditor">
-        <div class="childEditRow">
-          <div class="childField">
-            <label for="childNameSimon">Name</label>
-            <input id="childNameSimon" type="text" value="Simon" autocomplete="off">
-          </div>
-          <div class="childField">
-            <label for="childAgeSimon">Age</label>
-            <select id="childAgeSimon">
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-              <option selected>6</option>
-              <option>7</option>
-              <option>8</option>
-              <option>9</option>
-            </select>
-          </div>
-          <div class="childActions">
-            <button type="button" class="childSaveBtn">Save</button>
-            <button type="button" class="childRemoveBtn warning">Remove</button>
-          </div>
-        </div>
-        <div class="childEditRow">
-          <div class="childField">
-            <label for="childNameNora">Name</label>
-            <input id="childNameNora" type="text" value="Nora" autocomplete="off">
-          </div>
-          <div class="childField">
-            <label for="childAgeNora">Age</label>
-            <select id="childAgeNora">
-              <option selected>3</option>
-              <option>4</option>
-              <option>5</option>
-              <option>6</option>
-              <option>7</option>
-              <option>8</option>
-              <option>9</option>
-            </select>
-          </div>
-          <div class="childActions">
-            <button type="button" class="childSaveBtn">Save</button>
-            <button type="button" class="childRemoveBtn warning">Remove</button>
-          </div>
-        </div>
-      </div>
+      <div class="childEditor" id="childEditorList"></div>
       <div class="familyActions" style="margin-top:14px;">
         <button class="familyBtn" id="addChildBtn" type="button">Add child</button>
       </div>
       <div class="childOnboarding" id="childOnboardingPanel" style="display:none;">
         <h3>Set up a child</h3>
-        <p>Start with name and age. Family Feature applies product-owned starter settings, then lets the parent adjust anything that does not fit.</p>
+        <p>Start with name and age — we'll set up age-based guidance for you, and you can adjust anything that doesn't fit.</p>
         <div class="childOnboardingPanel">
           <div class="childEditRow">
             <div class="childField">
@@ -1532,9 +1487,9 @@
             </div>
           </div>
           <ul class="childOnboardingSteps" aria-label="Child setup flow">
-            <li>Use age-based starter settings immediately after the child is added.</li>
-            <li>Offer parent review for content flags that commonly need adjustment.</li>
-            <li>Keep future age updates automatic only for settings the parent has not changed.</li>
+            <li>Starts with age-based guidance the moment your child is added.</li>
+            <li>Flags settings worth a second look, without changing them for you.</li>
+            <li>Keeps up with their age, but never overrides a setting you've already changed.</li>
           </ul>
         </div>
       </div>
@@ -1544,7 +1499,7 @@
   <div class="homeSection">
     <span class="homeSectionLabel">Content settings</span>
     <div class="familyCard" id="familySettingsPanel">
-      <h3>Simon</h3>
+      <h3 id="familySettingsChildName">Simon</h3>
       <p>Adjust content limits here. Each setting keeps track of whether it follows age guidance or a parent change.</p>
       <div class="familyRows">
         <div class="familySettingRow">
@@ -1762,7 +1717,22 @@ const MOVIES_BY_STUDIO = MOVIES.reduce((groups, movie, idx)=>{
   groups.get(movie.studio).push(idx);
   return groups;
 }, new Map());
-let state = { order: defaultOrder(), orderUpdatedAt: 0, orderDevice: '', checked: {}, priority: {} };
+function defaultChildren(){
+  return [
+    { id: 'simon', name: 'Simon', age: 6 },
+    { id: 'nora', name: 'Nora', age: 3 }
+  ];
+}
+
+function makeChildId(){
+  try{
+    return crypto.randomUUID();
+  }catch(e){
+    return 'child-' + Math.random().toString(36).slice(2, 10);
+  }
+}
+
+let state = { order: defaultOrder(), orderUpdatedAt: 0, orderDevice: '', checked: {}, priority: {}, children: defaultChildren(), childrenUpdatedAt: 0, childrenDevice: '' };
 let filter = "all";
 let priorityOnly = false;
 let newOnly = false;
@@ -2021,16 +1991,57 @@ function normalizeMarks(rawMarks, version){
   return marks;
 }
 
+function normalizeChild(raw){
+  if(!raw || typeof raw !== 'object') return null;
+  const name = typeof raw.name === 'string' ? raw.name.trim().slice(0, 60) : '';
+  if(!name) return null;
+  const age = parseInt(raw.age, 10);
+  return {
+    id: (typeof raw.id === 'string' && raw.id) ? raw.id : makeChildId(),
+    name,
+    age: Number.isInteger(age) ? Math.min(Math.max(age, 3), 9) : 3
+  };
+}
+
+function normalizeChildren(rawList){
+  if(!Array.isArray(rawList)) return null;
+  const out = [];
+  const seenIds = new Set();
+  rawList.forEach(raw=>{
+    const child = normalizeChild(raw);
+    if(child && !seenIds.has(child.id)){
+      out.push(child);
+      seenIds.add(child.id);
+    }
+  });
+  return out;
+}
+
+function normalizeChildrenMeta(rawChildren){
+  if(rawChildren && typeof rawChildren === 'object' && Array.isArray(rawChildren.list)){
+    return {
+      children: normalizeChildren(rawChildren.list) || [],
+      childrenUpdatedAt: Number(rawChildren.updatedAt) || 0,
+      childrenDevice: rawChildren.device || ''
+    };
+  }
+  return { children: defaultChildren(), childrenUpdatedAt: 0, childrenDevice: '' };
+}
+
 function normalizeState(raw){
   const parsed = raw || {};
   const version = parsed.v === 3 ? 3 : parsed.v === 2 ? 2 : 1;
   const orderMeta = normalizeOrderMeta(parsed.order || parsed.o, version);
+  const childrenMeta = normalizeChildrenMeta(parsed.children);
   return {
     order: orderMeta.order,
     orderUpdatedAt: orderMeta.orderUpdatedAt,
     orderDevice: orderMeta.orderDevice,
     checked: normalizeMarks(parsed.checked || parsed.c, version),
-    priority: normalizeMarks(parsed.priority || parsed.p, version)
+    priority: normalizeMarks(parsed.priority || parsed.p, version),
+    children: childrenMeta.children,
+    childrenUpdatedAt: childrenMeta.childrenUpdatedAt,
+    childrenDevice: childrenMeta.childrenDevice
   };
 }
 
@@ -2046,8 +2057,18 @@ function serializeState(){
       device: state.orderDevice || DEVICE_ID
     },
     checked: state.checked,
-    priority: state.priority
+    priority: state.priority,
+    children: {
+      list: state.children,
+      updatedAt: state.childrenUpdatedAt || 0,
+      device: state.childrenDevice || DEVICE_ID
+    }
   };
+}
+
+function touchChildren(){
+  state.childrenUpdatedAt = now();
+  state.childrenDevice = DEVICE_ID;
 }
 
 function markValue(collection, idx){
@@ -2335,6 +2356,7 @@ function renderStudioGrid(){
 function renderCurrentView(){
   posterEagerBudget = 24;
   renderNewSection();
+  renderChildren();
   if(currentScreen === 'browse') render();
   else if(currentScreen === 'watchlist') renderWatchlist();
   else if(currentScreen === 'search') renderSearchScreen();
@@ -2806,12 +2828,16 @@ function mergeMarks(localMarks, remoteMarks){
 function mergeState(local, remote){
   const normalizedRemote = normalizeState(remote);
   const useRemoteOrder = (normalizedRemote.orderUpdatedAt || 0) > (local.orderUpdatedAt || 0);
+  const useRemoteChildren = (normalizedRemote.childrenUpdatedAt || 0) > (local.childrenUpdatedAt || 0);
   return {
     order: useRemoteOrder ? normalizedRemote.order : local.order,
     orderUpdatedAt: useRemoteOrder ? normalizedRemote.orderUpdatedAt : local.orderUpdatedAt,
     orderDevice: useRemoteOrder ? normalizedRemote.orderDevice : local.orderDevice,
     checked: mergeMarks(local.checked, normalizedRemote.checked),
-    priority: mergeMarks(local.priority, normalizedRemote.priority)
+    priority: mergeMarks(local.priority, normalizedRemote.priority),
+    children: useRemoteChildren ? normalizedRemote.children : local.children,
+    childrenUpdatedAt: useRemoteChildren ? normalizedRemote.childrenUpdatedAt : local.childrenUpdatedAt,
+    childrenDevice: useRemoteChildren ? normalizedRemote.childrenDevice : local.childrenDevice
   };
 }
 
@@ -3029,17 +3055,116 @@ document.querySelectorAll('[data-edit-child]').forEach(btn=>{
   });
 });
 
-document.querySelectorAll('.childSaveBtn').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    showToast('Child profile saved');
-  });
-});
+function clampChildAge(rawAge){
+  const age = parseInt(rawAge, 10);
+  return Number.isInteger(age) ? Math.min(Math.max(age, 3), 9) : 3;
+}
 
-document.querySelectorAll('.childRemoveBtn').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    showToast('Remove child would ask for confirmation');
+function saveChild(id, rawName, rawAge){
+  const name = rawName.trim();
+  if(!name){ showToast('Add a child name first'); return; }
+  const child = state.children.find(c => c.id === id);
+  if(!child) return;
+  child.name = name.slice(0, 60);
+  child.age = clampChildAge(rawAge);
+  touchChildren();
+  saveState();
+  renderChildren();
+  showToast('Child profile saved');
+}
+
+function removeChild(id){
+  const child = state.children.find(c => c.id === id);
+  if(!child) return;
+  if(!window.confirm(`Remove ${child.name}? This can't be undone.`)) return;
+  state.children = state.children.filter(c => c.id !== id);
+  touchChildren();
+  saveState();
+  renderChildren();
+  showToast(`${child.name} removed`);
+}
+
+function addChild(rawName, rawAge){
+  const name = rawName.trim();
+  if(!name){ showToast('Add a child name first'); return; }
+  const child = { id: makeChildId(), name: name.slice(0, 60), age: clampChildAge(rawAge) };
+  state.children.push(child);
+  touchChildren();
+  saveState();
+  renderChildren();
+  document.getElementById('newChildName').value = '';
+  document.getElementById('childOnboardingPanel').style.display = 'none';
+  showToast(`${child.name} added with age guidance`);
+}
+
+function renderChildren(){
+  const container = document.getElementById('childEditorList');
+  if(!container) return;
+  container.replaceChildren();
+
+  state.children.forEach(child=>{
+    const row = document.createElement('div');
+    row.className = 'childEditRow';
+
+    const nameId = `childName-${child.id}`;
+    const ageId = `childAge-${child.id}`;
+
+    const nameField = document.createElement('div');
+    nameField.className = 'childField';
+    const nameLabel = document.createElement('label');
+    nameLabel.setAttribute('for', nameId);
+    nameLabel.textContent = 'Name';
+    const nameInput = document.createElement('input');
+    nameInput.type = 'text';
+    nameInput.id = nameId;
+    nameInput.autocomplete = 'off';
+    nameInput.value = child.name;
+    nameField.appendChild(nameLabel);
+    nameField.appendChild(nameInput);
+
+    const ageField = document.createElement('div');
+    ageField.className = 'childField';
+    const ageLabel = document.createElement('label');
+    ageLabel.setAttribute('for', ageId);
+    ageLabel.textContent = 'Age';
+    const ageSelect = document.createElement('select');
+    ageSelect.id = ageId;
+    for(let age = 3; age <= 9; age++){
+      const opt = document.createElement('option');
+      opt.value = String(age);
+      opt.textContent = String(age);
+      if(age === child.age) opt.selected = true;
+      ageSelect.appendChild(opt);
+    }
+    ageField.appendChild(ageLabel);
+    ageField.appendChild(ageSelect);
+
+    const actions = document.createElement('div');
+    actions.className = 'childActions';
+    const saveBtn = document.createElement('button');
+    saveBtn.type = 'button';
+    saveBtn.className = 'childSaveBtn';
+    saveBtn.textContent = 'Save';
+    saveBtn.addEventListener('click', () => saveChild(child.id, nameInput.value, ageSelect.value));
+    const removeBtn = document.createElement('button');
+    removeBtn.type = 'button';
+    removeBtn.className = 'childRemoveBtn warning';
+    removeBtn.textContent = 'Remove';
+    removeBtn.addEventListener('click', () => removeChild(child.id));
+    actions.appendChild(saveBtn);
+    actions.appendChild(removeBtn);
+
+    row.appendChild(nameField);
+    row.appendChild(ageField);
+    row.appendChild(actions);
+    container.appendChild(row);
   });
-});
+
+  const settingsHeader = document.getElementById('familySettingsChildName');
+  if(settingsHeader){
+    settingsHeader.textContent = state.children.length ? state.children[0].name : 'No children yet';
+  }
+}
 
 document.getElementById('addChildBtn').addEventListener('click', ()=>{
   const panel = document.getElementById('childOnboardingPanel');
@@ -3048,8 +3173,7 @@ document.getElementById('addChildBtn').addEventListener('click', ()=>{
 });
 
 document.getElementById('saveNewChildBtn').addEventListener('click', ()=>{
-  const name = document.getElementById('newChildName').value.trim();
-  showToast(name ? `${name} added with age guidance` : 'Add a child name first');
+  addChild(document.getElementById('newChildName').value, document.getElementById('newChildAge').value);
 });
 
 document.getElementById('familySyncBtn').addEventListener('click', ()=>{
