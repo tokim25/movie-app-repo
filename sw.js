@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'family-feature-v10-20260906-content-settings';
+const CACHE_VERSION = 'family-feature-v11-20260906-tonight-skip';
 const APP_SHELL = [
   '/',
   '/index.html',

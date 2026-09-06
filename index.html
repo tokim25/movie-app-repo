@@ -32,7 +32,21 @@
     --error:#9c3b3b;
   }
   *{box-sizing:border-box; -webkit-font-smoothing:antialiased;}
+  html{
+    -webkit-text-size-adjust:100%;
+    text-size-adjust:100%;
+  }
   html,body{margin:0;padding:0;}
+  input,
+  select,
+  textarea,
+  button{
+    font-size:16px;
+  }
+  button,
+  a{
+    touch-action:manipulation;
+  }
   body{
     background:var(--bg);
     color:var(--ink);
@@ -1133,7 +1147,7 @@
     background:var(--surface);
     color:var(--ink);
     font-family:inherit;
-    font-size:15px;
+    font-size:16px;
     padding:8px 10px;
   }
   .childField input:focus,
@@ -2063,7 +2077,7 @@ let genreFilter = "";
 let studioFilter = "";
 let sortMode = "year";
 let currentScreen = "setup";
-let tonightSelection = { childIds: new Set(), time: 90, mood: 'calm', currentPickIdx: null, amber: false };
+let tonightSelection = { childIds: new Set(), time: 90, mood: 'calm', currentPickIdx: null, currentPickSource: '', amber: false, skippedMovieNums: new Set() };
 let selectedFamilyChildId = null;
 
 const GOOGLE_CLIENT_ID = "987776124251-t4skn7ia6qd1r88ftass906jinm98v1q.apps.googleusercontent.com";
@@ -2732,27 +2746,48 @@ function movieVerdictForKids(movie, kids){
   return { verdict: 'green', reasons: kids.map(child => `Within ${child.name}'s starter settings.`).slice(0, 2) };
 }
 
+function isTonightEligible(idx, kids, maxAge, includeSkipped){
+  const movie = MOVIES[idx];
+  const age = parseAge(movie.ca) || 99;
+  if(kids.length && age > maxAge + 2) return false;
+  if(markValue(state.checked, idx) && tonightSelection.mood !== 'favorite') return false;
+  if(!includeSkipped && tonightSelection.skippedMovieNums.has(movieKey(idx))) return false;
+  return true;
+}
+
 function findTonightCandidate(){
   const kids = selectedKids();
   const maxAge = kids.length ? Math.max(...kids.map(child => child.age)) : 99;
   const order = sortMovieIndices(MOVIES.map((_, idx) => idx), 'age');
-  const preferred = order.filter(idx=>{
-    const movie = MOVIES[idx];
-    const age = parseAge(movie.ca) || 99;
-    if(kids.length && age > maxAge + 2) return false;
-    if(markValue(state.checked, idx) && tonightSelection.mood !== 'favorite') return false;
-    return true;
-  });
-  return (preferred[0] !== undefined ? preferred[0] : order[0]);
+  const tiered = [
+    { source: 'Want to watch', indices: order.filter(idx => markValue(state.priority, idx)) },
+    { source: 'New this week', indices: order.filter(idx => !markValue(state.priority, idx) && isRecent(MOVIES[idx])) },
+    { source: 'Shelf', indices: order.filter(idx => !markValue(state.priority, idx) && !isRecent(MOVIES[idx])) }
+  ];
+
+  for(const tier of tiered){
+    const idx = tier.indices.find(candidate => isTonightEligible(candidate, kids, maxAge, false));
+    if(idx !== undefined) return { idx, source: tier.source };
+  }
+
+  tonightSelection.skippedMovieNums.clear();
+  for(const tier of tiered){
+    const idx = tier.indices.find(candidate => isTonightEligible(candidate, kids, maxAge, true));
+    if(idx !== undefined) return { idx, source: tier.source };
+  }
+
+  return order.length ? { idx: order[0], source: 'Shelf' } : null;
 }
 
 function showTonightPick(){
-  const idx = findTonightCandidate();
-  if(idx === undefined) return;
+  const candidate = findTonightCandidate();
+  if(!candidate) return;
+  const idx = candidate.idx;
   const movie = MOVIES[idx];
   const kids = selectedKids();
   const verdict = movieVerdictForKids(movie, kids);
   tonightSelection.currentPickIdx = idx;
+  tonightSelection.currentPickSource = candidate.source;
   tonightSelection.amber = verdict.verdict === 'amber';
 
   const verdictEl = document.getElementById('tonightVerdict');
@@ -2768,7 +2803,7 @@ function showTonightPick(){
     copy.push(verdict.reasons[0] || 'Within the selected child settings.');
   }
   copy.push(`Fits a ${tonightSelection.time === 999 ? 'flexible' : tonightSelection.time + ' minute'} window.`);
-  copy.push(tonightSelection.mood === 'new' ? 'Leans toward something recently added.' : 'Chosen for tonight’s mood.');
+  copy.push(candidate.source === 'Want to watch' ? 'Pulled from Want to watch.' : candidate.source === 'New this week' ? 'Pulled from new additions.' : 'Pulled from the rest of Shelf.');
   copy.slice(0, 3).forEach(text=>{
     const li = document.createElement('li');
     li.textContent = text;
@@ -2796,6 +2831,12 @@ function logWatchAnywaySignal(){
   showToast('Logged as a gentle Family review signal');
 }
 
+function resetTonightSkips(){
+  tonightSelection.skippedMovieNums.clear();
+  tonightSelection.currentPickIdx = null;
+  tonightSelection.currentPickSource = '';
+}
+
 function renderTonightKidChoices(){
   const container = document.getElementById('tonightKidChoices');
   if(!container) return;
@@ -2808,6 +2849,7 @@ function renderTonightKidChoices(){
     btn.addEventListener('click', ()=>{
       if(tonightSelection.childIds.has(child.id)) tonightSelection.childIds.delete(child.id);
       else tonightSelection.childIds.add(child.id);
+      resetTonightSkips();
       renderTonightKidChoices();
     });
     container.appendChild(btn);
@@ -2818,6 +2860,7 @@ function renderTonightKidChoices(){
   adultsOnly.textContent = 'Adults only';
   adultsOnly.addEventListener('click', ()=>{
     tonightSelection.childIds.clear();
+    resetTonightSkips();
     renderTonightKidChoices();
   });
   container.appendChild(adultsOnly);
@@ -4111,7 +4154,10 @@ document.getElementById('tonightShelfBtn').addEventListener('click', ()=>{
   showScreen('browse');
 });
 
-document.getElementById('findTonightPickBtn').addEventListener('click', showTonightPick);
+document.getElementById('findTonightPickBtn').addEventListener('click', ()=>{
+  resetTonightSkips();
+  showTonightPick();
+});
 
 document.getElementById('tonightWatchBtn').addEventListener('click', ()=>{
   if(tonightSelection.currentPickIdx !== null){
@@ -4123,13 +4169,17 @@ document.getElementById('tonightWatchBtn').addEventListener('click', ()=>{
 document.getElementById('tonightWatchAnywayBtn').addEventListener('click', logWatchAnywaySignal);
 
 document.getElementById('tonightSkipBtn').addEventListener('click', ()=>{
-  document.getElementById('tonightPickCard').style.display = 'none';
-  showToast('Showing two alternates next');
+  if(tonightSelection.currentPickIdx !== null){
+    tonightSelection.skippedMovieNums.add(movieKey(tonightSelection.currentPickIdx));
+  }
+  showTonightPick();
+  showToast('Skipped for tonight');
 });
 
 document.querySelectorAll('#tonightTimeChoices .choiceChip').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     tonightSelection.time = parseInt(btn.dataset.time, 10);
+    resetTonightSkips();
     setSelectedChoice('tonightTimeChoices', 'time', tonightSelection.time);
   });
 });
@@ -4137,6 +4187,7 @@ document.querySelectorAll('#tonightTimeChoices .choiceChip').forEach(btn=>{
 document.querySelectorAll('#tonightMoodChoices .choiceChip').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     tonightSelection.mood = btn.dataset.mood;
+    resetTonightSkips();
     setSelectedChoice('tonightMoodChoices', 'mood', tonightSelection.mood);
   });
 });
