@@ -946,6 +946,11 @@
     padding:9px 14px;
     cursor:pointer;
   }
+  .primaryBtn.done{
+    background:var(--bg-sub);
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+  }
   .logicNote{
     margin-top:16px;
     padding:12px 14px;
@@ -1930,7 +1935,7 @@
         <div class="pickTitle" id="tonightPickTitle"></div>
         <ul class="pickReasons" id="tonightPickReasons"></ul>
         <div class="setupActions">
-          <button type="button" class="primaryBtn" id="tonightWatchBtn">Watch</button>
+          <button type="button" class="primaryBtn" id="tonightWatchBtn">Mark watched</button>
           <button type="button" class="secondaryBtn" id="tonightWatchAnywayBtn">Watch anyway</button>
           <button type="button" class="secondaryBtn" id="tonightSkipBtn">Skip</button>
         </div>
@@ -3272,6 +3277,15 @@ function findTonightCandidate(){
   return MOVIES.length ? { idx: 0, source: 'Shelf' } : null;
 }
 
+function updateTonightWatchBtn(){
+  const btn = document.getElementById('tonightWatchBtn');
+  if(!btn) return;
+  const idx = tonightSelection.currentPickIdx;
+  const isWatched = idx !== null && markValue(state.checked, idx);
+  btn.textContent = isWatched ? '✓ Watched' : 'Mark watched';
+  btn.classList.toggle('done', isWatched);
+}
+
 function showTonightPick(){
   setTonightEditOpen(false);
   const candidate = findTonightCandidate();
@@ -3286,6 +3300,7 @@ function showTonightPick(){
 
   const verdictEl = document.getElementById('tonightVerdict');
   document.getElementById('tonightPickCard').classList.toggle('watched', markValue(state.checked, idx));
+  updateTonightWatchBtn();
   verdictEl.textContent = verdict.verdict === 'amber' ? 'Amber: worth a quick look' : 'Green Light';
   document.getElementById('tonightPickTitle').textContent = `${movie.t} (${movie.y})`;
 
@@ -4703,12 +4718,16 @@ document.getElementById('findTonightPickBtn').addEventListener('click', ()=>{
 });
 
 document.getElementById('tonightWatchBtn').addEventListener('click', ()=>{
-  if(tonightSelection.currentPickIdx !== null){
-    toggleCheck(tonightSelection.currentPickIdx);
-    document.getElementById('tonightPickCard').classList.add('watched');
-    document.getElementById('tonightVerdict').textContent = 'Watched';
-    showToast('Marked watched');
-  }
+  const idx = tonightSelection.currentPickIdx;
+  if(idx === null) return;
+  toggleCheck(idx);
+  const isWatched = markValue(state.checked, idx);
+  document.getElementById('tonightPickCard').classList.toggle('watched', isWatched);
+  document.getElementById('tonightVerdict').textContent = isWatched
+    ? 'Watched'
+    : (tonightSelection.amber ? 'Amber: worth a quick look' : 'Green Light');
+  updateTonightWatchBtn();
+  showToast(isWatched ? 'Marked watched' : 'Removed from watched');
 });
 
 document.getElementById('tonightWatchAnywayBtn').addEventListener('click', logWatchAnywaySignal);

@@ -62,10 +62,21 @@ test('finding another pick after a result behaves like skip', async ({ page }) =
 
 test('watching tonight pick shows watched visual state', async ({ page }) => {
   await page.locator('#findTonightPickBtn').click();
+  await expect(page.locator('#tonightWatchBtn')).toHaveText('Mark watched');
+
   await page.locator('#tonightWatchBtn').click();
 
   await expect(page.locator('#tonightPickCard')).toHaveClass(/watched/);
   await expect(page.locator('#tonightVerdict')).toHaveText('Watched');
+  await expect(page.locator('#tonightWatchBtn')).toHaveText('✓ Watched');
+  await expect(page.locator('#tonightWatchBtn')).toHaveClass(/done/);
+
+  await page.locator('#tonightWatchBtn').click();
+
+  await expect(page.locator('#tonightPickCard')).not.toHaveClass(/watched/);
+  await expect(page.locator('#tonightVerdict')).not.toHaveText('Watched');
+  await expect(page.locator('#tonightWatchBtn')).toHaveText('Mark watched');
+  await expect(page.locator('#tonightWatchBtn')).not.toHaveClass(/done/);
 });
 
 test('night mood changes the selected movie', async ({ page }) => {
