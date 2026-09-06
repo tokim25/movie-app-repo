@@ -665,6 +665,9 @@
   .homeSection{
     margin-top:28px;
   }
+  .homeSection.tight{
+    margin-top:24px;
+  }
   .homeSectionHead{
     display:flex;
     align-items:baseline;
@@ -881,38 +884,49 @@
     gap:14px;
     margin-top:18px;
   }
+  .tonightCard{
+    padding:16px;
+  }
   .tonightSummary{
-    display:grid;
-    grid-template-columns:minmax(0, 1fr) auto;
-    gap:12px;
-    align-items:center;
-    padding:14px;
-    border-radius:14px;
-    background:var(--bg-sub);
-    border:1px solid var(--line);
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:16px;
   }
   .tonightSummaryCopy{
     min-width:0;
+    flex:1 1 auto;
   }
   .tonightSummaryLabel{
     color:var(--ink-faint);
     font-size:12px;
-    font-weight:650;
+    font-weight:700;
     text-transform:uppercase;
-    letter-spacing:0.04em;
+    letter-spacing:0.08em;
   }
   .tonightSummaryText{
-    margin-top:4px;
+    margin-top:7px;
     color:var(--ink);
-    font-size:17px;
-    line-height:1.32;
-    font-weight:600;
+    font-size:20px;
+    line-height:1.22;
+    font-weight:650;
+    text-wrap:balance;
+  }
+  .tonightChangeButton{
+    min-height:34px;
+    border:0;
+    background:transparent;
+    padding:2px 0 2px 12px;
+    color:var(--accent);
+    font-size:14px;
+    font-weight:650;
+    white-space:nowrap;
   }
   .tonightEditPanel{
     display:grid;
     gap:14px;
-    margin-top:12px;
-    padding-top:12px;
+    margin-top:16px;
+    padding-top:16px;
     border-top:1px solid var(--line);
   }
   .tonightEditPanel[hidden]{
@@ -924,6 +938,16 @@
   }
   .tonightEditPanel .setupActions{
     margin-top:0;
+  }
+  .tonightActions{
+    margin-top:18px;
+  }
+  .tonightActions .primaryBtn{
+    min-height:48px;
+    padding-inline:20px;
+  }
+  .tonightActions .secondaryBtn{
+    background:transparent;
   }
   .choiceGrid{
     display:flex;
@@ -1421,6 +1445,35 @@
   }
   .ageDefault input{ accent-color:var(--accent); }
   @media (max-width:560px){
+    header{
+      padding:34px 20px 18px;
+      text-align:left;
+    }
+    h1{
+      font-family:-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      font-size:34px;
+      line-height:1.08;
+      font-weight:700;
+      margin-bottom:6px;
+    }
+    .subtitle{
+      max-width:320px;
+      margin:0;
+      font-size:15px;
+      line-height:1.42;
+    }
+    .stats{
+      justify-content:space-between;
+      gap:12px;
+      margin-top:18px;
+    }
+    .stats div{ text-align:left; }
+    .stats b{
+      font-size:22px;
+    }
+    .homeSection.tight{
+      margin-top:14px;
+    }
     .setupFields{
       grid-template-columns:1fr;
     }
@@ -1443,11 +1496,15 @@
     .settingScaleHelp{ grid-template-columns:1fr 1fr; }
     .limitControl{ width:100%; }
     .limitControl button{ width:100%; }
-    .tonightSummary{
-      grid-template-columns:1fr;
-      align-items:start;
+    .tonightSummary{ gap:10px; }
+    .tonightSummaryText{ font-size:18px; }
+    .tonightChangeButton{ flex:0 0 auto; }
+    .tonightActions{
+      display:grid;
+      gap:10px;
     }
-    .tonightSummary .secondaryBtn{
+    .tonightActions .primaryBtn,
+    .tonightActions .secondaryBtn{
       width:100%;
     }
   }
@@ -1720,7 +1777,7 @@
 <div id="homeScreen" class="homeScreen">
   <header>
     <h1>Tonight</h1>
-    <div class="subtitle">Answer three quick questions. Family Feature gives you one good pick, with the safety logic visible.</div>
+    <div class="subtitle">One good pick for the people, time, and mood you have tonight.</div>
     <div class="stats">
       <div><b id="statChecked">0</b>Watched</div>
       <div><b id="statLeft">1038</b>To watch</div>
@@ -1728,15 +1785,14 @@
     </div>
   </header>
 
-  <div class="homeSection">
-    <span class="homeSectionLabel">Tonight ask</span>
-    <div class="familyCard">
+  <div class="homeSection tight">
+    <div class="familyCard tonightCard">
       <div class="tonightSummary">
         <div class="tonightSummaryCopy">
           <div class="tonightSummaryLabel">Tonight ask</div>
           <div class="tonightSummaryText" id="tonightAskSummary">Simon + Theo · About 90 minutes · Calm it down</div>
         </div>
-        <button type="button" class="secondaryBtn" id="tonightChangeBtn" aria-expanded="false" aria-controls="tonightEditPanel">Change</button>
+        <button type="button" class="tonightChangeButton" id="tonightChangeBtn" aria-expanded="false" aria-controls="tonightEditPanel">Change</button>
       </div>
       <div class="tonightEditPanel" id="tonightEditPanel" hidden>
         <div>
@@ -1765,7 +1821,7 @@
           <button type="button" class="secondaryBtn" id="tonightDoneBtn">Done</button>
         </div>
       </div>
-      <div class="setupActions">
+      <div class="setupActions tonightActions">
         <button type="button" class="primaryBtn" id="findTonightPickBtn">Find tonight's pick</button>
         <button type="button" class="secondaryBtn" id="tonightShelfBtn">Browse Shelf instead</button>
       </div>
