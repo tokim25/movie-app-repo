@@ -17,7 +17,7 @@ test('first-run setup leads to Tonight, Shelf, and Family', async ({ page }) => 
   await expect(page.locator('#familyScreen')).toBeVisible();
   await expect(page.locator('#homeScreen')).toBeHidden();
   await expect(page.locator('#tabFamily')).toHaveClass(/on/);
-  await expect(page.locator('#familyScreen')).toContainText('How Family understands each kid right now');
+  await expect(page.locator('#familyScreen')).toContainText('How Family Feature understands each kid right now');
   await expect(page.locator('#childrenSettingsPanel')).toContainText('Add a child or update their name and age');
   await expect(page.locator('#childrenSettingsPanel > .childEditor input[type="text"]')).toHaveCount(2);
   await expect(page.locator('#childrenSettingsPanel > .childEditor select')).toHaveCount(2);
