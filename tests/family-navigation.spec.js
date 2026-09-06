@@ -1,34 +1,32 @@
 import { test, expect } from '@playwright/test';
 
-test('primary nav switches between Tonight, Shelf, and Family surfaces', async ({ page }) => {
+test('primary nav exposes Browse, request, and Family settings surfaces', async ({ page }) => {
   await page.goto('/');
 
-  await expect(page.locator('#catalogSurface')).toBeVisible();
-  await expect(page.locator('#familySurface')).toBeHidden();
-  await expect(page.locator('#qbTonight')).toHaveClass(/on/);
+  await expect(page.locator('#homeScreen')).toBeVisible();
+  await expect(page.locator('#familyScreen')).toBeHidden();
+  await expect(page.locator('#tabHome')).toHaveClass(/on/);
 
-  await page.locator('#qbFamily').click();
-  await expect(page.locator('#familySurface')).toBeVisible();
-  await expect(page.locator('#catalogSurface')).toHaveClass(/isHidden/);
-  await expect(page.locator('#qbFamily')).toHaveClass(/on/);
-  await expect(page.locator('#familyTitle')).toHaveText('How Family understands each kid right now.');
-  await expect(page.locator('#familySettingsPanel')).toContainText('Settings');
+  await page.locator('#tabFamily').click();
+  await expect(page.locator('#familyScreen')).toBeVisible();
+  await expect(page.locator('#homeScreen')).toBeHidden();
+  await expect(page.locator('#tabFamily')).toHaveClass(/on/);
+  await expect(page.locator('#familyScreen')).toContainText('How Family understands each kid right now.');
+  await expect(page.locator('#familySettingsPanel')).toContainText('Adjust content limits');
   await expect(page.locator('#familySettingsPanel .limitControl')).toHaveCount(6);
 
   await page.locator('#familySyncBtn').click();
-  await expect(page.locator('#familySurface')).toBeVisible();
-  await expect(page.locator('#catalogSurface')).toHaveClass(/isHidden/);
+  await expect(page.locator('#familyScreen')).toBeVisible();
   await expect(page.locator('#syncPanel')).toBeVisible();
-  await expect(page.locator('#qbFamily')).toHaveClass(/on/);
+  await expect(page.locator('#tabFamily')).toHaveClass(/on/);
 
-  await page.locator('#qbShelf').click();
-  await expect(page.locator('#catalogSurface')).toBeVisible();
-  await expect(page.locator('#familySurface')).toBeHidden();
-  await expect(page.locator('#flatView')).toBeVisible();
+  await page.locator('#tabBrowse').click();
+  await expect(page.locator('#browseScreen')).toBeVisible();
+  await expect(page.locator('#familyScreen')).toBeHidden();
   await expect(page.locator('#requestMoviePanel')).toBeVisible();
-  await expect(page.locator('#qbShelf')).toHaveClass(/on/);
+  await expect(page.locator('#tabBrowse')).toHaveClass(/on/);
 
-  await page.locator('#qbTonight').click();
-  await expect(page.locator('#groupedView')).toBeVisible();
-  await expect(page.locator('#qbTonight')).toHaveClass(/on/);
+  await page.locator('#tabHome').click();
+  await expect(page.locator('#homeScreen')).toBeVisible();
+  await expect(page.locator('#tabHome')).toHaveClass(/on/);
 });

@@ -8,14 +8,23 @@ test('renders without console errors and shows the full catalog', async ({ page 
   });
 
   await page.goto('/');
-  await expect(page.locator('h1')).toHaveText('Family Feature');
+  await expect(page.locator('#homeScreen h1')).toHaveText('Family Feature');
 
   const movieCount = await page.evaluate(() => MOVIES.length);
   expect(movieCount).toBeGreaterThan(500);
   await expect(page.locator('#statLeft')).toHaveText(String(movieCount));
 
-  const studioGroupCount = await page.locator('#groupedView .studioGroup').count();
-  expect(studioGroupCount).toBeGreaterThan(0);
+  // Home is the default landing screen: real catalog-driven studio tiles
+  // should render there without navigating anywhere first.
+  const studioTileCount = await page.locator('#studioGrid .studioTile').count();
+  expect(studioTileCount).toBeGreaterThan(0);
+
+  // "More studios" hands off to the Browse tab, where the full catalog
+  // (and its studio filter) lives -- there's no separate grouped view.
+  await page.locator('#studioGrid .moreStudiosTile').click();
+  await page.locator('#browseScreen').waitFor({ state: 'visible' });
+  const rowCount = await page.locator('#list > li.row').count();
+  expect(rowCount).toBeGreaterThan(0);
 
   expect(errors, `Unexpected console errors:\n${errors.join('\n')}`).toEqual([]);
 });

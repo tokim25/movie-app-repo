@@ -135,13 +135,48 @@ tripped session limits before), or inline if it's a small batch:
    that fallback page instead. Never leave `srcUrl` empty if any source was used --
    if you truly can't find one, omit the field rather than guessing a URL.
 3. Classify `genre` (1-3 tags from the fixed closed list below, always including
-   `Animation` or `Live-Action`) and `studio` (the real studio, prefer names already
-   in use across the catalog for consistency, new values are fine).
+   `Animation` or `Live-Action`) and `studio`.
 
 Closed genre vocabulary (case-sensitive, don't invent others): Animation,
 Live-Action, Comedy, Adventure, Fantasy, Musical, Drama, Sci-Fi, Action, Horror,
 Documentary, Sports, Holiday, Romance, Mystery, Superhero, Coming-of-Age, War,
 Western, Biography.
+
+**`studio` is user-facing now (added 2026-09-04)** -- it's what renders in the
+movie-row badge (see "Displaying the studio + CSM age badge" below), not just
+internal metadata, so consistency matters more than it used to. Use the real
+studio that made the film, but fold pure naming/legal variants of the same
+company into one canonical name -- check this list first (case-sensitive,
+values other than these are fine for a studio not yet represented, but prefer
+an existing canonical name over inventing a near-duplicate):
+
+Disney, Warner Bros., Warner Bros. Animation (kept separate from Warner
+Bros. -- own identity: Looney Tunes, Tom & Jerry, Scooby-Doo), DreamWorks,
+20th Century Fox, Universal Pictures, Sony Pictures, Nickelodeon, Marvel
+Studios (kept separate -- own brand value), Pixar (kept separate), Studio
+Ghibli (kept separate), Paramount Pictures, Lucasfilm (kept separate), MGM,
+Netflix, Sony Pictures Animation (kept separate -- Hotel Transylvania,
+Spider-Verse), Illumination, Aardman (kept separate -- Wallace & Gromit),
+Blue Sky Studios.
+
+Fold into these rather than writing a variant: "Walt Disney Pictures",
+"Walt Disney Productions", "Walt Disney Television", "Walt Disney Home
+Video", "Buena Vista Pictures", "Touchstone Pictures" → `Disney`. "Warner
+Bros. Pictures" → `Warner Bros.`. "DreamWorks Animation" → `DreamWorks`.
+"20th Century Studios", "20th Century Animation" → `20th Century Fox`.
+"Universal" → `Universal Pictures`. "Columbia Pictures", "TriStar Pictures"
+/ "Tri-Star Pictures" → `Sony Pictures`. "Nickelodeon Movies" →
+`Nickelodeon`. "Metro-Goldwyn-Mayer", "MGM/UA", "United Artists" → `MGM`.
+"Netflix Animation" → `Netflix`. "Illumination Entertainment" →
+`Illumination`.
+
+For a studio genuinely outside this list (a real one-off distributor --
+Laika, A24, GKIDS, Focus Features, New Line, Lionsgate, Miramax, Nelvana,
+Hanna-Barbera, etc.), just use its real name; don't force it into the list
+above and don't use `"Other"` -- `"Other"` is a placeholder for entries that
+never got researched, not a valid classification, and every one of those is
+a data gap to fix via individual research, not a shortcut to take on a new
+one.
 
 ## Step 3 — Poster art
 
@@ -248,3 +283,26 @@ show a "See the source →" link pointing at `m.srcUrl` when it's present, right
 after the CSM age badge, alongside the existing "Details" toggle. Older entries
 without `srcUrl` simply don't show the link -- don't fabricate URLs to backfill
 them.
+
+## Displaying the studio + CSM age badge
+
+Added 2026-09-04, replacing an earlier two-badge layout that showed
+`sourceLabels[m.source]` (which data-*.js file a movie was batch-added
+from -- internal provenance, not a real user-facing category, and wrong as
+often as not: a single curated batch like the old "Marvel/DC" file spans
+several real studios) plus a redundant `m.la` age suffix next to the CSM
+age badge (`m.la` and `m.ca` were never meaningfully distinct -- just two
+independently-researched numbers that were almost always the same).
+
+Each movie row now renders a single combined meta line: `"{studio} · CSM
+{age}"`, using `m.studio` (see the canonical studio list in Step 2, not
+`m.source`) and `m.ca`. `m.la` is not displayed anywhere; leave it in the
+schema when writing new entries (Step 4 still requires it) since older code
+or a future feature may still reference it, just don't add new display logic
+for it.
+
+This only changes the per-row badge. `m.source` and `sourceLabels` are
+unrelated plumbing that still matters -- they drive `renderGroupedView()`'s
+studio/franchise sections and the "curated lists" count, and Step 5's
+instructions to wire a new `data-<source>.js` file into `sourceLabels` still
+apply as written.

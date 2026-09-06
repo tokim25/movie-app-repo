@@ -2,6 +2,8 @@ import { test, expect } from '@playwright/test';
 import { switchToFlatView, rows } from './helpers.js';
 
 test('clearing watched marks persists and does not resurrect on reload', async ({ page }) => {
+  page.on('dialog', (dialog) => dialog.accept());
+
   await page.goto('/');
   await switchToFlatView(page);
 
@@ -14,6 +16,8 @@ test('clearing watched marks persists and does not resurrect on reload', async (
   }
   await expect(page.locator('#statChecked')).toHaveText('3');
 
+  await page.locator('#tabFamily').click();
+  await page.locator('#familyScreen').waitFor({ state: 'visible' });
   await page.locator('#clearAllBtn').click();
   await expect(page.locator('#statChecked')).toHaveText('0');
 

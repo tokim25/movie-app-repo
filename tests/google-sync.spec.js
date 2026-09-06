@@ -133,7 +133,7 @@ test('a 401 response disconnects sync and stops retrying', async ({ page }) => {
   await expect(page.locator('#googleSyncStatus')).toHaveClass(/syncError/);
   await expect(page.locator('#familySyncBtn')).toHaveText('Sync needs reconnect');
   await expect(page.locator('#familySyncBtn')).toHaveClass(/syncWarning/);
-  await page.locator('#qbFamily').click();
+  await page.locator('#tabFamily').click();
   await expect(page.locator('#googleSyncAlert')).toBeVisible();
   await expect(page.locator('#googleSyncAlertMessage')).toHaveText('Google sync paused — sign in again');
   const syncMeta = await page.evaluate(() =>
@@ -172,13 +172,13 @@ test('remembered Google sync shows reconnect when the server-side refresh fails'
 
   await page.goto('/');
 
+  await page.locator('#tabFamily').click();
+  await expect(page.locator('#googleSyncAlert')).toBeVisible();
+  await expect(page.locator('#googleSyncAlertMessage')).toHaveText('Google sync paused — sign in again');
   await expect(page.locator('#googleSyncStatus')).toHaveText('Google sync paused — sign in again');
   await expect(page.locator('#googleSyncStatus')).toHaveClass(/syncError/);
   await expect(page.locator('#familySyncBtn')).toHaveText('Sync needs reconnect');
   await expect(page.locator('#familySyncBtn')).toHaveClass(/syncWarning/);
-  await page.locator('#qbFamily').click();
-  await expect(page.locator('#googleSyncAlert')).toBeVisible();
-  await expect(page.locator('#googleSyncAlertMessage')).toHaveText('Google sync paused — sign in again');
   const signInDisplay = await page.evaluate(() => document.getElementById('googleSignInBtn').style.display);
   expect(signInDisplay).toBe('inline-block');
   const signOutDisplay = await page.evaluate(() => document.getElementById('googleSignOutBtn').style.display);
@@ -208,8 +208,9 @@ test('unfinished Google sign-in shows a reconnect warning and toast', async ({ p
   });
 
   await page.goto('/');
-  await openSyncSettings(page);
+  await switchToFlatView(page);
   await page.clock.install();
+  await openSyncSettings(page);
   await page.locator('#googleSignInBtn').click();
   await expect(page.locator('#googleSyncStatus')).toHaveText('Connecting to Google…');
 
@@ -265,23 +266,6 @@ test('failed writes back off instead of retrying aggressively, and a later succe
 });
 
 test('the "Synced with Google" toast only fires on the first successful sync of a session', async ({ page }) => {
-  await page.route('https://accounts.google.com/gsi/client', async (route) => {
-    return route.fulfill({
-      status: 200,
-      contentType: 'text/javascript',
-      body: `
-        window.google = {
-          accounts: {
-            oauth2: {
-              initCodeClient: () => ({ requestCode: () => {} }),
-              revoke: () => {}
-            }
-          }
-        };
-      `,
-    });
-  });
-
   const mock = await mockDrive(page, 'ok');
   await page.goto('/');
 

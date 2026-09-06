@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#2f6f5e">
+<meta name="theme-color" content="#bd5b3a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Family Feature">
@@ -18,26 +18,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#f8f7f3;
-    --bg-sub:#f0f0ec;
-    --surface:#fff;
-    --ink:#151916;
-    --ink-soft:#68706b;
-    --ink-faint:#9aa19d;
-    --line:rgba(21,25,22,0.1);
-    --accent:#2f6f5e;
-    --accent-soft:#e5efeb;
-    --review:#9b6a2f;
-    --review-soft:#fdf9f1;
-    --warning:#9a514d;
-    --warning-soft:#f3e8e5;
+    --bg:#faf5ee;
+    --bg-sub:#f1e7d8;
+    --ink:#332821;
+    --ink-soft:#7d6c5c;
+    --ink-faint:#a89985;
+    --line:#e6dbc9;
+    --accent:#bd5b3a;
     --check:var(--ink);
-    --star:var(--review);
+    --star:#d9932f;
     --new:#3d5f68;
     --new-bg:#e2ecec;
     --error:#9c3b3b;
-    --radius:16px;
-    --shadow:0 16px 56px rgba(27,32,28,0.09);
   }
   *{box-sizing:border-box; -webkit-font-smoothing:antialiased;}
   html,body{margin:0;padding:0;}
@@ -48,7 +40,6 @@
     min-height:100vh;
     padding-bottom:calc(84px + env(safe-area-inset-bottom, 0px));
   }
-  #catalogSurface.isHidden{ display:none; }
   @media (prefers-reduced-motion: no-preference){
     .row{ transition: opacity 0.25s ease; }
   }
@@ -60,7 +51,7 @@
     margin:0 auto;
   }
   h1{
-    font-family:inherit;
+    font-family:"Fraunces", Georgia, "Times New Roman", serif;
     font-size:clamp(34px,7vw,48px);
     font-weight:600;
     letter-spacing:-0.01em;
@@ -74,6 +65,7 @@
     max-width:440px;
     margin:0 auto;
     font-weight:400;
+    text-wrap:pretty;
   }
   .stats{
     display:flex;
@@ -94,11 +86,6 @@
     max-width:680px;
     margin:0 auto 18px;
     padding:0 20px;
-  }
-  .familyPanel .syncAlert{
-    max-width:none;
-    margin:16px 0 0;
-    padding:0;
   }
   .syncAlertInner{
     display:flex;
@@ -259,7 +246,7 @@
     cursor:pointer;
     font-weight:500;
   }
-.sortbar button.syncWarning{
+  .sortbar button.syncWarning{
     color:var(--error);
   }
   .familyBtn.syncWarning{
@@ -280,6 +267,11 @@
     outline:2px solid var(--accent);
     outline-offset:1px;
   }
+  #filterSheet #sortMode{
+    display:block;
+    width:100%;
+    margin:10px auto 0;
+  }
   #installAppBtn{
     display:none;
   }
@@ -292,7 +284,7 @@
     margin:12px auto 0;
     padding:16px 20px;
   }
-  .familyPanel .syncPanel{
+  .familyCard .syncPanel{
     max-width:none;
     margin:14px 0 0;
     padding:16px 0 0;
@@ -363,11 +355,10 @@
     color:var(--error);
   }
 
-  ul#list{
+  ul#list, #watchlistList, #searchResultsList{
     list-style:none;
-    max-width:680px;
-    margin:8px auto 0;
-    padding:0 20px;
+    margin:8px 0 0;
+    padding:0;
   }
   .row{
     border-bottom:1px solid var(--line);
@@ -471,11 +462,17 @@
     gap:10px;
     flex-wrap:wrap;
     align-items:center;
+    text-wrap:pretty;
   }
   .badge{
     color:var(--ink-soft);
   }
   .badge.csm{ color:var(--ink); font-weight:500; }
+  .metaLinks{
+    display:flex;
+    gap:10px;
+    align-items:center;
+  }
   .detailLink{
     background:none;
     border:none;
@@ -560,34 +557,12 @@
   }
   .requestForm{
     display:flex;
+    align-items:center;
     justify-content:center;
     gap:8px;
-    margin:14px 0 0;
-    padding:0;
-    max-width:none;
-  }
-  .requestPanel{
-    max-width:680px;
-    margin:18px auto 0;
-    padding:18px 20px;
-    border-radius:16px;
-    background:var(--surface);
-    border:1px solid var(--line);
-    box-shadow:0 10px 28px rgba(27,32,28,0.05);
-  }
-  .requestPanel h2{
-    margin:0 0 5px;
-    color:var(--ink);
-    font-size:18px;
-    line-height:1.25;
-    font-weight:600;
-    letter-spacing:0;
-  }
-  .requestPanel p{
-    margin:0;
-    color:var(--ink-soft);
-    font-size:13px;
-    line-height:1.45;
+    margin:32px auto 0;
+    padding:0 20px;
+    max-width:420px;
   }
   .requestForm input[type="text"]{
     flex:1;
@@ -634,107 +609,248 @@
     z-index:10;
   }
 
-  .familySurface{
-    max-width:1120px;
-    margin:0 auto;
-    padding:42px 20px 28px;
+  .quickBar{
+    position:fixed;
+    left:0; right:0; bottom:0;
+    z-index:20;
+    display:flex;
+    background:var(--bg);
+    border-top:1px solid var(--line);
+    padding:8px 6px calc(14px + env(safe-area-inset-bottom, 0px));
+    box-shadow:0 -2px 10px rgba(51,40,33,0.06);
+    transition:transform 0.22s ease;
   }
-  .familySurface[hidden]{ display:none; }
-  .familyShell{
+  .quickBar.qbHidden{
+    transform:translateY(100%);
+  }
+  .qbBtn{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:3px;
+    background:none;
+    border:none;
+    font-family:inherit;
+    color:var(--ink-soft);
+    padding:8px 4px 7px;
+    border-radius:10px;
+    cursor:pointer;
+  }
+  .qbBtn svg{ width:22px; height:22px; }
+  .qbBtn span{ font-size:11px; font-weight:500; letter-spacing:-0.01em; }
+  .qbBtn:active{ background:var(--bg-sub); }
+  .qbBtn.on{ color:var(--accent); }
+  .toast.show{ opacity:1; }
+
+  .homeScreen{
+    max-width:680px;
+    margin:0 auto;
+    padding:0 20px 24px;
+  }
+  .homeSection{
+    margin-top:28px;
+  }
+  .homeSectionHead{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    margin-bottom:10px;
+  }
+  .homeSectionLabel{
+    font-size:12px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    color:var(--ink-faint);
+  }
+  .homeSeeAll{
+    font-family:inherit;
+    font-size:14px;
+    color:var(--ink-soft);
+    background:none;
+    border:none;
+    padding:0;
+    cursor:pointer;
+  }
+  .studioGrid{
     display:grid;
-    grid-template-columns:minmax(300px, 390px) minmax(0, 1fr);
-    overflow:hidden;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+  .studioTile{
+    display:block;
+    background:var(--bg-sub);
+    border:none;
+    border-radius:12px;
+    padding:14px;
+    text-align:left;
+    font-family:inherit;
+    cursor:pointer;
+  }
+  .studioTileName{
+    display:block;
+    font-weight:600;
+    color:var(--ink);
+    margin-bottom:2px;
+  }
+  .studioTileCount{
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  .moreStudiosTile{
+    grid-column:1 / -1;
+    background:none;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:14px;
+    text-align:center;
+    font-family:inherit;
+    font-weight:600;
+    color:var(--ink-soft);
+    cursor:pointer;
+  }
+
+  /* Browse / Watchlist / Search / More screens */
+  .screenWrap{
+    max-width:680px;
+    margin:0 auto;
+    padding:24px 20px 24px;
+  }
+  .screenTopBar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:16px;
+  }
+  .screenTopBar h1{
+    font-size:28px;
+    margin:0;
+  }
+  .iconBtn{
+    width:40px;
+    height:40px;
+    border-radius:10px;
+    background:var(--accent);
+    color:#fff;
+    border:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    flex-shrink:0;
+  }
+  .iconBtn svg{ width:20px; height:20px; }
+  .sortRow{
+    margin-bottom:14px;
+  }
+  .requestLink{
+    font-size:14px;
+    color:var(--ink-soft);
+    margin:14px 0;
+  }
+  .requestPanel{
+    margin:16px 0 4px;
+    padding:16px;
+    border-radius:14px;
     background:var(--surface);
     border:1px solid var(--line);
-    border-radius:18px;
-    box-shadow:var(--shadow);
+    box-shadow:0 10px 28px rgba(27,32,28,0.05);
   }
-  .familyListPane{
-    background:var(--bg-sub);
-    border-right:1px solid var(--line);
-    padding:42px 36px;
+  .requestPanel h2{
+    margin:0 0 4px;
+    font-size:18px;
+    line-height:1.25;
+    font-weight:600;
   }
-  .familyProfilePane{
-    padding:42px;
-    background:var(--surface);
+  .requestPanel p{
+    margin:0;
+    color:var(--ink-soft);
+    font-size:13px;
+    line-height:1.45;
   }
-  .familyEyebrow{
-    margin:0 0 8px;
+  .linkBtn{
+    background:none;
+    border:none;
+    font-family:inherit;
+    font-size:inherit;
+    font-weight:600;
     color:var(--accent);
-    font-size:12px;
-    font-weight:600;
-    text-transform:uppercase;
+    padding:0;
+    cursor:pointer;
   }
-  .familyTitle{
-    margin:0 0 11px;
+  .moreCard{
+    background:var(--bg-sub);
+    border-radius:12px;
+    overflow:hidden;
+  }
+  .familyCard{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:18px;
+    box-shadow:0 10px 28px rgba(27,32,28,0.05);
+  }
+  .familyCard h2,
+  .familyCard h3{
+    margin:0 0 8px;
     color:var(--ink);
-    font-size:30px;
-    line-height:1.14;
+    font-size:19px;
+    line-height:1.25;
     font-weight:600;
-    letter-spacing:0;
   }
-  .familyCopy{
+  .familyCard p{
     margin:0;
     color:var(--ink-soft);
     font-size:14px;
     line-height:1.55;
   }
   .familyChildren{
-    margin-top:30px;
-    border-radius:var(--radius);
-    background:var(--surface);
-    overflow:hidden;
-    box-shadow:0 1px 0 rgba(21,25,22,0.04);
+    display:grid;
+    gap:10px;
+    margin-top:14px;
   }
   .familyChild{
-    padding:20px;
-    border-top:1px solid var(--line);
-  }
-  .familyChild:first-child{ border-top:0; }
-  .familyChild.selected{
-    background:rgba(47,111,94,0.04);
-    box-shadow:inset 3px 0 0 var(--accent);
+    padding:14px;
+    border-radius:13px;
+    background:var(--bg-sub);
   }
   .familyTopline,
   .familyKid,
-  .familyCue,
-  .familyProfileHead,
   .familyActions{
     display:flex;
     align-items:center;
     gap:12px;
   }
-  .familyTopline,
-  .familyCue,
-  .familyProfileHead{
+  .familyTopline{
     justify-content:space-between;
   }
   .familyAvatar{
-    width:46px;
-    height:46px;
-    border-radius:14px;
+    width:42px;
+    height:42px;
+    border-radius:13px;
     display:grid;
     place-items:center;
     background:#d8d2c6;
     color:var(--ink);
-    font-size:16px;
+    font-size:15px;
     font-weight:600;
     flex:0 0 auto;
   }
   .familyAvatar.alt{ background:#dce8eb; }
   .familyName{
     color:var(--ink);
-    font-size:17px;
+    font-size:16px;
     font-weight:600;
   }
   .familyAge{
-    margin-top:3px;
+    margin-top:2px;
     color:var(--ink-faint);
     font-size:13px;
   }
   .familyPill,
   .familyTag{
-    min-height:28px;
+    min-height:27px;
     border-radius:999px;
     display:inline-flex;
     align-items:center;
@@ -749,17 +865,20 @@
     color:var(--warning);
     background:var(--warning-soft);
   }
-  .familySummary{ margin-top:13px; }
+  .familySummary{
+    margin-top:11px;
+  }
   .familyCue{
+    display:grid;
+    grid-template-columns:7px 1fr;
+    gap:12px;
+    align-items:center;
     min-height:46px;
-    margin-top:17px;
+    margin-top:14px;
     border-radius:12px;
     padding:12px 14px;
     background:var(--surface);
     border:1px solid rgba(155,106,47,0.2);
-    color:var(--ink);
-    font-size:14px;
-    font-weight:500;
   }
   .familyCue::before{
     content:"";
@@ -767,9 +886,7 @@
     height:7px;
     border-radius:999px;
     background:var(--review);
-    flex:0 0 auto;
   }
-  .familyCue span{ flex:1; }
   .familyCue strong{
     display:block;
     color:var(--ink);
@@ -782,108 +899,21 @@
     color:var(--ink-soft);
     font-size:12px;
     font-style:normal;
-    font-weight:400;
-  }
-  .familyCue small{
-    color:var(--ink-faint);
-    font-size:12px;
-    white-space:nowrap;
-  }
-  .familyProfileHead{
-    align-items:flex-start;
-    padding-bottom:28px;
-    margin-bottom:28px;
-    border-bottom:1px solid var(--line);
-  }
-  .familyProfileName{
-    display:flex;
-    align-items:center;
-    gap:14px;
-  }
-  .familyGrid{
-    display:grid;
-    grid-template-columns:minmax(360px, 1fr) 300px;
-    gap:24px;
-    align-items:start;
-  }
-  .familyStack{
-    display:grid;
-    gap:18px;
-  }
-  .familyPanel{
-    border-radius:var(--radius);
-    background:#fbfbf9;
-    border:1px solid var(--line);
-    padding:22px;
-  }
-  .familyPanel.review{
-    background:var(--surface);
-    border-color:rgba(155,106,47,0.16);
-    border-left:4px solid var(--review);
-  }
-  .familyPanel h3{
-    margin:0 0 8px;
-    color:var(--ink);
-    font-size:21px;
-    line-height:1.25;
-    font-weight:600;
-    letter-spacing:0;
-  }
-  .familyBtn{
-    min-height:40px;
-    border:0;
-    border-radius:10px;
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:10px 14px;
-    background:rgba(21,25,22,0.055);
-    color:var(--ink);
-    font-family:inherit;
-    font-size:14px;
-    font-weight:500;
-    cursor:pointer;
-  }
-  .familyBtn.primary{
-    background:var(--accent);
-    color:#fff;
   }
   .familyRows{
-    margin-top:15px;
+    margin-top:14px;
     border-radius:13px;
     border:1px solid var(--line);
     background:var(--surface);
     overflow:hidden;
   }
-  .familyRow{
-    min-height:70px;
-    display:grid;
-    grid-template-columns:1fr 36px;
-    gap:14px;
-    align-items:center;
-    padding:16px;
-    border-top:1px solid var(--line);
-  }
-  .familyRow:first-child{ border-top:0; }
-  .familyRow strong{
-    display:block;
-    margin-bottom:4px;
-    color:var(--ink);
-    font-size:15px;
-    font-weight:500;
-  }
-  .familyRow span{
-    color:var(--ink-soft);
-    font-size:13px;
-    line-height:1.42;
-  }
   .familySettingRow{
-    min-height:92px;
     display:grid;
     grid-template-columns:minmax(0, 1fr) auto;
-    gap:18px;
+    gap:14px;
     align-items:center;
-    padding:18px 16px;
+    min-height:88px;
+    padding:15px;
     border-top:1px solid var(--line);
   }
   .familySettingRow:first-child{ border-top:0; }
@@ -935,95 +965,89 @@
     font-size:13px;
     font-weight:500;
   }
-  .ageDefault input{
-    accent-color:var(--accent);
+  .ageDefault input{ accent-color:var(--accent); }
+  @media (max-width:560px){
+    .familySettingRow{ grid-template-columns:1fr; }
+    .limitControl{ width:100%; min-width:0; }
+    .limitControl button{ width:100%; }
   }
-  .familyLevel{
-    width:36px;
-    height:36px;
-    border-radius:10px;
-    display:grid;
-    place-items:center;
-    background:#eef0ec;
-    color:var(--ink);
-    border:1px solid var(--line);
-    font-weight:600;
-  }
-  .familyAsideNote{
-    padding-top:13px;
-    margin-top:14px;
-    border-top:1px solid var(--line);
-  }
-  .familyQuiet{
-    margin-top:28px;
-    border-radius:18px;
-    background:var(--surface);
-    border:1px solid rgba(21,25,22,0.08);
-    box-shadow:var(--shadow);
-    padding:24px;
-  }
-  .familyQuiet h3{
-    margin:0 0 8px;
-    color:var(--ink);
-    font-size:19px;
-    font-weight:600;
-    letter-spacing:0;
-  }
-  .familyQuiet p{
-    margin:0;
-    color:var(--ink-soft);
-    font-size:14px;
-    line-height:1.55;
-  }
-
-  .quickBar{
-    position:fixed;
-    left:0; right:0; bottom:0;
-    z-index:20;
-    display:flex;
-    background:var(--bg);
-    border-top:1px solid var(--line);
-    padding:8px 6px calc(14px + env(safe-area-inset-bottom, 0px));
-    box-shadow:0 -2px 10px rgba(51,40,33,0.06);
-    transition:transform 0.22s ease;
-  }
-  .quickBar.qbHidden{
-    transform:translateY(100%);
-  }
-  .qbBtn{
-    flex:1;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:5px;
+  .moreRow{
+    display:block;
+    width:100%;
+    text-align:left;
     background:none;
     border:none;
     font-family:inherit;
-    color:var(--ink-soft);
-    min-height:62px;
-    padding:10px 4px 9px;
-    border-radius:13px;
+    font-size:15px;
+    color:var(--ink);
+    padding:14px 16px;
     cursor:pointer;
-    position:relative;
   }
-  .qbBtn svg{ width:25px; height:25px; }
-  .qbBtn span{ font-size:12px; font-weight:600; letter-spacing:0; }
-  .qbBtn:active{ background:var(--bg-sub); }
-  .qbBtn.on{
-    color:var(--accent);
-    background:rgba(47,111,94,0.08);
+  .moreRow:not(:last-child){
+    border-bottom:1px solid var(--line);
   }
-  .qbDot{
-    position:absolute;
-    top:8px;
-    right:calc(50% - 22px);
-    width:7px;
-    height:7px;
-    border-radius:999px;
-    background:var(--review);
-    box-shadow:0 0 0 3px var(--bg);
+  .moreRowSplit{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    cursor:default;
   }
-  .toast.show{ opacity:1; }
+  .moreRowSplit > span{
+    flex:1 1 auto;
+    min-width:0;
+  }
+  .moreRowSplit > .reset{
+    display:inline-block;
+    width:auto;
+    margin:0;
+    flex-shrink:0;
+  }
+  .scrim{
+    position:fixed;
+    inset:0;
+    background:rgba(51,40,33,0.32);
+    z-index:29;
+  }
+  .sheet{
+    position:fixed;
+    left:0; right:0; bottom:0;
+    z-index:30;
+    background:var(--bg);
+    border-radius:18px 18px 0 0;
+    padding:10px 20px calc(20px + env(safe-area-inset-bottom, 0px));
+    max-height:80vh;
+    overflow-y:auto;
+    box-shadow:0 -4px 20px rgba(51,40,33,0.16);
+  }
+  .sheetHandle{
+    width:36px;
+    height:4px;
+    border-radius:2px;
+    background:var(--line);
+    margin:0 auto 14px;
+  }
+  .sheetHeader{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    font-weight:600;
+    margin-bottom:14px;
+  }
+  .applyBtn{
+    display:block;
+    width:100%;
+    background:var(--accent);
+    color:#fff;
+    border:none;
+    border-radius:12px;
+    padding:14px;
+    font-family:inherit;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    margin-top:14px;
+  }
 
   .newSection{
     max-width:680px;
@@ -1103,58 +1127,7 @@
     cursor:pointer;
     padding:12px 0;
   }
-  .groupedView{
-    max-width:680px;
-    margin:8px auto 0;
-    padding:0 20px;
-  }
-  .studioGroup{
-    border-bottom:1px solid var(--line);
-  }
-  .studioHeader{
-    width:100%;
-    display:flex;
-    align-items:center;
-    gap:10px;
-    background:none;
-    border:none;
-    padding:14px 0;
-    cursor:pointer;
-    font-family:inherit;
-    text-align:left;
-  }
-  .studioHeader .chev{
-    color:var(--ink-faint);
-    font-size:11px;
-    display:inline-block;
-    transition:transform 0.15s;
-    flex-shrink:0;
-  }
-  .studioHeader.expanded .chev{ transform:rotate(90deg); }
-  .studioHeader .studioName{
-    font-weight:600;
-    font-size:15px;
-    flex:1;
-  }
-  .studioHeader .studioCount{
-    font-size:13px;
-    color:var(--ink-soft);
-  }
-  .studioBody{ padding:0 0 18px; }
-  .safeBetsLabel{
-    font-size:11px;
-    text-transform:uppercase;
-    letter-spacing:0.03em;
-    color:var(--ink-soft);
-    margin:0 0 10px;
-  }
   .safeBetRow{
-    display:flex;
-    align-items:flex-start;
-    gap:12px;
-    padding:8px 0;
-  }
-  .studioMovieRow{
     display:flex;
     align-items:flex-start;
     gap:12px;
@@ -1165,11 +1138,6 @@
   }
   .safeBetDetail.noPosterDetail{
     padding-left:46px;
-  }
-  .safeBetEmpty{
-    color:var(--ink-soft);
-    font-size:14px;
-    padding:8px 0;
   }
   .shuffleBtn{
     display:block;
@@ -1184,75 +1152,6 @@
     font-weight:500;
     cursor:pointer;
     margin-top:4px;
-  }
-  .browseAllLink{
-    text-align:center;
-    margin-top:10px;
-  }
-  .browseAllLink button{
-    background:none;
-    border:none;
-    color:var(--accent);
-    font-family:inherit;
-    font-size:13px;
-    font-weight:500;
-    cursor:pointer;
-  }
-
-  @media (max-width:860px){
-    .familySurface{
-      padding:18px 14px 22px;
-    }
-    .familyShell{
-      display:block;
-      border-radius:0;
-      border:0;
-      background:transparent;
-      box-shadow:none;
-      overflow:visible;
-    }
-    .familyListPane,
-    .familyProfilePane{
-      padding:24px 0;
-      background:transparent;
-      border:0;
-    }
-    .familyTitle{
-      font-size:27px;
-    }
-    .familyChildren,
-    .familyPanel,
-    .familyQuiet{
-      box-shadow:0 10px 32px rgba(27,32,28,0.06);
-    }
-    .familyProfileHead{
-      display:block;
-    }
-    .familyActions{
-      margin-top:18px;
-      flex-wrap:wrap;
-    }
-    .familyGrid{
-      grid-template-columns:1fr;
-    }
-    .familySettingRow{
-      grid-template-columns:1fr;
-    }
-    .limitControl{
-      width:100%;
-      min-width:0;
-    }
-    .limitControl button{
-      width:100%;
-    }
-    .familyCue{
-      display:grid;
-      grid-template-columns:7px 1fr;
-      align-items:center;
-    }
-    .familyCue small{
-      display:none;
-    }
   }
 
   @media (max-width:430px){
@@ -1290,80 +1189,101 @@
 </head>
 <body>
 
-<main id="catalogSurface">
-<header>
-  <h1>Family Feature</h1>
-  <div class="subtitle">Find the right movie for tonight, pre-screened for the stuff that actually matters.</div>
+<div id="homeScreen" class="homeScreen">
+  <header>
+    <h1>Family Feature</h1>
+    <div class="subtitle">Find the right movie for tonight, pre-screened for the stuff that actually matters.</div>
+    <div class="stats">
+      <div><b id="statChecked">0</b>Watched</div>
+      <div><b id="statLeft">1038</b>To watch</div>
+      <div><b id="statPriority">0</b>Want to watch</div>
+    </div>
+  </header>
+
+  <div id="newSection" class="newSection" style="display:none;"></div>
+
+  <div class="homeSection">
+    <div class="homeSectionHead">
+      <span class="homeSectionLabel">Studios</span>
+      <button type="button" class="homeSeeAll" id="homeBrowseLink">Browse tab &rarr;</button>
+    </div>
+    <div class="studioGrid" id="studioGrid"></div>
+  </div>
+</div>
+
+<div id="browseScreen" class="screenWrap" style="display:none;">
+  <div class="screenTopBar">
+    <h1>Browse</h1>
+    <button type="button" class="iconBtn" id="filterSheetBtn" aria-label="Filter and sort">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><circle cx="9" cy="7" r="2" fill="currentColor" stroke="none"/><line x1="4" y1="17" x2="20" y2="17"/><circle cx="15" cy="17" r="2" fill="currentColor" stroke="none"/></svg>
+    </button>
+  </div>
+  <div class="controls">
+    <input type="text" id="search" placeholder="Search">
+    <div class="seg" id="filterSeg">
+      <button data-filter="all" class="active">All</button>
+      <button data-filter="todo">To watch</button>
+      <button data-filter="done">Watched</button>
+    </div>
+  </div>
+  <ul id="list"></ul>
+  <div class="empty" id="emptyMsg" style="display:none;">No movies match your search.</div>
+  <section class="requestPanel" id="requestMoviePanel" aria-labelledby="requestMovieTitle">
+    <h2 id="requestMovieTitle">Request a movie</h2>
+    <p>Ask for a title to be added to the shelf.</p>
+    <iframe name="hiddenRequestFrame" style="display:none;" title="hidden"></iframe>
+    <form id="requestMovieForm" class="requestForm" action="https://docs.google.com/forms/d/e/1FAIpQLSf6gLu-Z9LO-ZnPQ70yuOmYC8_9O1Jk7Kwsk0BF-FepiWH8tQ/formResponse" method="POST" target="hiddenRequestFrame">
+      <input type="text" name="entry.1104459577" id="requestMovieInput" placeholder="Movie title" autocomplete="off" required>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+</div>
+
+<div id="watchlistScreen" class="screenWrap" style="display:none;">
+  <div class="screenTopBar">
+    <h1>Watchlist</h1>
+  </div>
+  <div class="subtitle" id="watchlistSubtitle" style="text-align:left;margin:0 0 14px;">0 movies you want to watch</div>
+  <div class="sortRow">
+    <select id="watchlistSortMode" class="sortSelect" aria-label="Sort watchlist">
+      <option value="year">Sort: Year</option>
+      <option value="age">Sort: Recommended age</option>
+      <option value="title">Sort: Title</option>
+    </select>
+  </div>
+  <ul id="watchlistList"></ul>
+  <div class="empty" id="watchlistEmptyMsg" style="display:none;">Tap the star on any movie to add it here.</div>
+</div>
+
+<div id="searchScreen" class="screenWrap" style="display:none;">
+  <div class="screenTopBar">
+    <h1>Search</h1>
+  </div>
+  <div class="controls">
+    <input type="text" id="searchScreenInput" placeholder="Search">
+  </div>
+  <p class="requestLink">Can't find a title? <button type="button" id="searchRequestLink" class="linkBtn">Request a movie</button></p>
+  <ul id="searchResultsList"></ul>
+  <div class="empty" id="searchEmptyMsg" style="display:none;"></div>
+</div>
+
+<div id="familyScreen" class="screenWrap" style="display:none;">
+  <div class="screenTopBar">
+    <h1>Family</h1>
+  </div>
   <div class="stats">
-    <div><b id="statChecked">0</b>Watched</div>
-    <div><b id="statLeft">1038</b>To watch</div>
-    <div><b id="statPriority">0</b>Want to watch</div>
+    <div><b id="statCheckedMore">0</b>Watched</div>
+    <div><b id="statLeftMore">1038</b>To watch</div>
+    <div><b id="statPriorityMore">0</b>Want to watch</div>
   </div>
-</header>
 
-<hr class="divider">
-
-<div id="newSection" class="newSection" style="display:none;"></div>
-
-<div class="viewSwitch" id="toFlatWrap"><button id="toFlatBtn">Browse all movies &rarr;</button></div>
-<div id="groupedView" class="groupedView"></div>
-
-<div id="flatView" style="display:none;">
-<div class="backLink"><button id="backToGroupsBtn">&larr; Back to browse by studio</button></div>
-<div class="controls">
-  <input type="text" id="search" placeholder="Search">
-  <div class="seg" id="filterSeg">
-    <button data-filter="all" class="active">All</button>
-    <button data-filter="todo">To watch</button>
-    <button data-filter="done">Watched</button>
-  </div>
-</div>
-<div class="filterRow">
-  <select id="decadeFilter"><option value="">Any decade</option></select>
-  <select id="ageFilter"><option value="">Any age</option></select>
-  <select id="genreFilter"><option value="">Any genre</option></select>
-  <select id="studioFilter"><option value="">Any studio</option></select>
-  <button id="newToggleBtn" class="priorityToggle newToggle">New this week</button>
-  <button id="priorityToggleBtn" class="priorityToggle">&#9733; Want to watch</button>
-  <button id="clearFiltersBtn">Clear filters</button>
-</div>
-<div class="sortbar">
-  <select id="sortMode" class="sortSelect" aria-label="Sort movies">
-    <option value="year">Sort by year</option>
-    <option value="age">Sort by recommended age</option>
-    <option value="title">Sort by title</option>
-    <option value="custom">Custom order</option>
-  </select>
-  <button id="installAppBtn">Install app</button>
-  <button id="resortBtn">Reset order</button>
-</div>
-<section class="requestPanel" id="requestMoviePanel" aria-labelledby="requestMovieTitle">
-  <h2 id="requestMovieTitle">Request a movie</h2>
-  <p>Ask for a title to be added to the shelf.</p>
-  <iframe name="hiddenRequestFrame" style="display:none;" title="hidden"></iframe>
-  <form id="requestMovieForm" class="requestForm" action="https://docs.google.com/forms/d/e/1FAIpQLSf6gLu-Z9LO-ZnPQ70yuOmYC8_9O1Jk7Kwsk0BF-FepiWH8tQ/formResponse" method="POST" target="hiddenRequestFrame">
-    <input type="text" name="entry.1104459577" id="requestMovieInput" placeholder="Movie title" autocomplete="off" required>
-    <button type="submit">Send</button>
-  </form>
-</section>
-
-<ul id="list"></ul>
-<div class="empty" id="emptyMsg" style="display:none;">No movies match your search.</div>
-</div>
-
-<button class="reset" id="clearAllBtn">Clear all watched marks</button>
-<p class="glossary">CSM = Common Sense Media, the nonprofit whose age and content guidance powers every rating here. DCOM = Disney Channel Original Movie.</p>
-</main>
-
-<section id="familySurface" class="familySurface" hidden>
-  <div class="familyShell">
-    <section class="familyListPane" aria-labelledby="familyTitle">
-      <p class="familyEyebrow">Family</p>
-      <h2 class="familyTitle" id="familyTitle">How Family understands each kid right now.</h2>
-      <p class="familyCopy">Starter settings come from product-owned age guidance. Parent changes stay protected, and repeated Watch Anyway choices become gentle review suggestions.</p>
-
+  <div class="homeSection">
+    <span class="homeSectionLabel">Understanding</span>
+    <div class="familyCard">
+      <h2>How Family understands each kid right now.</h2>
+      <p>Starter settings come from product-owned age guidance. Parent changes stay protected, and repeated Watch Anyway choices become gentle review suggestions.</p>
       <div class="familyChildren">
-        <article class="familyChild selected">
+        <article class="familyChild">
           <div class="familyTopline">
             <div class="familyKid">
               <div class="familyAvatar" aria-hidden="true">S</div>
@@ -1374,16 +1294,14 @@
             </div>
             <span class="familyPill">Personalized</span>
           </div>
-          <p class="familyCopy familySummary">More sensitive to scary moments and violence. Everything else follows age suggestions.</p>
+          <p class="familySummary">More sensitive to scary moments and violence. Everything else follows age suggestions.</p>
           <div class="familyCue">
             <span>
               <strong>Simon may be ready for a little more suspense.</strong>
               <em>Based on recent Watch Anyway choices.</em>
             </span>
-            <small>Review</small>
           </div>
         </article>
-
         <article class="familyChild">
           <div class="familyTopline">
             <div class="familyKid">
@@ -1395,203 +1313,160 @@
             </div>
             <span class="familyPill">Age guidance</span>
           </div>
-          <p class="familyCopy familySummary">Using age suggestions. No review needed right now.</p>
+          <p class="familySummary">Using age suggestions. No review needed right now.</p>
         </article>
       </div>
-    </section>
-
-    <section class="familyProfilePane" aria-labelledby="profileTitle">
-      <div class="familyProfileHead">
-        <div class="familyProfileName">
-          <div class="familyAvatar" aria-hidden="true">S</div>
-          <div>
-            <h2 class="familyTitle" id="profileTitle">Simon</h2>
-            <p class="familyCopy">6 years old</p>
-          </div>
-        </div>
-        <div class="familyActions">
-          <button class="familyBtn" id="familyEditBtn" type="button">Settings</button>
-          <button class="familyBtn primary" id="familyReviewBtn" type="button">Review suggestion</button>
-        </div>
-      </div>
-
-      <div class="familyGrid">
-        <div class="familyStack">
-          <article class="familyPanel">
-            <h3>How Family understands him</h3>
-            <p class="familyCopy">Simon is set a little gentler than age guidance for scary moments and violence. Other limits still follow product-owned starter settings for his age.</p>
-          </article>
-
-          <article class="familyPanel review">
-            <h3>Suggestion to review</h3>
-            <p class="familyCopy">Simon has watched through a few scary moments that were above his current limit. Keep the limit as-is, or review whether this one flag should change.</p>
-            <div class="familyActions" style="margin-top:16px;">
-              <button class="familyBtn primary" id="familyOpenReviewBtn" type="button">Open review</button>
-              <button class="familyBtn" type="button">Dismiss</button>
-            </div>
-          </article>
-
-          <article class="familyPanel" id="familySettingsPanel">
-            <h3>Settings</h3>
-            <p class="familyCopy">Adjust Simon's content limits here. Each setting keeps track of whether it follows age guidance or a parent change.</p>
-            <div class="familyRows">
-              <div class="familySettingRow">
-                <div>
-                  <strong>Scary moments</strong>
-                  <span>Parent-set. Gentler than age guidance.</span>
-                  <label class="ageDefault"><input type="checkbox"> Use age guidance</label>
-                </div>
-                <div class="limitControl" aria-label="Scary moments limit">
-                  <button type="button">1</button>
-                  <button type="button" class="selected">2</button>
-                  <button type="button">3</button>
-                  <button type="button">4</button>
-                </div>
-              </div>
-              <div class="familySettingRow">
-                <div>
-                  <strong>Violence</strong>
-                  <span>Parent-set. Gentler than age guidance.</span>
-                  <label class="ageDefault"><input type="checkbox"> Use age guidance</label>
-                </div>
-                <div class="limitControl" aria-label="Violence limit">
-                  <button type="button">1</button>
-                  <button type="button" class="selected">2</button>
-                  <button type="button">3</button>
-                  <button type="button">4</button>
-                </div>
-              </div>
-              <div class="familySettingRow">
-                <div>
-                  <strong>Sad moments</strong>
-                  <span>Following age guidance.</span>
-                  <label class="ageDefault"><input type="checkbox" checked> Use age guidance</label>
-                </div>
-                <div class="limitControl" aria-label="Sad moments limit">
-                  <button type="button">1</button>
-                  <button type="button">2</button>
-                  <button type="button" class="selected">3</button>
-                  <button type="button">4</button>
-                </div>
-              </div>
-              <div class="familySettingRow">
-                <div>
-                  <strong>Language</strong>
-                  <span>Following age guidance.</span>
-                  <label class="ageDefault"><input type="checkbox" checked> Use age guidance</label>
-                </div>
-                <div class="limitControl" aria-label="Language limit">
-                  <button type="button">1</button>
-                  <button type="button">2</button>
-                  <button type="button" class="selected">3</button>
-                  <button type="button">4</button>
-                </div>
-              </div>
-              <div class="familySettingRow">
-                <div>
-                  <strong>Romance</strong>
-                  <span>Following age guidance.</span>
-                  <label class="ageDefault"><input type="checkbox" checked> Use age guidance</label>
-                </div>
-                <div class="limitControl" aria-label="Romance limit">
-                  <button type="button" class="selected">1</button>
-                  <button type="button">2</button>
-                  <button type="button">3</button>
-                  <button type="button">4</button>
-                </div>
-              </div>
-              <div class="familySettingRow">
-                <div>
-                  <strong>Drinking</strong>
-                  <span>Following age guidance.</span>
-                  <label class="ageDefault"><input type="checkbox" checked> Use age guidance</label>
-                </div>
-                <div class="limitControl" aria-label="Drinking limit">
-                  <button type="button" class="selected">1</button>
-                  <button type="button">2</button>
-                  <button type="button">3</button>
-                  <button type="button">4</button>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
-
-        <aside class="familyStack">
-          <article class="familyPanel">
-            <h3>Account & sync</h3>
-            <p class="familyCopy">Manage Google sync and device transfer from Family settings. Your family data stays in your Google Drive or on this device.</p>
-            <div id="googleSyncAlert" class="syncAlert" style="display:none;" role="status" aria-live="polite">
-              <div class="syncAlertInner">
-                <div class="syncAlertCopy">
-                  <span class="syncAlertTitle">Google sync needs attention</span>
-                  <span id="googleSyncAlertMessage" class="syncAlertMessage"></span>
-                </div>
-                <button id="googleSyncAlertBtn" type="button">Reconnect</button>
-              </div>
-            </div>
-            <div class="familyActions" style="margin-top:16px;">
-              <button class="familyBtn" id="familySyncBtn" type="button">Open sync settings</button>
-            </div>
-            <div class="syncPanel" id="syncPanel" style="display:none;">
-              <div class="syncRow" id="googleSyncRow" style="display:none;">
-                <label>Sync automatically with your Google account — saves your list as a small file in your Google Drive that only this app can read or edit. See our <a href="/privacy.html">Privacy Policy</a> and <a href="/terms.html">Terms</a>.</label>
-                <div class="googleSyncControls">
-                  <button id="googleSignInBtn">Sign in with Google</button>
-                  <span id="googleSyncStatus" style="display:none;"></span>
-                  <button id="googleSignOutBtn" style="display:none;">Disconnect</button>
-                </div>
-              </div>
-              <div class="syncRow">
-                <label>Or copy a code — paste it into this app on another device to load your progress there.</label>
-                <div class="syncCodeRow">
-                  <textarea id="syncCodeOut" readonly rows="3"></textarea>
-                  <button id="syncCopyBtn">Copy</button>
-                </div>
-              </div>
-              <div class="syncRow">
-                <label>Paste a code from another device here to load it on this one.</label>
-                <div class="syncCodeRow">
-                  <textarea id="syncCodeIn" rows="3" placeholder="Paste code here"></textarea>
-                  <button id="syncLoadBtn">Load</button>
-                </div>
-              </div>
-            </div>
-          </article>
-          <article class="familyPanel">
-            <h3>Hard preferences</h3>
-            <p class="familyCopy">No hard opt-outs set. Parent-controlled hard preferences are never changed by age guidance or Watch Anyway patterns.</p>
-            <div class="familyAsideNote">
-              <span class="familyTag warning">Parent controlled</span>
-            </div>
-          </article>
-          <article class="familyPanel">
-            <h3>What changes automatically</h3>
-            <p class="familyCopy">Only age-based starter settings can mature over time. Parent-set limits stay exactly where the parent put them.</p>
-          </article>
-        </aside>
-      </div>
-    </section>
+    </div>
   </div>
 
-  <section class="familyQuiet">
-    <h3>Quiet transparency, not alerts</h3>
-    <p>Family shows changes and suggestions here when they matter. It does not interrupt movie night, and it does not turn repeated Watch Anyway choices into automatic setting changes.</p>
-  </section>
-</section>
+  <div class="homeSection">
+    <span class="homeSectionLabel">Settings</span>
+    <div class="familyCard" id="familySettingsPanel">
+      <h3>Simon</h3>
+      <p>Adjust content limits here. Each setting keeps track of whether it follows age guidance or a parent change.</p>
+      <div class="familyRows">
+        <div class="familySettingRow">
+          <div><strong>Scary moments</strong><span>Parent-set. Gentler than age guidance.</span><label class="ageDefault"><input type="checkbox"> Use age guidance</label></div>
+          <div class="limitControl" aria-label="Scary moments limit"><button type="button">1</button><button type="button" class="selected">2</button><button type="button">3</button><button type="button">4</button></div>
+        </div>
+        <div class="familySettingRow">
+          <div><strong>Violence</strong><span>Parent-set. Gentler than age guidance.</span><label class="ageDefault"><input type="checkbox"> Use age guidance</label></div>
+          <div class="limitControl" aria-label="Violence limit"><button type="button">1</button><button type="button" class="selected">2</button><button type="button">3</button><button type="button">4</button></div>
+        </div>
+        <div class="familySettingRow">
+          <div><strong>Sad moments</strong><span>Following age guidance.</span><label class="ageDefault"><input type="checkbox" checked> Use age guidance</label></div>
+          <div class="limitControl" aria-label="Sad moments limit"><button type="button">1</button><button type="button">2</button><button type="button" class="selected">3</button><button type="button">4</button></div>
+        </div>
+        <div class="familySettingRow">
+          <div><strong>Language</strong><span>Following age guidance.</span><label class="ageDefault"><input type="checkbox" checked> Use age guidance</label></div>
+          <div class="limitControl" aria-label="Language limit"><button type="button">1</button><button type="button">2</button><button type="button" class="selected">3</button><button type="button">4</button></div>
+        </div>
+        <div class="familySettingRow">
+          <div><strong>Romance</strong><span>Following age guidance.</span><label class="ageDefault"><input type="checkbox" checked> Use age guidance</label></div>
+          <div class="limitControl" aria-label="Romance limit"><button type="button" class="selected">1</button><button type="button">2</button><button type="button">3</button><button type="button">4</button></div>
+        </div>
+        <div class="familySettingRow">
+          <div><strong>Drinking</strong><span>Following age guidance.</span><label class="ageDefault"><input type="checkbox" checked> Use age guidance</label></div>
+          <div class="limitControl" aria-label="Drinking limit"><button type="button" class="selected">1</button><button type="button">2</button><button type="button">3</button><button type="button">4</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="homeSection">
+    <span class="homeSectionLabel">Account &amp; sync</span>
+    <div class="familyCard">
+      <div id="googleSyncAlert" class="syncAlert" style="display:none;" role="status" aria-live="polite">
+        <div class="syncAlertInner">
+          <div class="syncAlertCopy">
+            <span class="syncAlertTitle">Google sync needs attention</span>
+            <span id="googleSyncAlertMessage" class="syncAlertMessage"></span>
+          </div>
+          <button id="googleSyncAlertBtn" type="button">Reconnect</button>
+        </div>
+      </div>
+      <button id="familySyncBtn" class="familyBtn" type="button">Open sync settings</button>
+      <div class="syncPanel" id="syncPanel" style="display:none;">
+        <div class="syncRow" id="googleSyncRow" style="display:none;">
+          <label>Sync automatically with your Google account — saves your list as a small file in your Google Drive that only this app can read or edit. See our <a href="/privacy.html">Privacy Policy</a> and <a href="/terms.html">Terms</a>.</label>
+          <div class="googleSyncControls">
+            <button id="googleSignInBtn">Sign in with Google</button>
+            <span id="googleSyncStatus" style="display:none;"></span>
+            <button id="googleSignOutBtn" style="display:none;">Disconnect</button>
+          </div>
+        </div>
+        <div class="syncRow">
+          <label>Or copy a code — paste it into this app on another device to load your progress there.</label>
+          <div class="syncCodeRow">
+            <textarea id="syncCodeOut" readonly rows="3"></textarea>
+            <button id="syncCopyBtn">Copy</button>
+          </div>
+        </div>
+        <div class="syncRow">
+          <label>Paste a code from another device here to load it on this one.</label>
+          <div class="syncCodeRow">
+            <textarea id="syncCodeIn" rows="3" placeholder="Paste code here"></textarea>
+            <button id="syncLoadBtn">Load</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="homeSection">
+    <span class="homeSectionLabel">App</span>
+    <div class="moreCard">
+      <button id="installAppBtn" class="moreRow">Install app on this device</button>
+      <button id="resortBtn" class="moreRow">Reset custom order</button>
+    </div>
+  </div>
+
+  <div class="homeSection">
+    <span class="homeSectionLabel">Data</span>
+    <div class="moreCard">
+      <div class="moreRow moreRowSplit">
+        <span>Clear all watched marks</span>
+        <button class="reset" id="clearAllBtn">Clear</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="homeSection">
+    <span class="homeSectionLabel">About</span>
+    <div class="moreCard">
+      <p class="glossary">CSM = Common Sense Media, the nonprofit whose age and content guidance powers every rating here. DCOM = Disney Channel Original Movie.</p>
+    </div>
+  </div>
+</div>
+
+<div class="scrim" id="filterScrim" style="display:none;"></div>
+<div class="sheet" id="filterSheet" style="display:none;">
+  <div class="sheetHandle"></div>
+  <div class="sheetHeader">
+    <span>Filter &amp; sort</span>
+    <button type="button" id="clearFiltersBtn" class="linkBtn">Clear</button>
+  </div>
+  <div class="filterRow">
+    <select id="decadeFilter"><option value="">Any decade</option></select>
+    <select id="ageFilter"><option value="">Any age</option></select>
+  </div>
+  <div class="filterRow">
+    <select id="genreFilter"><option value="">Any genre</option></select>
+    <select id="studioFilter"><option value="">Any studio</option></select>
+  </div>
+  <div class="filterRow">
+    <button id="newToggleBtn" class="priorityToggle newToggle">New this week</button>
+    <button id="priorityToggleBtn" class="priorityToggle">&#9733; Want to watch</button>
+  </div>
+  <select id="sortMode" class="sortSelect" aria-label="Sort movies">
+    <option value="year">Sort by year</option>
+    <option value="age">Sort by recommended age</option>
+    <option value="title">Sort by title</option>
+    <option value="custom">Custom order</option>
+  </select>
+  <button type="button" id="applyFiltersBtn" class="applyBtn">Show movies</button>
+</div>
 
 <div class="toast" id="toast"></div>
 
-<nav class="quickBar" id="quickBar" aria-label="Primary sections">
-  <button type="button" class="qbBtn on" id="qbTonight" aria-current="page">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8z"/><path d="M8 4v4"/><path d="M16 4v4"/><path d="M4 12h16"/></svg>
-    <span>Tonight</span>
+<nav class="quickBar" id="quickBar" aria-label="Main navigation">
+  <button type="button" class="qbBtn" id="tabHome">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9h12v-9"/></svg>
+    <span>Home</span>
   </button>
-  <button type="button" class="qbBtn" id="qbShelf">
+  <button type="button" class="qbBtn" id="tabBrowse">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>
+    <span>Browse</span>
+  </button>
+  <button type="button" class="qbBtn" id="qbWatchlist">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 4l2.3 4.9 5.2.7-3.8 3.8.9 5.3L12 16.2 7.4 18.7l.9-5.3-3.8-3.8 5.2-.7z"/></svg>
-    <span>Shelf</span>
+    <span>Watchlist</span>
   </button>
-  <button type="button" class="qbBtn" id="qbFamily">
+  <button type="button" class="qbBtn" id="qbSearch">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="20" y1="20" x2="15.4" y2="15.4"/></svg>
+    <span>Search</span>
+  </button>
+  <button type="button" class="qbBtn" id="tabFamily">
     <span class="qbDot" aria-hidden="true"></span>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 11a4 4 0 1 0-8 0v3a4 4 0 0 0 8 0v-3z"/><path d="M7 21a7 7 0 0 1 10 0"/><path d="M4 12a3 3 0 0 1 2-2.8"/><path d="M20 12a3 3 0 0 0-2-2.8"/></svg>
     <span>Family</span>
@@ -1656,7 +1531,8 @@ const MERGED_MOVIE_NUMS = new Map([
   ['611', '270'],
   ['629', '282'],
   ['614', '359'],
-  ['659', '450']
+  ['659', '450'],
+  ['666', '305']
 ]);
 const MOVIES_BY_STUDIO = MOVIES.reduce((groups, movie, idx)=>{
   if(!movie.studio) return groups;
@@ -1675,8 +1551,7 @@ let ageFilter = "";
 let genreFilter = "";
 let studioFilter = "";
 let sortMode = "year";
-let viewMode = "grouped";
-let groupedExpanded = {};
+let currentScreen = "home";
 
 const GOOGLE_CLIENT_ID = "987776124251-t4skn7ia6qd1r88ftass906jinm98v1q.apps.googleusercontent.com";
 const DRIVE_FILE_NAME = "family-feature-state-v3.json";
@@ -1988,29 +1863,24 @@ function createStarButton(idx, isPriority){
   return star;
 }
 
-function createMeta(idx, m, options){
+function createMeta(idx, m){
   const meta = document.createElement('div');
   meta.className = 'meta';
-
-  if(options && options.listLabel){
-    const badge = document.createElement('span');
-    badge.className = 'badge';
-    if(options.listTitle) badge.title = options.listTitle;
-    badge.textContent = options.listLabel + (options.listAge || '');
-    meta.appendChild(badge);
-  }
 
   const csmBadge = document.createElement('span');
   csmBadge.className = 'badge csm';
   csmBadge.title = 'Common Sense Media';
-  csmBadge.textContent = 'CSM ' + m.ca;
+  csmBadge.textContent = `${m.studio} · CSM ${m.ca}`;
   meta.appendChild(csmBadge);
+
+  const links = document.createElement('div');
+  links.className = 'metaLinks';
 
   const detailBtn = document.createElement('button');
   detailBtn.className = 'detailLink';
   detailBtn.textContent = openDetail === idx ? 'Hide' : 'Details';
   detailBtn.onclick = () => toggleDetail(idx);
-  meta.appendChild(detailBtn);
+  links.appendChild(detailBtn);
 
   const sourceUrl = m.srcUrl ? safeSourceUrl(m.srcUrl) : '';
   if(sourceUrl){
@@ -2020,8 +1890,10 @@ function createMeta(idx, m, options){
     sourceLink.target = '_blank';
     sourceLink.rel = 'noopener';
     sourceLink.textContent = 'Source';
-    meta.appendChild(sourceLink);
+    links.appendChild(sourceLink);
   }
+
+  meta.appendChild(links);
 
   return meta;
 }
@@ -2133,15 +2005,11 @@ function resetOrder(){
 }
 
 function clearAllChecks(){
+  if(!window.confirm('Clear all watched marks? This can\'t be undone.')) return;
   MOVIES.forEach((_, idx) => setMark('checked', idx, false));
   saveState();
   renderCurrentView();
   showToast('Watched marks cleared');
-}
-
-function toggleStudioGroup(studio){
-  groupedExpanded[studio] = !groupedExpanded[studio];
-  renderGroupedView();
 }
 
 function browseStudio(studio){
@@ -2156,7 +2024,7 @@ function browseStudio(studio){
   document.getElementById('sortMode').value = sortMode;
   studioFilter = studio;
   document.getElementById('studioFilter').value = studio;
-  switchToFlat();
+  showScreen('browse');
 }
 
 function browseNew(){
@@ -2171,78 +2039,92 @@ function browseNew(){
   document.getElementById('sortMode').value = sortMode;
   newOnly = true;
   document.getElementById('newToggleBtn').classList.add('on');
-  switchToFlat();
+  showScreen('browse');
 }
 
-function setActiveTab(tab){
-  const tabs = {
-    tonight: document.getElementById('qbTonight'),
-    shelf: document.getElementById('qbShelf'),
-    family: document.getElementById('qbFamily')
-  };
-  Object.entries(tabs).forEach(([name, button])=>{
-    if(!button) return;
-    const selected = name === tab;
-    button.classList.toggle('on', selected);
-    if(selected) button.setAttribute('aria-current', 'page');
-    else button.removeAttribute('aria-current');
+// Exactly one function drives every tab switch -- not one per tab. It
+// always does all four steps below, for every screen, every time: no
+// tab-specific variant, and no screen is ever wired to another tab's
+// content (see Tab_State_Spec on the design canvas -- this replaced two
+// hand-written functions, showHomeScreen()/showLegacyScreen(), where the
+// second only ever removed Home's "on" class and never gave Browse/More
+// their own, and both tabs fell back to the same single legacy view).
+const SCREENS = ['home', 'browse', 'watchlist', 'search', 'family'];
+let screens = {};
+let tabs = {};
+
+function showScreen(target){
+  const isSameScreen = target === currentScreen;
+  currentScreen = target;
+  SCREENS.forEach(name => {
+    screens[name].style.display = name === target ? 'block' : 'none';
+    tabs[name].classList.toggle('on', name === target);
   });
+  renderCurrentView();
+  if(isSameScreen){
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
 }
 
-function showCatalogSurface(){
-  document.getElementById('catalogSurface').classList.remove('isHidden');
-  document.getElementById('familySurface').hidden = true;
+function initScreens(){
+  SCREENS.forEach(name => {
+    screens[name] = document.getElementById(name + 'Screen');
+  });
+  tabs.home = document.getElementById('tabHome');
+  tabs.browse = document.getElementById('tabBrowse');
+  tabs.watchlist = document.getElementById('qbWatchlist');
+  tabs.search = document.getElementById('qbSearch');
+  tabs.family = document.getElementById('tabFamily');
 }
 
-function showFamilySurface(){
-  document.getElementById('catalogSurface').classList.add('isHidden');
-  document.getElementById('familySurface').hidden = false;
-  setActiveTab('family');
-}
+function renderStudioGrid(){
+  const grid = document.getElementById('studioGrid');
+  grid.replaceChildren();
 
-function switchToFlat(){
-  viewMode = 'flat';
-  showCatalogSurface();
-  document.getElementById('groupedView').style.display = 'none';
-  document.getElementById('toFlatWrap').style.display = 'none';
-  document.getElementById('flatView').style.display = 'block';
-  setActiveTab('shelf');
-  render();
-}
+  const realStudios = [...MOVIES_BY_STUDIO.entries()].filter(([studio]) => studio !== 'Other');
+  realStudios.sort((a, b) => b[1].length - a[1].length);
+  const top = realStudios.slice(0, 6);
+  const restStudioCount = MOVIES_BY_STUDIO.size - top.length;
 
-function switchToGrouped(){
-  viewMode = 'grouped';
-  showCatalogSurface();
-  document.getElementById('flatView').style.display = 'none';
-  document.getElementById('groupedView').style.display = 'block';
-  document.getElementById('toFlatWrap').style.display = 'flex';
-  setActiveTab('tonight');
-  renderGroupedView();
-}
+  top.forEach(([studio, indices]) => {
+    const tile = document.createElement('button');
+    tile.type = 'button';
+    tile.className = 'studioTile';
+    const name = document.createElement('span');
+    name.className = 'studioTileName';
+    name.textContent = studio;
+    const count = document.createElement('span');
+    count.className = 'studioTileCount';
+    count.textContent = `${indices.length} film${indices.length === 1 ? '' : 's'}`;
+    tile.appendChild(name);
+    tile.appendChild(count);
+    tile.onclick = () => browseStudio(studio);
+    grid.appendChild(tile);
+  });
 
-function switchToFamily(){
-  viewMode = 'family';
-  showFamilySurface();
-  window.scrollTo({top:0, behavior:'smooth'});
+  const more = document.createElement('button');
+  more.type = 'button';
+  more.className = 'moreStudiosTile';
+  more.textContent = `More studios · ${restStudioCount} →`;
+  more.onclick = () => showScreen('browse');
+  grid.appendChild(more);
 }
 
 function renderCurrentView(){
   posterEagerBudget = 24;
-  if(viewMode === 'family'){
-    updateStats();
-    showFamilySurface();
-    return;
-  }
-  showCatalogSurface();
   renderNewSection();
-  if(viewMode === 'grouped') renderGroupedView();
-  else render();
+  if(currentScreen === 'browse') render();
+  else if(currentScreen === 'watchlist') renderWatchlist();
+  else if(currentScreen === 'search') renderSearchScreen();
+  else updateStats();
 }
 
 function refreshCatalogData(){
   renderNewSection();
-  renderGroupedView();
   render();
+  renderWatchlist();
+  renderSearchScreen();
+  updateStats();
 }
 
 function renderNewSection(){
@@ -2315,16 +2197,21 @@ function renderNewSection(){
     const seeAll = document.createElement('button');
     seeAll.className = 'newSeeAll';
     seeAll.textContent = `See all ${indices.length} new →`;
-    seeAll.onclick = browseNew;
+    seeAll.onclick = () => browseNew();
     section.appendChild(seeAll);
   }
 }
 
 function updateStats(){
   const checkedCount = markCount(state.checked);
+  const leftCount = MOVIES.length - checkedCount;
+  const priorityCount = markCount(state.priority);
   document.getElementById('statChecked').textContent = checkedCount;
-  document.getElementById('statLeft').textContent = MOVIES.length - checkedCount;
-  document.getElementById('statPriority').textContent = markCount(state.priority);
+  document.getElementById('statLeft').textContent = leftCount;
+  document.getElementById('statPriority').textContent = priorityCount;
+  document.getElementById('statCheckedMore').textContent = checkedCount;
+  document.getElementById('statLeftMore').textContent = leftCount;
+  document.getElementById('statPriorityMore').textContent = priorityCount;
 
   const syncPanel = document.getElementById('syncPanel');
   if(syncPanel && syncPanel.style.display !== 'none'){
@@ -2332,110 +2219,93 @@ function updateStats(){
   }
 }
 
-function renderGroupedView(){
+function createSimpleRow(idx){
+  const m = MOVIES[idx];
+  const isChecked = markValue(state.checked, idx);
+
+  const li = document.createElement('li');
+  li.className = 'row' + (isChecked ? ' checked' : '');
+
+  const check = document.createElement('button');
+  check.className = 'check' + (isChecked ? ' on' : '');
+  check.setAttribute('aria-label', 'Mark watched');
+  check.onclick = () => toggleCheck(idx);
+
+  const isPriority = markValue(state.priority, idx);
+  const star = createStarButton(idx, isPriority);
+
+  const poster = createPoster(m, null, isRecent(m));
+
+  const info = document.createElement('div');
+  info.className = 'info';
+  const title = document.createElement('div');
+  title.className = 'title';
+  title.textContent = `${m.t} (${m.y})`;
+  title.onclick = () => toggleDetail(idx);
+  const meta = createMeta(idx, m);
+  info.appendChild(title);
+  info.appendChild(meta);
+
+  li.appendChild(check);
+  li.appendChild(star);
+  if(poster) li.appendChild(poster);
+  li.appendChild(info);
+
+  return li;
+}
+
+function appendSimpleRow(listEl, idx){
+  const row = createSimpleRow(idx);
+  listEl.appendChild(row);
+  if(openDetail === idx){
+    const hasPoster = !!row.querySelector('.poster');
+    const detail = document.createElement('div');
+    detail.className = 'detail open' + (hasPoster ? '' : ' noPosterDetail');
+    detail.textContent = MOVIES[idx].full;
+    listEl.appendChild(detail);
+  }
+}
+
+function renderWatchlist(){
   posterEagerBudget = 24;
-  const groupedEl = document.getElementById('groupedView');
-  groupedEl.replaceChildren();
+  const listEl = document.getElementById('watchlistList');
+  const emptyMsg = document.getElementById('watchlistEmptyMsg');
+  const subtitle = document.getElementById('watchlistSubtitle');
+  const watchlistSortMode = document.getElementById('watchlistSortMode').value;
 
-  const studios = [...MOVIES_BY_STUDIO.keys()].sort((a,b) => MOVIES_BY_STUDIO.get(b).length - MOVIES_BY_STUDIO.get(a).length);
+  const allIndices = MOVIES.map((m, idx) => idx).filter(idx => markValue(state.priority, idx));
+  const indices = sortMovieIndices(allIndices, watchlistSortMode);
 
-  studios.forEach(studio=>{
-    const indices = MOVIES_BY_STUDIO.get(studio);
+  subtitle.textContent = `${indices.length} movie${indices.length === 1 ? '' : 's'} you want to watch`;
+  listEl.replaceChildren();
+  emptyMsg.style.display = indices.length ? 'none' : 'block';
 
-    const group = document.createElement('div');
-    group.className = 'studioGroup';
+  indices.forEach(idx => appendSimpleRow(listEl, idx));
+}
 
-    const header = document.createElement('button');
-    header.className = 'studioHeader' + (groupedExpanded[studio] ? ' expanded' : '');
-    const chev = document.createElement('span');
-    chev.className = 'chev';
-    chev.textContent = '\u25b8';
-    const studioName = document.createElement('span');
-    studioName.className = 'studioName';
-    studioName.textContent = studio;
-    const studioCount = document.createElement('span');
-    studioCount.className = 'studioCount';
-    studioCount.textContent = indices.length;
-    header.appendChild(chev);
-    header.appendChild(studioName);
-    header.appendChild(studioCount);
-    header.onclick = () => toggleStudioGroup(studio);
-    group.appendChild(header);
+function renderSearchScreen(){
+  posterEagerBudget = 24;
+  const listEl = document.getElementById('searchResultsList');
+  const emptyMsg = document.getElementById('searchEmptyMsg');
+  const q = document.getElementById('searchScreenInput').value.trim().toLowerCase();
 
-    if(groupedExpanded[studio]){
-      const body = document.createElement('div');
-      body.className = 'studioBody';
+  listEl.replaceChildren();
 
-      const label = document.createElement('p');
-      label.className = 'safeBetsLabel';
-      label.textContent = 'Chronological';
-      body.appendChild(label);
+  if(!q){
+    emptyMsg.style.display = 'none';
+    return;
+  }
 
-      const studioMovies = sortMovieIndices(indices, 'year');
-      if(studioMovies.length === 0){
-        const empty = document.createElement('p');
-        empty.className = 'safeBetEmpty';
-        const unwatchedCount = indices.filter(i => !markValue(state.checked, i)).length;
-        empty.textContent = unwatchedCount === 0 ? "You've watched everything here." : 'Nothing to show.';
-        body.appendChild(empty);
-      } else {
-        studioMovies.forEach(idx=>{
-          const m = MOVIES[idx];
-          const isChecked = markValue(state.checked, idx);
+  const indices = MOVIES.map((m, idx) => idx).filter(idx => MOVIES[idx].t.toLowerCase().includes(q));
 
-          const row = document.createElement('div');
-          row.className = 'studioMovieRow';
+  if(indices.length === 0){
+    emptyMsg.textContent = `No matches for "${q}". Try a different spelling, or request it above.`;
+    emptyMsg.style.display = 'block';
+    return;
+  }
+  emptyMsg.style.display = 'none';
 
-          const check = document.createElement('button');
-          check.className = 'check' + (isChecked ? ' on' : '');
-          check.setAttribute('aria-label', 'Mark watched');
-          check.onclick = () => toggleCheck(idx);
-
-          const isPriority = markValue(state.priority, idx);
-          const star = createStarButton(idx, isPriority);
-
-          const poster = createPoster(m, 'safeBetPoster', isRecent(m));
-
-          const info = document.createElement('div');
-          info.className = 'info';
-          const title = document.createElement('div');
-          title.className = 'title';
-          title.textContent = `${m.t} (${m.y})`;
-          title.onclick = () => toggleDetail(idx);
-          const meta = createMeta(idx, m);
-          info.appendChild(title);
-          info.appendChild(meta);
-
-          row.appendChild(check);
-          row.appendChild(star);
-          if(poster) row.appendChild(poster);
-          row.appendChild(info);
-          body.appendChild(row);
-
-          if(openDetail === idx){
-            const detail = document.createElement('div');
-            detail.className = 'detail open safeBetDetail' + (poster ? '' : ' noPosterDetail');
-            detail.textContent = m.full;
-            body.appendChild(detail);
-          }
-        });
-      }
-
-      const browseWrap = document.createElement('p');
-      browseWrap.className = 'browseAllLink';
-      const browseBtn = document.createElement('button');
-      browseBtn.textContent = `Browse all ${indices.length} →`;
-      browseBtn.onclick = () => browseStudio(studio);
-      browseWrap.appendChild(browseBtn);
-      body.appendChild(browseWrap);
-
-      group.appendChild(body);
-    }
-
-    groupedEl.appendChild(group);
-  });
-
-  updateStats();
+  indices.forEach(idx => appendSimpleRow(listEl, idx));
 }
 
 function encodeState(){
@@ -2867,11 +2737,7 @@ function render(){
     title.className = 'title';
     title.textContent = `${m.t} (${m.y})`;
     title.onclick = () => toggleDetail(idx);
-    const sourceLabels = { RT: 'RT', DCOM: 'DCOM', DISNEY: 'Disney', PIXAR: 'Pixar', DREAMWORKS: 'DreamWorks', NICK: 'Nickelodeon', EXTRA: 'Added', CSM: 'CSM Picks', MCUDC: 'Marvel/DC', GHIBLI: 'Ghibli' };
-    const listLabel = sourceLabels[m.source] || 'List';
-    const listTitle = m.source === 'DCOM' ? 'Disney Channel Original Movie' : '';
-    const listAge = (m.la && m.la !== listLabel && m.la !== 'N/A') ? ` ${m.la}` : '';
-    const meta = createMeta(idx, m, { listLabel, listTitle, listAge });
+    const meta = createMeta(idx, m);
     info.appendChild(title);
     info.appendChild(meta);
 
@@ -2929,18 +2795,13 @@ document.querySelectorAll('#filterSeg button').forEach(btn=>{
 
 document.getElementById('resortBtn').addEventListener('click', resetOrder);
 document.getElementById('clearAllBtn').addEventListener('click', clearAllChecks);
-document.getElementById('toFlatBtn').addEventListener('click', ()=>{
-  decadeFilter = ''; ageFilter = ''; genreFilter = ''; studioFilter = ''; priorityOnly = false; newOnly = false; query = '';
-  document.getElementById('decadeFilter').value = '';
-  document.getElementById('ageFilter').value = '';
-  document.getElementById('genreFilter').value = '';
-  document.getElementById('studioFilter').value = '';
-  document.getElementById('search').value = '';
-  document.getElementById('priorityToggleBtn').classList.remove('on');
-  document.getElementById('newToggleBtn').classList.remove('on');
-  switchToFlat();
+
+document.getElementById('familySyncBtn').addEventListener('click', ()=>{
+  const panel = document.getElementById('syncPanel');
+  const opening = panel.style.display === 'none';
+  panel.style.display = opening ? 'block' : 'none';
+  if(opening) document.getElementById('syncCodeOut').value = encodeState();
 });
-document.getElementById('backToGroupsBtn').addEventListener('click', switchToGrouped);
 
 document.getElementById('syncCopyBtn').addEventListener('click', async ()=>{
   const out = document.getElementById('syncCodeOut');
@@ -2966,7 +2827,7 @@ document.getElementById('googleSignInBtn').addEventListener('click', ()=>{
 
 document.getElementById('googleSyncAlertBtn').addEventListener('click', ()=>{
   googleSyncIntent = true;
-  switchToFamily();
+  showScreen('family');
   const panel = document.getElementById('syncPanel');
   panel.style.display = 'block';
   document.getElementById('syncCodeOut').value = encodeState();
@@ -3010,12 +2871,8 @@ document.getElementById('syncLoadBtn').addEventListener('click', ()=>{
     state = decodeState(input.value);
     saveState();
     input.value = '';
-    if(viewMode === 'family'){
-      refreshCatalogData();
-      showFamilySurface();
-    }else{
-      renderCurrentView();
-    }
+    if(currentScreen === 'family') refreshCatalogData();
+    else renderCurrentView();
     showToast('Synced from code');
   }catch(e){
     showToast("That code doesn't look right");
@@ -3084,28 +2941,48 @@ document.getElementById('priorityToggleBtn').addEventListener('click', ()=>{
   renderCurrentView();
 });
 
-document.getElementById('qbTonight').addEventListener('click', ()=>{
-  switchToGrouped();
-  window.scrollTo({top:0, behavior:'smooth'});
+document.getElementById('tabHome').addEventListener('click', ()=>{
+  showScreen('home');
 });
-document.getElementById('qbShelf').addEventListener('click', ()=>{
-  switchToFlat();
-  document.getElementById('list').scrollIntoView({behavior:'smooth', block:'start'});
+document.getElementById('homeBrowseLink').addEventListener('click', ()=>{
+  showScreen('browse');
 });
-document.getElementById('qbFamily').addEventListener('click', switchToFamily);
-['familyEditBtn', 'familyReviewBtn', 'familyOpenReviewBtn'].forEach(id=>{
-  document.getElementById(id).addEventListener('click', ()=>{
-    document.getElementById('familySettingsPanel').scrollIntoView({behavior:'smooth', block:'start'});
-  });
+document.getElementById('tabBrowse').addEventListener('click', ()=>{
+  showScreen('browse');
 });
-document.getElementById('familySyncBtn').addEventListener('click', ()=>{
-  const panel = document.getElementById('syncPanel');
-  const opening = panel.style.display === 'none';
-  panel.style.display = opening ? 'block' : 'none';
-  if(opening){
-    document.getElementById('syncCodeOut').value = encodeState();
-    panel.scrollIntoView({behavior:'smooth', block:'nearest'});
-  }
+document.getElementById('tabFamily').addEventListener('click', ()=>{
+  showScreen('family');
+});
+document.getElementById('qbSearch').addEventListener('click', ()=>{
+  showScreen('search');
+  document.getElementById('searchScreenInput').focus();
+});
+document.getElementById('qbWatchlist').addEventListener('click', ()=>{
+  showScreen('watchlist');
+});
+
+document.getElementById('filterSheetBtn').addEventListener('click', ()=>{
+  document.getElementById('filterScrim').style.display = 'block';
+  document.getElementById('filterSheet').style.display = 'block';
+});
+
+function closeFilterSheet(){
+  document.getElementById('filterScrim').style.display = 'none';
+  document.getElementById('filterSheet').style.display = 'none';
+}
+
+document.getElementById('filterScrim').addEventListener('click', closeFilterSheet);
+document.getElementById('applyFiltersBtn').addEventListener('click', closeFilterSheet);
+
+document.getElementById('watchlistSortMode').addEventListener('change', renderWatchlist);
+
+document.getElementById('searchScreenInput').addEventListener('input', renderSearchScreen);
+
+document.getElementById('searchRequestLink').addEventListener('click', ()=>{
+  showScreen('browse');
+  const input = document.getElementById('requestMovieInput');
+  input.scrollIntoView({behavior:'smooth', block:'center'});
+  input.focus();
 });
 
 // The mobile keyboard resizing the viewport makes a raw `position:fixed` bar
@@ -3187,6 +3064,9 @@ if('serviceWorker' in navigator){
 
 loadState();
 tryInitGoogleSync();
+renderStudioGrid();
+initScreens();
+showScreen('home');
 </script>
 </body>
 </html>

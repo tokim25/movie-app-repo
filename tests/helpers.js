@@ -1,10 +1,11 @@
 export async function switchToFlatView(page) {
-  await page.locator('#toFlatBtn').click();
-  await page.locator('#flatView').waitFor({ state: 'visible' });
+  await page.locator('#tabBrowse').click();
+  await page.locator('#browseScreen').waitFor({ state: 'visible' });
 }
 
 export async function openSyncSettings(page) {
-  await page.locator('#qbFamily').click();
+  await page.locator('#tabFamily').click();
+  await page.locator('#familyScreen').waitFor({ state: 'visible' });
   await page.locator('#familySyncBtn').click();
   await page.locator('#syncPanel').waitFor({ state: 'visible' });
 }
