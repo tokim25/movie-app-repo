@@ -825,6 +825,11 @@
   .familyTopline{
     justify-content:space-between;
   }
+  .familyMetaActions{
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
   .familyAvatar{
     width:42px;
     height:42px;
@@ -864,6 +869,18 @@
   .familyTag.warning{
     color:var(--warning);
     background:var(--warning-soft);
+  }
+  .familyEditBtn{
+    min-height:34px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--surface);
+    color:var(--accent);
+    font-family:inherit;
+    font-size:13px;
+    font-weight:600;
+    padding:7px 11px;
+    cursor:pointer;
   }
   .familySummary{
     margin-top:11px;
@@ -906,6 +923,103 @@
     border:1px solid var(--line);
     background:var(--surface);
     overflow:hidden;
+  }
+  .childEditor{
+    display:grid;
+    gap:12px;
+    margin-top:14px;
+  }
+  .childEditRow{
+    display:grid;
+    grid-template-columns:minmax(120px, 1fr) 104px auto;
+    gap:10px;
+    align-items:end;
+    padding:14px;
+    border-radius:13px;
+    background:var(--bg-sub);
+  }
+  .childField label{
+    display:block;
+    margin-bottom:6px;
+    color:var(--ink-faint);
+    font-size:12px;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+  }
+  .childField input,
+  .childField select{
+    width:100%;
+    min-height:40px;
+    border:1px solid transparent;
+    border-radius:10px;
+    background:var(--surface);
+    color:var(--ink);
+    font-family:inherit;
+    font-size:15px;
+    padding:8px 10px;
+  }
+  .childField input:focus,
+  .childField select:focus{
+    outline:2px solid var(--accent);
+    outline-offset:1px;
+  }
+  .childActions{
+    display:flex;
+    gap:6px;
+    justify-content:flex-end;
+  }
+  .childActions button{
+    min-height:40px;
+    border:0;
+    border-radius:10px;
+    background:var(--surface);
+    color:var(--accent);
+    font-family:inherit;
+    font-size:13px;
+    font-weight:600;
+    padding:8px 11px;
+    cursor:pointer;
+  }
+  .childActions button.warning{
+    color:var(--warning);
+  }
+  .childOnboarding{
+    margin-top:16px;
+    padding-top:16px;
+    border-top:1px solid var(--line);
+  }
+  .childOnboardingPanel{
+    display:grid;
+    gap:12px;
+    margin-top:12px;
+    padding:14px;
+    border-radius:13px;
+    background:var(--bg-sub);
+  }
+  .childOnboardingSteps{
+    display:grid;
+    gap:8px;
+    margin:2px 0 0;
+    padding:0;
+    list-style:none;
+  }
+  .childOnboardingSteps li{
+    display:flex;
+    align-items:flex-start;
+    gap:9px;
+    color:var(--ink-soft);
+    font-size:13px;
+    line-height:1.4;
+  }
+  .childOnboardingSteps li::before{
+    content:"";
+    width:7px;
+    height:7px;
+    margin-top:6px;
+    border-radius:999px;
+    background:var(--accent);
+    flex:0 0 auto;
   }
   .familySettingRow{
     display:grid;
@@ -967,6 +1081,19 @@
   }
   .ageDefault input{ accent-color:var(--accent); }
   @media (max-width:560px){
+    .familyTopline{
+      align-items:flex-start;
+    }
+    .familyMetaActions{
+      flex-direction:column;
+      align-items:flex-end;
+    }
+    .childEditRow{
+      grid-template-columns:1fr;
+    }
+    .childActions{
+      justify-content:flex-start;
+    }
     .familySettingRow{ grid-template-columns:1fr; }
     .limitControl{ width:100%; min-width:0; }
     .limitControl button{ width:100%; }
@@ -1292,7 +1419,10 @@
                 <div class="familyAge">6 years old</div>
               </div>
             </div>
-            <span class="familyPill">Personalized</span>
+            <div class="familyMetaActions">
+              <span class="familyPill">Personalized</span>
+              <button type="button" class="familyEditBtn" data-edit-child="childNameSimon">Edit</button>
+            </div>
           </div>
           <p class="familySummary">More sensitive to scary moments and violence. Everything else follows age suggestions.</p>
           <div class="familyCue">
@@ -1311,7 +1441,10 @@
                 <div class="familyAge">3 years old</div>
               </div>
             </div>
-            <span class="familyPill">Age guidance</span>
+            <div class="familyMetaActions">
+              <span class="familyPill">Age guidance</span>
+              <button type="button" class="familyEditBtn" data-edit-child="childNameNora">Edit</button>
+            </div>
           </div>
           <p class="familySummary">Using age suggestions. No review needed right now.</p>
         </article>
@@ -1320,7 +1453,96 @@
   </div>
 
   <div class="homeSection">
-    <span class="homeSectionLabel">Settings</span>
+    <span class="homeSectionLabel">Children</span>
+    <div class="familyCard" id="childrenSettingsPanel">
+      <h3>Children</h3>
+      <p>Add a child or update their name and age. Age changes update starter guidance only where a parent has not already set a custom limit.</p>
+      <div class="childEditor">
+        <div class="childEditRow">
+          <div class="childField">
+            <label for="childNameSimon">Name</label>
+            <input id="childNameSimon" type="text" value="Simon" autocomplete="off">
+          </div>
+          <div class="childField">
+            <label for="childAgeSimon">Age</label>
+            <select id="childAgeSimon">
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option selected>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+            </select>
+          </div>
+          <div class="childActions">
+            <button type="button" class="childSaveBtn">Save</button>
+            <button type="button" class="childRemoveBtn warning">Remove</button>
+          </div>
+        </div>
+        <div class="childEditRow">
+          <div class="childField">
+            <label for="childNameNora">Name</label>
+            <input id="childNameNora" type="text" value="Nora" autocomplete="off">
+          </div>
+          <div class="childField">
+            <label for="childAgeNora">Age</label>
+            <select id="childAgeNora">
+              <option selected>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+            </select>
+          </div>
+          <div class="childActions">
+            <button type="button" class="childSaveBtn">Save</button>
+            <button type="button" class="childRemoveBtn warning">Remove</button>
+          </div>
+        </div>
+      </div>
+      <div class="familyActions" style="margin-top:14px;">
+        <button class="familyBtn" id="addChildBtn" type="button">Add child</button>
+      </div>
+      <div class="childOnboarding" id="childOnboardingPanel" style="display:none;">
+        <h3>Set up a child</h3>
+        <p>Start with name and age. Family Feature applies product-owned starter settings, then lets the parent adjust anything that does not fit.</p>
+        <div class="childOnboardingPanel">
+          <div class="childEditRow">
+            <div class="childField">
+              <label for="newChildName">Name</label>
+              <input id="newChildName" type="text" placeholder="Child name" autocomplete="off">
+            </div>
+            <div class="childField">
+              <label for="newChildAge">Age</label>
+              <select id="newChildAge">
+                <option selected>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+              </select>
+            </div>
+            <div class="childActions">
+              <button type="button" id="saveNewChildBtn">Save child</button>
+            </div>
+          </div>
+          <ul class="childOnboardingSteps" aria-label="Child setup flow">
+            <li>Use age-based starter settings immediately after the child is added.</li>
+            <li>Offer parent review for content flags that commonly need adjustment.</li>
+            <li>Keep future age updates automatic only for settings the parent has not changed.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="homeSection">
+    <span class="homeSectionLabel">Content settings</span>
     <div class="familyCard" id="familySettingsPanel">
       <h3>Simon</h3>
       <p>Adjust content limits here. Each setting keeps track of whether it follows age guidance or a parent change.</p>
@@ -2795,6 +3017,40 @@ document.querySelectorAll('#filterSeg button').forEach(btn=>{
 
 document.getElementById('resortBtn').addEventListener('click', resetOrder);
 document.getElementById('clearAllBtn').addEventListener('click', clearAllChecks);
+
+document.querySelectorAll('[data-edit-child]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const target = document.getElementById(btn.dataset.editChild);
+    const panel = document.getElementById('childrenSettingsPanel');
+    if(panel) panel.scrollIntoView({ behavior:'smooth', block:'start' });
+    if(target){
+      setTimeout(()=>target.focus(), 260);
+    }
+  });
+});
+
+document.querySelectorAll('.childSaveBtn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    showToast('Child profile saved');
+  });
+});
+
+document.querySelectorAll('.childRemoveBtn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    showToast('Remove child would ask for confirmation');
+  });
+});
+
+document.getElementById('addChildBtn').addEventListener('click', ()=>{
+  const panel = document.getElementById('childOnboardingPanel');
+  panel.style.display = 'block';
+  document.getElementById('newChildName').focus();
+});
+
+document.getElementById('saveNewChildBtn').addEventListener('click', ()=>{
+  const name = document.getElementById('newChildName').value.trim();
+  showToast(name ? `${name} added with age guidance` : 'Add a child name first');
+});
 
 document.getElementById('familySyncBtn').addEventListener('click', ()=>{
   const panel = document.getElementById('syncPanel');
