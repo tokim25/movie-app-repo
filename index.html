@@ -911,6 +911,12 @@
     background:var(--bg-sub);
     border:1px solid var(--line);
   }
+  .pickCard.watched{
+    opacity:0.62;
+  }
+  .pickCard.watched .pickTitle{
+    text-decoration:line-through;
+  }
   .pickMeta{
     color:var(--ink-faint);
     font-size:12px;
@@ -1277,6 +1283,15 @@
     border-radius:11px;
     background:var(--bg-sub);
     padding:9px;
+    color:var(--ink);
+    font-family:inherit;
+    text-align:left;
+    cursor:pointer;
+  }
+  .scaleCard:hover,
+  .scaleCard:focus-visible{
+    border-color:rgba(42,91,76,0.32);
+    outline:none;
   }
   .scaleCard.active{
     border-color:rgba(42,91,76,0.42);
@@ -1325,6 +1340,31 @@
   }
   .limitControl button.starter{
     box-shadow:inset 0 0 0 2px rgba(184,91,63,0.2);
+  }
+  .fitSignals{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-top:8px;
+  }
+  .fitSignal{
+    display:inline-flex;
+    align-items:center;
+    min-height:24px;
+    border-radius:999px;
+    padding:4px 8px;
+    background:rgba(42,91,76,0.09);
+    color:var(--accent);
+    font-size:12px;
+    font-weight:650;
+  }
+  .fitSignal.amber{
+    background:var(--warning-soft);
+    color:var(--warning);
+  }
+  .fitSignal.red{
+    background:rgba(156,59,59,0.1);
+    color:var(--error);
   }
   .ageDefault{
     margin-top:10px;
@@ -1391,6 +1431,24 @@
     width:auto;
     margin:0;
     flex-shrink:0;
+  }
+  .aboutPanel{
+    padding:18px;
+    display:grid;
+    gap:14px;
+  }
+  .aboutPanel p{
+    margin:0;
+    color:var(--ink-soft);
+    font-size:14px;
+    line-height:1.5;
+  }
+  .aboutPanel ul{
+    margin:0;
+    padding-left:18px;
+    color:var(--ink-soft);
+    font-size:14px;
+    line-height:1.48;
   }
   .scrim{
     position:fixed;
@@ -1847,19 +1905,17 @@
   </div>
 
   <div class="homeSection">
-    <span class="homeSectionLabel">Data</span>
-    <div class="moreCard">
-      <div class="moreRow moreRowSplit">
-        <span>Clear all watched marks</span>
-        <button class="reset" id="clearAllBtn">Clear</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="homeSection">
     <span class="homeSectionLabel">About</span>
-    <div class="moreCard">
-      <p class="glossary">CSM = Common Sense Media, the nonprofit whose age and content guidance powers every rating here. DCOM = Disney Channel Original Movie.</p>
+    <div class="moreCard aboutPanel">
+      <p>Family Feature combines the movie catalog, Common Sense Media age guidance, your watched and Want to watch marks, and each child's content settings.</p>
+      <ul>
+        <li>Tonight checks the selected kids first. Adults-only nights do not apply child safety limits.</li>
+        <li>Recommendations pull from Want to watch first, New this week second, and the rest of Shelf last.</li>
+        <li>The kind of night changes the order inside those pools: calm favors gentler picks, silly favors comedies, new favors recent additions, and old favourite favors watched titles.</li>
+        <li>Starter settings are product-owned age defaults. Parent-set limits stay fixed unless you switch them back to starter settings.</li>
+        <li>CSM means Common Sense Media. DCOM means Disney Channel Original Movie.</li>
+      </ul>
+      <p>Your family data stays in this browser unless you turn on sync. Google sync stores a small app-only file in your Google Drive.</p>
     </div>
   </div>
 </div>
@@ -2497,6 +2553,31 @@ function createMeta(idx, m){
   return meta;
 }
 
+function createFitSignals(idx){
+  const kids = selectedKids();
+  if(!kids.length) return null;
+  const fit = movieFitForKids(MOVIES[idx], kids);
+  const wrap = document.createElement('div');
+  wrap.className = 'fitSignals';
+  const signal = document.createElement('span');
+  signal.className = 'fitSignal' + (fit.verdict === 'green' ? '' : ` ${fit.verdict}`);
+  const names = kids.length === state.children.length ? 'selected kids' : kids.map(child => child.name).join(' + ');
+  signal.textContent = fit.verdict === 'green'
+    ? `Fits ${names}`
+    : fit.verdict === 'amber'
+      ? `Review for ${names}`
+      : `Above settings for ${names}`;
+  wrap.appendChild(signal);
+  if(fit.issues.length){
+    const issue = fit.issues[0];
+    const detail = document.createElement('span');
+    detail.className = 'fitSignal amber';
+    detail.textContent = `${issue.child.name}: ${issue.flag.label}`;
+    wrap.appendChild(detail);
+  }
+  return wrap;
+}
+
 function showToast(msg){
   toastEl.textContent = msg;
   toastEl.classList.add('show');
@@ -2600,14 +2681,6 @@ function resetOrder(){
   saveState();
   renderCurrentView();
   showToast('Order reset');
-}
-
-function clearAllChecks(){
-  if(!window.confirm('Clear all watched marks? This can\'t be undone.')) return;
-  MOVIES.forEach((_, idx) => setMark('checked', idx, false));
-  saveState();
-  renderCurrentView();
-  showToast('Watched marks cleared');
 }
 
 function browseStudio(studio){
@@ -2734,17 +2807,47 @@ function inferredMovieFlagLevel(movie){
   return 3;
 }
 
+function movieContentProfile(movie){
+  const text = `${movie.t || ''} ${movie.full || ''} ${(movie.genre || []).join(' ')}`.toLowerCase();
+  const age = parseAge(movie.ca) || 6;
+  const base = inferredMovieFlagLevel(movie);
+  const score = keywords => keywords.reduce((count, word) => count + (text.includes(word) ? 1 : 0), 0);
+  return {
+    scary: Math.min(4, Math.max(base, score(['scary', 'frightening', 'horror', 'monster', 'peril', 'tense']) >= 2 ? base + 1 : base)),
+    violence: Math.min(4, Math.max(age >= 9 ? 3 : base, score(['violence', 'weapon', 'fight', 'battle', 'gun', 'explosion', 'bullying']) >= 2 ? base + 1 : base)),
+    sad: Math.min(4, Math.max(age >= 10 ? 3 : base, score(['sad', 'death', 'grief', 'loss', 'dies', 'orphan', 'separation']) >= 2 ? base + 1 : base)),
+    language: Math.min(4, Math.max(age >= 10 ? 3 : age >= 7 ? 2 : 1, score(['language', 'swear', 'hell', 'crap', 'insult']) >= 2 ? 3 : 1)),
+    romance: Math.min(4, Math.max(age >= 10 ? 3 : age >= 7 ? 2 : 1, score(['romance', 'kiss', 'crush', 'flirt', 'dating']) >= 1 ? 2 : 1)),
+    drinking: Math.min(4, Math.max(age >= 10 ? 3 : age >= 7 ? 2 : 1, score(['drink', 'drinking', 'alcohol', 'smoking', 'party']) >= 1 ? 2 : 1))
+  };
+}
+
+function movieFitForKids(movie, kids){
+  if(kids.length === 0) return { verdict: 'green', summary: 'Adults only', issues: [] };
+  const profile = movieContentProfile(movie);
+  const issues = [];
+  kids.forEach(child=>{
+    CONTENT_FLAGS.forEach(flag=>{
+      const level = profile[flag.id] || 1;
+      const limit = settingForChildFlag(child, flag.id).value;
+      if(level >= limit + 2) issues.push({ child, flag, severity: 'red' });
+      else if(level === limit + 1) issues.push({ child, flag, severity: 'amber' });
+    });
+  });
+  if(issues.some(issue => issue.severity === 'red')){
+    return { verdict: 'red', summary: 'Above settings', issues };
+  }
+  if(issues.length){
+    return { verdict: 'amber', summary: 'Review fit', issues };
+  }
+  return { verdict: 'green', summary: 'Fits settings', issues: [] };
+}
+
 function movieVerdictForKids(movie, kids){
   if(kids.length === 0) return { verdict: 'green', reasons: ['Adults-only night: safety limits are not applied.'] };
-  const flags = ['scary moments', 'violence'];
-  const level = inferredMovieFlagLevel(movie);
-  const amber = [];
-  const red = [];
-  kids.forEach(child=>{
-    const limit = settingForChildFlag(child, 'scary').value;
-    if(level >= limit + 2) red.push(`${child.name}: ${flags[0]}`);
-    else if(level === limit + 1) amber.push(`${child.name}: ${flags[0]}`);
-  });
+  const fit = movieFitForKids(movie, kids);
+  const red = fit.issues.filter(issue => issue.severity === 'red').map(issue => `${issue.child.name}: ${issue.flag.plain}`);
+  const amber = fit.issues.filter(issue => issue.severity === 'amber').map(issue => `${issue.child.name}: ${issue.flag.plain}`);
   if(red.length) return { verdict: 'red', reasons: red };
   if(amber.length) return { verdict: 'amber', reasons: amber };
   return { verdict: 'green', reasons: kids.map(child => `Within ${child.name}'s starter settings.`).slice(0, 2) };
@@ -2759,14 +2862,47 @@ function isTonightEligible(idx, kids, maxAge, includeSkipped){
   return true;
 }
 
+function moodScore(idx){
+  const movie = MOVIES[idx];
+  const genres = movie.genre || [];
+  const text = `${movie.t || ''} ${movie.full || ''}`.toLowerCase();
+  const age = parseAge(movie.ca) || 99;
+  if(tonightSelection.mood === 'calm'){
+    let score = age;
+    if(genres.includes('Drama') || text.includes('scary') || text.includes('peril')) score += 3;
+    if(genres.includes('Comedy') || genres.includes('Musical')) score -= 1;
+    return score;
+  }
+  if(tonightSelection.mood === 'silly'){
+    let score = 10;
+    if(genres.includes('Comedy')) score -= 5;
+    if(genres.includes('Animation')) score -= 2;
+    if(genres.includes('Musical')) score -= 1;
+    if(genres.includes('Drama') || genres.includes('Documentary')) score += 3;
+    return score;
+  }
+  if(tonightSelection.mood === 'favorite'){
+    return markValue(state.checked, idx) ? 0 : 8;
+  }
+  if(tonightSelection.mood === 'new'){
+    return 0;
+  }
+  return 0;
+}
+
+function sortForTonightMood(indices, baseCompare){
+  return indices.slice().sort((a, b) => moodScore(a) - moodScore(b) || baseCompare(a, b));
+}
+
 function tonightSourceTiers(){
   const ageSorted = sortMovieIndices(MOVIES.map((_, idx) => idx), 'age');
-  const newestSorted = MOVIES.map((_, idx) => idx).sort(compareByAddedThenRelease);
+  const newestSorted = sortForTonightMood(MOVIES.map((_, idx) => idx), compareByAddedThenRelease);
   const shelfSorted = state.order && state.order.length ? state.order.slice() : ageSorted;
+  const fallbackSorted = sortForTonightMood(ageSorted, compareByAge);
   return [
-    { source: 'Want to watch', indices: shelfSorted.filter(idx => markValue(state.priority, idx)) },
+    { source: 'Want to watch', indices: sortForTonightMood(shelfSorted.filter(idx => markValue(state.priority, idx)), compareByAge) },
     { source: 'New this week', indices: newestSorted.filter(idx => !markValue(state.priority, idx) && isRecent(MOVIES[idx])) },
-    { source: 'Shelf', indices: ageSorted.filter(idx => !markValue(state.priority, idx) && !isRecent(MOVIES[idx])) }
+    { source: 'Shelf', indices: fallbackSorted.filter(idx => !markValue(state.priority, idx) && !isRecent(MOVIES[idx])) }
   ];
 }
 
@@ -2801,6 +2937,7 @@ function showTonightPick(){
   tonightSelection.amber = verdict.verdict === 'amber';
 
   const verdictEl = document.getElementById('tonightVerdict');
+  document.getElementById('tonightPickCard').classList.toggle('watched', markValue(state.checked, idx));
   verdictEl.textContent = verdict.verdict === 'amber' ? 'Amber: worth a quick look' : 'Green Light';
   document.getElementById('tonightPickTitle').textContent = `${movie.t} (${movie.y})`;
 
@@ -2821,6 +2958,13 @@ function showTonightPick(){
   });
   document.getElementById('tonightWatchAnywayBtn').style.display = verdict.verdict === 'amber' ? 'inline-block' : 'none';
   document.getElementById('tonightPickCard').style.display = 'block';
+}
+
+function skipCurrentTonightPick(){
+  if(tonightSelection.currentPickIdx !== null){
+    tonightSelection.skippedMovieNums.add(movieKey(tonightSelection.currentPickIdx));
+  }
+  showTonightPick();
 }
 
 function logWatchAnywaySignal(){
@@ -3020,6 +3164,8 @@ function renderNewSection(){
     info.appendChild(title);
     info.appendChild(tag);
     info.appendChild(meta);
+    const fitSignals = createFitSignals(idx);
+    if(fitSignals) info.appendChild(fitSignals);
 
     row.appendChild(check);
     row.appendChild(star);
@@ -3087,6 +3233,8 @@ function createSimpleRow(idx){
   const meta = createMeta(idx, m);
   info.appendChild(title);
   info.appendChild(meta);
+  const fitSignals = createFitSignals(idx);
+  if(fitSignals) info.appendChild(fitSignals);
 
   li.appendChild(check);
   li.appendChild(star);
@@ -3587,6 +3735,8 @@ function render(){
     const meta = createMeta(idx, m);
     info.appendChild(title);
     info.appendChild(meta);
+    const fitSignals = createFitSignals(idx);
+    if(fitSignals) info.appendChild(fitSignals);
 
     const moves = document.createElement('div');
     moves.className = 'moves';
@@ -3642,7 +3792,6 @@ document.querySelectorAll('#filterSeg button').forEach(btn=>{
 });
 
 document.getElementById('resortBtn').addEventListener('click', resetOrder);
-document.getElementById('clearAllBtn').addEventListener('click', clearAllChecks);
 
 document.querySelectorAll('[data-edit-child]').forEach(btn=>{
   btn.addEventListener('click', ()=>{
@@ -3803,8 +3952,11 @@ function renderFamilySettings(){
     const scaleHelp = document.createElement('div');
     scaleHelp.className = 'settingScaleHelp';
     flag.levels.forEach((level, index)=>{
-      const card = document.createElement('div');
+      const card = document.createElement('button');
+      card.type = 'button';
       card.className = 'scaleCard' + (index + 1 === effective.value ? ' active' : '');
+      card.setAttribute('aria-pressed', index + 1 === effective.value ? 'true' : 'false');
+      card.addEventListener('click', () => setChildFlagLimit(selectedChild.id, flag.id, index + 1));
       const levelTitle = document.createElement('strong');
       levelTitle.textContent = `${index + 1}. ${level.name}`;
       const meaning = document.createElement('span');
@@ -4165,13 +4317,18 @@ document.getElementById('tonightShelfBtn').addEventListener('click', ()=>{
 });
 
 document.getElementById('findTonightPickBtn').addEventListener('click', ()=>{
-  resetTonightSkips();
+  if(tonightSelection.currentPickIdx !== null && document.getElementById('tonightPickCard').style.display !== 'none'){
+    skipCurrentTonightPick();
+    return;
+  }
   showTonightPick();
 });
 
 document.getElementById('tonightWatchBtn').addEventListener('click', ()=>{
   if(tonightSelection.currentPickIdx !== null){
     toggleCheck(tonightSelection.currentPickIdx);
+    document.getElementById('tonightPickCard').classList.add('watched');
+    document.getElementById('tonightVerdict').textContent = 'Watched';
     showToast('Marked watched');
   }
 });
@@ -4179,10 +4336,7 @@ document.getElementById('tonightWatchBtn').addEventListener('click', ()=>{
 document.getElementById('tonightWatchAnywayBtn').addEventListener('click', logWatchAnywaySignal);
 
 document.getElementById('tonightSkipBtn').addEventListener('click', ()=>{
-  if(tonightSelection.currentPickIdx !== null){
-    tonightSelection.skippedMovieNums.add(movieKey(tonightSelection.currentPickIdx));
-  }
-  showTonightPick();
+  skipCurrentTonightPick();
   showToast('Skipped for tonight');
 });
 

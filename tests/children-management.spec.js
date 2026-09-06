@@ -61,7 +61,7 @@ test('new child gets selectable adjustable content settings', async ({ page }) =
 
   const scaryRow = page.locator('#familySettingsRows .familySettingRow[data-flag="scary"]');
   await expect(scaryRow.locator('.limitControl button.selected')).toHaveText('1');
-  await scaryRow.locator('.limitControl button').filter({ hasText: '3' }).click();
+  await scaryRow.locator('.scaleCard').filter({ hasText: '3. Moderate scares' }).click();
   await expect(scaryRow.locator('.settingBadge')).toHaveText('Parent-set');
   await expect(scaryRow).toContainText('Parent-set to 3. Age 4 starter is 1.');
   await expect(scaryRow.locator('.limitControl button.selected')).toHaveText('3');

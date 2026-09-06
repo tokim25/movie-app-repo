@@ -30,6 +30,9 @@ test('first-run setup leads to Tonight, Shelf, and Family', async ({ page }) => 
   await expect(page.locator('#childOnboardingPanel')).toContainText('Starts with product-owned starter settings');
   await expect(page.locator('#familySettingsPanel')).toContainText('Adjust content limits');
   await expect(page.locator('#familySettingsPanel .limitControl')).toHaveCount(6);
+  await expect(page.locator('#familyScreen')).not.toContainText('Clear all watched marks');
+  await expect(page.locator('#familyScreen')).toContainText('Recommendations pull from Want to watch first');
+  await expect(page.locator('#familyScreen')).toContainText('Starter settings are product-owned age defaults');
 
   await page.locator('#familySyncBtn').click();
   await expect(page.locator('#familyScreen')).toBeVisible();

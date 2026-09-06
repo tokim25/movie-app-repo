@@ -16,6 +16,42 @@ test('skip advances to a different tonight pick', async ({ page }) => {
   await expect(page.locator('#toast')).toContainText('Skipped for tonight');
 });
 
+test('finding another pick after a result behaves like skip', async ({ page }) => {
+  await page.locator('#findTonightPickBtn').click();
+  const firstPick = await page.locator('#tonightPickTitle').textContent();
+
+  await page.locator('#findTonightPickBtn').click();
+
+  await expect(page.locator('#tonightPickTitle')).not.toHaveText(firstPick);
+});
+
+test('watching tonight pick shows watched visual state', async ({ page }) => {
+  await page.locator('#findTonightPickBtn').click();
+  await page.locator('#tonightWatchBtn').click();
+
+  await expect(page.locator('#tonightPickCard')).toHaveClass(/watched/);
+  await expect(page.locator('#tonightVerdict')).toHaveText('Watched');
+});
+
+test('night mood changes the selected movie', async ({ page }) => {
+  await page.evaluate(() => {
+    const gentleIdx = MOVIES.findIndex(movie => movie.t === 'The Many Adventures of Winnie the Pooh');
+    const actionIdx = MOVIES.findIndex(movie => movie.t === 'The Incredibles');
+    if(gentleIdx < 0 || actionIdx < 0) throw new Error('Test movies missing');
+    togglePriority(gentleIdx);
+    togglePriority(actionIdx);
+    toggleCheck(actionIdx);
+  });
+
+  await page.locator('#tonightMoodChoices .choiceChip').filter({ hasText: 'Calm it down' }).click();
+  await page.locator('#findTonightPickBtn').click();
+  await expect(page.locator('#tonightPickTitle')).toContainText('Winnie the Pooh');
+
+  await page.locator('#tonightMoodChoices .choiceChip').filter({ hasText: 'Old favourite' }).click();
+  await page.locator('#findTonightPickBtn').click();
+  await expect(page.locator('#tonightPickTitle')).toContainText('The Incredibles');
+});
+
 test('tonight picks from want to watch before new and general shelf', async ({ page }) => {
   const title = await page.evaluate(() => {
     const idx = MOVIES.findIndex(movie => movie.t === 'The Greatest Showman');
