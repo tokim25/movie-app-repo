@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+(function(){
+  try{
+    var pref = localStorage.getItem('family-feature-theme-v1');
+    if(pref === 'light' || pref === 'dark'){
+      document.documentElement.setAttribute('data-theme', pref);
+    }
+  }catch(e){ /* storage unavailable; fall back to system preference */ }
+})();
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#fbf7f1" media="(prefers-color-scheme: light)">
@@ -28,7 +38,11 @@
     --ink-soft:#7d6c5c;
     --ink-faint:#a89985;
     --line:#e6dbc9;
-    --accent:#bd5b3a;
+    --accent:#bb5938;
+    --accent-rgb:187,89,56;
+    --on-accent:#fff;
+    --select-rgb:42,91,76;
+    --error-bg:#f7e8df;
     --check:var(--ink);
     --star:#d9932f;
     --new:#3d5f68;
@@ -40,16 +54,20 @@
     --shadow-card:0 14px 36px rgba(48,38,31,0.06);
   }
   @media (prefers-color-scheme: dark){
-    :root{
+    :root:not([data-theme="light"]){
       --bg:#171411;
       --bg-sub:#2b251f;
       --surface:#211d19;
       --ink:#f5eee5;
       --on-ink:#171411;
       --ink-soft:#c7b9aa;
-      --ink-faint:#948577;
+      --ink-faint:#9c8d7f;
       --line:#3a332b;
       --accent:#df8066;
+      --accent-rgb:223,128,102;
+      --on-accent:#332821;
+      --select-rgb:131,173,181;
+      --error-bg:#3a211f;
       --check:#f5eee5;
       --star:#e0a34a;
       --new:#83adb5;
@@ -60,6 +78,30 @@
       --shadow-soft:0 10px 28px rgba(0,0,0,0.2);
       --shadow-card:0 18px 44px rgba(0,0,0,0.28);
     }
+  }
+  :root[data-theme="dark"]{
+    --bg:#171411;
+    --bg-sub:#2b251f;
+    --surface:#211d19;
+    --ink:#f5eee5;
+    --on-ink:#171411;
+    --ink-soft:#c7b9aa;
+    --ink-faint:#9c8d7f;
+    --line:#3a332b;
+    --accent:#df8066;
+    --accent-rgb:223,128,102;
+    --on-accent:#332821;
+    --select-rgb:131,173,181;
+    --error-bg:#3a211f;
+    --check:#f5eee5;
+    --star:#e0a34a;
+    --new:#83adb5;
+    --new-bg:#24343a;
+    --error:#e08b82;
+    --warning:#d8ad63;
+    --warning-soft:#3a2f1d;
+    --shadow-soft:0 10px 28px rgba(0,0,0,0.2);
+    --shadow-card:0 18px 44px rgba(0,0,0,0.28);
   }
   *{box-sizing:border-box; -webkit-font-smoothing:antialiased;}
   html{
@@ -139,7 +181,7 @@
     display:flex;
     align-items:center;
     gap:12px;
-    background:#f7e8df;
+    background:var(--error-bg);
     border:1px solid rgba(156,59,59,0.18);
     border-radius:10px;
     padding:12px 14px;
@@ -477,7 +519,7 @@
     margin-top:1px;
   }
   .check.on{ background:var(--check); border-color:var(--check); }
-  .check.on::after{ content:"\2713"; color:#fff; font-size:13px; font-weight:700; }
+  .check.on::after{ content:"\2713"; color:var(--on-ink); font-size:13px; font-weight:700; }
   .star{
     width:24px; height:24px;
     border:none;
@@ -783,7 +825,7 @@
     height:40px;
     border-radius:10px;
     background:var(--accent);
-    color:#fff;
+    color:var(--on-accent);
     border:none;
     display:flex;
     align-items:center;
@@ -1015,8 +1057,8 @@
     cursor:pointer;
   }
   .choiceChip.selected{
-    border-color:rgba(42,91,76,0.26);
-    background:rgba(42,91,76,0.1);
+    border-color:rgba(var(--accent-rgb),0.4);
+    background:rgba(var(--accent-rgb),0.1);
     color:var(--accent);
   }
   .pickCard{
@@ -1087,8 +1129,8 @@
     background:var(--bg-sub);
   }
   .familyChild.active{
-    outline:2px solid rgba(42,91,76,0.34);
-    background:rgba(42,91,76,0.08);
+    outline:2px solid rgba(var(--select-rgb),0.34);
+    background:rgba(var(--select-rgb),0.08);
   }
   .familyTopline,
   .familyKid,
@@ -1160,7 +1202,7 @@
   .familyEditBtn.primary{
     background:var(--accent);
     border-color:var(--accent);
-    color:#fff;
+    color:var(--on-accent);
   }
   .familySummary{
     margin-top:11px;
@@ -1225,7 +1267,7 @@
   .settingsChildChip.selected{
     background:var(--ink);
     border-color:var(--ink);
-    color:#fff;
+    color:var(--on-ink);
   }
   .settingsIntro{
     margin-top:10px;
@@ -1381,7 +1423,7 @@
     white-space:nowrap;
   }
   .settingBadge.parent{
-    background:rgba(184,91,63,0.12);
+    background:rgba(var(--accent-rgb),0.09);
     color:var(--accent);
   }
   .settingCopy{
@@ -1405,12 +1447,12 @@
   }
   .scaleCard:hover,
   .scaleCard:focus-visible{
-    border-color:rgba(42,91,76,0.32);
+    border-color:rgba(var(--select-rgb),0.32);
     outline:none;
   }
   .scaleCard.active{
-    border-color:rgba(42,91,76,0.42);
-    background:rgba(42,91,76,0.1);
+    border-color:rgba(var(--select-rgb),0.42);
+    background:rgba(var(--select-rgb),0.1);
   }
   .scaleCard strong{
     margin:0 0 3px;
@@ -1450,11 +1492,11 @@
   }
   .limitControl button.selected{
     background:var(--ink);
-    color:#fff;
+    color:var(--on-ink);
     box-shadow:0 3px 10px rgba(21,25,22,0.18);
   }
   .limitControl button.starter{
-    box-shadow:inset 0 0 0 2px rgba(184,91,63,0.2);
+    box-shadow:inset 0 0 0 2px rgba(var(--accent-rgb),0.35);
   }
   .fitSignals{
     display:flex;
@@ -1468,7 +1510,7 @@
     min-height:24px;
     border-radius:999px;
     padding:4px 8px;
-    background:rgba(42,91,76,0.09);
+    background:rgba(var(--accent-rgb),0.09);
     color:var(--accent);
     font-size:12px;
     font-weight:650;
@@ -1648,7 +1690,7 @@
     display:block;
     width:100%;
     background:var(--accent);
-    color:#fff;
+    color:var(--on-accent);
     border:none;
     border-radius:12px;
     padding:14px;
@@ -1981,7 +2023,6 @@
   <div class="homeSection">
     <span class="homeSectionLabel">Children</span>
     <div class="familyCard" id="childrenSettingsPanel">
-      <h3>Children</h3>
       <p>Add a child or update their name and age. Age changes update starter guidance only where a parent has not already set a custom limit.</p>
       <div class="childEditor" id="childEditorList"></div>
       <div class="familyActions" style="margin-top:14px;">
@@ -2030,6 +2071,18 @@
       <div class="settingsChildPicker" id="familySettingsChildPicker" aria-label="Choose child for content settings"></div>
       <div class="settingsIntro" id="familySettingsIntro"></div>
       <div class="familyRows" id="familySettingsRows"></div>
+    </div>
+  </div>
+
+  <div class="homeSection">
+    <span class="homeSectionLabel">Appearance</span>
+    <div class="familyCard">
+      <p>Choose how Family Feature looks on this device.</p>
+      <div class="choiceGrid" id="themeChoices">
+        <button type="button" class="choiceChip" data-theme-choice="system">Match device</button>
+        <button type="button" class="choiceChip" data-theme-choice="light">Light</button>
+        <button type="button" class="choiceChip" data-theme-choice="dark">Dark</button>
+      </div>
     </div>
   </div>
 
@@ -2194,6 +2247,7 @@ const MOVIES = MOVIES_BASE
   .concat(typeof MOVIES_GHIBLI !== 'undefined' ? MOVIES_GHIBLI : []);
 const STORAGE_KEY = "family-movie-watchlist-v1";
 const DEVICE_ID_KEY = "family-feature-device-id";
+const THEME_KEY = "family-feature-theme-v1";
 const STATE_SCHEMA = 3;
 const MOVIE_NUMS = new Set(MOVIES.map(movie => String(movie.num)));
 const MOVIE_INDEX_BY_NUM = new Map(MOVIES.map((movie, idx) => [String(movie.num), idx]));
@@ -4204,7 +4258,7 @@ function renderFamilySettings(){
     picker.appendChild(chip);
   });
 
-  header.textContent = `${selectedChild.name}'s content settings`;
+  header.textContent = selectedChild.name;
   intro.textContent = `Age ${selectedChild.age} starter settings are shown with an outline. The numbered levels are product-owned calibration steps, not external ratings.`;
 
   CONTENT_FLAGS.forEach(flag=>{
@@ -4785,7 +4839,54 @@ if('serviceWorker' in navigator){
   });
 }
 
+function getThemePreference(){
+  try{
+    const pref = localStorage.getItem(THEME_KEY);
+    return (pref === 'light' || pref === 'dark') ? pref : 'system';
+  }catch(e){
+    return 'system';
+  }
+}
+
+function updateThemeColorMeta(pref){
+  const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const effectiveDark = pref === 'dark' || (pref === 'system' && systemDark);
+  let meta = document.getElementById('themeColorOverride');
+  if(!meta){
+    meta = document.createElement('meta');
+    meta.id = 'themeColorOverride';
+    meta.setAttribute('name', 'theme-color');
+    document.head.appendChild(meta);
+  }
+  meta.setAttribute('content', effectiveDark ? '#171411' : '#fbf7f1');
+}
+
+function applyTheme(pref){
+  if(pref === 'light' || pref === 'dark'){
+    document.documentElement.setAttribute('data-theme', pref);
+  }else{
+    document.documentElement.removeAttribute('data-theme');
+  }
+  try{
+    if(pref === 'system') localStorage.removeItem(THEME_KEY);
+    else localStorage.setItem(THEME_KEY, pref);
+  }catch(e){ /* storage unavailable; theme still applies for this load */ }
+
+  updateThemeColorMeta(pref);
+  document.querySelectorAll('#themeChoices .choiceChip').forEach(btn=>{
+    btn.classList.toggle('selected', btn.dataset.themeChoice === pref);
+  });
+}
+
+function initTheme(){
+  applyTheme(getThemePreference());
+  document.querySelectorAll('#themeChoices .choiceChip').forEach(btn=>{
+    btn.addEventListener('click', () => applyTheme(btn.dataset.themeChoice));
+  });
+}
+
 initScreens();
+initTheme();
 loadState();
 tryInitGoogleSync();
 renderStudioGrid();
