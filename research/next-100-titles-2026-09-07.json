@@ -1,0 +1,617 @@
+{
+  "listBatch": "next-100-titles-2026-09-07",
+  "preparedAt": "2026-09-07",
+  "preparedBy": "Claude (Movie Repo PM)",
+  "purpose": "Candidate list of the next 100 catalog titles for CSM content-flag research, prepared to hand off to whichever session has real network access to commonsensemedia.org. PM's own cloud sandbox is network-egress-blocked from CSM (verified live at prep time) and cannot execute this research directly -- see handoff doc for details.",
+  "selectionMethod": "938 total catalog entries minus the 310 already covered by Codex's pilot + refetched batches (18 covered exact-fallback + others), sorted with remaining exact-fallback ('Not on CSM; substitute source used') and '(approximate)' age entries prioritized first, then ascending catalog num.",
+  "counts": {
+    "totalCatalogEntries": 938,
+    "alreadyCoveredByCodex": 310,
+    "remainingUncovered": 628,
+    "inThisBatch": 100,
+    "fallbackEntriesInThisBatch": 14,
+    "approximateAgeEntriesInThisBatch": 13
+  },
+  "entries": [
+    {
+      "num": 137,
+      "file": "data-dcom.js",
+      "title": "The Magic Faraway Tree",
+      "currentCa": "~6+ (approximate)"
+    },
+    {
+      "num": 138,
+      "file": "data-dcom.js",
+      "title": "Northern Lights",
+      "currentCa": "Not on CSM; substitute source used"
+    },
+    {
+      "num": 141,
+      "file": "data-dcom.js",
+      "title": "High School Musical 2",
+      "currentCa": "7+ (approximate)"
+    },
+    {
+      "num": 143,
+      "file": "data-dcom.js",
+      "title": "Halloweentown II: Kalabar's Revenge",
+      "currentCa": "7+ (approximate)"
+    },
+    {
+      "num": 144,
+      "file": "data-dcom.js",
+      "title": "Zenon: Girl of the 21st Century",
+      "currentCa": "~7+ (approximate)"
+    },
+    {
+      "num": 145,
+      "file": "data-dcom.js",
+      "title": "Zenon: The Zequel",
+      "currentCa": "~7+ (approximate)"
+    },
+    {
+      "num": 146,
+      "file": "data-dcom.js",
+      "title": "Zenon: Z3",
+      "currentCa": "~9+ (approximate)"
+    },
+    {
+      "num": 147,
+      "file": "data-dcom.js",
+      "title": "Descendants",
+      "currentCa": "8+ (approximate)"
+    },
+    {
+      "num": 148,
+      "file": "data-dcom.js",
+      "title": "Descendants 2",
+      "currentCa": "8+ (approximate)"
+    },
+    {
+      "num": 149,
+      "file": "data-dcom.js",
+      "title": "Descendants 3",
+      "currentCa": "8+ (approximate)"
+    },
+    {
+      "num": 151,
+      "file": "data-dcom.js",
+      "title": "Camp Rock 2: The Final Jam",
+      "currentCa": "8+ (approximate)"
+    },
+    {
+      "num": 153,
+      "file": "data-dcom.js",
+      "title": "The Cheetah Girls 2",
+      "currentCa": "7+ (approximate)"
+    },
+    {
+      "num": 154,
+      "file": "data-dcom.js",
+      "title": "The Cheetah Girls: One World",
+      "currentCa": "7+ (approximate)"
+    },
+    {
+      "num": 155,
+      "file": "data-dcom.js",
+      "title": "Cadet Kelly",
+      "currentCa": "8+ (approximate)"
+    },
+    {
+      "num": 259,
+      "file": "data-disney.js",
+      "title": "Make Mine Music",
+      "currentCa": "Not on CSM; substitute source used"
+    },
+    {
+      "num": 343,
+      "file": "data-disney.js",
+      "title": "In Search of the Castaways",
+      "currentCa": "Not on CSM; substitute source used"
+    },
+    {
+      "num": 354,
+      "file": "data-disney.js",
+      "title": "Now You See Him, Now You Don't",
+      "currentCa": "Not on CSM; substitute source used"
+    },
+    {
+      "num": 365,
+      "file": "data-disney.js",
+      "title": "The Apple Dumpling Gang Rides Again",
+      "currentCa": "Not on CSM; substitute source used"
+    },
+    {
+      "num": 370,
+      "file": "data-disney.js",
+      "title": "Condorman",
+      "currentCa": "Not on CSM; substitute source used"
+    },
+    {
+      "num": 371,
+      "file": "data-disney.js",
+      "title": "Night Crossing",
+      "currentCa": "Not on CSM; substitute source used"
+    },
+    {
+      "num": 373,
+      "file": "data-disney.js",
+      "title": "Trenchcoat",
+      "currentCa": "Not on CSM; substitute source used"
+    },
+    {
+      "num": 392,
+      "file": "data-disney.js",
+      "title": "The Jungle Book",
+      "currentCa": "Not on CSM; substitute source used"
+    },
+    {
+      "num": 393,
+      "file": "data-disney.js",
+      "title": "A Kid in King Arthur's Court",
+      "currentCa": "Not on CSM; substitute source used"
+    },
+    {
+      "num": 546,
+      "file": "data-nickelodeon.js",
+      "title": "Snow Day",
+      "currentCa": "Not on CSM; substitute source used"
+    },
+    {
+      "num": 561,
+      "file": "data-nickelodeon.js",
+      "title": "A Fairly Odd Summer",
+      "currentCa": "Not on CSM; substitute source used"
+    },
+    {
+      "num": 1035,
+      "file": "data-extra.js",
+      "title": "Air Bud Returns",
+      "currentCa": "Not on CSM; substitute source used"
+    },
+    {
+      "num": 1054,
+      "file": "data-extra.js",
+      "title": "Octonauts & the Ring of Fire",
+      "currentCa": "Not on CSM; substitute source used"
+    },
+    {
+      "num": 101,
+      "file": "data-rt.js",
+      "title": "Beauty and the Beast",
+      "currentCa": "5+"
+    },
+    {
+      "num": 102,
+      "file": "data-rt.js",
+      "title": "Chicken Run",
+      "currentCa": "7+"
+    },
+    {
+      "num": 103,
+      "file": "data-rt.js",
+      "title": "Frozen",
+      "currentCa": "5+"
+    },
+    {
+      "num": 104,
+      "file": "data-rt.js",
+      "title": "Kiki's Delivery Service",
+      "currentCa": "5+"
+    },
+    {
+      "num": 105,
+      "file": "data-rt.js",
+      "title": "A Little Princess",
+      "currentCa": "7+"
+    },
+    {
+      "num": 106,
+      "file": "data-rt.js",
+      "title": "The Muppet Movie",
+      "currentCa": "6+"
+    },
+    {
+      "num": 107,
+      "file": "data-rt.js",
+      "title": "The Red Balloon",
+      "currentCa": "5+"
+    },
+    {
+      "num": 108,
+      "file": "data-rt.js",
+      "title": "Snow White and the Seven Dwarfs",
+      "currentCa": "5+"
+    },
+    {
+      "num": 109,
+      "file": "data-rt.js",
+      "title": "WALL-E",
+      "currentCa": "5+"
+    },
+    {
+      "num": 110,
+      "file": "data-rt.js",
+      "title": "Babe",
+      "currentCa": "7+"
+    },
+    {
+      "num": 111,
+      "file": "data-rt.js",
+      "title": "Coco",
+      "currentCa": "8+"
+    },
+    {
+      "num": 112,
+      "file": "data-rt.js",
+      "title": "Elf",
+      "currentCa": "8+"
+    },
+    {
+      "num": 113,
+      "file": "data-rt.js",
+      "title": "Fantastic Mr. Fox",
+      "currentCa": "7+"
+    },
+    {
+      "num": 114,
+      "file": "data-rt.js",
+      "title": "The Goonies",
+      "currentCa": "10+"
+    },
+    {
+      "num": 115,
+      "file": "data-rt.js",
+      "title": "Home Alone",
+      "currentCa": "8+"
+    },
+    {
+      "num": 116,
+      "file": "data-rt.js",
+      "title": "The Iron Giant",
+      "currentCa": "8+"
+    },
+    {
+      "num": 117,
+      "file": "data-rt.js",
+      "title": "Little Manhattan",
+      "currentCa": "10+"
+    },
+    {
+      "num": 118,
+      "file": "data-rt.js",
+      "title": "Matilda",
+      "currentCa": "8+"
+    },
+    {
+      "num": 119,
+      "file": "data-rt.js",
+      "title": "The Neverending Story",
+      "currentCa": "8+"
+    },
+    {
+      "num": 120,
+      "file": "data-rt.js",
+      "title": "Paddington 2",
+      "currentCa": "6+"
+    },
+    {
+      "num": 121,
+      "file": "data-rt.js",
+      "title": "Spirited Away",
+      "currentCa": "9+"
+    },
+    {
+      "num": 122,
+      "file": "data-rt.js",
+      "title": "Spy Kids",
+      "currentCa": "7+"
+    },
+    {
+      "num": 123,
+      "file": "data-rt.js",
+      "title": "Star Wars: Episode IV \u2013 A New Hope",
+      "currentCa": "8+"
+    },
+    {
+      "num": 124,
+      "file": "data-rt.js",
+      "title": "The 400 Blows",
+      "currentCa": "13+"
+    },
+    {
+      "num": 125,
+      "file": "data-rt.js",
+      "title": "Akeelah and the Bee",
+      "currentCa": "8+"
+    },
+    {
+      "num": 126,
+      "file": "data-rt.js",
+      "title": "Au Revoir, les Enfants",
+      "currentCa": "12+"
+    },
+    {
+      "num": 127,
+      "file": "data-rt.js",
+      "title": "Hugo",
+      "currentCa": "8+"
+    },
+    {
+      "num": 128,
+      "file": "data-rt.js",
+      "title": "Napoleon Dynamite",
+      "currentCa": "11+"
+    },
+    {
+      "num": 129,
+      "file": "data-rt.js",
+      "title": "Pee-wee's Big Adventure",
+      "currentCa": "7+"
+    },
+    {
+      "num": 130,
+      "file": "data-rt.js",
+      "title": "Raiders of the Lost Ark",
+      "currentCa": "11+"
+    },
+    {
+      "num": 131,
+      "file": "data-rt.js",
+      "title": "Romeo and Juliet",
+      "currentCa": "14+"
+    },
+    {
+      "num": 132,
+      "file": "data-rt.js",
+      "title": "Rudy",
+      "currentCa": "11+"
+    },
+    {
+      "num": 133,
+      "file": "data-rt.js",
+      "title": "Spider-Man: Into the Spider-Verse",
+      "currentCa": "9+"
+    },
+    {
+      "num": 134,
+      "file": "data-rt.js",
+      "title": "Time Bandits",
+      "currentCa": "9+"
+    },
+    {
+      "num": 135,
+      "file": "data-rt.js",
+      "title": "West Side Story",
+      "currentCa": "11+"
+    },
+    {
+      "num": 136,
+      "file": "data-rt.js",
+      "title": "The Witches",
+      "currentCa": "9+"
+    },
+    {
+      "num": 139,
+      "file": "data-dcom.js",
+      "title": "Under Wraps",
+      "currentCa": "7+"
+    },
+    {
+      "num": 140,
+      "file": "data-dcom.js",
+      "title": "High School Musical",
+      "currentCa": "7+"
+    },
+    {
+      "num": 142,
+      "file": "data-dcom.js",
+      "title": "Halloweentown",
+      "currentCa": "7+"
+    },
+    {
+      "num": 150,
+      "file": "data-dcom.js",
+      "title": "Camp Rock",
+      "currentCa": "8+"
+    },
+    {
+      "num": 152,
+      "file": "data-dcom.js",
+      "title": "The Cheetah Girls",
+      "currentCa": "7+"
+    },
+    {
+      "num": 156,
+      "file": "data-dcom.js",
+      "title": "Teen Beach Movie",
+      "currentCa": "8+"
+    },
+    {
+      "num": 157,
+      "file": "data-dcom.js",
+      "title": "You Lucky Dog",
+      "currentCa": "8+"
+    },
+    {
+      "num": 158,
+      "file": "data-dcom.js",
+      "title": "Brink!",
+      "currentCa": "8+"
+    },
+    {
+      "num": 159,
+      "file": "data-dcom.js",
+      "title": "Can of Worms",
+      "currentCa": "7+"
+    },
+    {
+      "num": 160,
+      "file": "data-dcom.js",
+      "title": "The Thirteenth Year",
+      "currentCa": "7+"
+    },
+    {
+      "num": 161,
+      "file": "data-dcom.js",
+      "title": "Smart House",
+      "currentCa": "8+"
+    },
+    {
+      "num": 162,
+      "file": "data-dcom.js",
+      "title": "Johnny Tsunami",
+      "currentCa": "6+"
+    },
+    {
+      "num": 163,
+      "file": "data-dcom.js",
+      "title": "Genius",
+      "currentCa": "7+"
+    },
+    {
+      "num": 164,
+      "file": "data-dcom.js",
+      "title": "P.U.N.K.S.",
+      "currentCa": "8+"
+    },
+    {
+      "num": 165,
+      "file": "data-dcom.js",
+      "title": "Don't Look Under the Bed",
+      "currentCa": "10+"
+    },
+    {
+      "num": 166,
+      "file": "data-dcom.js",
+      "title": "Horse Sense",
+      "currentCa": "8+"
+    },
+    {
+      "num": 167,
+      "file": "data-dcom.js",
+      "title": "Up, Up and Away",
+      "currentCa": "7+"
+    },
+    {
+      "num": 168,
+      "file": "data-dcom.js",
+      "title": "The Color of Friendship",
+      "currentCa": "10+"
+    },
+    {
+      "num": 169,
+      "file": "data-dcom.js",
+      "title": "Alley Cats Strike!",
+      "currentCa": "8+"
+    },
+    {
+      "num": 170,
+      "file": "data-dcom.js",
+      "title": "Rip Girls",
+      "currentCa": "7+"
+    },
+    {
+      "num": 171,
+      "file": "data-dcom.js",
+      "title": "Miracle in Lane 2",
+      "currentCa": "8+"
+    },
+    {
+      "num": 172,
+      "file": "data-dcom.js",
+      "title": "Stepsister from Planet Weird",
+      "currentCa": "7+"
+    },
+    {
+      "num": 173,
+      "file": "data-dcom.js",
+      "title": "Ready to Run",
+      "currentCa": "7+"
+    },
+    {
+      "num": 174,
+      "file": "data-dcom.js",
+      "title": "Quints",
+      "currentCa": "8+"
+    },
+    {
+      "num": 175,
+      "file": "data-dcom.js",
+      "title": "The Other Me",
+      "currentCa": "7+"
+    },
+    {
+      "num": 176,
+      "file": "data-dcom.js",
+      "title": "Mom's Got a Date with a Vampire",
+      "currentCa": "8+"
+    },
+    {
+      "num": 177,
+      "file": "data-dcom.js",
+      "title": "Phantom of the Megaplex",
+      "currentCa": "7+"
+    },
+    {
+      "num": 178,
+      "file": "data-dcom.js",
+      "title": "The Ultimate Christmas Present",
+      "currentCa": "7+"
+    },
+    {
+      "num": 179,
+      "file": "data-dcom.js",
+      "title": "Motocrossed",
+      "currentCa": "8+"
+    },
+    {
+      "num": 180,
+      "file": "data-dcom.js",
+      "title": "The Luck of the Irish",
+      "currentCa": "6+"
+    },
+    {
+      "num": 181,
+      "file": "data-dcom.js",
+      "title": "Hounded",
+      "currentCa": "7+"
+    },
+    {
+      "num": 182,
+      "file": "data-dcom.js",
+      "title": "Jett Jackson: The Movie",
+      "currentCa": "7+"
+    },
+    {
+      "num": 183,
+      "file": "data-dcom.js",
+      "title": "The Jennie Project",
+      "currentCa": "7+"
+    },
+    {
+      "num": 184,
+      "file": "data-dcom.js",
+      "title": "Jumping Ship",
+      "currentCa": "8+"
+    },
+    {
+      "num": 185,
+      "file": "data-dcom.js",
+      "title": "The Poof Point",
+      "currentCa": "7+"
+    },
+    {
+      "num": 186,
+      "file": "data-dcom.js",
+      "title": "'Twas the Night",
+      "currentCa": "7+"
+    },
+    {
+      "num": 187,
+      "file": "data-dcom.js",
+      "title": "Double Teamed",
+      "currentCa": "8+"
+    }
+  ]
+}
