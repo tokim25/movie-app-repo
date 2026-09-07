@@ -1244,6 +1244,33 @@
     font-size:12px;
     font-style:normal;
   }
+  .sadRemovedNotice{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+    margin-top:14px;
+    border-radius:12px;
+    padding:12px 14px;
+    background:var(--surface);
+    border:1px solid rgba(155,106,47,0.2);
+  }
+  .sadRemovedNotice strong{
+    display:block;
+    color:var(--ink);
+    font-size:14px;
+    font-weight:500;
+  }
+  .sadRemovedNotice em{
+    display:block;
+    margin-top:3px;
+    color:var(--ink-soft);
+    font-size:12px;
+    font-style:normal;
+  }
+  .sadRemovedNotice button{
+    flex-shrink:0;
+  }
   .familyRows{
     margin-top:14px;
     border-radius:13px;
@@ -2074,6 +2101,7 @@
       <h3 id="familySettingsChildName">No children yet</h3>
       <p>Adjust content limits for one child at a time. Starter settings come from the child's age; parent changes stay fixed until you switch them back.</p>
       <div class="settingsChildPicker" id="familySettingsChildPicker" aria-label="Choose child for content settings"></div>
+      <div id="familySettingsNotice"></div>
       <div class="settingsIntro" id="familySettingsIntro"></div>
       <div class="familyRows" id="familySettingsRows"></div>
     </div>
@@ -2273,36 +2301,14 @@ const MOVIES_BY_STUDIO = MOVIES.reduce((groups, movie, idx)=>{
 }, new Map());
 const CONTENT_FLAGS = [
   {
-    id: 'scary',
-    label: 'Scary moments',
-    plain: 'scary moments',
-    levels: [
-      { name: 'Very gentle', meaning: 'Brief surprise, quickly resolved.', example: 'Cars' },
-      { name: 'Mild tension', meaning: 'Some chase or peril, still playful.', example: 'Monsters University' },
-      { name: 'Moderate scares', meaning: 'Longer suspense or darker images.', example: 'Toy Story 3' },
-      { name: 'Big-kid scary', meaning: 'Horror flavor or sustained fear.', example: 'Night of the Zoopocalypse' }
-    ]
-  },
-  {
     id: 'violence',
-    label: 'Violence',
-    plain: 'violence',
+    label: 'Violence & Scariness',
+    plain: 'violence and scariness',
     levels: [
-      { name: 'Slapstick', meaning: 'Bumps, falls, no lasting harm.', example: 'Cars' },
-      { name: 'Cartoon action', meaning: 'Chases or crashes with low stakes.', example: 'Toy Story 2' },
-      { name: 'Sustained action', meaning: 'Weapons, battles, or repeated peril.', example: 'The Incredibles' },
-      { name: 'Older-kid fights', meaning: 'More realistic threat or bullying.', example: 'The Karate Kid' }
-    ]
-  },
-  {
-    id: 'sad',
-    label: 'Sad moments',
-    plain: 'sad moments',
-    levels: [
-      { name: 'Light emotion', meaning: 'Small disappointments or worry.', example: 'Cars' },
-      { name: 'Tender scenes', meaning: 'Separation or loss is present but soft.', example: 'Toy Story 2' },
-      { name: 'Big feelings', meaning: 'Grief, anxiety, or family stress matters.', example: 'Inside Out 2' },
-      { name: 'Heavy themes', meaning: 'Sustained grief or hard real-world topics.', example: 'Wonder' }
+      { name: 'Very mild', meaning: 'Brief surprises, bumps, or falls; no lasting harm or real menace.', example: 'Cars' },
+      { name: 'Mild peril or slapstick', meaning: 'Chases, crashes, or brief tension, still playful.', example: 'Toy Story 2 (action); Monsters University (scary)' },
+      { name: 'Moderate scares or action', meaning: 'Longer suspense, darker images, weapons/battles, or repeated peril.', example: 'The Incredibles (action); Toy Story 3 (scary)' },
+      { name: 'Older-kid intensity', meaning: 'Horror flavor, sustained fear, or more realistic fighting/threat.', example: 'The Karate Kid (action); Night of the Zoopocalypse (scary)' }
     ]
   },
   {
@@ -2635,10 +2641,37 @@ function normalizeMarks(rawMarks, version){
   return marks;
 }
 
+function parentSetValue(rawFlag){
+  if(!rawFlag || typeof rawFlag !== 'object' || rawFlag.source !== 'parent') return null;
+  const value = parseInt(rawFlag.value, 10);
+  return (value >= 1 && value <= 4) ? value : null;
+}
+
+// Migration (added 2026-09-07): 'scary' merged into 'violence' (CSM scores
+// them as one "Violence & Scariness" category), 'sad' dropped entirely (CSM
+// doesn't score it as its own category -- sad/emotional content now shows up
+// in each movie's written review instead). Idempotent: on already-migrated
+// data, rawSettings.scary/sad are simply absent and this is a no-op.
 function normalizeContentSettings(rawSettings){
   const settings = {};
   if(!rawSettings || typeof rawSettings !== 'object') return settings;
+
+  const scaryValue = parentSetValue(rawSettings.scary);
+  const violenceValue = parentSetValue(rawSettings.violence);
+  let migratedViolence = null;
+  if(scaryValue !== null && violenceValue !== null){
+    migratedViolence = Math.min(scaryValue, violenceValue); // more restrictive of the two
+  }else if(scaryValue !== null){
+    migratedViolence = scaryValue;
+  }else if(violenceValue !== null){
+    migratedViolence = violenceValue;
+  }
+  if(migratedViolence !== null){
+    settings.violence = { source: 'parent', value: migratedViolence };
+  }
+
   CONTENT_FLAG_IDS.forEach(flagId=>{
+    if(flagId === 'violence') return; // handled above
     const raw = rawSettings[flagId];
     if(!raw || typeof raw !== 'object') return;
     const value = parseInt(raw.value, 10);
@@ -2654,11 +2687,16 @@ function normalizeChild(raw){
   const name = typeof raw.name === 'string' ? raw.name.trim().slice(0, 60) : '';
   if(!name) return null;
   const age = parseInt(raw.age, 10);
+  const hadParentSad = parentSetValue(raw.settings && raw.settings.sad) !== null;
   return {
     id: (typeof raw.id === 'string' && raw.id) ? raw.id : makeChildId(),
     name,
     age: Number.isInteger(age) ? Math.min(Math.max(age, 3), 9) : 3,
-    settings: normalizeContentSettings(raw.settings)
+    settings: normalizeContentSettings(raw.settings),
+    // Sticky once set (added 2026-09-07): stays true across saves until the
+    // parent explicitly dismisses the one-time "Sad moments removed" notice,
+    // even after the underlying legacy 'sad' setting itself is gone.
+    sadRemovedNoticePending: hadParentSad || !!raw.sadRemovedNoticePending
   };
 }
 
@@ -2701,7 +2739,12 @@ function normalizeState(raw){
     children: childrenMeta.children,
     childrenUpdatedAt: childrenMeta.childrenUpdatedAt,
     childrenDevice: childrenMeta.childrenDevice,
-    events: Array.isArray(parsed.events) ? parsed.events : []
+    // 'scary' merged into 'violence' (see normalizeContentSettings) -- keep
+    // pre-merge watch_anyway signals counting toward the same cue instead of
+    // silently losing them.
+    events: Array.isArray(parsed.events)
+      ? parsed.events.map(event => (event && event.flag === 'scary') ? { ...event, flag: 'violence' } : event)
+      : []
   };
 }
 
@@ -3027,20 +3070,21 @@ function setSelectedChoice(containerId, attr, value){
 
 function starterLimitForFlagAge(flagId, age){
   const safeAge = clampChildAge(age);
+  // violence's row merges the old separate 'violence'/'scary' matrices,
+  // taking the more cautious (lower) value at every age -- they only
+  // differed at age 7, where scary's [..2..] was stricter than violence's [..3..].
   const matrix = {
-    scary: [1, 1, 2, 2, 2, 3, 3],
-    violence: [1, 1, 2, 2, 3, 3, 3],
-    sad: [1, 1, 2, 2, 3, 3, 3],
+    violence: [1, 1, 2, 2, 2, 3, 3],
     language: [1, 1, 1, 2, 2, 2, 3],
     romance: [1, 1, 1, 1, 2, 2, 2],
     drinking: [1, 1, 1, 1, 2, 2, 2]
   };
-  const values = matrix[flagId] || matrix.scary;
+  const values = matrix[flagId] || matrix.violence;
   return values[safeAge - 3] || 1;
 }
 
 function starterLimitForAge(age){
-  return starterLimitForFlagAge('scary', age);
+  return starterLimitForFlagAge('violence', age);
 }
 
 function settingForChildFlag(child, flagId){
@@ -3088,6 +3132,15 @@ function useStarterForChildFlag(childId, flagId){
   showToast(`${child.name} now uses the age starter setting`);
 }
 
+function dismissSadRemovedNotice(childId){
+  const child = state.children.find(c => c.id === childId);
+  if(!child) return;
+  child.sadRemovedNoticePending = false;
+  touchChildren();
+  saveState();
+  renderChildren();
+}
+
 function inferredMovieFlagLevel(movie){
   const age = parseAge(movie.ca) || 6;
   if(age <= 5) return 1;
@@ -3101,9 +3154,9 @@ function movieContentProfile(movie){
   const base = inferredMovieFlagLevel(movie);
   const score = keywords => keywords.reduce((count, word) => count + (text.includes(word) ? 1 : 0), 0);
   return {
-    scary: Math.min(4, Math.max(base, score(['scary', 'frightening', 'horror', 'monster', 'peril', 'tense']) >= 2 ? base + 1 : base)),
-    violence: Math.min(4, Math.max(age >= 9 ? 3 : base, score(['violence', 'weapon', 'fight', 'battle', 'gun', 'explosion', 'bullying']) >= 2 ? base + 1 : base)),
-    sad: Math.min(4, Math.max(age >= 10 ? 3 : base, score(['sad', 'death', 'grief', 'loss', 'dies', 'orphan', 'separation']) >= 2 ? base + 1 : base)),
+    // Merged with the old separate 'scary' scorer (2026-09-07, matches CSM's
+    // real "Violence & Scariness" category) -- union of both keyword lists.
+    violence: Math.min(4, Math.max(age >= 9 ? 3 : base, score(['scary', 'frightening', 'horror', 'monster', 'peril', 'tense', 'violence', 'weapon', 'fight', 'battle', 'gun', 'explosion', 'bullying']) >= 2 ? base + 1 : base)),
     language: Math.min(4, Math.max(age >= 10 ? 3 : age >= 7 ? 2 : 1, score(['language', 'swear', 'hell', 'crap', 'insult']) >= 2 ? 3 : 1)),
     romance: Math.min(4, Math.max(age >= 10 ? 3 : age >= 7 ? 2 : 1, score(['romance', 'kiss', 'crush', 'flirt', 'dating']) >= 1 ? 2 : 1)),
     drinking: Math.min(4, Math.max(age >= 10 ? 3 : age >= 7 ? 2 : 1, score(['drink', 'drinking', 'alcohol', 'smoking', 'party']) >= 1 ? 2 : 1))
@@ -3134,7 +3187,7 @@ function movieExperienceProfile(idx){
   const releaseYear = movieYear(idx);
   const watched = markValue(state.checked, idx);
   const wanted = markValue(state.priority, idx);
-  const intensity = Math.max(content.scary, content.violence, content.sad);
+  const intensity = content.violence;
   let energy = age <= 5 ? 1 : age <= 8 ? 2 : 3;
   if(action) energy += 1;
   if(comedy || musical) energy += 0.5;
@@ -3340,7 +3393,7 @@ function logWatchAnywaySignal(){
     type: 'watch_anyway',
     titleId: movie.num,
     childId: child.id,
-    flag: 'scary',
+    flag: 'violence',
     createdAt: now()
   }));
   state.events = (state.events || []).concat(events);
@@ -4249,10 +4302,12 @@ function renderFamilySettings(){
   const rows = document.getElementById('familySettingsRows');
   const intro = document.getElementById('familySettingsIntro');
   const header = document.getElementById('familySettingsChildName');
+  const notice = document.getElementById('familySettingsNotice');
   if(!picker || !rows || !intro || !header) return;
 
   picker.replaceChildren();
   rows.replaceChildren();
+  if(notice) notice.replaceChildren();
   if(!state.children.length){
     selectedFamilyChildId = null;
     header.textContent = 'No children yet';
@@ -4273,7 +4328,27 @@ function renderFamilySettings(){
     picker.appendChild(chip);
   });
 
-  header.textContent = selectedChild.name;
+  header.textContent = `${selectedChild.name}'s content settings`;
+
+  if(notice && selectedChild.sadRemovedNoticePending){
+    const box = document.createElement('div');
+    box.className = 'sadRemovedNotice';
+    const copy = document.createElement('span');
+    const strong = document.createElement('strong');
+    strong.textContent = `Sad moments is no longer a separate setting for ${selectedChild.name}.`;
+    const em = document.createElement('em');
+    em.textContent = "We'll call that out in each movie's written review instead.";
+    copy.appendChild(strong);
+    copy.appendChild(em);
+    const dismiss = document.createElement('button');
+    dismiss.type = 'button';
+    dismiss.className = 'linkBtn';
+    dismiss.textContent = 'Got it';
+    dismiss.addEventListener('click', () => dismissSadRemovedNotice(selectedChild.id));
+    box.appendChild(copy);
+    box.appendChild(dismiss);
+    notice.appendChild(box);
+  }
   intro.textContent = `Age ${selectedChild.age} starter settings are shown with an outline. The numbered levels are product-owned calibration steps, not external ratings.`;
 
   CONTENT_FLAGS.forEach(flag=>{
@@ -4434,14 +4509,14 @@ function renderChildren(){
       summary.textContent = summarizeChildUnderstanding(child);
       article.appendChild(summary);
 
-      const watchSignals = (state.events || []).filter(event => event.type === 'watch_anyway' && event.childId === child.id && event.flag === 'scary');
+      const watchSignals = (state.events || []).filter(event => event.type === 'watch_anyway' && event.childId === child.id && event.flag === 'violence');
       if(watchSignals.length >= 3){
         activeSuggestionCount += 1;
         const cue = document.createElement('div');
         cue.className = 'familyCue';
         const span = document.createElement('span');
         const strong = document.createElement('strong');
-        strong.textContent = `Review ${child.name}'s scary setting.`;
+        strong.textContent = `Review ${child.name}'s Violence & Scariness setting.`;
         const em = document.createElement('em');
         em.textContent = 'Based on repeated Watch anyway choices. No limit changed automatically.';
         span.appendChild(strong);
