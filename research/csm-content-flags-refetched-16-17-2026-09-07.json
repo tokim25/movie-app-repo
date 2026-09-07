@@ -1,0 +1,849 @@
+{
+  "researchBatch": "csm-content-flags-refetched-16-17-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only handoff for nums 746-765 in data-mcudc.js. Built from live Common Sense Media refetches of catalog srcUrl pages. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "sourceRange": {
+    "file": "data-mcudc.js",
+    "nums": [746, 765],
+    "entryCount": 20
+  },
+  "contentFlagModel": {
+    "version": 1,
+    "flags": ["violence", "language", "romance", "drinking"],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 746,
+      "file": "data-mcudc.js",
+      "title": "Avengers: Age of Ultron",
+      "year": "2015",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/avengers-age-of-ultron",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Relentless superhero destruction includes gunfire, deaths, flying cars, collapsing buildings, missiles, children in danger, mass civilian peril, and one especially sad death."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Moderate profanity, insults, and religious exclamations appear, including an early swear that is immediately called out."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Couples kiss and flirt, with brief sexual banter but no explicit sexual activity or nudity."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Only brief social or celebratory drinking is noted."
+        }
+      },
+      "handoffNotes": [
+        "A notable character death may need emotional-context prose for sensitive viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 747,
+      "file": "data-mcudc.js",
+      "title": "Batman vs. Robin",
+      "year": "2015",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/batman-vs-robin",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Frequent animated combat includes shootings, rifle use, parental murder flashbacks, child abuse, a child killing an owl, kidnapped children in cages, and frightening Dollmaker imagery."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Occasional mild-to-moderate profanity and insults are used."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Sex is implied after a bedroom scene, and there is innuendo involving Bruce, Nightwing, and their romantic partners."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adults drink wine and liquor without drunken behavior, and Batman is drugged with a hallucinogen that causes disturbing visions."
+        }
+      },
+      "handoffNotes": [
+        "Child captivity, child abuse, and Bruce's parental-murder trauma may need prose treatment beyond the numeric violence flag."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 748,
+      "file": "data-mcudc.js",
+      "title": "Fantastic Four",
+      "year": "2015",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/fantastic-four-2015",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Sci-fi violence turns graphic near the end, with many deaths, blood, exploding heads, the Thing used as a military weapon, intense transformations, and a sibling beating."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A few moderate swears and crude terms appear."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Only flirting and loaded looks are flagged, without actual romance or sex."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Young adult characters drink heavily enough to make poor decisions."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Drinking, Drugs & Smoking as 'a little' while the detail describes heavy drinking that leads to bad decisions."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 749,
+      "file": "data-mcudc.js",
+      "title": "Justice League: Gods and Monsters",
+      "year": "2015",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/justice-league-gods-and-monsters",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Dark superhero violence includes shootings, explosions, blood, demonic imagery, neck biting, police battles, and a woman killed by a sword through the chest."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Occasional profanity includes moderate swears, crude words, insults, and religious exclamations."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Innuendo, revealing superhero costuming, and visible female android nudity are flagged."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A college flashback includes marijuana references and characters seeming high after a party, plus pipe smoking."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 750,
+      "file": "data-mcudc.js",
+      "title": "Justice League: Throne of Atlantis",
+      "year": "2015",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/justice-league-throne-of-atlantis",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Animated action includes a prolonged bar fight, club beatings, two stabbing deaths, a shark killing, monster-mask imagery, machine guns, and rocket launchers."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Occasional profanity includes moderate swears and insults."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Arthur is severely intoxicated in a dive bar, starts a fight while drinking, and is shown hung over the next day."
+        }
+      },
+      "handoffNotes": [
+        "Arthur's grief after his father's death and later maternal loss may need emotional-context prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 751,
+      "file": "data-mcudc.js",
+      "title": "Batman v Superman: Dawn of Justice",
+      "year": "2016",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/batman-v-superman-dawn-of-justice",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Dark superhero violence includes assassinations, execution-style shootings, an explosive room attack, abductions at gunpoint, a deadly car chase, collapsing buildings, injured crowds, and Batman and Superman badly hurting each other."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Language is limited but includes a couple of moderate swears."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Clark and Lois kiss passionately, including a bath scene with partial nudity; Bruce wakes beside a partially nude woman and flirts with Diana."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Bruce drinks wine frequently, and adults drink cocktails at parties."
+        }
+      },
+      "handoffNotes": [
+        "CSM notes this review covers the PG-13 theatrical release; the R-rated extended cut may differ."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 752,
+      "file": "data-mcudc.js",
+      "title": "Batman: Bad Blood",
+      "year": "2016",
+      "currentCatalogCa": "14+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/batman-bad-blood",
+      "csmAge": "14+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Most of the film is animated mayhem: explosions, collapsing buildings, gunfights, fistfights, swordplay, torture, landslides, stabbing, beheading, apparent hero deaths, and glimpsed family deaths."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Some mild-to-moderate swearing and insults are used, occasionally by Robin."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A brief sexual fantasy involves shirtless Batman and multiple women, and Batwoman's dating life and potential new romantic interest are referenced."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Background social drinking appears, Kate Kane's past heavy drinking is mentioned, and one character secretly drinks from a flask."
+        }
+      },
+      "handoffNotes": [
+        "Batwoman's past substance-abuse history may need prose context if the app distinguishes current use from backstory."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 753,
+      "file": "data-mcudc.js",
+      "title": "Captain America: Civil War",
+      "year": "2016",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/captain-america-civil-war",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Avengers fight enemies and each other with weapons and powers, alongside explosions, gunfire, collateral casualties, serious injuries, grief after a death, and a disturbing past killing."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Infrequent but moderate swearing, insults, and religious exclamations appear."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Romance is limited to a quick kiss, longing looks, and a few embraces."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "The grief thread, teammate-on-teammate conflict, and revealed past killing may need prose beyond the violence level."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 754,
+      "file": "data-mcudc.js",
+      "title": "Doctor Strange",
+      "year": "2016",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/doctor-strange",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Fantasy action includes large-scale destruction, martial arts with magical weapons, surgery and bloody injuries, a brutal texting-related car crash, a fall through glass, a non-gory beheading, and nightmarish imagery."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A small number of moderate swears and crude insults are used."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A past intimate relationship is discussed, including a brief reference to sleeping together."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 755,
+      "file": "data-mcudc.js",
+      "title": "Justice League vs. Teen Titans",
+      "year": "2016",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/justice-league-vs-teen-titans",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Animated violence and demonic imagery run throughout, with sword fighting, a decapitation, electrocution, explosions, punches, kicks, and characters violently thrown around."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Only a few mild profanities are noted."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Starfire appears in a revealing robe, and dialogue includes sexual innuendo about Raven's parents and teen hookups."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "Demonic possession and Raven's family backstory may need prose context for sensitive viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 756,
+      "file": "data-mcudc.js",
+      "title": "Suicide Squad",
+      "year": "2016",
+      "currentCatalogCa": "14+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/suicide-squad",
+      "csmAge": "14+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Violence includes executions, shootings, supernatural instant kills, fire attacks, military weapons, explosions, deaths or presumed deaths, widespread destruction, and a remembered family tragedy."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Several moderate swears, crude sexual terms, insults, and possibly one stronger profanity are used."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Harley is heavily sexualized through outfits, dancing, and club scenes; there are passionate kisses, references to sleeping together, and crude comments."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "The squad drinks together in a bar, and adults drink at the Joker's club."
+        }
+      },
+      "handoffNotes": [
+        "Sexist abuse and Diablo's family tragedy may need prose treatment outside the four category levels."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 757,
+      "file": "data-mcudc.js",
+      "title": "X-Men: Apocalypse",
+      "year": "2016",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/x-men-apocalypse",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Large-scale superhero violence includes weapons, explosions, flying bodies, global destruction threats, a near-instant head-destruction sequence, bloody Wolverine slashing, and a child's death with grief."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Language includes one F-word plus moderate profanity, mild swears, and religious exclamations."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "There is flirting, revealing costuming on some female characters, and Mystique's body-armored natural form."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "The death of Magneto's family, including a child, should stay in emotional/sad-content prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 758,
+      "file": "data-mcudc.js",
+      "title": "Batman and Harley Quinn",
+      "year": "2017",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/batman-harley-quinn",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Comic-book action includes monster killings, a giant spike through a chest, machine guns, handguns, martial arts fighting, pratfalls, and Harley breaking the arm of someone who grabs her."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Mild profanity mixes with crude sexual wordplay, obscene gestures, middle-finger use, and a graphic gag caption during a fight."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "This has unusually adult sexual content for animated Batman, including Harley in underwear, implied sex with Nightwing, an erection reference, vibrator innuendo, sexual dancing, and objectifying comments."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A bar scene includes drinking."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Violence & Scariness as 'some' though details include fatal monster attacks and a spike-through-chest death; reviewer may want to compare against other animated DC entries."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 759,
+      "file": "data-mcudc.js",
+      "title": "Guardians of the Galaxy Vol. 2",
+      "year": "2017",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/guardians-of-the-galaxy-vol-2",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Space action includes guns, swords, taser-like weapons, crashes, explosions, warlike ship battles, huge enemies, executions by airlock, high body counts, bloody arrow kills, planet-level destruction, and a major death."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Language is not constant but includes moderate swears, crude insults, and frequent euphemistic name-calling."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Romantic tension, scantily clad human-like robots, near kisses, conception references, and flirtation about natural reproduction are flagged."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Ravagers and others drink in pub and ship settings, some to visible drunkenness, and Groot is doused with alcohol."
+        }
+      },
+      "handoffNotes": [
+        "A popular character's death and chosen-family themes may need emotional-context prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 760,
+      "file": "data-mcudc.js",
+      "title": "Justice League",
+      "year": "2017",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/justice-league",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Large superhero battles include explosions, widespread destruction, many weapons, monster attacks with green blood, a resurrected Superman injuring Batman, and a family nearly killed."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A few stronger swears, bleeped F-words, religious exclamations, and insults appear."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Content is limited to shirtless male characters, a reunited couple kissing and embracing, and comments about Wonder Woman's attractiveness."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adults drink in pubs and privately, Aquaman downs liquor, and Bruce and Diana share a drink."
+        }
+      },
+      "handoffNotes": [
+        "CSM notes the review reflects the original theatrical release, not the longer extended cut."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 761,
+      "file": "data-mcudc.js",
+      "title": "Teen Titans: The Judas Contract",
+      "year": "2017",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/teen-titans-the-judas-contract",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Near-continuous animated violence includes lasers, guns, swords, fire, arrows, wild animals, point-blank shootings, stabbing, torture, crushing, captivity, restraints, blood, and deaths."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Occasional moderate profanity and insults are used."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Kissing, embracing, mild seduction, revealing outfits, emphasized breasts, and light sexual banter appear."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "Betrayal and a team member's eventual amends may need prose context if emotional themes are tracked."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 762,
+      "file": "data-mcudc.js",
+      "title": "The Lego Batman Movie",
+      "year": "2017",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-lego-batman-movie",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Constant toy-brick action includes bad guys, attacks, crashes, explosions, bombs, guns, fire, lava, crumbling Gotham scenes, and ongoing peril, but no gore or lasting damage."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Insult and potty words, mild exclamations, British slang, and jokes about Dick/Robin's name appear."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Very mild flirting, Batman admiring Barbara and his own physique, underwear or robe moments, Robin's pants-free costume gag, and over-kids'-heads name jokes are flagged."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "Only a reference to Alfred drinking wine and unclear party beverages are mentioned."
+        }
+      },
+      "handoffNotes": [
+        "CSM shows the category as Drinking, Drugs & Smoking 'none' even though the detail text mentions a wine reference; level 1 is retained."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 763,
+      "file": "data-mcudc.js",
+      "title": "Thor: Ragnarok",
+      "year": "2017",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/thor-ragnarok",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Comic-book violence includes explosions, battles, firearms, fantasy weapons, many deaths, scary Hela scenes, slashing and stabbing, a melting death, and a bloody wound visible across multiple scenes."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Moderate swearing appears along with extended crude body-part humor."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Brief nonsexual Hulk rear nudity and references to masturbation and orgies are noted without explicit detail."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Valkyrie drinks heavily as part of a trauma backstory without real consequences, and other characters drink socially."
+        }
+      },
+      "handoffNotes": [
+        "Major traumatic change, Valkyrie's trauma-linked drinking, and Asgard's destruction may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 764,
+      "file": "data-mcudc.js",
+      "title": "Wonder Woman",
+      "year": "2017",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/wonder-woman",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "World War I and superhero action include frequent battles, arrows, swords, guns, high body counts, poison gas killing officials, planned gas warfare, collateral damage, and several sad deaths."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language is mild and limited to light profanity, religious exclamations, and insults."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Romance includes innuendo, reproduction and pleasure references, Steve covering his nudity after a bath, passionate kissing, implied possible overnight intimacy, revealing armor, and one underwear gag."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Characters drink beer or champagne in pubs and receptions, and one character gets drunk and fights."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Violence & Scariness as 'some' despite frequent war violence, high body counts, poison gas, and multiple emotionally heavy deaths.",
+        "Steve's sacrifice and other sad deaths should remain in emotional/sad-content prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 765,
+      "file": "data-mcudc.js",
+      "title": "Ant-Man and the Wasp",
+      "year": "2018",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/ant-man-and-the-wasp",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frequent but lighter Marvel action includes chases, peril, crashes, property destruction, fights with guns and knives, a missile countdown, a woman used as a weapon, giant-ant attacks, and painful parental-loss flashbacks."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Moderate profanity, crude words, religious exclamations, and insults appear."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Established couples kiss briefly, there is some flirting, and Scott is shirtless in a bath scene."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults drink wine with a meal, and Hope drugs Scott to move him against his will."
+        }
+      },
+      "handoffNotes": [
+        "Flashbacks with children losing parents and Ava's chronic pain/mortal danger may need emotional prose.",
+        "Drugging Scott is non-recreational but should remain in the drinking/drugs summary."
+      ],
+      "confidence": "high"
+    }
+  ],
+  "handoffSummary": {
+    "refetchedEntries": 20,
+    "sourceBasis": "live CSM refetch by subagent",
+    "firstNum": 746,
+    "lastNum": 765,
+    "unavailablePages": [],
+    "labelDetailConflicts": [
+      {
+        "num": 748,
+        "title": "Fantastic Four",
+        "note": "CSM labels Drinking, Drugs & Smoking as 'a little' while the details describe heavy drinking leading to poor decisions."
+      },
+      {
+        "num": 758,
+        "title": "Batman and Harley Quinn",
+        "note": "CSM labels Violence & Scariness as 'some' though the details include monster killings and a spike-through-chest death."
+      },
+      {
+        "num": 762,
+        "title": "The Lego Batman Movie",
+        "note": "CSM labels Drinking, Drugs & Smoking as 'none' while the detail text mentions a wine reference; proposed level stays at 1."
+      },
+      {
+        "num": 764,
+        "title": "Wonder Woman",
+        "note": "CSM labels Violence & Scariness as 'some' while the details include frequent war violence, poison gas, high body counts, and several deaths."
+      }
+    ],
+    "emotionalProseAttention": [
+      {
+        "num": 746,
+        "title": "Avengers: Age of Ultron",
+        "note": "One major sad death may matter for sensitive viewers."
+      },
+      {
+        "num": 747,
+        "title": "Batman vs. Robin",
+        "note": "Child captivity, child abuse, and Bruce's parental murder flashback are prominent."
+      },
+      {
+        "num": 750,
+        "title": "Justice League: Throne of Atlantis",
+        "note": "Arthur's grief after his father's death and later maternal loss may need prose context."
+      },
+      {
+        "num": 753,
+        "title": "Captain America: Civil War",
+        "note": "Grief, teammate conflict, and a revealed past killing carry emotional weight."
+      },
+      {
+        "num": 755,
+        "title": "Justice League vs. Teen Titans",
+        "note": "Demonic possession and Raven's family backstory may be intense for sensitive viewers."
+      },
+      {
+        "num": 756,
+        "title": "Suicide Squad",
+        "note": "Sexist abuse and Diablo's family tragedy should be handled in prose."
+      },
+      {
+        "num": 757,
+        "title": "X-Men: Apocalypse",
+        "note": "Magneto's family loss, including a child death, should stay in sad-content prose."
+      },
+      {
+        "num": 759,
+        "title": "Guardians of the Galaxy Vol. 2",
+        "note": "A popular character's death and chosen-family themes may need emotional-context prose."
+      },
+      {
+        "num": 763,
+        "title": "Thor: Ragnarok",
+        "note": "Major traumatic change, Valkyrie's trauma-linked drinking, and Asgard's destruction may need prose context."
+      },
+      {
+        "num": 764,
+        "title": "Wonder Woman",
+        "note": "Steve's sacrifice and other sad deaths should remain visible in prose."
+      },
+      {
+        "num": 765,
+        "title": "Ant-Man and the Wasp",
+        "note": "Child parental-loss flashbacks and Ava's painful backstory may need emotional prose."
+      }
+    ],
+    "nextClaudeAction": "Review label/detail conflicts and emotional prose notes before importing any production catalog content flags."
+  }
+}

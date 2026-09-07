@@ -15,9 +15,9 @@ Codex completed repo/process research and a bounded CSM pilot, then pushed the r
 - producing a first-pass handoff checklist for PM/Coder/Reviewer
 - verifying that direct CSM page access works from this environment
 - researching 50 representative existing catalog titles under the 4-flag model
-- manually refetching an additional 100 catalog titles through five parallel subagents
+- manually refetching 200 catalog titles through ten parallelized subagent slices
 
-Codex should not perform the full 938-title backfill in this pass. The plan still depends on the local bridge session on tokim25's machine for the unattended nightly run, progress checkpoints, rate-guard behavior, and PR batching. The 50-title pilot plus 100-title live-refetched set is intended to prove the research shape and give Claude concrete examples, not replace the scheduled backfill process.
+Codex should not perform the full 938-title backfill in this pass. The plan still depends on the local bridge session on tokim25's machine for the unattended nightly run, progress checkpoints, rate-guard behavior, and PR batching. The 50-title pilot plus 200-title live-refetched set is intended to prove the research shape and give Claude concrete examples, not replace the scheduled backfill process.
 
 Codex should also avoid doing coder, reviewer, or UX-designer work in this pass. That means no implementation changes, no PR approval opinion, and no product/interaction changes beyond research findings.
 
@@ -31,13 +31,18 @@ The branch now contains five pilot JSON files with 50 total titles:
 - `research/csm-content-flags-pilot-04-2026-09-07.json`
 - `research/csm-content-flags-pilot-05-2026-09-07.json`
 
-It also contains five live-refetched JSON files with 100 additional titles:
+It also contains ten live-refetched JSON files with 200 additional titles:
 
 - `research/csm-content-flags-refetched-06-07-2026-09-07.json`
 - `research/csm-content-flags-refetched-08-09-2026-09-07.json`
 - `research/csm-content-flags-refetched-10-11-2026-09-07.json`
 - `research/csm-content-flags-refetched-12-13-2026-09-07.json`
 - `research/csm-content-flags-refetched-14-15-2026-09-07.json`
+- `research/csm-content-flags-refetched-16-17-2026-09-07.json`
+- `research/csm-content-flags-refetched-18-19-2026-09-07.json`
+- `research/csm-content-flags-refetched-20-21-2026-09-07.json`
+- `research/csm-content-flags-refetched-22-23-2026-09-07.json`
+- `research/csm-content-flags-refetched-24-25-2026-09-07.json`
 
 Each entry includes:
 
@@ -59,6 +64,8 @@ Notable pilot findings:
 - Low-age animated titles can still carry meaningful Violence & Scariness values, so the app should not infer content flags from age alone.
 - Emotional/life-and-death content remains important in prose even after dropping `Sad moments` as a scored slider.
 - In the 100-title refetch range, `Steel` remains a fallback-source title: the catalog URL is Wikipedia and targeted CSM lookup did not surface a CSM review.
+- In the next 100-title refetch range, `Batman and Superman: Battle of the Super Sons` remains unavailable on CSM after targeted lookup.
+- `Avengers: Doomsday` has a limited CSM preview page, but no full review, age, or category detail yet.
 
 ## Verified Repo State
 

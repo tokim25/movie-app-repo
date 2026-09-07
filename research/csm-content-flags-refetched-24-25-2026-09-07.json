@@ -1,0 +1,861 @@
+{
+  "researchBatch": "csm-content-flags-refetched-24-25-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only handoff for nums 827-846 in data-ghibli.js and data-extra.js. Built from live Common Sense Media refetches of catalog srcUrl pages. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 827,
+      "file": "data-ghibli.js",
+      "title": "My Neighbors the Yamadas",
+      "year": "1999",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/my-neighbors-the-yamadas",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Briefly upsetting comic-strip vignettes include a young child left behind at a mall and a run-in with bikers that turns into a rescue chase."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Only mild insult language and bickering-style phrases are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A schoolboy crush prompts teasing, and a side scene includes gossip about an affair plus non-explicit cuddling and kissing."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The father is shown smoking in a few short stories."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 828,
+      "file": "data-ghibli.js",
+      "title": "The Cat Returns",
+      "year": "2002",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-cat-returns",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Fantasy peril includes a near-truck accident, cartoon cat battles using blades and chains, a tower explosion, freefall, and a cat briefly appearing dead."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A tween talks with friends about a crush; no explicit sexual content is noted."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 829,
+      "file": "data-ghibli.js",
+      "title": "Howl's Moving Castle",
+      "year": "2004",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/howls-moving-castle",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Mild fantasy scares include war explosions, ominous blob-like pursuers, dark night scenes, peril, possible injuries, and an early intimidation/ogling scene."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text still mentions a few colorful insults even though the visible category label is none."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The page notes romantic background talk, tension between central characters, and discussion of love."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A character smokes a cigar and refers to it positively."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Language as none while the detail text mentions a few insults."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 830,
+      "file": "data-ghibli.js",
+      "title": "Tales from Earthsea",
+      "year": "2006",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/tales-from-earthsea",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Heavy fantasy violence includes bloody dragon combat, patricide, wolves, slave-taking, strangling, bloody sword fights, a severed hand, monstrous transformations, and a burning death."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Drugged young people appear barely conscious, and palace guards drink wine and behave drunkenly."
+        }
+      },
+      "handoffNotes": [
+        "Mature existential themes around denying death may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 831,
+      "file": "data-ghibli.js",
+      "title": "Arrietty",
+      "year": "2010",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-secret-world-of-arrietty",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Gentle peril centers on tiny characters being discovered, trapped in a jar, frightened by a lifted-away home, clawed at by a cat, and facing a boy's serious heart condition."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A character briefly raises wine, and sherry is mentioned in passing."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 832,
+      "file": "data-ghibli.js",
+      "title": "From Up on Poppy Hill",
+      "year": "2011",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/from-up-on-poppy-hill",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Violence is limited to discussion of fathers dying in the Korean War and a boy jumping from a window into water, injuring his hand."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild insults such as schoolyard put-downs are noted."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Teen romance includes flirting, blushes, hand touching, a bicycle ride, declarations of love, and a concern that the two teens may be related."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adult women share alcohol with an older teen but not a younger teen; some incidental smoking appears."
+        }
+      },
+      "handoffNotes": [
+        "The father-loss backstory and possible-family-connection romance complication may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 833,
+      "file": "data-ghibli.js",
+      "title": "The Tale of the Princess Kaguya",
+      "year": "2013",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-tale-of-the-princess-kaguya",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A few moments include characters dying or disappearing, a suitor falling to his death, and men tackling a young thief."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Brief kissing, nonsexual breastfeeding nudity, and a reference to a suitor's treatment of young women are noted."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM highlights heartbreak, loss, and constrained freedom themes that may need prose even though category levels are low."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 834,
+      "file": "data-ghibli.js",
+      "title": "The Wind Rises",
+      "year": "2013",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-wind-rises",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Historical peril includes earthquake and fire devastation, visible distress and injuries, war-plane context, test crashes, and an off-screen tuberculosis death."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild exclamations, insults, and one mild profanity are noted."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "The central adult relationship includes falling in love, hand-holding, kissing, marriage, embracing under covers, and implied intimacy."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frequent cigarette smoking is shown and discussed, including around an ill person."
+        }
+      },
+      "handoffNotes": [
+        "Tuberculosis, death, war use of planes, and morally complicated engineering themes need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 835,
+      "file": "data-ghibli.js",
+      "title": "When Marnie Was There",
+      "year": "2014",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/when-marnie-was-there",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild intensity includes an alleged knife threat, an asthma attack, falls and bruises, and a scary storm sequence in a decaying silo."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Insults are mostly self-directed, including harsh body and personality put-downs, and Anna repeatedly says she hates herself."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adults drink at a party, an adult offers Anna wine, and some smoking appears."
+        }
+      },
+      "handoffNotes": [
+        "Anna's loneliness, self-hatred, foster-family identity conflict, and asthma should remain in prose for sensitive viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 836,
+      "file": "data-ghibli.js",
+      "title": "The Red Turtle",
+      "year": "2016",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-red-turtle",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Peril and sadness include destroyed rafts, a man striking and killing a turtle, a possibly creepy transformation, a destructive storm, uncertainty about family survival, and a tearful final parting."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "The film has no dialogue, and CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "The central relationship includes caressing, hand-holding, embracing, initial nudity covered by hair, and implied off-screen sex."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Sad animal death and the final separation scene may need emotional-content prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 837,
+      "file": "data-ghibli.js",
+      "title": "The Boy and the Heron",
+      "year": "2023",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-boy-and-the-heron",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Dark fantasy material includes a boy's bloody self-harm, a hospital fire that kills a parent, bullying, armed carnivorous birds, creepy body imagery, a melting death, distant fall deaths, shocks, and a fish disembowelment."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Only a couple of mild swears and rude words are noted."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Adults smoke cigarettes, and the 11-year-old protagonist uses stolen cigarettes to get favors from smoking adults."
+        }
+      },
+      "handoffNotes": [
+        "Self-harm, grief over a parent's death, and unsettling fantasy imagery need explicit prose treatment."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 838,
+      "file": "data-extra.js",
+      "title": "The Sheep Detectives",
+      "year": "2026",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-sheep-detectives",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A murder mystery drives the story, with grief, a partly shown body, human grappling, serious animal fights, bleeding references, aggressive dogs, poison talk, knives, a stun gun, scary settings, stormy mystery imagery, destructive rams, and chaotic panic."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild swears and insults appear."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One character has an obvious crush, and past relationships are referenced."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Whiskey glasses are used as a clue, and adults drink wine at an inn."
+        }
+      },
+      "handoffNotes": [
+        "Although CSM age is 8+, the page and parent reviews emphasize murder, grief, animal injury, and loss; prose should call out the cozy-mystery death theme."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 839,
+      "file": "data-extra.js",
+      "title": "Moana",
+      "year": "2026",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/moana-2026",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Live-action intensity heightens storms, dangerous ocean voyages, a fiery lava monster, a grandparent's death and spirit return, starvation peril, coconut-pirate attacks with arrows and darts, a giant crab attack, comic hits, repeated near-drowning, and a tattoo scene."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild rude words, insults, and comic fake-sounding phrases are noted."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Grandparent death and live-action peril may need prose for sensitive younger viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 840,
+      "file": "data-extra.js",
+      "title": "Star Wars Episode V: The Empire Strikes Back",
+      "year": "1980",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/star-wars-episode-v-the-empire-strikes-back",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Frequent sci-fi violence includes cockpit deaths, Force-choking, a cave monster, a bloody severed arm, a creature cut open for warmth, a severed hand, crushing by walkers, a giant worm, off-screen torture with screams, carbon freezing, and a disturbing decapitation vision."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Banter, name-calling, and one mild profanity are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Main-character flirtation includes several kisses and mild innuendo."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM frames this as psychologically intense, with emotional turmoil and off-screen torture that may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 841,
+      "file": "data-extra.js",
+      "title": "Star Wars Episode VI: Return of the Jedi",
+      "year": "1983",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/star-wars-episode-vi-the-return-of-the-jedi",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Sci-fi peril includes explosions, lightsaber injuries, prolonged electrocution, combat deaths, torture and dismemberment of robots and aliens, monsters eating characters, Jabba's strangling death, a dead Ewok, blaster wounds, and a carcass image."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "There are a few kisses, plus scantily dressed dancers and Leia's prolonged skimpy costume in Jabba's palace."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM labels the category none but still notes hookah pipes among adults and alien background characters in Jabba's palace."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Drinking, Drugs & Smoking as none while the detail text mentions hookah pipes.",
+        "The Ewok death and Jabba-palace objectification may need prose despite lower non-violence labels."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 842,
+      "file": "data-extra.js",
+      "title": "Star Wars Episode I: The Phantom Menace",
+      "year": "1999",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/star-wars-episode-i-the-phantom-menace",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Non-gory sci-fi violence includes two major on-screen deaths by lightsaber, frequent droid destruction, cockpit and podracer deaths, a funeral body, invasions, toxic gas, punching and kicking, creature attacks, enslavement, and a frightening villain."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Name-calling, crude bathroom-related wording, and repeated use of the word slave are noted."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "A 9-year-old leaving his mother forever is a bittersweet separation beat that may need prose for younger viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 843,
+      "file": "data-extra.js",
+      "title": "Star Wars Episode II: Attack of the Clones",
+      "year": "2002",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/star-wars-episode-ii-attack-of-the-clones",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Heavy sci-fi violence includes a fatal terrorist attack, beheading, lightsaber amputations, explosions, electrocution, rage-driven killing of defenseless aliens including children, decapitated bodies, a broken neck, mass battle, blaster fights, bloody monster wounds, imprisonment, chases, and an on-screen parental death."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One mild profanity and fewer insults than other franchise entries are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A central romance includes flirting and some kissing."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Characters enter a bar or club with drinking in the background, and a drug-like offer is refused."
+        }
+      },
+      "handoffNotes": [
+        "Rage-driven killing of defenseless beings and an on-screen parental death should be called out in prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 844,
+      "file": "data-extra.js",
+      "title": "Star Wars Episode III: Revenge of the Sith",
+      "year": "2005",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/star-wars-episode-iii-revenge-of-the-sith",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "This darker installment includes many battles, blasters, lightsabers, off-screen child massacre, brief dead child bodies, beheading, amputations, burning, painful cyborg rebuilding, force-lightning disfigurement and death, surprise killings, childbirth death, and a sustained descent into evil."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A secret marriage, pregnancy, and occasional kissing are noted."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Child massacre, pregnancy/childbirth death, Anakin's moral collapse, and grotesque burning/rebuilding imagery need explicit prose treatment."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 845,
+      "file": "data-extra.js",
+      "title": "Star Wars Episode VII: The Force Awakens",
+      "year": "2015",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/star-wars-episode-vii-the-force-awakens",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Large- and small-scale sci-fi action includes planet destruction, spacecraft explosions, duels, shootouts, deaths by stabbing and explosions, civilian massacre orders, Force torture, kidnapping, bloody injuries, dead bodies, flamethrowers, gas, monsters eating people, frequent peril, and a major beloved-character death."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild-to-moderate swears and insults appear."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A tender adult hug, intense bonding, and mild flirtation are noted."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "An interstellar pub scene shows assorted creatures drinking what is presumably alcohol."
+        }
+      },
+      "handoffNotes": [
+        "The death of a beloved main character and civilian massacre order may need emotional/intensity prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 846,
+      "file": "data-extra.js",
+      "title": "Star Wars Episode VIII: The Last Jedi",
+      "year": "2017",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/star-wars-episode-viii-the-last-jedi",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Sci-fi violence includes space battles, explosions, duels, fistfights, shootouts, deaths, a bloodless but explicit bisection, bloody faces, destroyed Resistance ships, people ejected into space, burning buildings, suicide-style mission sacrifices, no-mercy orders, grotesque villain imagery, and abused racing creatures."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild-to-moderate swears and insults are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A quick kiss, romantic tension, a shirtless scene, revealing casino outfits, mild innuendo, and a non-nude recovery gag are noted."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Characters drink alcohol in a casino, and one line references someone being sold for drinking money."
+        }
+      },
+      "handoffNotes": [
+        "Mission-sacrifice deaths, abused racing creatures, and the bloodless bisection may need prose context."
+      ],
+      "confidence": "high"
+    }
+  ],
+  "handoffSummary": {
+    "refetchedEntries": 20,
+    "sourceBasis": "live CSM refetch by subagent",
+    "firstNum": 827,
+    "lastNum": 846,
+    "unavailablePages": [],
+    "labelDetailConflicts": [
+      {
+        "num": 829,
+        "title": "Howl's Moving Castle",
+        "note": "CSM labels Language as none while the detail text mentions a few colorful insults."
+      },
+      {
+        "num": 841,
+        "title": "Star Wars Episode VI: Return of the Jedi",
+        "note": "CSM labels Drinking, Drugs & Smoking as none while the detail text mentions hookah pipes in Jabba's palace."
+      }
+    ],
+    "emotionalProseAttention": [
+      {
+        "num": 830,
+        "title": "Tales from Earthsea",
+        "note": "Mature death/life themes and violent fantasy imagery may need prose context."
+      },
+      {
+        "num": 832,
+        "title": "From Up on Poppy Hill",
+        "note": "Father-loss backstory and the possible familial-romance complication may need prose context."
+      },
+      {
+        "num": 833,
+        "title": "The Tale of the Princess Kaguya",
+        "note": "Heartbreak, pressure into an unwanted life, and melancholy themes may need prose despite low category levels."
+      },
+      {
+        "num": 834,
+        "title": "The Wind Rises",
+        "note": "Tuberculosis, death, war-plane context, and morally complicated engineering themes may need prose."
+      },
+      {
+        "num": 835,
+        "title": "When Marnie Was There",
+        "note": "Loneliness, self-hatred, foster-family identity conflict, and asthma may need sensitive prose."
+      },
+      {
+        "num": 836,
+        "title": "The Red Turtle",
+        "note": "Sad animal death and final separation may need emotional-content prose."
+      },
+      {
+        "num": 837,
+        "title": "The Boy and the Heron",
+        "note": "Self-harm and grief over a parent's death need explicit prose treatment."
+      },
+      {
+        "num": 838,
+        "title": "The Sheep Detectives",
+        "note": "Murder, grief, animal injury, and loss are central despite the cozy-mystery framing."
+      },
+      {
+        "num": 839,
+        "title": "Moana",
+        "note": "Grandparent death and live-action peril may need prose for sensitive younger viewers."
+      },
+      {
+        "num": 840,
+        "title": "Star Wars Episode V: The Empire Strikes Back",
+        "note": "Psychological intensity, off-screen torture, and a disturbing vision may need prose context."
+      },
+      {
+        "num": 841,
+        "title": "Star Wars Episode VI: Return of the Jedi",
+        "note": "The Ewok death and Jabba-palace objectification may need prose despite lower non-violence labels."
+      },
+      {
+        "num": 842,
+        "title": "Star Wars Episode I: The Phantom Menace",
+        "note": "A young child leaving his mother forever is a separation beat that may matter for younger viewers."
+      },
+      {
+        "num": 843,
+        "title": "Star Wars Episode II: Attack of the Clones",
+        "note": "Rage-driven killing of defenseless beings and an on-screen parental death need prose context."
+      },
+      {
+        "num": 844,
+        "title": "Star Wars Episode III: Revenge of the Sith",
+        "note": "Child massacre, childbirth death, Anakin's moral collapse, and burning/rebuilding imagery need explicit prose treatment."
+      },
+      {
+        "num": 845,
+        "title": "Star Wars Episode VII: The Force Awakens",
+        "note": "A beloved-character death and civilian massacre order may need emotional/intensity prose."
+      },
+      {
+        "num": 846,
+        "title": "Star Wars Episode VIII: The Last Jedi",
+        "note": "Mission-sacrifice deaths, abused racing creatures, and bloodless bisection may need prose context."
+      }
+    ],
+    "nextClaudeAction": "Review label/detail conflicts and emotional prose notes before importing any production catalog content flags."
+  }
+}

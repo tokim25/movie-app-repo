@@ -1,0 +1,858 @@
+{
+  "researchBatch": "csm-content-flags-refetched-20-21-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only live Common Sense Media refetch for nums 787-806 inclusive from data-mcudc.js. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Where CSM's label and category detail conflict, the proposed level may reflect the detail rather than the label and a handoff note is included."
+  },
+  "entries": [
+    {
+      "num": 787,
+      "file": "data-mcudc.js",
+      "title": "Eternals",
+      "year": "2021",
+      "currentCatalogCa": "14+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/eternals",
+      "csmAge": "14+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Frequent superhero combat includes frightening Deviants, implied civilian deaths, goopy monster gore, weapons, genocide imagery, Hiroshima aftermath, natural disasters, and major-character deaths."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Occasional mild-to-moderate profanity, religious exclamations, insults, and a middle-finger gesture appear."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Romance is more prominent than usual for MCU entries, including passionate kissing, bare shoulders/backs in an implied sex scene, crushes, embraces, and affectionate married-couple moments."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adults drink beer, liquor, mead, ale, and homemade alcohol; one post-credit character appears drunk and drunkenness is joked about."
+        }
+      },
+      "handoffNotes": [
+        "Large-scale loss and grief are central and may need prose beyond the scored violence flag."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 788,
+      "file": "data-mcudc.js",
+      "title": "Justice Society: World War II",
+      "year": "2021",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/justice-society-world-war-ii",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Superhero and wartime fighting includes bombs, machine guns, explosions, hand-to-hand combat, a trident stabbing death, peril, dead bodies, and monster imagery."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Only one mild profanity is surfaced."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Cigarette smoking appears, and wine is seen on a table."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 789,
+      "file": "data-mcudc.js",
+      "title": "Shang-Chi and the Legend of the Ten Rings",
+      "year": "2021",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/shang-chi-and-the-legend-of-the-ten-rings",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Frequent martial-arts and fantasy action includes deaths, severe injuries, falls, stabbing, shooting, impalement, explosions, demon-like creatures, mourning, and heated arguments."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Infrequent language includes several variations on stronger mild profanity, other mild swears, religious exclamations, and one anatomical term."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Flashbacks show a couple's attraction, embrace, kiss, marriage, and children."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "No meaningful drinking, drugs, or smoking concern is surfaced, beyond a possible glimpse of drinks during a meal."
+        }
+      },
+      "handoffNotes": [
+        "A couple of deaths and mourning may need emotional prose outside the four scored flags."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 790,
+      "file": "data-mcudc.js",
+      "title": "Venom: Let There Be Carnage",
+      "year": "2021",
+      "currentCatalogCa": "14+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/venom-let-there-be-carnage",
+      "csmAge": "14+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Heavy monster violence includes mass destruction, many deaths, a headless body, offscreen stomping, child murder in an animated flashback, abuse, strangling, biting, eye injury, a head bite, shooting, lethal injection setup, and jump scares."
+        },
+        "language": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Language includes one F-word, several S-words, crude insults, body-part terms, religious profanity, and a middle-finger gesture."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "There is brief passionate kissing, a cartoon bare-bottom shot, and a flirtatious comment toward Venom."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "Animated flashback abuse and child-on-family violence may need prose beyond the slider value."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 791,
+      "file": "data-mcudc.js",
+      "title": "Batman and Superman: Battle of the Super Sons",
+      "year": "2022",
+      "currentCatalogCa": "Not on CSM; substitute source used",
+      "csmStatus": "unavailable",
+      "csmUrl": null,
+      "sourceUrlChecked": "https://en.wikipedia.org/wiki/Batman_and_Superman:_Battle_of_the_Super_Sons",
+      "targetedSearches": [
+        "site:commonsensemedia.org/movie-reviews \"Batman and Superman: Battle of the Super Sons\"",
+        "site:commonsensemedia.org/movie-reviews \"Battle of the Super Sons\" \"Common Sense Media\"",
+        "Common Sense Media Batman and Superman Battle of the Super Sons",
+        "https://www.commonsensemedia.org/movie-reviews/batman-and-superman-battle-of-the-super-sons",
+        "https://www.commonsensemedia.org/movie-reviews/batman-superman-battle-of-the-super-sons"
+      ],
+      "csmAge": null,
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available from a real CSM review page."
+        },
+        "language": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available from a real CSM review page."
+        },
+        "romance": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available from a real CSM review page."
+        },
+        "drinking": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available from a real CSM review page."
+        }
+      },
+      "handoffNotes": [
+        "Catalog srcUrl is not a CSM URL, and targeted CSM searches surfaced no actual CSM review page for this title.",
+        "One third-party page claimed a CSM rating, but no Common Sense Media source page could be verified; keep this marked unavailable unless a real CSM URL is later found."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 792,
+      "file": "data-mcudc.js",
+      "title": "Black Adam",
+      "year": "2022",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/black-adam",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "A high body count comes from shootings, bloody wounds, beatings, electrocution, skeletonizing, blade injury, a child hit by an arrow, severed hand, cliff death, crashes, zombies, and satanic-style imagery."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Sporadic mild-to-moderate profanity and religious language appear."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Only light flirting is surfaced."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 793,
+      "file": "data-mcudc.js",
+      "title": "Black Panther: Wakanda Forever",
+      "year": "2022",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/black-panther-wakanda-forever",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Intense action includes off-camera royal death, another emotionally heavy death, chases, hand-to-hand and weapons fights, spears, water bombs, guns, drowning, shooting, sinking vessels, and siren-like hypnosis that drives people into the sea."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Infrequent stronger mild profanity and subtitled insults or demonic references appear."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Only references to T'Challa and Nakia's past romantic relationship are surfaced."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "Grief, Boseman tribute context, and a character losing their remaining family may need emotional prose outside scored flags."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 794,
+      "file": "data-mcudc.js",
+      "title": "Catwoman: Hunted",
+      "year": "2022",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/catwoman-hunted",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Superhero violence includes guns, swords, claws, whips, spikes causing bloody injuries, a groin kick, rebar impalement, crashes, cliff falls, explosions, and creepy imagery."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild profanity appears."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Suggestive tension between Catwoman and Batwoman includes a near-kiss setup, towel removal, bath nudity partly obscured by bubbles, and later jokes about their tension."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Wine drinking occurs at a masquerade party."
+        }
+      },
+      "handoffNotes": [
+        "Romance/nudity label is only a little, but the detail includes stronger-than-minimal innuendo and bath nudity; reviewer should confirm the proposed level."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 795,
+      "file": "data-mcudc.js",
+      "title": "DC League of Super-Pets",
+      "year": "2022",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/dc-league-of-super-pets",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoon peril includes magical villainy, temporary slapstick injuries, electrocution jokes, car and missile hits, wall and ceiling crashes, bombs, explosions, baby separation, and animal lab-testing backstory."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Repeated bleeped swearing is contextually understandable, alongside mild insults and name-calling."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Light romance includes kisses, a background proposal, flirting, suggestive sleepover humor, and a brief dog-licking gag."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "The self-sacrifice/letting-go theme and lab-tested animals may need prose for younger viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 796,
+      "file": "data-mcudc.js",
+      "title": "Doctor Strange in the Multiverse of Madness",
+      "year": "2022",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/doctor-strange-in-the-multiverse-of-madness",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Horror-leaning MCU violence includes jump scares, creature attacks, mass death, burning to ash, resurrected corpse control, demonic beings, an eyeball injury, impalement, crushing, neck snapping, and a high body count."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Occasional stronger mild profanity, religious profanity, insults, and mild swears appear."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Minimal romance includes a shirtless shot, references to an intimate past relationship, longing looks, hand-holding, and affectionate moms in a memory."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adults drink martinis, champagne, wine, and cocktails at a wedding reception."
+        }
+      },
+      "handoffNotes": [
+        "CSM and parent/kid reactions emphasize unusually scary horror imagery for an MCU title; preserve that in prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 797,
+      "file": "data-mcudc.js",
+      "title": "Morbius",
+      "year": "2022",
+      "currentCatalogCa": "14+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/morbius",
+      "csmAge": "14+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Vampire-style violence includes biting, claw slashing, blood spatters, gurgling, deaths, dead bodies, gunfire, child bullying, crutch injury, a woman knocked unconscious, and a jump scare."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A few S-words plus mild profanity are surfaced."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Brief kissing and shirtless male characters are noted."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adults drink cocktails and shots, and hypodermic needles are used to inject the secret formula."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 798,
+      "file": "data-mcudc.js",
+      "title": "The Batman",
+      "year": "2022",
+      "currentCatalogCa": "14+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-batman",
+      "csmAge": "14+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Dark realistic-feeling violence includes killings, dead bodies, gunfire, death traps, severe beatings, violence against women, choking, taser use, a severed thumb, explosions, crashes, murder audio, flooding, blood, fire, and grim crime-scene details."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Sporadic stronger mild profanity, crude insults, religious exclamations, and name-calling appear."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Kissing, brief sex-related dialogue, and a woman dressing in underwear are noted."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A fictional eye-drop drug trade is a plot point, addicts are shown, and minor drinking appears."
+        }
+      },
+      "handoffNotes": [
+        "Dialogue about orphaned children, addiction, bodies, and dead parents may need prose beyond scored flags."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 799,
+      "file": "data-mcudc.js",
+      "title": "Thor: Love and Thunder",
+      "year": "2022",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/thor-love-and-thunder",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Comic-book action includes kidnapped children, a child dying from exposure and starvation, weapon fights, hand-to-hand combat, incapacitations, deaths, and a major character dying from illness."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Multiple S-word variations, mild profanity, rude phrases, and religious exclamations appear."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Romance and suggestive comedy include orgy references, scantily clad women, passionate kissing and embraces, magically removed clothing with rear nudity, lost-love references, flirting, and a rock-baby joke."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Tourists receive mead, and Valkyrie jokes that a keg is needed for a trip."
+        }
+      },
+      "handoffNotes": [
+        "Child death, cancer/terminal illness, and a major character death may need emotional prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 800,
+      "file": "data-mcudc.js",
+      "title": "Ant-Man and the Wasp: Quantumania",
+      "year": "2023",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/ant-man-and-the-wasp-quantumania",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Typical MCU violence includes group and one-on-one battles, genocide references, disintegration-like deaths of background characters, a killing-machine villain, and a climactic fight that leaves Scott bloodied and near death."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Several stronger mild profanities and crude body-part jokes appear."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Brief couple kisses and embraces appear, with suggestive jokes about Janet's past and a scantily clad warrior."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A tavern sequence includes alien and human drinking, mind-altering beverages, meal drinking, and a request for something that will cause drunkenness."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 801,
+      "file": "data-mcudc.js",
+      "title": "Aquaman and the Lost Kingdom",
+      "year": "2023",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/aquaman-and-the-lost-kingdom",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Mostly bloodless action includes beatings, skeletal zombies, clawed and tentacled monsters, giant insects, fist/trident/laser fights, repeated body slams, explosions, torture, kidnapping, baby separation, and a suicide-over-capture moment."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Language includes mild-to-moderate profanity, crude body-part terms, an unfinished F-word, and insulting name-calling."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Some costumes show cleavage."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Aquaman is shown drinking beer, Guinness is positively featured elsewhere, and a fact-finding scene occurs in a rough bar."
+        }
+      },
+      "handoffNotes": [
+        "Baby separation and suicide-over-capture should be carried in prose despite the violence label being some."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 802,
+      "file": "data-mcudc.js",
+      "title": "Batman: The Doom That Came to Gotham",
+      "year": "2023",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/batman-the-doom-that-came-to-gotham",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Lovecraftian animated violence includes demonic and monster imagery, Bruce's parents' murder flashback, a character sliced in half, pickaxe attack, dead tundra bodies, a diary about killing dogs, a lethal ear-crawling salamander, lizard and bat attacks, and suicide talk."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild-to-moderate profanity appears."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Brief nonsexual breast nudity is surfaced."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "One lead character is depicted as a heavy drinker who binge-drinks wine and slurs at dinner; hookah smoking, flask drinking, and Prohibition-era alcohol barrels also appear."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels brief nonsexual nudity as some, which may need reviewer confirmation against the app's romance/nudity mapping.",
+        "Suicide talk and references to killing dogs may need prose beyond the slider values."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 803,
+      "file": "data-mcudc.js",
+      "title": "Blue Beetle",
+      "year": "2023",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/blue-beetle",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Intense but mostly bloodless action includes frightening alien-host bonding with screams and body bulges, parent and sympathetic-character deaths, an armed raid on an immigrant family, mech-suit fights, electrified fantasy weapons, assault-weapon fire, explosions, constant peril, and child-perspective war images."
+        },
+        "language": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Frequent language includes stronger mild profanity, crude terms, religious profanity, an unfinished F-word, insults, and racist condescension toward a Latino employee."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A long kiss, an erection joke, and non-explicit nudity after Jaime returns to human form are noted."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Uncle Rudy drinks beer and jokes about weed."
+        }
+      },
+      "handoffNotes": [
+        "The armed immigration-style raid and deaths of sympathetic characters may need prose outside the scored flags."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 804,
+      "file": "data-mcudc.js",
+      "title": "Guardians of the Galaxy Vol. 3",
+      "year": "2023",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/guardians-of-the-galaxy-vol-3",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "The darkest Guardians entry includes traumatic animal experimentation and death, mass destruction, guns, bombs, blades, shooting, incineration, decapitation, visible gore and skeletal remains, near-death of a main character, captive children, intense fights, medical procedures, bloody facial injuries, a removed skin mask, mass killings, and a destroyed planet."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Strong language includes the MCU's first F-word plus many mild-to-moderate profanities, crude insults, religious exclamations, and an incomplete crude phrase."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Flirting, intense eye contact, compliments, and a mind-influenced attraction gag appear."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Peter is extremely drunk early on, and a drug deal involving underage beings is later referenced as meth."
+        }
+      },
+      "handoffNotes": [
+        "Animal torture/death and Rocket's trauma need clear prose beyond a generic violence level.",
+        "CSM labels language as some despite a first MCU F-word; reviewer may want to confirm app language mapping."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 805,
+      "file": "data-mcudc.js",
+      "title": "Legion of Super-Heroes",
+      "year": "2023",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/legion-of-super-heroes",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Animated superhero violence includes Krypton's destruction and Supergirl's mother choosing to die there, Batman choking a villain to death, bodies and cars thrown into buildings, explosions, bloody nose, and Supergirl stabbed with a kryptonite knife."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Occasional mild-to-moderate profanity appears, along with mean-girl name-calling."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Ongoing sexual tension between Supergirl and Brainiac 5 includes passionate kissing."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "A parent choosing death during Krypton's destruction may need emotional prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 806,
+      "file": "data-mcudc.js",
+      "title": "Shazam! Fury of the Gods",
+      "year": "2023",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/shazam-fury-of-the-gods",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Comic-book violence includes a collapsing bridge, citywide monster attacks, impalings, gods turning humans into zombie-like creatures, a sympathetic character's fatal fall, a suicide mission, car crashes, screaming humans in peril, a terrifying dragon, and a painful splinter-removal gag."
+        },
+        "language": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Regular profanity includes stronger mild swears, crude phrases, religious exclamations, and a child's clearly implied but cut-off F-word compound."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Teen romance includes a kiss and crush expressions."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Characters have sparkling wine, another character has an implied hangover, and there is a joke about being on drugs."
+        }
+      },
+      "handoffNotes": [
+        "Suicide mission and sympathetic death may need prose beyond the violence level."
+      ],
+      "confidence": "high"
+    }
+  ],
+  "handoffSummary": {
+    "entriesResearched": 20,
+    "availableCsmEntries": 19,
+    "unavailablePages": [
+      {
+        "num": 791,
+        "title": "Batman and Superman: Battle of the Super Sons",
+        "note": "No actual CSM review page found after targeted lookup; catalog remains fallback/Wikipedia-sourced."
+      }
+    ],
+    "labelDetailConflicts": [
+      {
+        "num": 794,
+        "title": "Catwoman: Hunted",
+        "note": "CSM labels Sex, Romance & Nudity as a little, but the details include strong innuendo and bath nudity."
+      },
+      {
+        "num": 802,
+        "title": "Batman: The Doom That Came to Gotham",
+        "note": "CSM labels brief nonsexual breast nudity as some; reviewer should confirm how this maps into the combined romance/nudity app flag."
+      },
+      {
+        "num": 804,
+        "title": "Guardians of the Galaxy Vol. 3",
+        "note": "CSM labels Language as some despite one F-word and many other profanities."
+      }
+    ],
+    "emotionalProseAttention": [
+      {
+        "num": 787,
+        "title": "Eternals",
+        "note": "Large-scale loss, betrayal, and grief are central."
+      },
+      {
+        "num": 789,
+        "title": "Shang-Chi and the Legend of the Ten Rings",
+        "note": "A couple of deaths and mourning may hit viewers hard."
+      },
+      {
+        "num": 793,
+        "title": "Black Panther: Wakanda Forever",
+        "note": "The film is explicitly shaped by grief, a tribute context, and a character losing remaining family."
+      },
+      {
+        "num": 795,
+        "title": "DC League of Super-Pets",
+        "note": "Letting-go/self-sacrifice themes and animal lab-testing backstory may need prose for younger viewers."
+      },
+      {
+        "num": 796,
+        "title": "Doctor Strange in the Multiverse of Madness",
+        "note": "Horror intensity is unusually high for the MCU and should be preserved in prose."
+      },
+      {
+        "num": 799,
+        "title": "Thor: Love and Thunder",
+        "note": "Child death, terminal illness, and a major character death may need prose."
+      },
+      {
+        "num": 801,
+        "title": "Aquaman and the Lost Kingdom",
+        "note": "Baby separation and suicide-over-capture should be carried in prose."
+      },
+      {
+        "num": 802,
+        "title": "Batman: The Doom That Came to Gotham",
+        "note": "Suicide talk and references to killing dogs may need prose beyond the sliders."
+      },
+      {
+        "num": 803,
+        "title": "Blue Beetle",
+        "note": "The armed immigration-style raid, war-from-a-child's-view images, and sympathetic deaths may need prose."
+      },
+      {
+        "num": 804,
+        "title": "Guardians of the Galaxy Vol. 3",
+        "note": "Animal torture/death and Rocket's trauma need explicit prose."
+      },
+      {
+        "num": 805,
+        "title": "Legion of Super-Heroes",
+        "note": "A parent choosing death during Krypton's destruction may need prose."
+      },
+      {
+        "num": 806,
+        "title": "Shazam! Fury of the Gods",
+        "note": "Suicide mission and sympathetic death may need prose."
+      }
+    ],
+    "nextClaudeAction": "Review unavailable fallback status for num 791 and the listed label/detail or emotional-prose notes before importing any production catalog content flags."
+  }
+}

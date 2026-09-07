@@ -1,0 +1,842 @@
+{
+  "researchBatch": "csm-content-flags-refetched-22-23-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only live CSM refetch for catalog nums 807-826 across data-mcudc.js and data-ghibli.js. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "sourceRange": {
+    "files": [
+      "data-mcudc.js",
+      "data-ghibli.js"
+    ],
+    "nums": [
+      807,
+      826
+    ],
+    "entryCount": 20
+  },
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "CSM labels were refetched live. Proposed levels map not present to 1, very little/a little to 2, some to 3, and a lot to 4."
+  },
+  "entries": [
+    {
+      "num": 807,
+      "file": "data-mcudc.js",
+      "title": "The Flash",
+      "year": "2023",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-flash",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Frequent superhero peril includes Barry's mother being fatally stabbed, a destructive chase with explosions and injuries, newborns falling from a collapsing hospital, a tortured Kryptonian prisoner, large battles with deaths, and repeated timeline-trauma scenes."
+        },
+        "language": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Language is stronger than many superhero entries, with one prominent F-word, frequent S-word use, crude body-part terms, and other mild-to-moderate profanity."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Romance is mostly crushes and flirtation, but nonsexual partial nudity is extended when super-speed strips young Barry's clothes and he repeatedly covers himself in public."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults occasionally drink wine or beer, and one character takes a bar shot."
+        }
+      },
+      "handoffNotes": [
+        "Live CSM language and romance labels are higher than the current catalog prose implies; reviewer should preserve the updated labels if importing.",
+        "Barry's grief over his murdered mother and the repeated failed attempts to change loss may need emotional-content prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 808,
+      "file": "data-mcudc.js",
+      "title": "The Marvels",
+      "year": "2023",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-marvels",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Comic-book action includes Kree attacks, laser and spear fights, crashes, stabbings, planetary resource collapse, presumed deaths, and one scene where heroes cannot evacuate everyone before a planet is destroyed."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A small number of mild-to-moderate swear words appear."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A light musical scene with Carol and a prince and a brief attractiveness comment are the only surfaced romance elements."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a drinking, drug, or smoking concern."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 809,
+      "file": "data-mcudc.js",
+      "title": "Justice League: Crisis on Infinite Earths Part One",
+      "year": "2024",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/justice-league-crisis-on-infinite-earths-part-one",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Animated multiverse action includes weapons, guns, explosions, stabbing, peril, character deaths, antimatter destruction threats, and brief bruising or dark blood marks."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Language includes mild-to-moderate profanity, insults, and religious exclamations."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Barry and Iris kiss at their wedding and in married-couple moments."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a drinking, drug, or smoking concern."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 810,
+      "file": "data-mcudc.js",
+      "title": "Justice League: Crisis on Infinite Earths Part Three",
+      "year": "2024",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/justice-league-crisis-on-infinite-earths-part-three",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Animated action includes guns, explosions, stabbings, repeated peril and death, multiverse destruction, dinosaur attacks, bar fighting, and brief blood or bruising on injuries."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Language includes S-word use, one stronger insult phrase, religious exclamations, insults, and mild profanity."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Only a little kissing is surfaced."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Characters are briefly shown drinking beer in a bar."
+        }
+      },
+      "handoffNotes": [
+        "CSM age is 13+ while the violence label remains only 'some'; details still include death, blood marks, dinosaurs, and bar fighting."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 811,
+      "file": "data-mcudc.js",
+      "title": "Justice League: Crisis on Infinite Earths Part Two",
+      "year": "2024",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/justice-league-crisis-on-infinite-earths-part-two",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Animated superhero violence includes weapons, guns, explosions, stabbing, world-ending antimatter peril, deaths, brief blood marks, bullying and domestic-violence flashbacks, mind-controlled teen stabbing with a pitchfork, and corporal punishment."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A few mild profanities and insults appear."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful romance, sex, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "There is a brief mention of wanting to smoke a cigarette."
+        }
+      },
+      "handoffNotes": [
+        "Bullying, domestic violence, humiliation, and classroom punishment are important prose context beyond the violence level."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 812,
+      "file": "data-mcudc.js",
+      "title": "Madame Web",
+      "year": "2024",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/madame-web",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Violence includes shootings, one shot to the head, stabbing, punching and slamming, fire, explosions, drowning, strangling, poisoning, a bloody car accident aftermath, intense peril, and a childbirth death."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Several mild-to-moderate profanities, religious exclamations, and a middle-finger gesture appear."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Two adults are shown entering an apartment and later waking in bed in underwear; the scene turns into threat rather than sex, and teens also flirt."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The main character asks for beer but receives soda instead."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 813,
+      "file": "data-mcudc.js",
+      "title": "Venom: The Last Dance",
+      "year": "2024",
+      "currentCatalogCa": "14+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/venom-the-last-dance",
+      "csmAge": "14+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Creature and gun violence includes shootings with blood, deaths, monsters devouring people, Venom biting off heads, alien tendril stabbings, acid and burning injuries, explosions, a helicopter crash, a bloody stomach wound, kids briefly in peril, and gross-out dialogue."
+        },
+        "language": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Strong and frequent profanity includes a motherf-word, repeated S-word variants, crude sexual and body-part language, insults, and religious exclamations."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Only brief comments describing characters as attractive are surfaced."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Eddie is drunk in a bar, Venom pressures him toward another drink, hangover comments recur, and a secondary character takes shots after a shock."
+        }
+      },
+      "handoffNotes": [
+        "Drinking label is only 'a little,' but the details include drunkenness, pressure to keep drinking, hangover references, and coping shots."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 814,
+      "file": "data-mcudc.js",
+      "title": "Captain America: Brave New World",
+      "year": "2025",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/captain-america-brave-new-world",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Frequent superhero action includes fights, assassination attempts, crashes, explosions, weapons, a rampaging Hulk, imprisonment, rough arrests, threatened hostages, supporting-character shootings, an offscreen suicide, graveyard grief, and references to nonconsensual medical experimentation."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Regular mild-to-moderate profanity, insults, and religious exclamations appear."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A shirtless transformation and one brief attractiveness implication are the surfaced romance or nudity elements."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A stocked limo appears without visible drinking, while medicinal pills and an implied smoking-cessation reference are also noted."
+        }
+      },
+      "handoffNotes": [
+        "Offscreen suicide, grief at a spouse's grave, and nonconsensual medical experimentation need prose context if imported."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 815,
+      "file": "data-mcudc.js",
+      "title": "Superman",
+      "year": "2025",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/superman",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Large-scale peril includes city destruction, implied civilian casualties, a giant rift, international invasion threats, metahuman and android battles, creepy nanotech, kidnapping, extralegal imprisonment and torture, brutal hand-to-hand fighting, and a villain shooting an unarmed victim at close range during a coercive Russian-roulette setup."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Infrequent but varied profanity includes moderate swear words, insults, crude terms, and religious exclamations."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Clark and Lois share several passionate kisses in an established relationship, while other scenes include nonreciprocal kissing, talk of harems and hookups, and implied sex workers approaching a man."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Perry often has an unlit cigar in his mouth, and there is a quick reference to an alien preferring planets where drunken partying is possible."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 816,
+      "file": "data-mcudc.js",
+      "title": "The Fantastic Four: First Steps",
+      "year": "2025",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-fantastic-four-first-steps",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Cosmic superhero peril includes Galactus destroying a planet, widespread New York devastation, mass evacuation, spaceship pursuit and crashes, Silver Surfer attacks including a near baby kidnapping, intense superpower fights, suspense, and one character death followed by revival."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Only infrequent stronger language and religious exclamations are surfaced."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Married affection includes hand-holding, embraces, kisses, pregnancy discussion with a brief suggestive line, form-fitting alien imagery with flirtation, and a non-graphic birth scene."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A dinner scene briefly shows what appears to be beer."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 817,
+      "file": "data-mcudc.js",
+      "title": "Thunderbolts*",
+      "year": "2025",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/thunderbolts",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Violence includes martial-arts fights, women being slammed or grabbed by the throat, shootings including a child and a head shot, chest impalement, electrical attacks, flaming arrows, glass spray, explosions, crashes, sonic attacks, shadow transformations, and brief domestic-abuse imagery."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Several mild-to-moderate profanities, crude terms, insults, and religious exclamations appear."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful romance, sex, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Substance-related content includes discussion of meth addiction, references to drinking to ease pain, vodka bottles in flashback, forced vodka drinking, and social vodka use."
+        }
+      },
+      "handoffNotes": [
+        "Drinking/drugs label is only 'a little,' but the details include addiction, forced drinking, and alcohol used for emotional pain.",
+        "Trauma, mental health, addiction, and domestic-abuse references need prose attention."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 818,
+      "file": "data-mcudc.js",
+      "title": "Avengers: Doomsday",
+      "year": "2026",
+      "currentCatalogCa": "Not on CSM; substitute source used",
+      "csmStatus": "unavailable",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/avengers-doomsday",
+      "sourceUrlChecked": "https://en.wikipedia.org/wiki/Avengers:_Doomsday",
+      "csmAge": null,
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "CSM currently provides only a limited preview, not a full review with category data."
+        },
+        "language": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "CSM currently provides only a limited preview, not a full review with category data."
+        },
+        "romance": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "CSM currently provides only a limited preview, not a full review with category data."
+        },
+        "drinking": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "CSM currently provides only a limited preview, not a full review with category data."
+        }
+      },
+      "handoffNotes": [
+        "Targeted CSM lookup found https://www.commonsensemedia.org/movie-reviews/avengers-doomsday, but the page says the full review will be available on December 18, 2026 and does not expose CSM age or the four category labels.",
+        "Do not import fallback/Wikipedia assumptions as CSM content flags."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 819,
+      "file": "data-mcudc.js",
+      "title": "Spider-Man: Brand New Day",
+      "year": "2026",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/spider-man-brand-new-day",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Frequent comic-book danger includes bloody and oozing wounds, guns, bladed and electrified weapons, explosions, mass destruction, vehicle crashes, high falls, threats, a tranquilizer dart, imprisonment, and torture."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Language includes several mild-to-moderate profanities, S-word variants, religious exclamations, and an interrupted motherf-word."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Romance includes kissing, a love letter, sex-related dialogue, and one hot-pool invitation to undress."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Casual party drinks and a beer mention appear, plus a comic dependency on an energy drink."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 820,
+      "file": "data-ghibli.js",
+      "title": "Castle in the Sky",
+      "year": "1986",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/castle-in-the-sky",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Adventure peril includes frequent shooting near child heroes, bullet nicks, artillery, heat rays, a nuclear-style explosion, offscreen deaths from falls, a street fight, and a robot destroyed by mortar fire."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a romance, sex, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a drinking, drug, or smoking concern."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 821,
+      "file": "data-ghibli.js",
+      "title": "Grave of the Fireflies",
+      "year": "1988",
+      "currentCatalogCa": "15+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/grave-of-the-fireflies",
+      "csmAge": "15+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "The war content is devastating: a teen and toddler suffer starvation, their mother dies from air-raid burns and is later shown decomposing, bombed civilians appear dead or dying with wounds and burns, villages are strafed, a corpse is mistaken for someone sleeping, food theft leads to a beating, and both children die."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Occasional mild-to-moderate profanity and insults appear."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Nonsexual nudity appears in family bathing and distant toddler play."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One character smokes a pipe."
+        }
+      },
+      "handoffNotes": [
+        "Emotional/sad prose is essential: the age rating is driven by starvation, civilian war trauma, graphic death aftermath, and the deaths of both children."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 822,
+      "file": "data-ghibli.js",
+      "title": "Only Yesterday",
+      "year": "1991",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/only-yesterday",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The surfaced violence is limited to Taeko's father slapping her hard."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Boys tease girls about periods and underwear, and characters use mild schoolyard insults."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Content includes boys trying to look up girls' skirts, children teasing each other about crushes, and mild romance."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adult men smoke cigarettes in several scenes."
+        }
+      },
+      "handoffNotes": [
+        "Menstruation teasing and boys trying to look up skirts are better handled with prose than only category levels."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 823,
+      "file": "data-ghibli.js",
+      "title": "Porco Rosso",
+      "year": "1992",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/porco-rosso",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoon-style action includes airplane dogfights, machine-gun fire, grenades, explosions, and a long fistfight."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Only a few mild profanities are surfaced."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A sultry nightclub singer, flirting, marriage proposals, and womanizer accusations are noted."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Porco often drinks wine and has a cigar, and bar scenes include drinking and smoking."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 824,
+      "file": "data-ghibli.js",
+      "title": "Pom Poko",
+      "year": "1994",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/pom-poko",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoon conflict includes tanuki fighting with sticks, sabotage of human development, overturned vehicles, fires, damaged bridges, three human deaths, repeated kill-the-humans rhetoric, scary transformations, and many tanuki dying from starvation, roads, or traps."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Insults toward humans and repeated hostile anti-human phrasing are the main language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Tanuki court, marry, and have offspring, and the traditional designs show visible testicles."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Celebrations include drinks that appear alcoholic, and a longer bar scene shows visibly drunk men reacting to tanuki pranks."
+        }
+      },
+      "handoffNotes": [
+        "Environmental grief, starvation, roadkill/trap deaths, and the loss of habitat should be retained in prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 825,
+      "file": "data-ghibli.js",
+      "title": "Whisper of the Heart",
+      "year": "1995",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/whisper-of-the-heart",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a violence or scariness concern."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "There is no profanity, but characters call each other mild names during arguments."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Innocent tween romance is central to the story."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Shizuku's father lights a cigarette during a family discussion, then puts it out after his wife objects."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 826,
+      "file": "data-ghibli.js",
+      "title": "Princess Mononoke",
+      "year": "1997",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/princess-mononoke",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Violent fantasy-war imagery includes a snake-covered dying boar god decomposing to bone, battle scenes with dismemberment and decapitation, wounded characters with blood, gruesome boar deaths, grenades, swords, poison darts, rifles, bows, and arrows."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Only a few mild profanities are surfaced."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The main surfaced sex-related content is discussion that some Iron Town women previously worked in brothels."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "There is a brief wine-drinking mention."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Violence & Scariness as 'some,' but the detail text includes dismemberment, decapitation, blood, and gruesome animal-god deaths."
+      ],
+      "confidence": "high"
+    }
+  ],
+  "handoffSummary": {
+    "refetchedEntries": 20,
+    "foundCsmEntries": 19,
+    "unavailableCsmEntries": [
+      {
+        "num": 818,
+        "title": "Avengers: Doomsday",
+        "catalogSrcUrl": "https://en.wikipedia.org/wiki/Avengers:_Doomsday",
+        "csmPreviewUrl": "https://www.commonsensemedia.org/movie-reviews/avengers-doomsday",
+        "reason": "Targeted CSM lookup found only a limited preview page; it states the full review will be available on December 18, 2026 and does not provide age or category labels."
+      }
+    ],
+    "firstNum": 807,
+    "lastNum": 826,
+    "sourceBasis": "live CSM refetch by subagent from catalog srcUrl when CSM URL was present; targeted CSM lookup for num 818",
+    "labelDetailConflicts": [
+      {
+        "num": 810,
+        "title": "Justice League: Crisis on Infinite Earths Part Three",
+        "note": "CSM age is 13+ while Violence & Scariness remains 'some' despite death, blood marks, dinosaur attacks, and bar fighting."
+      },
+      {
+        "num": 813,
+        "title": "Venom: The Last Dance",
+        "note": "CSM labels Drinking, Drugs & Smoking as 'a little' while details include drunkenness, pressure to keep drinking, hangover references, and coping shots."
+      },
+      {
+        "num": 817,
+        "title": "Thunderbolts*",
+        "note": "CSM labels Drinking, Drugs & Smoking as 'a little' while details include meth addiction, forced vodka drinking, and alcohol use tied to emotional pain."
+      },
+      {
+        "num": 826,
+        "title": "Princess Mononoke",
+        "note": "CSM labels Violence & Scariness as 'some' while details include dismemberment, decapitation, blood, and gruesome animal-god deaths."
+      }
+    ],
+    "emotionalProseAttention": [
+      {
+        "num": 807,
+        "title": "The Flash",
+        "note": "Barry's grief over his mother's murder and repeated loss should remain in prose."
+      },
+      {
+        "num": 811,
+        "title": "Justice League: Crisis on Infinite Earths Part Two",
+        "note": "Bullying, domestic violence, humiliation, and corporal punishment appear in the violence details."
+      },
+      {
+        "num": 814,
+        "title": "Captain America: Brave New World",
+        "note": "Offscreen suicide, grief at a spouse's grave, and nonconsensual medical experimentation need prose context."
+      },
+      {
+        "num": 817,
+        "title": "Thunderbolts*",
+        "note": "Trauma, mental health, addiction, and domestic-abuse references need prose attention."
+      },
+      {
+        "num": 821,
+        "title": "Grave of the Fireflies",
+        "note": "Starvation, civilian war trauma, graphic death aftermath, and the deaths of both children are central."
+      },
+      {
+        "num": 822,
+        "title": "Only Yesterday",
+        "note": "Menstruation teasing and boys trying to look up girls' skirts are better handled with prose than only category levels."
+      },
+      {
+        "num": 824,
+        "title": "Pom Poko",
+        "note": "Environmental grief, starvation, roadkill/trap deaths, and habitat loss should remain in prose."
+      }
+    ],
+    "handoffNotes": [
+      "Do not edit production catalog files from this research-only pass.",
+      "All available CSM titles in this batch use researchBasis: live CSM refetch by subagent.",
+      "Num 818 should remain unavailable for CSM category import until CSM publishes a full review with age and category labels."
+    ],
+    "nextAction": "Reviewer should transform approved entries through the official content-flag backfill workflow before any production catalog edits."
+  }
+}
