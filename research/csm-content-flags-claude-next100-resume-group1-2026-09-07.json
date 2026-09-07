@@ -1,0 +1,982 @@
+{
+  "researchBatch": "csm-content-flags-claude-next100-resume-group1-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Claude",
+  "purpose": "Resume group 1 of 4 for the next-100 candidate title backfill (research/next-100-titles-2026-09-07.json); live CSM research with Wikipedia/IMDb fallback for titles absent from CSM.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This research preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 137,
+      "file": "data-dcom.js",
+      "title": "The Magic Faraway Tree",
+      "year": "2026",
+      "currentCatalogCa": "~6+ (approximate)",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-magic-faraway-tree",
+      "csmAge": "8+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mostly mild fantasy threat rather than real violence: climbing a towering ladder, risk of being trapped in magical lands, a scary character caging the kids and threatening them with a 'toffee' gun, a dangerous plane flight with an emergency landing, and a small explosion."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Name-calling and mild insults such as 'loser,' 'weird,' 'beardy weirdo,' 'dum-dum,' and 'fool,' plus 'heck,' 'God' as an exclamation, and 'damn' in a song lyric."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Parents kiss on the lips a few times and a character practices kissing on a broom; a joke involves pulling baked buns from pants near a testicles-related gag."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults drink wine with dinner, and a joke references a parent's nightly glass of wine with no alcoholism implied."
+        }
+      },
+      "handoffNotes": [
+        "RESOLUTION for currentCa='~6+ (approximate)': a real, live CSM review exists at the URL above and rates the film 8+, higher than the catalog's approximated ~6+. Catalog should be upgraded to reflect the real CSM age rating of 8+ rather than the approximation.",
+        "CSM notes a passing reference to the death of a dad/grandad; may need gentle prose context for a family-facing summary."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 138,
+      "file": "data-dcom.js",
+      "title": "Northern Lights",
+      "year": "1997",
+      "currentCatalogCa": "Not on CSM; substitute source used",
+      "csmStatus": "unavailable",
+      "csmUrl": null,
+      "sourceUrlChecked": "https://en.wikipedia.org/wiki/Northern_Lights_(1997_film)",
+      "targetedSearches": [
+        "Northern Lights Disney Channel movie commonsensemedia.org",
+        "\"Northern Lights\" 1997 Disney Channel Original Movie hockey commonsensemedia",
+        "site:commonsensemedia.org \"Northern Lights\" Diane Keaton"
+      ],
+      "csmAge": null,
+      "researchBasis": "live CSM search plus Wikipedia fallback by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; no CSM review exists for this 1997 Disney Channel Original Movie. Wikipedia's article does not flag any violence content."
+        },
+        "language": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; Wikipedia's article does not flag any language content."
+        },
+        "romance": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; Wikipedia's article does not flag any romance/sexual content (the story centers on a widowed aunt and her orphaned nephew)."
+        },
+        "drinking": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available. Wikipedia notes the lead character (played by Diane Keaton) is depicted as a heavy smoker throughout, which the actress herself called an unusual choice for a Disney Channel production -- a real drinking/drugs/smoking concern even though no CSM label exists to size it."
+        }
+      },
+      "handoffNotes": [
+        "RESOLUTION for currentCa='Not on CSM; substitute source used': confirmed correct as-is. Multiple targeted searches (direct, hockey/DCOM-specific, and site:commonsensemedia.org) turned up no CSM review for this 1997 TV movie; no upgrade is available. Catalog should keep the substitute-source flag.",
+        "The plot centers on a woman inheriting her orphaned nephew after her estranged brother's death, and the pair must bond while grieving -- meaningful grief/loss/death and family-separation themes that may need gentle prose context for parents.",
+        "Notable smoking content: the lead adult character is depicted as a heavy smoker throughout, per Wikipedia -- worth flagging even without a CSM-sourced label since no live review exists to size it precisely."
+      ],
+      "confidence": "low"
+    },
+    {
+      "num": 141,
+      "file": "data-dcom.js",
+      "title": "High School Musical 2",
+      "year": "2007",
+      "currentCatalogCa": "7+ (approximate)",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/high-school-musical-2",
+      "csmAge": "8+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful violence or scariness concern."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild teen flirting with lots of near-kisses and a couple of real kisses at the end; one boy calls a girl a 'little hottie.'"
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "RESOLUTION for currentCa='7+ (approximate)': a real, live CSM review exists at the URL above and rates the film 8+, one year older than the catalog's approximated 7+. Catalog should be upgraded to the real CSM age rating of 8+ rather than the approximation."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 143,
+      "file": "data-dcom.js",
+      "title": "Halloweentown II: Kalabar's Revenge",
+      "year": "2001",
+      "currentCatalogCa": "7+ (approximate)",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/halloweentown-ii-kalabars-revenge",
+      "csmAge": "8+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Non-graphic magical peril, such as the main character getting zapped by the villain but recovering quickly; a young warlock pops up unexpectedly and taunts characters in a mildly scary, threatening tone, though humor softens the tenser moments."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "RESOLUTION for currentCa='7+ (approximate)': a real, live CSM review exists at the URL above and rates the film 8+, one year older than the catalog's approximated 7+. Catalog should be upgraded to the real CSM age rating of 8+ rather than the approximation.",
+        "No meaningful grief/loss/death theme surfaced; the plot's tension is time-pressure to rescue friends/family from a spell rather than an actual death or separation."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 144,
+      "file": "data-dcom.js",
+      "title": "Zenon: Girl of the 21st Century",
+      "year": "1999",
+      "currentCatalogCa": "~7+ (approximate)",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/zenon-girl-of-the-21st-century",
+      "csmAge": "6+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A brief but real moment of peril when Zenon discovers the space station -- with her parents and friends still aboard -- is about to explode; the main villain also displays threatening behavior."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "No swearing, but two instances of 'shut up.'"
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "RESOLUTION for currentCa='~7+ (approximate)': a real, live CSM review exists at the URL above and rates the film 6+, younger than the catalog's approximated ~7+. Catalog should be corrected to the real CSM age rating of 6+.",
+        "CSM flags a short-lived risk of death and destruction to Zenon's parents when the space station is sabotaged, and Zenon is separated from her family and banished to Earth to live with her aunt -- meaningful separation/peril-to-family themes that may need gentle prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 145,
+      "file": "data-dcom.js",
+      "title": "Zenon: The Zequel",
+      "year": "2001",
+      "currentCatalogCa": "~7+ (approximate)",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/zenon-the-zequel",
+      "csmAge": "6+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One scary scene where characters find themselves stranded in space with no fuel; otherwise a harmless space caper with essentially no real violence."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No objectionable language."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No sexual or romantic content noted."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No substance use depicted."
+        }
+      },
+      "handoffNotes": [
+        "RESOLUTION for currentCa='~7+ (approximate)': a real, live CSM review exists at the URL above and rates the film 6+, younger than the catalog's approximated ~7+. Catalog should be corrected to the real CSM age rating of 6+."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 146,
+      "file": "data-dcom.js",
+      "title": "Zenon: Z3",
+      "year": "2004",
+      "currentCatalogCa": "~9+ (approximate)",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/zenon-z3",
+      "csmAge": "6+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A Moon God threatens to destroy the Earth, but there is no real violence or scary content beyond that brief threat."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild flirting, and two teens share a gentle kiss, as now-17-year-old Zenon finds romance."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "RESOLUTION for currentCa='~9+ (approximate)': a real, live CSM review exists at the URL above and rates the film 6+, notably younger than the catalog's approximated ~9+. Catalog should be corrected to the real CSM age rating of 6+."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 147,
+      "file": "data-dcom.js",
+      "title": "Descendants",
+      "year": "2015",
+      "currentCatalogCa": "8+ (approximate)",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/descendants",
+      "csmAge": "8+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One scary scene shows a woman transform into a menacing dragon; otherwise minimal violence."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Flirting between teens and a couple of kisses; one character flirts heavily with breathy, sexualized singing and dancing."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "RESOLUTION for currentCa='8+ (approximate)': a real, live CSM review exists at the URL above and confirms the exact same 8+ age rating the catalog already carries. This is a straight upgrade from an unverified approximation to a live-confirmed match -- no numeric change needed, but the 'approximate' qualifier can now be dropped."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 148,
+      "file": "data-dcom.js",
+      "title": "Descendants 2",
+      "year": "2017",
+      "currentCatalogCa": "8+ (approximate)",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/descendants-2",
+      "csmAge": "8+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Suspenseful sword battle between Uma and Mal over Ben's fate; Mal transforms into a dragon and Uma into a sea creature, which could be scary for younger kids."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mal and Ben's relationship continues, and other teens pair up; some flirting and a few kisses, described by CSM as very sweet."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "RESOLUTION for currentCa='8+ (approximate)': a real, live CSM review exists at the URL above and confirms the exact same 8+ age rating the catalog already carries. This is a straight upgrade from an unverified approximation to a live-confirmed match -- no numeric change needed, but the 'approximate' qualifier can now be dropped."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 149,
+      "file": "data-dcom.js",
+      "title": "Descendants 3",
+      "year": "2019",
+      "currentCatalogCa": "8+ (approximate)",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/descendants-3",
+      "csmAge": "8+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Hades hits Mal and her friends with laser blasts and knocks them down; Mal is injured by magic from Audrey's scepter while in dragon form and needs help recovering her strength."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mal and Ben's romance continues with a marriage proposal and several moments of closeness; true love's kiss awakens a sleeping character."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "RESOLUTION for currentCa='8+ (approximate)': a real, live CSM review exists at the URL above and confirms the exact same 8+ age rating the catalog already carries. This is a straight upgrade from an unverified approximation to a live-confirmed match -- no numeric change needed, but the 'approximate' qualifier can now be dropped."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 151,
+      "file": "data-dcom.js",
+      "title": "Camp Rock 2: The Final Jam",
+      "year": "2010",
+      "currentCatalogCa": "8+ (approximate)",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/camp-rock-2-the-final-jam",
+      "csmAge": "8+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful violence or scariness concern."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A couple of uses of 'butt.'"
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A developing teen relationship brings plenty of longing glances, some hand-holding, and one long-awaited kiss."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "RESOLUTION for currentCa='8+ (approximate)': a real, live CSM review exists at the URL above and confirms the exact same 8+ age rating the catalog already carries. This is a straight upgrade from an unverified approximation to a live-confirmed match -- no numeric change needed, but the 'approximate' qualifier can now be dropped."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 153,
+      "file": "data-dcom.js",
+      "title": "The Cheetah Girls 2",
+      "year": "2006",
+      "currentCatalogCa": "7+ (approximate)",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-cheetah-girls-2",
+      "csmAge": "8+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful violence or scariness concern."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Occasional uses of 'Oh, my God,' but nothing stronger."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A few mild kissing scenes and some flirtatious exchanges during the girls' Barcelona trip."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "RESOLUTION for currentCa='7+ (approximate)': a real, live CSM review exists at the URL above and rates the film 8+, one year older than the catalog's approximated 7+. Catalog should be upgraded to the real CSM age rating of 8+ rather than the approximation."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 154,
+      "file": "data-dcom.js",
+      "title": "The Cheetah Girls: One World",
+      "year": "2008",
+      "currentCatalogCa": "7+ (approximate)",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-cheetah-girls-one-world",
+      "csmAge": "8+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful violence or scariness concern."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Light romance with one kiss; one character initiates a relationship via cell phone."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "RESOLUTION for currentCa='7+ (approximate)': a real, live CSM review exists at the URL above and rates the film 8+, one year older than the catalog's approximated 7+. Catalog should be upgraded to the real CSM age rating of 8+ rather than the approximation."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 155,
+      "file": "data-dcom.js",
+      "title": "Cadet Kelly",
+      "year": "2002",
+      "currentCatalogCa": "8+ (approximate)",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/cadet-kelly",
+      "csmAge": "8+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One suspenseful scene has a principal character stranded on a cliff; several comic pratfalls during military-training scenes, and a platoon leader pulls a soldier by the ear."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The heroine is constantly called a 'maggot' by her team leader as part of harsh drill-sergeant-style discipline."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "RESOLUTION for currentCa='8+ (approximate)': a real, live CSM review exists at the URL above and confirms the exact same 8+ age rating the catalog already carries. This is a straight upgrade from an unverified approximation to a live-confirmed match -- no numeric change needed, but the 'approximate' qualifier can now be dropped.",
+        "The film centers on a teen learning to adjust to and accommodate her divorced parents; CSM frames the divorce very positively (both parents shown as loving and conscientious), but the separation/family-restructuring theme may still warrant gentle prose context for families navigating similar situations."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 259,
+      "file": "data-disney.js",
+      "title": "Make Mine Music",
+      "year": "1946",
+      "currentCatalogCa": "Not on CSM; substitute source used",
+      "csmStatus": "unavailable",
+      "csmUrl": null,
+      "sourceUrlChecked": "https://en.wikipedia.org/wiki/Make_Mine_Music",
+      "targetedSearches": [
+        "Make Mine Music 1946 Disney commonsensemedia.org",
+        "site:commonsensemedia.org \"Make Mine Music\""
+      ],
+      "csmAge": null,
+      "researchBasis": "live CSM search plus Wikipedia fallback by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available. Per Wikipedia, this package film includes real content concerns: the 'Martins and the Coys' segment depicts a family feud with gunplay (later censored from US home video for gun violence), 'Peter and the Wolf' involves hunting a wolf, and the finale 'The Whale Who Wanted to Sing at the Met' ends with the whale harpooned and killed."
+        },
+        "language": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; Wikipedia's segment-by-segment summary does not flag any language content."
+        },
+        "romance": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available. Several segments ('The Martins and the Coys,' 'Without You,' 'Two Silhouettes,' 'Johnnie Fedora and Alice Bluebonnet') center on romance and lost love, though nothing explicit. Wikipedia also notes brief mild female nudity in the 'All the Cats Join In' segment that was edited out of later US/UK home video releases."
+        },
+        "drinking": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; Wikipedia's segment-by-segment summary does not flag any drinking, drugs, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "RESOLUTION for currentCa='Not on CSM; substitute source used': confirmed correct as-is. Targeted searches (direct and site:commonsensemedia.org) found no CSM review for this 1946 package film; no upgrade is available. Catalog should keep the substitute-source flag.",
+        "The film's closing segment, 'The Whale Who Wanted to Sing at the Met' (Willie the Operatic Whale), ends with Willie harpooned and killed by a hunter who mistakenly believes he swallowed opera singers -- a real on-screen animal death with a bittersweet ending that may need gentle prose context for sensitive viewers.",
+        "Note: an earlier US/UK home-video edit of the 'All the Cats Join In' segment removed brief mild female nudity, and the 'Martins and the Coys' segment (family feud with gunplay) has also been censored from some home releases -- worth flagging since the version being screened may differ from the original theatrical cut."
+      ],
+      "confidence": "low"
+    },
+    {
+      "num": 343,
+      "file": "data-disney.js",
+      "title": "In Search of the Castaways",
+      "year": "1962",
+      "currentCatalogCa": "Not on CSM; substitute source used",
+      "csmStatus": "unavailable",
+      "csmUrl": null,
+      "sourceUrlChecked": "https://en.wikipedia.org/wiki/In_Search_of_the_Castaways_(film)",
+      "targetedSearches": [
+        "In Search of the Castaways 1962 Disney commonsensemedia.org",
+        "site:commonsensemedia.org \"In Search of the Castaways\""
+      ],
+      "csmAge": null,
+      "researchBasis": "live CSM search plus Wikipedia fallback by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available. Per Wikipedia, the adventure includes an earthquake, a giant condor attacking a child, a tidal wave, a lightning storm, capture and imprisonment by hostile natives, an avalanche, and a volcano eruption during the group's escape -- a genuinely intense sequence of perils for a family film."
+        },
+        "language": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; Wikipedia's summary does not flag any language content."
+        },
+        "romance": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available. Wikipedia notes a mild 'puppy love' romance develops between young Mary Grant and Lord Glenarvan's son John -- innocent and age-appropriate."
+        },
+        "drinking": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; Wikipedia's summary does not flag any drinking, drugs, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "RESOLUTION for currentCa='Not on CSM; substitute source used': confirmed correct as-is. Targeted searches (direct and site:commonsensemedia.org) found no CSM review for this 1962 film; no upgrade is available. Catalog should keep the substitute-source flag.",
+        "The entire plot is a worldwide search for a missing, possibly shipwrecked father -- meaningful themes of family separation and concern for a lost parent that may need gentle prose context, even though the father is ultimately found alive."
+      ],
+      "confidence": "low"
+    },
+    {
+      "num": 354,
+      "file": "data-disney.js",
+      "title": "Now You See Him, Now You Don't",
+      "year": "1972",
+      "currentCatalogCa": "Not on CSM; substitute source used",
+      "csmStatus": "unavailable",
+      "csmUrl": null,
+      "sourceUrlChecked": "https://en.wikipedia.org/wiki/Now_You_See_Him,_Now_You_Don%27t",
+      "targetedSearches": [
+        "Now You See Him, Now You Don't 1972 Disney commonsensemedia.org",
+        "site:commonsensemedia.org \"Now You See Him, Now You Don't\""
+      ],
+      "csmAge": null,
+      "researchBasis": "live CSM search plus Wikipedia fallback by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available. Per Wikipedia, the film includes a comedic car chase and physical confrontations during an invisible bank heist and its capture, but nothing beyond typical slapstick Disney comedy peril."
+        },
+        "language": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; Wikipedia's summary does not flag any language content."
+        },
+        "romance": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; Wikipedia's summary does not flag any romance or sexual content."
+        },
+        "drinking": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; Wikipedia's summary does not flag any drinking, drugs, or smoking content -- the film's fictional invisibility formula is a comedic sci-fi device, not a substance-use depiction."
+        }
+      },
+      "handoffNotes": [
+        "RESOLUTION for currentCa='Not on CSM; substitute source used': confirmed correct as-is. Targeted searches (direct and site:commonsensemedia.org) found no CSM review for this 1972 film -- note that CSM does have a review for the unrelated 2025 franchise film 'Now You See Me: Now You Don't,' which shares a similar title but is a different movie entirely, so it cannot be used as a substitute match. No upgrade is available for this title; catalog should keep the substitute-source flag.",
+        "No meaningful grief/loss/death/separation theme surfaced in Wikipedia's plot summary."
+      ],
+      "confidence": "low"
+    },
+    {
+      "num": 365,
+      "file": "data-disney.js",
+      "title": "The Apple Dumpling Gang Rides Again",
+      "year": "1979",
+      "currentCatalogCa": "Not on CSM; substitute source used",
+      "csmStatus": "unavailable",
+      "csmUrl": null,
+      "sourceUrlChecked": "https://en.wikipedia.org/wiki/The_Apple_Dumpling_Gang_Rides_Again",
+      "targetedSearches": [
+        "The Apple Dumpling Gang Rides Again commonsensemedia.org",
+        "site:commonsensemedia.org \"Apple Dumpling Gang Rides Again\""
+      ],
+      "csmAge": null,
+      "researchBasis": "live CSM search plus Wikipedia fallback by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available. Sources describe typical comedic Western gunplay: bank-robbery scenes, a train-heist conspiracy, and law-enforcement pursuits, played for slapstick rather than realism."
+        },
+        "language": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; no profanity concerns noted in available source material."
+        },
+        "romance": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; minimal romantic content, limited to a light subplot involving Major Gaskill's daughter Millie."
+        },
+        "drinking": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available. Source material notes 'drunk jokes' as part of the comedic tone, so some alcohol-related humor is present even without a CSM label to size it precisely."
+        }
+      },
+      "handoffNotes": [
+        "RESOLUTION for currentCa='Not on CSM; substitute source used': confirmed correct as-is. Targeted searches (direct and site:commonsensemedia.org) found no CSM review for this 1979 Disney Western comedy; no upgrade is available. Catalog should keep the substitute-source flag.",
+        "No meaningful grief/loss/death/separation theme surfaced; the plot centers on reformed outlaws Amos and Theodore trying to go straight amid comic misadventures."
+      ],
+      "confidence": "low"
+    },
+    {
+      "num": 370,
+      "file": "data-disney.js",
+      "title": "Condorman",
+      "year": "1981",
+      "currentCatalogCa": "Not on CSM; substitute source used",
+      "csmStatus": "unavailable",
+      "csmUrl": null,
+      "sourceUrlChecked": "https://en.wikipedia.org/wiki/Condorman",
+      "targetedSearches": [
+        "Condorman 1981 Disney commonsensemedia.org",
+        "site:commonsensemedia.org Condorman"
+      ],
+      "csmAge": null,
+      "researchBasis": "live CSM search plus Wikipedia fallback by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available. Per Wikipedia, this spy-action comedy includes extensive car and boat chases, characters shot at, explosions, and an antagonist (Morovich) dying in a boat crash on an island rock -- notably more intense than typical Disney fare of the era, though critics note the effects look dated."
+        },
+        "language": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; no significant profanity noted in available source material."
+        },
+        "romance": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available. Wikipedia describes the film as 'slightly more racy than Disney normally produced,' with the female lead Natalia called 'the sexiest in Disney's history' by the studio's own president at the time -- worth flagging as a real content concern even without a CSM label to size it."
+        },
+        "drinking": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; no drinking, drugs, or smoking content noted in available source material."
+        }
+      },
+      "handoffNotes": [
+        "RESOLUTION for currentCa='Not on CSM; substitute source used': confirmed correct as-is. Targeted searches (direct and site:commonsensemedia.org) found no CSM review for this 1981 film; no upgrade is available. Catalog should keep the substitute-source flag.",
+        "An antagonist (Morovich) dies on-screen in a boat crash, and the plot involves a Soviet agent escaping an abusive relationship with her former partner Krokov -- worth flagging even though it isn't a central grief theme for the protagonists."
+      ],
+      "confidence": "low"
+    },
+    {
+      "num": 371,
+      "file": "data-disney.js",
+      "title": "Night Crossing",
+      "year": "1982",
+      "currentCatalogCa": "Not on CSM; substitute source used",
+      "csmStatus": "unavailable",
+      "csmUrl": null,
+      "sourceUrlChecked": "https://en.wikipedia.org/wiki/Night_Crossing",
+      "targetedSearches": [
+        "Night Crossing 1982 Disney commonsensemedia.org",
+        "site:commonsensemedia.org \"Night Crossing\""
+      ],
+      "csmAge": null,
+      "researchBasis": "live CSM search plus Wikipedia fallback by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available. This is a real content concern per Wikipedia: the opening depicts a teenager shot by East German border guards during an escape attempt, and the film sustains real Cold War danger throughout -- border patrols, helicopter pursuit, and fires during the balloon's construction. Notably more intense than typical family fare."
+        },
+        "language": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; no language content noted in available source material."
+        },
+        "romance": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; no romance or sexual content noted in available source material."
+        },
+        "drinking": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; no drinking, drugs, or smoking content noted in available source material."
+        }
+      },
+      "handoffNotes": [
+        "RESOLUTION for currentCa='Not on CSM; substitute source used': confirmed correct as-is. Targeted searches (direct and site:commonsensemedia.org) found no CSM review for this 1982 film; no upgrade is available. Catalog should keep the substitute-source flag.",
+        "The plot's central escape is partly motivated by one family member's sick mother in West Berlin whom East Germany has repeatedly refused to let her visit -- meaningful family-separation and illness themes that may need gentle prose context.",
+        "Note: a teenager is shot by border guards in the opening scene -- a genuinely intense, true-story-based violence beat that should be weighed carefully against this app's family-friendly bar, even without a CSM review to size it precisely."
+      ],
+      "confidence": "low"
+    },
+    {
+      "num": 373,
+      "file": "data-disney.js",
+      "title": "Trenchcoat",
+      "year": "1983",
+      "currentCatalogCa": "Not on CSM; substitute source used",
+      "csmStatus": "unavailable",
+      "csmUrl": null,
+      "sourceUrlChecked": "https://en.wikipedia.org/wiki/Trenchcoat_(film)",
+      "targetedSearches": [
+        "Trenchcoat 1983 Disney commonsensemedia.org",
+        "site:commonsensemedia.org Trenchcoat Margot Kidder"
+      ],
+      "csmAge": null,
+      "researchBasis": "live CSM search plus Wikipedia fallback by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available, and Wikipedia's plot summary of this international plutonium-smuggling conspiracy comedy-thriller does not enumerate specific violence details, only that 'comic chaos' ensues."
+        },
+        "language": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; no language specifics found in available source material."
+        },
+        "romance": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available. The lead becomes romantically involved with a mysterious American man; Wikipedia does not detail specifics beyond noting the film has 'more adult themes' generally."
+        },
+        "drinking": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; no drinking, drugs, or smoking specifics found in available source material."
+        }
+      },
+      "handoffNotes": [
+        "RESOLUTION for currentCa='Not on CSM; substitute source used': confirmed correct as-is. Targeted searches (direct and site:commonsensemedia.org) found no CSM review for this 1983 film; no upgrade is available. Catalog should keep the substitute-source flag.",
+        "IMPORTANT CAVEAT: Wikipedia's plot summary is thin on specifics but explicitly states the film was released without the Disney brand name 'due to its more adult themes,' and it is cited alongside Never Cry Wolf and Dragonslayer as one of the films that led Disney to launch the more mature Touchstone Pictures banner in 1984. This is a meaningfully stronger caution flag than a typical Disney family title, even though no itemized content data could be found -- recommend a human reviewer watch or find a fuller review before assigning a confident content-flag level.",
+        "No grief/loss/death/separation theme surfaced in available sources."
+      ],
+      "confidence": "low"
+    },
+    {
+      "num": 392,
+      "file": "data-disney.js",
+      "title": "The Jungle Book",
+      "year": "1994",
+      "currentCatalogCa": "Not on CSM; substitute source used",
+      "csmStatus": "unavailable",
+      "csmUrl": null,
+      "sourceUrlChecked": "https://en.wikipedia.org/wiki/The_Jungle_Book_(1994_film)",
+      "targetedSearches": [
+        "The Jungle Book 1994 live action commonsensemedia.org",
+        "site:commonsensemedia.org \"Jungle Book\" 1994 Jason Scott Lee"
+      ],
+      "csmAge": null,
+      "researchBasis": "live CSM search plus Wikipedia fallback by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available (CSM only reviews the 2016 remake, not this 1994 live-action version). Per Wikipedia, this is a real content concern: Mowgli's father is killed by Shere Khan in the backstory, soldiers are mauled by animals and one drowns in quicksand, characters die in booby traps, a snake kills an antagonist, and there is sword/dagger combat. Roger Ebert and other critics called several scenes unsuitable for small children despite the PG rating."
+        },
+        "language": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; no specific language content flagged in available sources."
+        },
+        "romance": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available. A chaste adult romantic subplot develops between the grown Mowgli and his childhood friend Kitty; no explicit content noted."
+        },
+        "drinking": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; no drinking, drugs, or smoking content flagged in available sources."
+        }
+      },
+      "handoffNotes": [
+        "RESOLUTION for currentCa='Not on CSM; substitute source used': confirmed correct as-is. CSM has a review for the 2016 Jungle Book remake but not this 1994 live-action version; targeted searches (direct and site:commonsensemedia.org) confirm no dedicated CSM review exists for the 1994 film specifically. No upgrade is available. Catalog should keep the substitute-source flag -- this matches the existing catalog entry's own note that 'No dedicated Common Sense Media review exists for this live-action version.'",
+        "Mowgli's father is killed by Shere Khan in the backstory, and the film is built around Mowgli's orphaning and eventual reunion with his adopted jungle family -- meaningful grief/loss/death and separation themes that need gentle prose context, and critics (including Roger Ebert) flagged the violence as unexpectedly intense for a PG family film."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 393,
+      "file": "data-disney.js",
+      "title": "A Kid in King Arthur's Court",
+      "year": "1995",
+      "currentCatalogCa": "Not on CSM; substitute source used",
+      "csmStatus": "unavailable",
+      "csmUrl": null,
+      "sourceUrlChecked": "https://en.wikipedia.org/wiki/A_Kid_in_King_Arthur%27s_Court",
+      "targetedSearches": [
+        "A Kid in King Arthur's Court commonsensemedia.org",
+        "site:commonsensemedia.org \"A Kid in King Arthur's Court\""
+      ],
+      "csmAge": null,
+      "researchBasis": "live CSM search plus Wikipedia fallback by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available. Per Wikipedia, the film includes medieval combat: a jousting tournament, sword fighting, physical confrontations, and a villain's attempted murder; the opening earthquake that transports the protagonist could also be frightening for sensitive viewers."
+        },
+        "language": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; no language content flagged in available sources."
+        },
+        "romance": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available. The protagonist develops an innocent crush on a young princess, an older princess falls for a knight, and a forced-marriage subplot drives part of the conflict, though no sexual content is described."
+        },
+        "drinking": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; no drinking, drugs, or smoking content flagged in available sources."
+        }
+      },
+      "handoffNotes": [
+        "RESOLUTION for currentCa='Not on CSM; substitute source used': confirmed correct as-is. Targeted searches (direct and site:commonsensemedia.org) found no CSM review for this 1995 film; no upgrade is available. Catalog should keep the substitute-source flag.",
+        "The protagonist must ultimately say a sad farewell and return to his own time period, separating permanently from Arthur, Katey, and the friends he made in the past -- a bittersweet separation theme that may need gentle prose context."
+      ],
+      "confidence": "low"
+    },
+    {
+      "num": 546,
+      "file": "data-nickelodeon.js",
+      "title": "Snow Day",
+      "year": "2000",
+      "currentCatalogCa": "Not on CSM; substitute source used",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/snow-day",
+      "csmAge": "5+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild comic peril, including kids confronting an adult snowplow driver and pelting the school principal with snowballs, but nothing beyond typical live-action family comedy antics."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild playground language and potty humor."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Some teen kisses as one of the storylines follows a teenage son pursuing a crush."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "RESOLUTION for currentCa='Not on CSM; substitute source used': this entry should be UPGRADED. Contrary to the catalog's current 'Not on CSM' flag, a real, live CSM movie review does exist for this exact 2000 film (starring Chevy Chase, directed by Chris Koch) at https://www.commonsensemedia.org/movie-reviews/snow-day -- explicitly confirmed as the 2000 film and not the 2022 musical remake (which has its own separate CSM entry). CSM rates it 5+. Catalog should replace the substitute-source flag with this live CSM data and the 5+ age rating.",
+        "No grief/loss/death/separation theme found; the plot is a lighthearted single-day family comedy about a record snow day."
+      ],
+      "confidence": "high"
+    }
+  ]
+}

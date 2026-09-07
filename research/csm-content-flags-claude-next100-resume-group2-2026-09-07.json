@@ -1,0 +1,902 @@
+{
+  "researchBatch": "csm-content-flags-claude-next100-resume-group2-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Claude",
+  "purpose": "Resume of next-100 candidate title research (research/next-100-titles-2026-09-07.json), group 2 of 4. Built from live Common Sense Media page fetches, with Wikipedia fallback where no CSM review exists. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 561,
+      "file": "data-nickelodeon.js",
+      "title": "A Fairly Odd Summer",
+      "year": "2014",
+      "currentCatalogCa": "Not on CSM; substitute source used",
+      "csmStatus": "unavailable",
+      "csmUrl": null,
+      "sourceUrlChecked": "https://en.wikipedia.org/wiki/A_Fairly_Odd_Summer",
+      "targetedSearches": [
+        "A Fairly Odd Summer commonsensemedia.org",
+        "site:commonsensemedia.org \"Fairly Odd Summer\""
+      ],
+      "csmAge": null,
+      "researchBasis": "live CSM search plus Wikipedia fallback by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No CSM review exists for this specific TV movie. Per Wikipedia's plot summary, there is a brief lava-fall peril scene the character survives, but otherwise minimal, family-friendly action typical of the Fairly OddParents live-action franchise."
+        },
+        "language": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; no notable language concern surfaced in the fallback source."
+        },
+        "romance": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; Wikipedia's summary notes only mild kid-level romance (Timmy and Tootie dancing together), no sexual content or nudity."
+        },
+        "drinking": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; no drinking, drugs, or smoking noted in the fallback source."
+        }
+      },
+      "handoffNotes": [
+        "RESOLUTION for currentCa='Not on CSM; substitute source used': confirmed correct as-is. Targeted CSM searches (direct title search and site:commonsensemedia.org search) surfaced no CSM review page for A Fairly Odd Summer (2014); CSM appears to only cover other franchise entries (e.g. A Fairly Odd Movie: Grow Up, Timmy Turner). No live CSM data exists to upgrade this entry -- catalog should keep the substitute-source flag."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 101,
+      "file": "data-rt.js",
+      "title": "Beauty and the Beast",
+      "year": "1991",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/beauty-and-the-beast",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "The Beast has angry outbursts and destroys furniture; wolves attack characters and draw blood; an intense mob-storms-the-castle sequence includes a stabbing and a fatal fall, plus some slapstick and gunfire."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Derogatory name-calling includes \"lunatic,\" \"loon,\" \"scurvy scum,\" and \"pea brain.\""
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Comedic flirting between Lumiere and a maid implies intimate behavior; Belle and the Beast flirt and share a kiss, with brief romantic references in a village scene."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A tavern scene shows foamy beer mugs being sloshed around."
+        }
+      },
+      "handoffNotes": [
+        "CSM's own review age (6+) is one year above the current catalog CA (5+); reviewer may want to confirm the intended app age."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 102,
+      "file": "data-rt.js",
+      "title": "Chicken Run",
+      "year": "2000",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/chicken-run",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A chicken is killed offscreen with an axe (the sound is heard), characters face repeated peril including threats of being turned into pies, and while there's cartoonish falling and slapstick, scenes with the farmers turn genuinely dark."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "British slang like \"buggers\" and \"bum\" appears, and an older hen calls Americans \"oversexed.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Light flirtation occurs between characters, plus the elderly hen's \"oversexed\" remark about Americans."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A rooster character drinks a cocktail from a martini glass and acts visibly intoxicated."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 103,
+      "file": "data-rt.js",
+      "title": "Frozen",
+      "year": "2013",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/frozen-0",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Elsa's magic accidentally strikes Anna, wolves chase the sleigh, a menacing ice creature and armed antagonists appear, one character faces execution, and a severe magical storm may frighten younger viewers."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Trolls call Kristoff a \"fixer upper\" and note his flaws, while dignitaries call Elsa a \"monster,\" \"evil sorceress,\" and other derogatory names."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Anna quickly develops feelings for Prince Hans and hastily accepts his proposal before genuinely bonding with Kristoff; two kiss scenes occur near the end, and Elsa wears a tight, high-slit sparkly dress."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Champagne is served at a royal reception."
+        }
+      },
+      "handoffNotes": [
+        "The film prominently features parental death as a plot driver -- Anna and Elsa's parents are lost in a shipwreck, with the storm/sinking and resulting mourning depicted -- which may need gentle prose context beyond the slider value."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 104,
+      "file": "data-rt.js",
+      "title": "Kiki's Delivery Service",
+      "year": "1990",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/kikis-delivery-service",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Kiki nearly falls from her broom during wind gusts and crashes through trees, angry crows attack her, Tombo nearly falls from height but is rescued, and storm scenes may frighten sensitive viewers."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild name-calling includes \"stupid\" and \"snooty.\""
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "Tombo flirts with Kiki -- they ride bikes, blush, and share one hug -- and her cat Jiji falls in love and eventually has kittens with another cat, but CSM marks this category as not present."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 105,
+      "file": "data-rt.js",
+      "title": "A Little Princess",
+      "year": "1995",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/a-little-princess",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "War scenes depict dead bodies in trenches and explosions, Sara has a scary escape sequence where she nearly falls from height, and a neighbor learns of her son's death in the war."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Schoolgirls discover alcohol (bitters) in the headmistress's office, and an adult drinks brandy without becoming visibly drunk."
+        }
+      },
+      "handoffNotes": [
+        "Significant grief and loss themes: Sara's father is presumed dead on a WWI battlefield and her mother died earlier in her life, leaving her a destitute orphan who struggles with grief and leans on imagination to cope -- this may need gentle prose context beyond the slider value."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 106,
+      "file": "data-rt.js",
+      "title": "The Muppet Movie",
+      "year": "1979",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-muppet-movie",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Extensive slapstick includes martial arts moves, Kermit is pursued by armed antagonists with gunfire, a scientist threatens a \"brain scrambling\" device, and there are car crashes, a Muppet near a ceiling fan, dynamite, and kidnapping at gunpoint."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild insults like \"shut up\" and name-calling appear, plus mild wordplay jokes."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Kermit and Miss Piggy hug and kiss, including a dream sequence of the two frolicking together; beauty pageant competitors wear one-piece swimsuits."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Bar scenes show adults with mugs, one character smokes a cigar, characters drink wine with straws, and a song references drinking beer before sleep."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 107,
+      "file": "data-rt.js",
+      "title": "The Red Balloon",
+      "year": "1956",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-red-balloon",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Some bullying occurs when older children chase a boy through Paris trying to steal and destroy his balloon, tormenting it with rocks and a slingshot before stomping on it."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern; the film is largely wordless."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "CSM's own review age (7+) is two years above the current catalog CA (5+); reviewer may want to confirm the intended app age."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 108,
+      "file": "data-rt.js",
+      "title": "Snow White and the Seven Dwarfs",
+      "year": "1937",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/snow-white-and-the-seven-dwarfs",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "The queen orders the huntsman to kill Snow White and bring back her heart, menacing vultures follow the transformed queen, and the enchanted forest turns increasingly frightening as Snow White flees through it."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The queen summons her magic mirror by commanding \"Slave!\" -- a minor but pointed word choice noted by CSM."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The prince kisses an unconscious Snow White, and several songs focus on romantic themes, though overall content is minimal."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Snow White eats a poisoned apple, which effectively drugs her into unconsciousness."
+        }
+      },
+      "handoffNotes": [
+        "CSM's own review age (6+) is one year above the current catalog CA (5+); reviewer may want to confirm the intended app age."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 109,
+      "file": "data-rt.js",
+      "title": "WALL-E",
+      "year": "2008",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/wall-e",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A robot fights a human, poking him in the eye and tossing him around, EVE fires her laser weapon at threats, and vivid explosions in old oil tankers could frighten younger viewers, though robot confrontations play mostly as comedic."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Gentle, understated romantic feelings develop between the two robots and between a human couple."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 110,
+      "file": "data-rt.js",
+      "title": "Babe",
+      "year": "1995",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/babe",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Wild dogs attack and kill a sheep named Ma, shown with a bloody wound; a duck is slaughtered off-camera; the farmer nearly shoots Babe; and there are scenes of puppies separated from their mother, Babe in a dark slaughterhouse, dogs fighting, and a dog biting a man's hand."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild insults include \"butt-head,\" \"block-head,\" \"shut up,\" \"moron,\" and \"stupid.\""
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "CSM's own review age (6+) is one year below the current catalog CA (7+); reviewer may want to confirm the intended app age.",
+        "The sheep Ma's on-screen death and puppies being separated from their mother may need gentle prose context around loss."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 111,
+      "file": "data-rt.js",
+      "title": "Coco",
+      "year": "2017",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/coco",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Day of the Dead imagery includes skeletons that come apart frequently and beheaded/limbless figures; a character is crushed by a large bell (played for humor); characters face chasing and peril including a fall from height; and a character is shown succumbing to poison."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild words include \"stupid,\" \"dumb,\" \"jerks,\" \"hate,\" and \"bum.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "References to a couple's love story and embracing, kissing in a movie-within-the-movie, and a skeleton posed for an artist (played for humor)."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Adult characters drink in a couple of scenes, including a shot in one scene and drinks at a party."
+        }
+      },
+      "handoffNotes": [
+        "The film heavily addresses death, grief, and family separation -- a character dissolves into dust and another appears to fade in a tear-jerking climactic sequence, with the story centered on loss of beloved relatives and remembrance traditions -- this needs gentle prose context beyond the slider value."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 112,
+      "file": "data-rt.js",
+      "title": "Elf",
+      "year": "2003",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/elf",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Cartoonish sequences include Santa wrestling an elf, park rangers chasing Santa's sleigh, Buddy getting hit by a taxi but bouncing back unharmed, and a ferocious-looking raccoon nearly attacking."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild profanity includes \"pissed,\" \"pee,\" \"hell,\" \"damn,\" \"crap,\" and \"up yours,\" plus jokes at the expense of a little person character."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Dating and romantic tension between the leads includes one kiss, and a scene shows a woman singing in the shower while Buddy sings from another room, without graphic nudity."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Two characters spike their coffee with whiskey and become noticeably intoxicated in a comedic scene; wine appears at dinner and a character's burping is attributed to drinking."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 113,
+      "file": "data-rt.js",
+      "title": "Fantastic Mr. Fox",
+      "year": "2009",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/fantastic-mr-fox",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Farmers try to kill Mr. Fox with guns, explosives, and kidnapping; a character dies in a knife fight; a rabid-dog confrontation creates tension; and Mr. Fox's tail is shot off, though nothing is graphic."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Strong profanity is replaced with the stand-in word \"cuss,\" as in \"What the cuss?\" and \"cluster cuss.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mr. and Mrs. Fox share embraces and kisses, a rat character alludes to Mrs. Fox's past, and two adolescent foxes flirt and become romantically involved, creating jealousy."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adult animals drink hard cider, wine, and champagne at meals without excess; one farmer drinks multiple jugs of cider daily; and pipe and cigarette smoking appears throughout."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 114,
+      "file": "data-rt.js",
+      "title": "The Goonies",
+      "year": "1985",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-goonies",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Death and torture are constantly threatened and implied; the film opens with a shootout and features crushed/impaled skeletons and the discovery of a frozen dead body."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Several instances of profanity include \"s--t\" and \"bulls--t,\" along with \"damn,\" \"goddamn,\" \"ass,\" and \"hell.\""
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Kissing scenes and crude humor referencing a nude statue's genitalia; a teen boy adjusts a mirror to view up a teen girl's skirt without her consent."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 115,
+      "file": "data-rt.js",
+      "title": "Home Alone",
+      "year": "1990",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/home-alone",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frequent slapstick violence builds toward the finale -- falls down stairs, being struck with objects, stepping on nails and glass, burns, and characters knocked unconscious; the protagonist shoots burglars with a BB gun and a movie-within-the-movie shows a character machine-gunned; an imaginary furnace also appears threatening."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Profanity includes \"s--t,\" \"crap,\" \"damn,\" \"hell,\" and \"bitch,\" plus sibling name-calling like \"disease,\" \"puke,\" \"jerk,\" and \"moron.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adult characters kiss, the protagonist finds an adult magazine but shows minimal interest, and teens reference \"nude beaches\" and body-related topics."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Brief adult drinking and smoking appears, including a Santa-dressed character with a cigarette and champagne on an airplane."
+        }
+      },
+      "handoffNotes": [
+        "CSM's own review age (10+) is two years above the current catalog CA (8+); reviewer may want to confirm the intended app age given the elevated language and slapstick-violence content."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 116,
+      "file": "data-rt.js",
+      "title": "The Iron Giant",
+      "year": "1999",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-iron-giant",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoon action includes a giant robot destroying infrastructure, military combat, and a deer being shot and killed, plus spooky musical elements accompanying vintage TV footage."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "\"Hell\" appears three times, with mild expressions like \"omigod\" and \"butt.\""
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A secretary smokes at her desk and a government official smokes a pipe throughout, period-accurate for the 1950s setting; a laxative is used as a comedic plot device."
+        }
+      },
+      "handoffNotes": [
+        "CSM's own review age (6+) is two years below the current catalog CA (8+); reviewer may want to confirm the intended app age."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 117,
+      "file": "data-rt.js",
+      "title": "Little Manhattan",
+      "year": "2005",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/little-manhattan",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Karate-related combat includes kicking, punching, and tripping; Gabe breaks his hand during board-breaking; a bully throws a dodgeball that non-seriously injures children; and characters fall off a scooter without injury."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "Only two instances of the word \"hell\" appear in dialogue."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "Young characters kiss (replayed repeatedly in one character's thoughts), adult versions of the characters kiss, the protagonists witness a couple making out on public transit, and two young characters briefly wrestle on the floor."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "Kids drink non-alcoholic Shirley Temples while adult guardians drink wine."
+        }
+      },
+      "handoffNotes": [
+        "The film centers on Gabe's parents' separation and divorce (they still live together while dissolving their marriage), which may need gentle prose context beyond the slider value."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 118,
+      "file": "data-rt.js",
+      "title": "Matilda",
+      "year": "1996",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/matilda",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoonish violence mostly from the school principal: a girl is flung over a fence by her pigtails, a boy is tossed from a window, children are placed in \"the chokey\" (a closet lined with nails and glass), and a boy is struck with a cake plate; a brief reference to suicide also occurs."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "One instance of \"hell\" and uses of \"oh my God\" as exclamations, plus substitute profanity where adults say things like \"dog slime\" instead of real swearing."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults occasionally drink beer on screen, with Budweiser cans visible."
+        }
+      },
+      "handoffNotes": [
+        "CSM notes a brief reference to suicide amid the principal's cruelty toward the children; may warrant gentle prose context given the age range."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 119,
+      "file": "data-rt.js",
+      "title": "The Neverending Story",
+      "year": "1984",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-neverending-story",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A quick but slightly bloody clash with a snarling wolf, a faceless \"Nothing\" destroying Fantasia, bullying classmates, a giant rock monster, and the traumatic scene of a swamp swallowing a beloved horse."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Name-calling includes \"weirdo,\" \"jerk,\" \"chicken,\" and \"nutcase\"; an adult calls his wife a \"wench.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Two sets of large sphinx statues have prominent breasts with protruding nipples."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "An adult briefly smokes an old-fashioned pipe."
+        }
+      },
+      "handoffNotes": [
+        "The film centers heavily on grief and loss: Atreyu's horse Artax sinks into the Swamp of Sadness and dies, a scene many adults recall as traumatizing, and the story explores characters who have given up hope amid overwhelming sadness -- this needs gentle prose context beyond the slider value."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 120,
+      "file": "data-rt.js",
+      "title": "Paddington 2",
+      "year": "2017",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/paddington-2",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Paddington chases a thief through the streets during a robbery, prison scenes initially feature intimidating inmates, a train chase puts characters in peril, and Paddington nearly drowns but survives; the emotional low point is Paddington crying alone in prison believing his family abandoned him."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "Only mild expressions like \"yellow bellies,\" \"coward,\" and \"weirdo,\" plus \"Oh my God\" as an exclamation; no strong profanity."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A couple of marital embraces and quick kisses between the Brown parents."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "Paddington's belief that his family has abandoned him while he's imprisoned is an emotionally intense separation/loss beat that may need gentle prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 121,
+      "file": "data-rt.js",
+      "title": "Spirited Away",
+      "year": "2001",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/spirited-away",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A character returns bloodied after encountering fantastical beasts; numerous intense creatures and spirits, including the witch Yubaba and No-Face, could disturb younger viewers; Chihiro's parents are transformed into pigs and a dragon character sustains injuries."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A giant baby's exposed bottom appears briefly."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "One character smokes a cigarette with an ashtray visible, and sake is offered to another character."
+        }
+      },
+      "handoffNotes": [
+        "Chihiro's parents being transformed into pigs and her separation from them while navigating the spirit world is a frightening loss-of-family theme that may need gentle prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 122,
+      "file": "data-rt.js",
+      "title": "Spy Kids",
+      "year": "2001",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/spy-kids",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Fantasy action sequences include fights, chases, falls, crashes, and explosions; mutant creatures may frighten younger viewers though most play as comedic, and no serious injuries occur."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "One near-swear (\"s--t\") is converted to \"shiitake mushroom\" for comedic effect, plus \"oh my God.\""
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults are briefly shown drinking wine in social contexts."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 123,
+      "file": "data-rt.js",
+      "title": "Star Wars: Episode IV – A New Hope",
+      "year": "1977",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/star-wars-episode-iv-a-new-hope",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Laser blaster firefights, lightsaber duels, and spacecraft combat occur throughout; minor characters are shot and killed; Darth Vader fatally chokes victims; burnt skeletal remains are briefly visible; a character's arm is severed bloodily; and a garbage compactor scene has walls closing in on the heroes."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Two uses of \"damn\" and two uses of \"hell,\" plus a derogatory reference to \"sand people.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild flirting and the suggestion of crushes between lead characters; one character kisses another on the cheek."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Characters briefly visit a space cantina that serves otherworldly beverages and substances to smoke."
+        }
+      },
+      "handoffNotes": [
+        "Significant grief and death themes: Princess Leia witnesses her entire home planet Alderaan destroyed along with everyone on it, Luke discovers his aunt Beru and uncle Owen burned to death, and Obi-Wan Kenobi is killed by Darth Vader -- these may need gentle prose context beyond the slider value."
+      ],
+      "confidence": "high"
+    }
+  ]
+}

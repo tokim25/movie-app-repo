@@ -1,0 +1,970 @@
+{
+  "researchBatch": "csm-content-flags-claude-next100-resume-group4-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Claude",
+  "purpose": "Part of the next-100 candidate titles content-flag backfill, resume group 4 of 4, live CSM research for 24 DCOM titles in data-dcom.js.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 164,
+      "file": "data-dcom.js",
+      "title": "P.U.N.K.S.",
+      "year": "1999",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/punks",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Continuous cartoon violence includes stun guns, electric shocks, brawling, chases, falls, threats, and gunshots, including a scene where the protagonist's father is severely beaten."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "No profanity is present, though mild insults appear occasionally and a character makes an inappropriate gesture."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A female character smokes in a bar scene, and the young protagonists pose as adults to enter a bar, though no alcohol consumption occurs."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 165,
+      "file": "data-dcom.js",
+      "title": "Don't Look Under the Bed",
+      "year": "1999",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/dont-look-under-the-bed",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Frequent jumpy scares include a boogeyman who resembles a horror-movie villain, a child grabbed from under his bed and kept captive in a sack, a fight with an attempted fingernail piercing, electrocution, and a bee-swarm attack."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A character is called a \"skanky creep,\" otherwise language is minimal."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild romantic content includes calling someone \"cute\" or a \"hottie,\" two characters kissing, and an adult double-entendre joke."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A character smokes from a bubble-producing novelty pipe."
+        }
+      },
+      "handoffNotes": [
+        "Frances carries guilt over her younger brother's leukemia (in remission), and the film's core theme is 'saying goodbye to childhood' -- this grief/growing-up thread may need gentle prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 166,
+      "file": "data-dcom.js",
+      "title": "Horse Sense",
+      "year": "1999",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/horse-sense",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A few scenes show animals in distress with mention of horse racing as a form of animal abuse, plus a minor vehicle collision and a character falling from a horse."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The words \"butt\" and \"darn\" are used."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "A decanter and glasses are shown on a coffee table, but nobody consumes alcohol on camera."
+        }
+      },
+      "handoffNotes": [
+        "The film repeatedly references the death of Tommy's father, along with family financial hardship and the potential loss of the home and ranch business -- this grief/loss thread is central to Tommy's arc and may need gentle prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 167,
+      "file": "data-dcom.js",
+      "title": "Up, Up and Away",
+      "year": "2000",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/up-up-and-away",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Mild peril includes characters holding but not firing guns, a building explosion the trapped characters escape unharmed, and superheroes tied up to have their minds wiped."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 168,
+      "file": "data-dcom.js",
+      "title": "The Color of Friendship",
+      "year": "2000",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-color-of-friendship",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A white diner kicks a Black South African waiter, and the film uses racial slurs and references police brutality, suicide, terrorists, martyrs, slavery, death, and hunger strikes, plus footage of mostly peaceful protests and a televised funeral."
+        },
+        "language": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Racially charged language includes \"kaffir,\" \"bantu,\" and the N-word, along with \"bloody\" used as profanity."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "The film references death, a televised funeral, and suicide within its apartheid-era historical context -- this grief/loss thread may need gentle prose context.",
+        "CSM's Language category is rated a lot (level 4) because of real historical racial slurs ('kaffir', the N-word, 'bantu') used in an anti-apartheid educational context; this is a meaningful upgrade from the app's current 10+ catalog entry and should be flagged for reviewer attention given the severity of the slurs."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 169,
+      "file": "data-dcom.js",
+      "title": "Alley Cats Strike!",
+      "year": "2000",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/alley-cats-strike",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A slight verbal altercation occurs between two groups, and one character jokingly threatens to \"ruff up\" a friend."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "No profanity, but occasional derogatory terms like \"dork,\" \"strange,\" and \"loser\" appear."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Harmless flirting includes an arm around the shoulder, with no sexual undertones."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 170,
+      "file": "data-dcom.js",
+      "title": "Rip Girls",
+      "year": "2000",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/rip-girls",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A character is rescued from drowning with a bloody cut head, another goes missing in dangerous surfing conditions and gets a bloody shoulder graze, there is a reference to the death of a parent, and some teen arguing occurs."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild disrespectful phrases are used, including comparing something to \"dead fish\" and calling a teen a \"stupid lovesick puppy.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A brief kiss between teens is gentle and chaste."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults toast with sparkling cider and offer some to a 13-year-old, who does not drink it."
+        }
+      },
+      "handoffNotes": [
+        "The film centers on the death of Sydney's mother, which occurred over 10 years before the story begins and is handled sensitively as Sydney uncovers her mother's story -- this grief/loss thread may need gentle prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 171,
+      "file": "data-dcom.js",
+      "title": "Miracle in Lane 2",
+      "year": "2000",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/miracle-in-lane-2",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A character passes out and crashes a soapbox car with facial cuts and a hospital operating-theater scene; a funeral is depicted with mentions of child death, spousal death, illness, surgery, torture, burning, war, and famine, plus some verbal conflict."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Occasional derogatory terms referring to disability and mental health are used, including \"cripple,\" \"crazy,\" \"nuts,\" \"cuckoo,\" \"wacko,\" \"dense,\" and \"a crock.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Parents hug and kiss on the lips, with a mention of massage oil implying they are sneaking off together."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One character takes medicine for a stomach ache."
+        }
+      },
+      "handoffNotes": [
+        "The film depicts a funeral and references child death, spousal death, and serious illness/surgery -- this grief/loss thread may need gentle prose context.",
+        "Given the film's disability storyline (soapbox racer with spina bifida), the derogatory disability/mental-health terms ('cripple,' 'crazy,' 'nuts,' etc.) may warrant specific sensitivity-review attention beyond the numeric language level."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 172,
+      "file": "data-dcom.js",
+      "title": "Stepsister from Planet Weird",
+      "year": "2000",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/stepsister-from-planet-weird",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Characters are shot with a ray-gun and are frozen and morphed into cube-like form."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild language includes \"freak,\" \"dweeb,\" and \"sucker.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adult characters kiss, and teens flirt with one another."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "The film deals with divorce and the death of a parent alongside a new blended family -- this grief/loss and separation thread may need gentle prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 173,
+      "file": "data-dcom.js",
+      "title": "Ready to Run",
+      "year": "2000",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/ready-to-run",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Horse racing footage includes riders falling, horses in mild distress, a barn fire that burns a character, and mentions of shooting horses and grinding them for meat."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "The words \"loser\" and \"butt\" are used."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild flirting and dancing occur between characters, and a talking horse attempts to chat up another horse."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One character smokes a cigar."
+        }
+      },
+      "handoffNotes": [
+        "Corrie's father has passed away in a horse racing accident, and the film repeatedly references this fact as her core motivation -- this grief/loss thread may need gentle prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 174,
+      "file": "data-dcom.js",
+      "title": "Quints",
+      "year": "2000",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/quints",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "There is one brief fire-breathing scene, but CSM does not surface a meaningful violence concern."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The concept of pregnancy is touched on in child-like terms, and a character is shown going into labor with contractions, though the birth itself is not shown."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 175,
+      "file": "data-dcom.js",
+      "title": "The Other Me",
+      "year": "2000",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-other-me",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A small explosion occurs, and a young character has a sack thrown over their head, is carried off by villains, and is tied to a chair and briefly gagged."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Some name-calling occurs, including \"doofus.\""
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Some flirting and one gentle kiss occur between teens, and a teen is seen with their top off."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 176,
+      "file": "data-dcom.js",
+      "title": "Mom's Got a Date with a Vampire",
+      "year": "2000",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/moms-got-a-date-with-a-vampire",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Comic vampire peril includes a character thrown from a nightclub, ear-pinching, captivity without harm, a vampire bending a bike frame and breaking doors, being hit with wooden stakes, a vampire hunter thrown onto a collapsing piano, characters placed in trances, and attempted neck-biting."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The term \"dweeb\" is used between siblings."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A couple shares a loving embrace, and a divorced parent begins dating."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Alcohol appears visually but is not consumed on screen."
+        }
+      },
+      "handoffNotes": [
+        "The mother is navigating life after divorce, and the children's arc involves helping her move past that family separation -- this may need light prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 177,
+      "file": "data-dcom.js",
+      "title": "Phantom of the Megaplex",
+      "year": "2000",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/phantom-of-the-megaplex",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Mysterious theater occurrences provide mild scares, including an uncontrolled inflatable dinosaur, a malfunctioning popcorn machine, a silhouetted fight with punches and kicks but no injuries, characters tied up, and a caped phantom peering creepily through poster eyes."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Only a brief reference to dating appears in the movie."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 178,
+      "file": "data-dcom.js",
+      "title": "The Ultimate Christmas Present",
+      "year": "2000",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-ultimate-christmas-present",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A snowball fight, a character pushed from a snowmobile, a vehicle crashing through a storefront, and a brief reference to a dead parent are noted."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "No strong language, but infrequent mild insults include \"dull,\" \"tiresome,\" \"chicken,\" and \"lame-o.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adult characters kiss on the cheek, and there is a reference to a classroom crush."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A cigar is referenced in passing but not shown on screen."
+        }
+      },
+      "handoffNotes": [
+        "CSM notes a brief reference to a dead parent, used to reinforce a message about making the most of family time -- this fleeting grief/loss reference may need a light prose touch."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 179,
+      "file": "data-dcom.js",
+      "title": "Motocrossed",
+      "year": "2001",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/motocrossed",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Several motorcycle crashes occur, one leaving a rider injured without graphic detail, plus an aggressive shove during an argument."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Sexist language like \"chick\" is used derogatorily, along with teasing phrases such as \"he brought his mommy\" and \"don't be such a girl,\" plus \"what a crock\" and \"bums me out.\""
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Boys leer at girls with mildly suggestive comments and talk of \"babe magnets,\" a teen removes his shirt to swim, and several teens show interest in each other unaware one is a girl disguised as a boy."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 180,
+      "file": "data-dcom.js",
+      "title": "The Luck of the Irish",
+      "year": "2001",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-luck-of-the-irish",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "An evil leprechaun seeks control of all leprechauns, driving two non-violent chase scenes, one on foot through a potato factory and one by vehicle through town."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Suggested romantic sparks appear between two teens, but there is no kissing or sex."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One brief scene takes place in an Irish pub."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 181,
+      "file": "data-dcom.js",
+      "title": "Hounded",
+      "year": "2001",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/hounded",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A small attack-dog bares its teeth and growls loudly, a child is kicked off a bike, a car crash occurs, and slapstick humor includes a man hit in the head."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 182,
+      "file": "data-dcom.js",
+      "title": "Jett Jackson: The Movie",
+      "year": "2001",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/jett-jackson-the-movie",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Comic-book-style martial arts brawls include adults fighting teens and a bully shoving/poking a student, plus fantasy violence with shockwaves, obliterated cities, a character trapped in a burning building, and a character pronounced dead and covered with a sheet."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Some bullying language occurs but no swearing."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Talk of a first prom date, with the teen romance concluding in hand-holding."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "A character is pronounced dead and shown covered with a sheet after a burning-building incident, and Jett's parents are divorced (though supportive) -- this death/separation content may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 183,
+      "file": "data-dcom.js",
+      "title": "The Jennie Project",
+      "year": "2001",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-jennie-project",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Poachers shoot a pregnant chimp with a poisoned arrow and leave her to die as she goes into labor; further concerns include a chimp biting a toy's head off, threats against the animal with mace, confinement in a basement, and court discussions about the animal's potential destruction."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "The film opens with a pregnant chimp killed by poachers, orphaning Jennie, and later builds ongoing tension about whether Jennie will be removed from the family -- this loss/separation thread may need gentle prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 184,
+      "file": "data-dcom.js",
+      "title": "Jumping Ship",
+      "year": "2001",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/jumping-ship",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A boat chase has characters falling into the sea and a flare gun setting a raft on fire; characters are kidnapped, gripped by the neck, kicked, and hit with a broom, though none seriously injured."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild verbal threats like being \"thrown to the sharks\" occur, and \"idiot\" is used as an insult."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Kissing occurs during a comedic dream sequence."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "As in the prior film (Horse Sense), Tommy is still grieving his father's death and now struggles with his mother dating again -- this grief/loss and family-change thread may need gentle prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 185,
+      "file": "data-dcom.js",
+      "title": "The Poof Point",
+      "year": "2001",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-poof-point",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Characters are in danger of disappearing from existence, and lab explosions shake neighboring houses without hurting anyone."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Occasional language such as \"heck\" and derogatory terms like \"busybody\" are used."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Parents flirt, hug, and kiss, with mentions of going steady and crushes."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "The comedic plot centers on parents aging backward toward a 'poof point' where they will cease to exist within 24 hours -- while played for laughs rather than tragedy, this near-loss premise may warrant light prose context for sensitive viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 186,
+      "file": "data-dcom.js",
+      "title": "'Twas the Night",
+      "year": "2001",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/twas-the-night",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A character is tied up and blindfolded played for laughs, and several shouting/threat scenes carry a slapstick tone."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Champagne is poured in a freeze-framed scene, so no one actually drinks it."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 187,
+      "file": "data-dcom.js",
+      "title": "Double Teamed",
+      "year": "2002",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/double-teamed",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Players occasionally target each other on the basketball court with elbowing and knock-downs, and one scene involves a fall with a badly twisted ankle and injured arm."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Occasional derogatory terms such as \"geek\" and \"weird\" are used."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One scene of playful flirtation occurs between members of the girls' basketball team and the school jock."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    }
+  ],
+  "handoffSummary": {
+    "refetchedEntries": 24,
+    "sourceBasis": "live CSM refetch by researcher",
+    "firstNum": 164,
+    "lastNum": 187,
+    "unavailablePages": [],
+    "priorityTitleResolutions": [],
+    "priorityTitleResolutionsNote": "None of this group's 24 titles had currentCa values of 'Not on CSM; substitute source used' or containing '(approximate)' in group4.json -- all 24 titles already carried a normal numeric-plus rating (e.g. '7+', '8+') and all 24 had live, real CSM review pages found and used. No priority-title resolution was required for this group.",
+    "labelDetailConflicts": [],
+    "emotionalProseAttention": [
+      {
+        "num": 165,
+        "title": "Don't Look Under the Bed",
+        "note": "Frances carries guilt over her younger brother's leukemia (in remission); the film's core theme is saying goodbye to childhood."
+      },
+      {
+        "num": 166,
+        "title": "Horse Sense",
+        "note": "The film repeatedly references the death of Tommy's father plus family financial hardship and potential loss of the home/business."
+      },
+      {
+        "num": 168,
+        "title": "The Color of Friendship",
+        "note": "References death, a televised funeral, and suicide within its apartheid-era historical context; also contains real historical racial slurs used educationally."
+      },
+      {
+        "num": 170,
+        "title": "Rip Girls",
+        "note": "Centers on the death of Sydney's mother over 10 years prior, handled sensitively as a plot element."
+      },
+      {
+        "num": 171,
+        "title": "Miracle in Lane 2",
+        "note": "Depicts a funeral and references child death, spousal death, and serious illness/surgery; also uses derogatory disability/mental-health terms given the film's disability storyline."
+      },
+      {
+        "num": 172,
+        "title": "Stepsister from Planet Weird",
+        "note": "Deals with divorce and the death of a parent alongside a new blended family."
+      },
+      {
+        "num": 173,
+        "title": "Ready to Run",
+        "note": "Corrie's father died in a horse racing accident; the film repeatedly references this as her core motivation."
+      },
+      {
+        "num": 176,
+        "title": "Mom's Got a Date with a Vampire",
+        "note": "The mother is navigating life after divorce; the children's arc involves helping her move past that family separation."
+      },
+      {
+        "num": 178,
+        "title": "The Ultimate Christmas Present",
+        "note": "Brief reference to a dead parent, used to reinforce a message about family time."
+      },
+      {
+        "num": 182,
+        "title": "Jett Jackson: The Movie",
+        "note": "A character is pronounced dead and shown covered with a sheet after a burning-building incident; Jett's parents are divorced though supportive."
+      },
+      {
+        "num": 183,
+        "title": "The Jennie Project",
+        "note": "Opens with a pregnant chimp killed by poachers, orphaning Jennie; ongoing tension about whether she will be removed from the family."
+      },
+      {
+        "num": 184,
+        "title": "Jumping Ship",
+        "note": "Sequel to Horse Sense -- Tommy still grieving his father's death and now struggles with his mother dating again."
+      },
+      {
+        "num": 185,
+        "title": "The Poof Point",
+        "note": "Comedic plot centers on parents aging backward toward a 'poof point' where they cease to exist within 24 hours; played for laughs but a near-loss premise."
+      }
+    ],
+    "nextClaudeAction": "Review label/detail conflicts and emotional prose notes before importing any production catalog content flags."
+  }
+}

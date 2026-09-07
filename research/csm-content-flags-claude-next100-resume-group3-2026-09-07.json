@@ -1,0 +1,898 @@
+{
+  "researchBatch": "csm-content-flags-claude-next100-resume-group3-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Claude",
+  "purpose": "Part of the next-100 candidate titles content-flag backfill, resume group 3 of 4, live CSM research.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 125,
+      "file": "data-rt.js",
+      "title": "Akeelah and the Bee",
+      "year": "2006",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/akeelah-and-the-bee",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Two girls bully Akeelah for being a \"brainiac\" and push and shove her before the principal intervenes."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Infrequent profanity and put-downs including \"s--t,\" \"ass,\" \"hell,\" \"damn,\" \"freak,\" \"idiot,\" and \"turd juggler.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Middle schoolers kiss each other on the cheek."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A positive character smokes a cigarette and another drinks a whiskey on the rocks but doesn't act drunk."
+        }
+      },
+      "handoffNotes": [
+        "Brief conversations reference the death of family members -- a father killed in neighborhood gun violence and a daughter lost to disease -- which may warrant gentle prose context for sensitive readers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 126,
+      "file": "data-rt.js",
+      "title": "Au Revoir, les Enfants",
+      "year": "1987",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/au-revoir-les-enfants",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Gestapo searches, a circumcision-check scene, and sustained psychological tension dominate rather than overt on-screen brutality."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Schoolboys use occasional profanity including \"bastard,\" \"s--t,\" and the ethnic slur \"yids\"; a sign reads \"No Jews Allowed.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Only subtle references to adolescent curiosity about masturbation and girls."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Schoolboys of various ages sneak cigarettes and smoke in several scenes."
+        }
+      },
+      "handoffNotes": [
+        "This is a profoundly sad WWII story about a Catholic school hiding Jewish boys under Nazi occupation; the ending involves the boys and a priest being taken away by the Gestapo, an implicit deportation/death that will need gentle, age-appropriate prose context for younger readers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 127,
+      "file": "data-rt.js",
+      "title": "Hugo",
+      "year": "2011",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/hugo",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Hugo's father dies in a fire, the station inspector's dog is set on unaccompanied children who are jailed and threatened with the orphanage, and Hugo has nightmares involving a train and transformation."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild insults include \"idiot,\" \"no-good thief,\" \"liar,\" and \"drunk.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults flirt and hold hands, married characters embrace and kiss, and Hugo and Isabelle hold hands with a cheek kiss; humorous adult talk references marriage and infidelity."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Uncle Claude drinks from a flask and is obviously drunk, and wine glasses appear at the train station cafe."
+        }
+      },
+      "handoffNotes": [
+        "Hugo's father dies in a fire early in the story and Hugo is orphaned, a grief/loss theme that may need gentle prose context for younger readers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 128,
+      "file": "data-rt.js",
+      "title": "Napoleon Dynamite",
+      "year": "2004",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/napoleon-dynamite",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Teen wrestling and fighting, an implied cow shooting, bullying, and implied assault injuries."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Insults and obscenity substitutes such as \"idiot,\" \"frickin',\" \"retarded,\" \"crap,\" \"sicko,\" and \"flippin'.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild kissing and embracing plus comical marketing of an herbal breast-enhancement product; no nudity."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful drinking, drug, or smoking concern for this title."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 129,
+      "file": "data-rt.js",
+      "title": "Pee-wee's Big Adventure",
+      "year": "1985",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/pee-wees-big-adventure",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Pratfalls, nightmares, cartoonish chases, underwater wrestling, a gun display without injuries, a casualty-free car crash, and potentially frightening clowns, devils, dinosaurs, and the character Large Marge."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "One instance of \"crap,\" the phrase \"burn in hell\" in a music video, and Pee-Wee's trademark \"I know you are, but what am I?\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild flirtation and romantic tension, plus a kissing scene within a movie-within-the-movie."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A scene set in a biker bar, and Pee-Wee dances to a song."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 130,
+      "file": "data-rt.js",
+      "title": "Raiders of the Lost Ark",
+      "year": "1981",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/indiana-jones-and-the-raiders-of-the-lost-ark",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frequent peril and hand-to-hand battles with guns, a frightening face-melting climax, vengeful-ghost imagery, and encounters with poisonous snakes and large spiders; a man is killed when his head hits a plane propeller."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "One instance of strong profanity plus \"goddamn,\" \"hell,\" \"bastard,\" and \"damn.\""
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Kissing and flirting, with implied sex between Indy and Marion -- he's shown shirtless getting out of bed."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A character wins a drinking contest by consuming large quantities of alcohol."
+        }
+      },
+      "handoffNotes": [
+        "CSM notes the film is insensitive toward people of color, who are depicted as violent, uneducated, and barbaric -- worth flagging for parents even though it isn't one of the 4 scored flags."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 131,
+      "file": "data-rt.js",
+      "title": "Romeo and Juliet",
+      "year": "1968",
+      "currentCatalogCa": "14+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/romeo-and-juliet",
+      "csmAge": "14+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Bitter quarreling leads to murder and suicide, with some deadly swordplay."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A nude male posterior and a glimpse of breasts appear in a tasteful bed scene."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful drinking, drug, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "The story ends in the deaths of both title characters (murder and suicide); CSM specifically warns that teens may perceive the narrative as romanticizing suicide, which warrants parental discussion and gentle prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 132,
+      "file": "data-rt.js",
+      "title": "Rudy",
+      "year": "1993",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/rudy",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A fiery plant explosion kills Rudy's best friend, and full-contact football practice scenes show bleeding wounds and bruises."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Profanity includes \"Bullsh--t,\" \"ass,\" \"crap,\" \"goddamn,\" and \"pissed off\"; a coach threatens to \"beat the s--t out of\" tryout candidates."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Rudy approaches college women to introduce to his shy tutor in exchange for tutoring help."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Rudy becomes intoxicated at a bar and reveals information that gets him removed from the booster squad; additional bar scenes appear."
+        }
+      },
+      "handoffNotes": [
+        "Rudy's best friend is killed in a fiery plant explosion partway through the film, a sudden-loss/grief moment that may need gentle prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 133,
+      "file": "data-rt.js",
+      "title": "Spider-Man: Into the Spider-Verse",
+      "year": "2018",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/spider-man-into-the-spider-verse",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Intense large-scale action, destruction, and explosions with close-up fighting, frequent suspense/peril, and mortal danger; a Peter Parker/Spider-Man and an important secondary character both die during the film."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "\"Crap,\" \"hell,\" \"dang,\" \"freakin'\" plus insults like \"janky,\" \"broke,\" \"fat,\" \"stupid,\" \"dumb,\" and \"pig.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Miles flirts with Gwen and they make eyes at each other but go no further than hugging; dialogue references having \"game.\""
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful drinking, drug, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "A version of Peter Parker/Spider-Man dies early in the film and an important secondary character also dies later, real grief/loss beats that may need gentle prose context for younger readers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 134,
+      "file": "data-rt.js",
+      "title": "Time Bandits",
+      "year": "1981",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/time-bandits",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Considerable cartoonish violence including an arm ripped off in arm wrestling, battle explosions, knights speared dead on javelins, the Titanic crashing, people on fire, and scary pursuing figures like a floating face."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "References to \"hell,\" \"damn,\" \"shut up,\" plus name-calling and some problematic slurs."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A brief nude painting, showgirl costumes, minimal innuendo, and flirting couples."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Characters drink alcohol frequently without appearing intoxicated, cigars are smoked once, and one scene involves injected sleeping drugs."
+        }
+      },
+      "handoffNotes": [
+        "Suicidal ideation is played for laughs in one scene, and Kevin's parents ignore or berate him throughout -- both may warrant gentle prose context for sensitive readers even though the film itself has no character death/grief arc."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 135,
+      "file": "data-rt.js",
+      "title": "West Side Story",
+      "year": "1961",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/west-side-story",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "A big fight scene leads to two characters being stabbed to death, and the film also features a sexual assault and a fatal shooting."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Profanity and derogatory ethnic slurs including \"spic\" and \"Polack.\""
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A brief reference to sex work and some kissing."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A musical number references drug use and characters smoke cigarettes."
+        }
+      },
+      "handoffNotes": [
+        "The Romeo-and-Juliet-inspired plot ends with two characters stabbed to death in a gang fight, a significant grief/loss theme that may need gentle prose context for younger readers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 136,
+      "file": "data-rt.js",
+      "title": "The Witches",
+      "year": "1990",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-witches",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Scary witches and children in peril, including a baby in a carriage pushed down a hill (rescued), and Luke's parents killed in an offscreen accident."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful drinking, drug, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "Luke's parents are killed offscreen early in the story, and CSM specifically flags that children may be upset both by that death and by Luke's seeming indifference to it -- this needs gentle prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 139,
+      "file": "data-dcom.js",
+      "title": "Under Wraps",
+      "year": "2021",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/tv-reviews/under-wraps",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent (CSM lists this Disney Channel Original Movie under its tv-reviews section rather than movie-reviews)",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Initial scares include a mummy that comes to life and chases kids, frightened by his bandages and face, but once he's understood to be friendly his looks are played for comic effect; kids also face peril, chases, and threats from thugs carrying clubs."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful drinking, drug, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "CSM's live age rating (8+) is one step above the current catalog value (7+); worth a light review since this is a real, current CSM review, not a fallback."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 140,
+      "file": "data-dcom.js",
+      "title": "High School Musical",
+      "year": "2006",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/high-school-musical",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A character screams out in anger when food is accidentally spilled on her, and one character attempts to undermine others' performance opportunities."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild language appears in song lyrics, including a reference to \"shake your booty.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Flirtation and an almost-kiss between the leads, one cheek kiss, and a shirtless scene in a changing room."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful drinking, drug, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "CSM's live age rating (8+) is one step above the current catalog value (7+); minor discrepancy worth a light review."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 142,
+      "file": "data-dcom.js",
+      "title": "Halloweentown",
+      "year": "1998",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/halloweentown",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Witches battle a reptilian warlock using largely bloodless magic powers; the antagonist's distorted voice and ability to transform characters into zombie-like states may frighten sensitive viewers, and family arguments occur."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Contains \"Hell,\" \"jerk,\" and religious exclamations, plus name-calling like \"wiener,\" \"nutcase,\" and \"weirdo.\""
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful drinking, drug, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "CSM's live age rating (6+) is one step below the current catalog value (7+); minor discrepancy worth a light review."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 150,
+      "file": "data-dcom.js",
+      "title": "Camp Rock",
+      "year": "2008",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/camp-rock",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "Only minor physical comedy and heated arguments."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Occasional use of words like \"jerk,\" \"stupid,\" \"loser,\" and \"shut up.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Characters show romantic interest, with flirting and eye contact but nothing explicit."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful drinking, drug, or smoking concern."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 152,
+      "file": "data-dcom.js",
+      "title": "The Cheetah Girls",
+      "year": "2003",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-cheetah-girls",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful violence or scariness concern."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Urban slang, one male character using dating slang, and occasional potty humor."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild flirting and one brief kissing scene; some outfits are tight and dance scenes include booty shaking."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful drinking, drug, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "CSM's live age rating (8+) is one step above the current catalog value (7+); minor discrepancy worth a light review."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 156,
+      "file": "data-dcom.js",
+      "title": "Teen Beach Movie",
+      "year": "2013",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/teen-beach-movie",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Antagonists are comedic rather than threatening; some scenes involve teens held hostage and stunned by a ray gun, with brief peril resolved positively."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Main characters hug and share near-kisses, with similarly innocent expressions of affection as teen relationships develop."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful drinking, drug, or smoking concern."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 157,
+      "file": "data-dcom.js",
+      "title": "You Lucky Dog",
+      "year": "1998",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/you-lucky-dog",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Guns appear (mostly tranquilizer darts) with no serious injuries, booby traps cause characters to trip and fall, a death is shown in flashback, and dangerous driving is depicted."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Occasional curses and derogatory terms such as \"heck,\" \"moron,\" \"numskull,\" \"fruitcake,\" \"maniac,\" and \"lowlife.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A character is shown bathing with partial nudity from the waist up."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful drinking, drug, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "The plot hinges on a millionaire's recent death (his dog inherits the fortune) and that death is shown in flashback -- may need gentle prose context for younger readers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 158,
+      "file": "data-dcom.js",
+      "title": "Brink!",
+      "year": "1998",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/brink",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Rollerbladers suffer rough-looking falls but are always in protective gear; a milkshake is thrown in a character's face and worms are placed in a sandwich."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Mild profanity including \"butt,\" \"jerk,\" \"wuss,\" plus one instance of racist language directed at a Peruvian character."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild flirting only."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful drinking, drug, or smoking concern."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 159,
+      "file": "data-dcom.js",
+      "title": "Can of Worms",
+      "year": "1999",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/can-of-worms",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Animatronic alien creatures range from amusing to repulsive and creepy; characters are abducted and attacked by the villain Thoad's tongue, and low-level bullying is depicted."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Some hostile language including \"jerk\" and two instances of \"shut up!\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "An alien offers a human character \"a great time\" but in a friendly, non-sexual way."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful drinking, drug, or smoking concern."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 160,
+      "file": "data-dcom.js",
+      "title": "The Thirteenth Year",
+      "year": "1999",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-thirteenth-year",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Pushing and shoving between teens; one character is pulled underwater and loses consciousness before being revived via CPR."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Teasing and name-calling including \"loser,\" \"screw up,\" \"pathetic,\" and \"jerk.\""
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Gentle teen flirting, brief kisses, and handholding as the story touches on first love."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful drinking, drug, or smoking concern."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 161,
+      "file": "data-dcom.js",
+      "title": "Smart House",
+      "year": "1999",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/smart-house",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A character is bullied with visible injuries (black eye, bruising); the smart home delivers electric shocks to bullies, shows a menacing skull hologram, imprisons residents, and electrifies door handles; historical footage of Nazi rallies and atomic explosions also appears."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild language, usually in a bullying context, including \"geek,\" \"kick-butt,\" \"dead meat,\" and \"shut up.\""
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "References to attraction between characters; an adult couple kisses and a teenage girl kisses a boy on the cheek."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful drinking, drug, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "The story is built around the death of the protagonist's mother before the film begins, and the smart house is explicitly used as an attempted maternal replacement; the film also addresses his father moving on to a new relationship -- this grief and family-loss thread may need gentle prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 162,
+      "file": "data-dcom.js",
+      "title": "Johnny Tsunami",
+      "year": "1999",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/tv-reviews/johnny-tsunami",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent (CSM lists this Disney Channel Original Movie under its tv-reviews section rather than movie-reviews)",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "One teen fistfight with a character pushed down and a slight nosebleed, verbal bullying (\"loser,\" \"maggot,\" \"freak\"), dramatic falls on snowy slopes, and two kids hanging from a mountain ledge."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Verbal bullying includes \"loser,\" \"maggot,\" \"freak,\" \"bonehead,\" and derogatory use of \"boy.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A developing crush and dancing between the main character and a girl, a mention of girls in bikinis, and a character viewing surfing magazine photos."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful drinking, drug, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "CSM notes a reference to Johnny's deceased mother; a background grief/loss thread that may need gentle prose context."
+      ],
+      "confidence": "high"
+    }
+  ]
+}
