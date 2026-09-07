@@ -1,0 +1,371 @@
+{
+  "researchBatch": "csm-content-flags-pilot-02-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Second research-only handoff sample for Claude/local CSM-capable backfill flow. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": ["violence", "language", "romance", "drinking"],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This pilot preserves CSM's visible category label and proposes the nearest app level. Claude/Coder should confirm the exact canonical mapper before writing production catalog data."
+  },
+  "entries": [
+    {
+      "num": 273,
+      "file": "data-disney.js",
+      "title": "The Many Adventures of Winnie the Pooh",
+      "year": "1977",
+      "currentCatalogCa": "3+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-many-adventures-of-winnie-the-pooh",
+      "csmAge": "3+",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Minor peril, bee chase, characters stuck or lost, Tigger bouncing into friends, and a toy pop-gun dream gag."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No meaningful language concern surfaced in CSM's category data."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No meaningful romance or nudity concern surfaced in CSM's category data."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No meaningful drinking, drugs, or smoking concern surfaced in CSM's category data."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 1038,
+      "file": "data-extra.js",
+      "title": "Annie",
+      "year": "2014",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/annie-2014",
+      "csmAge": "7+",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Hostile foster-parent behavior, visible fear, a near truck accident, and a chase where Annie is in danger."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild profanity and insults."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Flirting, suggestive dancing/clothing, innuendo, and an end-of-film kiss."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Miss Hannigan drinks often, appears drunk, and worries about pills being discovered."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 1041,
+      "file": "data-extra.js",
+      "title": "Pokemon Detective Pikachu",
+      "year": "2019",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/pokemon-detective-pikachu",
+      "csmAge": "8+",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Pokemon battles, lab destruction, a fatal crash setup, repeated peril, hostage threat, injuries, and dangerous terrain."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild profanity, insults, and one cut-off stronger word."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Flirting and a few double-meaning jokes."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A couple of scenes take place in a bar/restaurant setting."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 486,
+      "file": "data-pixar.js",
+      "title": "Cars",
+      "year": "2006",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/cars",
+      "csmAge": "5+",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Vehicle crashes, intimidation on a bridge, near-crashes, road damage, and anxious misreadings of backfiring."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A few mild insults and one mild phrase."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Cars flirt, date, show affection, and the movie includes a few vehicle-based innuendo jokes."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No meaningful drinking, drugs, or smoking concern surfaced in CSM's category data."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 487,
+      "file": "data-pixar.js",
+      "title": "Cars 2",
+      "year": "2011",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/cars-2",
+      "csmAge": "8+",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Spy-thriller sequel with gunfire, high-speed chases, crashes, torture-like threat, character deaths, weapons, and injuries."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A few mild insults."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Tame flirting and girlfriend references among car characters."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Party scenes include cars drinking cocktails."
+        }
+      },
+      "handoffNotes": ["Useful franchise contrast: violence level rises from Cars while other flags stay low."],
+      "confidence": "high"
+    },
+    {
+      "num": 488,
+      "file": "data-pixar.js",
+      "title": "Cars 3",
+      "year": "2017",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/cars-3",
+      "csmAge": "6+",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Intense crash injury, demolition derby danger, saw/fire imagery, race peril, training crash, and tense arguments."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild insults and soft exclamations."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "Only a simple expression of love between Sally and Lightning."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Saloon/pub scene with unspecified drinks and a brief moonshine reference."
+        }
+      },
+      "handoffNotes": ["Useful franchise contrast: less spy violence than Cars 2, but still materially more intense than Cars."],
+      "confidence": "high"
+    },
+    {
+      "num": 489,
+      "file": "data-pixar.js",
+      "title": "The Incredibles",
+      "year": "2004",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-incredibles",
+      "csmAge": "8+",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Sustained superhero combat, guns, explosions, deaths, skeleton imagery, torture threat, near-death danger, and suicide reference."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild exclamations, soft insults, and one abbreviated profanity joke."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Marital affection, flirting, affair concern, teen crushes, body-focused costume framing, and mild adult joke."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Alcoholic drinks appear, adults discuss shots, and one character smokes."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 492,
+      "file": "data-pixar.js",
+      "title": "Monsters University",
+      "year": "2013",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/monsters-university",
+      "csmAge": "5+",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Monster-scare practice, a frightening dean, mild bullying, pranks, and a pledging gag that turns comic."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no language, though mild insults appear in context."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Two adult monsters show interest in each other and kiss once."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "College-party imagery with red cups and a drinking-game analogue."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 493,
+      "file": "data-pixar.js",
+      "title": "Toy Story 2",
+      "year": "1999",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/toy-story-2",
+      "csmAge": "5+",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Toy rescue peril, street crossing chaos, slapstick falls, mild grappling, video-game explosions, and separation stress."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild insults."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Toy flirting and kissing, plus a brief Barbie aisle pickup gag."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No meaningful drinking, drugs, or smoking concern surfaced in CSM's category data."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 498,
+      "file": "data-pixar.js",
+      "title": "Inside Out 2",
+      "year": "2024",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/inside-out-2",
+      "csmAge": "6+",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Mind-world peril, storms, chases, falls, dark-room capture, demolition, dynamite, anxiety/panic imagery, conflict, and a brief skeleton."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild insults and substitute swearing."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Crush-themed imagination and one character's infatuation with a fantasy game character."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Energy drink use is framed in a way that echoes harder drinking."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    }
+  ],
+  "handoffSummary": {
+    "researchedEntries": 10,
+    "csmFound": 10,
+    "fallbackUpgradesFound": 0,
+    "catalogAgeMismatches": [],
+    "franchiseCalibrationNotes": [
+      "Cars stays mostly level 1-2 except violence.",
+      "Cars 2 and Cars 3 both justify violence level 3, for different reasons.",
+      "Pixar titles with low CSM ages can still have violence/scariness at level 3, so age alone should not be used to infer flags."
+    ],
+    "nextClaudeAction": "Validate the mapping and summaries, then either import this pilot through the official backfill process or use it as a calibration sample for local bridge-session researchers."
+  }
+}
