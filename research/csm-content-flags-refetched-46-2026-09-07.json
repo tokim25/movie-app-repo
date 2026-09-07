@@ -1,0 +1,435 @@
+{
+  "researchBatch": "csm-content-flags-refetched-46-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only handoff for nums 331-340 in data-disney.js. Built from live Common Sense Media refetches of catalog srcUrl pages. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 331,
+      "file": "data-disney.js",
+      "title": "Tinker Bell and the Great Fairy Rescue",
+      "year": "2010",
+      "currentCatalogCa": "4+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/tinker-bell-and-the-great-fairy-rescue",
+      "csmAge": "4+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild peril includes fairies being captured by humans, a cat threatening them, travel through a storm, a crash, and a near car hit."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 332,
+      "file": "data-disney.js",
+      "title": "Secret of the Wings",
+      "year": "2012",
+      "currentCatalogCa": "4+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/tinker-bell-and-the-secret-of-the-wings",
+      "csmAge": "4+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Brief tension centers on wing injuries and a freezing threat that endangers Pixie Hollow and flight."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A fairy flirts with an attractive male fairy, and there is one kiss near the end."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 333,
+      "file": "data-disney.js",
+      "title": "The Pirate Fairy",
+      "year": "2014",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-pirate-fairy",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Pirates show swords, capture the fairies, threaten imprisonment, and one character is bitten by a young crocodile."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One mild insult is noted."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Pirates drink grog."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 334,
+      "file": "data-disney.js",
+      "title": "Tinker Bell and the Legend of the NeverBeast",
+      "year": "2014",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/tinker-bell-and-the-legend-of-the-neverbeast",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Fantasy intensity includes Gruff's scarier transformed look, roaring, hawk and creature chases, storms, injuries, scout fairies using weapons and sedative powder, and two fairies briefly appearing badly hurt."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Gruff's hibernation and the apparent severe injuries to Fawn and Tink may need emotional prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 335,
+      "file": "data-disney.js",
+      "title": "Planes",
+      "year": "2013",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/planes",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Flying peril includes near-crashes, storm danger, going underwater, a train tunnel close call, sabotage injuries, and a flashback to fighter planes being shot down."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Dialogue includes mild insults and a vehicle-themed crude phrase."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Planes flirt, serenade, use affectionate nicknames, show kiss marks, and make one mild backside-focused remark."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM mentions a disqualifying fuel enhancer but does not label it as drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Drinking, Drugs & Smoking as not present while the detail text mentions a competition-disqualifying fuel enhancer."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 336,
+      "file": "data-disney.js",
+      "title": "Planes: Fire & Rescue",
+      "year": "2014",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/planes-fire-rescue",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frequent wildfire peril includes characters trapped by fire, smoke and embers, crash landings, river rapids near a waterfall, an old-mine entrapment with suffocation fear, serious heat damage, a memorial to a dead friend, and a fire caused by a rough landing."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Vehicle-themed fake swears, a few insults, and mild gas humor are noted."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Romance jokes include an aggressive crush, date and room-sharing comments, mild body-part innuendo, pickup flirting, and an older couple discussing their engagement."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Vehicle characters socialize in bar-like settings with oil cans treated like drinks, plus a mock cocktail reference."
+        }
+      },
+      "handoffNotes": [
+        "Wildfire peril, fear of suffocation, serious damage, and a past death may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 337,
+      "file": "data-disney.js",
+      "title": "Treasure Island",
+      "year": "1950",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/treasure-island-1950",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Pirate violence includes shootings, a close-range face shooting, stabbings, and a knife injury to the boy hero."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface actual profanity, aside from a joke that a parrot may repeat bad language."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Seamen drink heavily, one drunken sailor is manipulated into a fatal fall overboard, and Billy Bones is implied to die from alcohol abuse."
+        }
+      },
+      "handoffNotes": [
+        "Alcohol-linked death and deliberate intoxication used as murder may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 338,
+      "file": "data-disney.js",
+      "title": "Old Yeller",
+      "year": "1957",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/old-yeller",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frontier peril includes rifle hunting, rock throwing, fights with wolves, a bear, and wild pigs, a bloody leg injury, and the famous ending in which the dog is put down."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "The animal death ending is central and should get explicit emotional-content prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 339,
+      "file": "data-disney.js",
+      "title": "The Shaggy Dog",
+      "year": "1959",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-shaggy-dog-1959",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "CSM's main violence note is a shotgun being used to scare off a dog, without injury."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Violence & Scariness as some even though the detail text only describes a shotgun used to drive away a dog without harm."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 340,
+      "file": "data-disney.js",
+      "title": "Pollyanna",
+      "year": "1960",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/pollyanna",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The notable concern is a frightening fall from a tree."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Tree-fall injury may need brief prose context for younger viewers."
+      ],
+      "confidence": "high"
+    }
+  ],
+  "handoffSummary": {
+    "refetchedEntries": 10,
+    "sourceBasis": "live CSM refetch by subagent",
+    "firstNum": 331,
+    "lastNum": 340,
+    "unavailablePages": [],
+    "labelDetailConflicts": [
+      {
+        "num": 335,
+        "title": "Planes",
+        "note": "CSM labels Drinking, Drugs & Smoking as not present while the detail text mentions a competition-disqualifying fuel enhancer."
+      },
+      {
+        "num": 339,
+        "title": "The Shaggy Dog",
+        "note": "CSM labels Violence & Scariness as some even though the detail text only describes a shotgun used to drive away a dog without harm."
+      }
+    ],
+    "emotionalProseAttention": [
+      {
+        "num": 334,
+        "title": "Tinker Bell and the Legend of the NeverBeast",
+        "note": "Gruff's hibernation and the apparent severe injuries to Fawn and Tink may need emotional prose context."
+      },
+      {
+        "num": 336,
+        "title": "Planes: Fire & Rescue",
+        "note": "Wildfire peril, fear of suffocation, serious damage, and a past death may need prose context."
+      },
+      {
+        "num": 337,
+        "title": "Treasure Island",
+        "note": "Alcohol-linked death and deliberate intoxication used as murder may need prose context."
+      },
+      {
+        "num": 338,
+        "title": "Old Yeller",
+        "note": "The animal death ending is central and should get explicit emotional-content prose."
+      },
+      {
+        "num": 340,
+        "title": "Pollyanna",
+        "note": "Tree-fall injury may need brief prose context for younger viewers."
+      }
+    ],
+    "nextClaudeAction": "Review label/detail conflicts and emotional prose notes before importing any production catalog content flags."
+  }
+}

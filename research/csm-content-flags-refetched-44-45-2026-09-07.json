@@ -1,0 +1,785 @@
+{
+  "researchBatch": "csm-content-flags-refetched-44-45-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only handoff for nums 311-330 inclusive in data-disney.js. Built from live Common Sense Media refetches of catalog srcUrl pages. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Where CSM's label and category detail conflict, the proposed level may reflect the detail rather than the label and a handoff note is included."
+  },
+  "entries": [
+    {
+      "num": 311,
+      "file": "data-disney.js",
+      "title": "The Lion King 1½",
+      "year": "2004",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-lion-king-1-12",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Hyenas attack meerkats, predators keep the meerkats in frequent danger, and comic peril includes waterfall and cliff near-falls."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text notes one mild wordplay joke."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Language as none while the detail text mentions one mild joke."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 312,
+      "file": "data-disney.js",
+      "title": "Peter Pan: Return to Never Land",
+      "year": "2002",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/return-to-never-land",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "CSM flags mild peril while noting that no one is hurt."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 313,
+      "file": "data-disney.js",
+      "title": "Cinderella II: Dreams Come True",
+      "year": "2002",
+      "currentCatalogCa": "4+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/cinderella-ii-dreams-come-true",
+      "csmAge": "4+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Tame cartoon slapstick includes characters colliding, cats chasing mice, and a runaway elephant carrying the king."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text mentions brief kisses between Cinderella and her romantic partner."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Sex, Romance & Nudity as none while the detail text mentions brief kisses."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 314,
+      "file": "data-disney.js",
+      "title": "Cinderella III: A Twist in Time",
+      "year": "2007",
+      "currentCatalogCa": "4+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/cinderella-iii-a-twist-in-time",
+      "csmAge": "4+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Mild animated violence includes a food fight and a mean cat being burned, transformed, shrunk, and tossed into water."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text notes a bridal romantic kiss."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Sex, Romance & Nudity as none while the detail text mentions a romantic kiss."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 315,
+      "file": "data-disney.js",
+      "title": "The Little Mermaid II: Return to the Sea",
+      "year": "2000",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-little-mermaid-ii-return-to-the-sea",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Fantasy peril includes Morgana threatening baby Melody over a shark's mouth, a shark trying to eat characters, Melody nearly drowning in a cave, and villain imagery similar to Ursula."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Threats against a baby and near-drowning may need prose for sensitive younger viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 316,
+      "file": "data-disney.js",
+      "title": "The Little Mermaid: Ariel's Beginning",
+      "year": "2008",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-little-mermaid-ariels-beginning",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild peril includes an ambiguous mother-loss scene with pirates and waves, a collision that briefly knocks out a character, eel and swordfish chases, shadowy cave suspense, sibling fights, and an angry father."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Very mild insults and one outdated descriptor are surfaced."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mermaid costuming includes shell bras and topless mermen, and mermaids talk or tease about boys and kissing without sexualization."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Ambiguous death or capture of Ariel's mother may need emotional prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 317,
+      "file": "data-disney.js",
+      "title": "The Return of Jafar",
+      "year": "1994",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-return-of-jafar",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "The revenge plot includes an evil genie framing Aladdin for murder and imprisoning his friends."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 318,
+      "file": "data-disney.js",
+      "title": "Aladdin and the King of Thieves",
+      "year": "1996",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/aladdin-and-the-king-of-thieves",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "none",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text mentions bared teeth, sword clashes, rampaging elephants, and a cliff-edge fight to the death."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Violence & Scariness as none while the detail text mentions swordplay, rampaging elephants, and a fight to the death."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 319,
+      "file": "data-disney.js",
+      "title": "Pocahontas II: Journey to a New World",
+      "year": "1998",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/pocahontas-ii-journey-to-a-new-world",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "CSM notes some fighting and typical Disney comic mayhem."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern in the category grid."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Several characters, including a dog, get drunk."
+        }
+      },
+      "handoffNotes": [
+        "The page description says the movie has more romance than history, but the current Sex, Romance & Nudity category is not present."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 320,
+      "file": "data-disney.js",
+      "title": "Mulan II",
+      "year": "2004",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/mulan-ii",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Cartoon action includes sword, trident, fist, and foot fighting plus two main characters hanging from an unstable bridge."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Couples kiss and cuddle, arranged marriage is lightly discussed, and a musical number includes a brief underwear lyric."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 321,
+      "file": "data-disney.js",
+      "title": "Tarzan II",
+      "year": "2005",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/tarzan-ii",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Mostly slapstick violence includes a young gorilla breaking rocks on his head, threatening to throw Tarzan off a cliff, and generally causing chaos without serious injuries."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text describes a short exchange of appearance-based insults."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Language as none while the detail text mentions insult humor."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 322,
+      "file": "data-disney.js",
+      "title": "Lady and the Tramp II: Scamp's Adventure",
+      "year": "2001",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/lady-and-the-tramp-ii-scamps-adventure",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "none",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text describes a scary street dog, snarling chases, a pound fight with Tramp, and Scamp briefly appearing knocked out."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text notes one mild body-part word during a dogfight."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Violence & Scariness and Language as none while the detail text mentions mild dog peril and one mild word.",
+        "Scamp briefly appearing knocked out may need prose for sensitive young viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 323,
+      "file": "data-disney.js",
+      "title": "Bambi II",
+      "year": "2006",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/bambi-ii",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Animal peril includes Bambi's father throwing hunting dogs aside, Bambi being chased and falling while escaping, porcupine slapstick, and Faline's mother caught in a hunter's trap."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text mentions a bully fawn teasing Bambi about his name."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Language as none while the detail text mentions bullying/name teasing.",
+        "Hunting-dog chase scenes and a trapped animal may need prose for sensitive viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 324,
+      "file": "data-disney.js",
+      "title": "The Fox and the Hound 2",
+      "year": "2006",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-fox-and-the-hound-2",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild slapstick peril includes a puppy-truck near miss, a dart-startled cow stampede, mistaken gun discharges, a beehive gag, and a runaway Ferris wheel that threatens but does not injure anyone."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Very mild insults and folksy exclamations are surfaced."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Dog affection is shown through rubbing and coy looks, and one character runs out in heart boxers."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 325,
+      "file": "data-disney.js",
+      "title": "101 Dalmatians II: Patch's London Adventure",
+      "year": "2003",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/101-dalmatians-ii-patchs-london-adventure",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoon peril includes TV-show violence, frying-pan hits, a character sent down a well, knife throwing, a kidnapping-style truck lure, Cruella striking others, puppy-death talk, vehicle chases, and Patch being left behind."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Patch is teased for his bark before proving himself."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Cruella is frequently shown with a cigarette holder, and some gallery attendees hold cocktails."
+        }
+      },
+      "handoffNotes": [
+        "Patch being left behind and puppy-death threats may need prose beyond the violence level."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 326,
+      "file": "data-disney.js",
+      "title": "Atlantis: Milo's Return",
+      "year": "2003",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/atlantis-milos-return",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "none",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text mentions minor pushing, shoving, and head-butting."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text mentions many hugs and two cheek kisses."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Violence & Scariness and Sex, Romance & Nudity as none while the detail text mentions minor roughness, hugs, and cheek kisses."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 327,
+      "file": "data-disney.js",
+      "title": "Piglet's Big Movie",
+      "year": "2003",
+      "currentCatalogCa": "4+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/piglets-big-movie",
+      "csmAge": "4+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Gentle suspense includes Piglet in jeopardy, bumps and falls, hanging from a branch, getting stuck, bee chases, river trouble, fear that friends are in danger, a mistaken fear about Kanga, and a memory book seeming destroyed."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Piglet's anxious misunderstandings and the apparently destroyed memory book may need emotional prose for very young viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 328,
+      "file": "data-disney.js",
+      "title": "Pooh's Heffalump Movie",
+      "year": "2005",
+      "currentCatalogCa": "4+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/poohs-heffalump-movie",
+      "csmAge": "4+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Very mild scares include strange sounds, imagined monster danger, traps and ropes, characters getting lost, mishaps, falls, and a friendly mother searching for her child."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Parent-child separation and mistaken monster fear may need gentle prose for preschool viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 329,
+      "file": "data-disney.js",
+      "title": "Tinker Bell",
+      "year": "2008",
+      "currentCatalogCa": "4+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/tinker-bell",
+      "csmAge": "4+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A hawk menaces fairies, slapstick accidents bonk characters, and runaway thistles damage Pixie Hollow without injuries."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text mentions one mild body-part word."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Tinker Bell is briefly ogled by other tinkers when first wearing her short dress."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Language as none while the detail text mentions one mild body-part word."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 330,
+      "file": "data-disney.js",
+      "title": "Tinker Bell and the Lost Treasure",
+      "year": "2009",
+      "currentCatalogCa": "4+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/tinker-bell-and-the-lost-treasure",
+      "csmAge": "4+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Tinker Bell faces dark shipwreck scares, spooky sounds and shadows, a tense rat chase, initially frightening trolls, grotesque troll designs, and a balloon fall without injury."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Trolls trade playful appearance and smell insults until one remark briefly hurts feelings and is resolved by apology."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Female fairies wear flattering outfits and pose coyly in the movie and marketing, though CSM says nothing is overtly sexual."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    }
+  ],
+  "handoffSummary": {
+    "totalEntries": 20,
+    "foundOnCsm": 20,
+    "unavailable": 0,
+    "unavailableNums": [],
+    "needsReviewerAttention": [
+      311,
+      313,
+      314,
+      315,
+      316,
+      318,
+      319,
+      321,
+      322,
+      323,
+      325,
+      326,
+      327,
+      328,
+      329
+    ],
+    "notes": [
+      "All 20 catalog srcUrl pages were reachable as live Common Sense Media movie-review pages during the refetch.",
+      "No unavailable pages were found, so no targeted CSM fallback lookup was needed.",
+      "Several entries have visible CSM labels of none while the detail text still describes minor content; those are called out in entry-level handoff notes.",
+      "Nums 315, 316, 322, 323, 325, 327, and 328 include child/animal peril, parent loss or separation, or anxious content that may need prose beyond slider levels."
+    ]
+  }
+}

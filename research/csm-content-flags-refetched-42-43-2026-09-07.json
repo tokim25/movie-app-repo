@@ -1,0 +1,834 @@
+{
+  "researchBatch": "csm-content-flags-refetched-42-43-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only live CSM refetch for catalog nums 291-310 in data-disney.js. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "sourceRange": {
+    "files": [
+      "data-disney.js"
+    ],
+    "nums": [
+      291,
+      310
+    ],
+    "entryCount": 20
+  },
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 291,
+      "file": "data-disney.js",
+      "title": "Atlantis: The Lost Empire",
+      "year": "2001",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/atlantis-the-lost-empire",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "This is darker and more intense than many Disney animated movies, with mass destruction, heavy weapons, explosions, monster attacks, many deaths, a punched elder who dies, blade violence, and an attempted genocide."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Some female characters wear revealing outfits that embarrass male characters, and an older woman jokes about sleeping nude."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "An adult quickly drinks martinis, another character chain-smokes, and there is a whiskey joke."
+        }
+      },
+      "handoffNotes": [
+        "Attempted genocide and large-scale deaths should be preserved in prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 292,
+      "file": "data-disney.js",
+      "title": "Lilo & Stitch",
+      "year": "2002",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/lilo-stitch-0",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoon sci-fi action includes explosions, space battles, laser fire, glass-cage imprisonment, a little girl accidentally captured, a house destroyed, underwater peril, biting, punching, and a past parental death by car crash."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language is mild but frequent enough to note, with butt plus comic insults such as idiot, crazy, abomination, and savage."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Beachwear and crop tops appear, and one adult has a respectful crush on a coworker who turns him down."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Family separation, orphaned sisters, and the parents' death may need emotional-content prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 293,
+      "file": "data-disney.js",
+      "title": "Treasure Planet",
+      "year": "2002",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/treasure-planet",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Animated sci-fi pirate action includes chases, falls, battles, lasers, swords, cannons, firestorms, explosives, threatening alien designs, casualties without gore, and a loyal character's tragic space death."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild language includes stupid, shut up, religious exclamations, and a flatulence-based gag language."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A subtle adult romantic subplot uses light banter and affection, with a later implication that the couple starts a family."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Some background alcohol appears, and a character smokes a pipe once."
+        }
+      },
+      "handoffNotes": [
+        "The betrayed character's death may need emotional-content prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 294,
+      "file": "data-disney.js",
+      "title": "Brother Bear",
+      "year": "2003",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/brother-bear",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "The main concern is peril plus two character deaths, with the dead later returning as spirits."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Death and spirit-return themes may need gentle emotional prose for younger viewers."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 295,
+      "file": "data-disney.js",
+      "title": "Home on the Range",
+      "year": "2004",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/home-on-the-range",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text still mentions mild peril and comic action, including a roller-coaster-like sequence, but the current surfaced signal is effectively unflagged."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions very mild language, though the current surfaced signal is effectively unflagged."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels/details conflict: violence and language are effectively not present, but detail prose mentions mild peril, comic action, and very mild language.",
+        "The bank foreclosing on the farm may need soft emotional prose."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 296,
+      "file": "data-disney.js",
+      "title": "Chicken Little",
+      "year": "2005",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/chicken-little",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frantic alien-invasion action includes panic, zapping, fires, pounding music, and bullying."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "There are mild orientation jokes, a brief underwear gag, and a song lyric about being a lover."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Bullying and father-child rejection are central enough to merit prose outside simple violence labeling."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 297,
+      "file": "data-disney.js",
+      "title": "Meet the Robinsons",
+      "year": "2007",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/meet-the-robinsons",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild peril includes an ominous robotic bowler hat, a T-rex chasing children and briefly picking one up, explosions from inventions, food-fight comedy, and a future where humanity is controlled."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Several childish taunts appear, including booger breath, pukeface, stupid, geek, and dumb."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions young Lewis and Franny smiling flirtatiously, though the surfaced signal is effectively unflagged."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A child uses coffee to stay awake, an adult's patches create an over-caffeinated effect, and adults toast with wine-like drinks that spill."
+        }
+      },
+      "handoffNotes": [
+        "Orphan rejection and Lewis wanting to meet his mother may need emotional-content prose.",
+        "Romance label/detail conflict: unflagged signal but mild flirtatious smiles in detail text."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 298,
+      "file": "data-disney.js",
+      "title": "Bolt",
+      "year": "2008",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/bolt",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Most peril is staged within the show-within-the-movie, including explosions, hostage danger, and threatening cats, but the climax has a genuinely tense fire that puts a central character in danger."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Animals use a couple of mild insults such as stupid."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "The staged violence distinction is important: early intense action is later revealed as manufactured."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 299,
+      "file": "data-disney.js",
+      "title": "The Princess and the Frog",
+      "year": "2009",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-princess-and-the-frog",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Scary magical imagery includes shadow minions and voodoo-like spells, plus cartoon fighting with guns, clubs, thrown knives, and a major character's injury and death."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Romance is fairy-tale mild, with frog-kissing, happily-ever-after kisses, and Naveen's light flirting."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults hold or sip wine and champagne at restaurants and parties."
+        }
+      },
+      "handoffNotes": [
+        "A major character death is gracefully handled but may still need emotional-content prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 300,
+      "file": "data-disney.js",
+      "title": "Tangled",
+      "year": "2010",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/tangled",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoon action includes chases, arrows, rising water, fire, head blows, threatened knives and spears, Mother Gothel's cruelty, Flynn appearing dead after a stabbing, and Gothel's transformation and fall."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Infrequent rude words include stupid and dumb."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Rapunzel and Flynn flirt, exchange longing looks, hold hands, and kiss; Mother Gothel uses her youthful appearance to manipulate men."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A tavern scene shows tough-looking characters eating and drinking, with one character acting slightly drunk."
+        }
+      },
+      "handoffNotes": [
+        "Mother Gothel's coercive parenting and Flynn's apparent death may need emotional-content prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 301,
+      "file": "data-disney.js",
+      "title": "Winnie the Pooh",
+      "year": "2011",
+      "currentCatalogCa": "3+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/winnie-the-pooh",
+      "csmAge": "3+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Very mild preschool peril includes the imaginary Backson, Pooh and friends falling into their own pit, and gentle pratfalls."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 302,
+      "file": "data-disney.js",
+      "title": "Big Hero 6",
+      "year": "2014",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/big-hero-6",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Superhero action includes a fatal fire, robot death matches, scary microbot attacks, Baymax nearly killing a villain after being reprogrammed, weaponized team fights, and an upsetting apparent sacrifice."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM notes nerd language, but mostly in a positive school/lab context rather than as a content concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults have drinks at a reception, and Baymax acts drunk when his battery runs low."
+        }
+      },
+      "handoffNotes": [
+        "Hiro's grief, orphan status, Tadashi's death, and an apparent sacrifice need emotional-content prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 303,
+      "file": "data-disney.js",
+      "title": "Moana",
+      "year": "2016",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/moana",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Adventure peril includes a fiery lava monster, scary exile story, an elder's death and spirit return, ocean storms, poisoned darts, coconut pirates, a giant crab attack, yelling, comic blows, near drowning, and tattoo pain."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "No profanity is flagged, but there are mild words such as butt, dumb, heiney, fish-pee humor, and creative insults."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "There is no real romance, but a young boy dances and winks at Moana, and Maui is shirtless throughout."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Grandmother death and spirit-return themes may need emotional-content prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 304,
+      "file": "data-disney.js",
+      "title": "Ralph Breaks the Internet",
+      "year": "2018",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/ralph-breaks-the-internet",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Video-game peril includes axe-throwing and fire-shooting racers, creepy clowns, crashes, characters fleeing unplugging and deletion, a nasty virus, a giant insecurity monster, a scary little creature, and princesses brandishing weapons."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes affectionate and cutting insults, potty humor, butt phrases, mild exclamations, and Ralph reading hateful internet comments."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A few game characters wear tight or revealing outfits, and married game characters embrace."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A game character holds a martini glass, root beer is served in beer mugs at a bar-like game, and a wine store appears in Slaughter Race."
+        }
+      },
+      "handoffNotes": [
+        "Internet comment cruelty and friendship breakup sadness may need prose outside the four flags."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 305,
+      "file": "data-disney.js",
+      "title": "Frozen II",
+      "year": "2019",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/frozen-2",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Fantasy danger includes battle flashbacks, weapons, nongraphic deaths, the parents' shipwreck remains, parent-death references, chases, falls, Earth giants, a water horse, tornado-like air spirits, huge waves, magical fire, evacuation danger, and Elsa and Olaf appearing lost."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions one butt, though the surfaced language signal is effectively unflagged."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Anna and Kristoff hug, kiss, embrace, and show couple affection; the sisters' parents embrace in flashbacks."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels language as not present while detail text mentions one mild butt.",
+        "Parent-death grief, Olaf melting, Anna's sadness, and Elsa appearing frozen may need emotional-content prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 306,
+      "file": "data-disney.js",
+      "title": "Strange World",
+      "year": "2022",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/strange-world",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Retro sci-fi peril includes life-or-death close calls in vehicles and on foot, a father leaving his teen for a dangerous mission, attacks by strange living beings, aircraft damage, an implied pilot death, flamethrower use, other weapons, and characters locked away."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Insulting family dialogue includes phrases about being a bad dad and not wanting to be like someone."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Ethan's parents kiss and embrace lovingly, and Ethan talks about his crush Diazo and is briefly shown beside him in a side hug."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults drink what appears to be bottled beer."
+        }
+      },
+      "handoffNotes": [
+        "Father-son abandonment/separation and family conflict may need emotional-content prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 307,
+      "file": "data-disney.js",
+      "title": "Wish",
+      "year": "2023",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/wish",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "The villain is intimidating and rage-prone, uses crackling magic in scenes that look like torture, drops a heavy object on someone, kicks distressed wooden figures, puts heroes in peril, triggers chases, and causes grief when people lose their wishes."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The mild language concern is a use of butt."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The only surfaced romance content is kiss appearing in a song lyric."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Loss of wishes and Asha's father's death are emotional themes that may need prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 308,
+      "file": "data-disney.js",
+      "title": "Moana 2",
+      "year": "2024",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/moana-2",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Seafaring peril includes characters knocked unconscious or seeming dead, a massive supernatural storm, lightning, downspouts, huge waves, near drowning, scary storm visions, a giant clam swallowing the crew, serpent monsters, poisoned darts, sedating poison, Maui held captive, bats, falls, gross substances, and a shark biting a boat."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild words and insults include hate, crazy, butt dial, scruffy, sucka, windbag, and gross."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "There is no real romance, but a boy dances and winks at Moana, a character's bare backside is partly glimpsed, Maui's tattoo twists his nipple, and many male characters are shirtless."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Multiple fake-out deaths, near drownings, and scary future visions may need prose for sensitive viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 309,
+      "file": "data-disney.js",
+      "title": "Beauty and the Beast",
+      "year": "2017",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/beauty-and-the-beast-0",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Scary live-action peril includes wolf attacks with wounds and bleeding, the Beast's roars, sad illness-death flashbacks, Gaston threatening and assaulting Maurice, Maurice and Belle arrested, mob violence with weapons, Gaston shooting the Beast, fighting between villagers and castle servants, and one character falling to death."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild insults include idiot, fool, crazy, peculiar, and hag, plus shut up and an eternal-damnation reference."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Romance includes flirting, dancing with opposite-sex and same-sex couples, a few kisses, and some dresses with cleavage."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Villagers drink in the local tavern."
+        }
+      },
+      "handoffNotes": [
+        "Parental death flashbacks and Gaston's mob violence should be preserved in prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 310,
+      "file": "data-disney.js",
+      "title": "Monsters, Inc.",
+      "year": "2001",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/monsters-inc",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "The closet-monster premise may briefly scare kids, but most peril is comic; the most intense scene has a villain strap a frightened toddler into a scream-extraction chair before she is rescued."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "There is some flirting and dating discussion."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "The toddler scream-extraction scene is the key sensitive moment despite the mild overall label."
+      ],
+      "confidence": "high"
+    }
+  ],
+  "handoffSummary": {
+    "totalEntries": 20,
+    "found": 20,
+    "unavailable": [],
+    "needsReviewerAttention": [
+      {
+        "num": 291,
+        "reason": "Attempted genocide and large-scale deaths should be preserved in prose."
+      },
+      {
+        "num": 292,
+        "reason": "Orphaned sisters and parental death may need emotional-content prose."
+      },
+      {
+        "num": 293,
+        "reason": "Betrayal and a loyal character's death may need emotional-content prose."
+      },
+      {
+        "num": 294,
+        "reason": "Death and spirit-return themes may be sensitive for younger viewers."
+      },
+      {
+        "num": 295,
+        "reason": "CSM labels/details conflict on mild peril and mild language."
+      },
+      {
+        "num": 297,
+        "reason": "Orphan rejection and mild romance label/detail conflict."
+      },
+      {
+        "num": 299,
+        "reason": "Major character death is gracefully handled but still relevant."
+      },
+      {
+        "num": 300,
+        "reason": "Coercive parenting and apparent death may need emotional prose."
+      },
+      {
+        "num": 302,
+        "reason": "Grief, orphan status, and apparent sacrifice need emotional-content prose."
+      },
+      {
+        "num": 305,
+        "reason": "Language label/detail mismatch plus parent-death grief and Olaf/Elsa fake-out loss."
+      },
+      {
+        "num": 306,
+        "reason": "Family separation and conflict are central emotional themes."
+      },
+      {
+        "num": 308,
+        "reason": "Fake-out deaths, near drownings, and scary storm visions may affect sensitive viewers."
+      },
+      {
+        "num": 310,
+        "reason": "Toddler scream-extraction scene is the main sensitive moment despite mild label."
+      }
+    ]
+  }
+}

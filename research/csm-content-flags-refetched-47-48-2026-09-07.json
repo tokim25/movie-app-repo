@@ -1,0 +1,756 @@
+{
+  "researchBatch": "csm-content-flags-refetched-47-48-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only handoff for nums 341, 342, 344-353, and 355-362 in data-disney.js. Built from live Common Sense Media refetches of catalog srcUrl pages. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 341,
+      "file": "data-disney.js",
+      "title": "Swiss Family Robinson",
+      "year": "1960",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/swiss-family-robinson",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Pirate attacks and survival peril include sword fights, cannon fire, rifles, explosives, booby traps that kill or injure pirates, animal attacks, and two brothers fighting over the same girl."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Teen brothers joke about wanting to see girls, compete for a teen girl's attention, and there is some kissing."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Father and sons share wine at a table, and the youngest son takes a sip from his father's glass."
+        }
+      },
+      "handoffNotes": [
+        "CSM notes that the violence is bloodless but realistic-looking for an older Disney adventure."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 342,
+      "file": "data-disney.js",
+      "title": "The Absent-Minded Professor",
+      "year": "1961",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-absent-minded-professor",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Comic action includes pratfalls, henchmen bonking heads and being knocked out, two head-on car crashes without injuries, and gunshots fired during a chase."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Wine appears in a beaker during an experiment, and police give a sobriety test after a car crash."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 344,
+      "file": "data-disney.js",
+      "title": "Son of Flubber",
+      "year": "1963",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/son-of-flubber",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface violence or scariness content."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Live CSM metadata gives zero ratings for all four requested categories and no visible detail sections for them."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 345,
+      "file": "data-disney.js",
+      "title": "The Three Lives of Thomasina",
+      "year": "1964",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-three-lives-of-thomasina",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "The main scariness signal is the death of a pet, though the pet returns."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Pet death should be called out clearly despite the low category level."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 346,
+      "file": "data-disney.js",
+      "title": "That Darn Cat!",
+      "year": "1965",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/that-darn-cat-1965",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A kidnapping plot is treated humorously but may scare younger kids, with raised voices, abductors, a final scuffle, and guns used without anyone being shot."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The cat's initials stand for \"Darn Cat,\" a phrase characters yell repeatedly in frustration."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A secondary character smokes a cigar."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 347,
+      "file": "data-disney.js",
+      "title": "The Ugly Dachshund",
+      "year": "1966",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-ugly-dachshund",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface violence or scariness content."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "A husband tells his wife to shut up during an argument, then apologizes strongly."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "A married couple hugs and kisses affectionately, with period-style twin beds."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "One anxious character drinks several glasses of champagne, and another is teased about having been drunk at a social event."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Language and Sex, Romance & Nudity as none despite minor detail text."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 348,
+      "file": "data-disney.js",
+      "title": "The Happiest Millionaire",
+      "year": "1967",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-happiest-millionaire",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A tavern musical sequence ends in a tame, choreographed bar fight with punches timed to the music."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a current language rating or visible language detail."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A long tavern sequence shows characters repeatedly chugging beer, one character wakes up hungover in jail, and there is champagne, wine, and cigar smoking in upper-class social scenes."
+        }
+      },
+      "handoffNotes": [
+        "Live metadata has no language value; treated as not present based on no visible language section."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 349,
+      "file": "data-disney.js",
+      "title": "Blackbeard's Ghost",
+      "year": "1968",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/blackbeards-ghost",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM notes some rowdy comic fighting involving an invisible adversary."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Blackbeard drinks rum."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 350,
+      "file": "data-disney.js",
+      "title": "The Love Bug",
+      "year": "1968",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-love-bug",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "The film opens with demolition-derby crashes, includes reckless driving, and has a scene where Herbie hangs from the Golden Gate Bridge in an imitation of suicidal despair."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A man ogles a saleswoman's legs while she holds a suggestive sign."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Herbie is given Irish coffee and joked about as hungover, adults get drunk on Irish coffee, characters drink sherry, wine, and champagne, cigarettes appear, and there are period jokes about hippies seeming high."
+        }
+      },
+      "handoffNotes": [
+        "Suicide-imitation scene involving Herbie should be specifically called out in prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 351,
+      "file": "data-disney.js",
+      "title": "The Computer Wore Tennis Shoes",
+      "year": "1969",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-computer-wore-tennis-shoes",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Slapstick action includes incompetent mobsters chasing Dexter's friends, a wacky car chase, and an attempted gunpoint abduction."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild insults include \"stupid,\" bad-mouthing Dexter and friends, and \"dirty rat.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Dexter kisses two girls on TV while his girlfriend watches, then apologizes later."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 352,
+      "file": "data-disney.js",
+      "title": "$1,000,000 Duck",
+      "year": "1971",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-million-dollar-duck",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Most danger is comic, but one scarier scene has a young boy trapped on a breaking ladder several stories above the street; car chases end in crashes without injuries."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Catalog title uses \"$1,000,000 Duck\" while the CSM URL slug is \"the-million-dollar-duck.\""
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 353,
+      "file": "data-disney.js",
+      "title": "Bedknobs and Broomsticks",
+      "year": "1971",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/bedknobs-and-broomsticks",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "War backstory and Nazi threat frame the danger; CSM also notes cartoon soccer violence, one knife threat, and a potentially scary finale with ghost-like armored knights fighting machine-gun-wielding Nazis."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The older boy tells his siblings to shut up."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Miss Price and Professor Browne have mild flirtation and a suggested future marriage; animated fish dance cheek-to-cheek."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A cartoon fish smokes a cigar, and an adult tells a child he wants to go to the pub for a drink."
+        }
+      },
+      "handoffNotes": [
+        "Orphaned-by-war setup and Nazi battle sequence may need age-context prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 355,
+      "file": "data-disney.js",
+      "title": "Charley and the Angel",
+      "year": "1973",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/charley-and-the-angel",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Near-fatal accidents, car crashes, gunfire, a child forced to drive a getaway car, a partner knocked out, kids held at home, a shoot-out, a car chase, guns drawn by police, and a machine gun all contribute to the violence signal."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM labels language as none but lists mild insults such as \"loonybird,\" \"lounge lizard,\" \"yacking broad,\" and \"boob.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Romance and adult innuendo include teen dating, hugging and kissing, all-night dancing, a woman sent to keep Charley company, a bedroom undressing interruption, elopement anxiety, newlywed giggling, and a passionate goodbye kiss."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Bootlegging liquor is a subplot, an alcoholic lemonade mistake occurs, gangsters smoke, Charley smokes a pipe, and several jokes refer to sobriety or drinking on the job."
+        }
+      },
+      "handoffNotes": [
+        "This is one of the heavier entries in the slice, with both gun violence and bootlegging context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 356,
+      "file": "data-disney.js",
+      "title": "Herbie Rides Again",
+      "year": "1974",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/herbie-rides-again",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Bloodless slapstick includes car chases, punching and fighting, a threat to get Herbie dead or alive, building demolitions, and a nightmare where monster-like cars attack a man who falls from a skyscraper."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Two characters develop a romance and kiss on-screen."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "One man appears drunk after waking from sleep, slurring and wobbling, and characters occasionally smoke cigarettes."
+        }
+      },
+      "handoffNotes": [
+        "Nightmare sequence may play scarier than the otherwise comic tone."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 357,
+      "file": "data-disney.js",
+      "title": "The Apple Dumpling Gang",
+      "year": "1975",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-apple-dumpling-gang",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Slapstick and peril include falls, out-of-control mine-cart action, chases, crashes, explosions, a collapsing mine, a bloodless shoot-out, frequent gun-pointing, kidnapping, strangling, and a child grabbed roughly."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Donovan and Dusty kiss."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Several characters smoke, a woman appears drunk and drops a beer bottle, and Col. Clydesdale gets drunk."
+        }
+      },
+      "handoffNotes": [
+        "Collapsing mine and child kidnapping are the main child-specific peril notes."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 358,
+      "file": "data-disney.js",
+      "title": "Escape to Witch Mountain",
+      "year": "1975",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/escape-to-witch-mountain",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM labels violence as none, while noting some tense scenes and mildly scary moments."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM's visible violence text mentions mild tension despite a none rating."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 359,
+      "file": "data-disney.js",
+      "title": "Freaky Friday",
+      "year": "1976",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/freaky-friday-1976",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM labels violence as none but describes comic car chases and crashes, sidewalk driving that scares pedestrians, and field hockey players hitting and tripping Annabel."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "Annabel has a crush on Boris and, while body-swapped into her mother, invites him over for the afternoon."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Mrs. Schmauss is described as alcoholic; although she does not drink on-screen, characters refer to her drinking on the job and she leaves to buy alcohol during the day."
+        }
+      },
+      "handoffNotes": [
+        "Alcoholism is the strongest current CSM concern for this title."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 360,
+      "file": "data-disney.js",
+      "title": "The Shaggy D.A.",
+      "year": "1976",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-shaggy-da",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Seedy crooks use a tranquilizer gun on the dog, a neighbor fires a shotgun at trespassers, the dog punches a crook, and there are scary high-ladder and plank-walking moments."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a current language rating or visible language detail."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a current sex, romance, or nudity rating or visible detail."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Period cigarette smoking appears among gangsters and bar patrons, and adults drink beer in a bar."
+        }
+      },
+      "handoffNotes": [
+        "Live metadata has null values for language and romance; treated as not present because no visible sections were surfaced."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 361,
+      "file": "data-disney.js",
+      "title": "Pete's Dragon",
+      "year": "1977",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/petes-dragon",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Comic roughhousing has Elliott knocking villains around, while songs joke about cutting up Elliott for medicine and abusing or killing young Pete."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Drinking imagery is pervasive: a main adult is the town drunk, characters repeatedly drink or discuss drinking, Elliott drinks from a flask, a dragon witness is told to drink, and a saloon musical number features beer barrels and suds."
+        }
+      },
+      "handoffNotes": [
+        "This is the only title in the slice with an app-level 4 substance signal."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 362,
+      "file": "data-disney.js",
+      "title": "Herbie Goes to Monte Carlo",
+      "year": "1977",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/herbie-goes-to-monte-carlo",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "CSM surfaces one mostly slapstick fight scene as the violence concern."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM's visible detail is sparse despite a \"some\" violence rating."
+      ],
+      "confidence": "high"
+    }
+  ]
+}

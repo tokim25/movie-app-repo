@@ -1,0 +1,764 @@
+{
+  "researchBatch": "csm-content-flags-refetched-49-50-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only handoff for nums 363, 364, 366, 367, 368, 369, 372, 374, 375, 376, 377, 378, 379, 380, 381, 382, 383, 384, 385, and 386 in data-disney.js. Built from live Common Sense Media refetches of catalog srcUrl pages. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 363,
+      "file": "data-disney.js",
+      "title": "The Cat from Outer Space",
+      "year": "1978",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-cat-from-outer-space",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Soldiers aim guns during the alien-cat plot, the story includes a helicopter rescue, and Cold War-era Soviet-threat references appear."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Two cats briefly lick each other affectionately."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM's live page title capitalizes this as The Cat From Outer Space."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 364,
+      "file": "data-disney.js",
+      "title": "Return from Witch Mountain",
+      "year": "1978",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/return-from-witch-mountain",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text still describes villain threats and heavy objects nearly crushing Tia."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions adults commanding Tony to pour red wine and Tony being injected with sedatives."
+        }
+      },
+      "handoffNotes": [
+        "Violence and drinking/drugs/smoking are rated not present even though CSM detail text mentions crushing threats, red wine, and sedative injections."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 366,
+      "file": "data-disney.js",
+      "title": "Unidentified Flying Oddball",
+      "year": "1979",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/unidentified-flying-oddball",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "The movie includes a near burning at the stake, comic sword fights, high falls, robot dismemberment, exposed mechanical innards, troops knocked down stairs, and a large battle with swordplay and falls."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "An adult magazine with a bikini-cover image appears repeatedly, and two characters kiss through a space helmet."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Violence is unusually high for this Disney slice because CSM rates the category a lot."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 367,
+      "file": "data-disney.js",
+      "title": "Herbie Goes Bananas",
+      "year": "1980",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/herbie-goes-bananas",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text notes that Herbie is thrown overboard from a cruise ship, which may upset some kids."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Violence is rated not present while CSM detail text mentions Herbie being thrown overboard."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 368,
+      "file": "data-disney.js",
+      "title": "The Watcher in the Woods",
+      "year": "1980",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-watcher-in-the-woods",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Horror suspense includes a fall from a horse, a truck accident, a motorcycle explosion, a near-drowning, breaking mirrors and glass, abrupt scary imagery, and jump-scare moments."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Champagne drinking appears, and one man is accused of being drunk."
+        }
+      },
+      "handoffNotes": [
+        "Horror suspense and the apparent drowning threat may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 369,
+      "file": "data-disney.js",
+      "title": "Amy",
+      "year": "1981",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/amy-1981",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Children are cruel to each other, one boy hits an older student who cannot defend himself, a student runs away and is hit by a train, and a child dies from illness."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Two adults kiss."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM's live page title identifies the review as Amy (1981); child death and train injury may need context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 372,
+      "file": "data-disney.js",
+      "title": "Tex",
+      "year": "1982",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/tex",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Characters face peril, a hitchhiker is killed by police, and Tex is shot during a struggle."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "The movie includes discussion of pregnancy-driven marriage, sexual boundaries with a girlfriend, and paternity."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Teen drinking and smoking appear, and characters sell drugs."
+        }
+      },
+      "handoffNotes": [
+        "Drug selling and teen substance use should be preserved in prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 374,
+      "file": "data-disney.js",
+      "title": "Something Wicked This Way Comes",
+      "year": "1983",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/something-wicked-this-way-comes",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Dark horror imagery includes a bloody severed-head likeness, graveyard chases, sudden monster transformations, electrocution torture, a villain decaying into a skeleton, death threats, tarantulas attacking boys, and a destructive tornado."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A couple of mild religiously themed exclamations appear."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Some scenes occur in a bar, and a man smokes a cigar."
+        }
+      },
+      "handoffNotes": [
+        "Horror violence is intense and includes tarantula peril, electrocution, and skeletal decay."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 375,
+      "file": "data-disney.js",
+      "title": "Never Cry Wolf",
+      "year": "1983",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/never-cry-wolf",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Peril includes an almost plane crash, wolves chasing the main character, a fall through ice, graphic mouse-eating experiment scenes, wolves eating caribou, distant gunshots, and talk of killing wolves for money."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "There is non-sexual nudity, including bare buttocks and brief full-frontal exposure, plus a passing comment about a woman wanting to come home with a man."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "The main character and others smoke pipes or cigarettes, and he drinks a beer-and-ethyl-alcohol mixture to manage fear of flying."
+        }
+      },
+      "handoffNotes": [
+        "Non-sexual nudity is more explicit than most Disney entries in this slice; animal-feeding scenes may need context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 376,
+      "file": "data-disney.js",
+      "title": "Splash",
+      "year": "1984",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/splash",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Allen nearly drowns twice, comic pratfalls target Walter, an Army jeep nearly hits him, and a mermaid fin hits a lead character in the crotch."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Profanity and sexual talk appear, including discussion of sex with a mermaid, pornographic movies, and a crude line in Swedish."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Madison is often nude from behind with hair covering private areas, Allen is nude in a tub while covering himself, Allen and Madison are shown in bed and making out, and Freddy's lecherous behavior includes porn magazines and skirt-peeking."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A lead character gets very drunk at a bar, and the movie includes cigarette smoking, beer, and wine."
+        }
+      },
+      "handoffNotes": [
+        "Sexual content and nudity are prominent for this catalog band and should not be softened in downstream prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 377,
+      "file": "data-disney.js",
+      "title": "The Journey of Natty Gann",
+      "year": "1985",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-journey-of-natty-gann",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A man who picks Natty up hitchhiking attempts sexual assault, and the movie also includes a train derailment, punching, rock throwing, slapping, explosions, a serious fall, bloody dog fighting, animal skinning, and vigilantes burning and beating people in a shanty town."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Several mild-to-moderate profanities are used."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions one kiss between Natty and Harry."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Characters smoke cigarettes and cigars, Connie drinks liquor, and Natty and friends share a cigarette."
+        }
+      },
+      "handoffNotes": [
+        "Romance is rated not present while CSM detail text mentions a kiss; attempted sexual assault is listed under violence and needs explicit prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 378,
+      "file": "data-disney.js",
+      "title": "Return to Oz",
+      "year": "1985",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/return-to-oz",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Adults threaten Dorothy with electroshock therapy, kids nearly drown, and Oz scenes include moving heads, hostile walls, the Nome King, monster chases, and threats to tear Dorothy apart."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Electroshock-therapy threats and frightening head imagery may need sensitivity context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 379,
+      "file": "data-disney.js",
+      "title": "Flight of the Navigator",
+      "year": "1986",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-flight-of-the-navigator",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Soldiers point machine guns at the lead character, and he falls backward into a ditch, landing on his head and back."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Language includes a disability slur from a child character and several moderate profanities from teens and adults."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM's live page title is The Flight of the Navigator, while the catalog title omits The."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 380,
+      "file": "data-disney.js",
+      "title": "Benji the Hunted",
+      "year": "1987",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/benji-the-hunted",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Animal fights are not explicit but include casualties, mainly from a cliff fall, and a cougar is shot and killed."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Animal casualties and a cougar shooting may need context for sensitive viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 381,
+      "file": "data-disney.js",
+      "title": "Ernest Saves Christmas",
+      "year": "1988",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/ernest-saves-christmas",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Nonviolent peril includes freeway near-misses, an out-of-control sleigh, a crate-crushing gag, a prop gun in a movie scene, and snake bites."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text notes one unfinished profanity."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text notes a visible beer brand on a billboard but no use."
+        }
+      },
+      "handoffNotes": [
+        "Language and drinking are rated not present while CSM detail text mentions an unfinished profanity and beer-brand billboard."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 382,
+      "file": "data-disney.js",
+      "title": "Honey, I Shrunk the Kids",
+      "year": "1989",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/honey-i-shrunk-the-kids",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Shrunken kids face constant backyard peril from huge insects, a scorpion, a bee ride, a near-drowning that requires resuscitation, lawnmower blades, minor injuries, harsh parental belittling, and the death of a friendly ant."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Language includes a mild profanity, name-calling among children, and a religious exclamation."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Teens flirt and make out, parents hug and kiss passionately, and a CPR joke implies tongue kissing."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A parent smokes and flicks a cigarette butt into the yard, and adults drink wine at dinner without intoxication."
+        }
+      },
+      "handoffNotes": [
+        "The friendly ant's death and resuscitation scene may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 383,
+      "file": "data-disney.js",
+      "title": "DuckTales the Movie: Treasure of the Lost Lamp",
+      "year": "1990",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/ducktales-the-movie-treasure-of-the-lost-lamp",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Comic action includes Merlock's threatening transformations, wild flight, chute and river peril, sumo-scorpion danger, repeated falls and hits, an elevator shaft, a crumbling building, and a food mixer."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions a few mild insults."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Language is rated not present while CSM detail text mentions mild insults."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 384,
+      "file": "data-disney.js",
+      "title": "The Rocketeer",
+      "year": "1991",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-rocketeer",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Action includes car chases, aviation disasters, fistfights, heavy gunfire, explosions, a grill threat, deaths by gunfire or falls, fiery deaths from a rocket pack and zeppelin, and Jenny being drugged, knocked out, and kidnapped."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes frequent mild profanity and ethnic/nationality insults."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Romantic kisses appear, along with cleavage-focused shots as Jenny is revived and nearly seduced by the villain before escaping."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Characters smoke cigars and cigarettes, and champagne is toasted and discussed."
+        }
+      },
+      "handoffNotes": [
+        "Jenny's chloroform kidnapping and villain bedroom scene may need careful prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 385,
+      "file": "data-disney.js",
+      "title": "Newsies",
+      "year": "1992",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/newsies",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Riots and labor clashes include adults punching, police batons, baseball bats, chains, slingshots, fire, visible bruises, boys play-fighting, and two separate scenes of threatening behavior toward women, including an alley attack implying sexual violence."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Mild-to-moderate profanity appears, along with disability-related slurs."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Characters flirt and kiss, a husband kisses his wife, and a character references suggestive headline words."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Characters, including teens and kids, smoke cigarettes and cigars, and a 10-year-old drinks beer to win a bet."
+        }
+      },
+      "handoffNotes": [
+        "Threats toward women, implied sexual violence, child/teen smoking, and a child drinking beer should be preserved in downstream review text."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 386,
+      "file": "data-disney.js",
+      "title": "Honey, I Blew Up the Kid",
+      "year": "1992",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/honey-i-blew-up-the-kid",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Comic peril includes a babysitter being tied up, reckless driving, roughhousing caused by the giant baby's size, bad-guy threats, and minor fistfights."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions a minor teen boy/girl kiss."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Romance is rated not present while CSM detail text mentions a minor teen kiss."
+      ],
+      "confidence": "high"
+    }
+  ]
+}
