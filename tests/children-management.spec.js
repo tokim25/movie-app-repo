@@ -56,26 +56,26 @@ test('new child gets selectable adjustable content settings', async ({ page }) =
   await expect(page.locator('#familySettingsChildName')).toHaveText("Theo's content settings");
   await expect(page.locator('#familySettingsIntro')).toContainText('Age 4 starter settings');
   await expect(page.locator('#familySettingsChildPicker .settingsChildChip.selected')).toHaveText('Theo');
-  await expect(page.locator('#familySettingsRows .familySettingRow')).toHaveCount(6);
+  await expect(page.locator('#familySettingsRows .familySettingRow')).toHaveCount(4);
   await expect(page.locator('#familySettingsRows .familySettingRow').first()).toContainText('Example: Cars');
 
-  const scaryRow = page.locator('#familySettingsRows .familySettingRow[data-flag="scary"]');
-  await expect(scaryRow.locator('.limitControl button.selected')).toHaveText('1');
-  await scaryRow.locator('.scaleCard').filter({ hasText: '3. Moderate scares' }).click();
-  await expect(scaryRow.locator('.settingBadge')).toHaveText('Parent-set');
-  await expect(scaryRow).toContainText('Parent-set to 3. Age 4 starter is 1.');
-  await expect(scaryRow.locator('.limitControl button.selected')).toHaveText('3');
+  const violenceRow = page.locator('#familySettingsRows .familySettingRow[data-flag="violence"]');
+  await expect(violenceRow.locator('.limitControl button.selected')).toHaveText('1');
+  await violenceRow.locator('.scaleCard').filter({ hasText: '3. Moderate scares' }).click();
+  await expect(violenceRow.locator('.settingBadge')).toHaveText('Parent-set');
+  await expect(violenceRow).toContainText('Parent-set to 3. Age 4 starter is 1.');
+  await expect(violenceRow.locator('.limitControl button.selected')).toHaveText('3');
 
   await page.reload();
   await page.locator('#tabFamily').click();
   await page.locator('#familyScreen').waitFor({ state: 'visible' });
   await page.locator('#familySettingsChildPicker .settingsChildChip').filter({ hasText: 'Theo' }).click();
-  const reloadedScaryRow = page.locator('#familySettingsRows .familySettingRow[data-flag="scary"]');
-  await expect(reloadedScaryRow.locator('.limitControl button.selected')).toHaveText('3');
+  const reloadedViolenceRow = page.locator('#familySettingsRows .familySettingRow[data-flag="violence"]');
+  await expect(reloadedViolenceRow.locator('.limitControl button.selected')).toHaveText('3');
 
-  await reloadedScaryRow.locator('.ageDefault input').check();
-  await expect(reloadedScaryRow.locator('.settingBadge')).toHaveText('Starter');
-  await expect(reloadedScaryRow.locator('.limitControl button.selected')).toHaveText('1');
+  await reloadedViolenceRow.locator('.ageDefault input').check();
+  await expect(reloadedViolenceRow.locator('.settingBadge')).toHaveText('Starter');
+  await expect(reloadedViolenceRow.locator('.limitControl button.selected')).toHaveText('1');
 });
 
 test('removing a child asks for confirmation and does not remove on cancel', async ({ page }) => {
