@@ -1,0 +1,777 @@
+{
+  "researchBatch": "csm-content-flags-refetched-28-29-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only handoff for nums 867, 868, 869, 870, 872, 874, 875, 876, 878, 879, 881, 882, 883, 884, 885, 886, 887, 888, 889, and 891 in data-extra.js. Built from live Common Sense Media refetches of catalog srcUrl pages. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 867,
+      "file": "data-extra.js",
+      "title": "Nanny McPhee",
+      "year": "2005",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/nanny-mcphee",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Comic household chaos includes pratfalls, food fights, a child hitting an adult with a pan, adults falling or crying out, and brief mortuary images of bodies."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild British profanity and repeated kid-level potty words are the main language issues."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The romance is mostly gentle, though one adult character wears revealing clothes and makes mild sexual suggestions."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Death of the children's mother and mortuary setting may need prose context for sensitive viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 868,
+      "file": "data-extra.js",
+      "title": "Stuart Little 2",
+      "year": "2002",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/stuart-little-2",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Animal peril and comic suspense include a runaway toy plane, sink-drain danger, rooftop falls, a predatory falcon stalking smaller animals, and the villain's cartoonish fatal crash."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM's details still mention a few very mild potty words."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM's details note one old film clip with a long kiss."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Language and Sex, Romance & Nudity as none while the detail text mentions minor potty words and a film-clip kiss."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 869,
+      "file": "data-extra.js",
+      "title": "Space Jam",
+      "year": "1996",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/space-jam",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Looney Tunes-style violence includes guns, lasers, explosions, and frequent exaggerated slapstick."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language is infrequent and mild, with insults, one mild swear, potty humor, and jokes about a character's weight."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adult-aimed innuendo includes a joke about sexual performance, exposed cartoon backside humor, and a raincoat gag."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A villain smokes a cigar, and a supposed performance-boosting drink is revealed as plain water."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 870,
+      "file": "data-extra.js",
+      "title": "The Chronicles of Narnia: The Lion, the Witch and the Wardrobe",
+      "year": "2005",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-chronicles-of-narnia-the-lion-the-witch-the-wardrobe",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "CSM surfaces battle content between the children and the White Witch's forces."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "The catalog srcUrl is a CSM URL but the live CSM page title identifies this as The Lion, the Witch & the Wardrobe (BBC), not the 2005 theatrical film named in the catalog entry."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 872,
+      "file": "data-extra.js",
+      "title": "Willow",
+      "year": "1988",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/willow",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Heavy fantasy peril includes sword fights, magical battles, deaths, skull-like villain imagery, a baby threatened by a ritual, bodies and heads on display, monsters, small amounts of blood, and a groping/harassment beat."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes a repeated fantasy slur, a few mild-to-moderate insults or swears, and one lewd line."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Romance and sexual material include kissing, hinted infidelity, love-potion behavior, innuendo, groping of a disguised character, and a lewd drunken question."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A pub scene shows drunken conduct, broken glass, near-fighting, and a character falling into beer and acting drunk afterward."
+        }
+      },
+      "handoffNotes": [
+        "Violence includes threats against a baby and frightening monster transformations that may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 874,
+      "file": "data-extra.js",
+      "title": "The Lego Ninjago Movie",
+      "year": "2017",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-lego-ninjago-movie",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Action is frequent but highly toy-like, with blasters, kung fu-style hits, and a removable Lego arm played for laughs."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Very mild rude humor and tame exclamations are noted."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 875,
+      "file": "data-extra.js",
+      "title": "The Lego Movie 2: The Second Part",
+      "year": "2019",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-lego-movie-2-the-second-part",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Lego peril includes weapons, explosions, imprisonment, brainwashing, characters nearly being pulled apart, a feared end-of-existence event, hardened post-apocalyptic characters, chainsaws, nightmares, and arguments."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Only occasional very mild terms such as kid-level insults are surfaced."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Romance is playful and toy-like, with Emmet and Lucy's close bond, Batman wedding jokes, and comic references to Batman's body."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM's details note a Lego champagne bottle used as a propellant."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Drinking, Drugs & Smoking as none while the detail text mentions a Lego champagne-bottle gag."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 876,
+      "file": "data-extra.js",
+      "title": "Who Framed Roger Rabbit",
+      "year": "1988",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/who-framed-roger-rabbit",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoon violence has a darker edge, including acid-like toon deaths, an on-screen shooting, and a villain crushed by a train."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adult characters use occasional moderate profanity and anti-toon slurs."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Sexualized humor is prominent, with many double entendres and Jessica Rabbit presented in revealing clothes with exaggerated adult sexuality."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "The lead character drinks heavily during the day, and smoking appears frequently."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 878,
+      "file": "data-extra.js",
+      "title": "The Secret of NIMH",
+      "year": "1982",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-secret-of-nimh",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Dark animal peril includes a bloody rat sword fight and death, a murder plot, children nearly drowning in mud, animal experimentation, an injection flashback, a spider crushed by an owl, and eerie glowing-eye imagery."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Only one mild swear is surfaced."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM's details still mention a crow talking about finding a mate and light crow flirtation."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Rats sometimes drug a cat to put it to sleep."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Sex, Romance & Nudity as none while the detail text mentions mild courtship jokes.",
+        "The animal testing and child peril may need emotional prose beyond the scored violence flag."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 879,
+      "file": "data-extra.js",
+      "title": "The Transformers: The Movie",
+      "year": "1986",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-transformers-the-movie-1986",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "The film is battle-heavy, with planets and ships destroyed, robots shot, crushed, melted, eaten, dismembered, disintegrated, shown dead, and heroic characters dying in emotional scenes."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Language includes one stronger censored profanity, a few milder swears, and repeated insult name-calling."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Deaths of beloved heroic characters may need emotional prose outside the violence level."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 881,
+      "file": "data-extra.js",
+      "title": "Jurassic Park",
+      "year": "1993",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/jurassic-park",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "High-intensity dinosaur scares include realistic attacks on people and animals, multiple deaths, a severed arm, jump scares, chases, crashes, and sustained child peril."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Infrequent profanity ranges from mild to moderate, alongside religious exclamations, insults, and some potty humor."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Sexual material is limited to bikini images on a computer screen and mild adult flirting."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One character smokes cigarettes regularly, and adults drink in a few scenes."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 882,
+      "file": "data-extra.js",
+      "title": "The Lost World: Jurassic Park",
+      "year": "1997",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-lost-world-jurassic-park",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Dinosaur violence is harsher, with traumatic big-game hunting, a baby dinosaur's broken leg, a child swarmed by small dinosaurs, people chewed, impaled, ripped apart, stomped, eaten, crushed, and placed in long peril sequences."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Profanity is infrequent but includes several moderate terms."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Alcohol appears at a beach picnic, one character drinks from a flask and seems drunk, and a hero smokes."
+        }
+      },
+      "handoffNotes": [
+        "Animal cruelty and a baby dinosaur injury may need prose context beyond the violence level."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 883,
+      "file": "data-extra.js",
+      "title": "Jurassic Park III",
+      "year": "2001",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/jurassic-park-iii",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "CSM flags very intense dinosaur peril and scares throughout, with some character deaths though not central-character deaths."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Only brief mild language is surfaced."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Sexual content is limited to a brief bra scene."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults order drinks in a bar."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 884,
+      "file": "data-extra.js",
+      "title": "Jurassic World",
+      "year": "2015",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/jurassic-world",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Sustained dinosaur terror includes kids in danger, dozens of deaths by eating, impalement, crushing, trampling, and explosions, bloody injuries and dinosaur mouths, dinosaur-on-dinosaur gore, weapons fire, a helicopter fall, and sibling name-calling."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Language includes several mild-to-moderate profanities, religious exclamations, and kid insults."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Romance and sexual references include a few kisses, mating references, adult innuendo, and a teen flirting with other teens."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One cameo shows drinks during an evacuation, and there is a joke about a sedated dinosaur being high."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 885,
+      "file": "data-extra.js",
+      "title": "Jurassic World: Fallen Kingdom",
+      "year": "2018",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/jurassic-world-fallen-kingdom",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Frequent scary peril includes child death fake-outs, dozens of deaths by dinosaurs and volcanic disaster, dismemberment, trampling, burns, injuries, dinosaur fights, guns, hand-to-hand combat, tooth collecting, and dinosaur cruelty."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes occasional mild-to-moderate swears, religious exclamations, and a cut-off stronger phrase."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Romance is limited to banter, flirting, and one climactic kiss."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A bar scene shows beer in front of main characters and other patrons drinking."
+        }
+      },
+      "handoffNotes": [
+        "Dinosaur cruelty and repeated child-in-peril scenes may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 886,
+      "file": "data-extra.js",
+      "title": "Jurassic World Dominion",
+      "year": "2022",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/jurassic-world-dominion",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Sustained dinosaur and locust peril includes children in danger, many deaths, dismemberment, trampling, mutilation, frightening apex predators trained to hunt targets, bloody dinosaur fights, guns, hand combat, and oversized killer locusts attacking farms and children."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Language includes moderate profanity, milder swears, and a teen's middle-finger gesture."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Romance is mild, with flirting, embraces, kisses between couples, and one joke about attraction."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A man offers a woman beer, which she declines because it is morning."
+        }
+      },
+      "handoffNotes": [
+        "The locust threat and child peril may need prose context for sensitive viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 887,
+      "file": "data-extra.js",
+      "title": "Jurassic World Rebirth",
+      "year": "2025",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/jurassic-world-rebirth",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Intense dinosaur action includes many chases, attacks, offscreen and partially bloody deaths, bodies swallowed or bitten, a severed arm, a helicopter explosion and crushing, gunfire and tranquilizers, a dinosaur killed, falls, near-drowning, midair attacks, child death fake-out, capsized boats, remains, and broad destruction."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Infrequent language includes moderate profanity, milder swears, and religious exclamations."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Romance includes adult flirting, a teen boyfriend on a family trip, a joke implying nudity or sex, hugging and hand-holding, and possible dinosaur mating behavior."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adults drink at a bar, and a character jokes about smoking weed while miming a joint."
+        }
+      },
+      "handoffNotes": [
+        "The child death fake-out and severed-arm imagery may need prose context beyond the scored violence flag."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 888,
+      "file": "data-extra.js",
+      "title": "The Hobbit",
+      "year": "1977",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-hobbit-1977",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Fantasy danger includes combat, dragon fire, distant dead bodies, trolls, wolves, giant spiders, and Gollum threatening to eat characters, but the violence is generally bloodless and stylized."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Pipe smoking is part of Hobbit/Gandalf behavior, and wood elves get drunk on wine."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 889,
+      "file": "data-extra.js",
+      "title": "The End of Oak Street",
+      "year": "2026",
+      "currentCatalogCa": "14+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-end-of-oak-street",
+      "csmAge": "14+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Heavy dinosaur horror includes bloody corpses and wounds, people eaten alive or dead, severed or bitten-off body parts, bodies dragged away, humans using many weapons against dinosaurs, gunfire, falls, news footage of dinosaurs killed, bullying, a pet-shooting threat, and boys spying on a girl."
+        },
+        "language": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Language includes one F-word plus repeated stronger and milder profanity, crude body terms, religious exclamations, and insults."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Sexual content includes a comic but fairly explicit dinosaur mating scene, a boy secretly reading an adult magazine, hugging and kissing, and suggestive jokes about a dog."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "An adult secretly drinks whiskey, dialogue mentions a boy hiding cigarette use, and a movie-within-the-movie includes kids discussing beer and drunkenness."
+        }
+      },
+      "handoffNotes": [
+        "The page is available, but this entry is a 2026 title; reviewer should recheck before production import if release metadata changes.",
+        "Spying on a girl through a fence and the graphic dinosaur mating gag may need prose beyond the romance level."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 891,
+      "file": "data-extra.js",
+      "title": "The Railway Children",
+      "year": "1970",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-railway-children",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild but serious moments include a maid slapping a boy, a bloody broken leg, a father taken away, a mother with influenza, children risking their lives on train tracks, and parental scolding."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A married couple's bedtime exchange briefly implies sex before the joke turns out to involve beer."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A doctor hides a flask after sleeping outdoors, and a railway worker drinks beer on his birthday."
+        }
+      },
+      "handoffNotes": [
+        "A father being taken away and a mother's illness may need emotional prose for sensitive viewers."
+      ],
+      "confidence": "high"
+    }
+  ],
+  "handoffSummary": {
+    "totalEntries": 20,
+    "foundOnCsm": 20,
+    "unavailable": 0,
+    "unavailableNums": [],
+    "needsReviewerAttention": [
+      868,
+      870,
+      875,
+      878,
+      879,
+      882,
+      885,
+      886,
+      887,
+      889,
+      891
+    ],
+    "notes": [
+      "All 20 catalog srcUrl pages were reachable as live Common Sense Media pages during the refetch.",
+      "Num 870 needs title/source review because the live CSM page identifies the review as the BBC version while the catalog title/year describe the 2005 theatrical film.",
+      "Nums 868, 875, and 878 have CSM category labels that read none while the detail text still mentions minor content.",
+      "Several Jurassic entries and The End of Oak Street include intense peril, death, gore, or emotional content that may need prose beyond slider levels."
+    ]
+  }
+}

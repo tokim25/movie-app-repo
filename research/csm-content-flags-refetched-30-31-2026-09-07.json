@@ -1,0 +1,851 @@
+{
+  "researchBatch": "csm-content-flags-refetched-30-31-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only handoff for nums 892, 894-899, and 901-913 in data-extra.js. Built from live Common Sense Media refetches of catalog srcUrl pages. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 892,
+      "file": "data-extra.js",
+      "title": "The Water Horse: Legend of the Deep",
+      "year": "2007",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-water-horse-legend-of-the-deep",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Military attacks on the creature, rifle fire, snapping-jaw threats, an off-screen dog death, and one adult fistfight create moderate fantasy peril."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Adults drink and smoke socially in banquet and pub settings."
+        }
+      },
+      "handoffNotes": [
+        "The child's uncertainty about his father being dead may need gentle prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 894,
+      "file": "data-extra.js",
+      "title": "Nacho Libre",
+      "year": "2006",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/nacho-libre",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Comic wrestling violence includes body slams, leaps, holds, crotch hits, pratfalls, a street fight, risky stunt gags, and an eye injury without blood."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild profanity and insult humor include crude wording, an implied lyric rhyme, and accent-based jokes."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A mild innuendo-laced invitation reflects Ignacio's crush on Sister Encarnacion."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Wine appears briefly at a party."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 895,
+      "file": "data-extra.js",
+      "title": "Tron",
+      "year": "1982",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/tron",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Stylized digital combat includes characters dematerializing, bloodless vehicle collisions, and one eerie energy-draining sequence."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Only a few mild expletives are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Brief dialogue alludes to earlier sexual relationships involving the heroine."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM notes no actual substance use, apart from Flynn's arcade having a bar-like look."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 896,
+      "file": "data-extra.js",
+      "title": "Indiana Jones and the Last Crusade",
+      "year": "1989",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/indiana-jones-and-the-last-crusade",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "High adventure violence includes fights, gunfire, whips, chases, explosions, near-drowning, skeletons, swarming rats, gruesome villain deaths, and a disturbing rapid-aging death."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild profanity and religious exclamations are used."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adult flirting leads to implied sex, forced kisses are treated lightly, and father-son banter references both men sleeping with the same woman."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults smoke and occasionally drink champagne or cocktails."
+        }
+      },
+      "handoffNotes": [
+        "Rapid-aging death, rats, snakes, and nonconsensual kissing may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 897,
+      "file": "data-extra.js",
+      "title": "Indiana Jones and the Temple of Doom",
+      "year": "1984",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/indiana-jones-and-the-temple-of-doom",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Very intense violence includes human sacrifice, torture, a heart removed from a victim, child forced labor, gunfights, whipping, knife threats, bugs, and gross-out food imagery."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Profanity includes moderate swearing and religious exclamations."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Sexual banter, kissing, cleavage, suggestive outfits, bedroom innuendo, and an unwanted reach into a woman's dress are noted."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A nightclub setting includes visible bottles and champagne."
+        }
+      },
+      "handoffNotes": [
+        "Human sacrifice, child exploitation, and nonconsensual sexualized contact need explicit prose treatment."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 898,
+      "file": "data-extra.js",
+      "title": "Indiana Jones and the Kingdom of the Crystal Skull",
+      "year": "2008",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/indiana-jones-and-the-kingdom-of-the-crystal-skull",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Adventure violence includes gunfire, brawls, sword threats from moving vehicles, deaths by falls and fire, killer ants, nuclear-test imagery, skulls, mummies, and other scares."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Several moderate profanities are noted, including partial stronger words and insults."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "There is mild sexual banter, but CSM does not flag explicit sexual content."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One character is briefly implied to be drunk."
+        }
+      },
+      "handoffNotes": [
+        "Nuclear-test imagery and killer-ant deaths may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 899,
+      "file": "data-extra.js",
+      "title": "Indiana Jones and the Dial of Destiny",
+      "year": "2023",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/indiana-jones-and-the-dial-of-destiny",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Frequent peril includes guns, execution-style killings, bloody wounds, vehicle and plane crashes, falls, knives, captivity, near-hanging, drowning danger, explosions, eels, insects, skeletons, and wartime battle violence."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Occasional mild and moderate language includes insults, religious exclamations, and scattered profanity."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Brief shirtless and underwear moments, a mild appreciative remark, and a tender kiss are noted."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Adults drink fairly often across several settings, with whiskey, Scotch, a flask, cigarette smoking, a cigar stub, a pipe, and ashtrays shown."
+        }
+      },
+      "handoffNotes": [
+        "Abrupt murders, grief over family loss, and older-Indy melancholy may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 901,
+      "file": "data-extra.js",
+      "title": "Labyrinth",
+      "year": "1986",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/labyrinth",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Fantasy peril includes roughhousing, sword fights, threatening machines, a machine gun gag, detachable-body scares, sibling separation, and threats involving a toddler."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild profanity and religious exclamations are used."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's category label does not identify sexual content, though its violence details describe Jareth's controlling obsession with teen Sarah."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Adult-coded pursuit/control of a teenage girl appears in CSM's detail text outside the romance category and may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 902,
+      "file": "data-extra.js",
+      "title": "Ghostbusters",
+      "year": "1984",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/ghostbusters",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Paranormal action includes laser blasts, building destruction, explosions, frightening ghosts, possession by monstrous creatures, falling debris, religious-sacrifice references, and a giant creature threatening crowds."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Moderate profanity, insults, ableist language, and sexualized jokes appear several times."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Sexual material includes ghost-related innuendo, possession-driven advances made without consent, revealing movement, crude dialogue, kisses, and harassment that is played lightly."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frequent smoking, adults drinking hard liquor and beer, and a comic wine-drinking ghost are noted."
+        }
+      },
+      "handoffNotes": [
+        "Possession-linked sexual advances, nonconsensual touching while unconscious, and uncriticized harassment need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 903,
+      "file": "data-extra.js",
+      "title": "Ghostbusters II",
+      "year": "1989",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/ghostbusters-ii",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Scary supernatural imagery includes severed heads, slime and ghost attacks, a baby carriage in traffic, a baby on a high ledge, kidnapping by a ghost, reckless driving, and explosions."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Infrequent but moderate profanity appears, along with crude sexual references."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Sexual innuendo includes medical-exam jokes, exposure jokes, and a brief implied-sex gag."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Characters mention beer, drink wine at dinner, and one character smokes a cigar."
+        }
+      },
+      "handoffNotes": [
+        "Baby-in-peril scenes and severed-head imagery may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 904,
+      "file": "data-extra.js",
+      "title": "The Karate Kid Part II",
+      "year": "1986",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-karate-kid-part-ii",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "The main concern is serious karate fighting, beatings, and revenge-driven aggression."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 905,
+      "file": "data-extra.js",
+      "title": "The Karate Kid Part III",
+      "year": "1989",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-karate-kid-part-iii",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Karate fights include cheating, intentional harm, vandalism, bloody fists, and a mountain-climbing threat."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild profanity appears throughout, and CSM notes two anti-Asian slurs."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A villain is shown with a cigar and champagne."
+        }
+      },
+      "handoffNotes": [
+        "The racial slurs should be preserved in prose sensitivity review even though the language level is low."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 906,
+      "file": "data-extra.js",
+      "title": "Gremlins",
+      "year": "1984",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/gremlins",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Dark comic horror includes lethal blender, syringe, knife, gun, explosion, decapitation, and fire attacks, jump scares, gooey creature births, a woman killed through a window, wrecked homes, crashes, and a dog-harm threat."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Language includes profanity, religious exclamations, a dog-harm threat, and a reference to wrist-cutting during holiday depression."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A creature briefly flashes a waitress, and human characters kiss passionately."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Creatures drink and smoke heavily, a human character is associated with drunkenness, and police joke about being intoxicated at work."
+        }
+      },
+      "handoffNotes": [
+        "Holiday-depression and wrist-cutting reference needs prose context; horror-comedy violence is much harsher than the family premise may suggest."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 907,
+      "file": "data-extra.js",
+      "title": "Gremlins 2: The New Batch",
+      "year": "1990",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/gremlins-2-the-new-batch",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Mostly cartoonish but frequent mayhem includes a head shooting and a paper-shredder death with green goo."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "CSM notes one mild profanity."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Sexualized jokes include unwanted under-table touching and a pornography reference."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Smoking and drinking appear in several scenes, including cigarettes, a pipe, beer, cocktails, sherry, and bar-set creature partying."
+        }
+      },
+      "handoffNotes": [
+        "The page rates drinking as a little despite multiple drinking and smoking examples; reviewer may want to check whether app level 2 is sufficient."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 908,
+      "file": "data-extra.js",
+      "title": "The Santa Clause 2",
+      "year": "2002",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-santa-clause-2",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Comic peril includes vandalism, a stair fall during a tooth-removal gag, rough reindeer flying, snowballs thrown at a house, and other slapstick."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A brief rear-end joke appears when the robotic Santa is created."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A cocoa gag has robotic Santa acting as if buzzed after drinking."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 909,
+      "file": "data-extra.js",
+      "title": "The Santa Clause 3: The Escape Clause",
+      "year": "2006",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-santa-clause-3-the-escape-clause",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Slapstick includes a shovel hit, pants catching fire, a character knocked down, and Santa falling from a roof and disappearing from his clothes."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions Mrs. Claus's pregnancy but does not flag sexual content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 910,
+      "file": "data-extra.js",
+      "title": "Turner & Hooch",
+      "year": "1989",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/turner-hooch",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Crime-comedy violence includes fatal stabbing, gun threats and shootings, a dog being shot and later dying, dog attacks, gun struggles, and a deliberate car crash with blood."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Minor profanity, repeated shouting, insults, and gendered put-downs are noted."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Sexual content includes underwear nudity, crude sex talk, kissing, and an implied post-sex scene with suggestive contact."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A dog is given and steals beer, and the plot involves a drug-smuggling ring."
+        }
+      },
+      "handoffNotes": [
+        "The dog shooting and death should get emotional-content prose despite moderate category labels."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 911,
+      "file": "data-extra.js",
+      "title": "Flash Gordon",
+      "year": "1980",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/flash-gordon-1980",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Campy sci-fi violence includes ray-gun and impalement deaths, hand-to-hand fights, non-red blood, bloody whipping, gas threats, and cyborg-like bodies dissolving or losing parts."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Only a few mild profanities are noted."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Sexualized material includes Ming's predatory interest in Dale, fondling of an enslaved woman, revealing costumes, talk of lovemaking, and double entendres."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Characters drink an intoxicating sci-fi beverage, and there is a brief pill-related joke."
+        }
+      },
+      "handoffNotes": [
+        "Predatory sexual attention and enslaved-woman fondling may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 912,
+      "file": "data-extra.js",
+      "title": "The Muppets Take Manhattan",
+      "year": "1984",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-muppets-take-manhattan",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild comic peril includes Kermit being hit by a car and developing amnesia, plus Miss Piggy being mugged and then overpowering the thief."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Construction workers catcall Miss Piggy, and Janice has a brief line refusing to remove clothes for art."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Cigarette smoking is noted."
+        }
+      },
+      "handoffNotes": [
+        "Kermit's accident and amnesia may need light prose context for sensitive younger viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 913,
+      "file": "data-extra.js",
+      "title": "Harry and the Hendersons",
+      "year": "1987",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/harry-and-the-hendersons",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Mostly cartoonish action includes minor fighting, hunters, guns, and shooting scenes without blood."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "CSM notes several moderate profanities from both a child and adults, including partial stronger words and religious exclamations."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Hunting and gunfire around a sympathetic creature may need prose context for younger viewers."
+      ],
+      "confidence": "high"
+    }
+  ],
+  "handoffSummary": {
+    "refetchedEntries": 20,
+    "sourceBasis": "live CSM refetch by subagent",
+    "firstNum": 892,
+    "lastNum": 913,
+    "unavailablePages": [],
+    "labelDetailConflicts": [
+      {
+        "num": 901,
+        "title": "Labyrinth",
+        "note": "CSM labels Sex, Romance & Nudity as not present while the Violence & Scariness detail text describes adult-coded pursuit/control of teen Sarah."
+      },
+      {
+        "num": 907,
+        "title": "Gremlins 2: The New Batch",
+        "note": "CSM labels Drinking, Drugs & Smoking as a little even though the detail text lists repeated smoking and drinking examples."
+      },
+      {
+        "num": 909,
+        "title": "The Santa Clause 3: The Escape Clause",
+        "note": "CSM labels Sex, Romance & Nudity as not present while its detail text mentions Mrs. Claus's pregnancy."
+      }
+    ],
+    "emotionalProseAttention": [
+      {
+        "num": 892,
+        "title": "The Water Horse: Legend of the Deep",
+        "note": "A child wrestling with whether his father is dead may need gentle prose context."
+      },
+      {
+        "num": 896,
+        "title": "Indiana Jones and the Last Crusade",
+        "note": "Rapid-aging death, rats, snakes, and nonconsensual kissing may need prose context."
+      },
+      {
+        "num": 897,
+        "title": "Indiana Jones and the Temple of Doom",
+        "note": "Human sacrifice, child exploitation, and nonconsensual sexualized contact need explicit prose treatment."
+      },
+      {
+        "num": 898,
+        "title": "Indiana Jones and the Kingdom of the Crystal Skull",
+        "note": "Nuclear-test imagery and killer-ant deaths may need prose context."
+      },
+      {
+        "num": 899,
+        "title": "Indiana Jones and the Dial of Destiny",
+        "note": "Abrupt murders, grief over family loss, and older-Indy melancholy may need prose context."
+      },
+      {
+        "num": 901,
+        "title": "Labyrinth",
+        "note": "Sibling separation, toddler danger, and Jareth's controlling attention toward Sarah may need prose context."
+      },
+      {
+        "num": 902,
+        "title": "Ghostbusters",
+        "note": "Possession-linked sexual material, unconscious touching, and uncriticized harassment need prose context."
+      },
+      {
+        "num": 903,
+        "title": "Ghostbusters II",
+        "note": "Baby-in-peril scenes and severed-head imagery may need prose context."
+      },
+      {
+        "num": 905,
+        "title": "The Karate Kid Part III",
+        "note": "Anti-Asian slurs should be preserved in sensitivity prose even though the language level is low."
+      },
+      {
+        "num": 906,
+        "title": "Gremlins",
+        "note": "Holiday-depression and wrist-cutting reference needs prose context; horror-comedy violence is much harsher than the family premise may suggest."
+      },
+      {
+        "num": 910,
+        "title": "Turner & Hooch",
+        "note": "The dog shooting and death should get emotional-content prose despite moderate category labels."
+      },
+      {
+        "num": 911,
+        "title": "Flash Gordon",
+        "note": "Predatory sexual attention and enslaved-woman fondling may need prose context."
+      },
+      {
+        "num": 912,
+        "title": "The Muppets Take Manhattan",
+        "note": "Kermit's accident and amnesia may need light prose context for sensitive younger viewers."
+      },
+      {
+        "num": 913,
+        "title": "Harry and the Hendersons",
+        "note": "Hunting and gunfire around a sympathetic creature may need prose context for younger viewers."
+      }
+    ],
+    "nextClaudeAction": "Review label/detail conflicts and emotional prose notes before importing any production catalog content flags."
+  }
+}

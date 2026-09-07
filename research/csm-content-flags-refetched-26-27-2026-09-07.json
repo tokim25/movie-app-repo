@@ -1,0 +1,833 @@
+{
+  "researchBatch": "csm-content-flags-refetched-26-27-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only live CSM refetch for catalog nums 847-866 in data-extra.js. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "sourceRange": {
+    "files": [
+      "data-extra.js"
+    ],
+    "nums": [
+      847,
+      866
+    ],
+    "entryCount": 20
+  },
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "CSM labels were refetched live. Proposed levels map not present or none to 1, very little or a little to 2, some to 3, and a lot to 4."
+  },
+  "entries": [
+    {
+      "num": 847,
+      "file": "data-extra.js",
+      "title": "Star Wars Episode IX: The Rise of Skywalker",
+      "year": "2019",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/star-wars-episode-ix-the-rise-of-skywalker",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Heavy sci-fi action includes space battles, shoot-outs, crashes, lightsaber combat, mass casualties, explicit but mostly bloodless deaths, creepy creatures, a grotesque preserved villain, and emotionally significant character losses."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild swearing and insults include words such as ass, hell, damn, stupid, and fantasy-specific put-downs."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Romance is limited to charged looks, hugs, brief kisses, and a supernatural bond with romantic undertones."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A backstory reference to being a spice runner carries a drug-running implication."
+        }
+      },
+      "handoffNotes": [
+        "Several deaths of primary and supporting characters may need emotional-content prose.",
+        "CSM notes flashing-light sequences that may be relevant outside the four content flags."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 848,
+      "file": "data-extra.js",
+      "title": "Rogue One: A Star Wars Story",
+      "year": "2016",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/rogue-one-a-star-wars-story",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "War violence is unusually heavy for the franchise, with many major and minor deaths, shoot-outs, Death Star destruction, dead bodies, a child witnessing parental loss, and a mind-invasion torture scene."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Language is limited to hostile labels such as traitor, thief, and criminal."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Two leads show attraction through longing looks, close conversation, and one climactic embrace."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "The high body count and sacrifice-centered ending may need emotional-content prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 849,
+      "file": "data-extra.js",
+      "title": "Solo: A Star Wars Story",
+      "year": "2018",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/solo-a-star-wars-story",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Sci-fi action includes warfare, executions, shoot-outs, decapitation, duels, chases, crashes, frequent peril, implied torture, and deaths of more than one supporting character."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes one cut-off stronger exclamation plus mild profanity and insults."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Several kisses and embraces appear, and one major character is consistently flirtatious."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Some scenes take place in pubs with drinking and gambling, and one captain drinks from a flask during battle."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 850,
+      "file": "data-extra.js",
+      "title": "Star Wars: The Mandalorian and Grogu",
+      "year": "2026",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/star-wars-the-mandalorian-and-grogu",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Frequent action includes blaster battles, explosions, aerial and vehicle pursuits, close combat, gladiator-style fights, bloody moments, people-eating creatures, electrocution, and a beloved character near death."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Language is limited to a quick hell and threatening talk."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Cantina and bar scenes show apparent alcohol, gas is used to incapacitate a character, a poisonous bite is discussed, and a Hutt smokes an unknown substance."
+        }
+      },
+      "handoffNotes": [
+        "This is a future-dated 2026 entry, but the catalog srcUrl currently resolves to a full CSM page."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 851,
+      "file": "data-extra.js",
+      "title": "D2: The Mighty Ducks",
+      "year": "1994",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/d2-the-mighty-ducks",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Rough hockey play includes cheap shots and players hurt on the ice, but no serious injury detail."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild flirting, chaste kisses, and tweens admiring models during a fashion-show scene are noted."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 852,
+      "file": "data-extra.js",
+      "title": "D3: The Mighty Ducks",
+      "year": "1996",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/d3-the-mighty-ducks",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mean-spirited bullying is played for laughs, and hockey roughness includes shoving plus one student flying through glass into bleachers."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Teen language includes mild words such as hell and stupid."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A boy repeatedly hits on classmates, and teens kiss after a game."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 853,
+      "file": "data-extra.js",
+      "title": "Yellow Submarine",
+      "year": "1968",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/yellow-submarine",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Very mild cartoon peril includes harmless arrows, machine guns used by Blue Meanies, and odd villain designs that may bother sensitive young kids."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Smoking imagery includes a word shaped like a lit cigarette and cigar smoking; CSM also notes longstanding drug-reference rumors around a Beatles song but no actual use."
+        }
+      },
+      "handoffNotes": [
+        "CSM's details distinguish psychedelic imagery and song-rumor context from actual drug or alcohol use."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 854,
+      "file": "data-extra.js",
+      "title": "Harry Potter and the Chamber of Secrets",
+      "year": "2002",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/harry-potter-and-the-chamber-of-secrets",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Fantasy peril includes giant spiders, a deadly basilisk, comatose-looking victims, a tense climax, Harry's broken and boneless arm, self-punishment by a house elf, a threatening snake, a flying-car near fall, and gross-out slug vomiting."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The main language concern is Draco using an offensive wizarding-world slur against Hermione."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Sensitive kids may need prose around repeated child peril and scary creature imagery."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 855,
+      "file": "data-extra.js",
+      "title": "Harry Potter and the Prisoner of Azkaban",
+      "year": "2004",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/harry-potter-and-the-prisoner-of-azkaban",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Darker magical peril includes Dementor attacks, a soul-removal threat, Harry hearing his mother's death, a provoked hippogriff injury, an offscreen execution setup, fear-shifting boggarts, Ron's broken leg, murder threats, and a werewolf chase."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A few mild British swears and one damn are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Romance is limited to teen flirting."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Butterbeer is introduced as a lightly alcoholic magical-world drink, and kids visit a pub."
+        }
+      },
+      "handoffNotes": [
+        "Harry repeatedly hearing his mother's death during Dementor attacks may need emotional-content prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 856,
+      "file": "data-extra.js",
+      "title": "Harry Potter and the Goblet of Fire",
+      "year": "2005",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/harry-potter-and-the-goblet-of-fire",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "The fourth film includes two deaths, one sad teen death, lifeless bodies, dragon attacks, underwater peril, a tortured spider, a severed hand used in ritual magic, and Harry writhing under a torture curse."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild British slang and phrases such as piss off are noted."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Romance grows with the teens: sexual-interest references, a ghost entering Harry's bath, and shadowy post-dance kissing."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Magical horses drink single-malt whiskey, and students drink butterbeer."
+        }
+      },
+      "handoffNotes": [
+        "CSM specifically flags the teen death and separation/anxiety themes as potentially upsetting."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 857,
+      "file": "data-extra.js",
+      "title": "Harry Potter and the Order of the Phoenix",
+      "year": "2007",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/harry-potter-and-the-order-of-the-phoenix",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Intense magical danger includes Dementors, Death Eaters, Voldemort, centaurs dragging off a character, torture-like school punishment, a bloody snake attack, a frightening climactic battle, a key death, and Harry being painfully possessed."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "CSM notes one mild British swear."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Harry and Cho kiss, while Ron and Hermione continue flirtatious bickering and glances."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Harry and friends meet in a rundown pub but do not drink."
+        }
+      },
+      "handoffNotes": [
+        "The upsetting death of someone close to Harry and his anger/grief afterward may need emotional-content prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 858,
+      "file": "data-extra.js",
+      "title": "Harry Potter and the Half-Blood Prince",
+      "year": "2009",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/harry-potter-and-the-half-blood-prince",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Dark fantasy danger includes a beloved character's death, a severe bloody curse wound, bruising and beating, poisonings, a life-threatening seizure, Death Eater attacks, a kidnapping, and frightening skeleton-like creatures."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild insults, British slang, and a couple of religious exclamations are noted."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Teen romance is more prominent, with flirting, kissing, hallway make-outs, attraction talk, jealousy, hand-holding, love potions, and breakups."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Underage characters drink butterbeer, mead, and wine-like drinks; a professor serves alcohol to teens, adults drink heavily, and magical potions affect behavior."
+        }
+      },
+      "handoffNotes": [
+        "Beloved-character death and sorrow are central enough to need emotional-content prose.",
+        "Drinking detail is stronger than the simple a little label may suggest because adults serve teens alcohol."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 859,
+      "file": "data-extra.js",
+      "title": "Harry Potter and the Deathly Hallows - Part 1",
+      "year": "2010",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/harry-potter-and-the-deathly-hallows-part-1",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "This installment has many deaths, including recurring characters, a bloody knife death, torture, severe injury, near drowning, a bloody ear wound, mistreatment of targeted people, Death Eaters and Dementors, and a snake bursting from a corpse."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes repeated British slang, mild profanity, religious exclamations, and repeated wizarding-world slurs."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Romance includes Harry and Ginny kissing after a dress-zip scene, longing looks and embraces, and a tormenting vision where Harry and Hermione appear nearly nude while kissing."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Champagne appears at a wedding reception and goblets are on a dinner table, but CSM says no meaningful drinking is shown."
+        }
+      },
+      "handoffNotes": [
+        "High body count, torture, grief, and a beloved character death need emotional-content prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 860,
+      "file": "data-extra.js",
+      "title": "Harry Potter and the Deathly Hallows - Part 2",
+      "year": "2011",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/harry-potter-and-the-deathly-hallows-part-2",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "The finale is the deadliest Potter film, with the Battle of Hogwarts, hundreds of implied deaths, bodies of beloved characters, bloody goblin deaths, Killing Curses, a gory snake attack, fire peril, disintegration, a disturbing body remnant, and Harry willingly facing death."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes one stronger insult in a famous line plus mild British slang."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Ron and Hermione kiss, hold hands, embrace, and comfort each other; Harry and Ginny briefly kiss, and another character talks about declaring romantic feelings before battle."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "The battle deaths, visible bodies, Harry's sacrifice, and grief-heavy finale need emotional-content prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 861,
+      "file": "data-extra.js",
+      "title": "Fantastic Beasts and Where to Find Them",
+      "year": "2016",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/fantastic-beasts-and-where-to-find-them",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Darker adult-centered fantasy includes mass destruction, gruesome deaths, wand battles, near execution in an acid-like pool, uncontrolled magic threatening Manhattan, and child abuse with visible welts and cuts."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Language includes mild fantasy exclamations, mild swearing, insults, and one anatomical term."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A woman changes clothes around men and is ogled, later appears in nightwear, makes a mild sexual allusion, and couples kiss, hold, or stare longingly."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adults order drinks in a speakeasy, a magical alcoholic drink is implied, and a supporting character smokes a cigar."
+        }
+      },
+      "handoffNotes": [
+        "Child abuse and visible injury may need prose separate from general fantasy violence."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 862,
+      "file": "data-extra.js",
+      "title": "Fantastic Beasts: The Crimes of Grindelwald",
+      "year": "2018",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/fantastic-beasts-the-crimes-of-grindelwald",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "The sequel has a high body count, injuries, mass destruction, wand battles, attacks on adults and children, deaths from creatures, curses, drowning, magical fire, executions, and destructive transformations."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Insults and a couple of mild swear words are noted."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Couples kiss, hug, cuddle, and exchange longing looks; one scene has a man resting his head on a woman's chest, and a flashback shows teen flirtation."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Queenie serves bottled drinks that look like beer or butterbeer."
+        }
+      },
+      "handoffNotes": [
+        "CSM's violence detail also mentions an implied coercive sexual relationship, which may need prose despite the romance label staying a little."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 863,
+      "file": "data-extra.js",
+      "title": "A Charlie Brown Christmas",
+      "year": "1965",
+      "currentCatalogCa": "3+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/a-charlie-brown-christmas",
+      "csmAge": "3+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface violence or scariness content."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Name-calling includes stupid and blockhead, mainly from Lucy."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Charlie Brown's seasonal sadness and the kids mocking him may be worth gentle emotional-context prose even though the four flags are minimal."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 864,
+      "file": "data-extra.js",
+      "title": "How the Grinch Stole Christmas",
+      "year": "1966",
+      "currentCatalogCa": "4+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/dr-seuss-how-the-grinch-stole-christmas",
+      "csmAge": "4+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Very mild peril centers on the Grinch's dog being treated roughly, including being slammed into snow and run over by the sleigh."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "The Grinch stealing Christmas and mistreating his dog may need soft prose for very young or sensitive viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 865,
+      "file": "data-extra.js",
+      "title": "The Great Muppet Caper",
+      "year": "1981",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-great-muppet-caper",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Slapstick includes characters thrown from vehicles, Gonzo repeatedly falling into traffic, Miss Piggy tossing and karate-chopping people, comic electrocution, a gun threat, a cab crash, and talk that someone could be killed during a heist."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A song includes one mild hell reference."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Kermit and Miss Piggy kiss, another character tries to kiss Miss Piggy, and there is adult-aimed innuendo involving models, a dressing room, bikinis, unwanted touching, and an affair reference."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Muppet characters drink champagne at a fancy restaurant, and one human character smokes a cigar."
+        }
+      },
+      "handoffNotes": [
+        "Some innuendo is adult-directed and likely to go over younger kids' heads."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 866,
+      "file": "data-extra.js",
+      "title": "A Christmas Story",
+      "year": "1983",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/a-christmas-story",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Bullying includes arm-twisting and a black eye; Ralphie punches a bully bloody, a BB-gun fantasy kills comic bandits, a child's tongue freezes to a pole, a dog's ear is caught in a door, children face physical punishment, and a scary Santa slide sequence appears."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Kids and adults use or discuss stronger language, including ass, son of a bitch, hell, hot damn, insults, frequent offscreen-style adult swearing, and Ralphie's famous censored F-word moment followed by soap punishment."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Sexual humor centers on the leg lamp and a mild blue-balls joke after a bowling ball lands in a man's lap."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Ralphie's parents drink wine after opening presents, and his father offers Ralphie a sip that his mother declines for him."
+        }
+      },
+      "handoffNotes": [
+        "CSM also flags racist stereotypes in the Chinese restaurant scene and other period racism; this sits outside the requested four flags but should be considered by reviewers."
+      ],
+      "confidence": "high"
+    }
+  ],
+  "handoffSummary": {
+    "totalEntries": 20,
+    "found": 20,
+    "unavailable": [],
+    "needsReviewerAttention": [
+      {
+        "num": 847,
+        "reason": "Emotional deaths and flashing-light note."
+      },
+      {
+        "num": 848,
+        "reason": "High body count and sacrifice-heavy ending."
+      },
+      {
+        "num": 853,
+        "reason": "Drug flag is contextual rumor/smoking imagery, not depicted drug use."
+      },
+      {
+        "num": 855,
+        "reason": "Dementor scenes connect peril to Harry hearing his mother's death."
+      },
+      {
+        "num": 856,
+        "reason": "Sad teen death and anxiety/separation sensitivity."
+      },
+      {
+        "num": 857,
+        "reason": "Key death and Harry's grief/anger."
+      },
+      {
+        "num": 858,
+        "reason": "Beloved-character death and teen drinking served by an adult."
+      },
+      {
+        "num": 859,
+        "reason": "High body count, torture, grief, and beloved-character death."
+      },
+      {
+        "num": 860,
+        "reason": "Deadliest Potter entry with visible bodies and sacrifice themes."
+      },
+      {
+        "num": 861,
+        "reason": "Child abuse detail within violence flag."
+      },
+      {
+        "num": 862,
+        "reason": "CSM violence detail mentions implied coercive sexual relationship despite romance label of a little."
+      },
+      {
+        "num": 863,
+        "reason": "Seasonal sadness and peer mockery may need soft prose."
+      },
+      {
+        "num": 864,
+        "reason": "Dog mistreatment and stolen-Christmas worry for sensitive young viewers."
+      },
+      {
+        "num": 866,
+        "reason": "Period racism and stereotypes are outside the four flags but reviewer-relevant."
+      }
+    ]
+  }
+}
