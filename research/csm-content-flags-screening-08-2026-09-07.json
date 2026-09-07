@@ -1,0 +1,361 @@
+{
+  "researchBatch": "csm-content-flags-screening-08-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Screening-only handoff sample for Claude/local CSM-capable backfill flow. Built from existing catalog CSM-backed prose and URLs, not live category refetches. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This screening pass proposes levels from existing CSM-backed prose. Claude/Coder should verify against live CSM category detail before writing production catalog data."
+  },
+  "entries": [
+    {
+      "num": 665,
+      "file": "data-csm.js",
+      "title": "A Shaun the Sheep Movie: Farmageddon",
+      "year": "2019",
+      "currentCatalogCa": "5+",
+      "sourceStatus": "catalog-csm-source",
+      "sourceUrl": "https://www.commonsensemedia.org/movie-reviews/a-shaun-the-sheep-movie-farmageddon",
+      "screeningBasis": "existing catalog CSM-backed prose and source URL; not a live CSM category re-fetch",
+      "proposedFlags": {
+        "violence": {
+          "proposedLevel": 2,
+          "summary": "Existing catalog prose mentions peril, slapstick. Proposed level 2; verify against the live CSM category detail before production import."
+        },
+        "language": {
+          "proposedLevel": 1,
+          "summary": "No meaningful language concern surfaced in the existing CSM-backed catalog prose."
+        },
+        "romance": {
+          "proposedLevel": 1,
+          "summary": "No meaningful romance concern surfaced in the existing CSM-backed catalog prose."
+        },
+        "drinking": {
+          "proposedLevel": 1,
+          "summary": "No meaningful drinking concern surfaced in the existing CSM-backed catalog prose."
+        }
+      },
+      "proseAttention": "Existing prose includes emotional, family-separation, grief, or loss material that should remain visible outside the scored flags.",
+      "handoffNotes": [
+        "Screening entry for Claude/local bridge verification; do not write to production catalog without live source check."
+      ],
+      "confidence": "screening"
+    },
+    {
+      "num": 667,
+      "file": "data-csm.js",
+      "title": "Ella Bella Bingo",
+      "year": "2020",
+      "currentCatalogCa": "6+",
+      "sourceStatus": "catalog-csm-source",
+      "sourceUrl": "https://www.commonsensemedia.org/movie-reviews/ella-bella-bingo",
+      "screeningBasis": "existing catalog CSM-backed prose and source URL; not a live CSM category re-fetch",
+      "proposedFlags": {
+        "violence": {
+          "proposedLevel": 2,
+          "summary": "Existing catalog prose mentions peril, chases. Proposed level 2; verify against the live CSM category detail before production import."
+        },
+        "language": {
+          "proposedLevel": 1,
+          "summary": "No meaningful language concern surfaced in the existing CSM-backed catalog prose."
+        },
+        "romance": {
+          "proposedLevel": 1,
+          "summary": "No meaningful romance concern surfaced in the existing CSM-backed catalog prose."
+        },
+        "drinking": {
+          "proposedLevel": 1,
+          "summary": "No meaningful drinking concern surfaced in the existing CSM-backed catalog prose."
+        }
+      },
+      "proseAttention": null,
+      "handoffNotes": [
+        "Screening entry for Claude/local bridge verification; do not write to production catalog without live source check."
+      ],
+      "confidence": "screening"
+    },
+    {
+      "num": 668,
+      "file": "data-csm.js",
+      "title": "Phineas and Ferb the Movie: Candace Against the Universe",
+      "year": "2020",
+      "currentCatalogCa": "5+",
+      "sourceStatus": "catalog-csm-source",
+      "sourceUrl": "https://www.commonsensemedia.org/movie-reviews/phineas-and-ferb-the-movie-candace-against-the-universe",
+      "screeningBasis": "existing catalog CSM-backed prose and source URL; not a live CSM category re-fetch",
+      "proposedFlags": {
+        "violence": {
+          "proposedLevel": 3,
+          "summary": "Existing catalog prose mentions crashes. Proposed level 3; verify against the live CSM category detail before production import."
+        },
+        "language": {
+          "proposedLevel": 1,
+          "summary": "Existing catalog prose mentions language concern. Proposed level 1; verify against the live CSM category detail before production import."
+        },
+        "romance": {
+          "proposedLevel": 1,
+          "summary": "No meaningful romance concern surfaced in the existing CSM-backed catalog prose."
+        },
+        "drinking": {
+          "proposedLevel": 1,
+          "summary": "No meaningful drinking concern surfaced in the existing CSM-backed catalog prose."
+        }
+      },
+      "proseAttention": null,
+      "handoffNotes": [
+        "Screening entry for Claude/local bridge verification; do not write to production catalog without live source check."
+      ],
+      "confidence": "screening"
+    },
+    {
+      "num": 669,
+      "file": "data-csm.js",
+      "title": "My Little Pony: A New Generation",
+      "year": "2021",
+      "currentCatalogCa": "5+",
+      "sourceStatus": "catalog-csm-source",
+      "sourceUrl": "https://www.commonsensemedia.org/movie-reviews/my-little-pony-a-new-generation",
+      "screeningBasis": "existing catalog CSM-backed prose and source URL; not a live CSM category re-fetch",
+      "proposedFlags": {
+        "violence": {
+          "proposedLevel": 2,
+          "summary": "Existing catalog prose mentions scary imagery, peril. Proposed level 2; verify against the live CSM category detail before production import."
+        },
+        "language": {
+          "proposedLevel": 2,
+          "summary": "Existing catalog prose mentions language concern, insults. Proposed level 2; verify against the live CSM category detail before production import."
+        },
+        "romance": {
+          "proposedLevel": 1,
+          "summary": "No meaningful romance concern surfaced in the existing CSM-backed catalog prose."
+        },
+        "drinking": {
+          "proposedLevel": 1,
+          "summary": "No meaningful drinking concern surfaced in the existing CSM-backed catalog prose."
+        }
+      },
+      "proseAttention": null,
+      "handoffNotes": [
+        "Screening entry for Claude/local bridge verification; do not write to production catalog without live source check."
+      ],
+      "confidence": "screening"
+    },
+    {
+      "num": 670,
+      "file": "data-csm.js",
+      "title": "Epic Tails",
+      "year": "2022",
+      "currentCatalogCa": "6+",
+      "sourceStatus": "catalog-csm-source",
+      "sourceUrl": "https://www.commonsensemedia.org/movie-reviews/epic-tails",
+      "screeningBasis": "existing catalog CSM-backed prose and source URL; not a live CSM category re-fetch",
+      "proposedFlags": {
+        "violence": {
+          "proposedLevel": 2,
+          "summary": "Level 2 inferred from the existing CSM-backed catalog prose; Claude should verify against the live CSM category detail before production import."
+        },
+        "language": {
+          "proposedLevel": 2,
+          "summary": "Existing catalog prose mentions name-calling. Proposed level 2; verify against the live CSM category detail before production import."
+        },
+        "romance": {
+          "proposedLevel": 1,
+          "summary": "No meaningful romance concern surfaced in the existing CSM-backed catalog prose."
+        },
+        "drinking": {
+          "proposedLevel": 1,
+          "summary": "No meaningful drinking concern surfaced in the existing CSM-backed catalog prose."
+        }
+      },
+      "proseAttention": null,
+      "handoffNotes": [
+        "Screening entry for Claude/local bridge verification; do not write to production catalog without live source check."
+      ],
+      "confidence": "screening"
+    },
+    {
+      "num": 671,
+      "file": "data-csm.js",
+      "title": "Luck",
+      "year": "2022",
+      "currentCatalogCa": "5+",
+      "sourceStatus": "catalog-csm-source",
+      "sourceUrl": "https://www.commonsensemedia.org/movie-reviews/luck",
+      "screeningBasis": "existing catalog CSM-backed prose and source URL; not a live CSM category re-fetch",
+      "proposedFlags": {
+        "violence": {
+          "proposedLevel": 2,
+          "summary": "Existing catalog prose mentions scary imagery. Proposed level 2; verify against the live CSM category detail before production import."
+        },
+        "language": {
+          "proposedLevel": 2,
+          "summary": "Existing catalog prose mentions language concern. Proposed level 2; verify against the live CSM category detail before production import."
+        },
+        "romance": {
+          "proposedLevel": 1,
+          "summary": "No meaningful romance concern surfaced in the existing CSM-backed catalog prose."
+        },
+        "drinking": {
+          "proposedLevel": 1,
+          "summary": "No meaningful drinking concern surfaced in the existing CSM-backed catalog prose."
+        }
+      },
+      "proseAttention": "Existing prose includes emotional, family-separation, grief, or loss material that should remain visible outside the scored flags.",
+      "handoffNotes": [
+        "Screening entry for Claude/local bridge verification; do not write to production catalog without live source check."
+      ],
+      "confidence": "screening"
+    },
+    {
+      "num": 672,
+      "file": "data-csm.js",
+      "title": "Marcel the Shell with Shoes On",
+      "year": "2022",
+      "currentCatalogCa": "8+",
+      "sourceStatus": "catalog-csm-source",
+      "sourceUrl": "https://www.commonsensemedia.org/movie-reviews/marcel-the-shell-with-shoes-on",
+      "screeningBasis": "existing catalog CSM-backed prose and source URL; not a live CSM category re-fetch",
+      "proposedFlags": {
+        "violence": {
+          "proposedLevel": 2,
+          "summary": "Existing catalog prose mentions peril. Proposed level 2; verify against the live CSM category detail before production import."
+        },
+        "language": {
+          "proposedLevel": 2,
+          "summary": "Existing catalog prose mentions swearing, mild profanity, insults. Proposed level 2; verify against the live CSM category detail before production import."
+        },
+        "romance": {
+          "proposedLevel": 1,
+          "summary": "No meaningful romance concern surfaced in the existing CSM-backed catalog prose."
+        },
+        "drinking": {
+          "proposedLevel": 1,
+          "summary": "No meaningful drinking concern surfaced in the existing CSM-backed catalog prose."
+        }
+      },
+      "proseAttention": "Existing prose includes emotional, family-separation, grief, or loss material that should remain visible outside the scored flags.",
+      "handoffNotes": [
+        "Screening entry for Claude/local bridge verification; do not write to production catalog without live source check."
+      ],
+      "confidence": "screening"
+    },
+    {
+      "num": 673,
+      "file": "data-csm.js",
+      "title": "Flow",
+      "year": "2024",
+      "currentCatalogCa": "6+",
+      "sourceStatus": "catalog-csm-source",
+      "sourceUrl": "https://www.commonsensemedia.org/movie-reviews/flow",
+      "screeningBasis": "existing catalog CSM-backed prose and source URL; not a live CSM category re-fetch",
+      "proposedFlags": {
+        "violence": {
+          "proposedLevel": 3,
+          "summary": "Existing catalog prose mentions peril, death, fighting. Proposed level 3; verify against the live CSM category detail before production import."
+        },
+        "language": {
+          "proposedLevel": 1,
+          "summary": "No meaningful language concern surfaced in the existing CSM-backed catalog prose."
+        },
+        "romance": {
+          "proposedLevel": 1,
+          "summary": "No meaningful romance concern surfaced in the existing CSM-backed catalog prose."
+        },
+        "drinking": {
+          "proposedLevel": 1,
+          "summary": "No meaningful drinking concern surfaced in the existing CSM-backed catalog prose."
+        }
+      },
+      "proseAttention": "Existing prose includes emotional, family-separation, grief, or loss material that should remain visible outside the scored flags.",
+      "handoffNotes": [
+        "Screening entry for Claude/local bridge verification; do not write to production catalog without live source check."
+      ],
+      "confidence": "screening"
+    },
+    {
+      "num": 674,
+      "file": "data-csm.js",
+      "title": "David",
+      "year": "2025",
+      "currentCatalogCa": "6+",
+      "sourceStatus": "catalog-csm-source",
+      "sourceUrl": "https://www.commonsensemedia.org/movie-reviews/david",
+      "screeningBasis": "existing catalog CSM-backed prose and source URL; not a live CSM category re-fetch",
+      "proposedFlags": {
+        "violence": {
+          "proposedLevel": 3,
+          "summary": "Existing catalog prose mentions violence, peril, battle action, fighting, weapons. Proposed level 3; verify against the live CSM category detail before production import."
+        },
+        "language": {
+          "proposedLevel": 1,
+          "summary": "Existing catalog prose mentions language concern. Proposed level 1; verify against the live CSM category detail before production import."
+        },
+        "romance": {
+          "proposedLevel": 1,
+          "summary": "No meaningful romance concern surfaced in the existing CSM-backed catalog prose."
+        },
+        "drinking": {
+          "proposedLevel": 1,
+          "summary": "No meaningful drinking concern surfaced in the existing CSM-backed catalog prose."
+        }
+      },
+      "proseAttention": null,
+      "handoffNotes": [
+        "Screening entry for Claude/local bridge verification; do not write to production catalog without live source check."
+      ],
+      "confidence": "screening"
+    },
+    {
+      "num": 675,
+      "file": "data-csm.js",
+      "title": "The Last Whale Singer",
+      "year": "2025",
+      "currentCatalogCa": "6+",
+      "sourceStatus": "catalog-csm-source",
+      "sourceUrl": "https://www.commonsensemedia.org/movie-reviews/the-last-whale-singer",
+      "screeningBasis": "existing catalog CSM-backed prose and source URL; not a live CSM category re-fetch",
+      "proposedFlags": {
+        "violence": {
+          "proposedLevel": 3,
+          "summary": "Existing catalog prose mentions frightening moments, peril, killing. Proposed level 3; verify against the live CSM category detail before production import."
+        },
+        "language": {
+          "proposedLevel": 1,
+          "summary": "No meaningful language concern surfaced in the existing CSM-backed catalog prose."
+        },
+        "romance": {
+          "proposedLevel": 1,
+          "summary": "No meaningful romance concern surfaced in the existing CSM-backed catalog prose."
+        },
+        "drinking": {
+          "proposedLevel": 1,
+          "summary": "No meaningful drinking concern surfaced in the existing CSM-backed catalog prose."
+        }
+      },
+      "proseAttention": "Existing prose includes emotional, family-separation, grief, or loss material that should remain visible outside the scored flags.",
+      "handoffNotes": [
+        "Screening entry for Claude/local bridge verification; do not write to production catalog without live source check."
+      ],
+      "confidence": "screening"
+    }
+  ],
+  "handoffSummary": {
+    "screenedEntries": 10,
+    "sourceBasis": "existing catalog CSM-backed prose and source URLs",
+    "firstNum": 665,
+    "lastNum": 675,
+    "nextClaudeAction": "Use these entries as prioritization and draft mapping input, then verify each title through the official live CSM backfill protocol before production import."
+  }
+}

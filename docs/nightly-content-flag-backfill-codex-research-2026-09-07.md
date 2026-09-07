@@ -15,20 +15,34 @@ Codex completed repo/process research and a bounded CSM pilot, then pushed the r
 - producing a first-pass handoff checklist for PM/Coder/Reviewer
 - verifying that direct CSM page access works from this environment
 - researching 50 representative existing catalog titles under the 4-flag model
+- screening an additional 100 catalog titles from existing CSM-backed prose and source URLs for Claude/local bridge verification
 
-Codex should not perform the full 938-title backfill in this pass. The plan still depends on the local bridge session on tokim25's machine for the unattended nightly run, progress checkpoints, rate-guard behavior, and PR batching. The 50-title pilot is intended to prove the research shape and give Claude concrete examples, not replace the scheduled backfill process.
+Codex should not perform the full 938-title backfill in this pass. The plan still depends on the local bridge session on tokim25's machine for the unattended nightly run, progress checkpoints, rate-guard behavior, and PR batching. The 50-title pilot plus 100-title screening set is intended to prove the research shape and give Claude concrete examples, not replace the scheduled backfill process.
 
 Codex should also avoid doing coder, reviewer, or UX-designer work in this pass. That means no implementation changes, no PR approval opinion, and no product/interaction changes beyond research findings.
 
 ## CSM Pilot Files Added By Codex
 
-The branch now contains five research-only JSON files with 50 total titles:
+The branch now contains five pilot JSON files with 50 total titles:
 
 - `research/csm-content-flags-pilot-2026-09-07.json`
 - `research/csm-content-flags-pilot-02-2026-09-07.json`
 - `research/csm-content-flags-pilot-03-2026-09-07.json`
 - `research/csm-content-flags-pilot-04-2026-09-07.json`
 - `research/csm-content-flags-pilot-05-2026-09-07.json`
+
+It also contains ten screening JSON files with 100 additional titles:
+
+- `research/csm-content-flags-screening-06-2026-09-07.json`
+- `research/csm-content-flags-screening-07-2026-09-07.json`
+- `research/csm-content-flags-screening-08-2026-09-07.json`
+- `research/csm-content-flags-screening-09-2026-09-07.json`
+- `research/csm-content-flags-screening-10-2026-09-07.json`
+- `research/csm-content-flags-screening-11-2026-09-07.json`
+- `research/csm-content-flags-screening-12-2026-09-07.json`
+- `research/csm-content-flags-screening-13-2026-09-07.json`
+- `research/csm-content-flags-screening-14-2026-09-07.json`
+- `research/csm-content-flags-screening-15-2026-09-07.json`
 
 Each entry includes:
 
@@ -41,7 +55,7 @@ Each entry includes:
 - a prose note for emotional/sad content when relevant
 - a short implementation note for Claude/Coder
 
-The pilot intentionally does not modify production catalog data. Claude should treat these files as source-backed research input to review and fold into the real backfill process.
+The pilot and screening files intentionally do not modify production catalog data. Claude should treat the pilot files as source-backed research input and the screening files as draft prioritization/mapping input that still requires live CSM category verification before production import.
 
 Notable pilot findings:
 

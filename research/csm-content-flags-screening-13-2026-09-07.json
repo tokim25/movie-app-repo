@@ -1,0 +1,361 @@
+{
+  "researchBatch": "csm-content-flags-screening-13-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Screening-only handoff sample for Claude/local CSM-capable backfill flow. Built from existing catalog CSM-backed prose and URLs, not live category refetches. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This screening pass proposes levels from existing CSM-backed prose. Claude/Coder should verify against live CSM category detail before writing production catalog data."
+  },
+  "entries": [
+    {
+      "num": 716,
+      "file": "data-mcudc.js",
+      "title": "Jonah Hex",
+      "year": "2010",
+      "currentCatalogCa": "15+",
+      "sourceStatus": "catalog-csm-source",
+      "sourceUrl": "https://www.commonsensemedia.org/movie-reviews/jonah-hex",
+      "screeningBasis": "existing catalog CSM-backed prose and source URL; not a live CSM category re-fetch",
+      "proposedFlags": {
+        "violence": {
+          "proposedLevel": 4,
+          "summary": "Existing catalog prose mentions violence. Proposed level 4; verify against the live CSM category detail before production import."
+        },
+        "language": {
+          "proposedLevel": 1,
+          "summary": "No meaningful language concern surfaced in the existing CSM-backed catalog prose."
+        },
+        "romance": {
+          "proposedLevel": 3,
+          "summary": "Existing catalog prose mentions sexual references, innuendo. Proposed level 3; verify against the live CSM category detail before production import."
+        },
+        "drinking": {
+          "proposedLevel": 1,
+          "summary": "No meaningful drinking concern surfaced in the existing CSM-backed catalog prose."
+        }
+      },
+      "proseAttention": null,
+      "handoffNotes": [
+        "Screening entry for Claude/local bridge verification; do not write to production catalog without live source check."
+      ],
+      "confidence": "screening"
+    },
+    {
+      "num": 717,
+      "file": "data-mcudc.js",
+      "title": "Justice League: Crisis on Two Earths",
+      "year": "2010",
+      "currentCatalogCa": "11+",
+      "sourceStatus": "catalog-csm-source",
+      "sourceUrl": "https://www.commonsensemedia.org/movie-reviews/justice-league-crisis-on-two-earths",
+      "screeningBasis": "existing catalog CSM-backed prose and source URL; not a live CSM category re-fetch",
+      "proposedFlags": {
+        "violence": {
+          "proposedLevel": 3,
+          "summary": "Existing catalog prose mentions violence, death, fighting. Proposed level 3; verify against the live CSM category detail before production import."
+        },
+        "language": {
+          "proposedLevel": 2,
+          "summary": "Existing catalog prose mentions language concern, mild profanity. Proposed level 2; verify against the live CSM category detail before production import."
+        },
+        "romance": {
+          "proposedLevel": 1,
+          "summary": "No meaningful romance concern surfaced in the existing CSM-backed catalog prose."
+        },
+        "drinking": {
+          "proposedLevel": 1,
+          "summary": "No meaningful drinking concern surfaced in the existing CSM-backed catalog prose."
+        }
+      },
+      "proseAttention": "Existing prose includes emotional, family-separation, grief, or loss material that should remain visible outside the scored flags.",
+      "handoffNotes": [
+        "Screening entry for Claude/local bridge verification; do not write to production catalog without live source check."
+      ],
+      "confidence": "screening"
+    },
+    {
+      "num": 718,
+      "file": "data-mcudc.js",
+      "title": "Superman/Batman: Apocalypse",
+      "year": "2010",
+      "currentCatalogCa": "13+",
+      "sourceStatus": "catalog-csm-source",
+      "sourceUrl": "https://www.commonsensemedia.org/movie-reviews/supermanbatman-apocalypse",
+      "screeningBasis": "existing catalog CSM-backed prose and source URL; not a live CSM category re-fetch",
+      "proposedFlags": {
+        "violence": {
+          "proposedLevel": 3,
+          "summary": "Existing catalog prose mentions death, battle action. Proposed level 3; verify against the live CSM category detail before production import."
+        },
+        "language": {
+          "proposedLevel": 3,
+          "summary": "Existing catalog prose mentions language concern, mild profanity. Proposed level 3; verify against the live CSM category detail before production import."
+        },
+        "romance": {
+          "proposedLevel": 3,
+          "summary": "Existing catalog prose mentions nudity. Proposed level 3; verify against the live CSM category detail before production import."
+        },
+        "drinking": {
+          "proposedLevel": 1,
+          "summary": "No meaningful drinking concern surfaced in the existing CSM-backed catalog prose."
+        }
+      },
+      "proseAttention": "Existing prose includes emotional, family-separation, grief, or loss material that should remain visible outside the scored flags.",
+      "handoffNotes": [
+        "Screening entry for Claude/local bridge verification; do not write to production catalog without live source check."
+      ],
+      "confidence": "screening"
+    },
+    {
+      "num": 719,
+      "file": "data-mcudc.js",
+      "title": "All-Star Superman",
+      "year": "2011",
+      "currentCatalogCa": "12+",
+      "sourceStatus": "catalog-csm-source",
+      "sourceUrl": "https://www.commonsensemedia.org/movie-reviews/all-star-superman",
+      "screeningBasis": "existing catalog CSM-backed prose and source URL; not a live CSM category re-fetch",
+      "proposedFlags": {
+        "violence": {
+          "proposedLevel": 3,
+          "summary": "Existing catalog prose mentions violence, scary imagery, death, battle action. Proposed level 3; verify against the live CSM category detail before production import."
+        },
+        "language": {
+          "proposedLevel": 2,
+          "summary": "Existing catalog prose mentions language concern, mild profanity. Proposed level 2; verify against the live CSM category detail before production import."
+        },
+        "romance": {
+          "proposedLevel": 1,
+          "summary": "No meaningful romance concern surfaced in the existing CSM-backed catalog prose."
+        },
+        "drinking": {
+          "proposedLevel": 1,
+          "summary": "No meaningful drinking concern surfaced in the existing CSM-backed catalog prose."
+        }
+      },
+      "proseAttention": "Existing prose includes emotional, family-separation, grief, or loss material that should remain visible outside the scored flags.",
+      "handoffNotes": [
+        "Screening entry for Claude/local bridge verification; do not write to production catalog without live source check."
+      ],
+      "confidence": "screening"
+    },
+    {
+      "num": 720,
+      "file": "data-mcudc.js",
+      "title": "Batman: Year One",
+      "year": "2011",
+      "currentCatalogCa": "14+",
+      "sourceStatus": "catalog-csm-source",
+      "sourceUrl": "https://www.commonsensemedia.org/movie-reviews/batman-year-one",
+      "screeningBasis": "existing catalog CSM-backed prose and source URL; not a live CSM category re-fetch",
+      "proposedFlags": {
+        "violence": {
+          "proposedLevel": 4,
+          "summary": "Existing catalog prose mentions fighting. Proposed level 4; verify against the live CSM category detail before production import."
+        },
+        "language": {
+          "proposedLevel": 3,
+          "summary": "Existing catalog prose mentions language concern, mild profanity. Proposed level 3; verify against the live CSM category detail before production import."
+        },
+        "romance": {
+          "proposedLevel": 3,
+          "summary": "Level 3 inferred from the existing CSM-backed catalog prose; Claude should verify against the live CSM category detail before production import."
+        },
+        "drinking": {
+          "proposedLevel": 1,
+          "summary": "No meaningful drinking concern surfaced in the existing CSM-backed catalog prose."
+        }
+      },
+      "proseAttention": null,
+      "handoffNotes": [
+        "Screening entry for Claude/local bridge verification; do not write to production catalog without live source check."
+      ],
+      "confidence": "screening"
+    },
+    {
+      "num": 721,
+      "file": "data-mcudc.js",
+      "title": "Captain America: The First Avenger",
+      "year": "2011",
+      "currentCatalogCa": "11+",
+      "sourceStatus": "catalog-csm-source",
+      "sourceUrl": "https://www.commonsensemedia.org/movie-reviews/captain-america-the-first-avenger",
+      "screeningBasis": "existing catalog CSM-backed prose and source URL; not a live CSM category re-fetch",
+      "proposedFlags": {
+        "violence": {
+          "proposedLevel": 3,
+          "summary": "Existing catalog prose mentions battle action, fighting, weapons. Proposed level 3; verify against the live CSM category detail before production import."
+        },
+        "language": {
+          "proposedLevel": 2,
+          "summary": "Existing catalog prose mentions mild profanity. Proposed level 2; verify against the live CSM category detail before production import."
+        },
+        "romance": {
+          "proposedLevel": 2,
+          "summary": "Existing catalog prose mentions romance, kissing. Proposed level 2; verify against the live CSM category detail before production import."
+        },
+        "drinking": {
+          "proposedLevel": 1,
+          "summary": "No meaningful drinking concern surfaced in the existing CSM-backed catalog prose."
+        }
+      },
+      "proseAttention": null,
+      "handoffNotes": [
+        "Screening entry for Claude/local bridge verification; do not write to production catalog without live source check."
+      ],
+      "confidence": "screening"
+    },
+    {
+      "num": 722,
+      "file": "data-mcudc.js",
+      "title": "Green Lantern",
+      "year": "2011",
+      "currentCatalogCa": "12+",
+      "sourceStatus": "catalog-csm-source",
+      "sourceUrl": "https://www.commonsensemedia.org/movie-reviews/green-lantern",
+      "screeningBasis": "existing catalog CSM-backed prose and source URL; not a live CSM category re-fetch",
+      "proposedFlags": {
+        "violence": {
+          "proposedLevel": 3,
+          "summary": "Existing catalog prose mentions frightening moments, battle action, explosions. Proposed level 3; verify against the live CSM category detail before production import."
+        },
+        "language": {
+          "proposedLevel": 3,
+          "summary": "Existing catalog prose mentions language concern, stronger profanity. Proposed level 3; verify against the live CSM category detail before production import."
+        },
+        "romance": {
+          "proposedLevel": 1,
+          "summary": "No meaningful romance concern surfaced in the existing CSM-backed catalog prose."
+        },
+        "drinking": {
+          "proposedLevel": 1,
+          "summary": "No meaningful drinking concern surfaced in the existing CSM-backed catalog prose."
+        }
+      },
+      "proseAttention": null,
+      "handoffNotes": [
+        "Screening entry for Claude/local bridge verification; do not write to production catalog without live source check."
+      ],
+      "confidence": "screening"
+    },
+    {
+      "num": 723,
+      "file": "data-mcudc.js",
+      "title": "Green Lantern: Emerald Knights",
+      "year": "2011",
+      "currentCatalogCa": "12+",
+      "sourceStatus": "catalog-csm-source",
+      "sourceUrl": "https://www.commonsensemedia.org/movie-reviews/green-lantern-emerald-knights",
+      "screeningBasis": "existing catalog CSM-backed prose and source URL; not a live CSM category re-fetch",
+      "proposedFlags": {
+        "violence": {
+          "proposedLevel": 3,
+          "summary": "Existing catalog prose mentions violence, fighting. Proposed level 3; verify against the live CSM category detail before production import."
+        },
+        "language": {
+          "proposedLevel": 2,
+          "summary": "Existing catalog prose mentions language concern, mild profanity. Proposed level 2; verify against the live CSM category detail before production import."
+        },
+        "romance": {
+          "proposedLevel": 1,
+          "summary": "No meaningful romance concern surfaced in the existing CSM-backed catalog prose."
+        },
+        "drinking": {
+          "proposedLevel": 1,
+          "summary": "No meaningful drinking concern surfaced in the existing CSM-backed catalog prose."
+        }
+      },
+      "proseAttention": null,
+      "handoffNotes": [
+        "Screening entry for Claude/local bridge verification; do not write to production catalog without live source check."
+      ],
+      "confidence": "screening"
+    },
+    {
+      "num": 724,
+      "file": "data-mcudc.js",
+      "title": "Thor",
+      "year": "2011",
+      "currentCatalogCa": "13+",
+      "sourceStatus": "catalog-csm-source",
+      "sourceUrl": "https://www.commonsensemedia.org/movie-reviews/thor",
+      "screeningBasis": "existing catalog CSM-backed prose and source URL; not a live CSM category re-fetch",
+      "proposedFlags": {
+        "violence": {
+          "proposedLevel": 3,
+          "summary": "Existing catalog prose mentions battle action, explosions. Proposed level 3; verify against the live CSM category detail before production import."
+        },
+        "language": {
+          "proposedLevel": 3,
+          "summary": "Existing catalog prose mentions language concern, mild profanity. Proposed level 3; verify against the live CSM category detail before production import."
+        },
+        "romance": {
+          "proposedLevel": 2,
+          "summary": "Existing catalog prose mentions kissing. Proposed level 2; verify against the live CSM category detail before production import."
+        },
+        "drinking": {
+          "proposedLevel": 1,
+          "summary": "No meaningful drinking concern surfaced in the existing CSM-backed catalog prose."
+        }
+      },
+      "proseAttention": null,
+      "handoffNotes": [
+        "Screening entry for Claude/local bridge verification; do not write to production catalog without live source check."
+      ],
+      "confidence": "screening"
+    },
+    {
+      "num": 725,
+      "file": "data-mcudc.js",
+      "title": "X-Men: First Class",
+      "year": "2011",
+      "currentCatalogCa": "12+",
+      "sourceStatus": "catalog-csm-source",
+      "sourceUrl": "https://www.commonsensemedia.org/movie-reviews/x-men-first-class",
+      "screeningBasis": "existing catalog CSM-backed prose and source URL; not a live CSM category re-fetch",
+      "proposedFlags": {
+        "violence": {
+          "proposedLevel": 3,
+          "summary": "Existing catalog prose mentions killing, explosions. Proposed level 3; verify against the live CSM category detail before production import."
+        },
+        "language": {
+          "proposedLevel": 3,
+          "summary": "Level 3 inferred from the existing CSM-backed catalog prose; Claude should verify against the live CSM category detail before production import."
+        },
+        "romance": {
+          "proposedLevel": 3,
+          "summary": "Existing catalog prose mentions nudity. Proposed level 3; verify against the live CSM category detail before production import."
+        },
+        "drinking": {
+          "proposedLevel": 2,
+          "summary": "Existing catalog prose mentions smoking. Proposed level 2; verify against the live CSM category detail before production import."
+        }
+      },
+      "proseAttention": "Existing prose includes emotional, family-separation, grief, or loss material that should remain visible outside the scored flags.",
+      "handoffNotes": [
+        "Screening entry for Claude/local bridge verification; do not write to production catalog without live source check."
+      ],
+      "confidence": "screening"
+    }
+  ],
+  "handoffSummary": {
+    "screenedEntries": 10,
+    "sourceBasis": "existing catalog CSM-backed prose and source URLs",
+    "firstNum": 716,
+    "lastNum": 725,
+    "nextClaudeAction": "Use these entries as prioritization and draft mapping input, then verify each title through the official live CSM backfill protocol before production import."
+  }
+}
