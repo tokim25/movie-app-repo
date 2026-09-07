@@ -1,0 +1,199 @@
+{
+  "researchBatch": "csm-content-flags-claude-next100-partial-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Claude",
+  "purpose": "Partial research-only handoff for the next-100 candidate list (research/next-100-titles-2026-09-07.json). Run was split into 4 concurrent groups of 25; a shared rate-guard block self-signaled after CSM WebFetch requests began consistently timing out, stopping all 4 groups per protocol before most titles could be researched. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 124,
+      "file": "data-rt.js",
+      "title": "The 400 Blows",
+      "year": "1959",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-400-blows",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM notes only a single slap (Antoine is slapped once); there is no meaningful violence or scary content in this coming-of-age drama."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Subtitled dialogue includes strong words like \"s--t\" and \"a--hole\" in some translations."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A husband playfully touches his wife's clothed breast, a psychologist questions the boy about whether he has had sexual relations (he denies it), and an out-of-wedlock pregnancy is mentioned."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Adults smoke heavily throughout the film, the 12-year-old protagonist secretly rolls and smokes cigarettes, and underage drinking occurs."
+        }
+      },
+      "handoffNotes": [
+        "The story centers on parental neglect, an unfaithful mother, and the boy's eventual separation from his family when he is sent to a juvenile detention camp -- this family breakdown/separation arc may need gentle context for sensitive viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 163,
+      "file": "data-dcom.js",
+      "title": "Genius",
+      "year": "1999",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/genius-0",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Hockey-rink aggression is portrayed as slapstick, producing only mild roughhousing."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Playground insults and teasing include words like 'stupid,' 'brainiac,' 'losers,' and 'jerk,' plus a coach sexistly addressing his all-male hockey team as 'ladies.'"
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One gentle kiss occurs between teens."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM's own review age (8+) is one year above the current catalog CA (7+); reviewer may want to confirm the intended app age."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1035,
+      "file": "data-extra.js",
+      "title": "Air Bud Returns",
+      "year": "2027",
+      "currentCatalogCa": "Not on CSM; substitute source used",
+      "csmStatus": "unavailable",
+      "csmUrl": null,
+      "sourceUrlChecked": "https://en.wikipedia.org/wiki/Air_Bud_Returns",
+      "targetedSearches": [
+        "Air Bud Returns commonsensemedia.org",
+        "site:commonsensemedia.org/movie-reviews Air Bud Returns"
+      ],
+      "csmAge": null,
+      "researchBasis": "live CSM search plus Wikipedia fallback by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; the film has not released yet (scheduled Jan 22, 2027) so no review exists."
+        },
+        "language": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; the film has not released yet (scheduled Jan 22, 2027) so no review exists."
+        },
+        "romance": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; the film has not released yet (scheduled Jan 22, 2027) so no review exists."
+        },
+        "drinking": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; the film has not released yet (scheduled Jan 22, 2027) so no review exists."
+        }
+      },
+      "handoffNotes": [
+        "RESOLUTION for currentCa='Not on CSM; substitute source used': confirmed correct as-is. Air Bud Returns has not been released (theatrical release scheduled Jan 22, 2027, per Cineverse/Wikipedia) so no CSM review exists yet, live or otherwise. No upgrade is available; catalog should keep the substitute-source flag until a real CSM review is published post-release.",
+        "Per Wikipedia's plot summary, 12-year-old Jacob is grieving his father's death and relocates with his mother before befriending the dog Buddy -- this grief/loss theme may need gentle prose context once real content data exists."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 1054,
+      "file": "data-extra.js",
+      "title": "Octonauts & the Ring of Fire",
+      "year": "2021",
+      "currentCatalogCa": "Not on CSM; substitute source used",
+      "csmStatus": "unavailable",
+      "csmUrl": null,
+      "sourceUrlChecked": "https://octonauts.fandom.com/wiki/The_Octonauts_and_the_Ring_of_Fire",
+      "targetedSearches": [
+        "Octonauts & the Ring of Fire commonsensemedia.org",
+        "site:commonsensemedia.org \"Octonauts\" \"Ring of Fire\""
+      ],
+      "csmAge": null,
+      "researchBasis": "CSM search (no dedicated movie review found; only a general Octonauts TV-series CSM page exists) plus Wikia/Netflix-summary fallback by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No CSM review exists for this specific TV movie. Per plot summaries, the Octonauts rescue sea creatures from tsunamis and volcanic eruptions across the Pacific Ring of Fire; this is disaster-rescue peril typical of the TV-Y-rated Octonauts franchise, with no reported injury detail or violence beyond adventure peril."
+        },
+        "language": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No CSM review exists for this specific TV movie. No language concerns are reported anywhere for this TV-Y-rated preschool franchise."
+        },
+        "romance": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No CSM review exists for this specific TV movie. No romance, sex, or nudity content is reported for this preschool-targeted franchise."
+        },
+        "drinking": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No CSM review exists for this specific TV movie. No drinking, drug, or smoking content is reported for this preschool-targeted franchise."
+        }
+      },
+      "handoffNotes": [
+        "RESOLUTION for currentCa='Not on CSM; substitute source used': confirmed correct as-is. CSM has no dedicated review page for this 2021 Octonauts TV movie -- only a general review of the Octonauts TV series exists on CSM, and that series-level page is not a substitute for movie-specific category data. Two fallback source fetches (Octonauts Fandom wiki, IMDb parents guide) both timed out; plot/content detail here is drawn from search-result summaries (Netflix synopsis, IMDb plot page) rather than a fully read fallback page, so confidence is medium.",
+        "No live CSM review to upgrade to; catalog's substitute-source flag should remain until Common Sense Media publishes a movie-specific review."
+      ],
+      "confidence": "medium"
+    }
+  ],
+  "handoffSummary": {
+    "refetchedEntries": 4,
+    "requestedEntries": 100,
+    "sourceBasis": "live CSM refetch by subagent",
+    "stoppedEarly": true,
+    "stopReason": "All 4 concurrent groups (25 titles each) began research in parallel. Group 1's very first CSM fetch (The Magic Faraway Tree) returned ETIMEDOUT; a second CSM URL (Nacho Libre) also timed out, while a control fetch of a non-CSM page (Wikipedia) succeeded instantly, indicating the failure was specific to commonsensemedia.org rather than a general fetch problem. Per protocol, Group 1 signaled a block to the shared scripts/csm-rate-guard.mjs state file, and each other group's next acquire call picked up that block and stopped immediately without retrying or falling back to another source. The nightly request counter was at 77/220 when the block was signaled -- this was not a quota exhaustion, it looks like CSM either rate-limiting or otherwise blocking/throttling this fetcher's requests specifically.",
+    "titlesCompleted": [
+      { "num": 124, "title": "The 400 Blows" },
+      { "num": 163, "title": "Genius" },
+      { "num": 1035, "title": "Air Bud Returns" },
+      { "num": 1054, "title": "Octonauts & the Ring of Fire" }
+    ],
+    "titlesNotResearched": 96,
+    "nextClaudeAction": "Before resuming: verify commonsensemedia.org is actually reachable via WebFetch from a fresh session (try 2-3 real review URLs in isolation, no concurrency) rather than immediately re-running all 4 groups again -- repeating the same concurrent-group approach without first confirming connectivity risks an immediate repeat block. See docs/nightly-content-flag-backfill-claude-run2-handoff-2026-09-07.md for the full remaining candidate list and next steps."
+  }
+}
