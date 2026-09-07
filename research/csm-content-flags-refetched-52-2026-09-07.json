@@ -1,0 +1,599 @@
+{
+  "researchBatch": "csm-content-flags-refetched-52-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only handoff for nums 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, and 418 in data-disney.js. Built from live Common Sense Media refetches of catalog srcUrl pages. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Where CSM's label and category detail conflict, the proposed level may reflect the detail rather than the label and a handoff note is included."
+  },
+  "entries": [
+    {
+      "num": 404,
+      "file": "data-disney.js",
+      "title": "102 Dalmatians",
+      "year": "2000",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/102-dalmatians",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Frequent exaggerated peril has puppies and dogs nearly falling, boarding a moving train, facing knives, and being carried by balloons, while humans take slapstick punishment and villains make scary faces."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Language is limited to mild insults and one mild profanity."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text mentions one fur-bikini image and a young couple falling in love and sharing a few chaste kisses."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Cruella smokes with a cigarette holder in several scenes, and champagne appears during a toast."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Sex, Romance & Nudity as none while the detail text mentions bikini imagery and chaste kisses.",
+        "The puppies' frequent peril and Cruella's threats may need prose for sensitive viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 405,
+      "file": "data-disney.js",
+      "title": "The Kid",
+      "year": "2000",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-kid-0",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild violence includes a playground scuffle with bullies."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "CSM surfaces some mild language."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Romance content is described as very mild."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A character asks for strong medicine and takes all the pills at once."
+        }
+      },
+      "handoffNotes": [
+        "Medication misuse is the main Drinking, Drugs & Smoking signal and may need prose clarity."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 406,
+      "file": "data-disney.js",
+      "title": "Remember the Titans",
+      "year": "2000",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/remember-the-titans",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Racially charged conflict includes a near-riot, thrown bottles and broken windows, fistfights, a Black student chased by White students, football tackles, a bloody car-crash hospitalization with paralysis, a broken wrist, a rifle threat, a brick thrown through a family's window, and exertion vomiting."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Language includes racist slurs and dehumanizing insults, plus some milder insults and one hell-related phrase."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Teens flirt and date, and one kiss occurs in a taunting rather than romantic context."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One line speculates that people must be high on something."
+        }
+      },
+      "handoffNotes": [
+        "Racism, slurs, segregation conflict, and the paralyzing car crash need prose context beyond the four slider levels."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 407,
+      "file": "data-disney.js",
+      "title": "Recess: School's Out",
+      "year": "2001",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/recess-schools-out",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Comic peril has kids fighting villains with water balloons and silly string."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "CSM surfaces some vulgar language."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "There are mild references to teen and adult romance."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 408,
+      "file": "data-disney.js",
+      "title": "Snow Dogs",
+      "year": "2002",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/snow-dogs",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Extensive slapstick and suspense include encounters with a snarling dog and angry bear, repeated jeopardy, dragging over snow and ice, punches, mountain and frozen-lake close calls, a dog bite on padded pants, a window crash, airplane close calls, and a frozen drink block knocking someone out."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A character yells at dogs, tells them to shut up, and a dog urinates on a tree."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Beach bikini imagery, mild innuendo, and a few kisses appear as lead characters fall in love."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Characters drink alcohol in a bar, and one character drinks from a flask."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels the violence a lot even though most incidents are slapstick; reviewer may want prose explaining comic tone versus suspense."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 409,
+      "file": "data-disney.js",
+      "title": "The Country Bears",
+      "year": "2002",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-country-bears",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "CSM notes family tension and mild peril without injuries."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "The only noted substance-adjacent content is comic talk about honey abuse."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Drinking, Drugs & Smoking as none while the detail text mentions comic honey-abuse references."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 410,
+      "file": "data-disney.js",
+      "title": "The Rookie",
+      "year": "2002",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-rookie",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful violence or scariness concern."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language is limited to a few mild profanities."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A husband and wife kiss in a few scenes."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adults drink casually after games, bar scenes include beer toasts, and a married couple shares wine, with no drunkenness noted."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 411,
+      "file": "data-disney.js",
+      "title": "Tuck Everlasting",
+      "year": "2002",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/tuck-everlasting",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Characters are shot with rifles but recover, one is hit with a rifle, a bar fight leads to someone being thrown out, and a young woman is abducted and forced onto a horse."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Late-teen characters kiss and embrace."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A bar scene shows alcohol bottles, but CSM notes no drinking."
+        }
+      },
+      "handoffNotes": [
+        "Abduction and immortality/death themes may need prose beyond the scored flags."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 412,
+      "file": "data-disney.js",
+      "title": "Freaky Friday",
+      "year": "2003",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/freaky-friday",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild comic incidents include body-swap earthquakes, a tackle to protect a secret, and students hitting each other with volleyballs."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes several mild coarse words, insults, body/potty terms, and religious exclamations."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Kisses become awkward because mother and daughter have swapped bodies, with brief thong and signed-butt shots plus a motorcycle scene where the mother-in-daughter's-body holds the daughter's crush."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults drink champagne and wine at wedding-related events without drunkenness."
+        }
+      },
+      "handoffNotes": [
+        "The body-swap premise creates awkward romance/body-boundary scenes that may need prose clarity."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 413,
+      "file": "data-disney.js",
+      "title": "Pirates of the Caribbean: The Curse of the Black Pearl",
+      "year": "2003",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/pirates-of-the-caribbean-the-curse-of-the-black-pearl",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Action violence includes character deaths and disturbing images such as skeletal pirates and a recurring loose false eyeball."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Swearing includes mild-to-moderate profanity and colorful pirate insults."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Sexual references include implications about sex workers and some revealing bodices."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Characters drink rum, sometimes to drunkenness, and a tavern scene shows many intoxicated patrons."
+        }
+      },
+      "handoffNotes": [
+        "Skeleton-pirate imagery and frequent rum drunkenness may need prose for families expecting a lighter Disney adventure."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 414,
+      "file": "data-disney.js",
+      "title": "Miracle",
+      "year": "2004",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/miracle",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Hockey action includes checks, cross-checks, slashing, tripping, players knocked down, a nosebleed, and an ice fight that the coach lets continue."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes several mild-to-moderate insults, repeated hell, and a puck-related banner joke aimed at the Soviets."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Some players talk about women in the stands, a joke gift involves panties, there is a cheek kiss, and a nonsexual locker-room shower scene briefly shows bare-chested men."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Players drink beer in a bar and at a Christmas party."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 415,
+      "file": "data-disney.js",
+      "title": "The Princess Diaries 2: Royal Engagement",
+      "year": "2004",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-princess-diaries-2-royal-engagement",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild action includes a spooky hidden passage, clumsy tumbles, guards falling, a frightened horse rearing, a stomped foot, and a harmless noisy villain."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Several scenes include romantic kisses."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text mentions a champagne toast."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Drinking, Drugs & Smoking as none while the detail text mentions a champagne toast."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 416,
+      "file": "data-disney.js",
+      "title": "Around the World in 80 Days",
+      "year": "2004",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/around-the-world-in-80-days",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Action includes martial arts, swords, spears, gunshots, pratfall injuries to a corrupt officer, repeated groin-hit gags, hot water, rope, and knife throwing."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes one mild profanity and sexual innuendo in verbal and physical gags."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Sexual innuendo appears in a Turkish palace scene and in a statue/groin gag."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Characters drink liquor shots and champagne, and some act drunk."
+        }
+      },
+      "handoffNotes": [
+        "Groin-injury slapstick and sexual innuendo overlap across Violence, Language, and Sex/Romance details."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 417,
+      "file": "data-disney.js",
+      "title": "Sky High",
+      "year": "2005",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/sky-high",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoony superhero action includes several major fights with fireballs and characters slammed into walls and windows."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text mentions very mild terms."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text mentions chaste high-school kissing and form-fitting costumes on women heroes."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "One boy lights a cigarette and is told to stop, and a party shows high school students dancing and drinking unknown beverages."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Language and Sex, Romance & Nudity as none while the detail text mentions mild language, chaste kissing, and costumes.",
+        "Teen cigarette use and party beverages drive the drinking/smoking level."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 418,
+      "file": "data-disney.js",
+      "title": "The Pacifier",
+      "year": "2005",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-pacifier",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Characters face peril, kickboxing, offscreen shooting, and cartoonish action-style violence."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "CSM surfaces crude schoolyard language."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern; the detail text only notes diaper humor."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    }
+  ],
+  "handoffSummary": {
+    "totalEntries": 15,
+    "foundOnCsm": 15,
+    "unavailable": 0,
+    "unavailableNums": [],
+    "needsReviewerAttention": [
+      404,
+      405,
+      406,
+      408,
+      409,
+      411,
+      412,
+      413,
+      415,
+      416,
+      417
+    ],
+    "notes": [
+      "All 15 catalog srcUrl pages were reachable as live Common Sense Media movie-review pages during the refetch.",
+      "No unavailable pages were found, so no targeted CSM fallback lookup was needed.",
+      "Several older CSM pages omit a category block entirely; those categories are marked not present when no live category detail was visible.",
+      "Nums 404, 409, 415, and 417 have visible CSM labels of none while the detail text still describes minor content.",
+      "Nums 406, 408, 411, 413, 416, and 417 may need prose beyond slider levels for racism, suspense, abduction/death themes, drinking, innuendo, or teen substance cues."
+    ]
+  }
+}

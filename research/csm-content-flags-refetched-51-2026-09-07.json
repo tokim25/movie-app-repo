@@ -1,0 +1,663 @@
+{
+  "researchBatch": "csm-content-flags-refetched-51-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only live CSM refetch for catalog nums 387-391 and 394-403 in data-disney.js, explicitly skipping nums 392-393 because they are reserved for Claude's next-100 list. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "sourceRange": {
+    "files": [
+      "data-disney.js"
+    ],
+    "nums": [
+      387,
+      388,
+      389,
+      390,
+      391,
+      394,
+      395,
+      396,
+      397,
+      398,
+      399,
+      400,
+      401,
+      402,
+      403
+    ],
+    "entryCount": 15,
+    "skippedReservedNums": [
+      392,
+      393
+    ]
+  },
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 387,
+      "file": "data-disney.js",
+      "title": "Cool Runnings",
+      "year": "1993",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/cool-runnings",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Sports peril includes pushcart and bobsled crashes, some newsreel crash footage, a brief comic bar fight with bottles broken, and passing references to being shot or killed in a crash."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Infrequent language includes mild and moderate insults, religious exclamations, comic threats, an outdated ethnic term, body-size jokes, and baldness jokes."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Romance is limited to a lingering kissing-booth kiss played for comedy and a couple of mild innuendo lines."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults drink beer in bar and beach scenes."
+        }
+      },
+      "handoffNotes": [
+        "CSM notes fictionalization of the true Olympic story outside the four content flags."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 388,
+      "file": "data-disney.js",
+      "title": "The Three Musketeers",
+      "year": "1993",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-three-musketeers-0",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Swashbuckling violence includes frequent sword and fist fights, mostly bloodless deaths, torture scenes, cannon fire, a mercy plea followed by a shadowed stabbing, and a suicide by cliff jump."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild swearing and name-calling appear."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frequent innuendo includes cleavage-heavy costumes, partial nudity from behind during a bath, kissing, wooing, seduction threats, and a groping attempt that is stopped with a knife threat."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Characters drink wine and mead, sometimes to excess."
+        }
+      },
+      "handoffNotes": [
+        "Suicide by jumping should be preserved in prose.",
+        "Romance/nudity content is stronger than most Disney-family entries in this batch."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 389,
+      "file": "data-disney.js",
+      "title": "Homeward Bound: The Incredible Journey",
+      "year": "1993",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/homeward-bound-the-incredible-journey",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The pets are lost and briefly fight, but no injuries are flagged and the story resolves with them safely returning home."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Lost-pet peril may need soft prose for sensitive children even though the flag level is low."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 390,
+      "file": "data-disney.js",
+      "title": "The Santa Clause",
+      "year": "1994",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-santa-clause",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "The central setup involves Santa dying after an accidental roof fall, and police later arrest Scott while drawing guns."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Language is minimal, with only very mild expressions surfaced by CSM."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A brief suggestive sidewalk remark is the only surfaced sex or romance concern."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "There is a vague past-drug-use joke, drinking at a corporate function, and a request for a strong drink."
+        }
+      },
+      "handoffNotes": [
+        "Santa's accidental death is comic but may need explicit prose for younger viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 391,
+      "file": "data-disney.js",
+      "title": "Angels in the Outfield",
+      "year": "1994",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/angels-in-the-outfield",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mostly comic sports chaos includes thrown punches that do not really land, a baseball bat to the face, a groin hit, a yelling coach, foster-care distress, angel/afterlife themes, and a loved one's cancer diagnosis."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A coach uses mild insults such as idiot and nutball."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Characters frequently smoke cigarettes, including at work, and one character pours alcohol into coffee."
+        }
+      },
+      "handoffNotes": [
+        "Foster-care distress, afterlife themes, and a cancer diagnosis need emotional-content prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 394,
+      "file": "data-disney.js",
+      "title": "Homeward Bound II: Lost in San Francisco",
+      "year": "1996",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/homeward-bound-ii-lost-in-san-francisco",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Animal peril includes near misses with an airplane and semi, several dog fights or threatening dog encounters, comic head injury, and a flowerpot dropped on a dog's head."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A character smokes a cigar throughout."
+        }
+      },
+      "handoffNotes": [
+        "Pet death fake-out worry may need prose for sensitive children."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 395,
+      "file": "data-disney.js",
+      "title": "101 Dalmatians",
+      "year": "1996",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/101-dalmatians-live-action",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Slapstick is frequent and sometimes harsh, including electric-fence groin shocks, falls, frozen water, molasses vats, bike crashes, a brick-filled purse blow, a pitchfork near a hidden puppy, and repeated talk of skinning puppies for a coat."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Cruella frequently smokes from a cigarette holder, and one villain drinks a beer before breaking the bottle."
+        }
+      },
+      "handoffNotes": [
+        "The puppy-skinning premise and Cruella's smoking should be preserved clearly."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 396,
+      "file": "data-disney.js",
+      "title": "James and the Giant Peach",
+      "year": "1996",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/james-and-the-giant-peach",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Dark fantasy peril includes James' parents dying, abusive aunts threatening to beat him, a many-toothed shark, ocean danger, and repeated near-death situations."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes one mild anatomical insult and a fake-out nautical exclamation that sounds close to stronger profanity."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "There is light flirting between Centipede and Spider."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Parental death and abusive relatives need emotional-content prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 397,
+      "file": "data-disney.js",
+      "title": "Flubber",
+      "year": "1997",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/flubber",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Comic violence includes flubber-powered balls bashing villains and a fistfight with bad guys."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text notes very quiet mild profanity, but the current surfaced signal is effectively unflagged."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Sex/nudity concerns include the professor accidentally entering a life-drawing class and general relationship issues."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions references to moderate drinking, but the current surfaced signal is effectively unflagged."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels/details conflict: language and drinking are not present by signal, while detail prose mentions quiet mild profanity and drinking references.",
+        "The beloved robot's apparent death may need emotional-content prose."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 398,
+      "file": "data-disney.js",
+      "title": "George of the Jungle",
+      "year": "1997",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/george-of-the-jungle",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Slapstick includes falls, repeated tree impacts, groin-impact comedy, a wrestling-style lion fight, a lion-attack threat, and poaching of a friendly ape."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content, though the broader review notes potty humor."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Sexual humor includes George's loincloth, George and Ursula's tame romance, monkey mating jokes, adult innuendo, and implied nudity."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions a coffee-driven caffeine high, but the category signal is effectively unflagged."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels/details conflict for drinking: unflagged signal but detail mentions caffeine intoxication.",
+        "Potty humor is prominent in the review but outside the requested four category signals unless folded into prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 399,
+      "file": "data-disney.js",
+      "title": "Air Bud",
+      "year": "1997",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/air-bud",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Concerns include school pushing and taunting, implied animal abuse, reckless driving that nearly hits people, a crate fall from a truck, an aggressive coach throwing basketballs at a scared teen, and sad dog-abandonment scenes."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes mild swears, shut up, school taunts, and an abusive pet owner's insults toward Buddy."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The villain drinks beer while near a window stacked with beer cans."
+        }
+      },
+      "handoffNotes": [
+        "Father's death, animal abuse, and dog-abandonment sadness need emotional-content prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 400,
+      "file": "data-disney.js",
+      "title": "Meet the Deedles",
+      "year": "1998",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/meet-the-deedles",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Comedy peril includes escaped animals, car and truck wrecks, explosives, a collapsing bungalow, a desk dropping into a sinkhole, a helicopter fall into rapids, a brake-fluid sabotage crash, and diarrhea gags."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Crude language includes mild rear-end and fart jokes plus screw."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Two adults kiss."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The twins make Hawaiian-style drinks, but the contents are unclear."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 401,
+      "file": "data-disney.js",
+      "title": "My Favorite Martian",
+      "year": "1999",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/my-favorite-martian",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "CSM summarizes the violence as cartoon-style action."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Crude and vulgar references appear, along with potty humor."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild sexual references are present."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "The page notes non-alcoholic intoxication."
+        }
+      },
+      "handoffNotes": [
+        "CSM detail text is sparse for this older review, so summaries stay high-level."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 402,
+      "file": "data-disney.js",
+      "title": "Inspector Gadget",
+      "year": "1999",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/inspector-gadget",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoon violence is frequent, including good-versus-evil Gadget battles, limbs ripped out, a disembodied talking head, RoboGadget threatening a child with weapons, and town-burning mayhem."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "CSM flags repeated leering innuendo despite no explicit sex."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Commercial tie-ins and potentially imitable bad behavior are noted by CSM outside the four requested flags."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 403,
+      "file": "data-disney.js",
+      "title": "The Straight Story",
+      "year": "1999",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-straight-story",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface meaningful violence or scariness content, though one detail field simply says mild."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions a reference to unwed pregnancy, but the current surfaced signal is effectively unflagged."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Most characters smoke, and there is a reference to past alcohol abuse."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels/details conflict: romance is not present by signal but detail mentions unwed pregnancy.",
+        "The 13+ rating appears driven more by slow adult drama and substance references than by overt content."
+      ],
+      "confidence": "medium"
+    }
+  ],
+  "handoffSummary": {
+    "totalEntries": 15,
+    "found": 15,
+    "unavailable": [],
+    "skippedReservedNums": [
+      392,
+      393
+    ],
+    "needsReviewerAttention": [
+      {
+        "num": 388,
+        "reason": "Suicide by cliff jump and stronger innuendo/nudity for a Disney-family entry."
+      },
+      {
+        "num": 390,
+        "reason": "Santa's accidental death is comic but may concern younger viewers."
+      },
+      {
+        "num": 391,
+        "reason": "Foster-care distress, afterlife themes, cancer diagnosis, and frequent smoking."
+      },
+      {
+        "num": 394,
+        "reason": "Pet death fake-out and constant cigar smoking."
+      },
+      {
+        "num": 395,
+        "reason": "Puppy-skinning premise and Cruella's frequent smoking."
+      },
+      {
+        "num": 396,
+        "reason": "Parental death and abusive relatives."
+      },
+      {
+        "num": 397,
+        "reason": "CSM label/detail conflict for language and drinking; robot death may need emotional prose."
+      },
+      {
+        "num": 398,
+        "reason": "Prominent innuendo and drinking-label/detail conflict around caffeine intoxication."
+      },
+      {
+        "num": 399,
+        "reason": "Father's death, animal abuse, and dog-abandonment sadness."
+      },
+      {
+        "num": 401,
+        "reason": "Sparse CSM detail text for older review."
+      },
+      {
+        "num": 403,
+        "reason": "CSM label/detail conflict for romance; substance references likely drive mature rating."
+      }
+    ]
+  }
+}
