@@ -1,0 +1,122 @@
+# Nightly Content-Flag Backfill - Codex Research Handoff
+
+Date: 2026-09-07  
+Scope: research-only handoff for `tokim25/movie-app-repo`  
+Branch: `research/backfill-audit-20260907-codex`
+
+## What Codex Can Safely Do Before Claude Takes Over
+
+Codex can complete repo/process research and push a documentation-only handoff. That includes:
+
+- verifying current GitHub PR state for the backfill-related work
+- recounting catalog size from the local data files
+- checking the proposed execution plan against the actual PR branch contents
+- identifying contradictions or data-normalization issues for Claude to reconcile
+- producing a first-pass handoff checklist for PM/Coder/Reviewer
+
+Codex should not perform the CSM title research in this environment. The plan explicitly depends on the local bridge session on tokim25's machine for real `commonsensemedia.org` access, and the quality bar requires real per-title WebSearch/WebFetch review. A non-CSM-capable environment should not infer or fabricate the 4 content-flag values.
+
+Codex should also avoid doing coder, reviewer, or UX-designer work in this pass. That means no implementation changes, no PR approval opinion, and no product/interaction changes beyond research findings.
+
+## Verified Repo State
+
+GitHub reports `master` at:
+
+`71537ab9633cd8e3bb3f62d054166ee0b8cf93ec`
+
+Open related PRs:
+
+- PR #30: `Merge Violence/Scariness content flags, drop Sad-moments scoring`
+  - URL: https://github.com/tokim25/movie-app-repo/pull/30
+  - Head: `content-flags-merge-violence-scariness-2026-09-07`
+  - Head SHA: `853e1d7a9368a18e4cb9a164b5c1f33bcf59c619`
+  - Base: `master`
+  - Mergeable state: clean
+  - Changed files: 4
+
+- PR #31: `Add real CSM rate-limit coordination for the nightly content-flag backfill`
+  - URL: https://github.com/tokim25/movie-app-repo/pull/31
+  - Head: `csm-rate-limit-guard-2026-09-07`
+  - Head SHA: `553fa4edb6d2ad9b7a4e87586eafeeb3a41bf91b`
+  - Base: `master`
+  - Mergeable state: clean
+  - Changed files: 3
+
+## Verified Catalog Counts
+
+Current local catalog count, excluding `data-posters.js`: 938 entries.
+
+Breakdown:
+
+- `data-csm.js`: 66
+- `data-dcom.js`: 116
+- `data-disney.js`: 231
+- `data-dreamworks.js`: 44
+- `data-extra.js`: 239
+- `data-ghibli.js`: 18
+- `data-mcudc.js`: 139
+- `data-nickelodeon.js`: 34
+- `data-pixar.js`: 15
+- `data-rt.js`: 36
+
+This matches the plan's 938-title number.
+
+## Fallback Count Note
+
+An exact match for `"Not on CSM; substitute source used"` in current local data finds 18 entries:
+
+- `data-dcom.js`: 1
+- `data-disney.js`: 10
+- `data-extra.js`: 2
+- `data-mcudc.js`: 3
+- `data-nickelodeon.js`: 2
+
+tokim25 confirmed that the broader 29-title fallback claim is accurate: those titles do not show up in CSM.
+
+Research implication: the catalog appears to use more than one way to represent fallback/not-on-CSM status, so the nightly selection/reporting logic should not rely only on the exact `ca === "Not on CSM; substitute source used"` string. Claude/Coder should reconcile the 29-title product truth against the data representation before scheduling.
+
+## Outstanding Confirmations From The Pasted Plan
+
+The pasted plan lists two confirmations as open. PR #31 appears to address both in its branch content:
+
+1. Periodic checkpoints
+   - `scripts/csm-rate-guard.mjs` adds a `checkpoint` command.
+   - The skill doc instructs subagents to call:
+     `node scripts/csm-rate-guard.mjs checkpoint "title N/TOTAL: <title>"`
+     before each title.
+   - `status` reports the last checkpoint.
+
+2. Fresh per-PR re-verification
+   - The skill doc explicitly says the candidate check happens once per PR within a night, not just once at the top of the night.
+   - It gives the PR 1 / PR 2 scenario and requires PR 2 to re-fetch and re-check `origin/master` after PR 1 merges.
+
+Research implication: if PR #31 is accepted as-is, those two plan gaps can likely move from "unconfirmed" to "implemented in PR #31, pending review/merge."
+
+## Still Open For Claude/Coder
+
+The new-title flow still needs confirmation or implementation so future additions stamp the same coverage fields at creation time:
+
+- `csmRecheckedAt`
+- `csmRecheckVersion`
+
+If that is not done, newly added titles may keep appearing as unchecked in future scans.
+
+The 29 fallback titles also need a normalized source-of-truth representation before the nightly run starts. The plan can keep the product-level number as 29, but the code/reporting path should be able to find the same 29 deterministically.
+
+## Recommended Claude Handoff
+
+Ask Claude to take over with these instructions:
+
+1. Review PR #30 and PR #31 together against the plan.
+2. Treat PR #31 as the likely resolution for checkpoint logging and per-PR re-verification, but verify from the diff before closing those items.
+3. Reconcile the 29 not-on-CSM titles against current data representation. Do not use only the exact `ca` fallback string unless the data is normalized first.
+4. Implement or confirm new-title stamping for `csmRecheckedAt` and `csmRecheckVersion`.
+5. Do not schedule the nightly job until the final go-live checkpoint includes the resolved fallback count, merged PRs, and watcher behavior.
+
+## Non-Goals For This Codex Pass
+
+- No CSM content extraction.
+- No new content-flag scores.
+- No app UI changes.
+- No reviewer approval.
+- No automation scheduling.
