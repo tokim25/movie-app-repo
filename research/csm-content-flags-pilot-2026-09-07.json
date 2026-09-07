@@ -1,0 +1,379 @@
+{
+  "researchBatch": "csm-content-flags-pilot-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only handoff sample for Claude/local CSM-capable backfill flow. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": ["violence", "language", "romance", "drinking"],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This pilot preserves CSM's visible category label and proposes the nearest app level. Claude/Coder should confirm the exact canonical mapper before writing production catalog data."
+  },
+  "entries": [
+    {
+      "num": 276,
+      "file": "data-disney.js",
+      "title": "The Black Cauldron",
+      "year": "1985",
+      "currentCatalogCa": "Not on CSM; substitute source used",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-black-cauldron",
+      "csmAge": "7+",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Dark fantasy peril, frightening creatures, skeleton imagery, repeated mortal danger, and a temporary self-sacrifice death."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No meaningful language concern surfaced in CSM's category data."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Brief witch seduction gag with body-focused comedy."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Minor drunken behavior among villain followers."
+        }
+      },
+      "handoffNotes": ["Current catalog fallback status should be upgraded because a CSM review now exists."],
+      "confidence": "high"
+    },
+    {
+      "num": 475,
+      "file": "data-disney.js",
+      "title": "Hocus Pocus 2",
+      "year": "2022",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/hocus-pocus-2",
+      "csmAge": "10+",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Comedic witch violence includes threats toward children and teens, magical attacks, soul-stealing talk, fires, and a walking zombie beheading gag."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild profanity, supernatural exclamations, and frequent name-calling."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Brief references to kissing and virginity."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Teen party cups appear while adults are absent."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 481,
+      "file": "data-disney.js",
+      "title": "Mufasa: The Lion King",
+      "year": "2024",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/mufasa-the-lion-king",
+      "csmAge": "8+",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Photorealistic animal peril, implied deaths, pride attacks, intense fights, and a scary central villain."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mostly mild insults and euphemistic threatening language."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Affection between lions, flirting, and a love-triangle thread."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No meaningful drinking, drugs, or smoking concern surfaced in CSM's category data."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 483,
+      "file": "data-disney.js",
+      "title": "Snow White",
+      "year": "2025",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/snow-white-2025",
+      "csmAge": "8+",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Dark forest fear, assassination orders, weapons, imprisonment, crossbow injury, poison apple coma, and mourning around presumed death."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild rude phrases and insults."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Flirting, near-kissing, and a true-love-kiss moment."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Potion use and unspecified drinks at a dinner."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 1037,
+      "file": "data-extra.js",
+      "title": "The Greatest Showman",
+      "year": "2017",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-greatest-showman",
+      "csmAge": "10+",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Brief physical aggression, protester threats, a circus fire, and a surviving serious injury."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Insulting language, one racial slur, and mild profanity/exclamations."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Romantic looks, kisses, marital tension, and interracial-relationship drama."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adults drink champagne, pub shots, beer, and liquor from a flask."
+        }
+      },
+      "handoffNotes": ["CSM age is 10+ while current catalog age is 8+; review before overwriting."],
+      "confidence": "high"
+    },
+    {
+      "num": 1039,
+      "file": "data-extra.js",
+      "title": "Wicked",
+      "year": "2024",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/wicked",
+      "csmAge": "10+",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Mostly light tone, but later scenes include attacking flying monkeys, threatening soldiers, fiery mechanical imagery, bullying, and imprisonment of animal characters."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Light insults and Oz-specific exclamations."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Flirting, one kiss, romantic tension, and implied offscreen sex in a backstory setup."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A mysterious elixir affects Elphaba's origin story, and a maid briefly drinks from a flask."
+        }
+      },
+      "handoffNotes": ["CSM age is 10+ while current catalog age is 9+; review before overwriting."],
+      "confidence": "high"
+    },
+    {
+      "num": 544,
+      "file": "data-nickelodeon.js",
+      "title": "Good Burger",
+      "year": "1997",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/good-burger",
+      "csmAge": "10+",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoonish slapstick, reckless driving, near-collisions, falls, explosions, and off-camera asylum chaos."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild profanity and many insults, including outdated mental-health/neurodiversity language."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Suggestive humor, body-focused camera work, and comedic partial undress."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Food-contamination plots involving poisons rather than typical substance use."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 557,
+      "file": "data-nickelodeon.js",
+      "title": "Rango",
+      "year": "2011",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/rango",
+      "csmAge": "10+",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Western-style gun violence, noose imagery, scary predator attacks, deaths, threats, suicidal ideation, and non-consensual touching folded into threat scenes."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Repeated mild profanity, insults, cultural slurs, and adult euphemisms."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Kissing, innuendo, a nude doll torso gag, and unwanted romantic advances."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Alcohol references, many saloon scenes, cactus juice treated like alcohol, and supporting-character smoking."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 484,
+      "file": "data-pixar.js",
+      "title": "Finding Dory",
+      "year": "2016",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/finding-dory",
+      "csmAge": "6+",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Emotional separation, peril with a predator, stressful escapes, accident imagery, slapstick, and near misses."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "No swearing; only very mild substitute wording appears."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No meaningful romance or nudity concern surfaced in CSM's category data."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No meaningful drinking, drugs, or smoking concern surfaced in CSM's category data."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 485,
+      "file": "data-pixar.js",
+      "title": "Ratatouille",
+      "year": "2007",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/ratatouille",
+      "csmAge": "6+",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Weapon-wielding humans chase Remy, a gun is fired, knives are thrown, characters are trapped, and the sewer sequence is tense."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A few mild insults and one mild profanity instance."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Linguini and Colette flirt, embrace, and kiss."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Wine appears as part of the French dining setting."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    }
+  ],
+  "handoffSummary": {
+    "researchedEntries": 10,
+    "csmFound": 10,
+    "fallbackUpgradesFound": 1,
+    "catalogAgeMismatches": [
+      {
+        "num": 1037,
+        "title": "The Greatest Showman",
+        "currentCatalogCa": "8+",
+        "csmAge": "10+"
+      },
+      {
+        "num": 1039,
+        "title": "Wicked",
+        "currentCatalogCa": "9+",
+        "csmAge": "10+"
+      }
+    ],
+    "nextClaudeAction": "Validate the mapping and summaries, then either import this pilot through the official backfill process or use it as a calibration sample for local bridge-session researchers."
+  }
+}
