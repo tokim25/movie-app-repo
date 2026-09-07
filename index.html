@@ -2340,6 +2340,11 @@ const CONTENT_FLAGS = [
   }
 ];
 const CONTENT_FLAG_IDS = CONTENT_FLAGS.map(flag => flag.id);
+// Bump whenever CONTENT_FLAGS' categories or scoring change in a way that
+// invalidates previously-researched `ca` content ratings (e.g. merging or
+// dropping a flag) -- stamped into movie entries as `csmRecheckVersion` so a
+// backfill can tell which entries were rated under an older content model.
+const CONTENT_MODEL_VERSION = 1;
 function defaultChildren(){
   return [];
 }

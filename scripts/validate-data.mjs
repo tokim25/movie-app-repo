@@ -124,6 +124,18 @@ for (const movie of movies) {
   if (movie.addedVia !== undefined && movie.addedVia !== 'request' && movie.addedVia !== 'discovery') {
     errors.push(`${label}: addedVia must be "request" or "discovery"`);
   }
+
+  const hasRecheckedAt = movie.csmRecheckedAt !== undefined;
+  const hasRecheckVersion = movie.csmRecheckVersion !== undefined;
+  if (hasRecheckedAt !== hasRecheckVersion) {
+    errors.push(`${label}: csmRecheckedAt and csmRecheckVersion must be set together`);
+  }
+  if (hasRecheckedAt && !/^\d{4}-\d{2}-\d{2}$/.test(movie.csmRecheckedAt)) {
+    errors.push(`${label}: csmRecheckedAt must be YYYY-MM-DD`);
+  }
+  if (hasRecheckVersion && !Number.isInteger(movie.csmRecheckVersion)) {
+    errors.push(`${label}: csmRecheckVersion must be an integer`);
+  }
 }
 
 const posterKeys = Object.keys(context.__POSTERS__ || {});

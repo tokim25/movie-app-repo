@@ -233,6 +233,21 @@ actually added recently. Run `node scripts/validate-data.mjs` after writing —
 it checks `addedAt` is a real date and `addedVia` is one of the two allowed
 values, among everything else it already checks.
 
+**Also set going forward (added 2026-09-07, tracks content-model coverage for
+the backfill job):** `csmRecheckedAt`, today's date as `"YYYY-MM-DD"`, and
+`csmRecheckVersion`, the current value of `CONTENT_MODEL_VERSION` in
+`index.html`. Since a freshly-added entry's `ca` rating is by definition
+researched under the current content model, stamp both fields at creation
+time for every new title, right after `addedAt`/`addedVia`. Both fields are
+optional and only meaningful together -- never write one without the other,
+and never stamp them until the researched content is actually confirmed
+good (they assert "this entry's content rating reflects content-model
+version N," not "this entry exists"). Older entries don't have these
+fields — don't backfill them here; that backfill is its own job (see
+"Re-researching an existing entry" below). `validate-data.mjs` checks both
+are present-or-absent together, that `csmRecheckedAt` is a real date, and
+that `csmRecheckVersion` is an integer.
+
 ## Step 5 — Assign nums and write the files
 
 Continue the `num` sequence from the current max across all data files (check all
