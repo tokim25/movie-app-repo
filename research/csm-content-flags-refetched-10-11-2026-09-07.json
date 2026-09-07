@@ -1,0 +1,794 @@
+{
+  "researchBatch": "csm-content-flags-refetched-10-11-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only live Common Sense Media refetch for data-mcudc.js catalog nums 686-705. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's visible category label and proposes the nearest app level. Labels of 'none' and 'not present' map to level 1; 'very little' and 'a little' map to level 2; 'some' maps to level 3; 'a lot' maps to level 4."
+  },
+  "entries": [
+    {
+      "num": 686,
+      "file": "data-mcudc.js",
+      "title": "Batman",
+      "year": "1989",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/batman-1989",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Shoot-outs, fights, chases, on-screen killings, childhood parental murder flashbacks, lethal Joker attacks, ledge peril, bladed weapons, and a suicide reference."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Several mild-to-moderate profanities, including censored stronger words and insults."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Implied sex, Joker's unwanted sexual advances, and prostitutes visible in a city street scene."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Cigar and cigarette smoking plus champagne drinking with a woman shown drunk after dinner."
+        }
+      },
+      "handoffNotes": [
+        "Emotional/sad prose should retain Bruce witnessing his parents' murder and the parallel child-witnessed killing."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 687,
+      "file": "data-mcudc.js",
+      "title": "Batman Returns",
+      "year": "1992",
+      "currentCatalogCa": "14+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/batman-returns",
+      "csmAge": "14+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Gunfire, carnage, a fatal window fall followed by supernatural return, a close-range shooting, a character set on fire, and a grotesque bite attack."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Mild obscenity and repeated double entendres, including one crude sexual term."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Batman and Catwoman fight in sexually charged ways, including straddling imagery and suggestive banter."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No drinking, drugs, or smoking concern surfaced in CSM's category data."
+        }
+      },
+      "handoffNotes": [
+        "Live CSM language label/details conflict with the earlier screening pass, which treated language as absent.",
+        "Emotional/sad prose should retain child abandonment, death, and corporate corruption themes."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 688,
+      "file": "data-mcudc.js",
+      "title": "Batman: Mask of the Phantasm",
+      "year": "1993",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/batman-mask-of-the-phantasm",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frequent animated fighting, gunshots, explosions, some blood, and dead bodies."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No meaningful language concern surfaced in CSM's category data."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Brief implication that Bruce and Andrea spent a night together."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Social drinking appears at a party, including wine thrown on Bruce."
+        }
+      },
+      "handoffNotes": [
+        "Emotional/sad prose should retain parental death and revenge themes."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 689,
+      "file": "data-mcudc.js",
+      "title": "Batman Forever",
+      "year": "1995",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/batman-forever",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Many fights with guns, punches, speeding vehicles, explosions, cartoonishly sadistic deaths, and traumatic parent/family death flashbacks."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Occasional mild profanity and one invented sexualized gag word."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Suggestive Bruce/Chase banter, revealing outfits on Two-Face's assistants, and a mind-reading sexual-fantasy reference."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No drinking, drugs, or smoking concern surfaced in CSM's category data."
+        }
+      },
+      "handoffNotes": [
+        "Live CSM language and romance levels are lower than the earlier screening assumptions.",
+        "Emotional/sad prose should retain Bruce's father being shot and Dick Grayson's family death."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 690,
+      "file": "data-mcudc.js",
+      "title": "Batman & Robin",
+      "year": "1997",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/batman-robin",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Hand-to-hand fights, gunshots, choking, hockey-stick combat, and an illegal motorcycle race that almost becomes fatal."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Infrequent direct mild profanity, but many innuendo-heavy puns and wordplay."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Poison Ivy's dialogue is heavily sexualized, and Batgirl's costume reveal includes body-focused camera shots."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Champagne at a gala, cigar smoking, and a brief scene of people sharing bagged alcohol around a fire."
+        }
+      },
+      "handoffNotes": [
+        "Live CSM language label/details conflict with the earlier screening pass, which treated language as absent."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 691,
+      "file": "data-mcudc.js",
+      "title": "Steel",
+      "year": "1997",
+      "currentCatalogCa": "Not on CSM; substitute source used",
+      "csmStatus": "unavailable",
+      "csmUrl": null,
+      "sourceUrlChecked": "https://en.wikipedia.org/wiki/Steel_(1997_film)",
+      "csmAge": null,
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available from the catalog source URL."
+        },
+        "language": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available from the catalog source URL."
+        },
+        "romance": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available from the catalog source URL."
+        },
+        "drinking": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available from the catalog source URL."
+        }
+      },
+      "handoffNotes": [
+        "Catalog srcUrl is not a CSM URL, and a targeted CSM search surfaced unrelated Steel titles rather than a CSM review for Steel (1997).",
+        "Leave production catalog unchanged unless a reviewer approves a fallback-source mapping."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 692,
+      "file": "data-mcudc.js",
+      "title": "Batman & Mr. Freeze: SubZero",
+      "year": "1998",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/batman-mr-freeze-subzero",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Car crash peril, gun and knife fights, robbery assault, a crotch kick, fire and explosions on an oil rig, and polar bear attacks."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No meaningful language concern surfaced in CSM's category data."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No meaningful romance or nudity concern surfaced in CSM's category data."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Cocktail drinking appears at a black-tie event."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 693,
+      "file": "data-mcudc.js",
+      "title": "Batman Beyond: Return of the Joker",
+      "year": "2000",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/batman-beyond-return-of-the-joker",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Dark flashback torture of Robin, characters shot and killed, gun and laser fights, gas bombs, and civilians thrown from a skyscraper roof."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No meaningful language concern surfaced in CSM's category data."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No meaningful romance or nudity concern surfaced in CSM's category data."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Champagne, brief nightclub drinking images, and the Joker's pipe shown as a prop."
+        }
+      },
+      "handoffNotes": [
+        "Live CSM drinking label/details are lower than the earlier screening assumption.",
+        "Emotional/sad prose should retain Robin's kidnapping and torture because it is unusually disturbing for an animated Batman entry."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 694,
+      "file": "data-mcudc.js",
+      "title": "X-Men",
+      "year": "2000",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/x-men",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Mostly bloodless superhero fights, stabbing, force-beam and weather attacks, an accidental claw injury, intense medical imagery, and one liquefaction."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Infrequent stronger language, mild profanities, religious exclamations, and a gesture equivalent to an obscene hand sign."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Some kissing plus Mystique's mostly unclothed blue-scaled appearance."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Cigar smoking is shown and criticized; beer and hard liquor also appear."
+        }
+      },
+      "handoffNotes": [
+        "Live CSM language label is higher than the earlier screening pass level."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 695,
+      "file": "data-mcudc.js",
+      "title": "X2",
+      "year": "2003",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/x2-x-men-united",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Heavy comic-book violence includes fatal claw attacks, police killed with fire, a knife threat to the president, and repeated throwing, stabbing, punching, and kicking."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Several censored strong words and mild profanities."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "CSM's romance section focuses on Mystique's body-like costume; related CSM detail also mentions coerced sexual contact during a prison-guard deception."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Teen smoking, Wolverine's cigar and beer use, and a president pouring an alcoholic drink."
+        }
+      },
+      "handoffNotes": [
+        "Live CSM violence and drinking labels are higher than the earlier screening pass."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 696,
+      "file": "data-mcudc.js",
+      "title": "Catwoman",
+      "year": "2004",
+      "currentCatalogCa": "14+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/catwoman",
+      "csmAge": "14+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Comic-book action violence, peril, robbery, murder, and psychological spousal abuse."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM labels language as none while noting only mild wording."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frequent sexuality, implied sex, and an adultery reference."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Characters drink, and a beauty product is treated like an addictive substance."
+        }
+      },
+      "handoffNotes": [
+        "Language has a visible CSM label of none even though the detail says mild; keep level 1 unless the mapper treats any detail text as a conflict."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 697,
+      "file": "data-mcudc.js",
+      "title": "Batman Begins",
+      "year": "2005",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/batman-begins",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Harshly edited martial arts and gunplay, scary images, and repeated references to Bruce witnessing his parents' murder."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Several mild profanities and insults."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One kiss and a brief playboy-excess pool scene."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Smoking, drinking, and hallucinogenic drug effects are part of the story."
+        }
+      },
+      "handoffNotes": [
+        "Live CSM language and drinking labels are higher than the earlier screening pass.",
+        "Emotional/sad prose should retain Bruce's childhood parental murder."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 698,
+      "file": "data-mcudc.js",
+      "title": "Elektra",
+      "year": "2005",
+      "currentCatalogCa": "14+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/elektra",
+      "csmAge": "14+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Extensive and graphic comic-book-style fighting and violence."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "CSM describes strong language but gives little itemized detail."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM labels romance/nudity as none while still mentioning a couple of kisses."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No drinking, drugs, or smoking concern surfaced in CSM's category data."
+        }
+      },
+      "handoffNotes": [
+        "CSM romance label and detail conflict: label is none, but the detail mentions kisses.",
+        "Live CSM violence and language labels are higher than the earlier screening pass."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 699,
+      "file": "data-mcudc.js",
+      "title": "Fantastic Four",
+      "year": "2005",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/fantastic-four",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Fantasy action includes frequent superhero fights, police gunfire, a bridge pileup, a character catching fire, thrown objects, and a brief bridge-jump concern."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild profanity, insults, and religious exclamations."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Partial nudity, sexual innuendo, bare chests, an implied nude hot-tub scene, kissing, bra/underwear moments, a shower gag, and a love triangle."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults drink wine with meals and beer or liquor in a bar; one character references past smoking."
+        }
+      },
+      "handoffNotes": [
+        "CSM violence detail includes an unwanted kiss portrayed casually; consider whether that belongs in prose outside the scored violence bucket."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 700,
+      "file": "data-mcudc.js",
+      "title": "Superman Returns",
+      "year": "2006",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/superman-returns",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Fiery crash, burning plane, rescues amid explosions and earthquake peril, near-falls, a severe beating and stabbing with kryptonite, animal-eating-animal gag, and armed thieves."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "One mild profanity and one censored stronger word."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM labels romance/nudity as none while describing romantic looks, a chaste flight, and tight costumes."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A bar scene includes beer, and Lois starts to smoke before Superman discourages her."
+        }
+      },
+      "handoffNotes": [
+        "CSM romance label and detail conflict: label is none, but the detail mentions mild romantic presentation.",
+        "Live CSM drinking label is higher than the earlier screening pass.",
+        "Emotional/sad prose should retain sad hospital/family worry and Superman grieving losses."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 701,
+      "file": "data-mcudc.js",
+      "title": "X-Men: The Last Stand",
+      "year": "2006",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/x-men-the-last-stand",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Comic-book explosions, stabbings, shootouts, fights, self-mutilation distress, assaults, character disintegration, bridge destruction, electrocution, and close-up stabbing."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Fairly mild but recurring profanity and crude terms."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Passionate kissing, full-body embrace, jealousy, a pants-removal gag, and Mystique's nude-like appearance with covered private areas."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM labels drinking/drugs/smoking as none while the detail mentions Wolverine smoking a cigar."
+        }
+      },
+      "handoffNotes": [
+        "CSM drinking label and detail conflict: label is none, but the detail mentions cigar smoking.",
+        "Emotional/sad prose should retain the self-mutilation attempt and Professor X death concern."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 702,
+      "file": "data-mcudc.js",
+      "title": "Fantastic Four: Rise of the Silver Surfer",
+      "year": "2007",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/fantastic-four-rise-of-the-silver-surfer",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Explosions, crowds in danger, fights with the Silver Surfer and Doom, one temporary spearing death, and another bloodless death."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Several mild profanities, insults, and crude phrases."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Spoken innuendo, mistaken exotic-dancer setup, lingerie and aloe jokes, repeated Sue/Reed kisses, a heated comment, and a towel-only shower exit."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Club beer drinking, oversized drinks, and a Jell-O shots reference."
+        }
+      },
+      "handoffNotes": [
+        "Live CSM language and drinking labels are higher than the earlier screening pass."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 703,
+      "file": "data-mcudc.js",
+      "title": "Ghost Rider",
+      "year": "2007",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/ghost-rider",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Constant fantasy violence and stunts include fatal motorcycle crash backstory, demonic killings, creepy flaming-skull imagery, knife wounds, shootings, chain attacks, and supernatural death scenes."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "One censored stronger word plus several mild profanities."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Cleavage-focused costuming, several kisses, and one joke about needing a woman's touch."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Saloon setting, cigarette smoking tied to cancer, beer, a refused cigarette, and a date-night wine bottle that leaves Roxy drunk."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 704,
+      "file": "data-mcudc.js",
+      "title": "Superman: Doomsday",
+      "year": "2007",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/superman-doomsday",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Intense animated fighting with Superman bleeding, deaths including off-screen child death, beatings, off-screen broken heads and spines, animal deaths, and a shooting death."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Mild profanity, a body-part term, and one euphemistic swear."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM labels romance/nudity as none while noting Superman and Lois are implied lovers and that nude male clones are strategically obscured."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Perry White drinks under stress."
+        }
+      },
+      "handoffNotes": [
+        "Catalog currentCatalogCa is 11+, while catalog la is 12+; live CSM age is 11+.",
+        "CSM romance label and detail conflict: label is none, but the detail mentions implied lovers/cohabitation and obscured clone nudity.",
+        "Emotional/sad prose should retain Superman's death stakes and off-screen child/animal deaths."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 705,
+      "file": "data-mcudc.js",
+      "title": "Batman: Gotham Knight",
+      "year": "2008",
+      "currentCatalogCa": "14+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/batman-gotham-knight",
+      "csmAge": "14+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Graphic animated violence includes gushing blood, a gory hospital sequence, decapitation, fantasy combat, gunfire, explosions, and a head shooting."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "One mild profanity."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Brief bikinis and low-cut dresses."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Brief social drinking."
+        }
+      },
+      "handoffNotes": [
+        "Live CSM language, romance, and drinking labels are higher than the earlier partial screening pass likely captured."
+      ],
+      "confidence": "high"
+    }
+  ],
+  "handoffSummary": {
+    "refetchedEntries": 20,
+    "foundCsmEntries": 19,
+    "unavailableCsmEntries": [
+      {
+        "num": 691,
+        "title": "Steel",
+        "catalogSrcUrl": "https://en.wikipedia.org/wiki/Steel_(1997_film)",
+        "reason": "Catalog source URL is not CSM, and targeted CSM search did not surface a CSM review for Steel (1997)."
+      }
+    ],
+    "firstNum": 686,
+    "lastNum": 705,
+    "sourceBasis": "live CSM refetch by subagent from catalog srcUrl when CSM URL was present",
+    "handoffNotes": [
+      "Do not edit production catalog files from this research-only pass.",
+      "Several live labels differ from the earlier screening assumptions, especially Batman Returns language, Batman & Robin language, X2 violence/drinking, Batman Begins language/drinking, Elektra violence/language, and Fantastic Four: Rise of the Silver Surfer language/drinking.",
+      "Carry forward CSM label/detail conflicts for reviewer judgment: Elektra romance, Superman Returns romance, X-Men: The Last Stand drinking, and Superman: Doomsday romance.",
+      "Carry forward emotional/sad prose where noted, especially parental murder, child abandonment, torture, self-harm imagery, grief, and child/animal death references."
+    ],
+    "nextAction": "Reviewer should transform approved entries through the official content-flag backfill workflow before any production catalog edits."
+  }
+}

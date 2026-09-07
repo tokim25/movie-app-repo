@@ -1,0 +1,770 @@
+{
+  "researchBatch": "csm-content-flags-refetched-06-07-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only handoff for CSM content flag backfill correction. Built from live Common Sense Media refetches of catalog source URLs for data-csm.js nums 643-664 inclusive. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's visible category label and proposes the nearest app level. Reviewer should confirm exact canonical mapper before writing production catalog data."
+  },
+  "entries": [
+    {
+      "num": 643,
+      "file": "data-csm.js",
+      "title": "An American Tail: The Mystery of the Night Monster",
+      "year": "2000",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/an-american-tail-the-mystery-of-the-night-monster",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Fievel has frightening nightmare imagery involving a monstrous bat-like figure; the mystery plot also includes kidnapping and a home being burned, but the treatment remains animated and mild."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful romance or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "Keep some prose for fear/nightmare content even though the scored concern is low."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 644,
+      "file": "data-csm.js",
+      "title": "Buzz Lightyear of Star Command: The Adventure Begins",
+      "year": "2000",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/buzz-lightyear-of-star-command-the-adventure-begins",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frequent sci-fi battles include lasers, explosions, robot damage, kidnapping peril, alien torture, and a death/funeral misunderstanding that adds emotional intensity."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful romance or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "Emotional funeral/mourning material should be mentioned in prose even though it sits under action-peril research."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 645,
+      "file": "data-csm.js",
+      "title": "Ice Age",
+      "year": "2002",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/ice-age",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Repeated animated danger includes attacking saber-toothed tigers, rampaging rhinos, cliff and mountain falls, volcanic and avalanche peril, implied deaths, and a mother's drowning after rescuing her baby."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM labels language as none, while noting only diaper and poop jokes."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful romance or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "CSM language label is none despite potty-humor detail; reviewer may want prose but not a score upgrade.",
+        "Mother's death and infant rescue are emotional/sad content worth retaining in prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 646,
+      "file": "data-csm.js",
+      "title": "Robots",
+      "year": "2005",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/robots",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Cartoon chases, captures, falls, battles, and a scrap-metal threat appear, with menace softened because the characters are robots and the action is played comically."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mostly potty words and an extended fart sequence, plus mild body-part words and a mechanical pun."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A small amount of flirtation and mild sexual humor, including jokes likely to pass over younger viewers."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM labels the category as none but mentions robot party drinks served in cocktail-style glasses."
+        }
+      },
+      "handoffNotes": [
+        "CSM drinking label and detail conflict: label is none, but party imagery resembles martinis/champagne using robot oil."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 647,
+      "file": "data-csm.js",
+      "title": "Brother Bear 2",
+      "year": "2006",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/brother-bear-2",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM labels violence as none but describes avalanche suspense, brief animal menace, and a moment when a loved character seems gravely hurt."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM labels romance as none while describing a gentle romance thread and a few teasing body-focused jokes from comic side characters."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "CSM violence label is none despite peril/detail text; leave for reviewer judgment.",
+        "CSM romance label is none despite mild flirtation/body-part jokes; leave for reviewer judgment.",
+        "Love after death and apparent injury may need prose for sensitive viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 649,
+      "file": "data-csm.js",
+      "title": "Leroy & Stitch",
+      "year": "2006",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/leroy-stitch",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM labels violence as none but notes one mild cartoon battle and a villain design that may frighten younger kids."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful romance or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "CSM violence label is none despite a mild battle and scary-looking cloned antagonist."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 650,
+      "file": "data-csm.js",
+      "title": "Coraline",
+      "year": "2009",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/coraline",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Sustained dark fantasy horror includes a frightening Other Mother, implied murdered children, chase peril, brief strangling, and a severed hand that continues to attack."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild swears and insults such as rude name-calling and religious exclamations."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One performance scene uses revealing costumes and body-focused imagery, but no sustained sexual content."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A character is suspected of drinking too much, without shown substance use."
+        }
+      },
+      "handoffNotes": [
+        "High horror/scariness drives the age rating; preserve mature-theme prose for sensitive kids."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 651,
+      "file": "data-csm.js",
+      "title": "Dr. Dolittle: Million Dollar Mutts",
+      "year": "2009",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/dr-dolittle-million-dollar-mutts",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Comic animal chase action targets an obnoxious agent, with no serious injury tone."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One brief kiss between college-aged characters."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful drinking, drugs, or smoking concern; a soda-chugging animal gag appears under positive role models rather than substance content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 652,
+      "file": "data-csm.js",
+      "title": "Despicable Me",
+      "year": "2010",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/despicable-me",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoon villain action includes weapons, explosions, gunfire, slapstick hits, crime jokes, implied injury, and the upsetting orphanage punishment box."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild insults, bathroom words, and softened exclamations."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful romance or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "Adoption/orphanage depiction is potentially upsetting and should remain visible in prose outside the four scored categories."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 653,
+      "file": "data-csm.js",
+      "title": "Arthur Christmas",
+      "year": "2011",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/arthur-christmas",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Peril includes a homeowner firing a gun, missiles hitting a sleigh, animal scares, traps, knockouts, and repeated dangerous rides, with some threats played for holiday adventure comedy."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild profanity, British rude words, and several insults, including sexist or body-focused name-calling."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One adult-targeted visual joke implies a dog is humping fuzzy slippers."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A tipsy elder Santa, whiskey references, alcohol bottles and pill bottles in a room, and a champagne-cork gag."
+        }
+      },
+      "handoffNotes": [
+        "Stereotyped, sexist, and fatphobic jokes are diversity/context issues outside the four requested scores."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 654,
+      "file": "data-csm.js",
+      "title": "Dolphin Tale",
+      "year": "2011",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/dolphin-tale",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Upsetting but non-graphic injury and disaster content includes a dolphin found tangled and bloody, an amputation aftermath, a wounded veteran in a wheelchair, and hurricane damage."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM labels language as none while listing only very mild words and exclamations."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM labels romance as none while noting mild adult flirtation and shirtless/swimsuit teens at a pool."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "CSM language and romance labels are none despite mild detail text.",
+        "Animal injury, amputation, veteran injury, and hurricane damage may need emotional/sad prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 655,
+      "file": "data-csm.js",
+      "title": "Ernest & Celestine",
+      "year": "2012",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/ernest-celestine",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Scary storytelling, attempts to catch or kill a tiny mouse, traps, police pursuit, courtroom peril, community anger, and a fire that nearly kills characters."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Occasional mild insult language."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful romance or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 656,
+      "file": "data-csm.js",
+      "title": "Despicable Me 2",
+      "year": "2013",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/despicable-me-2",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoon weapons and villain gadgets include tasers, knives, razors, flame guns, hostage-taking, a tranquilizer dart, mutated minions, animal danger, and flashbacks to bullying."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild insults, body-part phrases, and fart humor."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Dating, crushes, kissing, hand-holding, toilet and exposed-bottom gags, and brief shirtless or swimsuit-style imagery."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A tranquilized character's odd behavior is excused to others as if she had been drinking."
+        }
+      },
+      "handoffNotes": [
+        "Mexican stereotyping is a context issue outside the four requested scores."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 657,
+      "file": "data-csm.js",
+      "title": "Song of the Sea",
+      "year": "2014",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/song-of-the-sea",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Emotional mythic peril includes an implied maternal death, illness and possible death scares for the children, near-drowning, a frightening witch figure, attacking owls, and one upsetting parental outburst."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A married couple briefly kisses."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults drink beer in a pub scene."
+        }
+      },
+      "handoffNotes": [
+        "Mother's implied death, grief, illness, and sadness are central and should be retained in prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 658,
+      "file": "data-csm.js",
+      "title": "An American Girl: Grace Stirs Up Success",
+      "year": "2015",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/an-american-girl-grace-stirs-up-success",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful violence or scariness concern."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful romance or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 660,
+      "file": "data-csm.js",
+      "title": "Albert",
+      "year": "2016",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/albert",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A few brief scary moments, especially a near-miss at a paper-processing mill and sabotage by an antagonistic cactus."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM labels language as none while noting several mild butt-related words and one insult."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM labels romance as none while describing a brief pollination-video gag with suggestive framing."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "CSM language and romance labels are none despite mild detail text; reviewer may want prose without level upgrade."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 661,
+      "file": "data-csm.js",
+      "title": "Elena and the Secret of Avalor",
+      "year": "2016",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/elena-and-the-secret-of-avalor",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Brief magical danger includes Elena's parents being consumed by smoke and presumed dead, imprisonment in objects, tense confrontations, and a villain falling from a height."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful romance or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "Presumed parental death and magical imprisonment may need prose despite low violence score."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 662,
+      "file": "data-csm.js",
+      "title": "Ferdinand",
+      "year": "2017",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/ferdinand",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Bullfighting drives the peril: Ferdinand is threatened and cut by spears, bulls face death or slaughterhouse machinery, characters are knocked about, and a father does not return from a match."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "No hard profanity, but recurring insults target non-aggressive bulls, with additional mild rude words and crude humor."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A few lines of mild innuendo, mostly one character admiring Ferdinand's body."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [
+        "Offscreen father loss, animal cruelty, and slaughterhouse implications need prose for emotional/sad content."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 663,
+      "file": "data-csm.js",
+      "title": "Dr. Seuss' The Grinch",
+      "year": "2018",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/dr-seuss-the-grinch",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Mostly comic physical mayhem: sledding chaos, falls, catapulting, destruction in Whoville, a trap for the Grinch, and a mountain-edge rescue."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A few mild insults and softened exclamations."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Brief nonsexual undressed/underwear gags."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 664,
+      "file": "data-csm.js",
+      "title": "Early Man",
+      "year": "2018",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/early-man",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Bronze Age invaders demolish the Stone Age village, chase the heroes, and drive frequent slapstick injuries and sports hits; a tied-up rabbit is repeatedly framed as nearly eaten."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild rude language and bathroom humor, including poop and fart jokes."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Minimal nonsexual near-nakedness, a mild body-focused comment, and a silly mistaken kiss."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful drinking, drugs, or smoking concern."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    }
+  ],
+  "handoffSummary": {
+    "totalEntries": 20,
+    "found": 20,
+    "unavailable": [],
+    "catalogRange": "data-csm.js nums 643-664 inclusive; actual entries only, gaps preserved",
+    "notes": [
+      "No production catalog files were edited.",
+      "All 20 catalog srcUrl values were Common Sense Media URLs and were available during refetch.",
+      "Potential CSM label/detail conflicts or prose-attention cases: Ice Age language detail; Robots drinking detail; Brother Bear 2 violence and romance detail; Leroy & Stitch violence detail; Dolphin Tale language and romance detail; Albert language and romance detail.",
+      "Emotional or sad content needing prose attention: Buzz Lightyear funeral/mourning, Ice Age maternal death, Brother Bear 2 love-after-death/apparent injury, Despicable Me adoption/orphanage material, Dolphin Tale injury/disability/disaster material, Song of the Sea grief/illness, Elena presumed parental death, Ferdinand animal cruelty/father loss."
+    ]
+  }
+}

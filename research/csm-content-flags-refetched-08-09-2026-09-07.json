@@ -1,0 +1,829 @@
+{
+  "researchBatch": "csm-content-flags-refetched-08-09-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only live Common Sense Media refetch for nums 665-685 inclusive from data-csm.js and data-mcudc.js. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's visible category label and proposes the nearest app level. Where CSM's label and category detail conflict, the proposed level may reflect the detail rather than the label and a handoff note is included."
+  },
+  "entries": [
+    {
+      "num": 665,
+      "file": "data-csm.js",
+      "title": "A Shaun the Sheep Movie: Farmageddon",
+      "year": "2019",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/a-shaun-the-sheep-movie-farmageddon",
+      "researchBasis": "live CSM refetch by subagent",
+      "csmAge": "5+",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Cartoon slapstick, brief danger, falls and vehicle crashes, a scary agent pursuing Lu-La, and parent separation, with no lasting injury."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "No real language concern; only bodily-noise humor is noted."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Brief underwear, covered nude-photo gag, and a short end-credit buttocks gag."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A character becomes hyper after drinking too much fizzy soda."
+        }
+      },
+      "handoffNotes": [
+        "Emotional goodbye and parent separation may need prose outside the scored flags.",
+        "Live CSM romance/nudity signal is higher than the screening pass, which had inferred no romance/nudity concern."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 667,
+      "file": "data-csm.js",
+      "title": "Ella Bella Bingo",
+      "year": "2020",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/ella-bella-bingo",
+      "researchBasis": "live CSM refetch by subagent",
+      "csmAge": "6+",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Cartoon peril includes a bull chase, roller-coaster excitement, toy swordplay, haunted-house imagery, and pratfalls."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "No language concern beyond repeated dog-fart humor."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "No romance or nudity concern surfaced in CSM's category data."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "No drinking, drugs, or smoking concern surfaced in CSM's category data."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 668,
+      "file": "data-csm.js",
+      "title": "Phineas and Ferb the Movie: Candace Against the Universe",
+      "year": "2020",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/phineas-and-ferb-the-movie-candace-against-the-universe",
+      "researchBasis": "live CSM refetch by subagent",
+      "csmAge": "5+",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Fast cartoon sci-fi action includes alien abduction, crashes, ejections, chases, fires, cliff falls, spores, and alien creatures being eaten or exploding."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Only a couple of mild words are noted."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "No romance or nudity concern surfaced in CSM's category data."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "No drinking, drugs, or smoking concern surfaced in CSM's category data."
+        }
+      },
+      "handoffNotes": [
+        "Live violence label is a little, lower than the screening pass's inferred level 3."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 669,
+      "file": "data-csm.js",
+      "title": "My Little Pony: A New Generation",
+      "year": "2021",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/my-little-pony-a-new-generation",
+      "researchBasis": "live CSM refetch by subagent",
+      "csmAge": "5+",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild animated peril includes near-falls, chases, imprisonment, a military-style robot, fearful talk about other pony groups, mob behavior, and mention of a deceased parent."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Childish taunts and mild rude words are noted."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "No romance or nudity concern surfaced in CSM's category data."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "No drinking, drugs, or smoking concern surfaced in CSM's category data."
+        }
+      },
+      "handoffNotes": [
+        "Mention of the main character's deceased father may need prose outside scored flags."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 670,
+      "file": "data-csm.js",
+      "title": "Epic Tails",
+      "year": "2022",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/epic-tails",
+      "researchBasis": "live CSM refetch by subagent",
+      "csmAge": "6+",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Mythic peril includes a kraken, rock-throwing robot, broken-glass threat, cyclopes threatening to eat characters, scorpion attacks, ship smashing, and visible vomiting."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild insults and occasional gross-out humor are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A cyclops backside is exposed in a pantsing gag."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "No drinking, drugs, or smoking concern surfaced in CSM's category data."
+        }
+      },
+      "handoffNotes": [
+        "Live violence label is some, higher than the screening pass's inferred level 2."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 671,
+      "file": "data-csm.js",
+      "title": "Luck",
+      "year": "2022",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/luck",
+      "researchBasis": "live CSM refetch by subagent",
+      "csmAge": "5+",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Characters repeatedly fall, get bonked, face chases and scary-looking monsters, but recover; the adoption-disappointment thread adds emotional weight."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Very mild rude words and taunts are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A unicorn and dragon fondly recall falling in love."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Juice-bar drinks look like tiki cocktails, though they are not presented as alcoholic."
+        }
+      },
+      "handoffNotes": [
+        "Adoption disappointment and found-family material may need prose outside the scored flags.",
+        "Live CSM romance and drinking signals are higher than the screening pass, which had inferred none."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 672,
+      "file": "data-csm.js",
+      "title": "Marcel the Shell with Shoes On",
+      "year": "2022",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/marcel-the-shell-with-shoes-on",
+      "researchBasis": "live CSM refetch by subagent",
+      "csmAge": "8+",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Tiny shells face everyday peril from animals, heights, machines, falling objects, and feet; Nana Connie is injured, and grief follows a sad loss."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Rare mild exclamations, insults, and rude-body words are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A pubic-hair discovery is framed as innocent crafting material, and Marcel imitates TV kissing for humor."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A bee is described as nectar-tipsy, and a cork pops during a celebration."
+        }
+      },
+      "handoffNotes": [
+        "Loss and grief are central and should remain visible in prose outside the scored flags.",
+        "Live CSM romance and drinking signals are higher than the screening pass, which had inferred none."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 673,
+      "file": "data-csm.js",
+      "title": "Flow",
+      "year": "2024",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/flow",
+      "researchBasis": "live CSM refetch by subagent",
+      "csmAge": "6+",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Sustained survival peril includes a massive flood, destruction, near-drowning, a stampede, fighting birds, abandonment, possible animal death, and injured wings."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "No language concern surfaced in CSM's category data."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "No romance or nudity concern surfaced in CSM's category data."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "No drinking, drugs, or smoking concern surfaced in CSM's category data."
+        }
+      },
+      "handoffNotes": [
+        "Dialogue-free life-or-death animal peril and a possible death may need prose outside the scored flags."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 674,
+      "file": "data-csm.js",
+      "title": "David",
+      "year": "2025",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/david",
+      "researchBasis": "live CSM refetch by subagent",
+      "csmAge": "6+",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Biblical battle peril includes David and Goliath, swords, spears, implied punches, a bruised cheek, and verbal references to death and killing, without blood or gore."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Very limited mild language is noted."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "No romance or nudity concern surfaced in CSM's category data."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "No drinking, drugs, or smoking concern surfaced in CSM's category data."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 675,
+      "file": "data-csm.js",
+      "title": "The Last Whale Singer",
+      "year": "2025",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-last-whale-singer",
+      "researchBasis": "live CSM refetch by subagent",
+      "csmAge": "6+",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Heavy emotional and peril content includes parent and child deaths, bodies sinking, a graveyard of bones, arrows killing a calf in legend, a tentacled monster, toxic gas, a fake-shark jump scare, and an atomic-bomb image."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Frequent mild insults and name-calling are noted."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "No romance or nudity concern surfaced in CSM's category data."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "No drinking, drugs, or smoking concern surfaced in CSM's category data."
+        }
+      },
+      "handoffNotes": [
+        "Grief, parental death, child death, and euphemistic afterlife language need prose outside scored flags."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 676,
+      "file": "data-csm.js",
+      "title": "Coyote vs. Acme",
+      "year": "2026",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/coyote-vs-acme",
+      "researchBasis": "live CSM refetch by subagent",
+      "csmAge": "7+",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frequent cartoon violence includes impacts, flattening, falls, knife threat, missiles, grenades, explosions, fire, crushed cars, a train crash, teeth gag, booby traps, distress while squeezed, and lab testing."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Infrequent profanity, religious exclamations, insults, and a censored explicit song are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Brief pants-dropping and cartoon-nudity gags."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Coyote drinks from an exaggerated liquor bottle and changes color."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 677,
+      "file": "data-csm.js",
+      "title": "Minions & Monsters",
+      "year": "2026",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/minions-monsters",
+      "researchBasis": "live CSM refetch by subagent",
+      "csmAge": "7+",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Busy comic peril includes monster destruction, fire blasts, creepy summoning imagery, villains dispatched in non-gory ways including a beheading gag, weapons, gunfire, dynamite, vehicle chases, shark attack, bullying, and a child threat."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A stronger insult appears once, alongside mild name-calling, rude words, and untranslated Minionese put-downs."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Bare Minion and monster bottom gags, a thong gag, brief nakedness, flirting, dating, near-kissing, and an end-credit nudity gag."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Champagne toasts, cocktail-style drinks, restaurant drinking, and liquor shown in a movie-within-the-movie."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 678,
+      "file": "data-csm.js",
+      "title": "PAW Patrol: The Dino Movie",
+      "year": "2026",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/paw-patrol-the-dino-movie",
+      "researchBasis": "live CSM refetch by subagent",
+      "csmAge": "6+",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "More intense rescue peril includes river rapids, waterfall danger, roaring dinosaurs, stampede, dynamite, erupting volcano with lava and fireballs, a knockout, boat fire, storm crash, trap, mudslide, and torch threat."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild rude words, insults, and a comic character name are noted."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "No romance or nudity concern surfaced in CSM's category data."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "No drinking, drugs, or smoking concern surfaced in CSM's category data."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 679,
+      "file": "data-csm.js",
+      "title": "Toy Story 5",
+      "year": "2026",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/toy-story-5",
+      "researchBasis": "live CSM refetch by subagent",
+      "csmAge": "5+",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Toy-scale rescue peril includes escapes, daring missions, danger of being eaten, damaged, discarded, lost, or separated, mock military play, and Bonnie being hurt by online exclusion."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild language, cut-off near-curses, and bathroom jokes tied to a potty-trainer toy are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Toy couples share quick wedding-related kisses and hugs."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Low-battery tech toys slur and slow down in a way that resembles intoxication."
+        }
+      },
+      "handoffNotes": [
+        "Bonnie's online rejection/exclusion may need prose outside the scored flags.",
+        "Live CSM romance and drinking signals are higher than the screening pass, which had inferred none for romance and drinking."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 680,
+      "file": "data-mcudc.js",
+      "title": "Batman",
+      "year": "1966",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/batman-1966",
+      "researchBasis": "live CSM refetch by subagent",
+      "csmAge": "9+",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Campy fight scenes, pratfalls, a fake shark bite, and a brief false alarm that Batman exploded are played broadly and without lasting harm."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "No language concern surfaced in CSM's category data."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Batman dates a woman, kisses her, and sees her in a slinky robe."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Penguin smokes with a cigarette holder, bar scenes appear, and Batman mentions alcohol-related delusions."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 681,
+      "file": "data-mcudc.js",
+      "title": "Superman",
+      "year": "1978",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/superman-the-movie",
+      "researchBasis": "live CSM refetch by subagent",
+      "csmAge": "9+",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Large-scale peril includes planetary destruction, falling people, earthquake and plane disasters, gun threats, offscreen parental death, a temporary major-character death, and consent-violation scenes framed as humor."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Infrequent profanity and insults are noted."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Kissing, including nonconsensual kisses, swimsuits, objectifying wet-clothing imagery, and mild sexual innuendo are noted."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Characters smoke indoors, smoke cigars or cigarettes, drink wine, drink from a flask, reference buying bottles, and mention a sex-and-drugs story."
+        }
+      },
+      "handoffNotes": [
+        "Consent issues and objectification need prose outside scored flags.",
+        "Live CSM violence label is a lot, higher than the current catalog prose emphasis may imply."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 682,
+      "file": "data-mcudc.js",
+      "title": "Superman II",
+      "year": "1980",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/superman-ii",
+      "researchBasis": "live CSM refetch by subagent",
+      "csmAge": "8+",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Superhero peril includes Lois nearly crushed, a creepy transformation, a bloody-nose beating, destructive fights in Metropolis, and offscreen/animal burning."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Several mild-to-moderate curse words are noted."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Lois and Clark's sexual relationship is discreetly implied."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "No drinking, drugs, or smoking concern surfaced in CSM's category data."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 683,
+      "file": "data-mcudc.js",
+      "title": "Superman III",
+      "year": "1983",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/superman-iii",
+      "researchBasis": "live CSM refetch by subagent",
+      "csmAge": "8+",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Super-powered fights use missiles and lightning, Jimmy Olsen is injured in a fall, and a character is briefly transformed into a cyborg-like figure."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "CSM summarizes the language as a few curse words."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 2,
+          "summary": "Although labeled none, CSM's detail notes a mistress/girlfriend in revealing clothing and Superman spending the night with her."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A corrupted Superman gets publicly drunk, another character is persistently drunk and hostile, and Gus uses drunkenness to gain access to a computer room."
+        }
+      },
+      "handoffNotes": [
+        "CSM romance/nudity label is none, but its detail describes revealing clothing and implied sex; proposed level reflects the detail.",
+        "Catalog prose already captures the drinking concern; keep it visible."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 684,
+      "file": "data-mcudc.js",
+      "title": "Supergirl",
+      "year": "1984",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/supergirl-1984",
+      "researchBasis": "live CSM refetch by subagent",
+      "csmAge": "8+",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Comic-book fights use varied weapons without blood or gore; CSM also notes mildly scary scenes and a brief non-graphic mentor death."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Occasional profanity and religious exclamation are noted."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 2,
+          "summary": "Although labeled none, CSM's detail and story text mention some kissing and Kara finding romance."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "The villain and her minions drink and smoke."
+        }
+      },
+      "handoffNotes": [
+        "CSM romance/nudity label is none, but its detail says there is kissing; proposed level reflects the detail.",
+        "Mentor death may need prose outside the scored flags."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 685,
+      "file": "data-mcudc.js",
+      "title": "Superman IV: The Quest for Peace",
+      "year": "1987",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/superman-iv-the-quest-for-peace",
+      "researchBasis": "live CSM refetch by subagent",
+      "csmAge": "8+",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Nuclear-weapons plotting and superhero battles across space, the moon, volcanoes, and city settings raise destruction peril, alongside references to Krypton's violent destruction and parental loss."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Very mild profanity and name-calling are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Lois and Superman seem romantically attached, and Lacey aggressively tries to seduce Clark with body-focused behavior."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults smoke cigars."
+        }
+      },
+      "handoffNotes": [
+        "Nuclear-war anxiety and repeated parental-loss references may need prose outside scored flags."
+      ],
+      "confidence": "high"
+    }
+  ],
+  "handoffSummary": {
+    "entriesRequested": "nums 665-685 inclusive from data-csm.js and data-mcudc.js, using actual entries in range",
+    "entriesResearched": 20,
+    "missingNumsInRange": [
+      666
+    ],
+    "unavailablePages": [],
+    "ageMismatches": [],
+    "labelDetailConflicts": [
+      {
+        "num": 683,
+        "title": "Superman III",
+        "note": "CSM labels Sex, Romance & Nudity as none, but detail mentions revealing clothing and Superman spending the night with a mistress/girlfriend."
+      },
+      {
+        "num": 684,
+        "title": "Supergirl",
+        "note": "CSM labels Sex, Romance & Nudity as none, but detail mentions some kissing."
+      }
+    ],
+    "emotionalContentNeedingProse": [
+      {
+        "num": 665,
+        "title": "A Shaun the Sheep Movie: Farmageddon",
+        "note": "Parent separation and emotional goodbye."
+      },
+      {
+        "num": 669,
+        "title": "My Little Pony: A New Generation",
+        "note": "Main character's deceased father is mentioned."
+      },
+      {
+        "num": 671,
+        "title": "Luck",
+        "note": "Adoption disappointment and found-family themes."
+      },
+      {
+        "num": 672,
+        "title": "Marcel the Shell with Shoes On",
+        "note": "Loss and grief are central."
+      },
+      {
+        "num": 673,
+        "title": "Flow",
+        "note": "Dialogue-free survival peril and possible animal death."
+      },
+      {
+        "num": 675,
+        "title": "The Last Whale Singer",
+        "note": "Parental death, child death, grief, and afterlife euphemisms."
+      },
+      {
+        "num": 681,
+        "title": "Superman",
+        "note": "Consent issues, objectification, offscreen parental death, and temporary major-character death."
+      },
+      {
+        "num": 684,
+        "title": "Supergirl",
+        "note": "Brief mentor death."
+      },
+      {
+        "num": 685,
+        "title": "Superman IV: The Quest for Peace",
+        "note": "Nuclear-war anxiety and repeated parental-loss references."
+      }
+    ],
+    "notes": [
+      "All requested catalog srcUrl values in this range were Common Sense Media URLs and were reachable during the refetch.",
+      "No production catalog files were edited."
+    ]
+  }
+}

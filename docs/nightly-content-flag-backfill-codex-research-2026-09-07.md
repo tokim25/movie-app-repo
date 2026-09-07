@@ -15,9 +15,9 @@ Codex completed repo/process research and a bounded CSM pilot, then pushed the r
 - producing a first-pass handoff checklist for PM/Coder/Reviewer
 - verifying that direct CSM page access works from this environment
 - researching 50 representative existing catalog titles under the 4-flag model
-- screening an additional 100 catalog titles from existing CSM-backed prose and source URLs for Claude/local bridge verification
+- manually refetching an additional 100 catalog titles through five parallel subagents
 
-Codex should not perform the full 938-title backfill in this pass. The plan still depends on the local bridge session on tokim25's machine for the unattended nightly run, progress checkpoints, rate-guard behavior, and PR batching. The 50-title pilot plus 100-title screening set is intended to prove the research shape and give Claude concrete examples, not replace the scheduled backfill process.
+Codex should not perform the full 938-title backfill in this pass. The plan still depends on the local bridge session on tokim25's machine for the unattended nightly run, progress checkpoints, rate-guard behavior, and PR batching. The 50-title pilot plus 100-title live-refetched set is intended to prove the research shape and give Claude concrete examples, not replace the scheduled backfill process.
 
 Codex should also avoid doing coder, reviewer, or UX-designer work in this pass. That means no implementation changes, no PR approval opinion, and no product/interaction changes beyond research findings.
 
@@ -31,18 +31,13 @@ The branch now contains five pilot JSON files with 50 total titles:
 - `research/csm-content-flags-pilot-04-2026-09-07.json`
 - `research/csm-content-flags-pilot-05-2026-09-07.json`
 
-It also contains ten screening JSON files with 100 additional titles:
+It also contains five live-refetched JSON files with 100 additional titles:
 
-- `research/csm-content-flags-screening-06-2026-09-07.json`
-- `research/csm-content-flags-screening-07-2026-09-07.json`
-- `research/csm-content-flags-screening-08-2026-09-07.json`
-- `research/csm-content-flags-screening-09-2026-09-07.json`
-- `research/csm-content-flags-screening-10-2026-09-07.json`
-- `research/csm-content-flags-screening-11-2026-09-07.json`
-- `research/csm-content-flags-screening-12-2026-09-07.json`
-- `research/csm-content-flags-screening-13-2026-09-07.json`
-- `research/csm-content-flags-screening-14-2026-09-07.json`
-- `research/csm-content-flags-screening-15-2026-09-07.json`
+- `research/csm-content-flags-refetched-06-07-2026-09-07.json`
+- `research/csm-content-flags-refetched-08-09-2026-09-07.json`
+- `research/csm-content-flags-refetched-10-11-2026-09-07.json`
+- `research/csm-content-flags-refetched-12-13-2026-09-07.json`
+- `research/csm-content-flags-refetched-14-15-2026-09-07.json`
 
 Each entry includes:
 
@@ -55,7 +50,7 @@ Each entry includes:
 - a prose note for emotional/sad content when relevant
 - a short implementation note for Claude/Coder
 
-The pilot and screening files intentionally do not modify production catalog data. Claude should treat the pilot files as source-backed research input and the screening files as draft prioritization/mapping input that still requires live CSM category verification before production import.
+The pilot and refetched files intentionally do not modify production catalog data. Claude should treat these files as source-backed research input that still needs normal review and transformation through the official backfill workflow before production import.
 
 Notable pilot findings:
 
@@ -63,6 +58,7 @@ Notable pilot findings:
 - `The Greatest Showman` and `Wicked` appear to have catalog age values below the current CSM recommendations found in the pilot.
 - Low-age animated titles can still carry meaningful Violence & Scariness values, so the app should not infer content flags from age alone.
 - Emotional/life-and-death content remains important in prose even after dropping `Sad moments` as a scored slider.
+- In the 100-title refetch range, `Steel` remains a fallback-source title: the catalog URL is Wikipedia and targeted CSM lookup did not surface a CSM review.
 
 ## Verified Repo State
 
