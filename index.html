@@ -445,7 +445,7 @@
     color:var(--error);
   }
 
-  ul#list, #watchlistList, #searchResultsList{
+  ul#list{
     list-style:none;
     margin:8px 0 0;
     padding:0;
@@ -804,7 +804,7 @@
     cursor:pointer;
   }
 
-  /* Browse / Watchlist / Search / More screens */
+  /* Browse / Family screens */
   .screenWrap{
     max-width:680px;
     margin:0 auto;
@@ -834,14 +834,6 @@
     flex-shrink:0;
   }
   .iconBtn svg{ width:20px; height:20px; }
-  .sortRow{
-    margin-bottom:14px;
-  }
-  .requestLink{
-    font-size:14px;
-    color:var(--ink-soft);
-    margin:14px 0;
-  }
   .requestPanel{
     margin:16px 0 4px;
     padding:16px;
@@ -2003,34 +1995,6 @@
       <button type="submit">Send</button>
     </form>
   </section>
-</div>
-
-<div id="watchlistScreen" class="screenWrap" style="display:none;">
-  <div class="screenTopBar">
-    <h1>Watchlist</h1>
-  </div>
-  <div class="subtitle" id="watchlistSubtitle" style="text-align:left;margin:0 0 14px;">0 movies you want to watch</div>
-  <div class="sortRow">
-    <select id="watchlistSortMode" class="sortSelect" aria-label="Sort watchlist">
-      <option value="year">Sort: Year</option>
-      <option value="age">Sort: Recommended age</option>
-      <option value="title">Sort: Title</option>
-    </select>
-  </div>
-  <ul id="watchlistList"></ul>
-  <div class="empty" id="watchlistEmptyMsg" style="display:none;">Tap the star on any movie to add it here.</div>
-</div>
-
-<div id="searchScreen" class="screenWrap" style="display:none;">
-  <div class="screenTopBar">
-    <h1>Search</h1>
-  </div>
-  <div class="controls">
-    <input type="text" id="searchScreenInput" placeholder="Search">
-  </div>
-  <p class="requestLink">Can't find a title? <button type="button" id="searchRequestLink" class="linkBtn">Request a movie</button></p>
-  <ul id="searchResultsList"></ul>
-  <div class="empty" id="searchEmptyMsg" style="display:none;"></div>
 </div>
 
 <div id="familyScreen" class="screenWrap" style="display:none;">
@@ -3465,7 +3429,7 @@ function renderTonightKidChoices(){
 // hand-written functions, showHomeScreen()/showLegacyScreen(), where the
 // second only ever removed Home's "on" class and never gave Browse/More
 // their own, and both tabs fell back to the same single legacy view).
-const SCREENS = ['setup', 'home', 'browse', 'watchlist', 'search', 'family'];
+const SCREENS = ['setup', 'home', 'browse', 'family'];
 let screens = {};
 let tabs = {};
 
@@ -3493,8 +3457,6 @@ function initScreens(){
   });
   tabs.home = document.getElementById('tabHome');
   tabs.browse = document.getElementById('tabBrowse');
-  tabs.watchlist = null;
-  tabs.search = null;
   tabs.family = document.getElementById('tabFamily');
   tabs.setup = null;
 }
@@ -3538,16 +3500,12 @@ function renderCurrentView(){
   renderChildren();
   renderTonightKidChoices();
   if(currentScreen === 'browse') render();
-  else if(currentScreen === 'watchlist') renderWatchlist();
-  else if(currentScreen === 'search') renderSearchScreen();
   else updateStats();
 }
 
 function refreshCatalogData(){
   renderNewSection();
   render();
-  renderWatchlist();
-  renderSearchScreen();
   updateStats();
 }
 
@@ -3643,97 +3601,6 @@ function updateStats(){
   if(syncPanel && syncPanel.style.display !== 'none'){
     document.getElementById('syncCodeOut').value = encodeState();
   }
-}
-
-function createSimpleRow(idx){
-  const m = MOVIES[idx];
-  const isChecked = markValue(state.checked, idx);
-
-  const li = document.createElement('li');
-  li.className = 'row' + (isChecked ? ' checked' : '');
-
-  const check = document.createElement('button');
-  check.className = 'check' + (isChecked ? ' on' : '');
-  check.setAttribute('aria-label', 'Mark watched');
-  check.onclick = () => toggleCheck(idx);
-
-  const isPriority = markValue(state.priority, idx);
-  const star = createStarButton(idx, isPriority);
-
-  const poster = createPoster(m, null, isRecent(m));
-
-  const info = document.createElement('div');
-  info.className = 'info';
-  const title = document.createElement('div');
-  title.className = 'title';
-  title.textContent = `${m.t} (${m.y})`;
-  title.onclick = () => toggleDetail(idx);
-  const meta = createMeta(idx, m);
-  info.appendChild(title);
-  info.appendChild(meta);
-  const fitSignals = createFitSignals(idx);
-  if(fitSignals) info.appendChild(fitSignals);
-
-  li.appendChild(check);
-  li.appendChild(star);
-  if(poster) li.appendChild(poster);
-  li.appendChild(info);
-
-  return li;
-}
-
-function appendSimpleRow(listEl, idx){
-  const row = createSimpleRow(idx);
-  listEl.appendChild(row);
-  if(openDetail === idx){
-    const hasPoster = !!row.querySelector('.poster');
-    const detail = document.createElement('div');
-    detail.className = 'detail open' + (hasPoster ? '' : ' noPosterDetail');
-    detail.textContent = MOVIES[idx].full;
-    listEl.appendChild(detail);
-  }
-}
-
-function renderWatchlist(){
-  posterEagerBudget = 24;
-  const listEl = document.getElementById('watchlistList');
-  const emptyMsg = document.getElementById('watchlistEmptyMsg');
-  const subtitle = document.getElementById('watchlistSubtitle');
-  const watchlistSortMode = document.getElementById('watchlistSortMode').value;
-
-  const allIndices = MOVIES.map((m, idx) => idx).filter(idx => markValue(state.priority, idx));
-  const indices = sortMovieIndices(allIndices, watchlistSortMode);
-
-  subtitle.textContent = `${indices.length} movie${indices.length === 1 ? '' : 's'} you want to watch`;
-  listEl.replaceChildren();
-  emptyMsg.style.display = indices.length ? 'none' : 'block';
-
-  indices.forEach(idx => appendSimpleRow(listEl, idx));
-}
-
-function renderSearchScreen(){
-  posterEagerBudget = 24;
-  const listEl = document.getElementById('searchResultsList');
-  const emptyMsg = document.getElementById('searchEmptyMsg');
-  const q = document.getElementById('searchScreenInput').value.trim().toLowerCase();
-
-  listEl.replaceChildren();
-
-  if(!q){
-    emptyMsg.style.display = 'none';
-    return;
-  }
-
-  const indices = MOVIES.map((m, idx) => idx).filter(idx => MOVIES[idx].t.toLowerCase().includes(q));
-
-  if(indices.length === 0){
-    emptyMsg.textContent = `No matches for "${q}". Try a different spelling, or request it above.`;
-    emptyMsg.style.display = 'block';
-    return;
-  }
-  emptyMsg.style.display = 'none';
-
-  indices.forEach(idx => appendSimpleRow(listEl, idx));
 }
 
 function encodeState(){
@@ -4863,17 +4730,6 @@ function closeFilterSheet(){
 
 document.getElementById('filterScrim').addEventListener('click', closeFilterSheet);
 document.getElementById('applyFiltersBtn').addEventListener('click', closeFilterSheet);
-
-document.getElementById('watchlistSortMode').addEventListener('change', renderWatchlist);
-
-document.getElementById('searchScreenInput').addEventListener('input', renderSearchScreen);
-
-document.getElementById('searchRequestLink').addEventListener('click', ()=>{
-  showScreen('browse');
-  const input = document.getElementById('requestMovieInput');
-  input.scrollIntoView({behavior:'smooth', block:'center'});
-  input.focus();
-});
 
 // The mobile keyboard resizing the viewport makes a raw `position:fixed` bar
 // jump/glitch unpredictably. Hide it on purpose with a real transition instead,
