@@ -4,19 +4,49 @@ Date: 2026-09-07
 Scope: research-only handoff for `tokim25/movie-app-repo`  
 Branch: `research/backfill-audit-20260907-codex`
 
-## What Codex Can Safely Do Before Claude Takes Over
+## What Codex Safely Did Before Claude Takes Over
 
-Codex can complete repo/process research and push a documentation-only handoff. That includes:
+Codex completed repo/process research and a bounded CSM pilot, then pushed the results to this branch. That includes:
 
 - verifying current GitHub PR state for the backfill-related work
 - recounting catalog size from the local data files
 - checking the proposed execution plan against the actual PR branch contents
 - identifying contradictions or data-normalization issues for Claude to reconcile
 - producing a first-pass handoff checklist for PM/Coder/Reviewer
+- verifying that direct CSM page access works from this environment
+- researching 30 representative existing catalog titles under the 4-flag model
 
-Codex should not perform the CSM title research in this environment. The plan explicitly depends on the local bridge session on tokim25's machine for real `commonsensemedia.org` access, and the quality bar requires real per-title WebSearch/WebFetch review. A non-CSM-capable environment should not infer or fabricate the 4 content-flag values.
+Codex should not perform the full 938-title backfill in this pass. The plan still depends on the local bridge session on tokim25's machine for the unattended nightly run, progress checkpoints, rate-guard behavior, and PR batching. The 30-title pilot is intended to prove the research shape and give Claude concrete examples, not replace the scheduled backfill process.
 
 Codex should also avoid doing coder, reviewer, or UX-designer work in this pass. That means no implementation changes, no PR approval opinion, and no product/interaction changes beyond research findings.
+
+## CSM Pilot Files Added By Codex
+
+The branch now contains three research-only JSON files with 30 total titles:
+
+- `research/csm-content-flags-pilot-2026-09-07.json`
+- `research/csm-content-flags-pilot-02-2026-09-07.json`
+- `research/csm-content-flags-pilot-03-2026-09-07.json`
+
+Each entry includes:
+
+- existing catalog identifier when available
+- title and year
+- CSM URL used for the pass
+- CSM age recommendation captured from the page
+- 4 content-flag levels: Violence & Scariness, Language, Romance, Drinking
+- evidence notes written in Codex's own words
+- a prose note for emotional/sad content when relevant
+- a short implementation note for Claude/Coder
+
+The pilot intentionally does not modify production catalog data. Claude should treat these files as source-backed research input to review and fold into the real backfill process.
+
+Notable pilot findings:
+
+- `The Black Cauldron` currently appears as a fallback entry in local data, but a CSM page now exists and should be upgraded during backfill.
+- `The Greatest Showman` and `Wicked` appear to have catalog age values below the current CSM recommendations found in the pilot.
+- Low-age animated titles can still carry meaningful Violence & Scariness values, so the app should not infer content flags from age alone.
+- Emotional/life-and-death content remains important in prose even after dropping `Sad moments` as a scored slider.
 
 ## Verified Repo State
 
@@ -115,8 +145,8 @@ Ask Claude to take over with these instructions:
 
 ## Non-Goals For This Codex Pass
 
-- No CSM content extraction.
-- No new content-flag scores.
+- No full-catalog CSM backfill.
+- No production catalog score changes.
 - No app UI changes.
 - No reviewer approval.
 - No automation scheduling.
