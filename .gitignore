@@ -5,3 +5,5 @@ node_modules/
 test-results/
 playwright-report/
 playwright/.cache/
+.csm-rate-state.json
+.csm-rate-state.json.lock

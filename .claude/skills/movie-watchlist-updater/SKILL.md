@@ -315,3 +315,84 @@ unrelated plumbing that still matters -- they drive `renderGroupedView()`'s
 studio/franchise sections and the "curated lists" count, and Step 5's
 instructions to wire a new `data-<source>.js` file into `sourceLabels` still
 apply as written.
+
+## Re-researching an existing entry (content-flag backfill mode, added 2026-09-07)
+
+Everything above (Steps 1-6) describes *adding a new title*. This section is
+a different mode: revisiting a title that's already in the catalog to
+refresh its `ca`/content-flag data and `full` text under the current
+5-category-turned-4-category CONTENT_FLAGS model (see "Displaying the studio
++ CSM age badge" above for the equivalent history on the badge; the content-
+flag model itself lives in `index.html`'s `CONTENT_FLAGS` array). Triggered
+by a systematic nightly backfill across the whole catalog, not by a request.
+
+**What this mode does and doesn't touch:**
+- Refresh: `ca`, `full` (specifically make sure any grief/loss/separation/
+  sad content is called out in the prose per the note in Step 2 above), and
+  `srcUrl` if this run finds a real CSM review for a title that previously
+  had none (`ca: "Not on CSM; substitute source used"` is a real, fixable
+  data gap when a review now exists -- upgrade it, don't leave it stale).
+- Do NOT touch: `num`, `title`/`t`, `year`/`y`, `genre`, `studio` -- unless
+  one of those is *clearly* wrong (a genuine data error you're confident
+  about, not a judgment call about categorization). This mode is a refresh,
+  not a re-classification; if something looks off but you're not sure,
+  leave it and note it rather than changing it.
+- Skip poster work entirely unless `data-posters.js` has no entry for this
+  `num` at all -- then follow Step 3 as normal.
+- No `num` assignment (the title already has one).
+
+**Which titles a given run picks** is governed by whatever coverage-tracking
+fields Tech Lead's schema work adds (a `csmRecheckedAt`/`csmRecheckVersion`
+pair or equivalent -- check `index.html`'s schema validation and
+`scripts/validate-data.mjs` for the actual current field names rather than
+trusting this paragraph, since that field design may evolve after this was
+written). Whatever the exact fields, the selection logic must follow the
+same principle as Step 1's dedupe: check `origin/master`'s *current* state
+before picking a night's batch, not a stale local snapshot -- two runs (or
+an unattended run overlapping an interactive session) picking the same
+not-yet-refreshed titles wastes real research work, not just a git conflict.
+
+**Research depth must not vary with batch size.** Whether a night's batch is
+25 titles or 200, each title gets the identical protocol: `WebSearch` to
+find the real CSM review, `WebFetch` and actually read the full page,
+extract the structured per-category subscores from that real content -- not
+from a `WebSearch` results snippet as a shortcut. Do not let time pressure
+from a larger nightly target change this. A run that finishes suspiciously
+fast relative to (title count × realistic per-title research time) is a
+signal something got shortcut, not a sign of efficiency -- worth flagging
+in the PR description rather than treated as a win.
+
+**Rate-limit coordination is mandatory, not a nice-to-have, for this mode.**
+Run `node scripts/csm-rate-guard.mjs acquire` immediately before *every*
+fetch against `commonsensemedia.org` (or a Wikipedia/IMDb fallback source)
+in this mode, and only proceed with the fetch if it exits 0. If it exits 2,
+**stop this run entirely -- do not retry, do not fall back to a different
+source to route around it.** The coverage-tracking fields mean the next run
+picks up exactly where this one stopped, which is the whole point: a
+rate-limit hit costs some nights of pace, not a broken run. If any fetch in
+this mode comes back looking like a block (429, CAPTCHA, anything that
+isn't the normal review page), run
+`node scripts/csm-rate-guard.mjs signal-block "<what you saw>"` immediately
+-- this is a *shared* signal file, so every other concurrent subagent's next
+`acquire` call aborts too, not just yours. See the comment header in
+`scripts/csm-rate-guard.mjs` for the full mechanism (a lock-file-guarded
+shared state file tracking a rolling per-minute window and a hard nightly
+total, both configurable via `CSM_RATE_PER_MINUTE`/`CSM_RATE_NIGHTLY_CAP`
+env vars) and `node scripts/csm-rate-guard.mjs status` to check current
+counts without mutating anything.
+
+**PR structure for a night's batch.** Split into multiple PRs rather than
+one giant one (roughly 40-50 titles each), by data file where the night's
+titles allow it -- naturally disjoint diffs (one PR touching
+`data-disney.js`, another touching `data-extra.js`) don't conflict with
+each other. Where a night's batch spans a file that more than one of that
+night's PRs also touches, open and merge those PRs sequentially rather than
+forking all of them from the same pre-batch commit: `git fetch origin
+master` again after the previous PR in that night actually merges, same
+coordination principle as Step 1/Step 6 above, just applied within one
+night instead of across nights. Each PR's description should include the
+elapsed time and title count for the slice it covers, so the "suspiciously
+fast" quality check above is actually checkable by whoever reviews it.
+Spot-check sample size should scale with the *night's total* batch (roughly
+15%), not reset to a small fixed number per PR -- a night split into five
+40-title PRs still needs the same total scrutiny as one 200-title PR would.
