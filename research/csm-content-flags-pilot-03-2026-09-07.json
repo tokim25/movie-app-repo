@@ -1,0 +1,211 @@
+{
+  "researchBatch": "csm-content-flags-pilot-03-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Third research-only handoff sample for Claude/local CSM-capable backfill flow. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": ["violence", "language", "romance", "drinking"],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This pilot preserves CSM's visible category label and proposes the nearest app level. Claude/Coder should confirm the exact canonical mapper before writing production catalog data."
+  },
+  "entries": [
+    {
+      "num": 607,
+      "file": "data-csm.js",
+      "title": "Modern Times",
+      "year": "1936",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/modern-times",
+      "csmAge": "6+",
+      "flags": {
+        "violence": {"csmLabel": "very little", "proposedLevel": 2, "summary": "Silent-film slapstick, machine mishaps, police/thief gunpoint moments, labor unrest, and one serious riot death."},
+        "language": {"csmLabel": "very little", "proposedLevel": 2, "summary": "One dated racial term appears in a song lyric."},
+        "romance": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful romance or nudity concern surfaced in CSM's category data."},
+        "drinking": {"csmLabel": "a little", "proposedLevel": 2, "summary": "Comic drunkenness, smoking, and an accidental drug-ingestion scene."}
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 608,
+      "file": "data-csm.js",
+      "title": "Bringing Up Baby",
+      "year": "1938",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/bringing-up-baby",
+      "csmAge": "8+",
+      "flags": {
+        "violence": {"csmLabel": "very little", "proposedLevel": 2, "summary": "Comic falls, minor crashes, animal scuffles, a roaring leopard, and non-threatening gun play."},
+        "language": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful language concern surfaced in CSM's category data."},
+        "romance": {"csmLabel": "very little", "proposedLevel": 2, "summary": "Flirting, embraces, gentle innuendo, and one dated throwaway line."},
+        "drinking": {"csmLabel": "a little", "proposedLevel": 2, "summary": "Recurring comic drinking from a flask plus social alcohol use."}
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 609,
+      "file": "data-csm.js",
+      "title": "An American in Paris",
+      "year": "1951",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/an-american-in-paris",
+      "csmAge": "8+",
+      "flags": {
+        "violence": {"csmLabel": "very little", "proposedLevel": 2, "summary": "War-context references, pretend stabbing in a musical number, and aggressive pursuit framed as romance."},
+        "language": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful language concern surfaced in CSM's category data."},
+        "romance": {"csmLabel": "a little", "proposedLevel": 2, "summary": "Kissing, suggestive dancing, pin-up imagery, affair context, and boundary-crossing romantic pursuit."},
+        "drinking": {"csmLabel": "a little", "proposedLevel": 2, "summary": "Cocktails, wine, champagne, sherry, smoking, and implied party drunkenness."}
+      },
+      "handoffNotes": ["Older-musical romance framing may need reviewer attention beyond the numeric label."],
+      "confidence": "high"
+    },
+    {
+      "num": 610,
+      "file": "data-csm.js",
+      "title": "Born Free",
+      "year": "1966",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/born-free",
+      "csmAge": "6+",
+      "flags": {
+        "violence": {"csmLabel": "some", "proposedLevel": 3, "summary": "Natural animal predation, animals shot, a human killed by a lion, blood in water, starvation, injury, and stampede aftermath."},
+        "language": {"csmLabel": "very little", "proposedLevel": 2, "summary": "One mild profanity instance."},
+        "romance": {"csmLabel": "very little", "proposedLevel": 2, "summary": "One kiss."},
+        "drinking": {"csmLabel": "very little", "proposedLevel": 2, "summary": "Adults drink at meals and one animal drinks leftover alcohol."}
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 612,
+      "file": "data-csm.js",
+      "title": "Chitty Chitty Bang Bang",
+      "year": "1968",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/chitty-chitty-bang-bang",
+      "csmAge": "6+",
+      "flags": {
+        "violence": {"csmLabel": "a little", "proposedLevel": 2, "summary": "Cartoon action, car crashes, fire/explosions, fantasy peril, pirate attacks, a creepy child-catcher, and comic battles."},
+        "language": {"csmLabel": "very little", "proposedLevel": 2, "summary": "One mild profanity instance."},
+        "romance": {"csmLabel": "very little", "proposedLevel": 2, "summary": "A lingerie dance and two kisses."},
+        "drinking": {"csmLabel": "very little", "proposedLevel": 2, "summary": "Party scene with smoking and drinking."}
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 613,
+      "file": "data-csm.js",
+      "title": "Charlotte's Web",
+      "year": "1973",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/charlottes-web-1973",
+      "csmAge": "5+",
+      "flags": {
+        "violence": {"csmLabel": "some", "proposedLevel": 3, "summary": "Wilbur is nearly killed for meat, and Charlotte's death is central and emotionally heavy."},
+        "language": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful language concern surfaced in CSM's category data."},
+        "romance": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful romance or nudity concern surfaced in CSM's category data."},
+        "drinking": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful drinking, drugs, or smoking concern surfaced in CSM's category data."}
+      },
+      "handoffNotes": ["This is a good example of emotional/life-and-death content now living in prose rather than a separate Sad flag."],
+      "confidence": "high"
+    },
+    {
+      "num": 615,
+      "file": "data-csm.js",
+      "title": "Annie",
+      "year": "1982",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/annie-1982",
+      "csmAge": "6+",
+      "flags": {
+        "violence": {"csmLabel": "a little", "proposedLevel": 2, "summary": "Kidnapping peril, bridge danger, a thrown bomb, cruel orphanage treatment, child fistfights, and threats toward a dog."},
+        "language": {"csmLabel": "a little", "proposedLevel": 2, "summary": "Mild profanity and insults aimed at children."},
+        "romance": {"csmLabel": "very little", "proposedLevel": 2, "summary": "Kissing, flirtation, and mild sexual innuendo."},
+        "drinking": {"csmLabel": "some", "proposedLevel": 3, "summary": "Miss Hannigan is often drunk, handles alcohol frequently, and adults smoke."}
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 617,
+      "file": "data-csm.js",
+      "title": "An American Tail",
+      "year": "1986",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/an-american-tail",
+      "csmAge": "6+",
+      "flags": {
+        "violence": {"csmLabel": "some", "proposedLevel": 3, "summary": "Village fire, cat attacks, near-drowning, separation from family, presumed death mourning, and a frightening mechanical mouse."},
+        "language": {"csmLabel": "very little", "proposedLevel": 2, "summary": "Mild insults and commands to be quiet."},
+        "romance": {"csmLabel": "very little", "proposedLevel": 2, "summary": "Young mice kiss and female pigeons are drawn with body-focused exaggeration."},
+        "drinking": {"csmLabel": "a little", "proposedLevel": 2, "summary": "A character drinks too much at a wake, sparkling wine appears, and characters smoke cigars."}
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 620,
+      "file": "data-csm.js",
+      "title": "The Brave Little Toaster",
+      "year": "1987",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-brave-little-toaster",
+      "csmAge": "5+",
+      "flags": {
+        "violence": {"csmLabel": "some", "proposedLevel": 3, "summary": "Dark appliance peril, abandonment themes, waterfall/quicksand danger, disarticulation, and a threatening junkyard magnet."},
+        "language": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful language concern surfaced in CSM's category data."},
+        "romance": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful romance or nudity concern surfaced in CSM's category data."},
+        "drinking": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful drinking, drugs, or smoking concern surfaced in CSM's category data."}
+      },
+      "handoffNotes": ["Parent/kid review summaries suggest scariness may warrant special prose attention even though CSM common-sense age is low."],
+      "confidence": "high"
+    },
+    {
+      "num": 621,
+      "file": "data-csm.js",
+      "title": "The Land Before Time",
+      "year": "1988",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-land-before-time",
+      "csmAge": "6+",
+      "flags": {
+        "violence": {"csmLabel": "some", "proposedLevel": 3, "summary": "Predator pursuit, natural disasters, constant fear, family separation, and the death of Littlefoot's mother."},
+        "language": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful language concern surfaced in CSM's category data."},
+        "romance": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful romance or nudity concern surfaced in CSM's category data."},
+        "drinking": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful drinking, drugs, or smoking concern surfaced in CSM's category data."}
+      },
+      "handoffNotes": ["Another strong example of emotional content being captured in prose rather than a separate Sad flag."],
+      "confidence": "high"
+    }
+  ],
+  "handoffSummary": {
+    "researchedEntries": 10,
+    "csmFound": 10,
+    "fallbackUpgradesFound": 0,
+    "catalogAgeMismatches": [],
+    "calibrationNotes": [
+      "Older G/PG catalog titles often have low global ages but meaningful violence/scariness notes.",
+      "Some low-age classics require prose callouts for death, grief, or abandonment even without a Sad slider.",
+      "Drinking varies sharply across musicals and classics, so it should not be inferred from age alone."
+    ],
+    "nextClaudeAction": "Validate the mapping and summaries, then either import this pilot through the official backfill process or use it as a calibration sample for local bridge-session researchers."
+  }
+}
