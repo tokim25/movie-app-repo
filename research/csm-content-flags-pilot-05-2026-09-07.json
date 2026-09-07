@@ -1,0 +1,211 @@
+{
+  "researchBatch": "csm-content-flags-pilot-05-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Fifth research-only handoff sample for Claude/local CSM-capable backfill flow. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": ["violence", "language", "romance", "drinking"],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This pilot preserves CSM's visible category label and proposes the nearest app level. Claude/Coder should confirm the exact canonical mapper before writing production catalog data."
+  },
+  "entries": [
+    {
+      "num": 633,
+      "file": "data-csm.js",
+      "title": "All Dogs Go to Heaven 2",
+      "year": "1996",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/all-dogs-go-to-heaven-2",
+      "csmAge": "5+",
+      "flags": {
+        "violence": {"csmLabel": "a little", "proposedLevel": 2, "summary": "Mostly implied cartoon mayhem plus tense afterlife/devil themes that may scare younger children."},
+        "language": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful language concern surfaced in CSM's category data."},
+        "romance": {"csmLabel": "very little", "proposedLevel": 2, "summary": "Mild innuendo."},
+        "drinking": {"csmLabel": "a little", "proposedLevel": 2, "summary": "Drinking, gambling, and smoking appear but are not glamorized."}
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 634,
+      "file": "data-csm.js",
+      "title": "Fly Away Home",
+      "year": "1996",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/fly-away-home",
+      "csmAge": "8+",
+      "flags": {
+        "violence": {"csmLabel": "a little", "proposedLevel": 2, "summary": "A fatal car crash is shown from inside the vehicle, hunters shoot at geese, and a police officer is struck."},
+        "language": {"csmLabel": "a little", "proposedLevel": 2, "summary": "One stronger profanity instance."},
+        "romance": {"csmLabel": "very little", "proposedLevel": 2, "summary": "A shower panic scene includes implied accidental nudity without visible nudity."},
+        "drinking": {"csmLabel": "a little", "proposedLevel": 2, "summary": "Adults drink wine and beer, and a cigar appears in the background."}
+      },
+      "handoffNotes": ["The crash/death setup needs prose prominence even though CSM's violence label is only a little."],
+      "confidence": "high"
+    },
+    {
+      "num": 635,
+      "file": "data-csm.js",
+      "title": "Anastasia",
+      "year": "1997",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/anastasia",
+      "csmAge": "6+",
+      "flags": {
+        "violence": {"csmLabel": "some", "proposedLevel": 3, "summary": "A corpse-like villain, curse threats, fiery escape, runaway train, storm peril, and apparent death fake-out."},
+        "language": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful language concern surfaced in CSM's category data."},
+        "romance": {"csmLabel": "none", "proposedLevel": 2, "summary": "Central young-adult romance with a final kiss despite CSM's low category label."},
+        "drinking": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful drinking, drugs, or smoking concern surfaced in CSM's category data."}
+      },
+      "handoffNotes": ["Romance mapper should decide whether a story-driving romance with kissing remains level 2."],
+      "confidence": "high"
+    },
+    {
+      "num": 636,
+      "file": "data-csm.js",
+      "title": "Cinderella",
+      "year": "1997",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/cinderella-1997",
+      "csmAge": "5+",
+      "flags": {
+        "violence": {"csmLabel": "a little", "proposedLevel": 2, "summary": "Comical slapstick, bullying, name-calling, and mental/emotional abuse framing."},
+        "language": {"csmLabel": "very little", "proposedLevel": 2, "summary": "Bullying language includes ableist or abusive insults."},
+        "romance": {"csmLabel": "very little", "proposedLevel": 2, "summary": "Kissing."},
+        "drinking": {"csmLabel": "a little", "proposedLevel": 2, "summary": "Champagne props and comic drunkenness in a musical number."}
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 637,
+      "file": "data-csm.js",
+      "title": "Kirikou and the Sorceress",
+      "year": "1998",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/kirikou-and-the-sorceress",
+      "csmAge": "5+",
+      "flags": {
+        "violence": {"csmLabel": "a little", "proposedLevel": 2, "summary": "Mildly scary sorceress threats, animal chases, a snake scare, a boat carrying children away, and brief presumed-death moments."},
+        "language": {"csmLabel": "none", "proposedLevel": 2, "summary": "One mild insult is noted even though CSM's category label is none."},
+        "romance": {"csmLabel": "not present", "proposedLevel": 3, "summary": "Non-sexualized nudity is present throughout, including bare-chested adults and simply drawn child nudity."},
+        "drinking": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful drinking, drugs, or smoking concern surfaced in CSM's category data."}
+      },
+      "handoffNotes": ["The app's Romance flag may need clearer naming or mapping because CSM combines sex, romance, and nudity."],
+      "confidence": "high"
+    },
+    {
+      "num": 638,
+      "file": "data-csm.js",
+      "title": "Annie",
+      "year": "1999",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/annie-1999",
+      "csmAge": "6+",
+      "flags": {
+        "violence": {"csmLabel": "a little", "proposedLevel": 2, "summary": "Cruel orphanage treatment, verbal threats, and an implied knife threat against Annie."},
+        "language": {"csmLabel": "very little", "proposedLevel": 2, "summary": "Some verbal bullying among orphan girls."},
+        "romance": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful romance or nudity concern surfaced in CSM's category data."},
+        "drinking": {"csmLabel": "a little", "proposedLevel": 2, "summary": "Adult antagonists drink whiskey, and a song references a drugged alcoholic drink."}
+      },
+      "handoffNotes": ["Adoption/orphan themes may need prose sensitivity for some families."],
+      "confidence": "high"
+    },
+    {
+      "num": 639,
+      "file": "data-csm.js",
+      "title": "Babar: King of the Elephants",
+      "year": "1999",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/babar-king-of-the-elephants",
+      "csmAge": "5+",
+      "flags": {
+        "violence": {"csmLabel": "a little", "proposedLevel": 2, "summary": "Babar's mother is shot by a poacher early in the film, and war is discussed."},
+        "language": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful language concern surfaced in CSM's category data."},
+        "romance": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful romance or nudity concern surfaced in CSM's category data."},
+        "drinking": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful drinking, drugs, or smoking concern surfaced in CSM's category data."}
+      },
+      "handoffNotes": ["Another low-age title where parent prose should surface a death/poaching setup."],
+      "confidence": "high"
+    },
+    {
+      "num": 640,
+      "file": "data-csm.js",
+      "title": "Muppets from Space",
+      "year": "1999",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/muppets-from-space",
+      "csmAge": "5+",
+      "flags": {
+        "violence": {"csmLabel": "a little", "proposedLevel": 2, "summary": "Frequent comic peril: Gonzo is shocked, kidnapped, threatened with lab procedures, launched from a cannon, and chased through action gags."},
+        "language": {"csmLabel": "very little", "proposedLevel": 2, "summary": "Insults and oddball name-calling."},
+        "romance": {"csmLabel": "none", "proposedLevel": 2, "summary": "One comic kiss."},
+        "drinking": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful drinking, drugs, or smoking concern surfaced in CSM's category data."}
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 641,
+      "file": "data-csm.js",
+      "title": "Stuart Little",
+      "year": "1999",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/stuart-little",
+      "csmAge": "7+",
+      "flags": {
+        "violence": {"csmLabel": "a little", "proposedLevel": 2, "summary": "Stuart faces cat attacks, chase/cornering scenes, a washing-machine scare, and comic pratfalls."},
+        "language": {"csmLabel": "some", "proposedLevel": 3, "summary": "Several mild profanities, mean words, and crude animal humor."},
+        "romance": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful romance or nudity concern surfaced in CSM's category data."},
+        "drinking": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful drinking, drugs, or smoking concern surfaced in CSM's category data."}
+      },
+      "handoffNotes": ["Adoption/family-transition themes may need prose handling separate from scored flags."],
+      "confidence": "high"
+    },
+    {
+      "num": 642,
+      "file": "data-csm.js",
+      "title": "Alvin and the Chipmunks Meet the Wolfman",
+      "year": "2000",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/alvin-and-the-chipmunks-meet-the-wolfman",
+      "csmAge": "5+",
+      "flags": {
+        "violence": {"csmLabel": "none", "proposedLevel": 2, "summary": "Scary nighttime encounters, an offscreen werewolf bite, mild slapstick, bullying, and an offscreen brother scuffle with visible aftermath."},
+        "language": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful language concern surfaced in CSM's category data."},
+        "romance": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful romance or nudity concern surfaced in CSM's category data."},
+        "drinking": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful drinking, drugs, or smoking concern surfaced in CSM's category data."}
+      },
+      "handoffNotes": ["CSM's none label conflicts with detail text that parents would likely understand as mild scary content."],
+      "confidence": "medium"
+    }
+  ],
+  "handoffSummary": {
+    "researchedEntries": 10,
+    "csmFound": 10,
+    "fallbackUpgradesFound": 0,
+    "catalogAgeMismatches": [],
+    "calibrationNotes": [
+      "CSM's Sex/Romance/Nudity category creates a product naming issue when non-sexual nudity is the main concern.",
+      "Several 5+ titles include emotionally significant death, abandonment, or scary-theme prose even when numeric labels stay low.",
+      "Language is the first flag in this slice to rise to level 3 because of repeated mild profanity and insults."
+    ],
+    "nextClaudeAction": "Before production import, confirm how the app should name and explain the Romance slider when nudity rather than romance drives the CSM category."
+  }
+}

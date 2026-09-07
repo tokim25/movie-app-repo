@@ -14,19 +14,21 @@ Codex completed repo/process research and a bounded CSM pilot, then pushed the r
 - identifying contradictions or data-normalization issues for Claude to reconcile
 - producing a first-pass handoff checklist for PM/Coder/Reviewer
 - verifying that direct CSM page access works from this environment
-- researching 30 representative existing catalog titles under the 4-flag model
+- researching 50 representative existing catalog titles under the 4-flag model
 
-Codex should not perform the full 938-title backfill in this pass. The plan still depends on the local bridge session on tokim25's machine for the unattended nightly run, progress checkpoints, rate-guard behavior, and PR batching. The 30-title pilot is intended to prove the research shape and give Claude concrete examples, not replace the scheduled backfill process.
+Codex should not perform the full 938-title backfill in this pass. The plan still depends on the local bridge session on tokim25's machine for the unattended nightly run, progress checkpoints, rate-guard behavior, and PR batching. The 50-title pilot is intended to prove the research shape and give Claude concrete examples, not replace the scheduled backfill process.
 
 Codex should also avoid doing coder, reviewer, or UX-designer work in this pass. That means no implementation changes, no PR approval opinion, and no product/interaction changes beyond research findings.
 
 ## CSM Pilot Files Added By Codex
 
-The branch now contains three research-only JSON files with 30 total titles:
+The branch now contains five research-only JSON files with 50 total titles:
 
 - `research/csm-content-flags-pilot-2026-09-07.json`
 - `research/csm-content-flags-pilot-02-2026-09-07.json`
 - `research/csm-content-flags-pilot-03-2026-09-07.json`
+- `research/csm-content-flags-pilot-04-2026-09-07.json`
+- `research/csm-content-flags-pilot-05-2026-09-07.json`
 
 Each entry includes:
 

@@ -1,0 +1,211 @@
+{
+  "researchBatch": "csm-content-flags-pilot-04-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Fourth research-only handoff sample for Claude/local CSM-capable backfill flow. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": ["violence", "language", "romance", "drinking"],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This pilot preserves CSM's visible category label and proposes the nearest app level. Claude/Coder should confirm the exact canonical mapper before writing production catalog data."
+  },
+  "entries": [
+    {
+      "num": 622,
+      "file": "data-csm.js",
+      "title": "Babar: The Movie",
+      "year": "1989",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/babar-the-movie",
+      "csmAge": "5+",
+      "flags": {
+        "violence": {"csmLabel": "a little", "proposedLevel": 2, "summary": "A village is attacked and burned, elephant families are separated, rhinos threaten and enslave elephants, and Babar fights a few attackers."},
+        "language": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful language concern surfaced in CSM's category data."},
+        "romance": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful romance or nudity concern surfaced in CSM's category data."},
+        "drinking": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful drinking, drugs, or smoking concern surfaced in CSM's category data."}
+      },
+      "handoffNotes": ["A low age rating can still include an intense opening-peril prose callout."],
+      "confidence": "high"
+    },
+    {
+      "num": 623,
+      "file": "data-csm.js",
+      "title": "FernGully: The Last Rainforest",
+      "year": "1992",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/ferngully-the-last-rainforest",
+      "csmAge": "6+",
+      "flags": {
+        "violence": {"csmLabel": "a little", "proposedLevel": 2, "summary": "Dark oil-monster imagery, attacks on the forest, and a brief pocket-knife moment, mostly softened by humor."},
+        "language": {"csmLabel": "very little", "proposedLevel": 2, "summary": "One mild teasing pun/name."},
+        "romance": {"csmLabel": "very little", "proposedLevel": 2, "summary": "A kiss, a body-focused comment, revealing fairy outfits, and jealousy around a developing friendship."},
+        "drinking": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful drinking, drugs, or smoking concern surfaced in CSM's category data."}
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 624,
+      "file": "data-csm.js",
+      "title": "The Muppet Christmas Carol",
+      "year": "1992",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-muppet-christmas-carol",
+      "csmAge": "5+",
+      "flags": {
+        "violence": {"csmLabel": "none", "proposedLevel": 1, "summary": "Mild Muppet slapstick with no injuries; the Future ghost and Tiny Tim death vision are better handled in prose."},
+        "language": {"csmLabel": "none", "proposedLevel": 1, "summary": "No meaningful language concern surfaced in CSM's category data."},
+        "romance": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful romance or nudity concern surfaced in CSM's category data."},
+        "drinking": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful drinking, drugs, or smoking concern surfaced in CSM's category data."}
+      },
+      "handoffNotes": ["Ghost/death sensitivity is not captured by the numeric violence label and should remain in prose."],
+      "confidence": "high"
+    },
+    {
+      "num": 625,
+      "file": "data-csm.js",
+      "title": "Heidi",
+      "year": "1993",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/heidi-1993",
+      "csmAge": "6+",
+      "flags": {
+        "violence": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful violence or scariness concern surfaced in CSM's category data."},
+        "language": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful language concern surfaced in CSM's category data."},
+        "romance": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful romance or nudity concern surfaced in CSM's category data."},
+        "drinking": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful drinking, drugs, or smoking concern surfaced in CSM's category data."}
+      },
+      "handoffNotes": ["Emotional intensity around rejection, illness, and death belongs in prose, not in a scored flag."],
+      "confidence": "high"
+    },
+    {
+      "num": 626,
+      "file": "data-csm.js",
+      "title": "The Nightmare Before Christmas",
+      "year": "1993",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-nightmare-before-christmas",
+      "csmAge": "7+",
+      "flags": {
+        "violence": {"csmLabel": "some", "proposedLevel": 3, "summary": "Macabre creature imagery, undead body gags, menacing villain scenes, kidnapping lyrics, a decapitated-head gag, and cannon fire."},
+        "language": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful language concern surfaced in CSM's category data."},
+        "romance": {"csmLabel": "very little", "proposedLevel": 2, "summary": "Crushes and kissing."},
+        "drinking": {"csmLabel": "very little", "proposedLevel": 2, "summary": "A character repeatedly uses nightshade poison against a captor in comic fantasy context."}
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 627,
+      "file": "data-csm.js",
+      "title": "The Thief and the Cobbler",
+      "year": "1993",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-thief-and-the-cobbler",
+      "csmAge": "5+",
+      "flags": {
+        "violence": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No scored violence concern, though very young children may react to hulking villains."},
+        "language": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful language concern surfaced in CSM's category data."},
+        "romance": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful romance or nudity concern surfaced in CSM's category data."},
+        "drinking": {"csmLabel": "mild", "proposedLevel": 2, "summary": "Mild substance content is noted, but CSM's exposed page text does not provide much detail."}
+      },
+      "handoffNotes": ["Reviewer should confirm whether CSM's older 'mild' label should normalize to level 2."],
+      "confidence": "medium"
+    },
+    {
+      "num": 628,
+      "file": "data-csm.js",
+      "title": "Black Beauty",
+      "year": "1994",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/black-beauty",
+      "csmAge": "7+",
+      "flags": {
+        "violence": {"csmLabel": "some", "proposedLevel": 3, "summary": "Animal mistreatment and Ginger's implied death create the primary frightening and sad content."},
+        "language": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful language concern surfaced in CSM's category data."},
+        "romance": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful romance or nudity concern surfaced in CSM's category data."},
+        "drinking": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful drinking, drugs, or smoking concern surfaced in CSM's category data."}
+      },
+      "handoffNotes": ["Another prose-sensitive emotional title even though only one numeric flag changes."],
+      "confidence": "high"
+    },
+    {
+      "num": 630,
+      "file": "data-csm.js",
+      "title": "The Swan Princess",
+      "year": "1994",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-swan-princess",
+      "csmAge": "5+",
+      "flags": {
+        "violence": {"csmLabel": "very little", "proposedLevel": 2, "summary": "Brief magical conflict, a comic paintball battle, an arrow injury to a bird, and a non-scary final battle."},
+        "language": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful language concern surfaced in CSM's category data."},
+        "romance": {"csmLabel": "none", "proposedLevel": 2, "summary": "Several loving kisses between the prince and princess despite the low CSM category label."},
+        "drinking": {"csmLabel": "not present", "proposedLevel": 1, "summary": "No meaningful drinking, drugs, or smoking concern surfaced in CSM's category data."}
+      },
+      "handoffNotes": ["CSM says romance/nudity is none while also describing kisses; mapper may need explicit treatment for affectionate kissing."],
+      "confidence": "high"
+    },
+    {
+      "num": 631,
+      "file": "data-csm.js",
+      "title": "Thumbelina",
+      "year": "1994",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/thumbelina",
+      "csmAge": "5+",
+      "flags": {
+        "violence": {"csmLabel": "a little", "proposedLevel": 2, "summary": "Bonking, a sword fight, kidnapping, and forced-marriage tension."},
+        "language": {"csmLabel": "none", "proposedLevel": 2, "summary": "One hurtful insult is noted even though CSM's category label is none."},
+        "romance": {"csmLabel": "very little", "proposedLevel": 2, "summary": "Persistent unwanted pet-name flirting and repeated true-love discussion."},
+        "drinking": {"csmLabel": "very little", "proposedLevel": 2, "summary": "Cocktails appear at the Beetle Ball."}
+      },
+      "handoffNotes": ["Another case where CSM's label and the detail text do not map perfectly to a simple app level."],
+      "confidence": "high"
+    },
+    {
+      "num": 632,
+      "file": "data-csm.js",
+      "title": "A Goofy Movie",
+      "year": "1995",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/a-goofy-movie",
+      "csmAge": "6+",
+      "flags": {
+        "violence": {"csmLabel": "very little", "proposedLevel": 2, "summary": "Car cliff peril, a river fall, one mascot punch, and parent bullying dynamics."},
+        "language": {"csmLabel": "very little", "proposedLevel": 2, "summary": "Mild body-language and an interrupted stronger word."},
+        "romance": {"csmLabel": "very little", "proposedLevel": 2, "summary": "Slinkier background outfits, one teen kiss, underwear/towel sight gags, and a baby bare-bottom gag."},
+        "drinking": {"csmLabel": "very little", "proposedLevel": 2, "summary": "Pete drinks beer and spits it out in a comic scene."}
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    }
+  ],
+  "handoffSummary": {
+    "researchedEntries": 10,
+    "csmFound": 10,
+    "fallbackUpgradesFound": 0,
+    "catalogAgeMismatches": [],
+    "calibrationNotes": [
+      "Several low-age titles need prose warnings even when scored flags remain low.",
+      "CSM's visible label can conflict with detail text, especially for kisses or isolated insults.",
+      "The merged Violence & Scariness flag is carrying both physical peril and spooky imagery as intended."
+    ],
+    "nextClaudeAction": "Review the label-to-level edge cases before importing: especially 'none' labels with detail text and older 'mild' labels."
+  }
+}
