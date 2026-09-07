@@ -1,0 +1,862 @@
+{
+  "researchBatch": "csm-content-flags-refetched-36-37-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only handoff for nums 228-247 in data-dcom.js. Built from live Common Sense Media refetches of catalog srcUrl pages. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 228,
+      "file": "data-dcom.js",
+      "title": "Geek Charming",
+      "year": "2011",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/geek-charming",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful violence or scariness concern."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "No profanity is noted, but classmates use mild labels such as geek and nerd."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The central teen romance ends with a few kisses."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM age is 8+ while the current catalog age is 7+."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 229,
+      "file": "data-dcom.js",
+      "title": "Good Luck Charlie, It's Christmas!",
+      "year": "2011",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/good-luck-charlie-its-christmas",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Comic danger includes video-game gunfire, a runaway car, hostage-style peril, paintball competition, and playful family scuffling."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text includes a teen making a mild appreciative comment about girls at a pool."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM age is 7+ while the current catalog age is 6+.",
+        "CSM labels Sex, Romance & Nudity as not present while the detail text includes a mild teen attractiveness comment."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 230,
+      "file": "data-dcom.js",
+      "title": "Frenemies",
+      "year": "2012",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/tv-reviews/frenemies",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful violence or scariness concern."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text notes one mild body-part word as the strongest language."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Teen flirting and a couple of kisses are noted."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM age is 7+ while the current catalog age is 8+.",
+        "CSM labels Language as not present while the detail text mentions one very mild term."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 231,
+      "file": "data-dcom.js",
+      "title": "Radio Rebel",
+      "year": "2012",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/radio-rebel",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful violence or scariness concern."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The teen romance content is limited to a couple of kisses."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 232,
+      "file": "data-dcom.js",
+      "title": "Let It Shine",
+      "year": "2012",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/let-it-shine",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One teen scuffle and a slap after a lie are the main violence notes."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "No swearing is noted, but mild insults and one body-part word appear."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Two teens compete for a girl's attention through flirting, with occasional comments about attractiveness."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 233,
+      "file": "data-dcom.js",
+      "title": "Girl vs. Monster",
+      "year": "2012",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/tv-reviews/girl-vs-monster",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Fantasy peril includes monster hunters using capture gear, smoky or disembodied monsters, possession, threats, and chase scenes involving scared teens."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "No profanity is noted, but mild insults and a shut-up phrase appear."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text describes a sweet teen crush without physical contact."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Sex, Romance & Nudity as not present while the detail text mentions a teen crush."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 234,
+      "file": "data-dcom.js",
+      "title": "Cloud 9",
+      "year": "2014",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/cloud-9",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Snowboarding falls and crashes are common; one past injury ended a career, and sledding and avalanche scenes add brief peril."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A gentle teen romance builds to one kiss."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Avalanche and career-ending injury references may need light prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 235,
+      "file": "data-dcom.js",
+      "title": "Zapped",
+      "year": "2014",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/zapped",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful violence or scariness concern."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Dialogue includes mild name-calling but no stronger language."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Teen flirting, a cheek kiss, and a supporting character's crush-heavy behavior are noted."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 236,
+      "file": "data-dcom.js",
+      "title": "How to Build a Better Boy",
+      "year": "2014",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/tv-reviews/how-to-build-a-better-boy",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One fistfight knocks a character out, and teens are mildly pursued by government officials."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Teens flirt and swoon over a boy, including one shirtless gag."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 237,
+      "file": "data-dcom.js",
+      "title": "Bad Hair Day",
+      "year": "2015",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/tv-reviews/bad-hair-day",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Light action includes a man tied up by a thief and an officer using an electroshock weapon on a criminal."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text mentions brief flirting."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Sex, Romance & Nudity as not present while the detail text mentions brief flirting."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 238,
+      "file": "data-dcom.js",
+      "title": "Teen Beach 2",
+      "year": "2015",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/teen-beach-2",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful violence or scariness concern."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text notes an established teen couple, a cheek kiss, and girls swooning over boys."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Sex, Romance & Nudity as not present while the detail text includes teen couple material and a cheek kiss."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 239,
+      "file": "data-dcom.js",
+      "title": "Invisible Sister",
+      "year": "2015",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/tv-reviews/invisible-sister",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful violence or scariness concern."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text notes a teen in boxers and a T-shirt, plus a couple of kisses and hand-holding."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM age is 8+ while the current catalog age is 7+.",
+        "CSM labels Sex, Romance & Nudity as not present while the detail text includes kisses, hand-holding, and underwear."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 240,
+      "file": "data-dcom.js",
+      "title": "Adventures in Babysitting",
+      "year": "2016",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/tv-reviews/adventures-in-babysitting",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text mentions mild peril and rough-play moments such as slapping and tripping."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text notes rare attractiveness comments."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Violence & Scariness as not present while the detail text mentions mild peril and rough play.",
+        "CSM labels Sex, Romance & Nudity as not present while the detail text includes brief attractiveness comments."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 241,
+      "file": "data-dcom.js",
+      "title": "The Swap",
+      "year": "2016",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-swap",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful violence or scariness concern."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text mentions one-sided teen flirting."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Sex, Romance & Nudity as not present while the detail text mentions teen flirting."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 242,
+      "file": "data-dcom.js",
+      "title": "Tangled: Before Ever After",
+      "year": "2017",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/tangled-before-ever-after",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild peril includes a collapsing bridge, visible weapons, kidnapping flashbacks, and a revenge-minded villain."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text notes kissing and a love declaration between Rapunzel and Eugene."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM age is 5+ while the current catalog age is 6+.",
+        "CSM labels Sex, Romance & Nudity as not present while the detail text includes kissing and an expression of love.",
+        "Kidnapping flashbacks may need light prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 243,
+      "file": "data-dcom.js",
+      "title": "Zombies",
+      "year": "2018",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/zombies",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A few transformation scenes show darkened eyes, bulging veins, and stalking behavior, with references to brain-eating but no actual violence."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text mentions longing looks and a kiss in Addison and Zed's romance."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Sex, Romance & Nudity as not present while the detail text includes a kiss and teen romance."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 244,
+      "file": "data-dcom.js",
+      "title": "Freaky Friday",
+      "year": "2018",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/freaky-friday-2018",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Family conflict includes a hurtful argument, school bullying with iced coffee poured on a teen, and a child briefly running away before being found."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild name-calling and one heated hate-you statement are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Teen crushes, song lyrics about biology and hormones, and affectionate moments between a mother and fiance appear."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM age is 8+ while the current catalog age is 6+.",
+        "A younger child running away and family distress may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 245,
+      "file": "data-dcom.js",
+      "title": "Kim Possible",
+      "year": "2019",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/kim-possible",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Action scenes include martial-arts-style fights, hits and kicks, staff fighting, a grappling-hook weapon, a slime-vat danger, and brief life-or-death peril."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM age is 6+ while the current catalog age is 7+."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 246,
+      "file": "data-dcom.js",
+      "title": "Zombies 2",
+      "year": "2020",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/zombies-2",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text notes tense moments involving an off-road school bus, an unstoppable explosive setup, uncertain fates, and tooth-baring werewolf imagery without injuries."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text notes Addison and Zed's continued relationship, one kiss, and other teen couples holding hands."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM age is 8+ while the current catalog age is 7+.",
+        "CSM labels Violence & Scariness as not present while the detail text includes tense peril and explosive danger.",
+        "CSM labels Sex, Romance & Nudity as not present while the detail text includes teen romance and a kiss."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 247,
+      "file": "data-dcom.js",
+      "title": "Upside-Down Magic",
+      "year": "2020",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/upside-down-magic",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A dark magical force possesses Reina and threatens the school, creating several moments where disaster seems likely before rescue."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "No swearing is noted, but mild name-calling and body-part language appear."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Possession and school-destruction danger may need light prose context."
+      ],
+      "confidence": "high"
+    }
+  ],
+  "handoffSummary": {
+    "refetchedEntries": 20,
+    "sourceBasis": "live CSM refetch by subagent",
+    "firstNum": 228,
+    "lastNum": 247,
+    "unavailablePages": [],
+    "labelDetailConflicts": [
+      {
+        "num": 229,
+        "title": "Good Luck Charlie, It's Christmas!",
+        "note": "CSM labels Sex, Romance & Nudity as not present while the detail text includes a mild teen attractiveness comment."
+      },
+      {
+        "num": 230,
+        "title": "Frenemies",
+        "note": "CSM labels Language as not present while the detail text mentions one very mild term."
+      },
+      {
+        "num": 233,
+        "title": "Girl vs. Monster",
+        "note": "CSM labels Sex, Romance & Nudity as not present while the detail text mentions a teen crush."
+      },
+      {
+        "num": 237,
+        "title": "Bad Hair Day",
+        "note": "CSM labels Sex, Romance & Nudity as not present while the detail text mentions brief flirting."
+      },
+      {
+        "num": 238,
+        "title": "Teen Beach 2",
+        "note": "CSM labels Sex, Romance & Nudity as not present while the detail text includes teen couple material and a cheek kiss."
+      },
+      {
+        "num": 239,
+        "title": "Invisible Sister",
+        "note": "CSM labels Sex, Romance & Nudity as not present while the detail text includes kisses, hand-holding, and underwear."
+      },
+      {
+        "num": 240,
+        "title": "Adventures in Babysitting",
+        "note": "CSM labels Violence & Scariness as not present while the detail text mentions mild peril and rough play."
+      },
+      {
+        "num": 240,
+        "title": "Adventures in Babysitting",
+        "note": "CSM labels Sex, Romance & Nudity as not present while the detail text includes brief attractiveness comments."
+      },
+      {
+        "num": 241,
+        "title": "The Swap",
+        "note": "CSM labels Sex, Romance & Nudity as not present while the detail text mentions teen flirting."
+      },
+      {
+        "num": 242,
+        "title": "Tangled: Before Ever After",
+        "note": "CSM labels Sex, Romance & Nudity as not present while the detail text includes kissing and an expression of love."
+      },
+      {
+        "num": 243,
+        "title": "Zombies",
+        "note": "CSM labels Sex, Romance & Nudity as not present while the detail text includes a kiss and teen romance."
+      },
+      {
+        "num": 246,
+        "title": "Zombies 2",
+        "note": "CSM labels Violence & Scariness as not present while the detail text includes tense peril and explosive danger."
+      },
+      {
+        "num": 246,
+        "title": "Zombies 2",
+        "note": "CSM labels Sex, Romance & Nudity as not present while the detail text includes teen romance and a kiss."
+      }
+    ],
+    "emotionalProseAttention": [
+      {
+        "num": 234,
+        "title": "Cloud 9",
+        "note": "Avalanche and career-ending injury references may need light prose context."
+      },
+      {
+        "num": 242,
+        "title": "Tangled: Before Ever After",
+        "note": "Kidnapping flashbacks may need light prose context."
+      },
+      {
+        "num": 244,
+        "title": "Freaky Friday",
+        "note": "A younger child running away and family distress may need prose context."
+      },
+      {
+        "num": 247,
+        "title": "Upside-Down Magic",
+        "note": "Possession and school-destruction danger may need light prose context."
+      }
+    ],
+    "nextClaudeAction": "Review label/detail conflicts, CSM/catalog age differences, and emotional prose notes before importing any production catalog content flags."
+  }
+}

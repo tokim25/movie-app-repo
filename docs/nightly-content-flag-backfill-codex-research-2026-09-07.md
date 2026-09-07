@@ -15,9 +15,9 @@ Codex completed repo/process research and a bounded CSM pilot, then pushed the r
 - producing a first-pass handoff checklist for PM/Coder/Reviewer
 - verifying that direct CSM page access works from this environment
 - researching 50 representative existing catalog titles under the 4-flag model
-- manually refetching 260 catalog titles through thirteen parallelized subagent slices
+- manually refetching 360 catalog titles through eighteen parallelized subagent slices
 
-Codex should not perform the full 938-title backfill in this pass. The plan still depends on the local bridge session on tokim25's machine for the unattended nightly run, progress checkpoints, rate-guard behavior, and PR batching. The 50-title pilot plus 260-title live-refetched set is intended to prove the research shape and give Claude concrete examples, not replace the scheduled backfill process.
+Codex should not perform the full 938-title backfill in this pass. The plan still depends on the local bridge session on tokim25's machine for the unattended nightly run, progress checkpoints, rate-guard behavior, and PR batching. The 50-title pilot plus 360-title live-refetched set is intended to prove the research shape and give Claude concrete examples, not replace the scheduled backfill process.
 
 Codex should also avoid doing coder, reviewer, or UX-designer work in this pass. That means no implementation changes, no PR approval opinion, and no product/interaction changes beyond research findings.
 
@@ -31,7 +31,7 @@ The branch now contains five pilot JSON files with 50 total titles:
 - `research/csm-content-flags-pilot-04-2026-09-07.json`
 - `research/csm-content-flags-pilot-05-2026-09-07.json`
 
-It also contains thirteen live-refetched JSON files with 260 additional titles:
+It also contains eighteen live-refetched JSON files with 360 additional titles:
 
 - `research/csm-content-flags-refetched-06-07-2026-09-07.json`
 - `research/csm-content-flags-refetched-08-09-2026-09-07.json`
@@ -46,6 +46,11 @@ It also contains thirteen live-refetched JSON files with 260 additional titles:
 - `research/csm-content-flags-refetched-26-27-2026-09-07.json`
 - `research/csm-content-flags-refetched-28-29-2026-09-07.json`
 - `research/csm-content-flags-refetched-30-31-2026-09-07.json`
+- `research/csm-content-flags-refetched-32-33-2026-09-07.json`
+- `research/csm-content-flags-refetched-34-35-2026-09-07.json`
+- `research/csm-content-flags-refetched-36-37-2026-09-07.json`
+- `research/csm-content-flags-refetched-38-39-2026-09-07.json`
+- `research/csm-content-flags-refetched-40-41-2026-09-07.json`
 
 Each entry includes:
 

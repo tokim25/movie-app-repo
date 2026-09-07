@@ -1,0 +1,763 @@
+{
+  "researchBatch": "csm-content-flags-refetched-38-39-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only handoff for nums 248-252 in data-dcom.js and nums 253-258 and 260-268 in data-disney.js. Built from live Common Sense Media refetches of catalog srcUrl pages. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 248,
+      "file": "data-dcom.js",
+      "title": "Spin",
+      "year": "2021",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/tv-reviews/spin",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The main concern is emotional rather than violent: Rhea's mother has died, flashbacks are sad, and characters briefly express mild mistrust or negative feelings."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "CSM notes only brief expressions of dislike and mistrust, without profanity."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A teen crush runs through the story, with hand-holding and some midriff-baring outfits but no sexualized content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Grief over a deceased parent may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 249,
+      "file": "data-dcom.js",
+      "title": "Under Wraps",
+      "year": "2021",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/tv-reviews/under-wraps",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Early spooky moments include the mummy coming to life and chasing frightened kids, but the scare softens once he is established as friendly and comic."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM detail text appears to contain a typo: \"chasea kids.\""
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 250,
+      "file": "data-dcom.js",
+      "title": "Christmas…Again?!",
+      "year": "2021",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/tv-reviews/christmas-again",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A repeating bully incident involves pushing kids and stealing lunch money, and Rowena makes dramatic hostile comments that are framed as tween frustration rather than real threats."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild words such as \"jerk,\" \"butt,\" and \"heck\" appear, along with rude family arguments and exaggerated hostile phrases."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults in committed relationships kiss and show mild affection; Rowena wants her divorced parents to fall back in love."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "The repeated \"I'm going to kill him\" style dialogue is not treated by CSM as sincere violence but may need careful wording."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 251,
+      "file": "data-dcom.js",
+      "title": "Zombies 3",
+      "year": "2022",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/zombies-3",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Light fantasy action includes fights, chases, electrocutions, threats, punches, falls, and monster transformations that CSM says are not realistic or very scary."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Language is limited to very mild interspecies taunting and threats."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Dating characters kiss on cheeks, nuzzle noses, cuddle, flirt, and in a few cases share actual kisses."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Live CSM age is 8+, while the current catalog CA is 7+."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 252,
+      "file": "data-dcom.js",
+      "title": "Under Wraps 2",
+      "year": "2022",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/tv-reviews/under-wraps-2",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild spooky content includes a few jump scares, brief peril, and fantasy sparring with magical beams."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Love is a secondary theme, and a couple marries and kisses at the end of the ceremony."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 253,
+      "file": "data-disney.js",
+      "title": "Pinocchio",
+      "year": "1940",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/pinocchio",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Threats and peril include a gun fired at a suspected intruder, boys fighting and destroying property, cartoon impacts, Pinocchio being kidnapped and caged, threats of destruction, separation from his father, and near-drowning."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A brief gag has Jiminy Cricket accidentally putting his hand on a female statue's rear."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Smoking and alcohol are frequent for a family classic: Geppetto smokes, children smoke cigars, Pinocchio drinks beer and acts intoxicated, tavern characters drink and smoke, and Stromboli drinks wine."
+        }
+      },
+      "handoffNotes": [
+        "Substance content is a larger current CSM signal than many parents may remember."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 254,
+      "file": "data-disney.js",
+      "title": "Fantasia",
+      "year": "1940",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/fantasia",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Unsettling animated sequences include Mickey losing control of magical brooms, storms and floods, volcanic destruction, a dinosaur fight to the death, ghosts, skeletons, vultures, bats, and alligators."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Animated nymphs, centaurs, and cherubs are nude or partially nude during courtship imagery, with one brief nipple shot but no genital detail."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The Pastoral Symphony sequence includes wine-drinking gods, humans, and animals, and Bacchus becomes drunk."
+        }
+      },
+      "handoffNotes": [
+        "Violence label is only \"a little,\" but the imagery may still be intense for sensitive younger children."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 255,
+      "file": "data-disney.js",
+      "title": "Dumbo",
+      "year": "1941",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/dumbo",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Dumbo is bullied and separated from his mother, Mrs. Jumbo is chained and isolated after defending him, circus workers are thrown around, and Dumbo's circus act brings down the tent."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM notes the stork delivery of animal babies may prompt questions from young children, but no romance or nudity concern is flagged."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Clowns are visibly drinking in silhouette, and Dumbo and Timothy accidentally get drunk, leading into the trippy Pink Elephants sequence."
+        }
+      },
+      "handoffNotes": [
+        "Racially dated crow portrayals are outside the four requested flags but may merit separate catalog prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 256,
+      "file": "data-disney.js",
+      "title": "Bambi",
+      "year": "1942",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/bambi",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "CSM flags several frightening scenes: Bambi's mother is killed off-screen, a quail is shot and shown dead, fire consumes the forest, thunderstorms scare the animals, young bucks fight, and hunting dogs chase Faline."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adolescent animals pair off in spring, flirt, snuggle, kiss, and later have babies."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Parent death and hunting scenes need clear prose context for younger viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 257,
+      "file": "data-disney.js",
+      "title": "Saludos Amigos",
+      "year": "1942",
+      "currentCatalogCa": "4+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/classic-caballeros-collection-saludos-amigos-and-the-three-caballeros",
+      "csmAge": "4+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "The combined CSM review notes guns fired into the air, a singing gun barrel gag, Donald and a llama nearly falling from a high bridge, baby-plane crash peril, and Goofy carrying and biting a hunting knife."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM calls the lyrics dated but innocuous, including the period use of \"gay caballeros.\""
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "The combined review notes Donald whistling at Latina women, one kiss, beach-ogling narration, Goofy's underwear gags, and a nonsexualized \"making love\" line."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "The combined review includes Donald getting drunk from one cocktail, adults drinking wine, and Jose Carioca frequently smoking a cigar."
+        }
+      },
+      "handoffNotes": [
+        "Catalog srcUrl redirects to CSM's combined Classic Caballeros Collection review for Saludos Amigos and The Three Caballeros.",
+        "Because the CSM review covers both films together, some category details may belong more strongly to The Three Caballeros than Saludos Amigos."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 258,
+      "file": "data-disney.js",
+      "title": "The Three Caballeros",
+      "year": "1944",
+      "currentCatalogCa": "4+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/classic-caballeros-collection-saludos-amigos-and-the-three-caballeros",
+      "csmAge": "4+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "The combined CSM review notes caballero gunplay, a surreal singing gun-barrel gag, bridge and plane peril, and a hunting knife gag."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM calls the dated lyrics innocuous, including the period phrase \"gay caballeros.\""
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "Donald whistles at Latina women and gets one kiss, narration comments on women at the beach, Goofy has underwear gags, and a toucan line uses \"making love\" nonsexually."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Donald gets drunk from a cocktail, adults drink wine, and Jose Carioca is rarely shown without a cigar."
+        }
+      },
+      "handoffNotes": [
+        "Catalog srcUrl redirects to CSM's combined Classic Caballeros Collection review for Saludos Amigos and The Three Caballeros."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 260,
+      "file": "data-disney.js",
+      "title": "Fun and Fancy Free",
+      "year": "1947",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/fun-and-fancy-free",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Peril includes Bongo being chased by a larger bear, lightning, cliff and waterfall danger, a giant kidnapping the harp, starving farmers, Mickey nearly being eaten, Donald threatening to kill the cow, and the giant falling from the beanstalk."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text lists only \"stupid.\""
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "Bongo and Lulu Bell fall in love, snuggle, dance, and rub noses while a jealous bear chases Lulu Bell."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Language and Sex, Romance & Nudity as none despite minor detail text."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 261,
+      "file": "data-disney.js",
+      "title": "Melody Time",
+      "year": "1948",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/melody-time",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "CSM notes shooting in a cowboy segment, racist violence toward Native characters, storm danger for boats, a skating rescue near a waterfall, a keyboard-snake gag, buzzards attacking a dying colt, and an abandoned baby raised by coyotes."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A woman alters her appearance to attract men, a man's attraction is played as making him lose sense, and cartoon couples kiss."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A heroic character is shown smoking cigarettes."
+        }
+      },
+      "handoffNotes": [
+        "Outdated Native representation and gender stereotypes are prominent current CSM concerns outside the four flag levels."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 262,
+      "file": "data-disney.js",
+      "title": "The Adventures of Ichabod and Mr. Toad",
+      "year": "1949",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-adventures-of-ichabod-and-mr-toad",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Cartoon violence includes rifles, guns, knives, swords, and hatchets, with the Headless Horseman repeatedly trying to behead Ichabod; CSM notes the horseman may be terrifying because he is never revealed as a disguise."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Characters smoke cigars and pipes, cartoon weasels are passed out drunk near bottles and mugs, and characters raise mugs of beer before drinking."
+        }
+      },
+      "handoffNotes": [
+        "Headless Horseman scares may need stronger prose than the app level alone implies."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 263,
+      "file": "data-disney.js",
+      "title": "Cinderella",
+      "year": "1950",
+      "currentCatalogCa": "4+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/cinderella",
+      "csmAge": "4+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Tense moments include a parent's death in narration, Lucifer chasing mice, Cinderella fleeing shadowy horses, the stepfamily destroying her gown and locking her in, brief sword chasing, head-bops, and bullying."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild insults include \"stupid\" and \"pompous windbag.\""
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Cinderella briefly undresses behind a screen with bare shoulders visible, shares a chaste kiss with the prince, and the story focuses heavily on romance and marriage."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The king lights a cigar and piles cigars on the Grand Duke, who briefly smokes one."
+        }
+      },
+      "handoffNotes": [
+        "CSM also flags gender-role/passivity conversation points outside the four requested category signals."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 264,
+      "file": "data-disney.js",
+      "title": "Alice in Wonderland",
+      "year": "1951",
+      "currentCatalogCa": "4+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/alice-in-wonderland",
+      "csmAge": "4+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild surreal peril includes Alice nearly drowning in tears, oysters being lured and killed off-screen, hostile flowers, Alice nearly destroying Rabbit's house, and the Queen repeatedly ordering beheadings before a card-army chase."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild insults include \"barbarian,\" \"stupidest,\" \"poo,\" \"fat,\" \"tyrant,\" and \"weed.\""
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "The Caterpillar repeatedly smokes a hookah, the smoke affects Alice, and two other characters smoke pipes."
+        }
+      },
+      "handoffNotes": [
+        "Hookah imagery is a clear CSM substance signal even though the movie is otherwise very young-skewing."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 265,
+      "file": "data-disney.js",
+      "title": "Peter Pan",
+      "year": "1953",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/peter-pan",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Violence and peril are frequent, with guns, swords, cannonballs, knives, clubs, kidnappings, walk-the-plank threats, a bomb plot, choking, fights, threats of throat-slitting and drowning, alligator danger, and a noose-linked Hangman's Tree reference."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Language includes racist terms for Native people, sexist remarks, many insults, violent place names, and a reference to drugging and kidnapping someone onto a ship."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "There are cheek kisses, Wendy trying to show Peter a kiss as he backs away, minimally clothed female characters including a mermaid covered by hair, burlesque-style walking, and jealousy over Peter's attention."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Kids smoke a ceremonial pipe, adults smoke cigars, adults drink from a liquor jug and act drunk, and rum is mentioned."
+        }
+      },
+      "handoffNotes": [
+        "Racist representation, noose imagery, and frequent weapon threats need explicit prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 266,
+      "file": "data-disney.js",
+      "title": "Lady and the Tramp",
+      "year": "1955",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/lady-and-the-tramp",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Lady is muzzled, chased by fierce dogs, and briefly held in the pound; the Siamese cats are creepy, and the climax has a rat threatening a baby before a frantic chase where a secondary dog appears dead briefly."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Lady and Tramp share gentle romance, including the spaghetti kiss, a romantic dinner, references to Tramp's past relationships, jealousy, dog marriage mentions, and puppies by the end."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM separately flags racist Siamese-cat caricatures outside the four requested flags."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 267,
+      "file": "data-disney.js",
+      "title": "Sleeping Beauty",
+      "year": "1959",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/sleeping-beauty",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Maleficent's menace drives the scares: she becomes a fire-breathing dragon, fights Philip, nearly sends him over a cliff, has him kidnapped and beaten in shadow, rains boulders on him, fires lightning, and lures Aurora in a trance toward the spinning wheel."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Maleficent uses insults including \"fools,\" \"idiots,\" and \"imbeciles,\" plus one reference to hell."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM labels romance as none and notes only a kiss."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "The kings drink to their children's planned marriage, and the minstrel drinks the leftovers until he falls over drunk under the table."
+        }
+      },
+      "handoffNotes": [
+        "Dragon battle and trance-to-spinning-wheel sequence may need clear scariness context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 268,
+      "file": "data-disney.js",
+      "title": "One Hundred and One Dalmatians",
+      "year": "1961",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/101-dalmatians",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cruella is frightening, puppies are kidnapped and threatened with being skinned for a coat, Horace and Jasper make threats, suspense is sustained, and high-speed chases end with villain cars crashing off a cliff."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild insults and threats include \"idiot,\" \"imbecile,\" \"fools,\" \"shut up,\" \"twerps,\" \"clumsy clod,\" \"bumbling blockheads,\" \"witch,\" \"scoundrels,\" \"inhuman beast,\" and \"rascals.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Roger and Anita flirt and kiss chastely, Pongo and Perdita rub noses, both couples marry, and the dogs are later raising puppies."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cruella smokes cigarettes in nearly every scene, Roger smokes a pipe, and Horace and Jasper drink wine straight from a bottle."
+        }
+      },
+      "handoffNotes": [
+        "Cruella's fur-coat scheme and smoking are major current CSM signals."
+      ],
+      "confidence": "high"
+    }
+  ]
+}

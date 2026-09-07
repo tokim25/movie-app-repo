@@ -1,0 +1,831 @@
+{
+  "researchBatch": "csm-content-flags-refetched-32-33-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only live CSM refetch for catalog nums 188-207 in data-dcom.js. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "sourceRange": {
+    "files": [
+      "data-dcom.js"
+    ],
+    "nums": [
+      188,
+      207
+    ],
+    "entryCount": 20
+  },
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "CSM labels were refetched live. Proposed levels map not present or none to 1, very little or a little to 2, some to 3, and a lot to 4."
+  },
+  "entries": [
+    {
+      "num": 188,
+      "file": "data-dcom.js",
+      "title": "Tru Confessions",
+      "year": "2002",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/tru-confessions",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a violence or scariness flag, though the story has emotionally hard family moments."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Bullying and family arguments include name-calling, including a disability slur directed at Eddie."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM age is now 10+, higher than the current catalog 8+.",
+        "Emotional content around disability, bullying, family strain, and Eddie's distress needs prose even though violence is not flagged."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 189,
+      "file": "data-dcom.js",
+      "title": "Get a Clue",
+      "year": "2002",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/get-a-clue",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface violence or scariness content."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions very mild teen flirting and crush discussion, despite the category being effectively unflagged."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM age is now 10+, higher than the current catalog 7+.",
+        "Romance details mention mild crush/flirting content while the visible signal is not present/none."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 190,
+      "file": "data-dcom.js",
+      "title": "Gotta Kick It Up!",
+      "year": "2002",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/gotta-kick-it-up",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild bullying includes a bumped student and a snack being stepped on, plus occasional team teasing."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "No strong profanity, but insulting words like dumb and loser appear."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Teen attraction includes hand-holding, face-touching, and comments about characters being hot."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 191,
+      "file": "data-dcom.js",
+      "title": "A Ring of Endless Light",
+      "year": "2002",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/a-ring-of-endless-light",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Water peril includes a child pulled under waves, a dolphin trapped in a net, and a near-drowning; the story also includes terminal illness and references past parental death."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Romance is limited to brief chaste teen kisses and an innocent love-triangle setup."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM age is now 8+, lower than the current catalog 9+.",
+        "Terminal illness, death, and near-drowning should be covered in emotional-content prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 192,
+      "file": "data-dcom.js",
+      "title": "The Scream Team",
+      "year": "2002",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-scream-team",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Ghostly peril includes frequent death references, a memorial, an evil ghost who throws fire and feeds on souls, eerie body-part gags, a mineshaft fall, and a dog attack."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild language includes a religious exclamation, freak, little beggars, and butt."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Death and afterlife themes are light in tone but should be named for sensitive viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 193,
+      "file": "data-dcom.js",
+      "title": "You Wish!",
+      "year": "2003",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/you-wish",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Mild kid peril includes pretend combat with toy-style gear, bullying with pizza dumped on kids, an arm punch, rough football tackles, a folklore eye-gouging reference, and a brief horror-movie image."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Infrequent rude words and insults include stupid, butt, poo, and jerk."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Romance is limited to a cheek kiss and teen crushes."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM age is now 8+, higher than the current catalog 7+."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 194,
+      "file": "data-dcom.js",
+      "title": "Right on Track",
+      "year": "2003",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/right-on-track",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Racing danger includes a crash where a young rider loses consciousness and is airlifted, plus a school-sports shoulder injury and teasing at school and the track."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Mild insults include butt and loser."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Characters mention hot boys and possible dates."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM age is now 8+, higher than the current catalog 7+.",
+        "Sexism in racing is a major theme but sits outside the four requested flags."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 195,
+      "file": "data-dcom.js",
+      "title": "The Even Stevens Movie",
+      "year": "2003",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-even-stevens-movie",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text describes mischief such as exploding beach balls, family spats, and wrestling while the category is effectively unflagged."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions some teen kissing, though the category is effectively unflagged."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM age is now 8+, higher than the current catalog 7+.",
+        "CSM labels violence and romance as none/not present but details still mention mischief and teen kissing."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 196,
+      "file": "data-dcom.js",
+      "title": "Eddie's Million Dollar Cook-Off",
+      "year": "2003",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/eddies-million-dollar-cook-off",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Slapstick includes kids wrestling, chasing each other, and two large messy food fights."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild language includes idiot, stupid, butt, and screw up."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 197,
+      "file": "data-dcom.js",
+      "title": "Full-Court Miracle",
+      "year": "2003",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/full-court-miracle",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Basketball hostility is mild, with one player tripped and another pushed in retaliation."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Some aggressive sports talk includes kick some butt."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Wine glasses appear on a dinner table, but CSM says no drinking is shown."
+        }
+      },
+      "handoffNotes": [
+        "CSM age is now 7+, lower than the current catalog 8+.",
+        "Religious content is central to the film but outside the four requested flags."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 198,
+      "file": "data-dcom.js",
+      "title": "Pixel Perfect",
+      "year": "2004",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/pixel-perfect",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild physical conflict includes shoving, a threat to smack someone, and a character hospitalized with a brain injury after a stage fall."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes one butt and mean body-shaming dialogue."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Teen dating, flirting, and kissing are present."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM age is now 10+, higher than the current catalog 7+.",
+        "Body image, emotional rights of an artificial performer, and hospitalization may need prose beyond the four flags."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 199,
+      "file": "data-dcom.js",
+      "title": "Going to the Mat",
+      "year": "2004",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/going-to-the-mat",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Sports violence includes shoving, wrestling throws and pins, an accidental bloody nose, and one hospitalizing athletic injury."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Insults target rural identity and disability, including freak directed at a blind character."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Romance is limited to kissing."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Disability teasing should be named in prose even though language is only a little."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 200,
+      "file": "data-dcom.js",
+      "title": "Stuck in the Suburbs",
+      "year": "2004",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/stuck-in-the-suburbs",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Slapstick chase moments include a character running into a car and briefly hurting their head."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "No profanity is flagged, but argument words such as creep, pathetic, and desperate upset one character."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM notes dated pop-star obsession and gender stereotypes outside the four requested flags."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 201,
+      "file": "data-dcom.js",
+      "title": "Tiger Cruise",
+      "year": "2004",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/tiger-cruise",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "9/11 material includes footage of planes hitting the Twin Towers, news references to casualties, hijacking, missing people, rescues, emergency alarms, a shipboard fall, Pearl Harbor death references, and mentions of weapons."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "No strong language; concerns are a military-family label some characters dislike and body-shaming comments."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A teen crushes on a navy officer and calls him hot."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Real 9/11 footage, missing-person fears, and presumed death need explicit emotional-content prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 202,
+      "file": "data-dcom.js",
+      "title": "Halloweentown High",
+      "year": "2004",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/halloweentown-high",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Conflict stays mild, mostly yelling and harmless teen run-ins amid monster-school chaos."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Insults stay around loser and stupid."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Light flirtation and one almost-kiss are noted."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 203,
+      "file": "data-dcom.js",
+      "title": "Now You See It...",
+      "year": "2005",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/now-you-see-it",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A mildly eerie mystery tone includes a basement jump scare, a bat suddenly appearing, and an unexpectedly slamming door."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild teen disputes appear, and one character calls themself a freak."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM age is now 8+, higher than the current catalog 7+."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 204,
+      "file": "data-dcom.js",
+      "title": "Buffalo Dreams",
+      "year": "2005",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/buffalo-dreams",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild danger includes a bike-race sabotage that breaks another rider's bike, boys vandalizing a sacred Navajo site, and kids redirecting buffalo before a possible stampede."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Cultural/spiritual Navajo content and sacred-site vandalism may need careful prose outside the four flags."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 205,
+      "file": "data-dcom.js",
+      "title": "Kim Possible Movie: So the Drama",
+      "year": "2005",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/kim-possible-movie-so-the-drama",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoon action is frequent: karate fights, scratches with brief red marks, smoke bombs, flaming swords, explosions, androids shot with green goo, capture, underwater peril, and giant robot attacks."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The language concern is mostly negative teasing around a character finding a prom date."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Teen dating talk is frequent, some outfits are skimpy or exaggerated, and Kim and Ron slow dance and kiss."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM age is now 8+, higher than the current catalog 7+."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 206,
+      "file": "data-dcom.js",
+      "title": "Go Figure",
+      "year": "2005",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/go-figure",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Rough hockey scenes include targeted knockdowns, and the story includes verbal bullying and pranks."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild insults include dork, geek, weenie, and a reference to Tonya Harding used as a put-down."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Romance is limited to a cheek kiss and a dinner-date bribe."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM age is now 10+, higher than the current catalog 8+."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 207,
+      "file": "data-dcom.js",
+      "title": "Life Is Ruff",
+      "year": "2005",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/life-is-ruff",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Animal-shelter content implies some dogs may be put down, dog-show exploitation is mentioned, an asthma attack is referenced, and two characters threaten a beating without following through."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Occasional mild insults include doofus and mutt."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM age is now 8+, higher than the current catalog 7+.",
+        "Animal shelter euthanasia implication may need gentle prose for sensitive viewers."
+      ],
+      "confidence": "high"
+    }
+  ],
+  "handoffSummary": {
+    "totalEntries": 20,
+    "found": 20,
+    "unavailable": [],
+    "needsReviewerAttention": [
+      {
+        "num": 188,
+        "reason": "CSM age changed to 10+ and emotional disability/bullying content needs prose."
+      },
+      {
+        "num": 189,
+        "reason": "CSM age changed to 10+; romance details mention mild flirting/crushes despite not-present signal."
+      },
+      {
+        "num": 191,
+        "reason": "Death, terminal illness, and near-drowning need emotional-content prose."
+      },
+      {
+        "num": 192,
+        "reason": "Death and afterlife themes are central despite a comic tone."
+      },
+      {
+        "num": 194,
+        "reason": "CSM age changed to 8+ and sexism theme sits outside the four flags."
+      },
+      {
+        "num": 195,
+        "reason": "CSM age changed to 8+; labels/details conflict on mischief and teen kissing."
+      },
+      {
+        "num": 198,
+        "reason": "CSM age changed to 10+; body-shaming and hospitalization may need prose."
+      },
+      {
+        "num": 199,
+        "reason": "Disability teasing should be preserved in prose."
+      },
+      {
+        "num": 201,
+        "reason": "Real 9/11 footage, missing-person fears, and presumed death need explicit prose."
+      },
+      {
+        "num": 204,
+        "reason": "Navajo sacred-site vandalism and cultural/spiritual themes need careful prose."
+      },
+      {
+        "num": 206,
+        "reason": "CSM age changed to 10+."
+      },
+      {
+        "num": 207,
+        "reason": "CSM age changed to 8+ and animal-shelter euthanasia implication may be sensitive."
+      }
+    ]
+  }
+}

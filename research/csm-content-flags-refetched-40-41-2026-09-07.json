@@ -1,0 +1,756 @@
+{
+  "researchBatch": "csm-content-flags-refetched-40-41-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only handoff for nums 269-272, 274-275, and 277-290 in data-disney.js. Built from live Common Sense Media refetches of catalog srcUrl pages. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 269,
+      "file": "data-disney.js",
+      "title": "The Sword in the Stone",
+      "year": "1963",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-sword-in-the-stone",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Wart is bullied and punished, and Merlin's lessons include mild peril, a spooky forest, fencing, tournament swords, and a somewhat scary Madam Mim."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Madam Mim uses a few harsh words and one mild comic exclamation."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Brief flirting and crush material are present."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Wine appears with meals."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 270,
+      "file": "data-disney.js",
+      "title": "The Jungle Book",
+      "year": "1967",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-jungle-book-1967",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "The Baloo and Shere Khan fight is bloodless but potentially upsetting, with a burning branch tied to Shere Khan's tail; Kaa repeatedly hypnotizes characters."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A young girl is framed as a romantic match for Mowgli in a suggestive way."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM's live page title distinguishes this review as The Jungle Book (1967)."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 271,
+      "file": "data-disney.js",
+      "title": "The Aristocats",
+      "year": "1970",
+      "currentCatalogCa": "4+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-aristocats",
+      "csmAge": "4+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Edgar drugs the cats, kidnaps and abandons them, and chase scenes create animal peril, including a pitchfork threat."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text only notes one very mild phrase from a dog."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "O'Malley's flattery prompts eye-batting, and there are several comic shots of Edgar's underwear."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A goose leaves a restaurant stumbling drunk after being marinated by a chef, played broadly for laughs."
+        }
+      },
+      "handoffNotes": [
+        "Language is rated not present while the detail text mentions one very mild phrase."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 272,
+      "file": "data-disney.js",
+      "title": "Robin Hood",
+      "year": "1973",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/robin-hood",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frequent cartoon fighting uses bows, flaming arrows, swords, axes, knives, and slapstick medieval weaponry, with references to hanging and Prince John striking Hiss."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A disguise gag gives Little John an exaggerated chest when coins are hidden in his outfit, drawing hoots and wolf whistles."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Sir Hiss hides in ale and reappears with glazed eyes, slurred speech, and cartoon drunkenness."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 274,
+      "file": "data-disney.js",
+      "title": "The Rescuers",
+      "year": "1977",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-rescuers",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A kidnapped orphan faces falls, near-drowning, snapping crocodiles, shotgun fire from Medusa, and a diamond hidden inside a human skull."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "An adult bullies a child with mild insults and tells her to shut up."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A country mouse shares strong homemade alcohol that makes drinkers spew fire and feel newly energized."
+        }
+      },
+      "handoffNotes": [
+        "Child kidnapping and near-drowning may need prose context despite the a little violence rating."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 275,
+      "file": "data-disney.js",
+      "title": "The Fox and the Hound",
+      "year": "1981",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-fox-and-the-hound",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Tod's mother is killed off-screen, Tod is later abandoned and hunted, Amos uses guns, traps, and fire, Chief appears badly hurt by a train, and a bear fight ends in a waterfall fall."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild old-fashioned exclamations and sexist insults are used."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "There is mild fox flirting, plus a brief underwear gag involving Amos."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Animal death, abandonment, hunting, and the train injury may need explicit context for sensitive viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 277,
+      "file": "data-disney.js",
+      "title": "The Great Mouse Detective",
+      "year": "1986",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-great-mouse-detective",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Ratigan menaces, threatens, and kidnaps mice, a creepy bat assists him, a cat eats a mouse, and the story includes a pub fight and climactic duel."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text only notes benign words such as old-fashioned villain insults."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Rodent characters drink and get tipsy, pub scenes include alcohol, Ratigan and Basil smoke, and a tipsy Watson ogles a burlesque dancer."
+        }
+      },
+      "handoffNotes": [
+        "Language is rated not present while the detail text mentions benign insult words; the burlesque beat appears in CSM's drinking/drugs/smoking detail."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 278,
+      "file": "data-disney.js",
+      "title": "Oliver & Company",
+      "year": "1988",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/oliver-company",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mr. Sykes makes threats, loads an automatic weapon, and a young girl is kidnapped, which may frighten younger viewers."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mr. Sykes smokes a cigar, with smoke shown around him."
+        }
+      },
+      "handoffNotes": [
+        "CSM's page title omits the ampersand as Oliver & Company in metadata but matches the catalog title."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 279,
+      "file": "data-disney.js",
+      "title": "The Little Mermaid",
+      "year": "1989",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-little-mermaid",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Ursula imprisons merpeople, grows giant, attacks with a trident, and dies dramatically; other peril includes a shark chase, near-drowning, kitchen cleaver danger, and destruction of Ariel's possessions."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Name-calling includes mild insults."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Ariel's crush drives the plot, a song encourages a kiss, mermaids wear shell bras, mermen are topless, and Ariel is briefly shadowed or underwater while naked after becoming human."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Characters handle a pipe."
+        }
+      },
+      "handoffNotes": [
+        "Brief transformed-human nudity may need precise prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 280,
+      "file": "data-disney.js",
+      "title": "The Rescuers Down Under",
+      "year": "1990",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-rescuers-down-under",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cody is repeatedly threatened by crocodiles, imprisoned in a mine, and falsely reported dead; McLeach dies over a waterfall, eggs and an eagle are endangered, and a medical chainsaw gag adds peril."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "CSM notes mild name-calling."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild flirting and budding romance appear, along with an underwear tangle gag."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A doctor tries to inject an unwilling patient with an oversized needle."
+        }
+      },
+      "handoffNotes": [
+        "CSM places the injection scene under Drinking, Drugs & Smoking even though it is medical peril rather than recreational substance use."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 281,
+      "file": "data-disney.js",
+      "title": "Aladdin",
+      "year": "1992",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/aladdin",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Armed henchmen chase and threaten Aladdin, mythical monsters and a sand creature create danger, Jasmine is chained and forced to feed Jafar, and the action has repeated near escapes."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild name-calling includes words such as stupid, dumb, and idiot."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Women are frequently shown in scanty outfits, dancers are curvy and barely clad, and Aladdin and Jasmine kiss and hold each other."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The Genie makes a smoking joke, acts briefly as if he is in a bar, and hookah smoking appears."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 282,
+      "file": "data-disney.js",
+      "title": "The Lion King",
+      "year": "1994",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-lion-king-1994",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Hyenas threaten and talk about eating others, the elephant graveyard is creepy, red claw marks appear in a lion fight, Mufasa is trampled to death, Simba finds his body, and Scar later tries to kill Simba."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild insults and casual exclamations are used."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Betrothed characters flirt and later become mates."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM's live page title distinguishes this review as The Lion King (1994); Mufasa's death and Simba discovering the body may need context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 283,
+      "file": "data-disney.js",
+      "title": "Pocahontas",
+      "year": "1995",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/pocahontas",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "The colonist and Powhatan conflict includes muskets, knives, swords, shoot-outs, three shootings with one death, near execution, imprisonment, and a stormy ship peril scene."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "CSM notes one mild word and repeated racist or dehumanizing terms for Indigenous people, including slurs in dialogue and songs."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Pocahontas and John Smith kiss, hug, and hold hands; Pocahontas is portrayed as an adult in fitted clothing despite the historical figure being a child, and non-sexual partial nudity appears while swimming."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Men on a ship fill mugs from a keg of wine."
+        }
+      },
+      "handoffNotes": [
+        "Racist slurs and the historical-age caveat in CSM's sex/romance detail should be preserved carefully in prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 284,
+      "file": "data-disney.js",
+      "title": "The Hunchback of Notre Dame",
+      "year": "1996",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-hunchback-of-notre-dame-1996",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "The movie includes cartoon violence, sword and knife battles, broken teeth, an arrow wound, demonic fire imagery, near burnings at the stake, mob bullying of Quasimodo, and a house set on fire."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Frollo threatens others, Quasimodo is insulted for his appearance, and a song includes hellfire language."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Esmeralda wears revealing clothing, Frollo's desire for her is threatening and framed through impure thoughts and burning desire, and Phoebus makes a sexual implication."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Festival scenes include grog, Frollo drinks what appears to be wine, gargoyles open champagne, and Phoebus says he could use a drink."
+        }
+      },
+      "handoffNotes": [
+        "Frollo's predatory desire, religious/demonic imagery, bullying, and near execution by burning may need explicit context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 285,
+      "file": "data-disney.js",
+      "title": "Hercules",
+      "year": "1997",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/hercules",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Hades is frightening, Hercules battles monsters, the hydra is repeatedly decapitated and regenerates, dead bodies and dying people appear in the underworld, and apocalyptic peril recurs."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Taunts and insults include mild name-calling and nickname jokes."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Meg is pressured to handle Hercules romantically, Hercules and Meg share long kisses, and Phil spies on and chases swimming nymphs."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Hades smokes a cigar and drinks a martini while celebrating."
+        }
+      },
+      "handoffNotes": [
+        "Underworld death imagery and Phil's spying on nymphs may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 286,
+      "file": "data-disney.js",
+      "title": "Mulan",
+      "year": "1998",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/mulan",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Mulan trains and fights with weapons in wartime, the Huns destroy villages and kill people off-screen, battle scenes are intense, and the climax includes sword fighting and explosions."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "There is mild flirting and shirtless male training imagery."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One character smokes a long cigarette."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 287,
+      "file": "data-disney.js",
+      "title": "Tarzan",
+      "year": "1999",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/tarzan",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A family escapes a burning boat, a leopard kills a baby gorilla and Tarzan's parents off-screen, bloody paw prints are shown, Tarzan later kills the leopard, gorillas are attacked and caged, the gorilla king is shot, and the villain dies in a fall."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Tarzan and Jane's budding romance ends with a loving kiss."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "A man pours wine for himself and Tarzan, but Tarzan does not drink it."
+        }
+      },
+      "handoffNotes": [
+        "Drinking is rated not present while the detail text mentions wine being poured; animal deaths and bloody paw prints may need context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 288,
+      "file": "data-disney.js",
+      "title": "Fantasia 2000",
+      "year": "1999",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/fantasia-2000",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A magic-act fake hand-chopping is quickly revealed as a trick, and several animated segments use ominous music, threatening imagery, rodents, fire, giant birds, and Mickey's uncontrolled flood sequence."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "The Firebird and Sorcerer's Apprentice segments may be the main sensitivity points despite the a little violence rating."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 289,
+      "file": "data-disney.js",
+      "title": "Dinosaur",
+      "year": "2000",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/dinosaur",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Meteorites, tsunami, landslides, cave collapse, fire, predators, brutal dinosaur fights, kills, and repeated danger to sympathetic characters make the threat level high."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Lemurs comically prepare to meet mates, Aladar falls in love with his life partner, and dinosaur eggs are part of the story."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "A plant is used to relieve a dying dinosaur's pain."
+        }
+      },
+      "handoffNotes": [
+        "Drinking is rated not present while the detail text mentions medicinal plant use; disaster and predator violence may need context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 290,
+      "file": "data-disney.js",
+      "title": "The Emperor's New Groove",
+      "year": "2000",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-emperors-new-groove",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mostly comic slapstick includes Yzma repeatedly trying to kill Kuzco, explicit kill threats, perilous falls, and frightening dark jungle scenes."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Bullying language includes shut up, hate, and kill threats."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Kuzco is shown a line of potential wives and insults them, while Yzma exposes her leg in a joke tied to others mocking her appearance."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Kill threats are split between CSM violence and language details."
+      ],
+      "confidence": "high"
+    }
+  ]
+}
