@@ -348,9 +348,21 @@ pair or equivalent -- check `index.html`'s schema validation and
 trusting this paragraph, since that field design may evolve after this was
 written). Whatever the exact fields, the selection logic must follow the
 same principle as Step 1's dedupe: check `origin/master`'s *current* state
-before picking a night's batch, not a stale local snapshot -- two runs (or
-an unattended run overlapping an interactive session) picking the same
+before picking a batch, not a stale local snapshot -- two runs (or an
+unattended run overlapping an interactive session) picking the same
 not-yet-refreshed titles wastes real research work, not just a git conflict.
+
+**This check happens once per PR within a night, not once at the top of the
+night (explicit as of 2026-09-07, since a night now splits into ~4-5
+sequential PRs -- see "PR structure" below).** If PR 2 of a night is being
+assembled after PR 1 of that same night already merged, PR 2's candidate
+list must re-fetch and re-check against `origin/master` *as it stands after
+PR 1*, not against whatever snapshot was current when the night started --
+otherwise a title PR 1 already covered can get redundantly re-researched in
+PR 2, which is the same coordination failure Step 1 already guards against
+for new titles, just recurring within one night instead of across nights.
+A single check at the start of the night is not sufficient once a night is
+multiple sequential PRs.
 
 **Research depth must not vary with batch size.** Whether a night's batch is
 25 titles or 200, each title gets the identical protocol: `WebSearch` to
@@ -380,6 +392,17 @@ shared state file tracking a rolling per-minute window and a hard nightly
 total, both configurable via `CSM_RATE_PER_MINUTE`/`CSM_RATE_NIGHTLY_CAP`
 env vars) and `node scripts/csm-rate-guard.mjs status` to check current
 counts without mutating anything.
+
+**Also call `node scripts/csm-rate-guard.mjs checkpoint "title N/TOTAL:
+<title>"` right before starting research on each title.** This is what
+makes an unattended overnight run legible from outside: whoever checks in
+on the run mid-flight (an external watcher, since a blocked or crashed
+session can't reliably notice and report its own total failure) reads
+`status`'s `checkpoint` field to tell "still working, last seen at title
+47" apart from "silent because it never started" or "silent because it
+died with no trace" -- three very different situations that all look like
+identical silence without this. Cheap to call every title; do so every
+time, not just when convenient.
 
 **PR structure for a night's batch.** Split into multiple PRs rather than
 one giant one (roughly 40-50 titles each), by data file where the night's

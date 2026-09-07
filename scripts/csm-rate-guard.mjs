@@ -25,8 +25,19 @@
 //     concurrent subagent's next `acquire` call will see it and abort too
 //     -- one agent hitting a wall stops the whole wave, not just itself.
 //
+//   node scripts/csm-rate-guard.mjs checkpoint "title 47/200: Finding Dory"
+//     Call this right before starting research on each title (added
+//     2026-09-07, so an external watcher checking in on the run mid-flight
+//     -- e.g. via get_session on the executing session -- can tell "still
+//     working, last seen at title 47" apart from "silent because it never
+//     started" or "silent because it died with no trace." This is
+//     observability, not a control -- acquire()/signal-block() don't read
+//     or gate on it. Cheap enough to call every title; do so.
+//
 //   node scripts/csm-rate-guard.mjs status
-//     Prints current counts without mutating state. For visibility/debug.
+//     Prints current counts (including the last checkpoint, if any)
+//     without mutating state. For visibility/debug, and what an external
+//     watcher should read to check in on an in-progress run.
 //
 //   node scripts/csm-rate-guard.mjs reset
 //     Clears state (new night, or manual re-run). Not called automatically
@@ -58,7 +69,7 @@ function todayUTC() {
 }
 
 function defaultState() {
-  return { date: todayUTC(), nightlyCount: 0, recentTimestamps: [], blocked: null };
+  return { date: todayUTC(), nightlyCount: 0, recentTimestamps: [], blocked: null, checkpoint: null };
 }
 
 function readState() {
@@ -157,6 +168,15 @@ async function acquire() {
   }
 }
 
+function checkpoint(text) {
+  return withLock(() => {
+    const state = readState();
+    state.checkpoint = { text: text || '(no message)', at: new Date().toISOString() };
+    writeState(state);
+    return 0;
+  });
+}
+
 function signalBlock(reason) {
   return withLock(() => {
     const state = readState();
@@ -177,7 +197,8 @@ function status() {
     nightlyCap: NIGHTLY_CAP,
     requestsInLastMinute: recentCount,
     perMinuteCap: PER_MINUTE_CAP,
-    blocked: state.blocked
+    blocked: state.blocked,
+    checkpoint: state.checkpoint
   }, null, 2));
   return 0;
 }
@@ -194,10 +215,11 @@ async function main() {
   switch (cmd) {
     case 'acquire': code = await acquire(); break;
     case 'signal-block': code = await signalBlock(rest.join(' ')); break;
+    case 'checkpoint': code = await checkpoint(rest.join(' ')); break;
     case 'status': code = status(); break;
     case 'reset': code = reset(); break;
     default:
-      console.error('Usage: csm-rate-guard.mjs <acquire|signal-block "reason"|status|reset>');
+      console.error('Usage: csm-rate-guard.mjs <acquire|signal-block "reason"|checkpoint "text"|status|reset>');
       code = 1;
   }
   process.exit(code);
