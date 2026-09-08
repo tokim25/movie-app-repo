@@ -1,0 +1,642 @@
+{
+  "researchBatch": "csm-content-flags-claude-final-group4-2026-09-08",
+  "researchedAt": "2026-09-08",
+  "researcher": "Claude",
+  "purpose": "Part of the final 69 catalog titles, group 4 of 4, live CSM research, nums 993-1010",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 993,
+      "file": "data-extra.js",
+      "title": "Beethoven's 2nd",
+      "year": "1993",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/beethovens-2nd",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "An intoxicated teen boy locks a girl in a bedroom with predatory intent before Beethoven intervenes and destroys the house; antagonists threaten to drown puppies, and numerous comedic falls and physical gags occur throughout."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild profanity including the word \"hell\" and a crude command to bite someone \"in the wiener.\""
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A young child asks her father about human reproduction, prompting an awkward explanation referencing eggs and tadpoles."
+        },
+        "drinking": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Dozens of teenagers consume beer at a lakeside party and display intoxication; three teen boys pour beer on Beethoven, and an intoxicated teen boy initiates the disturbing bedroom scene."
+        }
+      },
+      "handoffNotes": [
+        "A drunken teen boy locking a girl in a bedroom with clear predatory intent (framed as a near-assault) is much darker than the film's family comedy premise suggests and needs explicit prose context despite the catalog's low 10+ rating."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 994,
+      "file": "data-extra.js",
+      "title": "Mr. Popper's Penguins",
+      "year": "2011",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/mr-poppers-penguins",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Slapstick humor and physical comedy dominate, including a zookeeper's self-inflicted face strike and a zoologist deeming an egg nonviable; sensitive children might find the absent-father storyline and casual references to his death unsettling."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild insults appear throughout, including \"butt,\" \"stupid,\" \"crazy,\" \"dumb,\" \"poo,\" and \"pee,\" plus occasional use of \"oh my God.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Divorced former spouses go on a date culminating in a kiss; a Viagra joke references male vigor, a teen girl hopes a boy will ask her to a dance, and a penguin is humorously accused of fathering multiple clutches of eggs."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Alcohol and champagne appear at a fancy party and dinner reception, but consumption isn't emphasized."
+        }
+      },
+      "handoffNotes": [
+        "The plot centers on Tom Popper processing his adventurer father's absence and eventual death, which the film treats fairly casually; sensitive younger viewers may need gentle prose context around this grief/loss thread."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 995,
+      "file": "data-extra.js",
+      "title": "We Bought a Zoo",
+      "year": "2011",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/we-bought-a-zoo",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A teen's dark violent drawings include a decapitated head with blood spurting from the neck; a teen kicks a snake, and some mild threats are played as humor."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Profanity includes \"s--t,\" \"damn,\" \"a--hole,\" and \"d--k,\" with some swearing done by child characters."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Flirtation between two teens and two adults leads to a kiss, plus mild innuendo; a maternity portrait shows a woman without her shirt in a non-sexual context."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Social drinking among adults appears along with photo references involving drinks, plus a joke about animals receiving medications that would cause intoxication."
+        }
+      },
+      "handoffNotes": [
+        "The story centers on a widowed father and his kids grieving their mother's/wife's recent death; this grief thread runs throughout and may need gentle prose context for sensitive viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 996,
+      "file": "data-extra.js",
+      "title": "Earth to Echo",
+      "year": "2014",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/earth-to-echo",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Tense but not intense: kids ride away from suspicious adults, a car chase occurs, and adults surgically operate on the alien; very young viewers might find the alien initially frightening."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A few \"what the's\" with a left-off expletive, plus insults like \"loser,\" \"liar,\" and \"stupid.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild hand-holding occurs between two characters, a boy makes a suggestive joke about being in a friend's mom's bed \"not sleeping,\" and boys call a girl \"hot\" or \"mannequin girl.\""
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Kids stumble into a biker bar where adults drink (the kids get Shirley Temples), and later attend a high school party with teens drinking from red Solo cups before fleeing when police arrive."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 997,
+      "file": "data-extra.js",
+      "title": "The House with a Clock in Its Walls",
+      "year": "2018",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-house-with-a-clock-in-its-walls",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Numerous creepy visuals include a haunted house, eerie animated toys and furniture, and predatory topiary; a corpse emerges from a coffin in a graveyard scene, an evil warlock recounts summoning a demon, and characters face electrocution, explosions, and magical attacks; war references include bloodied hands and tales of slaughter. A child also experiences bullying including threats and physical violence."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Characters trade insults like \"old hag,\" \"withered purple skeleton,\" and \"coward\"; a bully calls another child \"runt,\" \"weird,\" and \"ankle biter.\" Profanity includes \"hell,\" \"damn,\" and \"oh my God\" used sparingly."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A married couple shares a passionate kiss. A magic spell transforms a human into a baby, shown briefly nude in a non-graphic way with objects blocking the view."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not flag drinking, drug, or smoking content; adult characters do play poker and teach a child to gamble, which falls outside this category."
+        }
+      },
+      "handoffNotes": [
+        "Director Eli Roth described this as a \"starter horror movie\" for tweens -- the catalog's 11+ rating should account for jump scares, necromancy/occult imagery, and a corpse-in-coffin scene despite otherwise moderate category labels."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 998,
+      "file": "data-extra.js",
+      "title": "Diary of a Wimpy Kid: Rodrick Rules",
+      "year": "2011",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/diary-of-a-wimpy-kid-rodrick-rules",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Some bullying and threatening: Rodrick picks on Greg mercilessly, and in one scene they physically brawl, with Greg jumping on Rodrick and both falling to the floor struggling."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Common insults include \"jerk,\" \"lame,\" \"loser,\" \"fart,\" \"doofus,\" and \"butt brain,\" plus \"oh my God.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Some minor flirting as Greg develops a crush on the pretty new girl in school."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Rodrick throws a wild party while his parents are away; teens drink from anonymous red cups and act crazy, though CSM notes no explicit mention or confirmation of alcohol is ever made."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 999,
+      "file": "data-extra.js",
+      "title": "Mirror Mirror",
+      "year": "2012",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/mirror-mirror",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Bloodless sword fighting occurs where no one is seriously injured, and two giant marionettes try to kill Snow White and destroy the dwarfs' home. The queen unleashes a flying creature that nearly kills the main characters, and the king's death happens off-screen."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The most common insult is \"idiot,\" with \"stupid\" and some euphemisms for \"short\" aimed at the dwarfs."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Suggestive jokes, flirting, and a kiss occur, including a reference to a \"May-December\" romance and a quick reference to being \"taken advantage of\"; a bespelled prince licks the queen's face, and there's a playful sword-fighting \"spanking\" gesture plus a scene where the prince's shirt is removed."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Some drinking by grown-ups occurs at parties and receptions, and a dwarf behaves in a drunken manner."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 1000,
+      "file": "data-extra.js",
+      "title": "Barbie",
+      "year": "2023",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/barbie",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Physical altercations use silly props and grappling; chase scenes with vehicle spinouts play as slapstick without real injuries, though one character experiences a fall requiring medical attention. There are also references to persistent, intrusive thoughts of death that trigger Barbie's crisis."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "One censored \"motherf--\" plus scattered profanity including \"damn,\" \"hell,\" and \"crap,\" alongside words like \"bimbo,\" \"tramp,\" \"stupid,\" \"penis,\" and \"vagina,\" and catcalls with double meanings."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Ken requests an overnight stay, and Barbie notes dolls lack genitalia; there's suggestive language about body features, shirtless male characters, multiple Kens dressed scantily while flirting with Barbies, and Ken attempts a kiss that Barbie declines. No sexual content is shown."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Multiple beer references (\"brewskis\") and red cups appear, along with a party scene featuring a wine glass and a mention of being \"day drunk.\""
+        }
+      },
+      "handoffNotes": [
+        "Barbie's storyline includes an existential crisis triggered by intrusive thoughts of death/mortality -- while not grief over a specific loss, this thematic content around death anxiety may warrant gentle prose context for sensitive younger viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1001,
+      "file": "data-extra.js",
+      "title": "Roald Dahl's Matilda the Musical",
+      "year": "2022",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/roald-dahls-matilda-the-musical",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Unrealistic fantasy violence includes a child swung by her pigtails and thrown through the sky, verbal bullying from parents, students locked in spike-lined \"chokey\" closets, ear-pulling punishment, forced cake consumption, small explosions in an obstacle course, and a circus accident involving a fall from height with the victim later shown dying in a hospital bed. Telekinesis creates additional chaos with flying metal cups and chains."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Words include \"brat,\" \"flaming flip,\" \"idiot,\" \"pig,\" \"maggots,\" \"creep,\" \"snot nose,\" and \"hell,\" plus fart and burp jokes."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A couple is seen making and drinking cocktails at home on more than one occasion."
+        }
+      },
+      "handoffNotes": [
+        "A circus performer falls from height and is later shown dying in a hospital bed (tied to Miss Honey's backstory) -- this death should get explicit prose context despite the film's otherwise moderate violence label. Matilda also endures ongoing cruelty and neglect from her parents and headmistress, which is central to the story."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1002,
+      "file": "data-extra.js",
+      "title": "Wonka",
+      "year": "2023",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/wonka",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Characters face gunpoint situations and one firearm discharge (not targeting people); near-drowning incidents and boat explosions occur with survivals. Wonka experiences head trauma via a baton strike, a young character is confined in a dark bird coop, and indentured servants face cruel treatment. References include a mother's death from illness. Additional threats involve property destruction, fire, and poisoned chocolate causing facial hair growth."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Insults include \"brat,\" \"bookworm,\" \"peasant,\" \"fart,\" \"nutty,\" \"insane,\" and \"stupid old hag,\" plus mild exclamations (\"blasted,\" \"oh my Lord,\" \"Jeez\") and one instance of \"damn.\""
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A couple of brief kisses occur between supporting characters, and adults flirt. A male character performs a seductive posterior wiggle while wearing short pants with dialogue about displaying legs, and two characters appear together in silk robes and undergarments with one seated on the other's lap."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "One chocolate variety simulates intoxication effects, and a character shows chocolate addiction. An Oompa Loompa prepares cocktails from a portable bar, wealthy chocolatiers drink chocolate beverages from cocktail glasses, and adult characters drink gin."
+        }
+      },
+      "handoffNotes": [
+        "Willy Wonka's mother's death from illness is referenced as backstory/motivation -- this loss should get gentle prose context for sensitive viewers.",
+        "The film also has a running fatphobic joke targeting one character, which CSM flags as a specific concern for parents beyond the four standard content categories."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1003,
+      "file": "data-extra.js",
+      "title": "Sing 2",
+      "year": "2021",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/sing-2",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Slapstick violence occurs without serious injuries; characters are electrocuted, the protagonist is nearly thrown from a balcony and is later pushed off a ledge before being rescued, a character is temporarily caged, and aggressive stage combat and a gun-like weapon appear. A character's eye pops out repeatedly for comic effect, and grief-related conversations are included."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Insults include \"stupid,\" \"loser,\" \"idiot,\" \"freak,\" \"rubbish,\" and \"dumb,\" plus minor mild language like \"go to heck.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A married couple embraces and briefly kisses, a character develops romantic feelings, there's implied (unseen) nudity, and a suggestive dance move that older viewers might notice."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not flag drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "A supporting character grieves his deceased wife, with grief-related conversations woven through the film -- this loss thread may need gentle prose context for sensitive viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1004,
+      "file": "data-extra.js",
+      "title": "The Garfield Movie",
+      "year": "2024",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-garfield-movie",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Includes kitten abandonment scenes in dark settings, frequent slapstick violence (falls, face-smackings, punches), a bird swallowing incident, electrocution of a bird, train chases, dairy-facility peril involving molten cheese and very sharp blades, and characters facing armed antagonists. Most characters survive injuries, though one bird dies."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Infrequent insults include \"outcast,\" \"loser,\" \"thug,\" \"crazy,\" and \"worthless,\" plus one use of the British slang \"bloody,\" potty humor, and weight-related jokes."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A brief romantic scene appears on the fake streaming service \"Catflix,\" plus mentions of dating apps; a forcibly separated bull and cow call out to each other and reunite with an obscured kiss while suggestive music plays."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "An animal is offered a drink called a Meow-mosa, and milk is served in martini glasses."
+        }
+      },
+      "handoffNotes": [
+        "The plot centers on Garfield being abandoned as a kitten and later reuniting with his absent father -- this separation/abandonment theme runs throughout and may need gentle prose context for sensitive viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1005,
+      "file": "data-extra.js",
+      "title": "The Angry Birds Movie",
+      "year": "2016",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-angry-birds-movie",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Chase scenes, explosions, and birds thrown into buildings occur; birds and pigs are punched, kicked (including a baby bird), and shoved. Eggs face kidnapping and near-drowning while parents cry about their lost eggs. A scene references \"redrum,\" Red contemplates death, and a bird couple grieves thinking their egg died."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "No actual swearing, but stand-ins like \"pluck my life,\" plus insults like \"idiot\" and \"weirdos\" and frequent \"butt\" jokes."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "An eagle looks through a telescope at a bird taking a bath (a Peeping Tom moment); characters joke about birds \"getting busy\" to lay eggs; plungers attached to a pig's chest shake like breasts; two birds flirt and snuggle."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A bird is in a bar saying \"drinks on me,\" and a party scene shows everyone drinking out of coconuts; wine appears in a gift basket, birds inhale helium balloons, and there's a subtle drug reference."
+        }
+      },
+      "handoffNotes": [
+        "A bird couple briefly grieves thinking their egg has died (later resolved), and Red separately contemplates death in one scene -- these moments may need gentle prose context for sensitive viewers despite being brief."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1006,
+      "file": "data-extra.js",
+      "title": "The Angry Birds Movie 2",
+      "year": "2019",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-angry-birds-movie-2",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Eggs face repeated danger, pigs play pranks on birds, and an antagonist plans \"total destruction\" of Bird and Pig Islands; characters are imprisoned and endangered, and explosions and pranks momentarily injure or scare birds and/or pigs, though outcomes are positive for everyone."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Includes \"butt\" jokes, \"kick your butt,\" \"crap,\" \"what the heck,\" \"freaking kidding me,\" \"stupid,\" \"weird,\" and \"oh my God.\""
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mating-season references, two birds flirting and embracing, pig nudity shown multiple times, and a speed-dating scene discussing romantic compatibility."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not flag drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 1007,
+      "file": "data-extra.js",
+      "title": "Jumanji: Welcome to the Jungle",
+      "year": "2017",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/jumanji-welcome-to-the-jungle",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Many scenes of peril and death occur, though most isn't permanent since characters are video-game avatars with extra lives; deaths range from comical to frightening, including jaguar maulings and snake bites, and one tense moment involves a character with limited lives remaining."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A few uses of \"s--t\" and variations on \"ass\" (including \"shut your ass up\" and \"badass\"), plus \"hell,\" \"damn,\" and \"sucks.\""
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Extended conversations about a female character inhabiting a male avatar's body, references to anatomy, and instruction on using sexuality to distract men. A couple of kisses appear, and the male lead's physique generates frequent comments."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "In one scene the teens (as their adult avatars) drink blended margaritas with limited consumption shown; the villain's heavy drinking is portrayed as contributing to his villainous behavior."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 1008,
+      "file": "data-extra.js",
+      "title": "Jumanji: The Next Level",
+      "year": "2019",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/jumanji-the-next-level",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Many scenes of danger and death occur, though most is just temporary since characters are video-game avatars; includes attacks by snakes, ostriches, and mandrills, plunging deaths, and rock crushes, presented without blood."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frequent use of \"goddamn\" and \"goddammit,\" as well as \"s--t\" and \"holy s--t,\" plus references to body parts like \"boobs\" and \"testicles.\""
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A couple of kisses occur (both in avatar form and real bodies) between main characters, and elderly characters kiss multiple times."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One scene takes place in a bar, and another at a celebration where adult background characters hold drinks."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 1010,
+      "file": "data-extra.js",
+      "title": "Ramona and Beezus",
+      "year": "2010",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/ramona-and-beezus",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Some slapstick falls, bumps, and bruises occur, along with a few scenes where Ramona imagines scary things happening (often prompted by her sister). The film also includes a brief kitchen fire and gently handles a pet's death."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A few insults like \"stupid\" and \"jerk\"; when Ramona wants to say a bad word, she chooses \"guts\" instead."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A few kisses and embraces between adult couples, one teenage kiss plus some tentative flirting, and a rekindled romance is one of the movie's key subplots."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults toast with champagne."
+        }
+      },
+      "handoffNotes": [
+        "The film includes a pet's death, handled gently but still worth gentle prose context for sensitive younger viewers. The family also navigates the father's job loss throughout the story, which is a source of stress though not a death/loss in the strict sense."
+      ],
+      "confidence": "high"
+    }
+  ]
+}

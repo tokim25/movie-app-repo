@@ -1,0 +1,654 @@
+{
+  "researchBatch": "csm-content-flags-claude-final-group2-2026-09-08",
+  "researchedAt": "2026-09-08",
+  "researcher": "Claude",
+  "purpose": "Part of the final 69 catalog titles, group 2 of 4, live CSM research, nums 958-974.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This research preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 958,
+      "file": "data-extra.js",
+      "title": "The Flintstones",
+      "year": "1994",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-flintstones",
+      "csmAge": "8+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoonish slapstick violence imitates the original cartoon, including Bam Bam clubbing Barney in the head, plus a kidnapping and threat against Pebbles and Bam Bam by the villain."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild language includes words like \"damn\" and \"sucks.\""
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Fred flirts with his secretary, whose dialogue includes sexually-charged one-liners like \"use me how you see fit.\""
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A character smokes a prehistoric cigarette, and Fred drinks and comes home drunk in one scene, with his mother-in-law accusing him of drunkenness."
+        }
+      },
+      "handoffNotes": [
+        "Kidnapping and threat against two children may need light prose context for younger viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 959,
+      "file": "data-extra.js",
+      "title": "Jingle All the Way",
+      "year": "1996",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/jingle-all-the-way",
+      "csmAge": "8+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Constant slapstick violence includes brawling, fake-choking, macing in the eyes, trampling, falling from heights, getting tasered and kicked in the crotch, plus comic explosions and boomerang gags on a TV screen."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "One-off mild words like \"damn,\" \"loser,\" \"goofy-butt,\" \"simpleton,\" and \"shut up,\" plus a racially insensitive joke comparing sweating to \"a dog in a Chinese restaurant.\""
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Complaints about infidelity, innuendo like \"I've got just the tool for the job,\" an attempted seduction of a married character, spousal kissing, and a non-sexual undershirt-and-boxers scene."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adults drink occasionally, including spiking coffee at a diner and swigging liquor bottles; a fantasy sequence shows a young child drinking from a liquor bottle, plus brief cigar smoking."
+        }
+      },
+      "handoffNotes": [
+        "The racially insensitive joke about a 'dog in a Chinese restaurant' should be preserved in sensitivity review even though the overall language level is low."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 960,
+      "file": "data-extra.js",
+      "title": "Sister Act",
+      "year": "1992",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/sister-act",
+      "csmAge": "10+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "The heroine witnesses her mobster boyfriend order henchmen to shoot and kill someone, is later pursued and shot at, and is abducted at gunpoint before escaping unharmed."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Occasional profanity includes \"s--t\" and \"hell,\" plus a strongly sarcastic blessing that implies the f-word."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Some kissing and mild mentions of sex occur."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Some references to alcohol, casino-setting smoking, and champagne drinking are shown."
+        }
+      },
+      "handoffNotes": [
+        "The heroine witnessing an ordered killing and being pursued/abducted at gunpoint may need prose context for younger viewers, despite the moderate violence category label."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 961,
+      "file": "data-extra.js",
+      "title": "Sister Act 2: Back in the Habit",
+      "year": "1993",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/sister-act-2-back-in-the-habit",
+      "csmAge": "8+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "The sequel is crime-free and villain-free, with no violence or scary content depicted."
+        },
+        "language": {
+          "csmLabel": "infrequent, mild",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild language includes \"hell,\" \"ass,\" \"crap,\" and \"Jesus Christ.\""
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No sexual content or nudity is depicted."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No substance use is depicted."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 962,
+      "file": "data-extra.js",
+      "title": "Miracle on 34th Street",
+      "year": "1947",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/miracle-on-34th-street",
+      "csmAge": "5+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Kris bops Sawyer on the head for mistreating Albert; otherwise the film is largely nonviolent."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A couple in a relationship hugs, shares one kiss, and talks about their future as a married couple."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Characters smoke cigars and cigarettes, and in two scenes characters appear drunk."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 963,
+      "file": "data-extra.js",
+      "title": "North",
+      "year": "1994",
+      "currentCatalogCa": "8+",
+      "csmStatus": "unavailable",
+      "csmUrl": null,
+      "sourceUrlChecked": "https://en.wikipedia.org/wiki/North_(1994_film)",
+      "targetedSearches": [
+        "North 1994 commonsensemedia.org",
+        "site:commonsensemedia.org/movie-reviews North 1994 Elijah Wood"
+      ],
+      "csmAge": null,
+      "researchBasis": "live CSM search (no review found) plus Wikipedia fallback by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No CSM review exists. Per Wikipedia, violence is minimal: an assassination attempt at an airport is interrupted before impact, and an Alaskan segment references a cultural senicide practice (elderly sent out to sea) treated matter-of-factly rather than graphically."
+        },
+        "language": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No CSM review exists and no language/profanity detail is available from the Wikipedia fallback source."
+        },
+        "romance": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No CSM review exists and no romance/sexual content detail is available from the Wikipedia fallback source."
+        },
+        "drinking": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No CSM review exists and no drinking/drugs/smoking detail is available from the Wikipedia fallback source."
+        }
+      },
+      "handoffNotes": [
+        "No live CSM review exists for this title (commonsensemedia.org/movie-reviews/north 404s and is actually a 'North of North' TV review / 'North by Northwest' review, not this film) -- catalog's currentCa of '8+' is NOT sourced from a real CSM page. Flag for reviewer: this title should likely carry a 'Not on CSM; substitute source used' style note rather than an unqualified '8+', since that field currently implies live CSM backing it does not have.",
+        "Grief/loss theme: the plot centers on a child's feeling of parental estrangement/rejection and a fantasy divorce from his parents; the Alaska segment depicts a senicide (elderly sent to sea to die) practice, referenced matter-of-factly. Also references a character's death in the Texas section. Recommend prose context given the separation/death themes, per instructions to call these out explicitly."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 964,
+      "file": "data-extra.js",
+      "title": "Night at the Museum",
+      "year": "2006",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/night-at-the-museum",
+      "csmAge": "7+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Lots of comic crashes and falls, plus repeated fight scenes with shooting, explosions, and swords between soldiers/warriors, with no visible lasting injuries except charring; dinosaur-skeleton and Attila the Hun chase scenes may startle younger viewers though encounters stay cartoonish."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild profanity such as \"don't be a kiss-ass\" and \"screwed up,\" name-calling like \"weirdy\" and \"cupcake,\" and occasional religious exclamations like \"Oh my God.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Only mild flirting, plus one scene where a character views a woman through binoculars and a bystander asks if he's \"checking her out.\""
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Minimal substance use limited to one scene of an adult drinking a glass of wine."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 965,
+      "file": "data-extra.js",
+      "title": "Night at the Museum: Battle of the Smithsonian",
+      "year": "2009",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/night-at-the-museum-battle-of-the-smithsonian",
+      "csmAge": "7+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Characters are frequently chased and threatened with weapons like spears and swords, though no serious injuries occur; a giant octopus causes havoc and creepy Egyptian underworld imagery may frighten younger viewers."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild profanity including words like \"dammit\" and \"suck,\" plus some older slang expressions; overall language usage remains minimal."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Flirting and kissing between characters, with a couple of innuendos likely to go unnoticed by children; some statues appear unclothed but nothing explicit is displayed."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No drinking, drugs, or smoking depicted."
+        }
+      },
+      "handoffNotes": [
+        "A CSM movie review does genuinely exist for this sequel (distinct from the CSM game review of the same title) -- confirmed by fetching the actual movie-reviews page, not just relying on search snippets."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 966,
+      "file": "data-extra.js",
+      "title": "The Polar Express",
+      "year": "2004",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-polar-express",
+      "csmAge": "6+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Continuous close calls include fast-moving train/pneumatic-tube rides shown from a child's POV, treacherous climbs atop the train, falls, lost kids, a runaway railway car, and cracking ice under a speeding train; a villain uses a creepy puppet to frighten the protagonist in a dark chamber filled with broken talking dolls."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No language concerns noted by CSM."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No sexual content or romance noted by CSM."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No drinking, drugs, or smoking depicted."
+        }
+      },
+      "handoffNotes": [
+        "CSM parent/kid reviews flag divided opinions about the film's unsettling animation style and dark-chamber sequence with a menacing conductor/hobo-style character as scarier than the G rating suggests -- worth noting alongside the 'some' violence/scariness category label for younger viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 967,
+      "file": "data-extra.js",
+      "title": "Curious George",
+      "year": "2006",
+      "currentCatalogCa": "4+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/curious-george-2006",
+      "csmAge": "4+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM labels this category 'not present'; the page's own descriptive text still notes slapstick falls/jumps and monkey antics (painting on walls, stealing and flying off on balloons, King-Kong-style scale gag), all comedic in tone."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No language concerns noted by CSM."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM labels this category 'not present'; the page's own descriptive text notes some flirting between Ted and Maggie and a kiss at the end."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No drinking, drugs, or smoking depicted."
+        }
+      },
+      "handoffNotes": [
+        "CSM's own category labels read 'Not present' for violence and romance despite descriptive text mentioning slapstick antics and a Ted/Maggie flirtation-and-kiss subplot -- preserved CSM's literal label per protocol, but flagging the discrepancy for reviewer awareness.",
+        "CSM also separately notes an emotionally-intense scene where George is taken away by animal control at the Man in the Yellow Hat's request, plus unpunished fraud by a human character (Ted) -- worth light handoff context though it doesn't map cleanly to the four tracked flags."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 968,
+      "file": "data-extra.js",
+      "title": "Happy Feet",
+      "year": "2006",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/happy-feet",
+      "csmAge": "8+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Penguins are attacked by scary leopard seals and face cold/blizzards; additional peril includes seabirds threatening Mumble, killer whales pursuing penguins, and an upsetting zoo hallucination scene."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild profanity including \"freakin'\" and phrases like \"shut up,\" \"fatty,\" and \"idiot,\" plus a reference to buttocks humor."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Suggestive penguin mating behavior runs throughout, with flirtatious dialogue and references to attraction; female penguin designs emphasize physical features and there are objectifying comments among male characters."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No drinking, drugs, or smoking depicted."
+        }
+      },
+      "handoffNotes": [
+        "CSM's review also flags racial/ethnic stereotyping as a notable concern -- smaller penguins coded as Latino and portrayed as party-loving, a larger penguin coded as Black and portrayed as an oversexed, fundamentalist preacher -- worth surfacing to reviewers even though it doesn't map to the four tracked flags."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 969,
+      "file": "data-extra.js",
+      "title": "Happy Feet Two",
+      "year": "2011",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/happy-feet-two",
+      "csmAge": "5+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "An iceberg traps the penguins in a snow valley they can't climb out of, and situations appear dire; also krill being consumed by larger sea creatures, an elephant seal threatening characters, seal combat, and predatory birds attacking penguin chicks."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild insults including \"loser,\" \"idiots,\" \"sucks,\" and \"bottom feeders.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Penguin parents embrace affectionately; one character makes a suggestive remark toward another (\"You, me, egg, now!\"), and flirtation occurs throughout."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No drinking, drugs, or smoking depicted."
+        }
+      },
+      "handoffNotes": [
+        "Verified a genuine CSM movie review exists specifically for this sequel (distinct from the CSM app reviews of the same title, e.g. 'Happy Feet Two: Erik's Adventure') by fetching the actual movie-reviews page rather than relying on search snippets."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 970,
+      "file": "data-extra.js",
+      "title": "Star Wars: The Clone Wars",
+      "year": "2008",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/star-wars-the-clone-wars",
+      "csmAge": "8+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Constant but bloodless animated sci-fi action, including lightsaber duels and small-arms/artillery energy-beam fire."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Minimal use of \"damn.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Alien dancing girls perform in tight clothing, and there are some longing glances."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "In an outer-space nightclub, several non-humans drink what are presumably intoxicants, and a huge slug-like alien smokes from a hookah."
+        }
+      },
+      "handoffNotes": [
+        "Confirmed via live fetch that this CSM page is for the 2008 animated CGI film 'Star Wars: The Clone Wars' (distinct from the separate CSM TV review for the 'Clone Wars' animated series and the CSM page for the earlier 2003 Genndy Tartakovsky 'Star Wars: Clone Wars' micro-series)."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 971,
+      "file": "data-extra.js",
+      "title": "Corpse Bride",
+      "year": "2005",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/tim-burtons-corpse-bride",
+      "csmAge": "10+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Some scariness including crows in trees, talking skeletons, and dead bodies with rotting flesh and maggots (the corpse bride's eye occasionally pops out to reveal a talking maggot living inside her, who offers romantic advice), all played for gothic/comic effect rather than horror."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM labels this category 'None'; the page's own text notes \"some spicy sayings but nothing too out of line.\""
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No sexual content or nudity noted; the central story is a quirky, PG-appropriate arranged-marriage fairy tale about love and selflessness."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM labels this category 'None'; the page's own text notes \"the skeletons drink, but it's clearly fantasy.\""
+        }
+      },
+      "handoffNotes": [
+        "Death/decay theme throughout: the film is a comic-gothic fairy tale about an arranged marriage that accidentally binds the hero to a dead woman, with skeletons, rotting corpses, and an afterlife setting played for whimsy rather than genuine grief -- worth noting given the death imagery even though it is not framed as loss/grief in the traditional sense."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 972,
+      "file": "data-extra.js",
+      "title": "ParaNorman",
+      "year": "2012",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/paranorman",
+      "csmAge": "11+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Dark, eerie tone with grotesque spirit imagery (flayed skin, severed necks, exposed intestines), chase sequences, a destructive witch with electric blasts and thorny spikes, armed townspeople, bullying, a witnessed fatal heart attack, and references to an 11-year-old's execution by hanging."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frequent insults like \"freak,\" \"stupid,\" \"loser,\" and \"fatty\"; \"the F-word\" is referenced but not said aloud; also \"jackass,\" \"damnation,\" \"boobs,\" \"wiener,\" \"hell,\" and religious exclamations \"Jesus\"/\"God.\""
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A teen character appears shirtless in a towel, another teen makes seduction attempts in midriff-baring clothing with implied butt-grabbing, a casino billboard shows a woman with money in her cleavage, and there's an early reference to \"sex and violence\" on TV."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Teens occasionally consume alcohol, and one character takes medication."
+        }
+      },
+      "handoffNotes": [
+        "Grief/death theme: the plot involves a boy who can see and speak to the dead, includes witnessing a character's fatal heart attack, and references the historical execution by hanging of an 11-year-old accused of witchcraft. The film's emotional core deals directly with death, guilt, and being haunted by the past -- recommend explicit prose context per grief/loss/death callout guidance."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 973,
+      "file": "data-extra.js",
+      "title": "Isle of Dogs",
+      "year": "2018",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/isle-of-dogs",
+      "csmAge": "11+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "A metal chunk is shown impaled in a boy's head, dog fights are depicted as smoke clouds with animated blood, military-issue teeth fire like bullets, there's a live fish-chopping scene, poisoning, dead bodies, caged dogs, a train wreck mention, canine flu imagery, dog skeletons, a gory kidney transplant, and suicide references."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "One instance of \"son of a bitch,\" one use of \"bitch\" (referring to a female dog), and two uses of \"damn it.\""
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "References to \"dogs in heat\" and mating, puppy litters mentioned, and a male character's bare bottom shown exiting a bathtub."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "An adult character drinks alcohol at a bar, and a minor character smokes a pipe."
+        }
+      },
+      "handoffNotes": [
+        "CSM's violence category explicitly lists 'suicide references' alongside death, dead bodies, and gory imagery (kidney transplant gore, dog skeletons, poisoning) -- this is a notably intense violence profile for an animated film and should carry explicit prose context given the grief/death/darker themes involved."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 974,
+      "file": "data-extra.js",
+      "title": "Diary of a Wimpy Kid",
+      "year": "2010",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/diary-of-a-wimpy-kid",
+      "csmAge": "9+",
+      "researchBasis": "live CSM fetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A trio of teens bullies and menaces Greg and Rowley, forcing Rowley to do something gross after catching them; Rodrick threatens to kill Greg; a girl taunts, wrestles, and later beats up Greg in front of the whole school."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Frequent insults like \"dumb,\" \"moron,\" \"stupid,\" \"clueless,\" \"jerk,\" \"tool,\" \"idiot,\" \"freakjob,\" and \"wimp\"; a couple uses of \"crap\" and \"God\" as an exclamation; \"freakin'\" a few times; plus scatological references to snot, boogers, and farting."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Rodrick has a fictional skin-mag-style magazine (\"Moto Mamas\") showing scantily clad women on motorcycles with only the cover shown; a middle-school boy walks hand-in-hand with girls; Greg mentions hearing girls call a boy's butt \"cute\"; a few quick glimpses of kids on toilets or peeing with no nudity."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No drinking, drugs, or smoking depicted."
+        }
+      },
+      "handoffNotes": [
+        "CSM's live age rating is 9+, slightly above the catalog's current 8+ -- not one of the flagged 'Not on CSM'/'(approximate)' titles, but worth a reviewer's attention as a minor rating drift."
+      ],
+      "confidence": "high"
+    }
+  ]
+}

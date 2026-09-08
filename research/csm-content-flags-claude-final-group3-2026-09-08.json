@@ -1,0 +1,639 @@
+{
+  "researchBatch": "csm-content-flags-claude-final-group3-2026-09-08",
+  "researchedAt": "2026-09-08",
+  "researcher": "Claude",
+  "purpose": "Part of the final 69 catalog titles, group 3 of 4, live CSM research, nums 976-992.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 976,
+      "file": "data-extra.js",
+      "title": "The Bad Guys 2",
+      "year": "2025",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-bad-guys-2",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoon-style action includes high-speed chases, explosions, weapons, and slapstick pratfalls, with characters tied up, shot with tranquilizer darts, kidnapped, and put in life-or-death situations, though no one is fatally injured."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Occasional language includes words like \"jackass,\" \"butt,\" \"fart,\" \"peepee,\" and \"hell.\""
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A snake character has a bird girlfriend, and a brief glimpse of their unique kisses involves him placing his head inside her beak."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A character drugs the main characters, rendering them incapacitated, then shoots one with a tranquilizer dart."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 977,
+      "file": "data-extra.js",
+      "title": "Minions: The Rise of Gru",
+      "year": "2022",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/minions-the-rise-of-gru",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Lots of physical and slapstick comedy as villains and sidekicks cause destruction and personal harm with advanced weapons, including martial arts fighting, minions hurting themselves in training, a torture threat via repeated disco music, and characters nearly eaten by crocodiles."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Infrequent insult language includes \"stupid idiots,\" \"what the heck,\" \"tubby little punk,\" \"shut up,\" and \"old man.\""
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Glimpses of bare minion bottoms and the top of young Gru's butt; guards are hypnotized to strip to boxers and dance, with mild innuendo and a minion asking about \"smoochie smoochie\" lessons."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 978,
+      "file": "data-extra.js",
+      "title": "Sonic the Hedgehog",
+      "year": "2020",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/sonic-the-hedgehog",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoonish fantasy violence includes laser- and bullet-shooting drones, exploding buildings, an arrow-struck character presumed dead, punching with a person knocked unconscious, and a bar brawl with a knocked-out tooth and someone jumping through a glass window."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Includes terms like \"geez,\" \"butt,\" \"fart,\" \"hell,\" \"heck,\" and \"freak,\" plus partially censored profanities like \"son of a b—\" and \"what the f—.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Characters kiss on the lips."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "An adult drinks what appears to be beer and drives soon after without incident; others drink at a bar, some get drunk, and a fight ensues."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 979,
+      "file": "data-extra.js",
+      "title": "Sonic the Hedgehog 2",
+      "year": "2022",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/sonic-the-hedgehog-2",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Considerable fantasy violence with animated characters often in peril but little realistic impact; characters are hit hard (including by a car) and nearly drown but are only temporarily stunned."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Language includes \"a-hole,\" \"butt,\" \"crap,\" \"hell,\" \"we're screwed,\" and \"oh my God,\" plus insults and a hinted-at profanity (\"a piece of shiitake\") and fart jokes."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A supporting character is getting married with an expression of romantic feelings and a kiss; cleavage and shirtless men appear, along with references to waxing and a groin attack."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Drinking Mai Tais is connected to fun and relaxation in Hawaii; champagne flows at a wedding, and a stressed-out character swigs it from a bottle."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 980,
+      "file": "data-extra.js",
+      "title": "Sonic the Hedgehog 3",
+      "year": "2024",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/sonic-the-hedgehog-3",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Intense sequences include a drone attack that kills two people, a lead character struck down and hospitalized, the military G.U.N. team firing laser weapons at the heroes, explosions and world-threatening peril, a character pulling a pistol during a chase, and slapstick violence from silly villains."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Occasional profanity includes \"badass,\" \"damn,\" and \"holy crap,\" plus humorous insults like \"dorkupine\" and \"thermonuclear gerbil,\" and \"freak\" used to describe an alien character feeling like an outsider."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Shadow's backstory centers on the death of Maria, a close friend/creator figure, shown in emotional flashback; CSM notes a character 'dies emotionally' and the film carries themes of grief, loss, and revenge tied to that death that go beyond typical franchise peril."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 981,
+      "file": "data-extra.js",
+      "title": "The Super Mario Bros. Movie",
+      "year": "2023",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-super-mario-bros-movie",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Animated action violence includes missiles being shot, fingers crushed in a piano, talk of ritual sacrifices, and chases with characters in peril; a particularly intense sequence features skeleton zombies with glowing red eyes chasing a character, and Bowser threatens characters and burns down a kingdom."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Insulting and bullying language demeans protagonists, including \"idiot,\" \"stupid,\" \"shut up,\" \"worthless,\" and \"you're a joke,\" plus the ableist term \"crazy\" describing a character."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Both Mario and Bowser express romantic interest in Princess Peach, with jokes suggesting Peach would not reciprocate Mario's feelings."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "True to the game, Mario eats magical mushrooms that give him temporary power."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 982,
+      "file": "data-extra.js",
+      "title": "The Super Mario Galaxy Movie",
+      "year": "2026",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-super-mario-galaxy-movie",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frequent peril and fantasy action violence: menacing dragons, T-rexes, and giant robots attack characters; a character is kidnapped and held captive with energy drained to destroy the universe; attacks involve missiles, spinning blades, fireballs, mallets, spears, maces, knives, and axes; a character falls into lava and emerges as a skeleton; and an earthquake-like sequence causes building damage and crashes."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Insult language includes \"lame,\" \"pathetic failure,\" \"slimeball,\" and \"dorks,\" plus \"shut up,\" \"hate,\" and exclamations like \"Oh God!\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A character receives a kiss on the cheek, and Mario harbors a crush on Princess Peach, prompting friends to tease him with kissing noises and singing."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A casino scene includes drinks that are presumably alcoholic."
+        }
+      },
+      "handoffNotes": [
+        "This is a very recent title (theatrical release April 2026); confirmed CSM has a real, dated review already published rather than a placeholder, so no fallback was needed."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 983,
+      "file": "data-extra.js",
+      "title": "Transformers One",
+      "year": "2024",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/transformers-one",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Frequent, explosive animated sci-fi/action violence; characters are injured or even destroyed/killed, usually by being crushed, impaled, or dismembered, plus high-speed races with crashes, weapon use, scary mine explosions, and confrontations with dangerous aliens."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Infrequent language includes \"Badass-a-Tron,\" \"my God,\" \"idiot,\" \"shut up,\" \"screwed,\" and \"hell,\" plus insults like \"glitch,\" \"nutjobs,\" and \"rustbucket,\" and an implied middle-finger gesture."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Central story arc is the best friendship between Orion Pax and D-16 breaking down into betrayal and rivalry (D-16 becomes Megatron); several named Transformer characters are destroyed/killed on-screen, which plays as meaningful loss within the story even though it is depicted as sci-fi action violence."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 984,
+      "file": "data-extra.js",
+      "title": "IF",
+      "year": "2024",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/if",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "The protagonist's mother's cancer death is depicted through a gentle montage (headscarves, hospital scenes); her father requires heart surgery; there are mild \"hop scares\" and creepy landlady moments; the large monster Blue is gentle and nonthreatening; and a melting marshmallow character causes pretend vomiting."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Includes \"butt,\" \"what the hell,\" \"good God,\" \"oh my God,\" \"swear to God,\" \"for God's sake,\" one \"damn,\" and a fart joke."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "This film centers significantly on grief and loss: the protagonist's mother died six years earlier from cancer, and her father is currently hospitalized awaiting heart surgery. CSM describes these elements as handled gently, with the girl's imagination functioning as a coping mechanism for processing grief, but the underlying themes (parental death, a parent's serious hospitalization) are meaningful and should be called out for parents."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 985,
+      "file": "data-extra.js",
+      "title": "KPop Demon Hunters",
+      "year": "2025",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/kpop-demon-hunters",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Unsettling sequences depict demons extracting souls and causing people to vanish; the three protagonists face repeated attacks, sword fights, and confrontations; one character dies sacrificing himself to protect another after being tormented by deceased loved ones' voices."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild profanity appears including \"idiots,\" \"stupid jerks,\" \"jeez,\" and \"suck.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Female characters react dramatically to a male character's muscular physique; two characters develop romantic feelings and engage in flirtation, with references to someone being \"hot.\""
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "A main character (Jinu) dies sacrificing himself to protect another, after being tormented throughout the film by the voices of deceased loved ones haunting him with guilt; this is a meaningful death/grief thread beyond typical fantasy-action peril."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 986,
+      "file": "data-extra.js",
+      "title": "Diary of a Wimpy Kid: The Last Straw",
+      "year": "2025",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/diary-of-a-wimpy-kid-the-last-straw",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Cartoon violence where characters hurt themselves unintentionally: a dog bites Greg, a raccoon attacks his father's face, a character recalls falling into a wasps' nest, kindergarteners get lost on a construction site, someone falls into a rushing river approaching a waterfall, and Greg's clumsiness causes mayhem; \"everybody is fine.\""
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild language throughout includes \"loaded diaper,\" \"butt,\" \"stupid,\" \"in your face,\" \"punk,\" \"squirt,\" and \"screw-up,\" plus burping and passing gas."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Greg's pants fall down and he's ridiculed for sitting in chocolate; another character appears in boxers, and a flier displays shirtless figures labeled \"beefcake.\""
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 987,
+      "file": "data-extra.js",
+      "title": "Smurfs",
+      "year": "2025",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/smurfs",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Evil wizards kidnap Smurfs and threaten them with death by smashing machines; the plot includes chases, threats involving mysterious voids, and a flashback showing a heroic character falling into a chasm; dogs and vehicles pursue characters in the human world, and an urn of ashes appears in a villain's lair."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "\"Smurf\" substitutes for stronger language in phrases like \"load of Smurf\" and \"Smurf that,\" plus \"Kick Your Big Giant Butt Smurf,\" \"stupid,\" \"idiot,\" \"heck,\" \"imbecile,\" and \"hate.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A past romantic history between two characters is implied, with others making kissing noises; a villain's clothes fly off as he transforms into a small form, and male Smurfs don't wear shirts."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Colorful drinks are served at a disco club bar and at a mini Smurf club inside it."
+        }
+      },
+      "handoffNotes": [
+        "Confirmed this is the 2025 Rihanna/James Corden/John Goodman Smurfs film (not the earlier 2011/2013 live-action or 2021 animated versions), matching the catalog's 7+ rating."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 988,
+      "file": "data-extra.js",
+      "title": "The SpongeBob Movie: Search for SquarePants",
+      "year": "2025",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-spongebob-movie-search-for-squarepants",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoon slapstick/animated action violence includes pratfalls and objects thunking on the head; the Flying Dutchman has menacing expressions and an evil laugh accompanied by ominous music, and sea monsters with sharp teeth (including a three-headed bird) appear silly but may startle younger viewers."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Insulting terms include \"barnacle brain,\" \"dummy,\" \"fool,\" and \"nitwit\"; toilet humor includes \"poo poo pee pee\" and references to \"butts\"; mild profanity is implied through expressions like \"son of a perch.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Two sea creatures kiss in a moment likely to make kids laugh; body humor includes rear-end close-ups and SpongeBob depicted in underpants."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 989,
+      "file": "data-extra.js",
+      "title": "Gabby's Dollhouse: The Movie",
+      "year": "2025",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/gabbys-dollhouse-the-movie",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Several perilous, intense sequences include a dollhouse tumbling through city streets, water bursting from a toilet, a jump scare with fake teeth, and structural collapses; characters experience frightening moments and separation."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One incomplete expletive (\"what the—\") and mild exclamations like \"Yeesh.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One comedic scene depicts a cupcake-marshmallow cat with a singed backside, followed by jokes about \"getting cakey.\""
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A character inhales catnip and displays intoxicated behavior played for humor; a grandma character prepares and drinks a miniature margarita described as her \"special little treat.\""
+        }
+      },
+      "handoffNotes": [
+        "CSM notes characters experience frightening moments and brief separation during the plot's peril sequences; this is mild/resolved rather than a grief or death theme, but flagged per protocol since separation is called out."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 990,
+      "file": "data-extra.js",
+      "title": "Swapped",
+      "year": "2025",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/swapped",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Potentially scary scenes involve predatory creatures, perilous situations, and a raging wildfire threatening forest inhabitants; characters experience falls, head injuries, near-death encounters with predators, frightening backstories, and unconsciousness, though the film concludes positively with courage and teamwork."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild insults throughout include \"dumb,\" \"stupid,\" \"idiot,\" \"sack of feathers,\" \"sodding tyrant,\" and scatological terms like \"dung\" and \"poo.\""
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM explicitly notes characters in this film have lost loved ones, including parents, to starvation; the narrative addresses species extinction threats and references past traumas involving family loss and loneliness. This is a meaningful grief/loss theme beyond typical peril."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 991,
+      "file": "data-extra.js",
+      "title": "GOAT",
+      "year": "2026",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/goat-0",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "References to the death of Will's mother; a rival not-so-jokingly offers to eat Will. Aggressive roarball gameplay includes pushing, shoving, and dangerous terrain, plus jokes about consuming other animals that may unsettle younger viewers."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Occasional insults and exclamations like \"scat,\" \"butt,\" \"get off my cloaca,\" \"shoot,\" \"dang,\" \"sucks,\" \"hogwash,\" and \"weak sauce.\""
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Several references to a character's attractiveness, with spectators proposing marriage; references to players being \"hot\" and social media as \"thirst traps\"; a \"Canoodle Cam\" shows animal couples kissing."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "This is a very recent title (theatrical release February 2026); confirmed CSM has a real, dated review at URL slug 'goat-0' (distinct from the unrelated 'Get the Goat' review) rather than a placeholder. The film references the death of the protagonist's mother as backstory, a meaningful loss theme worth calling out."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 992,
+      "file": "data-extra.js",
+      "title": "Teenage Mutant Ninja Turtles II: The Secret of the Ooze",
+      "year": "1991",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/teenage-mutant-ninja-turtles-2-the-secret-of-the-ooze",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Combat scenes feature weapons like nunchakus and bo staffs without visible blood; characters are thrown through windows and rooms; mutant creatures with sharp teeth may frighten sensitive viewers, though comedic pratfalls balance the action."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild expressions including \"drat,\" \"darn,\" \"spasmatic,\" \"stupid,\" and \"ugly\" are used throughout."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A poster of a supermodel in a one-piece swimsuit appears, and characters make joking kissing sounds."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A minor character briefly smokes a cigarette; a character consumes \"ooze\" to gain superhuman abilities."
+        }
+      },
+      "handoffNotes": [
+        "CSM URL uses the numeral '2' rather than 'II' in the slug (teenage-mutant-ninja-turtles-2-the-secret-of-the-ooze); confirmed this is the correct 1991 sequel review matching the catalog's 6+ rating."
+      ],
+      "confidence": "high"
+    }
+  ]
+}

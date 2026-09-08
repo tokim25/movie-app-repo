@@ -1,0 +1,716 @@
+{
+  "researchBatch": "csm-content-flags-claude-final-group1-2026-09-08",
+  "researchedAt": "2026-09-08",
+  "researcher": "Claude",
+  "purpose": "Live CSM research for part of the final 69 catalog titles, group 1 of 4, nums 940-957.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 940,
+      "file": "data-extra.js",
+      "title": "Tom and Huck",
+      "year": "1995",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/tom-and-huck",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "A murder victim is stabbed three times with a knife shown from behind and another character has a knife thrown into their back; a child-adult fight draws blood, children are threatened with guns and knives, nearly drown, and an adult repeatedly threatens to kill a child, with references to whipping and lynching."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Profanity includes \"jackass,\" \"goddamn,\" \"damn,\" and \"hell,\" plus name-calling like \"idle wastrel,\" \"river trash,\" and a body-shaming \"fat boy\" taunt; the Native American antagonist is repeatedly called \"Injun Joe.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Children develop crushes and discuss love and engagement, with chaste kissing and hand-holding."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Characters drink at bars, one is known for heavy drinking, and a boy repeatedly smokes a pipe while other characters smoke tobacco throughout."
+        }
+      },
+      "handoffNotes": [
+        "A murder witnessed by children, an adult repeatedly threatening to kill a child, and references to child abuse/lynching are intense for the family catalog and may need prose context.",
+        "The ethnic slur \"Injun Joe\" used for the antagonist should be flagged for sensitivity review even though it is folded into the language category."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 941,
+      "file": "data-extra.js",
+      "title": "We're Back! A Dinosaur's Story",
+      "year": "1993",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/were-back-a-dinosaurs-story",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Lots of cartoon action and scary images/music surround an evil villain, including a frightening circus with fiery dragons, bats, and a demon parade, plus chasing, capture, caging, forced transformation into monkeys, and a climax where crows appear to devour the villain."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A few mild insults appear, such as \"moron.\""
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's category label is none, though it notes mild flirtation between two child characters."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Gentle dinosaurs are drugged to revert to fearsome behavior, two children are given a substance that turns them into monkeys, and the villain smokes."
+        }
+      },
+      "handoffNotes": [
+        "CSM's Sex/Romance label is none but its detail text notes mild child flirtation, a minor label/detail conflict.",
+        "Villain-driven scares (demon parade, forced transformation, threat of being devoured) may be intense for the film's young target audience and could need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 942,
+      "file": "data-extra.js",
+      "title": "Wild America",
+      "year": "1997",
+      "currentCatalogCa": "8+",
+      "csmStatus": "unavailable",
+      "csmUrl": null,
+      "sourceUrlChecked": "https://en.wikipedia.org/wiki/Wild_America_(film)",
+      "targetedSearches": [
+        "Wild America commonsensemedia.org",
+        "site:commonsensemedia.org Wild America 1997",
+        "https://www.commonsensemedia.org/movie-reviews/wild-america (404)"
+      ],
+      "csmAge": null,
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; no CSM review page exists for this title. Wikipedia describes real-animal peril: a near-drowning alligator attack, military jets firing on the brothers, tense bear encounters, a rattlesnake den, a mention of a woman whose husband was killed by bears, and a sibling fight that breaks a bone."
+        },
+        "language": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM data available; the fallback Wikipedia source does not address language content."
+        },
+        "romance": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM data available; the fallback Wikipedia source does not address romance or sexual content."
+        },
+        "drinking": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM data available; the fallback Wikipedia source does not address substance use."
+        }
+      },
+      "handoffNotes": [
+        "Common Sense Media has no review page for Wild America (1997); the direct CSM URL guess returned a 404 and targeted searches surfaced only unrelated CSM titles.",
+        "Fallback source is Wikipedia only; leave production catalog unchanged unless a reviewer approves a fallback-source mapping.",
+        "A brother's leg-breaking fight and a bear-mauling death reference (for another character's husband) are real-world dangers, not fantasy peril, and may need prose context if this entry is ever promoted from fallback status."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 943,
+      "file": "data-extra.js",
+      "title": "Cats Don't Dance",
+      "year": "1997",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/cats-dont-dance",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's official rating flags no violence, though its Kids Say section notes some parents found the villain potentially scary and the slapstick a mild concern."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 944,
+      "file": "data-extra.js",
+      "title": "The Land Before Time II: The Great Valley Adventure",
+      "year": "1994",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-land-before-time-ii-the-great-valley-adventure",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Some larger dinosaurs display threatening behavior with snarling and visible sharp teeth, and characters face hazards including near-cliff falls and a rock avalanche."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drugs, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 945,
+      "file": "data-extra.js",
+      "title": "The Land Before Time III: The Time of the Great Giving",
+      "year": "1995",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-land-before-time-iii-the-time-of-great-giving",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Occasional peril includes a meteorite strike causing a mudslide, charging dinosaur confrontations, fire threatening safety with a young dinosaur tumbling down a cliff, recurring bullying, and an encounter with an angry trio of tyrannosaurus rexes."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Occasional insults such as \"dummy\" or \"baby\" are used."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drugs, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "A dinosaur habitat facing severe water scarcity drives most of the plot's conflict; no character death or lasting loss occurs on screen."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 946,
+      "file": "data-extra.js",
+      "title": "The Land Before Time IV: Journey Through the Mists",
+      "year": "1996",
+      "currentCatalogCa": "6+",
+      "csmStatus": "unavailable",
+      "csmUrl": null,
+      "sourceUrlChecked": "https://en.wikipedia.org/wiki/The_Land_Before_Time_IV:_Journey_Through_the_Mists",
+      "targetedSearches": [
+        "The Land Before Time IV Journey Through the Mists commonsensemedia.org",
+        "site:commonsensemedia.org \"Land Before Time IV\"",
+        "https://www.commonsensemedia.org/movie-reviews/the-land-before-time-iv-journey-through-the-mists (404)"
+      ],
+      "csmAge": null,
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; no CSM review page exists for this direct-to-video sequel. Wikipedia describes an earthquake with falling stalactites/stalagmites, pursuit by two predatory creatures (a mostly-blind Deinosuchus and an Ichthyornis), a near-drowning, multiple chase sequences with threat of being eaten, an encounter with a larger predator, and characters using rocks as weapons."
+        },
+        "language": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM data available; the fallback Wikipedia source notes no language concerns."
+        },
+        "romance": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM data available; the fallback Wikipedia source notes no romance or sexual content concerns."
+        },
+        "drinking": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM data available; the fallback Wikipedia source notes no substance use concerns."
+        }
+      },
+      "handoffNotes": [
+        "Common Sense Media has no review page for this sequel; the direct CSM URL guess returned a 404 and targeted/site-restricted searches surfaced only other Land Before Time entries (II, III, XII), not IV.",
+        "Fallback source is Wikipedia only; leave production catalog unchanged unless a reviewer approves a fallback-source mapping.",
+        "GRIEF/LOSS: the plot centers on Littlefoot's grandfather contracting a disease described as lethal to any dinosaur, with his illness and threat of death driving the entire journey (he recovers by the end). The film also closes with a bittersweet separation as new friend Ali departs with her own herd. Both should be flagged for prose context if this entry is ever promoted from fallback status."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 947,
+      "file": "data-extra.js",
+      "title": "Quest for Camelot",
+      "year": "1998",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/quest-for-camelot",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A good guy is killed on screen (the heroine's father, defending King Arthur from the villain), and there are several tense scenes throughout the quest."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drugs, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "GRIEF/LOSS: the heroine's father is killed defending King Arthur before the story begins, and the film opens with/references this death directly; CSM's own Parents Need to Know singles out 'a scene in which a good guy is killed' as the main sensitivity flag. May need prose context for younger or more sensitive viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 948,
+      "file": "data-extra.js",
+      "title": "Pokémon: The First Movie",
+      "year": "1998",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/pokemon-the-first-movie",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Almost nonstop cartoon action with dark, suspenseful music, including a laboratory destroyed by explosion and fire, one-on-one combat, lasers, electrocution, psychic powers used to throw and smash characters into walls, severe weather threats, and a central character appearing dead for several minutes."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drugs, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "GRIEF/LOSS: a central character (Ash) is turned to stone and appears dead for several minutes before being revived; CSM explicitly calls out 'some characters appear to die' and flags this as not suitable for young children who cannot distinguish real from pretend violence/death. Strong candidate for prose context.",
+        "CSM also flags 'a lot' of Products & Purchases (games, toys, trading cards, action figures tie-ins), outside this app's 4-flag model but worth noting for context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 949,
+      "file": "data-extra.js",
+      "title": "The Land Before Time V: The Mysterious Island",
+      "year": "1997",
+      "currentCatalogCa": "6+",
+      "csmStatus": "unavailable",
+      "csmUrl": null,
+      "sourceUrlChecked": "https://en.wikipedia.org/wiki/The_Land_Before_Time_V:_The_Mysterious_Island",
+      "targetedSearches": [
+        "The Land Before Time V The Mysterious Island commonsensemedia.org",
+        "https://www.commonsensemedia.org/movie-reviews/the-land-before-time-v-the-mysterious-island (404)"
+      ],
+      "csmAge": null,
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; no CSM review page exists for this direct-to-video sequel. Wikipedia describes a swimming predator attacking the group on a log crossing, a Giganotosaurus hunting the children across the island and chasing them toward a cliff, a young dinosaur briefly pulled underwater by the falling predator, a pterodactyl capturing and then releasing a character unharmed, and multiple chase/life-threatening sequences."
+        },
+        "language": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM data available; the fallback Wikipedia source notes no language concerns."
+        },
+        "romance": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM data available; the fallback Wikipedia source notes no romance or sexual content concerns."
+        },
+        "drinking": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM data available; the fallback Wikipedia source notes no substance use concerns."
+        }
+      },
+      "handoffNotes": [
+        "Common Sense Media has no review page for this sequel; the direct CSM URL guess returned a 404 and a title search surfaced only other Land Before Time entries.",
+        "Fallback source is Wikipedia only; leave production catalog unchanged unless a reviewer approves a fallback-source mapping.",
+        "GRIEF/LOSS/SEPARATION: the film's core conflict is the young dinosaurs becoming stranded away from their parents and families, who are shown worrying on the mainland shore; the group is reunited by the end, but the separation and children's longing for their families is a sustained emotional throughline that may need prose context if this entry is ever promoted from fallback status."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 950,
+      "file": "data-extra.js",
+      "title": "The Land Before Time VI: The Secret of Saurus Rock",
+      "year": "1998",
+      "currentCatalogCa": "6+",
+      "csmStatus": "unavailable",
+      "csmUrl": null,
+      "sourceUrlChecked": "https://en.wikipedia.org/wiki/The_Land_Before_Time_VI:_The_Secret_of_Saurus_Rock",
+      "targetedSearches": [
+        "The Land Before Time VI The Secret of Saurus Rock commonsensemedia.org",
+        "https://www.commonsensemedia.org/movie-reviews/the-land-before-time-vi-the-secret-of-saurus-rock (404)"
+      ],
+      "csmAge": null,
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available; no CSM review page exists for this direct-to-video sequel. Wikipedia describes predator-prey conflict including an Allosaurus chasing the young dinosaurs, a climactic battle where two carnivores fight adult dinosaurs (with the predators falling to apparent off-screen death), a child character falling from a cliff before being rescued, a nightmare sequence where the legendary Saurus Rock collapses, and a tornado natural-disaster sequence."
+        },
+        "language": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM data available; the fallback Wikipedia source notes no language concerns."
+        },
+        "romance": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM data available; the fallback Wikipedia source notes no romance or sexual content concerns."
+        },
+        "drinking": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM data available; the fallback Wikipedia source notes no substance use concerns."
+        }
+      },
+      "handoffNotes": [
+        "Common Sense Media has no review page for this sequel; the direct CSM URL guess returned a 404 and a title search surfaced no CSM result.",
+        "Fallback source is Wikipedia only; leave production catalog unchanged unless a reviewer approves a fallback-source mapping.",
+        "No meaningful grief, loss, or separation theme identified in the fallback source; predator deaths occur off-screen and are not framed as tragic loss for the main cast."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 951,
+      "file": "data-extra.js",
+      "title": "An American Tail: Fievel Goes West",
+      "year": "1991",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/an-american-tail-fievel-goes-west",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A fair bit of cartoon violence, including cats terrorizing mice and cats in turn being terrorized by dogs, though CSM notes nothing especially severe."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drugs, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM's Parents Need to Know flags 'rather stereotypical portrayals of Eastern European Jews and Native Americans' as a more troublesome concern than the violence itself; this sensitivity issue falls outside the app's 4-flag model but should be surfaced to a human reviewer."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 952,
+      "file": "data-extra.js",
+      "title": "Baby's Day Out",
+      "year": "1994",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/babys-day-out",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Slapstick-style violence as kidnappers experience falls, punches, slaps, and head/groin strikes; an extended scene depicts a man's crotch catching fire. Characters react to pain but realistic injury consequences are absent."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Name-calling limited to terms like \"moron\" and \"idiot.\""
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drugs, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "The plot centers on an unsupervised baby wandering dangerous real-world environments (traffic, construction zones) after a kidnapping attempt; CSM flags this premise itself, plus the baby's dangerous independent behavior, as a parental concern even though the tone stays comedic throughout and the baby is never harmed."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 953,
+      "file": "data-extra.js",
+      "title": "Blank Check",
+      "year": "1994",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/blank-check",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A criminal threatens someone with a gun and threatens a man's family, men threaten to throw a kid off a roof, a boy bites a thug, brothers punch each other, a man drives his car over a bike, and a kid locks a man in a rolling cage and pushes him into a pool."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's category label is none; only very mild words like \"butt\" and \"punk\" appear."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Parents joke about intimate relations in front of their son, an adult woman kisses the 11-year-old protagonist on the mouth, and a child suggests an adult couple will have sex after their first date."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Alcohol appears at an adult party."
+        }
+      },
+      "handoffNotes": [
+        "The romance category includes an adult woman kissing the 11-year-old protagonist on the mouth as part of a romantic-attention subplot; this age-inappropriate dynamic is worth flagging distinctly to a human reviewer beyond the numeric level."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 954,
+      "file": "data-extra.js",
+      "title": "The Borrowers",
+      "year": "1997",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-borrowers",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Perilous scenarios with tangible results including traps, chemical burns, pokes in the flesh with prongs, and chase scenes where tiny characters face hammers or risk drowning in milk; no deaths occur and the action stays frenzied but fun."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild profanity including \"damned,\" \"idiot,\" and \"shut up.\""
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The antagonist smokes cigars."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 955,
+      "file": "data-extra.js",
+      "title": "Doug's 1st Movie",
+      "year": "1999",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/dougs-1st-movie",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Sharpshooters fire at a mechanical monster during a school dance, and characters attempt to shoot the real creature while Doug and Skeeter shield it with their bodies; the boys also encounter frightening sounds while searching for the monster."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern, despite the plot's Valentine's Day dance and middle-school-crush subplot."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drugs, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 956,
+      "file": "data-extra.js",
+      "title": "Dunston Checks In",
+      "year": "1996",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/dunston-checks-in",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Slapstick and rough-and-tumble pummeling including ear-biting, silly karate, and kitchen pots to the head; a kitchen knife is wielded and a large tranquilizer rifle is shot at the orangutan Dunston."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A few mild swears, the worst of which are \"hell\" and \"holy s--t.\""
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's category label is none, though it notes mild suggestiveness involving a massage scene and a teen boy's romantic interests, plus silly sexual humor involving older women aimed over young viewers' heads."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A woman drinks from a hip flask, and the orangutan Dunston is given a cigar to smoke."
+        }
+      },
+      "handoffNotes": [
+        "The 'some' language level includes a partially-censored strong profanity (\"holy s--t\") that is more intense than typical for the app's family catalog and may warrant a closer look despite CSM's own 6+ age rating.",
+        "CSM notes sensitive children might worry about the orangutan's safety during the tranquilizer dart scene, though the outcome is not distressing."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 957,
+      "file": "data-extra.js",
+      "title": "First Kid",
+      "year": "1996",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/first-kid",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Lots of comedic pratfalls (characters fall into walls, trip on floors, roller skate into a giant birthday cake), the protagonist is bullied and engages in two fistfights, and a climactic scene involves characters pulling guns as the main character faces a near-abduction."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "\"Sucks\" appears twice, \"hell\" once, and the protagonist is called a \"dork\" by school bullies."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's category label is none; only brief nonsexual partial nudity occurs when the protagonist moons the press corps as a prank."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Secret Service officers are shown at a bar holding and drinking beers early in the film, and one character appears quite intoxicated."
+        }
+      },
+      "handoffNotes": [
+        "A subplot involves an online stalker threatening the protagonist, escalating to a climactic near-abduction scene with drawn guns; CSM notes this is treated more for plot advancement than substantive discussion, but the real-world danger (stalking, attempted abduction of a child) may warrant prose context or sensitivity review beyond the numeric violence level."
+      ],
+      "confidence": "high"
+    }
+  ]
+}

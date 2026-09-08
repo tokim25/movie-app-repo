@@ -1,0 +1,430 @@
+{
+  "listBatch": "final-69-titles-2026-09-08",
+  "preparedAt": "2026-09-08",
+  "preparedBy": "Claude",
+  "purpose": "Candidate list of the final 69 uncovered catalog titles, completing full research coverage of the 938-entry catalog (869 already covered: 830 by Codex, 39 by Claude).",
+  "selectionMethod": "All remaining uncovered entries as of commit 3393720, ascending by catalog num (nums 940-1010). This is the entire remainder, not a subset.",
+  "counts": {
+    "totalCatalogEntries": 938,
+    "alreadyCovered": 869,
+    "inThisBatch": 69,
+    "fallbackEntriesInThisBatch": 0,
+    "approximateAgeEntriesInThisBatch": 0
+  },
+  "entries": [
+    {
+      "num": 940,
+      "file": "data-extra.js",
+      "title": "Tom and Huck",
+      "currentCa": "11+"
+    },
+    {
+      "num": 941,
+      "file": "data-extra.js",
+      "title": "We're Back! A Dinosaur's Story",
+      "currentCa": "6+"
+    },
+    {
+      "num": 942,
+      "file": "data-extra.js",
+      "title": "Wild America",
+      "currentCa": "8+"
+    },
+    {
+      "num": 943,
+      "file": "data-extra.js",
+      "title": "Cats Don't Dance",
+      "currentCa": "5+"
+    },
+    {
+      "num": 944,
+      "file": "data-extra.js",
+      "title": "The Land Before Time II: The Great Valley Adventure",
+      "currentCa": "5+"
+    },
+    {
+      "num": 945,
+      "file": "data-extra.js",
+      "title": "The Land Before Time III: The Time of the Great Giving",
+      "currentCa": "5+"
+    },
+    {
+      "num": 946,
+      "file": "data-extra.js",
+      "title": "The Land Before Time IV: Journey Through the Mists",
+      "currentCa": "6+"
+    },
+    {
+      "num": 947,
+      "file": "data-extra.js",
+      "title": "Quest for Camelot",
+      "currentCa": "6+"
+    },
+    {
+      "num": 948,
+      "file": "data-extra.js",
+      "title": "Pokémon: The First Movie",
+      "currentCa": "6+"
+    },
+    {
+      "num": 949,
+      "file": "data-extra.js",
+      "title": "The Land Before Time V: The Mysterious Island",
+      "currentCa": "6+"
+    },
+    {
+      "num": 950,
+      "file": "data-extra.js",
+      "title": "The Land Before Time VI: The Secret of Saurus Rock",
+      "currentCa": "6+"
+    },
+    {
+      "num": 951,
+      "file": "data-extra.js",
+      "title": "An American Tail: Fievel Goes West",
+      "currentCa": "5+"
+    },
+    {
+      "num": 952,
+      "file": "data-extra.js",
+      "title": "Baby's Day Out",
+      "currentCa": "7+"
+    },
+    {
+      "num": 953,
+      "file": "data-extra.js",
+      "title": "Blank Check",
+      "currentCa": "10+"
+    },
+    {
+      "num": 954,
+      "file": "data-extra.js",
+      "title": "The Borrowers",
+      "currentCa": "8+"
+    },
+    {
+      "num": 955,
+      "file": "data-extra.js",
+      "title": "Doug's 1st Movie",
+      "currentCa": "6+"
+    },
+    {
+      "num": 956,
+      "file": "data-extra.js",
+      "title": "Dunston Checks In",
+      "currentCa": "6+"
+    },
+    {
+      "num": 957,
+      "file": "data-extra.js",
+      "title": "First Kid",
+      "currentCa": "10+"
+    },
+    {
+      "num": 958,
+      "file": "data-extra.js",
+      "title": "The Flintstones",
+      "currentCa": "8+"
+    },
+    {
+      "num": 959,
+      "file": "data-extra.js",
+      "title": "Jingle All the Way",
+      "currentCa": "8+"
+    },
+    {
+      "num": 960,
+      "file": "data-extra.js",
+      "title": "Sister Act",
+      "currentCa": "10+"
+    },
+    {
+      "num": 961,
+      "file": "data-extra.js",
+      "title": "Sister Act 2: Back in the Habit",
+      "currentCa": "8+"
+    },
+    {
+      "num": 962,
+      "file": "data-extra.js",
+      "title": "Miracle on 34th Street",
+      "currentCa": "6+"
+    },
+    {
+      "num": 963,
+      "file": "data-extra.js",
+      "title": "North",
+      "currentCa": "8+"
+    },
+    {
+      "num": 964,
+      "file": "data-extra.js",
+      "title": "Night at the Museum",
+      "currentCa": "7+"
+    },
+    {
+      "num": 965,
+      "file": "data-extra.js",
+      "title": "Night at the Museum: Battle of the Smithsonian",
+      "currentCa": "7+"
+    },
+    {
+      "num": 966,
+      "file": "data-extra.js",
+      "title": "The Polar Express",
+      "currentCa": "6+"
+    },
+    {
+      "num": 967,
+      "file": "data-extra.js",
+      "title": "Curious George",
+      "currentCa": "4+"
+    },
+    {
+      "num": 968,
+      "file": "data-extra.js",
+      "title": "Happy Feet",
+      "currentCa": "8+"
+    },
+    {
+      "num": 969,
+      "file": "data-extra.js",
+      "title": "Happy Feet Two",
+      "currentCa": "5+"
+    },
+    {
+      "num": 970,
+      "file": "data-extra.js",
+      "title": "Star Wars: The Clone Wars",
+      "currentCa": "8+"
+    },
+    {
+      "num": 971,
+      "file": "data-extra.js",
+      "title": "Corpse Bride",
+      "currentCa": "10+"
+    },
+    {
+      "num": 972,
+      "file": "data-extra.js",
+      "title": "ParaNorman",
+      "currentCa": "11+"
+    },
+    {
+      "num": 973,
+      "file": "data-extra.js",
+      "title": "Isle of Dogs",
+      "currentCa": "11+"
+    },
+    {
+      "num": 974,
+      "file": "data-extra.js",
+      "title": "Diary of a Wimpy Kid",
+      "currentCa": "8+"
+    },
+    {
+      "num": 976,
+      "file": "data-extra.js",
+      "title": "The Bad Guys 2",
+      "currentCa": "6+"
+    },
+    {
+      "num": 977,
+      "file": "data-extra.js",
+      "title": "Minions: The Rise of Gru",
+      "currentCa": "6+"
+    },
+    {
+      "num": 978,
+      "file": "data-extra.js",
+      "title": "Sonic the Hedgehog",
+      "currentCa": "7+"
+    },
+    {
+      "num": 979,
+      "file": "data-extra.js",
+      "title": "Sonic the Hedgehog 2",
+      "currentCa": "8+"
+    },
+    {
+      "num": 980,
+      "file": "data-extra.js",
+      "title": "Sonic the Hedgehog 3",
+      "currentCa": "9+"
+    },
+    {
+      "num": 981,
+      "file": "data-extra.js",
+      "title": "The Super Mario Bros. Movie",
+      "currentCa": "7+"
+    },
+    {
+      "num": 982,
+      "file": "data-extra.js",
+      "title": "The Super Mario Galaxy Movie",
+      "currentCa": "7+"
+    },
+    {
+      "num": 983,
+      "file": "data-extra.js",
+      "title": "Transformers One",
+      "currentCa": "9+"
+    },
+    {
+      "num": 984,
+      "file": "data-extra.js",
+      "title": "IF",
+      "currentCa": "6+"
+    },
+    {
+      "num": 985,
+      "file": "data-extra.js",
+      "title": "KPop Demon Hunters",
+      "currentCa": "10+"
+    },
+    {
+      "num": 986,
+      "file": "data-extra.js",
+      "title": "Diary of a Wimpy Kid: The Last Straw",
+      "currentCa": "8+"
+    },
+    {
+      "num": 987,
+      "file": "data-extra.js",
+      "title": "Smurfs",
+      "currentCa": "7+"
+    },
+    {
+      "num": 988,
+      "file": "data-extra.js",
+      "title": "The SpongeBob Movie: Search for SquarePants",
+      "currentCa": "7+"
+    },
+    {
+      "num": 989,
+      "file": "data-extra.js",
+      "title": "Gabby's Dollhouse: The Movie",
+      "currentCa": "5+"
+    },
+    {
+      "num": 990,
+      "file": "data-extra.js",
+      "title": "Swapped",
+      "currentCa": "8+"
+    },
+    {
+      "num": 991,
+      "file": "data-extra.js",
+      "title": "GOAT",
+      "currentCa": "7+"
+    },
+    {
+      "num": 992,
+      "file": "data-extra.js",
+      "title": "Teenage Mutant Ninja Turtles II: The Secret of the Ooze",
+      "currentCa": "6+"
+    },
+    {
+      "num": 993,
+      "file": "data-extra.js",
+      "title": "Beethoven's 2nd",
+      "currentCa": "10+"
+    },
+    {
+      "num": 994,
+      "file": "data-extra.js",
+      "title": "Mr. Popper's Penguins",
+      "currentCa": "6+"
+    },
+    {
+      "num": 995,
+      "file": "data-extra.js",
+      "title": "We Bought a Zoo",
+      "currentCa": "12+"
+    },
+    {
+      "num": 996,
+      "file": "data-extra.js",
+      "title": "Earth to Echo",
+      "currentCa": "7+"
+    },
+    {
+      "num": 997,
+      "file": "data-extra.js",
+      "title": "The House with a Clock in Its Walls",
+      "currentCa": "11+"
+    },
+    {
+      "num": 998,
+      "file": "data-extra.js",
+      "title": "Diary of a Wimpy Kid: Rodrick Rules",
+      "currentCa": "9+"
+    },
+    {
+      "num": 999,
+      "file": "data-extra.js",
+      "title": "Mirror Mirror",
+      "currentCa": "8+"
+    },
+    {
+      "num": 1000,
+      "file": "data-extra.js",
+      "title": "Barbie",
+      "currentCa": "11+"
+    },
+    {
+      "num": 1001,
+      "file": "data-extra.js",
+      "title": "Roald Dahl's Matilda the Musical",
+      "currentCa": "8+"
+    },
+    {
+      "num": 1002,
+      "file": "data-extra.js",
+      "title": "Wonka",
+      "currentCa": "8+"
+    },
+    {
+      "num": 1003,
+      "file": "data-extra.js",
+      "title": "Sing 2",
+      "currentCa": "7+"
+    },
+    {
+      "num": 1004,
+      "file": "data-extra.js",
+      "title": "The Garfield Movie",
+      "currentCa": "7+"
+    },
+    {
+      "num": 1005,
+      "file": "data-extra.js",
+      "title": "The Angry Birds Movie",
+      "currentCa": "7+"
+    },
+    {
+      "num": 1006,
+      "file": "data-extra.js",
+      "title": "The Angry Birds Movie 2",
+      "currentCa": "7+"
+    },
+    {
+      "num": 1007,
+      "file": "data-extra.js",
+      "title": "Jumanji: Welcome to the Jungle",
+      "currentCa": "11+"
+    },
+    {
+      "num": 1008,
+      "file": "data-extra.js",
+      "title": "Jumanji: The Next Level",
+      "currentCa": "10+"
+    },
+    {
+      "num": 1010,
+      "file": "data-extra.js",
+      "title": "Ramona and Beezus",
+      "currentCa": "6+"
+    }
+  ]
+}
