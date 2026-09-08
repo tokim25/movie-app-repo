@@ -134,7 +134,6 @@ test('a 401 response disconnects sync and stops retrying', async ({ page }) => {
   await expect(page.locator('#googleSyncStatus')).toHaveClass(/syncError/);
   await expect(page.locator('#familySyncBtn')).toHaveText('Sync needs reconnect');
   await expect(page.locator('#familySyncBtn')).toHaveClass(/syncWarning/);
-  await page.locator('#tabFamily').click();
   await expect(page.locator('#googleSyncAlert')).toBeVisible();
   await expect(page.locator('#googleSyncAlertMessage')).toHaveText('Google sync paused — sign in again');
   const syncMeta = await page.evaluate(() =>
@@ -174,7 +173,6 @@ test('remembered Google sync shows reconnect when the server-side refresh fails'
   await page.goto('/');
   await setupSampleFamily(page);
 
-  await page.locator('#tabFamily').click();
   await expect(page.locator('#googleSyncAlert')).toBeVisible();
   await expect(page.locator('#googleSyncAlertMessage')).toHaveText('Google sync paused — sign in again');
   await expect(page.locator('#googleSyncStatus')).toHaveText('Google sync paused — sign in again');
