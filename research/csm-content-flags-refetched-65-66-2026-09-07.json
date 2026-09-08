@@ -1,0 +1,794 @@
+{
+  "researchBatch": "csm-content-flags-refetched-65-66-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only handoff for nums 553, 554, 555, 556, 558, 559, 560, 562, 563, 564, 565, 566, 567, 568, 569, 570, 571, 572, 573, and 574 in data-nickelodeon.js. Built from live Common Sense Media refetches of catalog srcUrl pages. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Where CSM's label and category detail conflict, the proposed level may reflect the detail rather than the label and a handoff note is included."
+  },
+  "entries": [
+    {
+      "num": 553,
+      "file": "data-nickelodeon.js",
+      "title": "The SpongeBob SquarePants Movie",
+      "year": "2004",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-spongebob-squarepants-movie",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoon peril escalates from shoving and smacking to knife-fight imagery, dagger-like boots, ruthless bullies, and repeated punching threats."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Language is mostly mild name-calling, one wordplay insult, and a phrase using damn as an adjective."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Characters appear in underwear, body parts become gag material, a female character is ogled, and Patrick wears stripper-style boots."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "SpongeBob and Patrick mimic drunken behavior after an ice-cream binge, while a bar scene includes alcohol, cigarettes, real drunkenness, and brawling."
+        }
+      },
+      "handoffNotes": [
+        "Drunken behavior is partly spoofed through ice cream but also appears in a real bar setting."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 554,
+      "file": "data-nickelodeon.js",
+      "title": "Barnyard",
+      "year": "2006",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/barnyard-the-original-party-animals",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Coyotes threaten the farm animals and kill Otis' father; there are also cow-tipping and boy-tipping gags."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text notes milk-based phrases used as fake profanity."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text mentions Otis' interest in a pregnant cow and odd udder-based body humor."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Milk is repeatedly coded like alcohol for the animals, including drinking in cars and outside a window; the farmer also drinks."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Language and Sex, Romance & Nudity as none while detail text mentions fake profanity and body/romance jokes.",
+        "Otis' father's death may need emotional prose for younger viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 555,
+      "file": "data-nickelodeon.js",
+      "title": "Firehouse Dog",
+      "year": "2007",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/firehouse-dog",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Firefighter-death flashbacks, intense fire scenes, and a boy trapped in a burning house with an arsonist may frighten younger viewers."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild PG-level insults and curses appear."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text notes flirting among adults, kids, and dogs, hand-holding, hugs, and colleagues staring at a firefighter in a sexy gown."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A benefit gala briefly shows champagne drinking."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Sex, Romance & Nudity as none while detail text mentions flirting, hand-holding, and a sexy gown.",
+        "Fire death and arson peril may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 556,
+      "file": "data-nickelodeon.js",
+      "title": "The Last Airbender",
+      "year": "2010",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-last-airbender",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Elemental and martial-arts fights are mostly non-graphic, though fire, water, and rocks are used in combat and one self-sacrificial death occurs."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text mentions mild insult language about Fire Nation and other peoples."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "There is one sweet kiss, mild flirting, and a line encouraging a nephew to think about pretty girls."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A commander makes a luncheon toast, though CSM says actual drinking is unclear."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Language as none while detail text mentions mild insults.",
+        "The self-sacrificial death may need prose despite gentle handling."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 558,
+      "file": "data-nickelodeon.js",
+      "title": "A Fairly Odd Movie: Grow Up!",
+      "year": "2011",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/a-fairly-odd-movie-grow-up-timmy-turner",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Live-action slapstick includes tree falls, a motorcycle wreck, and brief electrocution of CGI and human characters without lasting harm."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The story centers on a budding young-adult relationship with flirting, one kiss, a love-meter gag, and characters calling girls hot."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 559,
+      "file": "data-nickelodeon.js",
+      "title": "A Fairly Odd Christmas",
+      "year": "2012",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/a-fairly-odd-christmas",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "North Pole peril includes ravine and snowy-mountain falls, a penguin repeatedly slapping an elf, and a gingerbread-man bite/revenge gag."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Very mild body-part language, potty humor, bad-breath jokes, and poop references appear."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Timmy and Tootie share one kiss."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 560,
+      "file": "data-nickelodeon.js",
+      "title": "Fun Size",
+      "year": "2012",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/fun-size",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Teen-comedy peril includes an MMA fighter threatening people, kidnapping and confining a boy, bully provocation, a comic weapon duel, fireworks retaliation, an apartment fire, and a character being pummeled."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Language includes moderate profanity, crude body terms, insults, religious exclamations, and a crude hair-removal joke."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Sexual material includes passionate teen and party kissing, implied teen hooking up or sharing a bed, a younger boyfriend spending the night with a single mother, and kissing in front of her kids."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Partygoers drink and smoke, underage teens drink at a high-school party, and drinking and driving is noted."
+        }
+      },
+      "handoffNotes": [
+        "Underage drinking, drinking and driving, teen sexual implications, and child kidnapping need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 562,
+      "file": "data-nickelodeon.js",
+      "title": "The SpongeBob Movie: Sponge Out of Water",
+      "year": "2015",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-spongebob-movie-sponge-out-of-water",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Exaggerated comic violence includes attempted sacrifice, laser-blasting dolphin powers, pirate-chef fights, guns, cannons, and other weapon use."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Language is limited to mild insults and one apocalyptic-style insult phrase."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "CSM surfaces a small amount of innuendo."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 563,
+      "file": "data-nickelodeon.js",
+      "title": "Monster Trucks",
+      "year": "2016",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/monster-trucks",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Action peril includes armed security teams shooting at teens, starving-looking captive creatures, toothy growling, vehicle destruction, a trailer destroyed, cliff-death fake-out, unclear injury or death, smashed cars, and vomit from fear/motion sickness."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Very mild insults and scatological phrasing are surfaced."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Teen romance includes flirting, hand-holding, and a couple shown with arms around each other."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Creature captivity, gunfire at teens, and a cliff-death fake-out may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 564,
+      "file": "data-nickelodeon.js",
+      "title": "Teenage Mutant Ninja Turtles: Out of the Shadows",
+      "year": "2016",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/teenage-mutant-ninja-turtles-out-of-the-shadows",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Large-scale action includes crashes, blown-up police cars, motorcycle and vehicle falls, people incapacitated, likely offscreen injuries or deaths, and superpowered/extraterrestrial weapons."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Language includes one censored stronger swear, mild profanities, insults, shut-up phrases, and fart/booger jokes."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Innuendo includes April being ogled while changing into a revealing outfit and two transformed men checking out their bodies."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults hold drinks at a party."
+        }
+      },
+      "handoffNotes": [
+        "CSM notes the action often minimizes consequences of likely injuries or deaths."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 565,
+      "file": "data-nickelodeon.js",
+      "title": "Hey Arnold!: The Jungle Movie",
+      "year": "2017",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/hey-arnold-the-jungle-movie",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Jungle peril includes river pirates, cliff danger, booby traps, machetes, a villain using someone as an arrow shield with presumed death, and characters crushed by falling rocks."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Helga uses mild insult name-calling."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text notes Helga's crush on Arnold leading to a kiss."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Sex, Romance & Nudity as none while detail text mentions a crush and kiss.",
+        "Presumed death from arrow-shield peril may need prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 566,
+      "file": "data-nickelodeon.js",
+      "title": "Wonder Park",
+      "year": "2019",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/wonder-park",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Peril includes weapon-wielding chimpanzombies attacking with murderous intent, battles, explosions, crashes, ride-robots, June's dangerous homemade coaster and traffic exposure, her mother's serious illness, a dark storm cloud destroying the park, intense rides, animal slapstick, quill projectiles, and arguing."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Language includes one mild exclamation and several woodchuck-themed fake swears."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Steve has a crush on Greta, makes dramatic romantic comments, receives one kiss, and June's friend is excited by a thank-you line that sounds kiss-related."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "June's mother's illness and the dark storm cloud may need emotional prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 567,
+      "file": "data-nickelodeon.js",
+      "title": "Dora and the Lost City of Gold",
+      "year": "2019",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/dora-and-the-lost-city-of-gold",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Adventure peril includes kids gassed, kidnapped, and held at gunpoint, quicksand near-death, arrows, traps, car and foot chases, dangerous plants, a scorpion on a face, and warriors."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Language includes mild insults, repeated shut-up phrases, mild exclamations, and kid-friendly fake swears."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A teen couple flirts, shares looks, hugs, and kisses; an animated sequence includes brief bare-bottom nudity."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Kids are gassed, and jungle spores seem to cause hallucinations."
+        }
+      },
+      "handoffNotes": [
+        "Kidnapping at gunpoint and hallucinatory spores may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 568,
+      "file": "data-nickelodeon.js",
+      "title": "Invader Zim: Enter the Florpus",
+      "year": "2019",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/tv-reviews/invader-zim-enter-the-florpus",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Flashy cartoon action includes laser guns, explosions, crashes, robot-army destruction, constant hero peril, and a planet-threatening disaster."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "No cursing is noted, but there is frequent mild name-calling plus hate and shut-up phrases."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Catalog source is a CSM TV-review URL, but it resolves to a real CSM review page for this movie-length special."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 569,
+      "file": "data-nickelodeon.js",
+      "title": "The SpongeBob Movie: Sponge on the Run",
+      "year": "2020",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-spongebob-movie-sponge-on-the-run",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Comic but macabre peril includes a flaming knife, a villain burning to ash, live-action zombies, execution/beheading references, a character sliced and fried but fine later, guillotine and ax-execution imagery, and cartoon explosions."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes mild profanity and repeated dumb/loser-style insults."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A female character swoons over a muscular character, and Mr. Krabs appears on a pinup-style underwear poster."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Saloons, casinos, and lounges show drinks that look alcoholic; SpongeBob and Patrick go on an implied all-night bender and wake up after passing out."
+        }
+      },
+      "handoffNotes": [
+        "Execution imagery and bender-style substance coding may need prose despite the comic tone."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 570,
+      "file": "data-nickelodeon.js",
+      "title": "Paw Patrol: The Movie",
+      "year": "2021",
+      "currentCatalogCa": "4+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/paw-patrol-the-movie",
+      "csmAge": "4+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Preschool-level peril includes near vehicle crashes, threatened building collapse, a weather catastrophe, fireworks causing a fire, and dogs abducted and locked up."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Dog abduction and disaster peril may need gentle prose for preschool viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 571,
+      "file": "data-nickelodeon.js",
+      "title": "Rumble",
+      "year": "2021",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/rumble",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Monster-wrestling slapstick includes ring combat, a thrown folding chair gag, a mildly scary talon-filing boss, comic taunting, and a backstory involving deaths years earlier."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Very mild religious exclamation, cut-off fake profanity, and humorous smack talk appear."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Theme of prior family/mentor loss may need light prose, though characters are no longer actively grieving."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 572,
+      "file": "data-nickelodeon.js",
+      "title": "Rise of the Teenage Mutant Ninja Turtles: The Movie",
+      "year": "2022",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/rise-of-the-teenage-mutant-ninja-turtles-the-movie",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoon sci-fi violence includes weapons, guns, explosions, stabbing, repeated peril, samurai and martial-arts weapons, creepy tentacled alien brains, possession, a main-character injury, alternate-timeline deaths, bruises, and brief dark blood spots."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes a mild strong-style compliment, butt-related fighting talk, and a religious exclamation."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Possession, familiar-character deaths in alternate timelines, and lingering injuries may need prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 573,
+      "file": "data-nickelodeon.js",
+      "title": "Under the Boardwalk",
+      "year": "2023",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/under-the-boardwalk",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Crab conflict includes disrespect and aggression between groups, threats and attempted fights, a storm washing characters out to sea, property damage, a crab losing a shell, threatening dialogue, and vomiting after a ride."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Language includes mild insults, some self-directed put-downs, and one claws-off phrase."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Several scenes include flirting, embraces, claw-holding, brief kisses, and date cuddling."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Nightclub and restaurant scenes show crabs eating and drinking, but CSM says alcohol is unclear."
+        }
+      },
+      "handoffNotes": [
+        "Storm danger and group hostility may need prose for younger viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 574,
+      "file": "data-nickelodeon.js",
+      "title": "Teenage Mutant Ninja Turtles: Mutant Mayhem",
+      "year": "2023",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/teenage-mutant-ninja-turtles-mutant-mayhem",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Action includes car chases, hand combat, martial arts, explosions, injuries and some deaths, unconscious or killed security agents, scarring, turtle kidnapping and milking, Superfly killing with weapons and strength, a cockroach death flashback, and bullying references."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild profanity, religious exclamations, shut-up language, piss, and puke-based bullying insults appear."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Leonardo has a crush on April and is teased about hormones, asks her to prom, and dances with her as a friend; Splinter seeks a female mutant online and later kisses Scumbug, with nonsexual milking jokes."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One scene shows someone drinking what appears to be alcohol."
+        }
+      },
+      "handoffNotes": [
+        "Turtle kidnapping/milking and Superfly's offscreen killings may need prose context."
+      ],
+      "confidence": "high"
+    }
+  ],
+  "handoffSummary": {
+    "totalEntries": 20,
+    "foundOnCsm": 20,
+    "unavailable": 0,
+    "unavailableNums": [],
+    "needsReviewerAttention": [
+      553,
+      554,
+      555,
+      556,
+      560,
+      563,
+      564,
+      565,
+      566,
+      567,
+      568,
+      569,
+      570,
+      571,
+      572,
+      573,
+      574
+    ],
+    "notes": [
+      "All 20 catalog srcUrl pages were reachable as live Common Sense Media pages during the refetch.",
+      "No unavailable pages were found, so no targeted CSM fallback lookup was needed.",
+      "Num 568 uses a CSM TV-review URL in the catalog, but the page is a real CSM review for Invader Zim: Enter the Florpus.",
+      "Several pages have visible CSM labels of none while the detail text describes minor content; those conflicts are called out in entry-level handoff notes.",
+      "Several titles include emotional death, kidnapping, substance-coded humor, possession, bullying, or intense peril that may need prose beyond the four product flag levels."
+    ]
+  }
+}

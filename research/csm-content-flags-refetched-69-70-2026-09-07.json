@@ -1,0 +1,773 @@
+{
+  "researchBatch": "csm-content-flags-refetched-69-70-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only handoff for nums 595-606, 618, 619, and 914-919. Built from live Common Sense Media refetches of catalog srcUrl pages where available plus targeted lookup for non-CSM or missing catalog URLs. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 595,
+      "file": "data-extra.js",
+      "title": "Now and Then",
+      "year": "1995",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/now-and-then",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "CSM notes Jell-O thrown at girls, newspaper descriptions of a burglary, murder, and fatal crash, a bloody-nose punch, a fake drowning panic, and a storm-drain flood rescue."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Language includes moderate profanity, crude body terms, sexual slang, insults, and bathroom words."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Preteen body anxiety, breast-size jokes, misleading sex talk corrected by friends, boys skinny-dipping, comments about penis size, hard-on references, and visible boys' backsides drive the category."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Kids try cigarettes, adults smoke, and a man says drinking in a bar may have kept him from protecting his family."
+        }
+      },
+      "handoffNotes": [
+        "Sexual-development and body-image details are central to CSM's age rating."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 596,
+      "file": "data-extra.js",
+      "title": "The Mighty Ducks",
+      "year": "1992",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-mighty-ducks",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Hockey body-checking, shoving, light wrestling, one player knocked unconscious without lasting injury, an alley scuffle, and a groin-impact gag are the main violence notes."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Adults and kids use mild-to-moderate profanity, sexist sports insults, and a couple of double entendres."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Kids excitedly look through swimsuit magazines, an adult brags about a sexual conquest, adults date and kiss, and there are mild double entendres."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "An early scene has a character drink and drive, then get pulled over and arrested for DUI."
+        }
+      },
+      "handoffNotes": [
+        "DUI is the key substance-content signal."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 597,
+      "file": "data-extra.js",
+      "title": "Beethoven",
+      "year": "1992",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/beethoven",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "An illegal stolen-dog testing scheme, threats involving exploding bullets, bullying, dog and human fights, fake blood, syringe injuries, near-drowning, a child car crash, Wolfman footage, and a suicide phrase create moderate peril."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild profanity, insults, a child-written innuendo, a \"dog killer\" accusation, and a casual \"I'll kill myself\" line are noted."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A husband mistakes the dog for his wife in bed and makes sexual comments while being licked, plus there is romantic kissing and a dog-name innuendo."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "An adult briefly smokes, and the villain plot implies drug testing on dogs with syringes and medical restraints."
+        }
+      },
+      "handoffNotes": [
+        "Animal testing and dog peril are the main sensitive-viewer issues."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 598,
+      "file": "data-extra.js",
+      "title": "3 Ninjas",
+      "year": "1992",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/3-ninjas",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Frequent choreographed fights put kids against adults, with swords, nunchaku, guns, minor bloody injuries, a thrown knife, a gunshot wound, kidnapping, armed robbery, bullying, tied-up adults, and violent song lyrics."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes mild insults, ableist slurs, religious exclamations, rude bumper-sticker wording, and repeated poop and toilet terms."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Sexual innuendo includes men looking at a racy magazine, repeated groin hits, bathroom-pants gags, boxers shown after a sword slices pants, and diarrhea-prank exposure humor."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One person is about to light a cigarette before a fight."
+        }
+      },
+      "handoffNotes": [
+        "This is the slice's clearest level 4 violence title."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 599,
+      "file": "data-extra.js",
+      "title": "Jumanji",
+      "year": "1995",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/jumanji",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Sustained peril includes wildlife attacks, a bullied boy with injuries, a maniacal hunter firing at characters, children dangling over raging water, and frightening game-suction effects."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "CSM notes a couple uses of \"damn.\""
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Animal peril and body-disintegration effects are likely the most relevant scariness details."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 600,
+      "file": "data-extra.js",
+      "title": "Mrs. Doubtfire",
+      "year": "1993",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/mrs-doubtfire",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "CSM notes brief bullying and arguments."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Language includes one strong profanity instance, other moderate profanity, sexual-size jokes, and a middle-finger gesture."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Sexual content includes questions about a mother's sex life and partners, Daniel bare-chested while changing, and dinner-table innuendo."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adults drink alcohol, an animated bird smokes in the opening, and adults smoke indoors in a scene the main character criticizes."
+        }
+      },
+      "handoffNotes": [
+        "Strong language is the main reason this skews older than most titles in the slice."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 601,
+      "file": "data-extra.js",
+      "title": "The Addams Family",
+      "year": "1991",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-addams-family-1991",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Macabre violence includes weapons, a biting bear rug, choking, falls, torture-machine stretching, children using arrows and an electric chair, fake-blood performance, presumed villain deaths, fiery train crash, burial and rotting-body talk, molestation mention, and a fairy-tale burning discussion."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes mild profanity, religious exclamations, and insults such as \"moron,\" \"deadbeat,\" \"parasite,\" and \"demented freak.\""
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Strong married-couple innuendo includes many kisses, pleasure tied to torture devices, Morticia enjoying being tied up, public making out, orgasmic sounds, and a cleavage-kiss cuckoo clock gag."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A character smokes cigars and says he started at age five, and adults drink spirits."
+        }
+      },
+      "handoffNotes": [
+        "Macabre child-play violence and sexualized married-couple humor both need explicit review."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 602,
+      "file": "data-extra.js",
+      "title": "Hook",
+      "year": "1991",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/hook",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Pirate peril includes kidnapped children, net traps, gunfire, sword fights, dead bodies, a boy killed by Hook's blade, bloody hook injury, shootings, knife chases, torture with scorpions, crocodile death, falls, crotch gags, a suicide threat, nonconsensual sleeping kiss, airplane fear, and a crying lost baby."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes mild profanity, \"fornicate,\" many insults about age and size, a long name-calling exchange, and a father yelling harshly at his kids."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Sexual content includes a brothel and sex workers, suggestive hook removal, mermaid kisses, other kisses including a nonconsensual one, comments on legs and beauty, crotch-sniffing flowers, and a pants-slashing gag."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adults drink wine and whiskey, a Neverland bar is named The Drunken Wench, one character is told they drink too much, Hook smokes two cigars at once, and drugs are referenced."
+        }
+      },
+      "handoffNotes": [
+        "Contains several nuance notes: suicide threat, child death, brothel imagery, and nonconsensual kiss."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 603,
+      "file": "data-extra.js",
+      "title": "Heavyweights",
+      "year": "1995",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/heavyweights",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Tony is tied up and placed in an electric-fence cage, and a father punches him in the stomach near the end."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Language includes a few mild-to-moderate phrases such as \"damn,\" \"big ass,\" \"see you in hell,\" and \"kick his ass.\""
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM labels romance as none while noting teens making out in the credits and at a dance, plus a counselor kissing the camp nurse."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Food addiction is framed with drug-like language and behavior, and adults including the cameraman and cook smoke cigarettes."
+        }
+      },
+      "handoffNotes": [
+        "Food-as-drug framing is the main CSM substance signal."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 604,
+      "file": "data-extra.js",
+      "title": "Mouse Hunt",
+      "year": "1997",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/mouse-hunt",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frequent pratfall violence includes a bloodied exterminator being dragged, Three Stooges-style head-bashing with household objects, broad cartoon mayhem, and one brother pointing a loaded shotgun at the other's face."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Language includes moderate profanity and sexual innuendo involving nature-film sex talk, a cat-related double entendre, and a mouse-in-pants gag while a fly is unzipped."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Sexualized slapstick includes a man nearly naked with string covering his private parts, his wife on a desk in lingerie, a mouse falling into cleavage, and men reaching down women's dresses to catch or imitate catching the mouse."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Characters drink alcohol at a reception."
+        }
+      },
+      "handoffNotes": [
+        "Loaded-shotgun gag and sexualized slapstick are the main handoff items."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 605,
+      "file": "data-extra.js",
+      "title": "The Little Rascals",
+      "year": "1994",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-little-rascals-1994",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Bullies threaten Alfalfa and Spanky, a large dog scares Alfalfa, a dream fall lands him on rocks, go-carts knock people over, Alfalfa punches Woim, and the clubhouse catches fire."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "CSM flags child-level double entendres involving a lizard, pickle, \"boy toy,\" \"number two,\" and \"fairy,\" plus bully phrases such as \"bite me\" and \"losers suck.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Children kiss several times, Alfalfa appears in underwear and is implied to be naked off-screen, A.J. kisses Spanky on the cheeks, and a girl uses the phrase \"boy toy.\""
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "During a pretend fancy date, Alfalfa and Darla drink grape juice from pudding glasses and make wine-related references."
+        }
+      },
+      "handoffNotes": [
+        "Several innuendo jokes are delivered by children, which may need careful tone in production copy."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 606,
+      "file": "data-extra.js",
+      "title": "The Parent Trap",
+      "year": "1998",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-parent-trap",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild content includes an ear-piercing scream, a woman falling into a lake and reacting to a lizard, and mean-spirited camp pranks and teasing."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Language includes \"two-faced little brat\" and \"God\" as an exclamation."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults kiss and embrace warmly, a girl must jump naked into a lake after losing a bet with no actual nudity shown, and a man walks around in a Speedo."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A main character owns a vineyard, wine drinking appears in many scenes, an 11-year-old tastes wine at dinner, and one character anxiously smokes and drinks too much."
+        }
+      },
+      "handoffNotes": [
+        "Wine and underage tasting are stronger signals than the otherwise gentle tone."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 618,
+      "file": "data-csm.js",
+      "title": "Anne of Green Gables",
+      "year": "1986",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/anne-of-green-gables",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Anne sometimes lashes out or lands in mild peril, including walking on a roof and floating in a leaky boat; a key death is very sad, a baby's illness is tense, and school discipline is stricter than today."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "There is very mild flirting and romance, plus a teacher giving eyebrow-raising special attention to a teen student by modern standards."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Anne accidentally gets Diana drunk at a tea party because of a bottle mix-up."
+        }
+      },
+      "handoffNotes": [
+        "Emotional intensity from death and illness may matter more than category levels suggest."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 619,
+      "file": "data-csm.js",
+      "title": "The Adventures of Milo and Otis",
+      "year": "1986",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-adventures-of-milo-and-otis",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Real animals face more danger than expected for a G-rated movie, including encounters with bears, hedgehogs, seagulls, crayfish, a cliff jump, a night alone in the dark, and close calls with predatory bears."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild threatening phrases include \"you're dead meat,\" \"make my doggie day,\" and \"cruddy.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Milo and Otis each meet mates, the couples romp together, and kitten and puppy births are shown."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM's review also references long-standing animal-rights concerns around how the film was made, outside the four requested flags."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 914,
+      "file": "data-extra.js",
+      "title": "Popeye",
+      "year": "1980",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/popeye",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "CSM surfaces cartoonish fights between Popeye and villains, including Bluto."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "CSM notes a few instances of very mild cursing."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM detail text is sparse; confidence is still high because the live category metadata is present."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 915,
+      "file": "data-extra.js",
+      "title": "All Dogs Go to Heaven",
+      "year": "1989",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/all-dogs-go-to-heaven",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoon violence and demonic imagery include character deaths, Anne-Marie threatened with death in a river of fire and nearly drowning, repeated kidnapping, gambling exploitation, theft, arson, gunfire during an escape, and a villain trying to kill the protagonist with a car and water."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Dogs drink at a bar, fall over and pass out, sing while drunk, one dog smokes and blows cigar smoke in Anne-Marie's face, and a horse smokes a cigarette."
+        }
+      },
+      "handoffNotes": [
+        "Substance content is level 4, and death/river-of-fire peril should be noted clearly."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 916,
+      "file": "data-extra.js",
+      "title": "The Jetsons Meet the Flintstones",
+      "year": "1987",
+      "currentCatalogCa": "6+",
+      "csmStatus": "unavailable",
+      "csmUrl": null,
+      "sourceUrlChecked": "https://en.wikipedia.org/wiki/The_Jetsons_Meet_the_Flintstones",
+      "targetedSearches": [
+        "site:commonsensemedia.org \"The Jetsons Meet the Flintstones\"",
+        "Common Sense Media The Jetsons Meet the Flintstones",
+        "https://www.commonsensemedia.org/movie-reviews/the-jetsons-meet-the-flintstones",
+        "https://www.commonsensemedia.org/tv-reviews/the-jetsons-meet-the-flintstones"
+      ],
+      "csmAge": null,
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available from a real CSM review page."
+        },
+        "language": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available from a real CSM review page."
+        },
+        "romance": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available from a real CSM review page."
+        },
+        "drinking": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available from a real CSM review page."
+        }
+      },
+      "handoffNotes": [
+        "Catalog srcUrl is not a CSM URL.",
+        "Targeted CSM lookup surfaced CSM pages for The Jetsons and The Flintstones properties, but no actual CSM review page for the 1987 crossover movie."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 917,
+      "file": "data-extra.js",
+      "title": "Mickey's Christmas Carol",
+      "year": "1983",
+      "currentCatalogCa": "4+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/disney-animation-collection-7-mickeys-christmas-carol",
+      "csmAge": "4+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Scary moments include the Ghost of Christmas Future and a burning coffin, plus comic Pluto's Christmas Tree violence where Mickey wrings Pluto's neck and insults him."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a current language rating or visible language detail."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "Daisy Duck flirtatiously wants a kiss from Scrooge, kisses his cheek, and his eyes and heart react wildly."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Cigar and cigarette smoking appear in the Christmas Carol cartoon."
+        }
+      },
+      "handoffNotes": [
+        "CSM page is for Disney Animation Collection 7: Mickey's Christmas Carol, not a standalone movie page.",
+        "Live metadata has a null language value; treated as not present because no visible language section was surfaced."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 918,
+      "file": "data-extra.js",
+      "title": "My Little Pony: The Movie",
+      "year": "1986",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/my-little-pony-the-movie",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoon action includes evil witches casting spells, smooze flooding Ponyland, Hydia abusing her daughters, ponies threatened by monster-spiders, underground growls, menacing trees, slime-spewing creatures, chases, falls, cliff danger, and narrow escapes."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The witches insult each other with mild phrases such as \"shut up,\" \"stupid,\" \"pea brain,\" and \"do-nothings.\""
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Fantasy menace is broad but cartoonish and aimed at young viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 919,
+      "file": "data-extra.js",
+      "title": "The Wiz",
+      "year": "1978",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-wiz",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frightening fantasy imagery includes living graffiti, subway marionettes, attacking trash cans, crow harassment, flying monkeys, a fire-breathing head, a visible dead body, electrocution, drugged unconsciousness, an interrupted suicide attempt, enslaved factory workers, torture, threats to burn a dog, and an off-screen melting death."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes \"hell\" and frequent colorful put-downs such as \"stupid,\" \"garbage guts,\" \"hulking she-devil,\" \"mangy mutt,\" and similar insults."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Characters kiss passionately, poison poppies are women in tight clothing who lure characters with suggestive dancing, released factory workers dance in underwear, and a man asks if he can take Dorothy home."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adults drink and smoke at Thanksgiving, a song mentions wine, and poison poppies use dust that drugs characters unconscious."
+        }
+      },
+      "handoffNotes": [
+        "Interrupted suicide attempt, enslaved factory workers, torture imagery, and drugging should be retained in prose."
+      ],
+      "confidence": "high"
+    }
+  ]
+}

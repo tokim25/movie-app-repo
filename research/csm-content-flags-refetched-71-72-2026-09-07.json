@@ -1,0 +1,787 @@
+{
+  "researchBatch": "csm-content-flags-refetched-71-72-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only handoff for nums 920-939 in data-extra.js. Built from live Common Sense Media refetches and targeted CSM lookups. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 920,
+      "file": "data-extra.js",
+      "title": "Little Monsters",
+      "year": "1989",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/little-monsters",
+      "sourceUrlChecked": "https://en.wikipedia.org/wiki/Little_Monsters_(1989_film)",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Scary monster faces, gross behavior, child scuffles, bullying, threatening behavior, and perilous scenes may scare sensitive viewers, though the tone is comic."
+        },
+        "language": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "CSM flags heavy-for-the-age profanity from both adults and kids, including several mild-to-moderate curses and potty words."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Women are objectified on TV and in Maurice's comments, and he briefly talks about touching himself."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Parents drink wine at dinner, and a monster bully smokes cigarettes, blows smoke at others, and threatens burns with a cigarette butt."
+        }
+      },
+      "handoffNotes": [
+        "Catalog srcUrl is not CSM; targeted lookup found the matching 1989 CSM review.",
+        "Current CSM age is 8+, higher than the catalog ca of 7+."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 921,
+      "file": "data-extra.js",
+      "title": "Richie Rich",
+      "year": "1994",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/richie-rich",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Close-range pistols, machine guns, and lasers appear, along with a safe plane crash, children nearly destroyed by a machine, and cliff-hanging peril."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language is somewhat explicit for the target age, with mild profanity and potty words."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Richie and Cadbury ogle Claudia Schiffer during a workout, and a few adult innuendos include comments about money and bodies."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Richie's parents drink champagne and get a little tipsy, while Van Dough smokes a cigar and celebrates with champagne."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 922,
+      "file": "data-extra.js",
+      "title": "It Takes Two",
+      "year": "1995",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/it-takes-two",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A jilted bride slaps the groom and threatens to hit two children."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adults use mild swears, and the phrase 'I'm going to kill you' is repeated jokingly."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "An engaged man flirts with and nearly kisses another woman, and adults share a romantic kiss."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 923,
+      "file": "data-extra.js",
+      "title": "Babes in Toyland",
+      "year": "1986",
+      "currentCatalogCa": "6+",
+      "csmStatus": "unavailable",
+      "csmUrl": null,
+      "sourceUrlChecked": "https://en.wikipedia.org/wiki/Babes_in_Toyland_(1986_film)",
+      "targetedSearches": [
+        "site:commonsensemedia.org/movie-reviews \"Babes in Toyland\" \"1986\"",
+        "Common Sense Media Babes in Toyland 1986",
+        "https://www.commonsensemedia.org/movie-reviews/babes-in-toyland",
+        "https://www.commonsensemedia.org/movie-reviews/babes-in-toyland-1961"
+      ],
+      "csmAge": null,
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available from a real CSM review page for the 1986 catalog title."
+        },
+        "language": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available from a real CSM review page for the 1986 catalog title."
+        },
+        "romance": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available from a real CSM review page for the 1986 catalog title."
+        },
+        "drinking": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available from a real CSM review page for the 1986 catalog title."
+        }
+      },
+      "handoffNotes": [
+        "Targeted lookup found CSM pages for Babes in Toyland (1961) and a 2004 animated Babes in Toyland, but not the 1986 TV movie in this catalog entry.",
+        "Do not import category data from the mismatched CSM versions."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 924,
+      "file": "data-extra.js",
+      "title": "Babes in Toyland",
+      "year": "1997",
+      "currentCatalogCa": "6+",
+      "csmStatus": "unavailable",
+      "csmUrl": null,
+      "sourceUrlChecked": "https://en.wikipedia.org/wiki/Babes_in_Toyland_(1997_film)",
+      "targetedSearches": [
+        "site:commonsensemedia.org/movie-reviews \"Babes in Toyland\" \"1997\"",
+        "Common Sense Media Babes in Toyland 1997",
+        "https://www.commonsensemedia.org/movie-reviews/babes-in-toyland-1997",
+        "https://www.commonsensemedia.org/movie-reviews/babes-in-toyland"
+      ],
+      "csmAge": null,
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available from a real CSM review page for the 1997 catalog title."
+        },
+        "language": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available from a real CSM review page for the 1997 catalog title."
+        },
+        "romance": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available from a real CSM review page for the 1997 catalog title."
+        },
+        "drinking": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available from a real CSM review page for the 1997 catalog title."
+        }
+      },
+      "handoffNotes": [
+        "The direct CSM candidate https://www.commonsensemedia.org/movie-reviews/babes-in-toyland-1997 returned a page-not-found response.",
+        "Targeted lookup found CSM pages for the 1961 and 2004 versions only; do not import those into this 1997 entry."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 925,
+      "file": "data-extra.js",
+      "title": "The Care Bears Movie",
+      "year": "1985",
+      "currentCatalogCa": "4+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-care-bears-movie",
+      "csmAge": "4+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "The Evil Spirit causes cloud quakes, fighting among children, and destruction in Care-a-Lot."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 926,
+      "file": "data-extra.js",
+      "title": "Care Bears Movie II: A New Generation",
+      "year": "1986",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-care-bears-movie-ii-a-new-generation",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Dark Heart appears as a boy, kidnaps Care Bears, and holds them in cages."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Care Bear kidnapping and cage imagery are the main sensitivity points."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 927,
+      "file": "data-extra.js",
+      "title": "The Adventures of Elmo in Grouchland",
+      "year": "1999",
+      "currentCatalogCa": "3+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-adventures-of-elmo-in-grouchland",
+      "csmAge": "3+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Preschool-level peril includes rollerblading danger, falling down a tunnel, Huxley stealing Elmo's blanket, and Elmo briefly entering a dark place before escaping with help."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Grouches use intentionally unfriendly phrases such as scram, yuck, and go away."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The Queen of Trash is presented as curvaceous and sensual, and Huxley is briefly shown in boxers and an undershirt."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 928,
+      "file": "data-extra.js",
+      "title": "The Brave Little Toaster to the Rescue",
+      "year": "1997",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-brave-little-toaster-to-the-rescue",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Very mild slapstick involves appliances breaking, falling, or dodging danger, plus menace from a lab assistant trying to sell animals for testing."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "CSM says there is no objectionable language but notes minor insults, including one aimed at an animal."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Animal testing threat is the main content concern."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 929,
+      "file": "data-extra.js",
+      "title": "Casper",
+      "year": "1995",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/casper",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Ghostly violence includes three deaths followed by ghost forms, willing attempts to enter the spirit world, a cliff death, cruel ghost pranks, Casper discussing his childhood death, vomiting on a priest, head-twisting, attempted vehicular harm, and bullying."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Occasional profanity includes mild-to-moderate curses, religious exclamations, and a tween telling someone to go away rudely."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adult and tween couples kiss, Casper has a crush and kisses Kat's cheek, and jokes include cleavage imagery, dropped trousers, and innuendo."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Adults and adult ghosts drink, act drunk, and smoke cigars, and the lead villain smokes cigarettes."
+        }
+      },
+      "handoffNotes": [
+        "Death, spirit-world themes, and Casper's childhood death disclosure may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 930,
+      "file": "data-extra.js",
+      "title": "Escape to Witch Mountain",
+      "year": "1995",
+      "currentCatalogCa": "6+",
+      "csmStatus": "unavailable",
+      "csmUrl": null,
+      "sourceUrlChecked": "https://en.wikipedia.org/wiki/Escape_to_Witch_Mountain_(1995_film)",
+      "targetedSearches": [
+        "site:commonsensemedia.org/movie-reviews \"Escape to Witch Mountain\" \"1995\"",
+        "Common Sense Media Escape to Witch Mountain 1995",
+        "https://www.commonsensemedia.org/movie-reviews/escape-to-witch-mountain"
+      ],
+      "csmAge": null,
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available from a real CSM review page for the 1995 catalog title."
+        },
+        "language": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available from a real CSM review page for the 1995 catalog title."
+        },
+        "romance": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available from a real CSM review page for the 1995 catalog title."
+        },
+        "drinking": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available from a real CSM review page for the 1995 catalog title."
+        }
+      },
+      "handoffNotes": [
+        "Targeted lookup found the CSM page for the 1975 Escape to Witch Mountain, not the 1995 TV movie in this catalog entry.",
+        "Do not import category data from the 1975 CSM review."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 931,
+      "file": "data-extra.js",
+      "title": "FernGully 2: The Magical Rescue",
+      "year": "1998",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/ferngully-2-the-magical-rescue",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Poachers kidnap baby animals, cage them, set fire to the rainforest, one caged animal sinks in water, a girl nearly falls from a cliff, and a bad human whips dogs."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Animal kidnapping, cages, and dog whipping may need context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 932,
+      "file": "data-extra.js",
+      "title": "Warriors of Virtue",
+      "year": "1997",
+      "currentCatalogCa": "8+",
+      "csmStatus": "unavailable",
+      "csmUrl": null,
+      "sourceUrlChecked": "https://en.wikipedia.org/wiki/Warriors_of_Virtue",
+      "targetedSearches": [
+        "site:commonsensemedia.org/movie-reviews \"Warriors of Virtue\" \"1997\"",
+        "Common Sense Media Warriors of Virtue 1997",
+        "https://www.commonsensemedia.org/movie-reviews/warriors-of-virtue",
+        "https://www.commonsensemedia.org/movie-reviews/warriors-of-virtue-2-the-return-to-tao"
+      ],
+      "csmAge": null,
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available from a real CSM review page for the 1997 catalog title."
+        },
+        "language": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available from a real CSM review page for the 1997 catalog title."
+        },
+        "romance": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available from a real CSM review page for the 1997 catalog title."
+        },
+        "drinking": {
+          "csmLabel": null,
+          "proposedLevel": null,
+          "summary": "No live CSM category data available from a real CSM review page for the 1997 catalog title."
+        }
+      },
+      "handoffNotes": [
+        "Direct CSM candidate for the original returned page not found.",
+        "Targeted lookup found Warriors of Virtue 2: The Return to Tao, but not the 1997 original; do not import sequel data."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 933,
+      "file": "data-extra.js",
+      "title": "Turbo: A Power Rangers Movie",
+      "year": "1997",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/turbo-a-power-rangers-movie",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frequent fantasy fighting includes punches, kicks, crossbows, a snake choking threat, a character dangling above rapids, a ship explosion, lava peril, and one character thrown into lava."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One mild exclamation is used."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The main antagonist wears a very revealing outfit."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM metadata lists release as 2003, but the title/page match the catalog entry."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 934,
+      "file": "data-extra.js",
+      "title": "Pippi Longstocking",
+      "year": "1997",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/pippi-longstocking",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A storm throws Pippi's father overboard, two thieves repeatedly slip and fall while trying to steal from Pippi, and Pippi mentions that her mother is in heaven."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "A song mentions champagne, but no one consumes it."
+        }
+      },
+      "handoffNotes": [
+        "Drinking is rated not present while CSM detail text mentions champagne in a song."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 935,
+      "file": "data-extra.js",
+      "title": "Mighty Morphin Power Rangers: The Movie",
+      "year": "1995",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/mighty-morphin-power-rangers-the-movie",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Continuous cartoon martial-arts fighting includes kicks, punches, spins, a worker thrown by a mysterious egg, a guard knocked out, battle axes, a giant mechanical scorpion, car destruction, and explosions."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Characters use a few creative mild insults."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The Rangers encounter a scantily clad warrior priestess."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM metadata lists release as 2003, but the title/page match the catalog entry."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 936,
+      "file": "data-extra.js",
+      "title": "Balto",
+      "year": "1995",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/balto",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Peril includes dogs falling from snowy cliffs, dangerously ill children, small coffins being prepared, growling and fighting dogs, a bully dog, a grizzly bear, and comic head bonks."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Dogs flirt, including a line about knowing where bones are buried while one dog tries to get another to go out with him."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Sick children and small coffins may need careful prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 937,
+      "file": "data-extra.js",
+      "title": "Dennis the Menace",
+      "year": "1993",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/dennis-the-menace",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "The antagonist ends up bloody and swollen, tied up, burned, and falling on a knife; Dennis is kidnapped, and Mr. Wilson repeatedly suffers slapstick injuries including a groin hit."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Language includes one spoken abbreviation for a religious profanity, kid insults, an accidental sexual word while reading, and potty humor."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Kids discuss where babies come from, Dennis describes his parents wrestling shirtless, a pinup-style magazine appears, and a babysitter makes out with her boyfriend."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A child says adults drink beer, and cigarette smoking appears."
+        }
+      },
+      "handoffNotes": [
+        "Kidnapping, bloody injury, and child discussions of sex/babies may need context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 938,
+      "file": "data-extra.js",
+      "title": "Flipper",
+      "year": "1996",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/flipper",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A dolphin is shot and killed, a hammerhead shark stalks and attacks a main character, and one character punches another into the water."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes a couple of mild profanities and rude insults."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Sandy is shown reading one of his uncle's Playboy copies."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Uncle Porter drinks Budweiser, pours beer into a pelican's mouth, smokes cigars, and forces Sandy to smoke cigars until he vomits after catching him smoking."
+        }
+      },
+      "handoffNotes": [
+        "CSM metadata lists release as 2004, but the IMDb identifier and review content match the 1996 Flipper remake."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 939,
+      "file": "data-extra.js",
+      "title": "Jungle 2 Jungle",
+      "year": "1997",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/jungle-2-jungle",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Slapstick and broad comic fighting include a cat knocked unconscious and Russian Mafia thugs waving guns and knives at the main characters."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    }
+  ]
+}

@@ -15,9 +15,9 @@ Codex completed repo/process research and a bounded CSM pilot, then pushed the r
 - producing a first-pass handoff checklist for PM/Coder/Reviewer
 - verifying that direct CSM page access works from this environment
 - researching 50 representative existing catalog titles under the 4-flag model
-- manually refetching 580 catalog titles through thirty parallelized subagent slices
+- manually refetching 680 catalog titles through thirty-five parallelized subagent slices
 
-Codex should not perform the full 938-title backfill in this pass. The plan still depends on the local bridge session on tokim25's machine for the unattended nightly run, progress checkpoints, rate-guard behavior, and PR batching. The 50-title pilot plus 580-title live-refetched set is intended to prove the research shape and give Claude concrete examples, not replace the scheduled backfill process.
+Codex should not perform the full 938-title backfill in this pass. The plan still depends on the local bridge session on tokim25's machine for the unattended nightly run, progress checkpoints, rate-guard behavior, and PR batching. The 50-title pilot plus 680-title live-refetched set is intended to prove the research shape and give Claude concrete examples, not replace the scheduled backfill process.
 
 Codex should also avoid doing coder, reviewer, or UX-designer work in this pass. That means no implementation changes, no PR approval opinion, and no product/interaction changes beyond research findings.
 
@@ -31,7 +31,7 @@ The branch now contains five pilot JSON files with 50 total titles:
 - `research/csm-content-flags-pilot-04-2026-09-07.json`
 - `research/csm-content-flags-pilot-05-2026-09-07.json`
 
-It also contains thirty live-refetched JSON files with 580 additional titles:
+It also contains thirty-five live-refetched JSON files with 680 additional titles:
 
 - `research/csm-content-flags-refetched-06-07-2026-09-07.json`
 - `research/csm-content-flags-refetched-08-09-2026-09-07.json`
@@ -63,6 +63,11 @@ It also contains thirty live-refetched JSON files with 580 additional titles:
 - `research/csm-content-flags-refetched-57-58-2026-09-07.json`
 - `research/csm-content-flags-refetched-59-60-2026-09-07.json`
 - `research/csm-content-flags-refetched-61-62-2026-09-07.json`
+- `research/csm-content-flags-refetched-63-64-2026-09-07.json`
+- `research/csm-content-flags-refetched-65-66-2026-09-07.json`
+- `research/csm-content-flags-refetched-67-68-2026-09-07.json`
+- `research/csm-content-flags-refetched-69-70-2026-09-07.json`
+- `research/csm-content-flags-refetched-71-72-2026-09-07.json`
 
 Each entry includes:
 
@@ -86,6 +91,7 @@ Notable pilot findings:
 - In the 100-title refetch range, `Steel` remains a fallback-source title: the catalog URL is Wikipedia and targeted CSM lookup did not surface a CSM review.
 - In the next 100-title refetch range, `Batman and Superman: Battle of the Super Sons` remains unavailable on CSM after targeted lookup.
 - `Avengers: Doomsday` has a limited CSM preview page, but no full review, age, or category detail yet.
+- In the latest 100-title refetch range, `The Jetsons Meet the Flintstones`, both `Babes in Toyland` catalog entries, `Escape to Witch Mountain` (1995), and `Warriors of Virtue` remain unavailable on CSM after targeted lookup.
 
 ## Verified Repo State
 

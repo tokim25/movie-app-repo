@@ -1,0 +1,841 @@
+{
+  "researchBatch": "csm-content-flags-refetched-63-64-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only live CSM refetch for catalog nums 531-543, 545, and 547-552 across data-dreamworks.js and data-nickelodeon.js. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "sourceRange": {
+    "files": [
+      "data-dreamworks.js",
+      "data-nickelodeon.js"
+    ],
+    "nums": [
+      531,
+      532,
+      533,
+      534,
+      535,
+      536,
+      537,
+      538,
+      539,
+      540,
+      541,
+      542,
+      543,
+      545,
+      547,
+      548,
+      549,
+      550,
+      551,
+      552
+    ],
+    "entryCount": 20
+  },
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 531,
+      "file": "data-dreamworks.js",
+      "title": "Captain Underpants: The First Epic Movie",
+      "year": "2017",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/captain-underpants-the-first-epic-movie",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Peril is mostly comic: fantasy laser destruction, a weapon-carrying villain, a giant robot attack on the school, a growth/shrink ray, runaway carnival rides, window falls, punches, vehicle hits, angry yelling, fear of class separation, and chaotic pranks."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Potty and body-function humor is constant, with repeated poop, butt, fart, booger, and Uranus jokes plus mild insults."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Two adult characters flirt, go on a date, and are teased by the boys for liking each other."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface alcohol, drug, or smoking content; the detail text only mentions kids getting wild on sugar."
+        }
+      },
+      "handoffNotes": [
+        "Potty humor is the dominant concern even though it sits under language rather than substance."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 532,
+      "file": "data-dreamworks.js",
+      "title": "How to Train Your Dragon: The Hidden World",
+      "year": "2019",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/how-to-train-your-dragon-the-hidden-world",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Dragon and human battles include capture, fire, repeated danger, threats to enslave dragons, world-conquest stakes, and a character who appears to fall to death, without gore."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Language is limited to insults and butt."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Romance includes flirting, affection, and a wedding kiss."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM notes possible Viking ale but no identified alcohol use or drunkenness."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 533,
+      "file": "data-dreamworks.js",
+      "title": "Trolls World Tour",
+      "year": "2020",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/trolls-world-tour",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Musical fantasy conflict includes territory destruction, leader kidnappings, imprisonment, bounty hunters, magical transformation attacks, and one brief comic near-drowning."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild rude phrases and insults include you suck, we're screwed, dang, and a balls joke that turns out to be about food."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Poppy and Branch have romantic tension and declarations of love; glitter trolls show bare sparkly bottoms, and one birth gag comes from hair."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 534,
+      "file": "data-dreamworks.js",
+      "title": "The Croods: A New Age",
+      "year": "2020",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-croods-a-new-age",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frequent peril includes human-sacrifice danger, a giant monster, animal attacks, punching between monkeys and humans, harmless electrocutions, glowing-eyed monkeys, yelling, and a sad tar-pit flashback where family members die."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild insults such as dumb, stupid, and twits appear with some rude/potty humor."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A teen/young-adult romance drives the plot, with kissing, a naked animal-butt gag, and shirtless male-body humor."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A bee-sting venom reaction makes one character act drunk."
+        }
+      },
+      "handoffNotes": [
+        "The tar-pit family-death flashback and child left alone afterward may need emotional prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 535,
+      "file": "data-dreamworks.js",
+      "title": "Spirit Untamed",
+      "year": "2021",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/spirit-untamed",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Western adventure peril includes Lucky's mother's offscreen stunt death, menacing horse thieves, risky riding and jumps, Lucky nearly dying, girls tying up thieves, and a main thief trying to shoot at Lucky and the horses."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Language is limited to mild phrases like what the heck, crazy, and are we insane."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Maternal death is central backstory and should be preserved in prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 536,
+      "file": "data-dreamworks.js",
+      "title": "The Boss Baby: Family Business",
+      "year": "2021",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-boss-baby-family-business",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoon peril includes baby ninjas with swords, chase scenes, a villain in a mechanical body, immobilized heroes, destruction, an explosion, sibling chest-twisting fights, a creepy child, pony attacks, hypnotized parents, school bullying, and insults."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild language includes sucks, butt, stupid, nerd, stand-in profanity, potty/baby humor, and one joke that could read as culturally insensitive."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text notes implied off-camera baby nudity after transformations, but the current surfaced signal is effectively unflagged."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface substance use; the detail text only notes heavy sugar/candy consumption."
+        }
+      },
+      "handoffNotes": [
+        "CSM romance/nudity detail mentions implied baby nudity despite not-present label."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 537,
+      "file": "data-dreamworks.js",
+      "title": "Puss in Boots: The Last Wish",
+      "year": "2022",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/puss-in-boots-the-last-wish",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "The movie repeatedly confronts death: Puss dies and reviews prior comic deaths, a scary wolf assassin stalks him, action scenes include swords, knives, fights, falls, explosions, fire, crashes, a cruel villain risks minions' lives, one minion is eaten with skeleton shown, and Puss has a panic attack."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Language includes mild profanity, body and potty words, insults, a fat insult, and bleeped words that appear to be stronger profanity."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Puss and Kitty Softpaws flirt and refer to having fallen in love."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Puss is shown drunk in one death flashback that recurs, and he drinks milk in a bar."
+        }
+      },
+      "handoffNotes": [
+        "Death anxiety, panic attack, and the wolf assassin may need emotional/scariness prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 538,
+      "file": "data-dreamworks.js",
+      "title": "Ruby Gillman, Teenage Kraken",
+      "year": "2023",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/ruby-gillman-teenage-kraken",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Fantasy action includes a sea-creature battle, tidal-wave peril, teens and marine life in danger, an unconscious human sinking before rescue, and rubbery slapstick where a sea creature is hit by a car and speared without injury."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild insults include dum-dum, shut up, and stupid."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A subplot centers on crushes and prom dates, with a couple of brief affectionate kisses."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 539,
+      "file": "data-dreamworks.js",
+      "title": "Trolls Band Together",
+      "year": "2023",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/trolls-band-together",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Villains kidnap Floyd and drain his talent until he becomes sickly and translucent; there is a long chase, troll fighting, kicks, Floyd nearly dying, bound newlyweds nearly hurt, and a startling clown-head gag."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild bathroom and body language includes barf, pee, butt, junk in the trunk, gol-darned, and one bleeped surprise."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Poppy and Branch are treated as serious partners, Bridget and Gristle kiss and act like newlyweds, glitter trolls show bare sparkly bottoms, and there are mild adult-directed innuendoes about making out, a honeymoon, and butts."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Poppy drinks something like a fruity cocktail, one psychedelic sequence looks hallucinatory, and characters treat a Ring Pop like a drug."
+        }
+      },
+      "handoffNotes": [
+        "Floyd's depletion and near death may need emotional-content prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 540,
+      "file": "data-dreamworks.js",
+      "title": "Chicken Run: Dawn of the Nugget",
+      "year": "2023",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/chicken-run-dawn-of-the-nugget",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "The threat is sustained because chickens are being killed for food; scenes show chickens heading toward that fate, plus cartoon electrocution, an ax, and explosions."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild name-calling appears, along with bum and one crack double-entendre during stacked-character comedy."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Factory-food death threat is central and should be named plainly for sensitive viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 541,
+      "file": "data-dreamworks.js",
+      "title": "Kung Fu Panda 4",
+      "year": "2024",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/kung-fu-panda-4",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frequent martial-arts action includes intense fights, village destruction, quarry fire, a scary sorceress summoning dead masters' abilities, capture, danger, slapstick crashes, spirit-realm imprisonment, injuries, and one death."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild words include stupid, butt, loser, screw up, a drinking-like fish joke, and bathroom humor."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 542,
+      "file": "data-dreamworks.js",
+      "title": "The Wild Robot",
+      "year": "2024",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-wild-robot",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Animal survival peril includes predator deaths, a crab knocked into boiling water, accidental deaths of Brightbill's family, a sacrifice, falls, explosions, a large fire, weaponized robots firing at fleeing geese and island creatures, animals attacking or stripping Roz, an egg-eating attempt, quills, death-obsessed possum jokes, and bullying."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes mild insults and put-downs such as dummy, freak show, weirdo, loser, vermin, jerk, runt, butt, and a euphemism for stronger profanity."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Animal death, orphaning, sacrifice, morbid jokes, and bullying of Brightbill need emotional-content prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 543,
+      "file": "data-nickelodeon.js",
+      "title": "Harriet the Spy",
+      "year": "1996",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/harriet-the-spy",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Bullying escalates when classmates dump blue paint on an ostracized girl and pretend to clean it while worsening the humiliation; she responds by slapping one attacker."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes a disability slur, dork insults, crap, violent hyperbole about killing or poisoning, and a written line about hanging herself if she had another classmate's life."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Puberty material includes classroom films about adolescence, a voice-over about a girl developing breasts while boys try to look down her shirt, and a bra hung from a flagpole as revenge."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Harriet talks back to her parents by referencing their nightly martinis."
+        }
+      },
+      "handoffNotes": [
+        "Bullying, humiliation, puberty harassment, and self-harm wording need careful prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 545,
+      "file": "data-nickelodeon.js",
+      "title": "The Rugrats Movie",
+      "year": "1998",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-rugrats-movie",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoon peril includes babies riding recklessly downhill, getting lost in the woods, falling from a cliff into water, a plane crash, a dog dragging a character, and confrontations with monkeys and wolves."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Iffy humor includes an interrupted baby-sex-identification joke, babies peeing rainbows, and defecation and flatulence gags."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A maternity-ward musical sequence includes a baby noticing their own anatomy."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Gross-out and anatomy humor are the main non-violence concerns."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 547,
+      "file": "data-nickelodeon.js",
+      "title": "Rugrats in Paris: The Movie",
+      "year": "2000",
+      "currentCatalogCa": "4+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/rugrats-in-paris",
+      "csmAge": "4+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions mechanical Reptar battling a mechanical snail, Chuckie's martial-arts fantasy, Coco's villain behavior, babies locked in a warehouse, and babies climbing from a moving vehicle, though the current surfaced signal is effectively unflagged."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions Coco's dress ripping to show her underpants, though the current surfaced signal is effectively unflagged."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels/details conflict for violence and romance/nudity because detail prose mentions mild peril and underwear.",
+        "Chuckie's sadness about not having a mother needs emotional-content prose."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 548,
+      "file": "data-nickelodeon.js",
+      "title": "Jimmy Neutron: Boy Genius",
+      "year": "2001",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/jimmy-neutron-boy-genius",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Comic sci-fi action includes invention mishaps, falls, exploding vehicles, alien invasion, a meteor shower, parent abduction, shock spears, air battles with explosions and electric bolts, scary alien creatures, death threats, a menaced robot dog, and monsters with fangs threatening to eat victims."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Potty humor and mild phrases include wet-pants jokes, kick buttock, holy cow pie, sugar booger, and shower-peeing."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions puberty and girls flirting with a bad-boy type, though the current surfaced signal is effectively unflagged."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM romance/detail conflict: signal is not present but details mention puberty and mild flirting."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 549,
+      "file": "data-nickelodeon.js",
+      "title": "Hey Arnold! The Movie",
+      "year": "2002",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/hey-arnold-the-movie",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Cartoon violence includes a bear trap gag, kitchen fighting with a spatula and pickle juice, billyclub hits including a groin hit, dynamite explosion without injury, one punch, and bird-dropping gross-out."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Name-calling centers on football head."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A brief bar scene shows unspecified drinks, with no intoxication."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 550,
+      "file": "data-nickelodeon.js",
+      "title": "Clockstoppers",
+      "year": "2002",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/clockstoppers",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild peril includes guns that fire ice pellets to shock people out of hyper-time, but no one is hurt."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "CSM surfaces only mild language."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Francesca wears some revealing outfits, and she and Zak share a couple of kisses."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 551,
+      "file": "data-nickelodeon.js",
+      "title": "The Wild Thornberrys Movie",
+      "year": "2002",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-wild-thornberrys-movie",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Eliza faces repeated animal-adventure danger: hanging from a helicopter ladder, river danger, capture by villains, falling onto a moving vehicle, rescuing a wounded rhino, an elephant stampede, a snake, a tornado, a tree crash, and kids going over a waterfall."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions animal flatulence and bunny-poop wording, though the current surfaced signal is effectively unflagged."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM language label/detail conflict: signal is not present but details mention mild potty wording."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 552,
+      "file": "data-nickelodeon.js",
+      "title": "Rugrats Go Wild",
+      "year": "2003",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/rugrats-go-wild",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Storm peril includes characters thrown overboard as a small ship sinks, plus a coconut head hit and a tiger scratch."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Language is limited to a cut-the-cheese fart joke."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A fantasy sequence shows a baby holding a tiki drink."
+        }
+      },
+      "handoffNotes": [
+        "Gross-out sight gags are prominent in the review but mostly sit outside the four requested flags."
+      ],
+      "confidence": "high"
+    }
+  ],
+  "handoffSummary": {
+    "totalEntries": 20,
+    "found": 20,
+    "unavailable": [],
+    "needsReviewerAttention": [
+      {
+        "num": 534,
+        "reason": "Tar-pit family-death flashback and child left alone afterward."
+      },
+      {
+        "num": 535,
+        "reason": "Maternal death is central backstory."
+      },
+      {
+        "num": 536,
+        "reason": "CSM romance/nudity detail mentions implied baby nudity despite not-present label."
+      },
+      {
+        "num": 537,
+        "reason": "Death anxiety, panic attack, and scary wolf assassin."
+      },
+      {
+        "num": 539,
+        "reason": "Floyd's depletion and near death may need emotional-content prose."
+      },
+      {
+        "num": 540,
+        "reason": "Factory-food death threat is central."
+      },
+      {
+        "num": 542,
+        "reason": "Animal death, orphaning, sacrifice, morbid jokes, and bullying."
+      },
+      {
+        "num": 543,
+        "reason": "Bullying, humiliation, puberty harassment, disability slur, and self-harm wording."
+      },
+      {
+        "num": 545,
+        "reason": "Gross-out and anatomy humor are main non-violence concerns."
+      },
+      {
+        "num": 547,
+        "reason": "CSM labels/details conflict on mild peril and underwear; Chuckie's sadness about not having a mother."
+      },
+      {
+        "num": 548,
+        "reason": "CSM romance/detail conflict around puberty and mild flirting."
+      },
+      {
+        "num": 551,
+        "reason": "CSM language label/detail conflict around mild potty wording."
+      },
+      {
+        "num": 552,
+        "reason": "Gross-out sight gags are prominent though mostly outside the four requested flags."
+      }
+    ]
+  }
+}

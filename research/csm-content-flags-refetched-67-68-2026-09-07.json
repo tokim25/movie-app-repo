@@ -1,0 +1,876 @@
+{
+  "researchBatch": "csm-content-flags-refetched-67-68-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only handoff for nums 575-594 across data-nickelodeon.js and data-extra.js. Built from live Common Sense Media refetches of catalog srcUrl pages. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 575,
+      "file": "data-nickelodeon.js",
+      "title": "Good Burger 2",
+      "year": "2023",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/good-burger-2",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Comic danger includes people hit by cars, lightning, heavy objects, machinery, fireworks, lasers, an out-of-control self-driving car, a house fire, bullying, threats, falls, and a character frozen for decades."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild and crude language includes profanity, insults, and body-function jokes."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A young man has a crush on a coworker and they hug; there is also a mild joke about an attractive nanny being a nun."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "The decades-long freezing gag and machinery peril may need light prose context despite the comic tone."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 576,
+      "file": "data-nickelodeon.js",
+      "title": "Paw Patrol: The Mighty Movie",
+      "year": "2023",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/paw-patrol-the-mighty-movie",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Preschool action peril includes meteor crashes, building destruction, a scrapyard fire with trapped characters, a meteor-shower threat to Earth, a near-drowning fake-out, and crystal-powered battles."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Near-drowning and large-scale meteor danger may need light prose context for very young viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 577,
+      "file": "data-extra.js",
+      "title": "Free Willy 2: The Adventure Home",
+      "year": "1995",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/free-willy-2-the-adventure-home",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "The main peril is a climax with three kids trapped on a boat amid burning oil-covered water, plus a boy falling from a rescue harness."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One mild insult-style word is noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A brief tween kiss, teasing talk about kissing, and an awkward parent-child puberty or sex talk are noted."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Boat fire and rescue-harness fall may need prose context for younger viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 578,
+      "file": "data-extra.js",
+      "title": "Free Willy",
+      "year": "1993",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/free-willy",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text notes one brief fistfight."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text mentions one mild angry expression."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Violence & Scariness and Language as not present while the detail text mentions a brief fistfight and one mild angry expression."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 579,
+      "file": "data-extra.js",
+      "title": "Free Willy 3: The Rescue",
+      "year": "1997",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/free-willy-3-the-rescue",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Threatened whale harpooning and a human barroom brawl are the main violence notes."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adult drunkenness is noted."
+        }
+      },
+      "handoffNotes": [
+        "Whale-hunting threats may need animal-peril prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 580,
+      "file": "data-extra.js",
+      "title": "Free Willy: Escape from Pirate's Cove",
+      "year": "2010",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/free-willy-escape-from-pirates-cove",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Very mild peril includes adult scuffling with intruders and a character injured in a fall."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text says the strongest language is mild exclamation and insult wording."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults drink beer."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Language as not present while the detail text mentions very mild wording."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 581,
+      "file": "data-extra.js",
+      "title": "Air Bud: Golden Receiver",
+      "year": "1998",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/air-bud-golden-receiver",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Rough football action stays bloodless, but Buddy is kidnapped for a circus act and a suspense sequence involves freeing captive animals."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild body-part wording, a mild boast phrase, and a mild exclamation are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A widowed parent begins dating again, and adults share a few kisses."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Captive-animal and widowed-parent context may need light prose attention."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 582,
+      "file": "data-extra.js",
+      "title": "Air Bud: World Pup",
+      "year": "2000",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/air-bud-world-pup",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Sports falls and suspenseful dog-napping occur, but no one is injured and the puppies are safely returned."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One mild insult is noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Dog romance leads to puppies, a boy has a crush, and the story mentions remarriage after a spouse's death."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Spouse-death and remarriage references may need light prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 583,
+      "file": "data-extra.js",
+      "title": "Air Bud: Seventh Inning Fetch",
+      "year": "2002",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/air-bud-seventh-inning-fetch",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild slapstick includes a catcher hit by a pitch, reckless driving and a crash into a pigsty, a scientist wanting to kidnap dogs, and a gross baby-urine gag."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 584,
+      "file": "data-extra.js",
+      "title": "Air Bud: Spikes Back",
+      "year": "2003",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/air-bud-spikes-back",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Tame pratfalls include dogs causing fair chaos, a vase falling on Buddy, thieves thrown from a ride, a parrot kidnapping, false blame on Buddy, and one gross vomiting scene."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Buddy being falsely blamed for crimes may upset younger viewers and may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 585,
+      "file": "data-extra.js",
+      "title": "Spider-Man",
+      "year": "2002",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/spider-man",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Heavy superhero violence includes brutal fights, broken bones, gun threats, an off-screen shooting with blood, kidnapping, vaporized skeletons, impalement, blood, fires, explosions, falling deaths, child peril, scary villain behavior, street harassment, abuse, and dead-family references."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Occasional moderate profanity, religious exclamations, and many insults are noted."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Sexual material includes passionate kissing, a wet-clothing visibility scene, scantily clad background women, a mild sexual joke, and nonsexual bare-chested men."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Alcohol and smoking include off-screen drunken beer demands, whiskey poured on screen, cigarette smoking, and a cigar-smoking supporting character."
+        }
+      },
+      "handoffNotes": [
+        "Street harassment, abusive home life, child peril, and graphic villain deaths need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 586,
+      "file": "data-extra.js",
+      "title": "Spider-Man 2",
+      "year": "2004",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/spider-man-2",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Intense superhero violence includes a lab accident that kills a woman with shattered glass, skyscraper battles, people thrown around, hostage peril, alley mugging, and a hospital attack by mechanical tentacles."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text notes one mild profanity despite the category label."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Romantic content is limited to kissing."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A character drinks heavily while despondent and is shown drunk at a bar and drinking whiskey at home."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Language as not present while the detail text mentions one mild profanity.",
+        "Despondent drinking and the lab-accident death may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 587,
+      "file": "data-extra.js",
+      "title": "Spider-Man 3",
+      "year": "2007",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/spider-man-3",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Long superhero fights include airborne attacks, visible blood on characters and a dagger, disfigurement, major character deaths, and Peter striking someone he loves."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild profanity and taunts are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Characters kiss and Peter shares one romantic dance with Gwen."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Harry drinks repeatedly, including hard liquor, while champagne and lounge drinking appear in other scenes."
+        }
+      },
+      "handoffNotes": [
+        "Disfigurement, major deaths, and Peter striking someone he loves may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 588,
+      "file": "data-extra.js",
+      "title": "The Amazing Spider-Man",
+      "year": "2012",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-amazing-spider-man",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Superhero action includes cars thrown from bridges, wall-smashing fights, a bloody dying mugging victim, harsh vigilante beatings, police weapons injuring Spider-Man, a claw impalement of an officer, and school bullying."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild and moderate swearing, religious exclamations, euphemistic profanity, and insults are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Romantic content is limited to flirting and a few kisses."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 2,
+          "summary": "CSM labels the category not present but notes that the villain injects himself with a powerful drug that transforms him."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Drinking, Drugs & Smoking as not present while the detail text describes self-injection with a transformative drug.",
+        "Bloody mugging death and impalement may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 589,
+      "file": "data-extra.js",
+      "title": "The Amazing Spider-Man 2",
+      "year": "2014",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-amazing-spider-man-2",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Large-scale superhero violence includes police-car pileups, gunfire, landmark destruction, injuries, painful villain transformation, and a few emotionally upsetting deaths of people close to Peter."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild profanity and religious exclamations are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A few kisses, embraces, and declarations of love appear."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Deaths of characters close to Peter are the most emotionally intense material and need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 590,
+      "file": "data-extra.js",
+      "title": "Spider-Man: Homecoming",
+      "year": "2017",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/spider-man-homecoming",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frequent action peril includes destructive weapons, explosions, a disintegration death, Peter dropped, battered, buried, dragged, and threatened, teens trapped in an elevator, a split ferry, a plane crash, gun threats, and rubble aftermath."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Regular but not constant profanity includes partial stronger language, insults, crude terms, religious exclamations, and a middle-finger gesture."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Teen crushes, flirting, a pornography joke, suggestive comments about May, shirtless or underwear scenes, swimsuits, a crude phrase, and adult kissing are noted."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A teen party implies drinking, May has beer at dinner, and Peter declines an offered drink because he is underage."
+        }
+      },
+      "handoffNotes": [
+        "Disintegration death, ferry panic, and teens in danger may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 591,
+      "file": "data-extra.js",
+      "title": "Spider-Man: Far From Home",
+      "year": "2019",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/spider-man-far-from-home",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Intense action includes mass destruction, near-fall danger, Spider-Man repeatedly injured and hit by a train, civilians hurt by collapsing buildings and elemental monsters, drones firing on people, guns, tranquilizer darts, a real shooting, stitches, and a disturbing corpse vision."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Occasional strong and moderate language includes partial stronger profanity, insults, religious exclamations, and crude phrases."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Flirting, quick kisses, shirtless changing scenes, misunderstanding-based sexual innuendo, an adult-film joke, and a rumor about Peter are noted."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adults drink at a pub, Peter is reminded he is too young to drink, and another underage traveler is stopped from drinking."
+        }
+      },
+      "handoffNotes": [
+        "Dead-mentor corpse vision and illusion-based violence may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 592,
+      "file": "data-extra.js",
+      "title": "Spider-Man: No Way Home",
+      "year": "2021",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/spider-man-no-way-home",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Comic-book fighting includes characters slammed, punched, choked, kicked, and falling from heights, explosions, property destruction, bloody cuts, brief gunfire, a jump scare, an important death, and heroes briefly trying to kill villains."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Language includes a cut-off stronger word, several moderate profanities, mild body-part language, and religious exclamations."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Romance and sexual references include kissing, Aunt May misreading a shirtless scene with Peter and MJ, and a brief joke about a character being unclothed."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "An end-credits bar scene includes a Marvel character declaring drunkenness."
+        }
+      },
+      "handoffNotes": [
+        "Important character death and revenge-driven attempts to kill villains need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 593,
+      "file": "data-extra.js",
+      "title": "Spider-Man: Across the Spider-Verse",
+      "year": "2023",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/spider-man-across-the-spider-verse",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Intense animated superhero action includes large-scale destruction, explosions, close fights, black-hole-like weapons, property damage, peril, capture, imprisonment, bound captives, and flashbacks about loved ones dying or canonical disasters."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Several mild exclamations, unfinished phrases, mild profanity, insults, and one moderate profanity are noted."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Miles and Gwen show romantic tension through staring and hugging, others comment on their chemistry, Miles' parents embrace, and a villain's body and hole jokes may read suggestively."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults drink wine and an unspecified party beverage."
+        }
+      },
+      "handoffNotes": [
+        "Loved-one death montage, captivity, and multiverse disaster stakes may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 594,
+      "file": "data-extra.js",
+      "title": "Hocus Pocus",
+      "year": "1993",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/hocus-pocus",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Campy but dark scares include a child's life force drained, a teen transformed into a cat, gallows deaths, bullying, a reanimated corpse, decapitation gags, witches burned without injury, spider eating, a cat hit by a bus, a stitched mouth cut open, and macabre magic objects."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A few mild profanities, insults, and religious exclamations are noted."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Sexual innuendo centers on repeated virginity references, flirtation, a near kiss, a suggestive pillow comment, and a bus-driver misunderstanding."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Teens mention hash and cigarettes, and an adult smokes at home."
+        }
+      },
+      "handoffNotes": [
+        "Child death, gallows imagery, occult/macabre objects, and virginity jokes need prose context for younger viewers."
+      ],
+      "confidence": "high"
+    }
+  ],
+  "handoffSummary": {
+    "refetchedEntries": 20,
+    "sourceBasis": "live CSM refetch by subagent",
+    "firstNum": 575,
+    "lastNum": 594,
+    "unavailablePages": [],
+    "labelDetailConflicts": [
+      {
+        "num": 578,
+        "title": "Free Willy",
+        "note": "CSM labels Violence & Scariness and Language as not present while the detail text mentions a brief fistfight and one mild angry expression."
+      },
+      {
+        "num": 580,
+        "title": "Free Willy: Escape from Pirate's Cove",
+        "note": "CSM labels Language as not present while the detail text mentions very mild wording."
+      },
+      {
+        "num": 586,
+        "title": "Spider-Man 2",
+        "note": "CSM labels Language as not present while the detail text mentions one mild profanity."
+      },
+      {
+        "num": 588,
+        "title": "The Amazing Spider-Man",
+        "note": "CSM labels Drinking, Drugs & Smoking as not present while the detail text describes self-injection with a transformative drug."
+      }
+    ],
+    "emotionalProseAttention": [
+      {
+        "num": 576,
+        "title": "Paw Patrol: The Mighty Movie",
+        "note": "Near-drowning and large-scale meteor danger may need light prose context for very young viewers."
+      },
+      {
+        "num": 577,
+        "title": "Free Willy 2: The Adventure Home",
+        "note": "Boat fire and rescue-harness fall may need prose context for younger viewers."
+      },
+      {
+        "num": 579,
+        "title": "Free Willy 3: The Rescue",
+        "note": "Whale-hunting threats may need animal-peril prose context."
+      },
+      {
+        "num": 581,
+        "title": "Air Bud: Golden Receiver",
+        "note": "Captive-animal and widowed-parent context may need light prose attention."
+      },
+      {
+        "num": 582,
+        "title": "Air Bud: World Pup",
+        "note": "Spouse-death and remarriage references may need light prose context."
+      },
+      {
+        "num": 584,
+        "title": "Air Bud: Spikes Back",
+        "note": "Buddy being falsely blamed for crimes may upset younger viewers and may need prose context."
+      },
+      {
+        "num": 585,
+        "title": "Spider-Man",
+        "note": "Street harassment, abusive home life, child peril, and graphic villain deaths need prose context."
+      },
+      {
+        "num": 586,
+        "title": "Spider-Man 2",
+        "note": "Despondent drinking and the lab-accident death may need prose context."
+      },
+      {
+        "num": 587,
+        "title": "Spider-Man 3",
+        "note": "Disfigurement, major deaths, and Peter striking someone he loves may need prose context."
+      },
+      {
+        "num": 588,
+        "title": "The Amazing Spider-Man",
+        "note": "Bloody mugging death and impalement may need prose context."
+      },
+      {
+        "num": 589,
+        "title": "The Amazing Spider-Man 2",
+        "note": "Deaths of characters close to Peter are the most emotionally intense material and need prose context."
+      },
+      {
+        "num": 590,
+        "title": "Spider-Man: Homecoming",
+        "note": "Disintegration death, ferry panic, and teens in danger may need prose context."
+      },
+      {
+        "num": 591,
+        "title": "Spider-Man: Far From Home",
+        "note": "Dead-mentor corpse vision and illusion-based violence may need prose context."
+      },
+      {
+        "num": 592,
+        "title": "Spider-Man: No Way Home",
+        "note": "Important character death and revenge-driven attempts to kill villains need prose context."
+      },
+      {
+        "num": 593,
+        "title": "Spider-Man: Across the Spider-Verse",
+        "note": "Loved-one death montage, captivity, and multiverse disaster stakes may need prose context."
+      },
+      {
+        "num": 594,
+        "title": "Hocus Pocus",
+        "note": "Child death, gallows imagery, occult/macabre objects, and virginity jokes need prose context for younger viewers."
+      }
+    ],
+    "nextClaudeAction": "Review label/detail conflicts and emotional prose notes before importing any production catalog content flags."
+  }
+}
