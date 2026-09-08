@@ -3154,6 +3154,20 @@ function inferredMovieFlagLevel(movie){
 }
 
 function movieContentProfile(movie){
+  // Real per-movie data, backfilled 2026-09-08 from a full CSM research pass
+  // across the catalog (see docs/content-flags-import-notes-2026-09-08.md).
+  // Falls through to the keyword/age heuristic below only for the minority of
+  // movies with no CSM review to draw on (or any future movie added before its
+  // own research pass).
+  if(movie.flags && typeof movie.flags === 'object'){
+    const base = inferredMovieFlagLevel(movie);
+    return {
+      violence: movie.flags.violence || base,
+      language: movie.flags.language || base,
+      romance: movie.flags.romance || base,
+      drinking: movie.flags.drinking || base
+    };
+  }
   const text = `${movie.t || ''} ${movie.full || ''} ${(movie.genre || []).join(' ')}`.toLowerCase();
   const age = parseAge(movie.ca) || 6;
   const base = inferredMovieFlagLevel(movie);

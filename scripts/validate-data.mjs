@@ -30,6 +30,8 @@ const movieArrays = [
   'MOVIES_GHIBLI'
 ];
 
+const contentFlagIds = ['violence', 'language', 'romance', 'drinking'];
+
 const allowedGenres = new Set([
   'Action',
   'Adventure',
@@ -123,6 +125,26 @@ for (const movie of movies) {
   }
   if (movie.addedVia !== undefined && movie.addedVia !== 'request' && movie.addedVia !== 'discovery') {
     errors.push(`${label}: addedVia must be "request" or "discovery"`);
+  }
+
+  if (movie.flags !== undefined) {
+    if (typeof movie.flags !== 'object' || movie.flags === null || Array.isArray(movie.flags)) {
+      errors.push(`${label}: flags must be an object`);
+    } else {
+      const keys = Object.keys(movie.flags);
+      for (const flagId of contentFlagIds) {
+        if (!(flagId in movie.flags)) errors.push(`${label}: flags missing ${flagId}`);
+      }
+      for (const key of keys) {
+        if (!contentFlagIds.includes(key)) errors.push(`${label}: flags has unexpected key ${key}`);
+      }
+      for (const flagId of contentFlagIds) {
+        const level = movie.flags[flagId];
+        if (level !== undefined && (!Number.isInteger(level) || level < 1 || level > 4)) {
+          errors.push(`${label}: flags.${flagId} must be an integer 1-4`);
+        }
+      }
+    }
   }
 
   const hasRecheckedAt = movie.csmRecheckedAt !== undefined;
