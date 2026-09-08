@@ -1,0 +1,891 @@
+{
+  "researchBatch": "csm-content-flags-refetched-57-58-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only handoff for nums 459-474 and 476-479 in data-disney.js. Built from live Common Sense Media refetches of catalog srcUrl pages. Num 475 was not assigned. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 459,
+      "file": "data-disney.js",
+      "title": "The Nutcracker and the Four Realms",
+      "year": "2018",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-nutcracker-and-the-four-realms",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Fantasy danger includes a swarm-like mouse king, people carried off, sword-wielding soldiers, attacking clowns, toy battles, soldiers falling or lying still, and grief over Clara's mother's death."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One mild profanity, a body-function exclamation, religious exclamation, and mild insults are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "There is very mild flirting and a couple of suggestive-sounding remarks about uniformed soldiers."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Clara's mother has died, with family grief and a pain/illness flashback that may need emotional prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 460,
+      "file": "data-disney.js",
+      "title": "Dumbo",
+      "year": "2019",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/dumbo-0",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Upsetting peril includes animal cruelty, a death in a tent collapse, Dumbo separated from his chained mother, fire danger, falls from heights, armed pursuit of a family, and a dark attraction with scary animals."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A few mild profanities, an unfinished stronger word, and mild insults appear."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adult romance is limited to longing looks and a kiss."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text mentions champagne toasts and flasks in a desk drawer even though the category is labeled not present."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Drinking, Drugs & Smoking as not present while the detail text mentions champagne and flasks.",
+        "Animal cruelty, mother-child separation, the dead mother backstory, and Holt's war injury may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 461,
+      "file": "data-disney.js",
+      "title": "Aladdin",
+      "year": "2019",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/aladdin-0",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Peril includes a scary cave collapse with lava, falls, chases, a dungeon death, magical disappearances and torture, an attempted drowning, giant-bird attacks, armed guards, and references to dead parents."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Insults and sexist comments directed at Jasmine are noted."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Romance includes flirting, hand-holding, dancing, kisses, attractiveness comments, and mild double-meaning remarks."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Genie has martinis in a couple of scenes, and a pipe appears."
+        }
+      },
+      "handoffNotes": [
+        "Attempted drowning, magical torture, and dead-parent references may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 462,
+      "file": "data-disney.js",
+      "title": "The Lion King",
+      "year": "2019",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-lion-king",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Realistic animal violence includes hunting, snarling attacks, claw-and-teeth fights, deaths, Mufasa's stampede death and Simba's grief, cubs pursued by hyenas, near-fatal lion fighting, fire, and ominous graveyard imagery."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Very mild body-function language and insults are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adult Nala and Simba fall in love and show affectionate nuzzling and closeness."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Mufasa's death, Simba beside the body, and the realistic animal style need emotional prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 463,
+      "file": "data-disney.js",
+      "title": "Noelle",
+      "year": "2019",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/noelle",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Light holiday slapstick includes out-of-control sleigh rides, chimney falls, and harmless reindeer mishaps."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text notes holiday-themed substitute exclamations and argument phrases."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "An innocent adult crush leads to a hug."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Language as not present while the detail text includes substitute exclamations."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 464,
+      "file": "data-disney.js",
+      "title": "Lady and the Tramp",
+      "year": "2019",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/lady-and-the-tramp-2019",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Dogs face cars, a rat, cats, other dogs, and a pursuing dog catcher; pound scenes are tense, cats wreck the home, a rat enters a baby's room, and Tramp briefly appears dead after a vehicle accident."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Only mild insult-style language is noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Flirting, an accidental spaghetti kiss, romantic affection between the dogs, and a bit of human couple slapstick are noted."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults appear to drink alcohol while celebrating impending fatherhood."
+        }
+      },
+      "handoffNotes": [
+        "Pound anxiety, implied dog euthanasia risk, baby danger, and Tramp appearing dead may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 465,
+      "file": "data-disney.js",
+      "title": "Togo",
+      "year": "2019",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/togo",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Sled-team peril includes deadly cold, blinding storms, near-cliff danger, cracking ice, a bloody window injury for Togo, and a town threatened by diphtheria."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One mild profanity and one dark name are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Seppala and his wife flirt and kiss."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Men gather in a bar, whiskey is offered, and the story centers on medicine for diphtheria."
+        }
+      },
+      "handoffNotes": [
+        "Children dying of diphtheria, epidemic risk, and dog-in-peril scenes may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 466,
+      "file": "data-disney.js",
+      "title": "Timmy Failure: Mistakes Were Made",
+      "year": "2020",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/timmy-failure-mistakes-were-made",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild peril and comedy include an imagined car through a living room, a purse-snatcher scuffle, a small car accident, and bridge danger near a dam."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Dialogue includes a mild profanity and mild insults."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No visible Drinking, Drugs & Smoking detail was surfaced on the fetched CSM page."
+        }
+      },
+      "handoffNotes": [
+        "The fetched page's telemetry had a null Drinking, Drugs & Smoking rating while the visible detail was blank; treated as not present for this research handoff."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 467,
+      "file": "data-disney.js",
+      "title": "Artemis Fowl",
+      "year": "2020",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/artemis-fowl",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frequent fantasy danger includes a father held hostage, death threats, a scary troll attack, near-death, fairy military battles, fire-using goblins, time-freeze danger, arrests, and fairy guns."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Name-calling centers on accusations such as thief, liar, traitor, and criminal mastermind."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Hostage stress position, parental death threats, and near-death scenes may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 468,
+      "file": "data-disney.js",
+      "title": "Safety",
+      "year": "2020",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/safety",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Football aggression includes pushing, threats, punishing drills, hazing-like expectations, three intimidating men surrounding siblings, and a painful mother-child separation."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild profanity and drug-related wording appear."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Romance includes flirting, dates, dancing, and an adult woman leaving a bedroom while buttoning her shirt."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "College party drinking is shown, and Ray's mother has drug-possession charges and repeat rehab history."
+        }
+      },
+      "handoffNotes": [
+        "Parental addiction, incarceration, rehab, and forced family separation need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 469,
+      "file": "data-disney.js",
+      "title": "Godmothered",
+      "year": "2020",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/godmothered",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Light peril and slapstick include a dead-husband backstory, frequent falls and bumps, a billiard-ball hit, an allergic reaction treated with an EpiPen, snowball retaliation, and bullying from a boss."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Fairy-tale substitute profanity, mild insults, and a religious exclamation are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults talk about loneliness with a euphemism, dance and flirt, and the fairy-tale premise invokes true love."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adults drink beer and a shot at a bar, there is a brief drug question, a needles joke, and an EpiPen injection after an allergic reaction."
+        }
+      },
+      "handoffNotes": [
+        "Dead spouse backstory and allergic reaction may need light prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 470,
+      "file": "data-disney.js",
+      "title": "Elephant",
+      "year": "2020",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/elephant-0",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Natural peril includes mud, roaring water, dry winds, crocodiles, lions, hyenas, rival elephant herds, drought, and an elephant death from old age."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Animal death and nature-survival danger may need prose context for younger viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 471,
+      "file": "data-disney.js",
+      "title": "Dolphin Reef",
+      "year": "2020",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/dolphin-reef",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Nature-documentary peril includes predator-prey scenes, animals being caught or eaten, a dolphin pod attack, Echo lost overnight in a dangerous canyon, and orcas surrounding a whale and calf."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text mentions one mild body-function word."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Language as not present while the detail text mentions one mild body-function word.",
+        "Predator-prey sequences and young-animal peril may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 472,
+      "file": "data-disney.js",
+      "title": "Cruella",
+      "year": "2021",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/cruella",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Dark material includes murder and murderous intent, a mother falling to her death while her child watches, death assumptions, attack-dog peril, punches and tackles, arson, a comic shock device, abuse, arguing, and childhood bullying."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Language includes a mild profanity on a sign, mild insults, body-function wording, and body-size insults."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Drinking from a decanter implies drunkenness, and champagne is served at parties and celebrations."
+        }
+      },
+      "handoffNotes": [
+        "On-screen maternal death witnessed by a child, abuse, arson, and drinking that leads to positive plot results need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 473,
+      "file": "data-disney.js",
+      "title": "Jungle Cruise",
+      "year": "2021",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/jungle-cruise",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Frequent adventure violence includes creepy undead conquistadors, deaths, abductions, slaps, stabbing, animal attacks, falls, chases, explosions, torpedoes, gunfire, blades, a suggested key-character death, and arguments."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild profanity, religious exclamations, crude phrasing, and insults are noted."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Banter and flirting lead to longing looks and a kiss, with one knife-removal exchange that sounds mildly suggestive."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Adults drink in taverns and from flasks and bottles, a jaguar becomes tipsy from wine, and one character brings a suitcase of liquor."
+        }
+      },
+      "handoffNotes": [
+        "Undead imagery, colonial/cannibalism framing, and heavy alcohol presence may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 474,
+      "file": "data-disney.js",
+      "title": "Pinocchio",
+      "year": "2022",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/pinocchio-2022",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Peril includes kidnapping, imprisonment, near-transformation into a donkey, a sea-monster swallowing, a beloved character seeming to die, characters tossed, threatened, hit, captured, burned, teased, and enslaved, plus scary villains and Pleasure Land imagery."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes mild profanity, substitute swears, exclamations, and many taunts and insults."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A brief statue-touching gag, attraction between puppets, and a song lyric about girls liking boys are noted."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A cuckoo-clock character drinks from a liquor bottle."
+        }
+      },
+      "handoffNotes": [
+        "Enslavement, scary villains, donkey transformation threat, and apparent death may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 476,
+      "file": "data-disney.js",
+      "title": "Chip 'n Dale: Rescue Rangers",
+      "year": "2022",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/chip-n-dale-rescue-rangers",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoon action includes kidnapping, chases, falls, threats, body-altering lasers, fistfights, near crashes, explosions, restraints, slicing, electrocution, stabbing, strangling, freezing, giant pursuers, and fake-out deaths."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A mild profanity, body-function words, insults, and a dog-related double-meaning joke appear."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Kidnapping, body-altering machine peril, and fake-out mourning may need prose context despite the comedic tone."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 477,
+      "file": "data-disney.js",
+      "title": "Disenchanted",
+      "year": "2022",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/disenchanted",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Fantasy danger includes characters turning cruel or evil, threats to lives including children, dragons, giants, sleeping potions, falls, fires, fights, spells, curses, and world-destruction stakes."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One mild insult is noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A married couple kisses, and teens flirt."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults drink wine."
+        }
+      },
+      "handoffNotes": [
+        "Threats to children and world-destruction stakes may need light prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 478,
+      "file": "data-disney.js",
+      "title": "Polar Bear",
+      "year": "2022",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/polar-bear",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Nature-documentary content includes bears hunting prey, baby animals and eggs eaten, feeding on a whale carcass with blood mentioned, male bears threatening mothers and cubs, and a cub dying in winter."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Bear courtship and mating are discussed indirectly, and cub nursing is shown and mentioned."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Predation, blood mention, climate/survival danger, and cub death need emotional prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 479,
+      "file": "data-disney.js",
+      "title": "Haunted Mansion",
+      "year": "2023",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/haunted-mansion",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Supernatural scares include suggested suicide, a body beside a fatal bottle, ghouls, ghosts, skeletons including headless figures, jump scares, an axe-throwing bride, a fatal duel, a near car hit, alligator danger, dark magic, seances, and a Ouija board."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One mild profanity is noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Flashbacks show love and a proposal, characters hug, romantic interest is implied, and deceased spouses are discussed."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Several adults drink frequently, including drinking tied to deep depression and building courage."
+        }
+      },
+      "handoffNotes": [
+        "Suggested suicide, grief over deceased spouses, depression-linked drinking, and frequent supernatural scares need explicit prose context."
+      ],
+      "confidence": "high"
+    }
+  ],
+  "handoffSummary": {
+    "refetchedEntries": 20,
+    "sourceBasis": "live CSM refetch by subagent",
+    "firstNum": 459,
+    "lastNum": 479,
+    "excludedNums": [
+      475
+    ],
+    "unavailablePages": [],
+    "labelDetailConflicts": [
+      {
+        "num": 460,
+        "title": "Dumbo",
+        "note": "CSM labels Drinking, Drugs & Smoking as not present while the detail text mentions champagne and flasks."
+      },
+      {
+        "num": 463,
+        "title": "Noelle",
+        "note": "CSM labels Language as not present while the detail text includes substitute exclamations."
+      },
+      {
+        "num": 466,
+        "title": "Timmy Failure: Mistakes Were Made",
+        "note": "The fetched page's telemetry had a null Drinking, Drugs & Smoking rating while the visible detail was blank; treated as not present for this research handoff."
+      },
+      {
+        "num": 471,
+        "title": "Dolphin Reef",
+        "note": "CSM labels Language as not present while the detail text mentions one mild body-function word."
+      }
+    ],
+    "emotionalProseAttention": [
+      {
+        "num": 459,
+        "title": "The Nutcracker and the Four Realms",
+        "note": "Clara's mother has died, with family grief and a pain/illness flashback that may need emotional prose context."
+      },
+      {
+        "num": 460,
+        "title": "Dumbo",
+        "note": "Animal cruelty, mother-child separation, the dead mother backstory, and Holt's war injury may need prose context."
+      },
+      {
+        "num": 461,
+        "title": "Aladdin",
+        "note": "Attempted drowning, magical torture, and dead-parent references may need prose context."
+      },
+      {
+        "num": 462,
+        "title": "The Lion King",
+        "note": "Mufasa's death, Simba beside the body, and the realistic animal style need emotional prose context."
+      },
+      {
+        "num": 464,
+        "title": "Lady and the Tramp",
+        "note": "Pound anxiety, implied dog euthanasia risk, baby danger, and Tramp appearing dead may need prose context."
+      },
+      {
+        "num": 465,
+        "title": "Togo",
+        "note": "Children dying of diphtheria, epidemic risk, and dog-in-peril scenes may need prose context."
+      },
+      {
+        "num": 467,
+        "title": "Artemis Fowl",
+        "note": "Hostage stress position, parental death threats, and near-death scenes may need prose context."
+      },
+      {
+        "num": 468,
+        "title": "Safety",
+        "note": "Parental addiction, incarceration, rehab, and forced family separation need prose context."
+      },
+      {
+        "num": 469,
+        "title": "Godmothered",
+        "note": "Dead spouse backstory and allergic reaction may need light prose context."
+      },
+      {
+        "num": 470,
+        "title": "Elephant",
+        "note": "Animal death and nature-survival danger may need prose context for younger viewers."
+      },
+      {
+        "num": 471,
+        "title": "Dolphin Reef",
+        "note": "Predator-prey sequences and young-animal peril may need prose context."
+      },
+      {
+        "num": 472,
+        "title": "Cruella",
+        "note": "On-screen maternal death witnessed by a child, abuse, arson, and drinking that leads to positive plot results need prose context."
+      },
+      {
+        "num": 473,
+        "title": "Jungle Cruise",
+        "note": "Undead imagery, colonial/cannibalism framing, and heavy alcohol presence may need prose context."
+      },
+      {
+        "num": 474,
+        "title": "Pinocchio",
+        "note": "Enslavement, scary villains, donkey transformation threat, and apparent death may need prose context."
+      },
+      {
+        "num": 476,
+        "title": "Chip 'n Dale: Rescue Rangers",
+        "note": "Kidnapping, body-altering machine peril, and fake-out mourning may need prose context despite the comedic tone."
+      },
+      {
+        "num": 477,
+        "title": "Disenchanted",
+        "note": "Threats to children and world-destruction stakes may need light prose context."
+      },
+      {
+        "num": 478,
+        "title": "Polar Bear",
+        "note": "Predation, blood mention, climate/survival danger, and cub death need emotional prose context."
+      },
+      {
+        "num": 479,
+        "title": "Haunted Mansion",
+        "note": "Suggested suicide, grief over deceased spouses, depression-linked drinking, and frequent supernatural scares need explicit prose context."
+      }
+    ],
+    "nextClaudeAction": "Review label/detail conflicts, the excluded num 475 boundary, and emotional prose notes before importing any production catalog content flags."
+  }
+}

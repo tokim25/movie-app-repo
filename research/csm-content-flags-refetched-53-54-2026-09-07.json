@@ -1,0 +1,835 @@
+{
+  "researchBatch": "csm-content-flags-refetched-53-54-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only live CSM refetch for catalog nums 419-438 in data-disney.js. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "sourceRange": {
+    "files": [
+      "data-disney.js"
+    ],
+    "nums": [
+      419,
+      438
+    ],
+    "entryCount": 20
+  },
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 419,
+      "file": "data-disney.js",
+      "title": "Herbie: Fully Loaded",
+      "year": "2005",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/herbie-fully-loaded",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions car crashes and a slightly scary demolition derby, but the current surfaced signal is effectively unflagged."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions a mild butt phrase, though the current surfaced signal is effectively unflagged."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions Herbie having a crush on a female car and a girl kissing her boyfriend, though the signal is effectively unflagged."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels/details conflict for violence, language, and romance: current signals are not present but detail prose mentions mild content."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 420,
+      "file": "data-disney.js",
+      "title": "The Greatest Game Ever Played",
+      "year": "2005",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-greatest-game-ever-played",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions father-son anger that might worry younger viewers, but the current surfaced signal is effectively unflagged."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions very mild language, though the current surfaced signal is effectively unflagged."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions Francis having a crush and exchanging looks with a wealthy girl, though the signal is effectively unflagged."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Characters smoke cigars, pipes, and cigarettes, with discreet party drinking plus rowdier drinking and smoking in a pub."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels/details conflict for violence, language, and romance because details mention mild content while signals are not present.",
+        "Sustained father-son tension should be preserved in prose."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 421,
+      "file": "data-disney.js",
+      "title": "Pirates of the Caribbean: Dead Man's Chest",
+      "year": "2006",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/pirates-of-the-caribbean-dead-mans-chest",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Frequent dark pirate peril includes stabbings, shootings, flogging, roasting threats, deaths by tentacle, grotesque undead sea-crews, soul bondage, cannibal fire peril, cages over an abyss, a severed beating heart, threatened hangings, and implied danger to a dog."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Language is limited to a few mild swears."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Innuendo and double meanings are frequent, a voodoo woman behaves seductively, Jack and Elizabeth kiss, and Elizabeth makes a mild desire-based remark about Will."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Characters drink throughout, and Jack speaks of rum positively."
+        }
+      },
+      "handoffNotes": [
+        "Grotesque imagery, human body-part imagery, soul bondage, and cannibal peril should be preserved in prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 422,
+      "file": "data-disney.js",
+      "title": "Eight Below",
+      "year": "2006",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/eight-below",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Survival peril includes dogs attacked by a leopard seal, wounded paws and legs, animal deaths from cold and starvation, dogs mourning dead bodies, dogs killing birds, carcass-eating, severe weather injuries, frostbite, unconsciousness, and a grizzly mauling story."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Language includes one stronger censored swear and hell."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "There is brief flirting, an eventual kiss, and some cleavage."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Characters meet in a bar, and wine appears on tables at an awards ceremony."
+        }
+      },
+      "handoffNotes": [
+        "Animal death, mourning, dead bodies, and abandonment in extreme conditions need emotional-content prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 423,
+      "file": "data-disney.js",
+      "title": "The Shaggy Dog",
+      "year": "2006",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-shaggy-dog-2006",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Animal-related peril includes cattle prods and large-needle injections used as threats, plus mild slapstick danger."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions butt and pee, though the current surfaced signal is effectively unflagged."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions implied but unseen nudity during human-to-dog transformations, though the current signal is effectively unflagged."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels/details conflict for language and romance/nudity: details mention mild potty words and implied nudity while signals are not present."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 424,
+      "file": "data-disney.js",
+      "title": "Invincible",
+      "year": "2006",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/invincible",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions rough football, fan scuffles, and thrown furniture, but the current surfaced signal is effectively unflagged."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Some profanity appears in teammate and bar-friend dialogue."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions mild romance and one passionate kiss, though the current surfaced signal is effectively unflagged."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "There is lots of drinking and smoking, drunken behavior, and one scene of public urination outside a bar."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels/details conflict for violence and romance: details mention football violence and a passionate kiss while signals are not present.",
+        "References to a wife's death and gritty job-loss era setting may need prose."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 425,
+      "file": "data-disney.js",
+      "title": "Bridge to Terabithia",
+      "year": "2007",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/bridge-to-terabithia",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Real-world conflict includes a tragic accident involving a main character, one boy punching another, and a teen bully pushing and threatening younger kids."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild insults are used among siblings and school kids, a father makes hurtful comments, and there are a few mild swears."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The central friendship is intense and affectionate; kids write a fake love letter to a teen girl, and a boy has a clear crush on a teacher."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Major character death, grief, loneliness, bullying, and family hurt are central and need emotional-content prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 426,
+      "file": "data-disney.js",
+      "title": "Enchanted",
+      "year": "2007",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/enchanted",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Fairy-tale peril includes a poison-apple murder attempt, sword-wielding, Nathaniel roughing up Pip for comic effect, and a queen transforming into a threatening dragon and trying to kill Giselle and Robert."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions several kisses, shower-to-towel modesty, flirting, dancing, and adult-directed relationship innuendo, though the current surfaced signal is effectively unflagged."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Giselle is served an apple martini but does not drink it, and another character becomes drunk at a bar."
+        }
+      },
+      "handoffNotes": [
+        "CSM romance label/detail conflict: signal is not present but detail prose includes kisses, flirting, and relationship innuendo.",
+        "Dragon climax may scare sensitive younger viewers."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 427,
+      "file": "data-disney.js",
+      "title": "Underdog",
+      "year": "2007",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/underdog",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoon action includes a character dragged through the street and into a bus stop, thieves hit with objects, characters tied up or surrounded by violent dogs, a girl and dog tied beside a bomb, and a villain trying to blow up a building."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions mild insults such as imbecile, idiot, and screw it up, though the current surfaced signal is effectively unflagged."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions dog flirting and cuddling, a brief street-couple kiss, and teen flirting and hugging, though the current surfaced signal is effectively unflagged."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels/details conflict for language and romance because detail prose mentions mild content while signals are not present."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 428,
+      "file": "data-disney.js",
+      "title": "National Treasure: Book of Secrets",
+      "year": "2007",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/national-treasure-2-book-of-secrets",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Action-adventure peril includes car chases, crashes, shooting, fighting, a Lincoln assassination reenactment, a flashback where a boy sees his father shot and killed, a home knockout, police custody struggle, cave near-falls, and a near-drowning flood."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A main couple kisses chastely, some cleavage appears, and Abigail uses a tight dress, cleavage, and a passionate kiss to distract a man."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Background drinking appears in bars, restaurants, and parties, and one character implies a brief marriage began with drunkenness."
+        }
+      },
+      "handoffNotes": [
+        "The father being shot in front of a child may need emotional-content prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 429,
+      "file": "data-disney.js",
+      "title": "College Road Trip",
+      "year": "2008",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/college-road-trip",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions slapstick, near-fall danger, a pig causing wedding chaos, and two people buzzed with a taser, though the current surfaced signal is effectively unflagged."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions very mild words such as stupid and dumb, though the signal is effectively unflagged."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions parent kisses and hugs plus mild flirting with college guys, though the signal is effectively unflagged."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels/details conflict for violence, language, and romance because details mention mild content while signals are not present."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 430,
+      "file": "data-disney.js",
+      "title": "Bedtime Stories",
+      "year": "2008",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/bedtime-stories",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Fantasy-story action includes mild cartoon gun violence in a Wild West bedtime sequence."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language is mild for an Adam Sandler film, with butt kiss, shoot, jerk, shut up, and stink."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "There are a couple of kisses, benign flirting, a clothed hot-tub scene in a bedtime story, and adult-directed references to a party-girl reputation."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults drink cocktails and champagne at a party."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 431,
+      "file": "data-disney.js",
+      "title": "Race to Witch Mountain",
+      "year": "2009",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/race-to-witch-mountain",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "The action is heavier than many PG Disney films, with an alien assassin trying to kill the heroes, government agents authorized for deadly force, explosions, fires, telepathic car crashes, hand-to-hand fights, loud confrontations, injuries, and world-ending stakes."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild language includes pimped and threatening phrases about death, deadly force, and disappearance."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Two characters flirt, hold hands, and are telepathically called out for thinking about each other."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "World-ending stakes and repeated lethal-force threats may need prose despite bloodless action."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 432,
+      "file": "data-disney.js",
+      "title": "Old Dogs",
+      "year": "2009",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/old-dogs",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Slapstick includes a spray-tan fall, a bruising Ultimate Frisbee game, one bloody face, joint-cracking comedy, and a character trapped in a gorilla's embrace."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild language includes idiot and scatological words."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Charlie flirts often, Dan kisses and flirts with Vicki, older kids will understand a one-night sexual backstory that led to twins, and there are bird-and-bees jokes plus non-explicit partial body exposure."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Adults get drunk on huge cocktails, flirt with drunk women, impulsively marry, and take many prescription pills with odd side effects."
+        }
+      },
+      "handoffNotes": [
+        "Drinking/pill content is notably stronger than most family comedies in this batch."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 433,
+      "file": "data-disney.js",
+      "title": "The Sorcerer's Apprentice",
+      "year": "2010",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-sorcerers-apprentice",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Fantasy action includes a swordfight in front of a frightened child, electrocution-like energy blasts, kill threats, impalements on swords, and Merlin being stabbed."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A few mild exclamations include hell and God."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Couples kiss."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A college student talks with a roommate about partying and living it up."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 434,
+      "file": "data-disney.js",
+      "title": "Prince of Persia: The Sands of Time",
+      "year": "2010",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/prince-of-persia-the-sands-of-time",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Action violence includes many chases, sword and knife deaths, a burning-cloak assassination, constant threat, creepy assassins, snakes, and ninja-like killing skills, though gore is limited."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild insults include words aimed at class or status."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "There is flirting, mild innuendo, revealing clothing, chaste kisses, and one harem-like group of bikini-clad women."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions a drinking question and one tipsy-looking moment without visible alcohol, while the current surfaced signal is effectively unflagged."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels/details conflict for drinking: current signal is not present but details mention a drinking question and tipsy behavior."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 435,
+      "file": "data-disney.js",
+      "title": "Secretariat",
+      "year": "2010",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/secretariat",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text notes that Penny's parents' deaths may disturb some young viewers, though the current violence signal is effectively unflagged."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild swears appear, along with untranslated French that another character says would be inappropriate and sexist diminutives directed at Penny."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults drink champagne at a party."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels/details conflict for violence: signal is not present but detail mentions parental deaths.",
+        "Sexism toward Penny is reviewer-relevant outside the four flags."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "num": 436,
+      "file": "data-disney.js",
+      "title": "Tron: Legacy",
+      "year": "2010",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/tron-legacy",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Digital-world action includes a building jump, death games with disc weapons and light-cycle walls, a few drops of human blood, programs shattering, a key character's arm breaking apart and regrowing, and a human implied to die in a light blast."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes mild swears and insults."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Programs cuddle, flirt, and kiss; main characters flirt and embrace; female programs wear skintight bodysuits and heels, and one character's clothes are digitally replaced with brief non-explicit skin exposure."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Programs drink bright liquids from martini glasses, and human characters drink beer."
+        }
+      },
+      "handoffNotes": [
+        "Deaths are stylized and digital, but the page still flags death-game stakes."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 437,
+      "file": "data-disney.js",
+      "title": "Mars Needs Moms",
+      "year": "2011",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/mars-needs-moms",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Scary family peril includes the threat that Mom will be killed after her parenting skills are extracted, an apparent Mom death, menacing Martian authorities, a near firing-squad execution, foot chases, and a tense rush to save Mom and return home."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild insults include idiot, stupid, and jerk."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Gribble and Ki flirt, blush, embrace, and share a cheek kiss."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Mom's threatened/apparent death is likely the key emotional sensitivity."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 438,
+      "file": "data-disney.js",
+      "title": "Prom",
+      "year": "2011",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/prom",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Teen conflict includes one nearly-started fight, one brief fight with a punch, shoving, a bloody chin, sneaking into another school, a janitor chase, and police stopping the teens."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild insults include loser, bad boy, punk, no good, and jerk, plus one religious exclamation."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Teen romance includes flirting, a few kisses, an admission of cheating, and a line about knowing when someone is about to kiss."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    }
+  ],
+  "handoffSummary": {
+    "totalEntries": 20,
+    "found": 20,
+    "unavailable": [],
+    "needsReviewerAttention": [
+      {
+        "num": 419,
+        "reason": "CSM labels/details conflict on mild car peril, butt phrase, and car/person kissing details."
+      },
+      {
+        "num": 420,
+        "reason": "CSM labels/details conflict on mild family anger, language, and crush details; smoking/drinking is some."
+      },
+      {
+        "num": 421,
+        "reason": "Very dark pirate violence, grotesque imagery, body-part imagery, and frequent alcohol."
+      },
+      {
+        "num": 422,
+        "reason": "Animal abandonment, deaths, mourning, dead bodies, and survival injuries."
+      },
+      {
+        "num": 423,
+        "reason": "CSM labels/details conflict on potty words and implied nudity."
+      },
+      {
+        "num": 424,
+        "reason": "CSM labels/details conflict on football violence and romance; lots of drinking/smoking."
+      },
+      {
+        "num": 425,
+        "reason": "Major character death and grief are central."
+      },
+      {
+        "num": 426,
+        "reason": "CSM romance label/detail conflict; dragon climax may scare sensitive kids."
+      },
+      {
+        "num": 427,
+        "reason": "CSM labels/details conflict on mild insults and flirting/kissing."
+      },
+      {
+        "num": 429,
+        "reason": "CSM labels/details conflict on slapstick, mild language, and family/teen affection."
+      },
+      {
+        "num": 432,
+        "reason": "Adult drunkenness and prescription-pill side effects are stronger than most in this batch."
+      },
+      {
+        "num": 434,
+        "reason": "CSM drinking label/detail conflict around drinking question and tipsy behavior."
+      },
+      {
+        "num": 435,
+        "reason": "CSM violence label/detail conflict around parental deaths; sexist language toward Penny."
+      },
+      {
+        "num": 437,
+        "reason": "Mom's threatened and apparent death may be upsetting."
+      }
+    ]
+  }
+}

@@ -1,0 +1,760 @@
+{
+  "researchBatch": "csm-content-flags-refetched-59-60-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only handoff for nums 480 and 482 in data-disney.js, nums 490, 491, 494, 495, 496, and 497 in data-pixar.js, and nums 499-510 in data-dreamworks.js. Built from live Common Sense Media refetches of catalog srcUrl pages. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 480,
+      "file": "data-disney.js",
+      "title": "Peter Pan & Wendy",
+      "year": "2023",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/peter-pan-wendy",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Sword fights with children, execution and walk-the-plank threats, cannon fire, an arrow through a man's hand, apparent drownings, deaths, and one pirate being eaten alive make the peril fairly intense."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The only romance-related note is Wendy offering Peter a thimble when prompted to kiss a wound, while Peter does not understand what a kiss is."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Deaths and execution threats are the main context to preserve for family-facing prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 482,
+      "file": "data-disney.js",
+      "title": "Descendants: The Rise of Red",
+      "year": "2024",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/descendants-the-rise-of-red",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Villains threaten children and parents with beheadings and banishment, a character believes her mother was killed, and action includes sword fights, chases, near-crashes, creature-transforming pranks, time freezing, and abusive parenting."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Language is limited to mild words such as \"witch,\" \"tyrant,\" and \"heck.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A married couple flirts, dances, and blows kisses."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Psychologically abusive parenting is a notable CSM detail outside simple action peril."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 490,
+      "file": "data-pixar.js",
+      "title": "Incredibles 2",
+      "year": "2018",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/incredibles-2",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "High-stakes superhero peril includes citywide threats, hypnotic mind control, weapons, children and parents in danger, a scary flashing-light fight, destructive baby powers, and a flashback to an armed robbery that ends in an off-screen shooting death."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild language includes \"crap,\" \"hell,\" \"damned,\" rude superhero insults, unfinished swearing, and a couple uses of \"oh my God.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A married couple kisses and hugs, teens flirt and have crushes, and Elastigirl wears a skintight costume."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adults toast or have cocktails, Elastigirl is offered a drink, there is a joke about drinking on the job, Edna briefly has a cigarette, and wine is shown."
+        }
+      },
+      "handoffNotes": [
+        "CSM specifically notes flashing lights in one fight as a possible photosensitivity concern."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 491,
+      "file": "data-pixar.js",
+      "title": "Brave",
+      "year": "2012",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/brave",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Several intense scenes involve a frightening bear attack, King Fergus losing a leg, Elinor becoming menacing while transformed, armed men hunting bear-Elinor, a tense climactic battle, spooky witch imagery, eerie wisps, and clan fights with bodies and weapons."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Married affection includes Fergus smacking Elinor's rear and staring when she is covered only by a sheet; there are brief bare animated rear ends and a housemaid with ample cleavage."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Steins of presumed mead or ale appear during a feast, but drinking is not emphasized and no one is shown drunk."
+        }
+      },
+      "handoffNotes": [
+        "Bear attacks and the mother-transformation scare are the core sensitive-viewer issues."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 494,
+      "file": "data-pixar.js",
+      "title": "Toy Story 3",
+      "year": "2010",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/toy-story-3",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Creepy Sunnyside toys, prison-like punishment, toys tied up or reset, bullying, peril, fantasy train and spaceship crashes, and a harrowing junkyard sequence near a fiery incinerator create the main scare load."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild insults include \"shut up,\" \"doofus,\" \"idiot,\" and \"monster.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Toy characters flirt, including Ken and Barbie and Buzz and Jessie."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "The incinerator scene should be preserved as the standout intensity note."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 495,
+      "file": "data-pixar.js",
+      "title": "Toy Story 4",
+      "year": "2019",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/toy-story-4",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Rescues and escapes bring jumps, chases, falls, and near misses; creepy ventriloquist dummies take toys hostage, imagined attacks include lasers, a cat damages and swallows toys, and there are sad separations and arguments."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild words include \"crazy,\" \"terrifying,\" \"weirdo,\" \"dummy,\" \"idiot,\" and \"stupid.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Toy characters exchange flirting and longing looks, leading to a lingering embrace, plus a quick joke about a previous fling."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "An imagined bubble-bath scene shows a person with a glass of red wine."
+        }
+      },
+      "handoffNotes": [
+        "Creepy dummies and toy damage are the main scariness details despite the low level."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 496,
+      "file": "data-pixar.js",
+      "title": "Lightyear",
+      "year": "2022",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/lightyear",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Space-ranger peril includes sentient vines that appear to swallow people, shields and weapons used against hostile forces, Zurg chasing and trying to destroy Buzz, armed robots, robot fights, and Buzz evading commanding officers."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Language is limited to \"shoot\" and a mild bathroom-humor misunderstanding."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A character announces her engagement and is later seen holding hands and kissing her wife at an anniversary celebration."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 497,
+      "file": "data-pixar.js",
+      "title": "Turning Red",
+      "year": "2022",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/turning-red",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "The panda transformation can cause intentional and accidental damage, the ceremony looks painful, a giant panda causes concert chaos, Mei bangs into walls and breaks a window with a dodgeball, and supernatural pandas push and fight."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Insults include \"dork,\" \"narc,\" \"brainwashed,\" \"jerkwad,\" \"butthead,\" \"freak,\" \"psycho mom,\" \"creepy temple,\" and \"crap.\""
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Young teen crushes include kissing boy-band media, talking about members' attractiveness, drawing romantic fantasy images, references to hotness and gyrating moves, and puberty and periods as major themes."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mei's mother makes a passing comment that a boy's behavior is due to not wearing sunblock and doing drugs all day."
+        }
+      },
+      "handoffNotes": [
+        "Puberty and period talk are central context for the romance/adolescence signal."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 499,
+      "file": "data-dreamworks.js",
+      "title": "Antz",
+      "year": "1998",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/antz",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Extensive cartoon war violence includes acid-shooting termites, combatants stabbed, stomped, and massacred, bodies on a battlefield, on-camera torture, forced captivity, insects burned by sun, falls, crushing threats, and a rushing-water escape."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Language includes insults and mild swearing such as \"idiot,\" \"maggot,\" \"tight-ass,\" \"damn,\" \"hell,\" \"anus,\" \"crap,\" and \"butt,\" plus an insect-poop gag."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "There is flirtation, mild innuendo including an erotic-fantasy joke, and a few kisses."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Worker ants drink an unidentified beverage in a colony bar, one ant is identified as drunk, and others worry they may have had too much to drink."
+        }
+      },
+      "handoffNotes": [
+        "This is the only title in the batch with a level 4 violence signal."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 500,
+      "file": "data-dreamworks.js",
+      "title": "The Prince of Egypt",
+      "year": "1998",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-prince-of-egypt",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Scary biblical violence centers on slavery, babies being dropped or thrown into crocodile-filled water, enslaved people being whipped and abused, and Moses killing an overseer."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A chariot-race gag has Moses looking up at Rameses' short uniform and joking about the exposed rear view."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Wine is dumped on two merchants' heads by two royal brothers."
+        }
+      },
+      "handoffNotes": [
+        "Infant peril and slavery imagery should be explicit in any production prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 501,
+      "file": "data-dreamworks.js",
+      "title": "Joseph: King of Dreams",
+      "year": "2000",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/joseph-king-of-dreams",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Violent biblical material includes frightening dream images of wolves, destruction, beheadings, and birds feeding on human flesh, plus Joseph being thrown into a pit, sold into slavery, auctioned, and imprisoned in grim conditions with rats."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "Potiphar's wife makes unwanted romantic advances, tears at Joseph's clothes after rejection, and falsely accuses him; Joseph and Asenath later kiss and embrace."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels romance as none despite a sexual-harassment and false-accusation detail; keep that nuance for review."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 502,
+      "file": "data-dreamworks.js",
+      "title": "Shrek",
+      "year": "2001",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/shrek",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Peril includes ogre hunters with pitchforks and torches, an exploding bird and eaten eggs, a scary dragon that eats a character, Shrek threatening villagers with soup and jelly, and the Gingerbread Man's legs being crushed."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes \"damn,\" \"ass,\" \"jackass,\" and \"crap.\""
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "The romance plot includes mild innuendo, Donkey making sexual sounds while dreaming, kisses including a butt-kiss gag, and a joke about Snow White living with seven men."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Shrek breaks a beer barrel, and characters chug beer without visible effects."
+        }
+      },
+      "handoffNotes": [
+        "The innuendo is a bigger current CSM signal than the age alone suggests."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 503,
+      "file": "data-dreamworks.js",
+      "title": "Spirit: Stallion of the Cimarron",
+      "year": "2002",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/spirit-stallion-of-the-cimarron",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frequent peril includes Spirit being captured and forcibly broken, tied up without food or water for three days, horses nearly drowning in rapids, a locomotive accident with explosions and building destruction, rifle shots, and horses kicking off riders."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A cavalryman is shown asleep near an almost-empty bottle of booze, and cigar smoking appears."
+        }
+      },
+      "handoffNotes": [
+        "Animal mistreatment and forced deprivation are the main violence-context concerns."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 504,
+      "file": "data-dreamworks.js",
+      "title": "Sinbad: Legend of the Seven Seas",
+      "year": "2003",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/sinbad-legend-of-the-seven-seas",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "The crew battles scary creatures from land, air, and sea; fantasy action includes swords, daggers, punches, execution fears, references to violent death, and a dog bite."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild flirting and innuendo include a quick brothel reference, sensual sirens luring men into danger, shirtless crew members, and one partially bare bottom."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Eris occasionally drinks martinis, and wine goblets are visible at meals."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 505,
+      "file": "data-dreamworks.js",
+      "title": "Shrek 2",
+      "year": "2004",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/shrek-2",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Comic violence includes a giant gingerbread man losing his arms and falling to a presumed death, falls, gun threats, characters being hit by objects, passing out, and one forced kiss."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes \"ass,\" \"bloody,\" \"darn,\" \"shoot,\" \"oh my God,\" and \"stupid.\""
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frequent innuendo includes Shrek and Donkey becoming \"sexy\" after potions, song lyrics about a \"sexy tush\" and \"taut, round buttocks,\" kissing, and rolling around on a beach."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Bar scenes include presumed alcohol, there is a passing mention of drunkenness, a catnip drug joke, and characters take magic potions."
+        }
+      },
+      "handoffNotes": [
+        "CSM rates romance higher than violence here because of sustained innuendo."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 506,
+      "file": "data-dreamworks.js",
+      "title": "Shark Tale",
+      "year": "2004",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/shark-tale",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Cartoon mafia-style sharks fight and chase fish, a pretend public fight is staged like professional wrestling, and a shark death leads to a mafia-funeral parody."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "CSM notes brief fish makeout sessions."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Mafia parody may require tone context even though category levels are low."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 507,
+      "file": "data-dreamworks.js",
+      "title": "Madagascar",
+      "year": "2005",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/madagascar",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Comic but frequent peril includes predators attacking, a lion biting a friend, an elderly woman beating and macing animals, crates falling into the ocean, reckless ship steering, police guns, a tranquilizer dart, jungle hazards, and a joke about killing people and eating livers."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Wordplay suggests stronger language, alongside \"sucks,\" \"shut up,\" \"darn you all to heck,\" a rectal thermometer joke, and insults such as \"freaks\" and \"pansies.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Brief gags include a hippo pretending to wear starfish and a crab as pasties, underwear thrown at a performer, and butt licking or biting."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A tranquilized lion hallucinates, a giraffe has prescription-medication bottles on a tray, and a zebra mixes seawater in a martini shaker."
+        }
+      },
+      "handoffNotes": [
+        "Several crude or body-related jokes are split across language, romance, and substance categories."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 508,
+      "file": "data-dreamworks.js",
+      "title": "Wallace & Gromit: The Curse of the Were-Rabbit",
+      "year": "2005",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/wallace-gromit-the-curse-of-the-were-rabbit",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "CSM's visible detail is brief but flags cartoon shooting and chasing on foot and in vehicles."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM labels language as none while noting one British phrase, \"arsing around.\""
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "Wallace has a crush, and CSM notes minor British sexual references in language."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM labels substance content as none but mentions minor adult drinking at a party."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels language, romance, and drinking as none despite minor detail text."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 509,
+      "file": "data-dreamworks.js",
+      "title": "Over the Hedge",
+      "year": "2006",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/over-the-hedge",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoon violence includes characters smashed, flattened, blown up, and crushed, a death threat from a bear, an exterminator with traps, poison, and explosives, backyard hazards, chases, crashes, a rabies scare, and a young possum kicked down stairs and appearing dead."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM labels language as none but lists mild words such as \"shoot,\" \"butt,\" \"dang,\" \"stupid,\" \"naive,\" and \"ignorant.\""
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM notes mild references to a female skunk's appeal when she is used to distract a guard cat."
+        },
+        "drinking": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM labels substance content as none but describes sugar as acting like a drug for Hammy."
+        }
+      },
+      "handoffNotes": [
+        "Death-threat wording and exterminator hazards are the main violence-context notes."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 510,
+      "file": "data-dreamworks.js",
+      "title": "Flushed Away",
+      "year": "2006",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/flushed-away",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Roddy nearly drowns during a toilet ride, he and Rita flee villains while being shot at and threatened, and other action includes electrocution, hard falls, yelling, threats, and repeated comic danger."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM labels language as none while listing mild phrases such as \"get stuffed,\" \"load of old rubbish,\" and \"you idiots.\""
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "Roddy accidentally kisses a bride-rat, female characters wear tight outfits and shake their behinds, Roddy accidentally pulls down Rita's pants to reveal underwear, and there is mild innuendo and boyfriend talk."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels romance and language as none despite several mild detail notes."
+      ],
+      "confidence": "high"
+    }
+  ]
+}

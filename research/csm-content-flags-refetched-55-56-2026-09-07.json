@@ -1,0 +1,800 @@
+{
+  "researchBatch": "csm-content-flags-refetched-55-56-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only handoff for nums 439-458 inclusive in data-disney.js. Built from live Common Sense Media refetches of catalog srcUrl pages. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Where CSM's label and category detail conflict, the proposed level may reflect the detail rather than the label and a handoff note is included."
+  },
+  "entries": [
+    {
+      "num": 439,
+      "file": "data-disney.js",
+      "title": "The Muppets",
+      "year": "2011",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-muppets",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Comic chaos includes an anger-management brawl, Muppets kidnapping Jack Black for a telethon gag, Gonzo's dangerous stunts, slapstick explosions, mildly threatening henchmen, and a joke reality-show title about punching a teacher."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Very mild language includes a body-part word, insults, religious exclamations, pig jokes, and a fart-shoe gag."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Kermit and Piggy's relationship remains complicated, while Gary and Mary hold hands, embrace, and share one sweet kiss; brief Muppet kissing also appears."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 440,
+      "file": "data-disney.js",
+      "title": "Chimpanzee",
+      "year": "2012",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/chimpanzee",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Nature-documentary peril includes chimp group confrontations, an attack that injures Oscar's mother, a frightening thunderstorm and leopard sequence tied to her death, repeated references to that loss, and a monkey hunt kept mostly offscreen."
+        },
+        "language": {
+          "csmLabel": "none",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text mentions one mild insult and one religious exclamation from the narrator."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Language as none while the detail text mentions a mild insult and religious exclamation.",
+        "Oscar's mother's injury/death and the animal hunt may need emotional prose for younger viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 441,
+      "file": "data-disney.js",
+      "title": "John Carter",
+      "year": "2012",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/john-carter",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Heavy sci-fi violence includes battles, disintegration weapons, a planet-destruction plot, arena deaths, monster killings, decapitation, branding and torture, death sentences, repeated near-deaths, charred family remains, gun injuries, skeletons, crushed eggs, and many weapons."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes a handful of mild-to-moderate profanities and insults."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Romance includes longing looks, touches, kisses, Dejah Thoris in skimpy clothing, and implied aftermath of a love scene with partial bed/balcony staging."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Before reaching Mars, John Carter drinks and enters a saloon where alcohol is visible."
+        }
+      },
+      "handoffNotes": [
+        "Charred remains of John Carter's wife and child may need prose beyond the violence level."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 442,
+      "file": "data-disney.js",
+      "title": "Frankenweenie",
+      "year": "2012",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/frankenweenie",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Dark tone and suspense include creepy classmates, prophetic gross-out humor, an invisible reanimated fish bite, reanimated pets and monsters terrorizing town, pet deaths, monster transformations, smashing, and destruction."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Only mild insults are surfaced."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Parents hug, a mother reads a romance novel, Sparky flirts with a neighbor dog, and Victor and Elsa have mild flirtatious sweetness."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Pet death, reanimation, and sustained monster scares may need emotional prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 443,
+      "file": "data-disney.js",
+      "title": "Oz the Great and Powerful",
+      "year": "2013",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/oz-the-great-and-powerful",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Fantasy scares include terrifying flying baboons, a violent circus pursuit, an intense tornado, magical torture, scary witches, China Town destruction and an injured orphaned China Girl, a freaky transformation, river rapids, waterfall danger, lion and plant attacks, fireballs, creepy forest imagery, and a suggested death."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language is limited to a couple of mild profanities and a shut-up phrase."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Oz is portrayed as a womanizer, kisses several women, has innuendo around past conquests, and some women wear tight or revealing outfits."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A clown drinks from a flask during a Kansas magic-show scene."
+        }
+      },
+      "handoffNotes": [
+        "China Girl's orphaning/injury, magical torture, and scary 3-D-style effects may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 444,
+      "file": "data-disney.js",
+      "title": "The Lone Ranger",
+      "year": "2013",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-lone-ranger",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Graphic western violence includes shootings, cannibalism, a heart cut from a victim and eaten in silhouette, explosions, high body count, homes burned, gun killings, Army violence against Native Americans, hostage abuse and rape threats, scalping, dismemberment, drownings, horse deaths, a boy threatened and slapped, and a startling vicious-animal gag."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes racist terms for Native Americans plus other insults, profanity, religious exclamations, and period-era slurs."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Romance and sexual material include kisses, a passionate embrace, a brothel setting, and cleavage-baring corsets."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adults drink from jugs and wine glasses, and a couple of men smoke cigars."
+        }
+      },
+      "handoffNotes": [
+        "Graphic cannibalism, rape threat, racism toward Native Americans, and violence against Native Americans require prose beyond slider levels."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 445,
+      "file": "data-disney.js",
+      "title": "Million Dollar Arm",
+      "year": "2014",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/million-dollar-arm",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The only violence-like issue CSM surfaces is J.B. yelling when upset with his players."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild profanities and insults appear."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Adult sexual content includes J.B.'s casual dating, a model implied to have spent the night, a bathroom walk-in moment, passionate kissing leading toward a bedroom, next-morning implications, questions about whether adults slept together, skimpy party outfits, and a hottie comment."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Three Indian characters get drunk at a party and become sick in a car; J.B. also drinks beer and Scotch."
+        }
+      },
+      "handoffNotes": [
+        "Adult dating/overnight-sex implications and immigrant characters getting drunk may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 446,
+      "file": "data-disney.js",
+      "title": "Bears",
+      "year": "2014",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/bears",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Nature peril includes threats from terrain, a hungry wolf, other bears, and moments that imply cubs could die or be eaten, though the family survives."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A male bear tries to attract a potential mate, with the narrator framing it as flirtation that is rejected."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Nature-documentary cub peril may need gentle prose for younger viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 447,
+      "file": "data-disney.js",
+      "title": "Into the Woods",
+      "year": "2014",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/into-the-woods",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Dark fairy-tale peril includes central deaths and mourning, orphaned children, a predatory wolf eating a girl, the wolf cut open in shadow, giant destruction, scary witch appearances, Jack hit and imperiled, a pet cow's death and resurrection, a blinded prince, possible baby peril and paternal abandonment, cruel stepsisters, mutilation, and birds attacking eyes."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Only one religious exclamation is surfaced."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Kissing, flirting, suggestive lyrics, implied extramarital trysting, and revealing stepsister outfits appear."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Celebration scenes include some revelry and carousing."
+        }
+      },
+      "handoffNotes": [
+        "Deaths, parental loss, wolf predation, mutilation, and extramarital implications need prose beyond slider levels."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 448,
+      "file": "data-disney.js",
+      "title": "McFarland, USA",
+      "year": "2015",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/mcfarland-usa",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Serious but infrequent incidents include a cleat thrown near a player, blood on a player's cheek, domestic-violence fear, a beer bottle and wall punch, a fight after an insult, a knife fight that hospitalizes kids, and a possible suicide attempt."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mostly mild insults appear, along with a farm-worker term used both neutrally and pejoratively."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Julie and Thomas flirt, dance, hold hands, hug, and kiss; adult spouses kiss and hug; one sister is pregnant and later seen with her baby."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A couple of adult characters drink beer."
+        }
+      },
+      "handoffNotes": [
+        "Domestic-violence implication, knife fight injuries, class/race context, and possible suicide attempt need prose beyond the low violence label."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 449,
+      "file": "data-disney.js",
+      "title": "Tomorrowland",
+      "year": "2015",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/tomorrowland",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Sci-fi action includes explosions, chases, crashes, falls, peril, robot soldiers disintegrating people with guns, attempts to kill main characters, fires and destruction, robot body-part damage, apparent and actual significant deaths, hand combat, body count, and disaster footage."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes interrupted stronger phrases, mild profanities, insults, and religious exclamations."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text mentions young Frank's crush on Athena and longing looks."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Sex, Romance & Nudity as none while the detail text mentions a young crush and longing looks.",
+        "Sad significant-character death and disaster imagery may need prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 450,
+      "file": "data-disney.js",
+      "title": "Cinderella",
+      "year": "2015",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/cinderella-2015",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Emotional and mild fantasy danger includes parental deaths, the king dying in his son's arms, cruel stepfamily abuse, a dress ripped apart, food withheld, cold insults, Ella chased and locked in an attic, and a pumpkin transformation that may alarm younger kids."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes mean names for Ella, mild insults, and violent threat language about poisoning, eye scratching, pushing, and head injury."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Characters kiss, and one dance partner reacts to a hand on the waist."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults drink at a party."
+        }
+      },
+      "handoffNotes": [
+        "Parental death and stepfamily emotional abuse need prose beyond the scored flags."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 451,
+      "file": "data-disney.js",
+      "title": "The Finest Hours",
+      "year": "2016",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-finest-hours",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frequent storm and rescue peril includes boats breaking apart in rough waves, one man killed while transferring boats, and an extended dangerous sandbar crossing during a historic storm."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild swearing appears."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A kiss is surfaced."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults drink socially."
+        }
+      },
+      "handoffNotes": [
+        "Sustained storm peril and a rescue death may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 452,
+      "file": "data-disney.js",
+      "title": "Alice Through the Looking Glass",
+      "year": "2016",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/alice-through-the-looking-glass",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Peril includes Alice institutionalized and escaping by sticking a needle into a doctor, a storm that nearly kills her crew, time-device use nearly destroying Underland, and one comic death."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Language consists of mild insult name-calling."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text mentions Time and the Red Queen hugging and briefly holding hands."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Sex, Romance & Nudity as none while the detail text mentions hugging and hand-holding.",
+        "Institutionalization and needle escape may need prose clarity."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 453,
+      "file": "data-disney.js",
+      "title": "Pete's Dragon",
+      "year": "2016",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/petes-dragon-2016",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frequent peril and sadness include Pete's parents dying in a car accident, Pete alone in dark woods, wolves, chases, head injury, hospital escape into traffic, loggers hunting and tranquilizing Elliot, capture that makes Elliot seem dead, a chase, bridge fire and cracking, and a car going off a bridge with apparent deaths."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "No swearing is surfaced, but a couple of mildly crude jokes appear."
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 2,
+          "summary": "CSM's detail text mentions adults hugging."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Sex, Romance & Nudity as none while the detail text mentions adult hugging.",
+        "Parental death, animal capture, and apparent deaths may need emotional prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 454,
+      "file": "data-disney.js",
+      "title": "The BFG",
+      "year": "2016",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-bfg",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Dark peril includes orphaned Sophie being abducted, fearing she will be eaten, human-eating giants hunting her, the BFG's home destroyed, the BFG hurt, hiding sequences, a planted nightmare, groin-hit slapstick, a near-eating rescue, army invasion of Giant Country, and references to a prior child being eaten."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Language includes mild insults and repeated silly fart humor from a fizzy drink."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Apparently drunk men are seen below the orphanage, and characters drink a nonalcoholic fermented fantasy beverage."
+        }
+      },
+      "handoffNotes": [
+        "Kidnapping, orphanhood, human-eating giants, and references to a child being eaten need prose beyond the violence level."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 455,
+      "file": "data-disney.js",
+      "title": "Born in China",
+      "year": "2016",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/born-in-china",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Nature-documentary violence includes animals fighting for dominance, sometimes fatally, a baby monkey carried off by a hawk, a dead animal eaten, and an injured mother animal dying."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Animal deaths, a baby animal taken by a predator, and mother-animal death may need emotional prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 456,
+      "file": "data-disney.js",
+      "title": "Pirates of the Caribbean: Dead Men Tell No Tales",
+      "year": "2017",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/pirates-of-the-caribbean-dead-men-tell-no-tales",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Pirate action has a high body count from burning boats, hand combat, sword fights, shoot-outs, drownings, throat-slitting, entire ships killed, and creepy supernatural villains."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes mild profanity, gendered pirate insults, and a running misheard word joke that sounds sexual."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Sexual material includes kisses, Jack's frequent innuendo and double meanings, Carina undressing to long underwear, ankle-related teasing, and a misheard occupation joke."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Jack is drunk for much of the movie, especially early on, and drinks a lot of rum."
+        }
+      },
+      "handoffNotes": [
+        "Throat-slitting, high body count, and sustained Jack drunkenness may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 457,
+      "file": "data-disney.js",
+      "title": "A Wrinkle in Time",
+      "year": "2018",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/a-wrinkle-in-time",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Fantasy peril includes a girl hitting a classmate with a ball after bullying, kids nearly falling to death, being swept into a twister, eternal entrapment threats, people dragged toward an evil force, a child taken and partly possessed by darkness, and telekinetic attacks on his sister."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Language is limited to a shut-up phrase and cruel bullying comments."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "There are marital kisses plus young-teen flirting, hand-holding, and an emotional hug."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Bullying, possession-like darkness, and sibling harm may need prose beyond slider levels."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 458,
+      "file": "data-disney.js",
+      "title": "Christopher Robin",
+      "year": "2018",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/christopher-robin",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild but sometimes sad or scary content includes Christopher Robin's father dying offscreen, funeral sadness, brief World War II combat images and casualties discussion, slapstick falls and bonks, yelling, Christopher knocked out, an underwater monster dream, frightened animals, monster-fight play, sad goodbyes, and a minor taxi crash."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Very mild language includes self-deprecating Pooh phrasing, woozle name-calling, old-fashioned exclamations, and mild insult phrases."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A couple embraces, dances, and kisses."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Father's death, war imagery, monster fear, and sad separation from Pooh may need emotional prose for younger viewers."
+      ],
+      "confidence": "high"
+    }
+  ],
+  "handoffSummary": {
+    "totalEntries": 20,
+    "foundOnCsm": 20,
+    "unavailable": 0,
+    "unavailableNums": [],
+    "needsReviewerAttention": [
+      440,
+      441,
+      442,
+      443,
+      444,
+      445,
+      446,
+      447,
+      448,
+      449,
+      450,
+      451,
+      452,
+      453,
+      454,
+      455,
+      456,
+      457,
+      458
+    ],
+    "notes": [
+      "All 20 catalog srcUrl pages were reachable as live Common Sense Media movie-review pages during the refetch.",
+      "No unavailable pages were found, so no targeted CSM fallback lookup was needed.",
+      "Some pages omit a visible category block entirely; those categories are marked not present when no live category detail was visible.",
+      "Nums 440, 449, 452, and 453 have visible CSM labels of none while the detail text still describes minor language or romance content.",
+      "Several entries include emotional animal death, parental death, racism, graphic violence, abduction, disaster, or sustained peril that may need prose beyond slider levels."
+    ]
+  }
+}

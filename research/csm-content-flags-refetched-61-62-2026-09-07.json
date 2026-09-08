@@ -1,0 +1,756 @@
+{
+  "researchBatch": "csm-content-flags-refetched-61-62-2026-09-07",
+  "researchedAt": "2026-09-07",
+  "researcher": "Codex",
+  "purpose": "Research-only handoff for nums 511-530 in data-dreamworks.js. Built from live Common Sense Media refetches of catalog srcUrl pages. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 511,
+      "file": "data-dreamworks.js",
+      "title": "Shrek the Third",
+      "year": "2007",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/shrek-the-third",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Fairy-tale villains and heroes fight with sticks, swords, fists, and slapstick destruction, and a teen is shown bullied at school with wedgie and swirlie references."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild insults and potty words appear, along with one bleeped gag and a rude sign on a character's backside."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Shrek and Fiona kiss and share a bed with implied nudity, couples hug, Puss flirts, and a few jokes allude to sex or bodies before cutting away."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Characters drink in a bar, mojitos are suggested, and students emerge from a smoke-filled carriage in an obvious marijuana joke."
+        }
+      },
+      "handoffNotes": [
+        "Substance jokes are more explicit than typical animated fantasy entries in this slice."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 512,
+      "file": "data-dreamworks.js",
+      "title": "Bee Movie",
+      "year": "2007",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/bee-movie",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Barry imagines a crash and explosion, survives dangerous flight, people try to kill insects, dead insect bodies appear, bees are smoked, some humans are held at gunpoint, police hold a woman down, and a suicide-pact line is discussed."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "CSM notes mild joking language around lawyers, mental state, and feeling psychotic."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Barry daydreams romantically about Vanessa, and the movie includes mild innuendo about dating, living together, and flirtation."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cigarette smoke becomes part of the legal argument, and beekeeper smoke is described as containing nicotine and tar and making bees addicted."
+        }
+      },
+      "handoffNotes": [
+        "CSM specifically mentions a suicide-pact joke and an 'I can't breathe' police-restraint line under violence/scariness."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 513,
+      "file": "data-dreamworks.js",
+      "title": "Kung Fu Panda",
+      "year": "2008",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/kung-fu-panda",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frequent martial-arts action includes punches, kicks, falls, crossbows, swords, staffs, maces, fireworks, dynamite, and an intense prison escape."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The word suck is used, and Po receives fatphobic insults about his body."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A smitten bunny calls Po attractive, and a bowl gag makes Po's chest look like breasts."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Body-shaming language is part of CSM's language concern."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 514,
+      "file": "data-dreamworks.js",
+      "title": "Madagascar: Escape 2 Africa",
+      "year": "2008",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/madagascar-escape-2-africa",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Peril includes a plane crash, fights involving an elderly woman and lions, guns aimed at animals, leadership battles, a dominance fight, sick animals in 'dying holes,' lava danger, and young Alex's forced separation from his father."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Only mild words such as stupid and butt are noted."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A hippo strongly flirts and receives repeated body compliments, with additional mild romance elsewhere."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Parent-child separation and sick-animal 'dying holes' may need context for sensitive viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 515,
+      "file": "data-dreamworks.js",
+      "title": "Monsters vs. Aliens",
+      "year": "2009",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/monsters-vs-aliens",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Action includes gunfire, explosions, alien deaths, an apparent good-guy death, intense bridge destruction, crushed buildings, and the president ordering the military to use violence."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Insults and mild exclamations appear, including body-related wording and religious phrases."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A couple is interrupted before making out, a breast-related gesture appears, and BOB flirts with a gelatin mold."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 516,
+      "file": "data-dreamworks.js",
+      "title": "Shrek Forever After",
+      "year": "2010",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/shrek-forever-after",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Cartoon violence includes Gingy fighting animal crackers like a gladiator and ogres taking up arms against Rumpelstiltskin's witches."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild insults appear, including stupid and fat, plus one context-specific use of ass for Donkey."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions kissing, flirting, true-love declarations, kissy faces, and witches adoring Rumpelstiltskin."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Shrek drinks several eyeball-themed martinis, and Rumpelstiltskin offers Mudslides."
+        }
+      },
+      "handoffNotes": [
+        "Romance is rated not present while CSM detail text mentions kissing and flirting."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 517,
+      "file": "data-dreamworks.js",
+      "title": "Megamind",
+      "year": "2010",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/megamind",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Cartoon action includes explosions, aerial battles, a skeleton glimpse, and the apparent death of a superhero."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Rude words and mild insults appear, along with one religious exclamation."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Roxanne flirts, holds hands, hugs, is carried, eventually kisses Megamind, and is once called a temptress."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 518,
+      "file": "data-dreamworks.js",
+      "title": "Kung Fu Panda 2",
+      "year": "2011",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/kung-fu-panda-2",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Fast hand-to-hand combat is frequent, warriors face gunpowder and cannons, and flashbacks to baby Po's separation from his parent and implied parental death may be upsetting."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Parent separation and implied parental death are the main sensitivity points."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 519,
+      "file": "data-dreamworks.js",
+      "title": "Puss in Boots",
+      "year": "2011",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/puss-in-boots",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Bloodless peril includes injuries, a character choosing to fall to death, swordplay, some gun and cannon action, a monster pursuit, and orphan backstory material."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text mentions mild pun-based insults."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Puss is framed as a lover leaving a female cat's home, flirts at a cat nightclub, dances and rubs noses with Kitty Softpaws, and Jack and Jill are shown in bed and joke about practicing for a family."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Pub scenes show steins, though the only drink shown poured or consumed is milk."
+        }
+      },
+      "handoffNotes": [
+        "Language is rated not present while CSM detail text mentions mild insults; the fall-to-death beat may need context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 520,
+      "file": "data-dreamworks.js",
+      "title": "Madagascar 3: Europe's Most Wanted",
+      "year": "2012",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/madagascar-3-europes-most-wanted",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mostly comic action includes threatening dogs, Captain Du Bois hunting Alex as a trophy, dart-gun tranquilizers, officers hospitalized, and physical sight gags."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM notes one pun that clearly echoes a stronger profanity."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "King Julien has an interspecies crush with snuggling and innuendo, Gloria and Melman hug, and Alex and Gia flirt and embrace."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Language is rated not present while CSM detail text notes a profanity-adjacent pun."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 521,
+      "file": "data-dreamworks.js",
+      "title": "Rise of the Guardians",
+      "year": "2012",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/rise-of-the-guardians",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Action includes Pitch destroying a Guardian, weakening the others, damaging the Tooth Fairy's castle and Easter eggs, giving children nightmares, frightening shadowy stallions, Santa using swords, and a flashback showing Jack Frost drowned while saving his sister."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The Easter Bunny frequently uses bloody as an exclamation, Pitch uses a rude egg insult, and characters trade mild insults."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's detail text says Tooth Fairy and some baby fairies seem smitten with Jack Frost."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Romance is rated not present while CSM detail text mentions smitten behavior; Jack Frost's drowning flashback may need context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 522,
+      "file": "data-dreamworks.js",
+      "title": "The Croods",
+      "year": "2013",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-croods",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Survival peril is frequent, with death talk, a possible central-character death, Guy's dead parents, apocalyptic earthquakes and fires, falling mountains, prey animals, hunting with spears and fiery sticks, rough family fighting, and cliff falls."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Humorous name-calling includes body insults and sucky."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A teen boy and teen cave-girl flirt, hold hands, and nearly kiss."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Frequent death talk and end-of-world peril may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 523,
+      "file": "data-dreamworks.js",
+      "title": "Turbo",
+      "year": "2013",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/turbo",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Peril includes a lawnmower encounter, a dangerous freeway and city trek, a large crash, crows taking snails, a crow being hit by a bus, and comments about being dead meat or slaughtered."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Teasing includes mild phrases, plus several potty-related snail names."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Male snails make suggestive comments that turn out to be about a tomato, and two snails briefly flirt and later seem paired."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults appear to drink bottled beer with meals in one scene."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 524,
+      "file": "data-dreamworks.js",
+      "title": "Mr. Peabody & Sherman",
+      "year": "2014",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/mr-peabody-sherman",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Historical peril includes imprisonment in Egypt, near deaths in the Sphinx, Greeks chanting for blood, a seeming sacrifice death, French Revolution death sentences, guillotine imagery, and repeated danger that everyone survives."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Insult language includes mild put-downs such as stupid, dumb, dirty, loser, and dog."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Penny is engaged to young King Tut, and Agamemnon later marries and kisses Mrs. Grunion after a comic kidnapping setup."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mr. Peabody mixes elaborate cocktails for Penny's parents in two scenes."
+        }
+      },
+      "handoffNotes": [
+        "Guillotine/death-sentence imagery may need context despite the a little violence label."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 525,
+      "file": "data-dreamworks.js",
+      "title": "How to Train Your Dragon 2",
+      "year": "2014",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/how-to-train-your-dragon-2",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A major character dies because of a dragon controlled by an evil alpha, dragon-army battles can frighten younger viewers, Toothless turns while controlled, and a Viking funeral pyre is emotionally intense."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Insults include coward, thief, moron, and useless."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Hiccup and Astrid kiss and hug, Ruffnut reacts lustfully to Eret's body and muscles, and an emotional married-couple reunion includes a lingering kiss and dance."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Major-character death, Toothless being controlled, and the funeral pyre may need context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 526,
+      "file": "data-dreamworks.js",
+      "title": "Penguins of Madagascar",
+      "year": "2014",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/penguins-of-madagascar",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Action includes apparent death, chases, explosions, kidnapping by an evil scientist, cages, fights with octopi, a baby kitten briefly swallowed, plane and boat peril, and penguins being turned into monsters."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Pop-culture names replace swears, flipper wordplay appears, and a transformed penguin has a butt-hand joke."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Kowalski follows his owl love interest, and she kisses him near the end, leaving lipstick marks."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Government agents sit on a yacht drinking what appears to be champagne."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 527,
+      "file": "data-dreamworks.js",
+      "title": "Home",
+      "year": "2015",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/home",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Huge alien spaceships invade Earth, a main character appears to be killed but survives, and Tip has been separated from her mother."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Mother-child separation is the main sensitivity point."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 528,
+      "file": "data-dreamworks.js",
+      "title": "Kung Fu Panda 3",
+      "year": "2016",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/kung-fu-panda-3",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frequent martial-arts fighting includes scary Kai and jade warriors, captures and danger, food used as weapons, nunchaku, a perilous trek, slapstick crashes, sad flashbacks to Po's separation from his mother, and Po's scary-realm sacrifice and return."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Infrequent insults and bathroom humor appear."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mei Mei flirts heavily with Po and others, but the flirting does not lead anywhere."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Po's separation flashbacks and sacrifice sequence may need context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 529,
+      "file": "data-dreamworks.js",
+      "title": "Trolls",
+      "year": "2016",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/trolls",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frequent peril includes scary Bergens threatening to eat trolls, knives and cooking tools, captures, panic, hungry predators, chase scenes, apparent deaths or eating, Branch's loss memory, cruel treatment of Bridget, and an apparent fiery fate for villains."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild slang, insults, and softened exclamations appear."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Bridget has a crush, flirts, poses to get attention, and receives mildly suggestive comments, while Poppy and Branch have romantic tension and some glitter-covered characters show bare sparkly bottoms."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Threats of being eaten and Branch's loss memory may need context for young viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 530,
+      "file": "data-dreamworks.js",
+      "title": "The Boss Baby",
+      "year": "2017",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-boss-baby",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Peril includes chases, imagined attacks, spooky scenes, dart guns, a baby thrown through a window, a stuffed animal beheaded, capture by a disguised thug, Tim's parents in danger, sibling hitting, and Tim feeling unloved."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Infrequent potty words, mild insults, rude phrases, and gross-out humor appear."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Bare baby bottoms are shown, a dog sniffs Boss Baby's bottom while he is in costume, and bachelorette-party women wear skimpy dresses."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Champagne is served in first class, Tim mentions trying a Long Island iced tea, and Boss Baby drinks special formula to keep his status."
+        }
+      },
+      "handoffNotes": [
+        "Sibling insecurity and the beheaded stuffed-animal gag may need tone-sensitive context."
+      ],
+      "confidence": "high"
+    }
+  ]
+}
