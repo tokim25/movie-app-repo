@@ -1,0 +1,384 @@
+{
+  "researchBatch": "csm-content-flags-claude-next39c-group2-2026-09-08",
+  "researchedAt": "2026-09-08",
+  "researcher": "Claude",
+  "purpose": "Part of the next-39-titles-c candidate titles, group 2 of 4, live CSM research, nums 1021-1030.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This research preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 1021,
+      "file": "data-extra.js",
+      "title": "A Series of Unfortunate Events",
+      "year": "2004",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/lemony-snickets-a-series-of-unfortunate-events",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Peril, tension, and mostly off-screen violence with some graphic images, including an adult striking a child, assaults, murders, and an apparent suicide."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Some very crude language is voiced by a baby character (\"shmuck,\" \"bite me\")."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A forced marriage plot targets a 14-year-old, predatory in intent though motivated by her inheritance rather than sexual content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "The three Baudelaire children are orphaned when their parents die in a house fire at the film's opening, and they face ongoing mistreatment and peril from Count Olaf throughout; this grief and loss theme may need gentle prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1022,
+      "file": "data-extra.js",
+      "title": "Spy Kids 2: The Island of Lost Dreams",
+      "year": "2002",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/spy-kids-2-the-island-of-lost-dreams",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Peril and action-style violence occur throughout, but no one is actually hurt."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild language includes one almost-four-letter word."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 1023,
+      "file": "data-extra.js",
+      "title": "Spy Kids 3-D: Game Over",
+      "year": "2003",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/spy-kids-3-d-game-over",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Nonstop cartoon action features giant robots, molten lava rocks, evil toy troops, explosions, light-saber-style attacks, and crashes that may frighten younger viewers."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Minimal profanity is limited to mild name-calling such as \"freak\" and \"wimp.\""
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 1024,
+      "file": "data-extra.js",
+      "title": "Addams Family Values",
+      "year": "1993",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/addams-family-values",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Violence is played for macabre humor: many attempted killings (several involving an infant), electrocution, an explosion and fire set during a camp play, gunshots, knife throwing, an attempted beheading, and serial-killer trading cards."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes \"damn,\" \"God\" as an exclamation, and rude phrases like \"eat me.\""
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A voluptuous villain has explicit sexual designs on Uncle Fester, with seduction and discussions of virginity; a magazine shows scantily clad women, and there are discussions of sex and a child's sex-education reference."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cigarette and cigar smoking and vodka and champagne drinking appear, including a cocktail mixed for a baby as a dark joke."
+        }
+      },
+      "handoffNotes": [
+        "Dark, comedic treatment of death and a serial-killer antagonist run throughout the film's macabre humor; the tone is played for laughs but may need prose context for sensitive viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1025,
+      "file": "data-extra.js",
+      "title": "High School Musical 3: Senior Year",
+      "year": "2008",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/high-school-musical-3-senior-year",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "The only concerning moment is a father-son argument that reaches near-yelling levels; otherwise no violence is flagged."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "\"Butt\" represents the strongest language used in the film."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild flirting, lots of handholding, and one sweet kiss, along with a fair number of scenes with shirtless high school boys."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 1026,
+      "file": "data-extra.js",
+      "title": "The Chronicles of Narnia: Prince Caspian",
+      "year": "2008",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-chronicles-of-narnia-prince-caspian",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Lots of swordfights and battles, some brutal, including stabbing, archery, and one prolonged close-up duel; multiple character deaths occur, though little gore is shown beyond the odd cut."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild profanity includes occasional phrases like \"shut up\" and \"idiot.\""
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "Some mild flirting and a single tender kiss at the end; no sexual content or nudity appears."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Wartime character deaths, deceit, betrayal, and a scary appearance by the White Witch occur throughout; this may need prose context for sensitive younger viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1027,
+      "file": "data-extra.js",
+      "title": "The Chronicles of Narnia: The Voyage of the Dawn Treader",
+      "year": "2010",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-chronicles-of-narnia-the-voyage-of-the-dawn-treader",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Fantasy battles with swords and arrows, a giant sea serpent, and scenes of people being sacrificed; characters appear dead but are actually in a deep sleep, and the White Witch appears only in a character's mind."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "British insults such as \"sod,\" \"what the blazes,\" \"bleedin',\" and \"thick,\" plus occasional \"crap,\" \"shut up,\" and \"idiot.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One brief scene shows a couple flirting and embracing; a star manifests as a beautiful woman who captivates two male characters, and a girl wishes she were as beautiful as her older sister."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "A girl watches her mother taken away on a boat, presumably never to be seen again (though this ultimately resolves positively), and the broader quest involves lords who were \"dispatched\" and never heard from again; this separation/loss theme may need gentle prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1028,
+      "file": "data-extra.js",
+      "title": "Scooby-Doo",
+      "year": "2002",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/scooby-doo",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Lots of toothsome, scary faces, zombies, and evil men in charge of teens on an island; lizard monsters and zombies chase the gang and possess characters' bodies."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild profanity includes \"beeatch,\" \"booty,\" crude expressions, and a French pickup-line reference."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A body-swap scenario carries suggestive humor, characters wear short skirts and tight tops, Fred is portrayed as a womanizer, and there is a kiss scene between Fred and Daphne."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Marijuana references appear through song choice and character behavior (including Shaggy's love interest named \"Mary Jane\" with suggestive dialogue), and Velma is shown drinking alcohol at a bar."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 1029,
+      "file": "data-extra.js",
+      "title": "Scooby-Doo 2: Monsters Unleashed",
+      "year": "2004",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/scooby-doo-2-monsters-unleashed",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Comic peril that may be too intense for younger viewers: ghoulish-looking ghosts and monsters, car chases, a monster harpooning the Mystery Machine, and a bad guy hitting Fred in the groin with a dart."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild profanity: \"crap,\" \"sucks.\""
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Kissing occurs, and Velma changes her look with Daphne's help (including a skintight purple outfit) to impress her love interest."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Shaggy smells marijuana in one scene, and there is beer drinking in a bar."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 1030,
+      "file": "data-extra.js",
+      "title": "How the Grinch Stole Christmas",
+      "year": "2000",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/how-the-grinch-stole-christmas",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Constant cartoonish action includes fires (one started by a flamethrower), explosions, falls, wild rides, and crashes with no serious injuries; the Grinch's menacing contortions and cackling put a child repeatedly in danger."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Profanity includes \"hell\" and \"bitchin',\" plus a threat to \"hunt them down and gut them like a fish\"; crude humor includes the Grinch exposing himself."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A married couple shares an exaggerated kiss, the Grinch falls into a woman's cleavage and strips to reveal fur with a garter belt, mistletoe is placed over his buttocks, and a character is forced to kiss a dog's rear end."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The Grinch drinks from a bottle marked \"XXX\" and subsequently acts intoxicated."
+        }
+      },
+      "handoffNotes": [
+        "The Grinch's backstory of childhood bullying and cruelty underlies his isolation and misanthropy; this may warrant light prose context though CSM does not detail an explicit death/loss scene."
+      ],
+      "confidence": "high"
+    }
+  ]
+}

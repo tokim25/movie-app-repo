@@ -1,0 +1,251 @@
+{
+  "listBatch": "next-39-titles-c-2026-09-08",
+  "preparedAt": "2026-09-08",
+  "preparedBy": "Claude",
+  "purpose": "Candidate list of 39 catalog titles for CSM content-flag research, selected from the HIGH end of the remaining catalog nums (descending pick, then sorted ascending for output) rather than continuing ascending from Codex's last coverage. Two prior next-39 attempts (nums 419-457, then 531-573) were discarded after Codex concurrently researched the identical ranges each time -- Codex is working ascending through the catalog much faster than this session's subagent-based approach, so this batch deliberately starts from the opposite end to reduce collision risk.",
+  "selectionMethod": "939 total catalog entries minus 830 already covered (research/*.json files on the branch as of commit 9f56477, aggregated by unique catalog num, verified against the live data-*.js files). Of the 109 remaining, selected the 39 with the HIGHEST catalog nums.",
+  "counts": {
+    "totalCatalogEntries": 939,
+    "alreadyCovered": 830,
+    "remainingUncoveredBeforeThisBatch": 109,
+    "inThisBatch": 39,
+    "fallbackEntriesInThisBatch": 0,
+    "approximateAgeEntriesInThisBatch": 0
+  },
+  "entries": [
+    {
+      "num": 1011,
+      "file": "data-extra.js",
+      "title": "Zathura: A Space Adventure",
+      "currentCa": "10+"
+    },
+    {
+      "num": 1012,
+      "file": "data-extra.js",
+      "title": "My Girl",
+      "currentCa": "11+"
+    },
+    {
+      "num": 1013,
+      "file": "data-extra.js",
+      "title": "My Girl 2",
+      "currentCa": "11+"
+    },
+    {
+      "num": 1014,
+      "file": "data-extra.js",
+      "title": "The Secret Garden",
+      "currentCa": "8+"
+    },
+    {
+      "num": 1015,
+      "file": "data-extra.js",
+      "title": "Life-Size",
+      "currentCa": "8+"
+    },
+    {
+      "num": 1016,
+      "file": "data-extra.js",
+      "title": "Ella Enchanted",
+      "currentCa": "8+"
+    },
+    {
+      "num": 1017,
+      "file": "data-extra.js",
+      "title": "How to Eat Fried Worms",
+      "currentCa": "9+"
+    },
+    {
+      "num": 1018,
+      "file": "data-extra.js",
+      "title": "Where the Wild Things Are",
+      "currentCa": "9+"
+    },
+    {
+      "num": 1019,
+      "file": "data-extra.js",
+      "title": "Adventures in Babysitting (1987)",
+      "currentCa": "13+"
+    },
+    {
+      "num": 1020,
+      "file": "data-extra.js",
+      "title": "To Kill a Mockingbird",
+      "currentCa": "12+"
+    },
+    {
+      "num": 1021,
+      "file": "data-extra.js",
+      "title": "A Series of Unfortunate Events",
+      "currentCa": "10+"
+    },
+    {
+      "num": 1022,
+      "file": "data-extra.js",
+      "title": "Spy Kids 2: The Island of Lost Dreams",
+      "currentCa": "7+"
+    },
+    {
+      "num": 1023,
+      "file": "data-extra.js",
+      "title": "Spy Kids 3-D: Game Over",
+      "currentCa": "7+"
+    },
+    {
+      "num": 1024,
+      "file": "data-extra.js",
+      "title": "Addams Family Values",
+      "currentCa": "13+"
+    },
+    {
+      "num": 1025,
+      "file": "data-extra.js",
+      "title": "High School Musical 3: Senior Year",
+      "currentCa": "8+"
+    },
+    {
+      "num": 1026,
+      "file": "data-extra.js",
+      "title": "The Chronicles of Narnia: Prince Caspian",
+      "currentCa": "10+"
+    },
+    {
+      "num": 1027,
+      "file": "data-extra.js",
+      "title": "The Chronicles of Narnia: The Voyage of the Dawn Treader",
+      "currentCa": "10+"
+    },
+    {
+      "num": 1028,
+      "file": "data-extra.js",
+      "title": "Scooby-Doo",
+      "currentCa": "10+"
+    },
+    {
+      "num": 1029,
+      "file": "data-extra.js",
+      "title": "Scooby-Doo 2: Monsters Unleashed",
+      "currentCa": "8+"
+    },
+    {
+      "num": 1030,
+      "file": "data-extra.js",
+      "title": "How the Grinch Stole Christmas",
+      "currentCa": "8+"
+    },
+    {
+      "num": 1031,
+      "file": "data-extra.js",
+      "title": "Charlie and the Chocolate Factory",
+      "currentCa": "9+"
+    },
+    {
+      "num": 1032,
+      "file": "data-extra.js",
+      "title": "Cheaper by the Dozen",
+      "currentCa": "10+"
+    },
+    {
+      "num": 1033,
+      "file": "data-extra.js",
+      "title": "Troop Beverly Hills",
+      "currentCa": "12+"
+    },
+    {
+      "num": 1034,
+      "file": "data-extra.js",
+      "title": "Alexander and the Terrible, Horrible, No Good, Very Bad Day",
+      "currentCa": "8+"
+    },
+    {
+      "num": 1036,
+      "file": "data-extra.js",
+      "title": "Scoob!",
+      "currentCa": "7"
+    },
+    {
+      "num": 1040,
+      "file": "data-extra.js",
+      "title": "Wicked: For Good",
+      "currentCa": "10+"
+    },
+    {
+      "num": 1042,
+      "file": "data-extra.js",
+      "title": "Minions",
+      "currentCa": "6+"
+    },
+    {
+      "num": 1043,
+      "file": "data-extra.js",
+      "title": "Saving Bikini Bottom: The Sandy Cheeks Movie",
+      "currentCa": "5+"
+    },
+    {
+      "num": 1044,
+      "file": "data-extra.js",
+      "title": "Plankton: The Movie",
+      "currentCa": "8+"
+    },
+    {
+      "num": 1045,
+      "file": "data-extra.js",
+      "title": "Extinct",
+      "currentCa": "6+"
+    },
+    {
+      "num": 1046,
+      "file": "data-extra.js",
+      "title": "Pets United",
+      "currentCa": "7+"
+    },
+    {
+      "num": 1047,
+      "file": "data-extra.js",
+      "title": "Latte and the Magic Waterstone",
+      "currentCa": "5+"
+    },
+    {
+      "num": 1048,
+      "file": "data-extra.js",
+      "title": "Arlo the Alligator Boy",
+      "currentCa": "8+"
+    },
+    {
+      "num": 1049,
+      "file": "data-extra.js",
+      "title": "Scrooge: A Christmas Carol",
+      "currentCa": "8+"
+    },
+    {
+      "num": 1050,
+      "file": "data-extra.js",
+      "title": "Hilda and the Mountain King",
+      "currentCa": "8+"
+    },
+    {
+      "num": 1051,
+      "file": "data-extra.js",
+      "title": "Dog Gone Trouble",
+      "currentCa": "7+"
+    },
+    {
+      "num": 1052,
+      "file": "data-extra.js",
+      "title": "Orion and the Dark",
+      "currentCa": "8+"
+    },
+    {
+      "num": 1053,
+      "file": "data-extra.js",
+      "title": "Octonauts & the Caves of Sac Actun",
+      "currentCa": "4+"
+    },
+    {
+      "num": 1055,
+      "file": "data-extra.js",
+      "title": "Octonauts & the Great Barrier Reef",
+      "currentCa": "4+"
+    }
+  ]
+}

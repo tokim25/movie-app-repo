@@ -1,0 +1,356 @@
+{
+  "researchBatch": "csm-content-flags-claude-next39c-group4-2026-09-08",
+  "researchedAt": "2026-09-08",
+  "researcher": "Claude",
+  "purpose": "Part of the next-39-titles-c candidate titles, group 4 of 4, live CSM research, nums 1046-1055.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 1046,
+      "file": "data-extra.js",
+      "title": "Pets United",
+      "year": "2020",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/pets-united",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Frequent animated action violence includes chases, fights, predatory animals, robot heads detaching, car and train crashes, throwing knives, a scrap-metal crusher that nearly kills a sympathetic robot and some pets, and a giant robotic spider crushing small animals with its claws."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "References to \"Devil,\" \"Hell,\" \"Poo,\" and \"Fart,\" plus taunts like \"loser,\" \"stupid,\" \"freak,\" \"scum,\" \"wimp,\" \"bootlicker,\" and \"buffoon.\""
+        },
+        "romance": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "Only limited, mild flirting is depicted; CSM does not flag meaningful sexual or romantic content."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Robots serve beverages from a cocktail shaker during a party scene."
+        }
+      },
+      "handoffNotes": [
+        "Exaggerated European-accented character voices and a character obsessed with cosmetic procedures (lip enhancements, nose jobs, waxing) may warrant a stereotype/self-image sensitivity note, though this is not one of the four scored flags."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1047,
+      "file": "data-extra.js",
+      "title": "Latte and the Magic Waterstone",
+      "year": "2019",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/latte-and-the-magic-waterstone",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Characters are in danger several times from predator animals and from falling down cliffs or out of trees, some nighttime scenes have mildly scary music and sounds, and a few fights involve slapping and shoving."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Some name-calling and taunting includes \"stupid,\" \"weirdo,\" \"freaks,\" \"pighead,\" and \"tattlebutt.\""
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Latte and Tjum eat berries given to them by a mysterious figure and immediately fall asleep, suggesting magical or drug-like properties, though the situation resolves safely."
+        }
+      },
+      "handoffNotes": [
+        "The story includes sad moments involving an orphan character coping with loss; parents of sensitive kids may want gentle prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1048,
+      "file": "data-extra.js",
+      "title": "Arlo the Alligator Boy",
+      "year": "2021",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/arlo-the-alligator-boy",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A large ferocious animal called the \"beast\" is seen mostly as an ominous shadow with glowing eyes, sharp teeth, and a frightening roar; the film also includes chase sequences, fights, near-captures, and one character stabbed with a pitchfork."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild words appear, including \"heck,\" \"suckers,\" \"fart,\" and \"freak.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A couple snuggles in a car, and a character tells two others to \"get a room.\""
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A sugar high follows a candy-store crash, tobacco spit appears, and one character is shown drinking liquor at a home bar."
+        }
+      },
+      "handoffNotes": [
+        "Arlo was abandoned as a baby and raised by an adoptive mother before searching for his birth father; the film's core themes of family separation, belonging, and found family may need gentle prose context.",
+        "The portrayal of two Southern-coded locals trying to capture Arlo, plus stereotyping of wealthy characters, may warrant a sensitivity note outside the four scored flags."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1049,
+      "file": "data-extra.js",
+      "title": "Scrooge: A Christmas Carol",
+      "year": "2022",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/scrooge-a-christmas-carol",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Ghost scenes could be scary for younger viewers, including eerie whispers, jangling chains, characters with fire for eyes, shape-shifting, lightning, and a jaw coming disjointed."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Some name-calling appears, including \"rat bag,\" \"clumsy lump,\" \"buffoon,\" \"loathsome old carcass,\" and \"old miser.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A kiss on the lips, mild flirtation and dancing, and love songs appear."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Wine is mentioned and wine glasses appear at a dinner table."
+        }
+      },
+      "handoffNotes": [
+        "Death is a central, recurring theme: Marley's ghost, graveyard and coffin imagery, and the future vision of Scrooge's own death and Tiny Tim's fate may need gentle grief/mortality prose context for younger or sensitive viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1050,
+      "file": "data-extra.js",
+      "title": "Hilda and the Mountain King",
+      "year": "2021",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/hilda-and-the-mountain-king",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Lots of eerie music, dark locations, scary monster sounds, and characters showing fear; large-scale property destruction from trolls throwing boulders occurs but no one is seriously hurt, and one human is scratched by a troll without a serious wound."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "There is a brief mention of the fantasy drink \"troll mead,\" described as powerful stuff that keeps you running for days."
+        }
+      },
+      "handoffNotes": [
+        "Hilda is magically body-swapped with a troll and separated from her mother, who is left worried and eventually loses her memory of Hilda under the mountain king's spell; this separation/identity-loss theme may need gentle prose context for younger viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1051,
+      "file": "data-extra.js",
+      "title": "Dog Gone Trouble",
+      "year": "2019",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/dog-gone-trouble",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Trouble falls from a moving truck and tumbles downhill, has threatening encounters with squirrels, growls at other dogs in animated skirmishes, and is pursued by an animal tracker seen once with a gun; nothing results in serious injury."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Lots of bodily-function humor and a wordplay joke confusing \"shedhouse\" with a cruder term, plus insults like \"stupid,\" \"dumb,\" \"idiot,\" \"mutt,\" \"pip-squeak,\" \"punk,\" and \"slimeball.\""
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Squirrels make suggestive references to their \"nuts,\" a small dog engages in humping behavior, and the animal tracker makes an innuendo about \"dominance.\""
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Trouble's beloved owner dies at the start of the film, which is what sets his ordeal in motion; younger kids may find this sad, so gentle grief/loss prose context is warranted."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1052,
+      "file": "data-extra.js",
+      "title": "Orion and the Dark",
+      "year": "2024",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/orion-and-the-dark",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Murderous clowns, physical threats, falling from buildings, bullying, and repeated near-fatal scenarios (people seemingly smothered or hit to be put to sleep, individuals sucked into vortexes) appear throughout the anxious child's sketchbook fantasies."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Includes \"hell,\" \"heck,\" \"butt,\" \"jerk,\" \"stupid,\" \"idiot,\" \"cuckoo,\" \"wacko,\" and \"infernal.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Characters experience crushes and adults show affection."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Orion is an 11-year-old with paralyzing anxiety, and his imagined fears (public humiliation, rejection, bullying, near-death scenarios) are depicted vividly; sensitive or anxious kids may need gentle prose context even though no death/grief occurs on screen."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1053,
+      "file": "data-extra.js",
+      "title": "Octonauts & the Caves of Sac Actun",
+      "year": "2020",
+      "currentCatalogCa": "4+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/octonauts-the-caves-of-sac-actun",
+      "csmAge": "4+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Characters are chased by predators including a shark and crocodiles, a helicopter crash forces a parachute escape, and oxygen supplies run dangerously low underwater in dark caves; no lasting damage occurs and outcomes are always positive."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM flags that Indigenous Yucatán characters are portrayed as unintelligent villains and voiced by a White actor using an inauthentic comedic accent; this is a sensitivity/representation concern worth surfacing even though it falls outside the four scored flags."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1055,
+      "file": "data-extra.js",
+      "title": "Octonauts & the Great Barrier Reef",
+      "year": "2020",
+      "currentCatalogCa": "4+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/octonauts-the-great-barrier-reef",
+      "csmAge": "4+",
+      "researchBasis": "live CSM refetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "Crown-of-thorns starfish pose an ecological threat to reef residents that could be scary to sensitive viewers, but the story concludes positively for all characters and CSM does not rate this as a meaningful violence concern."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    }
+  ]
+}

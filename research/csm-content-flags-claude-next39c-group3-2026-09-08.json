@@ -1,0 +1,388 @@
+{
+  "researchBatch": "csm-content-flags-claude-next39c-group3-2026-09-08",
+  "researchedAt": "2026-09-08",
+  "researcher": "Claude",
+  "purpose": "Research-only handoff for nums 1031-1045 (group 3 of 4) in the next-39-titles-c candidate batch. Built from live Common Sense Media fetches of each title's review page.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This research preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 1031,
+      "file": "data-extra.js",
+      "title": "Charlie and the Chocolate Factory",
+      "year": "2005",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/charlie-and-the-chocolate-factory-2005",
+      "csmAge": "8+",
+      "researchBasis": "live CSM fetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Misbehaving children face physical and emotional punishment: one girl inflates into a giant blueberry, another is sucked into a tube, and a third is attacked and pinned by squirrels before being dropped down a garbage chute. An early scene shows dolls catching fire with their eyeballs popping out, and Willy Wonka has mildly scary flashbacks involving his dentist father and disturbing orthodontic headgear."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Minimal profanity, with at least one use of \"hell.\""
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Willy Wonka's flashbacks reveal an estranged, controlling relationship with his father that separated them for years; may need gentle prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1032,
+      "file": "data-extra.js",
+      "title": "Cheaper by the Dozen",
+      "year": "2003",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/cheaper-by-the-dozen",
+      "csmAge": "10+",
+      "researchBasis": "live CSM fetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Frequent slapstick injuries include falls from ladders and a chandelier (resulting only in grazes), physical sibling fights, vomiting scenes, and an on-screen vasectomy procedure."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Uses of \"damn\" and \"God\" as exclamations, plus name-calling like \"idiot,\" \"moron,\" \"jerk,\" \"loser,\" \"wiener,\" and \"doorknob.\""
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "References to a vasectomy shown on the operating table, suggestive dialogue, passionate kissing between the parents, and a subplot about an adult daughter living with her boyfriend and questions about sleeping arrangements during a family visit."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults drink what looks like champagne at a birthday party."
+        }
+      },
+      "handoffNotes": [
+        "The family's pet dies off-screen and receives an on-screen funeral, and a parent's sister's death is referenced; both may need gentle prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1033,
+      "file": "data-extra.js",
+      "title": "Troop Beverly Hills",
+      "year": "1989",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/troop-beverly-hills",
+      "csmAge": "12+",
+      "researchBasis": "live CSM fetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Farcical pratfalls include the scout leader falling off a window ledge and teetering on an unsafe bridge, plus mild animal encounters and mildly frightening ghost stories told by the girls."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Occasional swearing includes \"damn,\" \"slut,\" \"bitches,\" \"hell,\" \"s--t,\" and \"screw,\" plus suggestive dialogue referencing \"boffing\" and cosmetic surgery."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Comic innuendo includes mentions of breast implants, an elderly man eagerly grabbing a \"girly\" magazine, observations about an adult's overnight guest, and mildly suggestive remarks exchanged between a police officer and the troop leader during a CPR scene."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "The troop leader smokes frequently using a cigarette holder and drinks wine in numerous scenes, often joined by other adults."
+        }
+      },
+      "handoffNotes": [
+        "The main character's marriage is falling apart and divorce is a running theme; may need gentle prose context for the separation storyline."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1034,
+      "file": "data-extra.js",
+      "title": "Alexander and the Terrible, Horrible, No Good, Very Bad Day",
+      "year": "2014",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/alexander-and-the-terrible-horrible-no-good-very-bad-day",
+      "csmAge": "9+",
+      "researchBasis": "live CSM fetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A few loud pratfalls involving kids and adults, a car accident during a driving test with screaming, fire incidents (papers/posters and the dad's shirt sleeves), an escaped kangaroo that kicks the father in the chest, and an alligator that snaps at him."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild language throughout, including \"butt,\" \"crap,\" \"idiot,\" \"pee,\" \"shut up,\" \"OMG,\" \"sucks,\" \"boobs,\" and \"penis,\" plus adults using incomplete profanities like \"oh sh...\" without finishing the word."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A teen wants his license to \"make out with his girlfriend\" and compliments her appearance; parents mistakenly hire male strippers for a birthday party; there's one chaste kiss, a baby's exposed bottom, and a scene where a mother sees her teen son naked in the bathroom with nothing shown."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A 13-year-old girl drinks cough medicine directly from the bottle while sick, becomes intoxicated on stage, and eventually vomits; the father drinks at a restaurant and accidentally sets his shirt sleeves on fire."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 1036,
+      "file": "data-extra.js",
+      "title": "Scoob!",
+      "year": "2020",
+      "currentCatalogCa": "7",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/scoob",
+      "csmAge": "7+",
+      "researchBasis": "live CSM fetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A phantom pursues the young Scooby group early on, shape-shifting robots appear menacing with laser beams, claws, and teeth, a massive luminous Cerberus intimidates and tries to consume the team, and multiple chase sequences with Dick Dastardly and aircraft occur."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Insult-based language predominates, including \"moron,\" \"pinheads,\" \"imbecile,\" and \"stupid,\" plus minor expletives like \"dang,\" wordplay referencing profanity (\"falcon around\"), and scatological humor involving pterodactyl waste."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Remarks suggesting physical attraction (\"she was pretty hot\"), a scene where an officer's hair movement and minor exposed cleavage briefly stun a character, and a joke referencing Tinder as a firewood delivery app."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Two emotionally challenging moments occur where a lost friend seems unrescuable and a team member seems permanently separated from the group (both resolve positively); may need gentle prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1040,
+      "file": "data-extra.js",
+      "title": "Wicked: For Good",
+      "year": "2025",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/wicked-for-good",
+      "csmAge": "11+",
+      "researchBasis": "live CSM fetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A character contemplates suicide as surrender and a major character's death occurs (not shown directly). Flying monkeys return as menacing figures, stylized pistol threats appear multiple times, one character is briefly shown tied up and beaten, and fantasy violence includes spells that permanently alter humans, a magically-created cyclone causing a house to fall on someone, mob aggression toward \"the witch,\" and burned effigies. Animals face imprisonment, rough treatment, and fear for their lives."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Sparing use of words like \"witch,\" \"traitor,\" \"crazy,\" \"hate,\" and \"shut up,\" along with euphemisms such as \"shiz\" and \"oh my Oz.\""
+        },
+        "romance": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Several kisses, including a few passionate ones, occur throughout. During the song \"As Long as You're Mine,\" an implied sex scene shows characters removing outer garments (a robe over a lacy undergarment, a partially unbuttoned shirt), kissing and caressing before the camera cuts away; afterward the man is shirtless and the woman is shown in a crocheted robe revealing some skin and bare shoulders."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Two characters drink a mysterious \"green elixir\"; one offers a small bottle of it to someone, saying it \"dulls the pain.\""
+        }
+      },
+      "handoffNotes": [
+        "A major character's death and a character's contemplation of suicide as surrender both occur; the story also involves close friends being permanently separated. This needs explicit, gentle prose context for younger viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1042,
+      "file": "data-extra.js",
+      "title": "Minions",
+      "year": "2015",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/minions",
+      "csmAge": "6+",
+      "researchBasis": "live CSM fetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Explosions, freeze guns, torture devices, and scenes of various \"villains\" dying in mostly humorous ways (a T. rex falling in lava, a military general shot at, a yeti killed by an ice block) along with several perilous/near-death moments, Minions tied to dynamite, paint guns used against police, and a destroyed water tower."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Infrequent insults: \"idiot,\" \"screwed it up,\" \"freaks,\" and \"loser.\""
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Glimpses of bare or thong-wearing Minion bottoms, three Tower of London guards hypnotized to strip to their boxers and dance, plus innuendo involving Minions near fire hydrants, lost swimwear scenes, bottom-squeezing, chest-oriented attention toward a character disguised as a woman, and two villains flirting and cuddling."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 1043,
+      "file": "data-extra.js",
+      "title": "Saving Bikini Bottom: The Sandy Cheeks Movie",
+      "year": "2024",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/saving-bikini-bottom-the-sandy-cheeks-movie",
+      "csmAge": "6+",
+      "researchBasis": "live CSM fetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoon action includes slapstick that causes no real injury, like a clamshell closing on a sea creature's leg. Live-action sequences include a disembodied human head and a disturbing image of multiple SpongeBobs sewn together into one giant patchwork of living flesh. Characters are chased by animals and attacked by snakes, though peril is offset with humor and isn't genuinely frightening."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Minimal language: one use of \"butt,\" jokes about passing gas, silly menacing remarks from the villain, and minor insults (Mr. Krabs calls Patrick a \"pointy pink eraser head\")."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 1044,
+      "file": "data-extra.js",
+      "title": "Plankton: The Movie",
+      "year": "2025",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/plankton-the-movie",
+      "csmAge": "8+",
+      "researchBasis": "live CSM fetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Lots of threats, attacks, and destruction, but animated and meant to be funny: property destruction, fires, explosions, cannon launches, and a giant robot with magnetic powers threatening characters and beachgoers."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Multiple insults throughout, including \"moron,\" \"BS,\" \"idiot,\" and \"stupid,\" plus a song featuring self-directed name-calling as the character acknowledges poor behavior."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The main character and his robot wife share several kisses and reflect on their romantic history."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "The plot centers on marital conflict and a character confronting selfish behavior through therapy and hypnosis; the relationship-strain/separation storyline may need light prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1045,
+      "file": "data-extra.js",
+      "title": "Extinct",
+      "year": "2021",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/extinct",
+      "csmAge": "6+",
+      "researchBasis": "live CSM fetch by subagent",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A fair amount of slapstick cartoon violence, with creatures injuring themselves (like flying directly into a wall) with no lasting consequences. A villain attempts to eliminate the species entirely, a mystical flashback shows the whole species dying in a volcanic eruption with creatures shown in flames, a spear is thrown, and a driver admits to hitting a pedestrian."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One instance of the word \"booby\" used as a joke about a bird species, plus characters called \"weird\" and a \"fruit loop.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One innuendo-led joke where a character giggles hearing another refer to a bird as a \"booby.\""
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "An explorer pulls out and drinks from a hip flask upon witnessing something shocking."
+        }
+      },
+      "handoffNotes": [
+        "The film centers on species extinction: the flummels' entire family/species is shown dying in a volcanic eruption via a mystical flashback, and this drives the plot. This meaningful loss/death theme needs gentle prose context for younger viewers."
+      ],
+      "confidence": "high"
+    }
+  ]
+}

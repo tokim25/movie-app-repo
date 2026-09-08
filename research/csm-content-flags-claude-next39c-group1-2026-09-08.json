@@ -1,0 +1,393 @@
+{
+  "researchBatch": "csm-content-flags-claude-next39c-group1-2026-09-08",
+  "researchedAt": "2026-09-08",
+  "researcher": "Claude",
+  "purpose": "Part of the next-39-titles-c candidate titles, group 1 of 4, live CSM research, nums 1011-1020.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 1011,
+      "file": "data-extra.js",
+      "title": "Zathura: A Space Adventure",
+      "year": "2005",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/zathura-a-space-adventure",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Spaceships fire guns and futuristic missiles, menacing lizard-like aliens attack, a crazed robot attacks the boys, and meteors and space weapons blow up the house/spaceship amid frequent explosions and sibling fighting, including a teen sister punching her younger brother."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Minor language includes kids saying \"d--k,\" \"screwed,\" \"ass,\" and \"bee-yatch,\" plus a \"time sphincter\" joke and an incomplete sexual insinuation from a teen girl."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A teenaged sister wears a tight top for a night out and develops a crush on a character who turns out to be her younger brother, making a suggestive remark upon the discovery."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "The boys' parents are recently divorced and the father works overtime because of the split household; this family-separation backdrop may need gentle prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1012,
+      "file": "data-extra.js",
+      "title": "My Girl",
+      "year": "1991",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/my-girl",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's violence category is not present in the visible sense, though a main character dies offscreen from bee stings."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "The film includes the \"s\" word and \"ass,\" and one character calls her friend a \"retard.\""
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Obscure references to sex and the sexual revolution appear in dialogue."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM lists no meaningful drinking or smoking content, apart from a brief reference to lighting a joint."
+        }
+      },
+      "handoffNotes": [
+        "Death is the movie's central theme: Vada's mother died giving birth to her (never depicted, only alluded to), and a main character (Thomas) dies tragically and unexpectedly from bee stings offscreen partway through. This sudden loss is likely to have a real emotional impact and needs gentle, clear prose context for grieving or anxious young readers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1013,
+      "file": "data-extra.js",
+      "title": "My Girl 2",
+      "year": "1994",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/my-girl-2",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful violence concern for this sequel."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild swearing occurs from both adults and kids."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A 13-year-old muses that sex is always \"a special circumstance,\" a teen boy discusses a pinup model, and two 13-year-olds share a romantic kiss."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A pot-smoking hippie character is seen and discussed by two teenage characters."
+        }
+      },
+      "handoffNotes": [
+        "Grief and loss carry through the sequel: Vada lost her mother in infancy and, more recently, her best friend Thomas; her father is an undertaker, and the plot centers on Vada investigating her deceased mother's life story. This is a heavy, ongoing grief theme that needs sensitive prose context.",
+        "Minor unsupervised risk-taking (two teens sneaking out at night, a girl getting her ears pierced without permission) may also be worth a brief prose note."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1014,
+      "file": "data-extra.js",
+      "title": "The Secret Garden",
+      "year": "1993",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-secret-garden",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by researcher (verified against catalog srcUrl and year to confirm the 1993 Agnieszka Holland version, not the 2020 remake)",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Colin is often ill, or thinks he is, and obsesses over death; Mary survives an earthquake that kills her parents; Medlock slaps Martha in the face; and Mary endures shunning and mild name-calling."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "The film centrally addresses death and grief: Mary's parents die in an earthquake before the story begins (a fact revealed early on), her uncle remains devastated by his late wife's death and stays emotionally withdrawn/isolated, and her cousin Colin is preoccupied with his own mortality due to chronic illness. This is a core, extended grief theme that needs gentle prose context for young readers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1015,
+      "file": "data-extra.js",
+      "title": "Life-Size",
+      "year": "2000",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/life-size",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A girl falls in front of a moving truck and is roughly pushed down on the football field; the story also involves a mother/wife who has passed away and is missed."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild words like \"wiener,\" \"quack,\" \"wreck,\" \"stupid,\" and \"Oh my God\" appear."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Men and women flirt, do a sexy dance, and come close to kissing, plus an off-color joke about a judge's \"briefs never being the same again.\""
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults drink \"punch\" at a party."
+        }
+      },
+      "handoffNotes": [
+        "The film centers on a girl grieving her mother's death, with her father also coping through work avoidance; the magically-animated doll helps both work through their grief. This maternal-loss theme needs gentle prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1016,
+      "file": "data-extra.js",
+      "title": "Ella Enchanted",
+      "year": "2004",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/ella-enchanted",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mostly cartoonish violence includes an ogre threatening to eat/cook Ella, swordplay, and knife use, a crotch hit in a slapstick fight, and a couple of genuinely frightening scenes, including Ella appearing to threaten stabbing the prince while under a curse's influence."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "No profanity is used; minimal crude language includes a child saying \"bite me\" and a reference to a \"cute butt.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Romantic interest and kissing occur between Ella and Prince Char, stepsisters pursue the prince, and an elf character is the subject of suggestive humor."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Guests drink martinis at a party, a fairy character slurs her words and falls off a stool after getting tipsy (played for laughs, including a reference to \"flying while intoxicated\" with sobriety testing)."
+        }
+      },
+      "handoffNotes": [
+        "Ella's mother becomes ill and dies, and her father later remarries, creating an emotional separation; this loss needs gentle prose context.",
+        "Ella is magically compelled by her curse to obey orders, including being ordered to shoplift, which could be confusing without context distinguishing compulsion from choice."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1017,
+      "file": "data-extra.js",
+      "title": "How to Eat Fried Worms",
+      "year": "2006",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/how-to-eat-fried-worms",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "Refreshingly free of slapstick violence; the only \"threat\" is students' fear of a fictional \"death ring\" schoolyard myth that supposedly kills its wearer upon reaching 8th grade."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Lots of snot and worm jokes, crude potty humor, pet names for male anatomy, and other mild profanities."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "Only mild romantic scenes and body-part jokes (a character's nickname for his private parts, a \"sphincter\" reference) appear; CSM does not flag meaningful sexual content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM notes only that the dad drinks wine after a hard day at work."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 1018,
+      "file": "data-extra.js",
+      "title": "Where the Wild Things Are",
+      "year": "2009",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/where-the-wild-things-are",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Wild Things smash and burn things and repeatedly threaten to eat Max; there's an intense dirt-clod battle with injuries, rambunctious scenes of trees knocked down and falls, Max's own destructive tantrums early on, and a scary struggle in water during the boat journey, all set against an overall dark, moody tone."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Occasional mild language includes \"damn,\" \"hell,\" \"stupid,\" and \"God\" used as an exclamation."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Max's mother has a boyfriend; they drink wine and kiss briefly, and other Wild Thing couples are shown bickering and being protective of one another."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A brief scene shows Max's mother and her boyfriend drinking wine before dinner."
+        }
+      },
+      "handoffNotes": [
+        "The film centers on Max's anxiety around parental separation, loneliness, and fear of familial rejection/abandonment (echoed by the Wild Things' own fear of being left or eaten by one another). This is a significant emotional-separation theme, distinct from literal death, that needs gentle prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 1019,
+      "file": "data-extra.js",
+      "title": "Adventures in Babysitting (1987)",
+      "year": "1987",
+      "currentCatalogCa": "13+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/adventures-in-babysitting",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Peril from misunderstandings, a homeless encounter, reckless driving, gunshots, a car-theft ring capture, a child clinging to a skyscraper exterior, punching, a knife injury to a toe (one stitch), and a gun revelation."
+        },
+        "language": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Strong profanity includes \"f--k,\" \"s--t,\" \"a--hole,\" \"homo,\" \"idiot,\" \"bitch,\" \"scum sucker,\" \"penis,\" \"goddamn,\" and \"Jesus.\""
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Features a college-age man dating a 17-year-old girl (with a crude complaint about her not being sexually available), an open-pants scene, Playboy references, an encounter with a prostitute, kissing scenes, and sexual innuendo throughout."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Adults drink cocktails at a party, and college students drink alcohol and play drinking games at a frat party."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 1020,
+      "file": "data-extra.js",
+      "title": "To Kill a Mockingbird",
+      "year": "1962",
+      "currentCatalogCa": "12+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/to-kill-a-mockingbird",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by researcher",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Physical confrontations, an off-screen attack that leaves a child with a broken arm, a detailed courtroom discussion of the rape of a young woman with implied abuse (and possibly incest) by her father, a threatening mob outside the jail, and the shooting of a rabid dog."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "The \"N\" word is used as a weapon by the lead villain, and young Scout also uses it after hearing it at school, prompting her father to explain why she should never use it; other outdated/offensive terms also appear."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM's Sex, Romance & Nudity category is not flagged separately; the rape/incest content is instead discussed within the violence category."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Cigarette smoking appears, and the antagonist is often depicted as intoxicated."
+        }
+      },
+      "handoffNotes": [
+        "Scout questions her brother about their deceased mother, a quiet but real thread of parental loss that may need gentle prose context.",
+        "The racial slur usage (including a child repeating it before being corrected) and the detailed courtroom rape/incest discussion are historically important to the story but need careful, deliberate prose handling given the app's young audience."
+      ],
+      "confidence": "high"
+    }
+  ]
+}
