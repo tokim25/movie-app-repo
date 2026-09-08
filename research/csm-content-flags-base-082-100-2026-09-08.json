@@ -1,0 +1,746 @@
+{
+  "researchBatch": "csm-content-flags-base-082-100-2026-09-08",
+  "researchedAt": "2026-09-08",
+  "researcher": "Codex",
+  "purpose": "Research-only handoff for nums 82-100 in data.js / MOVIES_BASE, excluding nonexistent num 81. Built from live Common Sense Media refetches of catalog srcUrl pages. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 82,
+      "file": "data.js",
+      "title": "Girl Rising",
+      "year": "2013",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/girl-rising",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Girls discuss rape, a father's death, bonded child labor, and systemic prejudice, without graphic reenactment."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The documentary discusses brothels, poverty-driven sexual exploitation, and child-bride harm in frank but educational terms."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One girl says the adult who raped her first offered her alcohol."
+        }
+      },
+      "handoffNotes": [
+        "Current CSM age is 12+, higher than the catalog ca of 11+.",
+        "Sexual violence and child exploitation need careful downstream prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 83,
+      "file": "data.js",
+      "title": "Chasing Coral",
+      "year": "2017",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/chasing-coral",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a violence or scariness concern."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Only a couple of mild profanities are noted."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Current CSM age is 9+, lower than the catalog ca of 10+."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 84,
+      "file": "data.js",
+      "title": "He Named Me Malala",
+      "year": "2015",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/he-named-me-malala",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "The attack on Malala is not shown directly, but the film includes bloody aftermath imagery, surgery preparation, bruises, scars, armored vehicles, armed Taliban footage, execution aftermath, explosions, and threats including beheading talk."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM detail text only mentions Malala's parents' romance and Malala admiring handsome athletes."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Current CSM age is 12+, higher than the catalog ca of 10+.",
+        "Romance is rated not present while CSM detail text mentions mild family-romance context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 85,
+      "file": "data.js",
+      "title": "Science Fair",
+      "year": "2018",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/science-fair",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "CSM notes potentially disturbing documentary footage of babies and children with Zika-related microcephaly."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a language concern."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "There are references to flirting and kissing at science-fair parties."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 86,
+      "file": "data.js",
+      "title": "My Octopus Teacher",
+      "year": "2020",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/my-octopus-teacher",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Predators repeatedly threaten the octopus, underwater chases show fish and other prey eaten, the octopus loses an arm, and the creature's full life cycle may upset sensitive viewers."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One mild profanity is noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Two octopi mate and produce eggs."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Natural predation and life-cycle death are the main sensitivity points."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 87,
+      "file": "data.js",
+      "title": "Night of the Zoopocalypse",
+      "year": "2025",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/night-of-the-zoopocalypse",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A frightening wolf chase opens the movie, a meteor virus turns zoo animals into glowing-eyed zombie-like creatures, tranquilizer darts are used, zombie chases recur, one character tries to bite another before being punched, and children cry during zoo chaos."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Insults include mild put-downs about intelligence, courage, and usefulness."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Despite zombie scares, CSM notes that no animals seem to die."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 88,
+      "file": "data.js",
+      "title": "Back to the Future",
+      "year": "1985",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/back-to-the-future",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Violence includes automatic weapon fire and an apparent fatal shooting, tense car and skateboard chases, shotgun threats, clock-tower peril, school punching, bullying, implied off-camera sexual assault, and a boy spying on a girl undressing."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Occasional profanity includes mild-to-moderate swears, religious exclamations, and period racial terms."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Teen crushes, flirting, kisses, embraces, a girl undressing to bra and underwear, and the time-travel premise involving Marty's future mother having a crush on him are central concerns."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Underage teens briefly try whiskey and a cigarette, adults drink beer and vodka, a drunk man sleeps on a bench, and reefer is referenced."
+        }
+      },
+      "handoffNotes": [
+        "Implied sexual assault and racial language need careful prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 89,
+      "file": "data.js",
+      "title": "School of Rock",
+      "year": "2003",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/school-of-rock",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A stage dive ends in a face-first fall, an overbearing parent yells at a child, and a joking line about touching kids is misunderstood by adults."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Occasional profanity includes several mild-to-moderate words, rude terms, and one silently mouthed stronger insult."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Sex-related jokes include a student looking up groupie and finding a derogatory definition, a kid saying rock is for scoring chicks, and a man calling a woman hot."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Concert and bar scenes show beer and cigarettes, an adult acts a little drunk, and adults mention being hung over, getting wasted, and drunken singing."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 90,
+      "file": "data.js",
+      "title": "The Karate Kid",
+      "year": "1984",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-karate-kid",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Teen bullying and fights lead to blood, bruises, split lips, illegal tournament attacks, a nosebleed, and a forced kiss that the girl rejects by punching the teen."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Language includes frequent mild-to-moderate profanity and insults."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Teens flirt, date, embrace, kiss, and make out; shirtless male teens appear in nonsexual contexts."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A high schooler rolls a marijuana joint, and an adult becomes visibly drunk while coping with grief."
+        }
+      },
+      "handoffNotes": [
+        "Forced kiss and substance use should be preserved in downstream text."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 91,
+      "file": "data.js",
+      "title": "The Kid Who Would Be King",
+      "year": "2019",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-kid-who-would-be-king",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Fantasy action includes scary Morgana forms, fiery-eyed mounted enemies, home invasion, skeleton warriors, evil trees, chases, big battles, fire breathing, school destruction, homemade weapons, apocalyptic visions, bullying, construction-site injury, and Alex briefly pointing a sword at his mother."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild profanity, religious exclamations, fantasy stand-ins, and insults appear."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Young Merlin briefly appears naked with his bottom blurred; CSM notes no romance."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The story mentions a father who used to drink to anger or excess."
+        }
+      },
+      "handoffNotes": [
+        "Current CSM age is 10+, higher than the catalog ca of 9+."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 92,
+      "file": "data.js",
+      "title": "Holes",
+      "year": "2003",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/holes",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Violence includes arrests, guns and pistol threats at camp, kid fights, attempted strangling, a car theft crash, racist mob arson, animal killing, lynching, suicide by poisonous lizard bite, murder with visible casketed bodies, and unwanted kissing or date pressure."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes mild profanity, insults, and rude name-calling."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A kid describes a bikini fantasy, a woman wears a midriff-baring outfit, adults kiss, and boys are seen showering in underwear or shirtless in nonsexual contexts."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adults smoke cigarettes or a pipe, a sheriff drinks and admits he is drunk, and a child references his mother's drinking."
+        }
+      },
+      "handoffNotes": [
+        "Racist violence, lynching, suicide, and coerced kissing/dating require explicit context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 93,
+      "file": "data.js",
+      "title": "Hidden Figures",
+      "year": "2016",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/hidden-figures",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "CSM notes arguments and yelling."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild profanity and religious exclamations appear, along with segregation-era terms used on restrooms, libraries, and workplace objects."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "There are a couple of kisses, some slow dancing, and brief comments about people being handsome or fine."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults drink in one scene and joke about getting a little tipsy."
+        }
+      },
+      "handoffNotes": [
+        "Segregation-era language appears in historical context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 94,
+      "file": "data.js",
+      "title": "Little Women",
+      "year": "2019",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/little-women-2019",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "The sisters help a sick family, Beth becomes gravely ill and later dies, Amy falls through ice and is rescued, Amy is struck by a teacher, Mr. March returns injured from war, and Jo grabs Amy after Amy burns her papers."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Aunt March makes a harsh comparison between acting and prostitution, and mild insults are used."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A few kisses, longing looks, two proposals, and a party dress designed to emphasize cleavage appear."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Meg and other young women drink champagne, Jo visits an ale house, Laurie drinks heavily in Europe, and minor characters smoke."
+        }
+      },
+      "handoffNotes": [
+        "Beth's illness/death and Laurie's drinking arc may need context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 95,
+      "file": "data.js",
+      "title": "Mixtape",
+      "year": "2021",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/mixtape",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Middle school bullying, Bev's parents' fatal car crash, sibling fighting with a groin kick, a forced-apology punch through a car window, mace and switchblade talk, a scary cemetery visit, and unsafe no-seatbelt travel are noted."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Language includes mild profanity, many schoolyard taunts, body words, and bathroom terms."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Teen pregnancy is referenced through a 'babies having babies' line, tween girls discuss periods and tampons, and a photo shows a couple kissing."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A sober character has AA materials, and the girls visit a bar where people are drinking."
+        }
+      },
+      "handoffNotes": [
+        "Parental death and sobriety/AA context should be preserved."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 96,
+      "file": "data.js",
+      "title": "Ride Like a Girl",
+      "year": "2020",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/ride-like-a-girl",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A parent has died before the story, another character dies in a horse fall, Michelle repeatedly falls and recovers from brain damage, her broken-bone history is noted, and one sequence shows dangerous weight-loss behavior."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Infrequent but stronger language includes a few uses of s-word, one hell, one moron, and a blunt family-directed insult."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A man makes an indecent workplace proposal using a riding innuendo, and a newly married couple kisses sweetly."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults drink wine at meals and toast at gatherings, without intoxication."
+        }
+      },
+      "handoffNotes": [
+        "Horse-racing injury, brain damage recovery, and weight-loss behavior need context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 97,
+      "file": "data.js",
+      "title": "Rainbow (Dhanak)",
+      "year": "2016",
+      "currentCatalogCa": "~8+ (approximate)",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/rainbow-dhanak",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A character is pushed and has clothes stolen, a movie-within-the-film has brief action, children are drugged and faint, a rifle is pointed at someone, and dead parents are referenced."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Language includes repeated insults, mild profanity, and God as an exclamation."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Background hookah smoking appears, someone drinks, and children are given drug-infused sweets that make them faint."
+        }
+      },
+      "handoffNotes": [
+        "Current CSM age is 10+, higher than the catalog's approximate ca.",
+        "Drugged sweets given to children should be preserved in downstream prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 98,
+      "file": "data.js",
+      "title": "Wonder",
+      "year": "2017",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/wonder",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Tween fights are brief but intense, Auggie is verbally and physically bullied, one character says he would kill himself if he looked like Auggie, and a family pet's death brings sadness."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Infrequent insults, appearance-based cruelty, bathroom jokes, and mild rude words appear."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Teens kiss, an adult married couple kisses, and there is mild innuendo around an unspecified risque gift."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A divorcing woman drinks heavily and may pass out, her teen daughter finishes one glass, adults drink wine at dinner, and one adult suggests getting drunk."
+        }
+      },
+      "handoffNotes": [
+        "Suicidal comparison line, bullying, and heavy adult drinking need careful context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 99,
+      "file": "data.js",
+      "title": "The Personal History of David Copperfield",
+      "year": "2020",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-personal-history-of-david-copperfield",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Mostly comic but notable violence includes implied child beating, suicidal talk with a razor, drowning with a body on shore, a donkey incident, a bloody fight, a child's head repeatedly hit against a sign, grief-fueled destruction, a hand trapped in a vise, slaps, and a punch."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "No profanity is flagged, but cruel language is used."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Two characters briefly kiss on the lips."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Characters regularly drink beer and wine, one character appears to have a drinking problem, friends get drunk on wine, and one character holds a pipe."
+        }
+      },
+      "handoffNotes": [
+        "Suicidal talk, child abuse implication, drowning, and alcohol misuse need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 100,
+      "file": "data.js",
+      "title": "The Water Man",
+      "year": "2021",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-water-man",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A mother is seriously ill, Gunner is disturbed by seeing her frail body, a girl pins a boy down, the animated Water Man tale involves a wife's drowning, bugs swarm the kids, Gunner nearly falls into rapids, and the Water Man looks creepy."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Occasional mild profanity and insults appear, plus a race-based comment implying a White father objects to his daughter having a Black friend."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Gunner finds his mother's prescription morphine."
+        }
+      },
+      "handoffNotes": [
+        "Current CSM age is 10+, higher than the catalog ca of 9+.",
+        "Parental illness, prescription morphine, and race-based comment should be preserved."
+      ],
+      "confidence": "high"
+    }
+  ]
+}

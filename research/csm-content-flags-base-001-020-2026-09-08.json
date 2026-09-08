@@ -1,0 +1,940 @@
+{
+  "researchBatch": "csm-content-flags-base-001-020-2026-09-08",
+  "researchedAt": "2026-09-08",
+  "researcher": "Codex",
+  "purpose": "Research-only live CSM refetch for the previously missed data.js / MOVIES_BASE base-list slice: nums 1-20. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "sourceRange": {
+    "files": [
+      "data.js"
+    ],
+    "catalogScope": "MOVIES_BASE",
+    "nums": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "entryCount": 20
+  },
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 1,
+      "file": "data.js",
+      "catalogScope": "MOVIES_BASE",
+      "title": "My Neighbor Totoro",
+      "year": "1988",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/my-neighbor-totoro",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "Covers previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Gentle supernatural scenes include soot sprites, a roaring Totoro, a child getting lost, and a brief fear that someone may have drowned."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No meaningful language concerns are surfaced."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A family bath scene has nonsexual partial nudity."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No drinking, drug, or smoking concerns are surfaced."
+        }
+      },
+      "handoffNotes": [
+        "Mother's illness and a missing-child scare may need gentle emotional-context prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 2,
+      "file": "data.js",
+      "catalogScope": "MOVIES_BASE",
+      "title": "Finding Nemo",
+      "year": "2003",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/finding-nemo",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "Covers previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "The story includes sharp-toothed sea creatures, repeated peril, and an early apparent family death."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No meaningful language concerns are surfaced."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No romance or nudity concerns are surfaced for the feature."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No drinking, drug, or smoking concerns are surfaced; an adult recovery-group-style shark joke is not presented as a product-use flag."
+        }
+      },
+      "handoffNotes": [
+        "Catalog age differs from current CSM age: catalog 6+, CSM 5+."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 3,
+      "file": "data.js",
+      "catalogScope": "MOVIES_BASE",
+      "title": "A Bug's Life",
+      "year": "1998",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/a-bugs-life",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "Covers previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Cartoon peril includes bullying grasshoppers, scary bugs and birds, capture, falls, fire, rain, and one villain death."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild insults and a few body-function or light profanity words appear."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No romance or nudity concerns are surfaced."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No drinking, drug, or smoking concerns are surfaced."
+        }
+      },
+      "handoffNotes": [
+        "Catalog age differs from current CSM age: catalog 6+, CSM 5+."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 4,
+      "file": "data.js",
+      "catalogScope": "MOVIES_BASE",
+      "title": "Toy Story",
+      "year": "1995",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/toy-story",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "Covers previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Toys face rough play, a dog chase, broken parts, Sid's destructive experiments, and tense toy-on-toy conflict, all without lasting injury."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A few mild insults and one light profanity term are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Toy flirting and a mild suggestive gag appear briefly."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A parent is shown asleep near beer cans."
+        }
+      },
+      "handoffNotes": [
+        "Catalog age differs from current CSM age: catalog 6+, CSM 5+."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 5,
+      "file": "data.js",
+      "catalogScope": "MOVIES_BASE",
+      "title": "Paddington",
+      "year": "2014",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/paddington",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "Covers previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Peril includes a hunter with a rifle, an earthquake death implication, kidnapping, tranquilizer use, taxidermy threats, a river drop, roof danger, an explosion, and slapstick accidents."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild insults and rude phrases appear."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Brief flirting, a teen boyfriend, kissing between married adults, and one nonexplicit nudity joke are noted."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A security guard drinks rum shots until drunk, and Paddington is hit with a tranquilizer dart."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 6,
+      "file": "data.js",
+      "catalogScope": "MOVIES_BASE",
+      "title": "Charlotte's Web",
+      "year": "2006",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/charlottes-web-2006",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "Covers previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild barnyard peril includes slapstick, crows chasing a rat, a rotten egg gag, repeated references to Wilbur possibly becoming food, and a peaceful death."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Very mild insults and one mild exclamation are noted."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "Charlotte has babies, but no sexual detail is presented."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No drinking, drug, or smoking concerns are surfaced."
+        }
+      },
+      "handoffNotes": [
+        "Charlotte's death and Wilbur's food-animal stakes may need emotional-context prose beyond the four flags."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 7,
+      "file": "data.js",
+      "catalogScope": "MOVIES_BASE",
+      "title": "Shaun the Sheep Movie",
+      "year": "2015",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/shaun-the-sheep-movie",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "Covers previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mostly comic danger includes an animal-control villain, cages and collars, a scary grabbing tool, quarry peril, and a tense surgery-table gag."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "There is no spoken dialogue, but some burp, fart, and poop humor is noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Brief comic flirtation and a mostly hidden nude-photo gag appear."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No drinking, drug, or smoking concerns are surfaced."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 8,
+      "file": "data.js",
+      "catalogScope": "MOVIES_BASE",
+      "title": "The Good Dinosaur",
+      "year": "2015",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-good-dinosaur",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "Covers previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "The film has a parent's flood death, separation from family, predatory dinosaurs and birds, storms, floods, hunting, fighting, a stampede, and a brief animal-kill gag."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "The surfaced label is unflagged, though details mention mild substitute words and one almost-stronger unfinished expression."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No romance or nudity concerns are surfaced."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Characters eat fermented fruit and become intoxicated, hallucinate, and recover afterward."
+        }
+      },
+      "handoffNotes": [
+        "Catalog age differs from current CSM age: catalog 8+, CSM 7+.",
+        "CSM labels/details conflict for language: label says not present, but detail text lists mild substitute words.",
+        "Parent death and sustained separation may need emotional-context prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 9,
+      "file": "data.js",
+      "catalogScope": "MOVIES_BASE",
+      "title": "Ponyo",
+      "year": "2008",
+      "currentCatalogCa": "5+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/ponyo",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "Covers previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Storm and tsunami peril, a tense car trip, uncertainty about parents' safety, and large fish-like waves may worry younger viewers."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Very mild name-calling and a brusque Morse-code insult are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Ponyo's parents embrace, and the children share hugs, a cheek kiss, and simple talk about love."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A mother drinks a beer-like beverage after disappointment, then later sleeps from exhaustion or possible tipsiness."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 10,
+      "file": "data.js",
+      "catalogScope": "MOVIES_BASE",
+      "title": "Inside Out",
+      "year": "2015",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/inside-out",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "Covers previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Emotional and fantasy peril includes a scary clown, crumbling memory islands, a train crash, the dark memory dump, Riley running away, family conflict, and Bing Bong's disappearance."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild insults, rude words, and a bleeped implied stronger word are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Brief jokes include a parent's memory of an attractive ex and an imaginary boyfriend's melodramatic devotion."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No drinking, drug, or smoking concerns are surfaced."
+        }
+      },
+      "handoffNotes": [
+        "Bing Bong's sacrifice and Riley's sadness/runaway sequence may need emotional-context prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 11,
+      "file": "data.js",
+      "catalogScope": "MOVIES_BASE",
+      "title": "Encanto",
+      "year": "2021",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/encanto",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "Covers previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Backstory violence includes armed men killing the grandfather offscreen; later scenes show the magical house and mountain cracking, cliff peril, and the family home collapsing."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Only a mild insult about being perfect is noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Married affection, kisses, embraces, dancing, and wedding flashbacks appear."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A child drinks coffee, and the family makes an unspecified toast."
+        }
+      },
+      "handoffNotes": [
+        "Displacement, family pressure, and grandfather's death may need emotional-context prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 12,
+      "file": "data.js",
+      "catalogScope": "MOVIES_BASE",
+      "title": "Luca",
+      "year": "2021",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/luca",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "Covers previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild danger includes rule-breaking, running away, cliff jumps, bike crashes, a spear thrown at the boys, bullying, slapstick hits, and a brief visible-organ gag."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild insults, rude put-downs, light Italian profanity, and substitute swearing appear."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No romance or nudity concerns are surfaced."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No drinking, drug, or smoking concerns are surfaced."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 13,
+      "file": "data.js",
+      "catalogScope": "MOVIES_BASE",
+      "title": "Zootopia",
+      "year": "2016",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/zootopia",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "Covers previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Mystery peril includes savage predators, a frightening jaguar chase, caged-animal scares, train fights and crashes, mobster threats, dart guns, bullying, and intimidation."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Frequent mild insults and rude words are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Brief suggestive material includes a pop star's revealing stage styling and a nudist-club sequence."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No drinking, drug, or smoking concerns are surfaced."
+        }
+      },
+      "handoffNotes": [
+        "Prejudice/bias themes may need context prose beyond the four product flags."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 14,
+      "file": "data.js",
+      "catalogScope": "MOVIES_BASE",
+      "title": "How to Train Your Dragon",
+      "year": "2010",
+      "currentCatalogCa": "7+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/how-to-train-your-dragon",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "Covers previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Dragon attacks destroy homes, minor characters die, a central character is maimed, teens train in combat with dragons, and a giant dragon battle is intense but largely bloodless."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A few insults, one anatomy joke, and one mild profanity term are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Teen crush talk and brief cheek and mouth kisses appear."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mugs appear in a bar-like setting."
+        }
+      },
+      "handoffNotes": [
+        "Catalog age differs from current CSM age: catalog 7+, CSM 6+."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 15,
+      "file": "data.js",
+      "catalogScope": "MOVIES_BASE",
+      "title": "Over the Moon",
+      "year": "2020",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/over-the-moon",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "Covers previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "The plot centers on a mother's death and grief, with fantasy peril from a homemade rocket, space travel, meteors, cliff-like leaps, a near explosion, and a sadness realm."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild insults and bathroom words are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Family affection, remarriage themes, a moon goddess's longing for her lost love, and tight performance outfits appear."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No drinking, drug, or smoking concerns are surfaced; an immortality potion is fantasy plot material rather than substance use."
+        }
+      },
+      "handoffNotes": [
+        "Bereavement and remarriage grief are central and likely need emotional-context prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 16,
+      "file": "data.js",
+      "catalogScope": "MOVIES_BASE",
+      "title": "March of the Penguins",
+      "year": "2005",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/march-of-the-penguins",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "Covers previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Nature-documentary danger includes predator attacks, egg loss, harsh survival conditions, and penguin deaths."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No language concerns are surfaced."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Penguin mating is part of the documentary subject."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No drinking, drug, or smoking concerns are surfaced."
+        }
+      },
+      "handoffNotes": [
+        "Animal death and harsh survival may need context prose for sensitive kids."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 17,
+      "file": "data.js",
+      "catalogScope": "MOVIES_BASE",
+      "title": "March of the Penguins 2: The Next Step",
+      "year": "2017",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/march-of-the-penguins-2-the-next-step",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "Covers previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Birds of prey attack young penguins, creating brief nature-documentary peril."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No language concerns are surfaced."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No romance or nudity concerns are surfaced."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No drinking, drug, or smoking concerns are surfaced."
+        }
+      },
+      "handoffNotes": [
+        "Predator scenes involving young animals may need brief emotional-context prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 18,
+      "file": "data.js",
+      "catalogScope": "MOVIES_BASE",
+      "title": "The LEGO Movie",
+      "year": "2014",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-lego-movie",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "Covers previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Brick-based action includes gunfire, explosions, beheading gags, erasing with nail-polish remover, super-glue threats, capture, and a mind-probe torture gag."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Light insults and mild substitute swearing appear."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Emmet has a crush on Wyldstyle, who is dating Batman, with brief gazes and hand-holding."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "No drinking, drug, or smoking concerns are surfaced; coffee jokes are not treated as substance-use content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 19,
+      "file": "data.js",
+      "catalogScope": "MOVIES_BASE",
+      "title": "Mary Poppins",
+      "year": "1964",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/mary-poppins",
+      "csmAge": "5+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "Covers previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild peril and slapstick include loud cannon fire, animated roughhousing, a river suicide concern, kids running off, shadowy city encounters, rooftop jumps, and a comic death from laughing."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild insults, old-fashioned exclamations, and dated racial terms are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Brief affection includes a married kiss, Bert and Mary flirting and holding hands, and an animated cheek kiss."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Sherry, pipe smoking, cigar and cigarette use, and medicine compared to rum punch are noted."
+        }
+      },
+      "handoffNotes": [
+        "Catalog age differs from current CSM age: catalog 6+, CSM 5+.",
+        "Dated racial language may need separate context prose."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 20,
+      "file": "data.js",
+      "catalogScope": "MOVIES_BASE",
+      "title": "Mary Poppins Returns",
+      "year": "2018",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/mary-poppins-returns",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "Covers previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild peril includes a dead mother in the backstory, animated kidnapping and chase danger, children falling from a bowl edge, Jack dangling from Big Ben, a greedy adult threatening children, family yelling, and cannon fire."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild insults and old-fashioned British exclamations are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A vaudeville-style number has mild innuendo and hip-thrust dancing, and Jack and Jane flirt."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "The surfaced label is unflagged, though detail text includes a passing joke about someone being drunk."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels/details conflict for drinking: label says not present, but details mention a brief drunkenness joke.",
+        "The dead-mother backstory and family grief may need emotional-context prose."
+      ],
+      "confidence": "high"
+    }
+  ],
+  "handoffSummary": {
+    "availableCount": 20,
+    "unavailableCount": 0,
+    "unavailableNums": [],
+    "catalogAgeMismatches": [
+      {
+        "num": 2,
+        "title": "Finding Nemo",
+        "catalogCa": "6+",
+        "csmAge": "5+"
+      },
+      {
+        "num": 3,
+        "title": "A Bug's Life",
+        "catalogCa": "6+",
+        "csmAge": "5+"
+      },
+      {
+        "num": 4,
+        "title": "Toy Story",
+        "catalogCa": "6+",
+        "csmAge": "5+"
+      },
+      {
+        "num": 8,
+        "title": "The Good Dinosaur",
+        "catalogCa": "8+",
+        "csmAge": "7+"
+      },
+      {
+        "num": 14,
+        "title": "How to Train Your Dragon",
+        "catalogCa": "7+",
+        "csmAge": "6+"
+      },
+      {
+        "num": 19,
+        "title": "Mary Poppins",
+        "catalogCa": "6+",
+        "csmAge": "5+"
+      }
+    ],
+    "labelDetailConflicts": [
+      {
+        "num": 8,
+        "title": "The Good Dinosaur",
+        "field": "language",
+        "note": "CSM label is not present, but details mention mild substitute words and one almost-stronger unfinished expression."
+      },
+      {
+        "num": 20,
+        "title": "Mary Poppins Returns",
+        "field": "drinking",
+        "note": "CSM label is not present, but details mention a passing drunkenness joke."
+      }
+    ],
+    "emotionalContentNotes": [
+      {
+        "num": 1,
+        "title": "My Neighbor Totoro",
+        "note": "Mother's illness and a missing-child scare may need prose beyond the flags."
+      },
+      {
+        "num": 6,
+        "title": "Charlotte's Web",
+        "note": "Charlotte's death and Wilbur's food-animal stakes may need prose beyond the flags."
+      },
+      {
+        "num": 8,
+        "title": "The Good Dinosaur",
+        "note": "Parent death and sustained separation may need prose beyond the flags."
+      },
+      {
+        "num": 10,
+        "title": "Inside Out",
+        "note": "Bing Bong's sacrifice and Riley's sadness/runaway sequence may need prose beyond the flags."
+      },
+      {
+        "num": 11,
+        "title": "Encanto",
+        "note": "Displacement, family pressure, and grandfather's death may need prose beyond the flags."
+      },
+      {
+        "num": 15,
+        "title": "Over the Moon",
+        "note": "Bereavement and remarriage grief are central and likely need prose beyond the flags."
+      },
+      {
+        "num": 16,
+        "title": "March of the Penguins",
+        "note": "Animal death and harsh survival may need prose beyond the flags."
+      },
+      {
+        "num": 17,
+        "title": "March of the Penguins 2: The Next Step",
+        "note": "Predator scenes involving young animals may need prose beyond the flags."
+      },
+      {
+        "num": 19,
+        "title": "Mary Poppins",
+        "note": "Dated racial language may need separate context prose."
+      },
+      {
+        "num": 20,
+        "title": "Mary Poppins Returns",
+        "note": "The dead-mother backstory and family grief may need prose beyond the flags."
+      }
+    ],
+    "notes": [
+      "All 20 requested data.js / MOVIES_BASE nums were refetched from live Common Sense Media pages using the catalog srcUrl values.",
+      "No production catalog or app files were edited."
+    ]
+  }
+}

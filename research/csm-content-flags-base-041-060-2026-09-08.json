@@ -1,0 +1,868 @@
+{
+  "researchBatch": "csm-content-flags-base-041-060-2026-09-08",
+  "researchedAt": "2026-09-08",
+  "researcher": "Codex",
+  "purpose": "Research-only handoff for previously missed nums 41-60 in data.js / MOVIES_BASE. Built from live Common Sense Media refetches of catalog srcUrl pages, except num 42 where the catalog used a non-CSM source and a targeted CSM lookup found the real review. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "implementationNote": "This artifact covers the previously missed data.js / MOVIES_BASE scope.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 41,
+      "file": "data.js",
+      "title": "Mighty Joe Young",
+      "year": "1998",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/mighty-joe-young-1998",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A poacher kills Joe's mother and Jill's mother in the opening, Joe injures a bystander and kills an attacker, and a child is rescued from a burning Ferris wheel."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM age is 7+ while the current catalog age is 8+.",
+        "Opening parental deaths and burning Ferris wheel rescue may need emotional prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 42,
+      "file": "data.js",
+      "title": "Peter Pan (Broadway Musical)",
+      "year": "2000",
+      "currentCatalogCa": "Not on CSM; substitute source used",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/peter-pan-2000",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Staged adventure violence includes battles among pirates, Native Americans, and children, child capture, Peter being wounded, and Hook throwing himself to a crocodile."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 2,
+          "summary": "CSM labels language not present but notes repeated use of a phrase that includes ass in an older donkey-related sense."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Catalog used a non-CSM source; targeted lookup found the CSM Peter Pan (2000) movie review.",
+        "Dated Native American stereotypes and Wendy's gendered caregiving role may need prose context.",
+        "CSM labels Language as not present while the detail text mentions repeated older-context ass wording."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 43,
+      "file": "data.js",
+      "title": "Strike",
+      "year": "2020",
+      "currentCatalogCa": "~6+ (approximate)",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/strike",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A parent dies in a mine explosion, villains use a gun, kidnapping, restraints, swords, dangerous machinery, construction-vehicle chases, slapstick hits, and cartoon electrocution."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild insults and a mild negative-use word are used."
+        },
+        "romance": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Suggestive material includes a woman using body language to manipulate a bureaucrat, lovestruck behavior, a bare-butt gag, kisses, and a soccer-ball double entendre."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A villain has escalating cocktail-like drinks as a sight gag during a tense soccer game."
+        }
+      },
+      "handoffNotes": [
+        "CSM age is 7+ while the current catalog age is approximate ~6+.",
+        "Parent death in a mine explosion and suggestive manipulation scene may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 44,
+      "file": "data.js",
+      "title": "The Princess Diaries",
+      "year": "2001",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-princess-diaries",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Comic pratfalls and a harmless car crash are the main violence notes."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Popular girls verbally bully the lead with mild name-calling."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Teen kissing is noted."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adults drink at dinner, and one older diplomat acts drunk."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 45,
+      "file": "data.js",
+      "title": "Yes Day",
+      "year": "2021",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/yes-day",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Comic chaos includes dictator-comparison imagery, a water-balloon battle, bathroom distress, a tree fall, bird attack, haphazard ambulance driving, a toy fight, a foam-filled party, and a teen lost at a festival."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild insults, potty words, and a religious exclamation are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Romance and body humor include younger girls being set up with older boys, married-couple kisses, and twerking demonstrations."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Young people appear intoxicated at a music festival."
+        }
+      },
+      "handoffNotes": [
+        "Teen lost at a festival and young people appearing intoxicated may need light prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 46,
+      "file": "data.js",
+      "title": "Ron's Gone Wrong",
+      "year": "2021",
+      "currentCatalogCa": "9+ (approximate)",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/rons-gone-wrong",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild comic peril includes animal slapstick, possible chicken death, goat destruction, bullying, escaping security, and Ron threatened with destruction."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild profanity, insults, potty jokes, bathroom teasing, and one middle-school meme about being pooped on are noted."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "There is a vodka reference and an adult sparkling-wine celebration."
+        }
+      },
+      "handoffNotes": [
+        "CSM age is 8+ while the current catalog age is approximate 9+.",
+        "Bullying and Ron's threatened destruction may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 47,
+      "file": "data.js",
+      "title": "The Bad Guys",
+      "year": "2022",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-bad-guys",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoon action includes car hits, animals eating other animals, fights, martial-arts self-defense, explosions, a car crash, and brief peril played comedically."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild vulgar words and one mild profanity appear."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Two characters show light attraction through dancing and very mild flirting."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Party scenes include champagne or martini-style glasses, though one similar drink is identified as tonic water."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 48,
+      "file": "data.js",
+      "title": "Raya and the Last Dragon",
+      "year": "2021",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/raya-and-the-last-dragon",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Fantasy action includes plague-like monsters turning people and dragons to stone, self-sacrifice, parentless children, an arrow strike, blade combat, capture escapes, dangerous chases, skeleton imagery, large-cat mounts, and an axe-wielding warrior."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "There are mild insults and a coined term that sounds close to stronger profanity."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Mass petrification, self-sacrifice, parental loss, and presumed death may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 49,
+      "file": "data.js",
+      "title": "Soul",
+      "year": "2020",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/soul",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Joe falls down a manhole, his body appears dead or dying, he is hospitalized, and body-swapping physical comedy follows."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "One mild profanity and several harsh self-worth or insult phrases are used."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Apparent death and existential/self-worth dialogue may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 50,
+      "file": "data.js",
+      "title": "Abominable",
+      "year": "2019",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/abominable",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Peril includes a seeming mountain fall death, tranquilizer guns, chaining and caging Everest, child capture, mountain falls, city and landmark chases, slapstick falls, and a parent's death being discussed."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 2,
+          "summary": "CSM labels language not present but notes burp jokes and smell-based teasing."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "There are mentions of Jin's girlfriends, girls flirting with him, and lingering teen looks."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Language as not present while the detail text mentions gross-out/name-calling material.",
+        "Parent death and apparent mountain death may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 51,
+      "file": "data.js",
+      "title": "Wish Dragon",
+      "year": "2021",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/wish-dragon",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Animated action includes fights, falls, traffic peril, river plunges, deaths and revivals, rooftop and car chases, injuries, dead-chicken humor, a lonely death flashback, and toilet-water gross-out."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild profanity, exclamations, shut-up language, insults, and a religious exclamation are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A woman flirts with and kisses the dragon in human disguise after a tail/hip gag; Din and Li Na hold hands."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Adults drink wine and champagne at a party, and Din's mother suspects drinking or drug use when he behaves strangely."
+        }
+      },
+      "handoffNotes": [
+        "Deaths and revivals, lonely death backstory, and dead-chicken humor may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 52,
+      "file": "data.js",
+      "title": "Spies in Disguise",
+      "year": "2019",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/spies-in-disguise",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Spy action includes weapons, shootings, capture, knockouts, life-or-death stakes, a villain planning to kill agents, physical comedy, and an off-screen parent death with emotional impact."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A repeated mild insult targets Walter."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Lovey aggressively flirts with Lance in pigeon form, and nonsexual nudity/body gags include a visible backside and shrinking-into-a-bird panic."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Gangsters are shown drinking."
+        }
+      },
+      "handoffNotes": [
+        "Off-screen parent death and kill-all-agents threat may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 53,
+      "file": "data.js",
+      "title": "The Mitchells vs. the Machines",
+      "year": "2021",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-mitchells-vs-the-machines",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Robot-apocalypse action includes armed robots capturing humans, pods, robots impaled or dismantled, blood-like robot spatter, explosions, falls, fire, crashes, attacking appliances, fake-out death, humiliation of a CEO, traps, dog-eating jokes, animal experimentation, and vomiting."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild insults, body-part language, a religious exclamation, and one dog-body joke are noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Married adults hug, Katie has an off-screen dating/crush subplot, and family members are briefly covered while naked in a flashback."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Apocalyptic family peril, fake-out death, and pet-eating joke may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 54,
+      "file": "data.js",
+      "title": "Wolfwalkers",
+      "year": "2020",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/wolfwalkers",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Peril includes wolves chased by hunters, arrests, a climactic wolf-guard battle, a violent death, crossbows and a cannon, an apparently dead falcon, a wolf bite that heals, fear for a missing mother, bullying with wooden swords and a cage, near-deaths, injuries, and yelling."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A few mild insults and a religious exclamation appear."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Violent death, mother-loss fear, bullying with confinement, and human-wolf conflict may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 55,
+      "file": "data.js",
+      "title": "The Sea Beast",
+      "year": "2022",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-sea-beast",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Sea-monster action includes attacks with teeth, tentacles, and pincers, monsters trying to swallow people, hunters using spears, cannons, and poison, a child seriously injured, brief blood, sword fights, a gun pointed at a child, drowning close calls, and orphan backstory."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild profanity and religious exclamations are used, including a weapon name with God in it."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Monster hunters share flasks on the ship, and tavern scenes include beer mugs."
+        }
+      },
+      "handoffNotes": [
+        "Gun pointed at a child, serious child injury, orphan backstory, and drowning danger may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 56,
+      "file": "data.js",
+      "title": "The One and Only Ivan",
+      "year": "2020",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-one-and-only-ivan",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Ivan recalls being separated from his gorilla family, with poachers shooting his father off camera and other gorillas presumed killed; Stella later dies peacefully from illness and exhaustion."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 2,
+          "summary": "CSM labels language not present but notes a harsh comment about humans and a dog fart joke."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful sex, romance, or nudity concern."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Language as not present while the detail text mentions a harsh comment and fart joke.",
+        "Animal family separation, poaching, and Stella's death need emotional prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 57,
+      "file": "data.js",
+      "title": "Flora & Ulysses",
+      "year": "2021",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/flora-ulysses",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Squirrel mayhem includes Ulysses sucked into a vacuum and revived with CPR, diner destruction, cat attacks, a dead-hamster comment, a car pushed into a lake, tranquilizer darts near kids, euthanasia/rabies testing threats, and unsafe car/bus peril."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Romance-novel material includes sensual covers and steamy-word jokes, separated adults kissing, a near kiss by another couple, and Flora's false pregnancy claim."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults drink wine with meals."
+        }
+      },
+      "handoffNotes": [
+        "Animal euthanasia/rabies testing threat and car/bus peril may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 58,
+      "file": "data.js",
+      "title": "The Biggest Little Farm",
+      "year": "2018",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-biggest-little-farm",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Documentary farm realities include dead animals killed by predators or environmental causes, childbirth deaths, a coyote shot off camera, an injured paralyzed coyote, discussion of putting animals down, the family dog's death, a friend's cancer death, and wildfire scares."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface a meaningful language concern."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 2,
+          "summary": "CSM labels romance not present but notes animals shown during or shortly after giving birth."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM labels Sex, Romance & Nudity as not present while the detail text mentions animal births.",
+        "Animal deaths, euthanasia discussions, pet death, cancer death, and wildfire danger need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 59,
+      "file": "data.js",
+      "title": "The Biggest Little Farm: The Return",
+      "year": "2022",
+      "currentCatalogCa": "~7-8+ (approximate)",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-biggest-little-farm-the-return",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Farm-documentary concerns include wounded, attacked, or killed animals, pecking chickens, snakes, prowling predators, dead piglets, veterinary stitching, wildfires, thunder, and wind storms."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "One mild potty word is noted."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Animal breeding and nursing are discussed and shown in a farm context."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "CSM age is 8+ while the current catalog age is approximate ~7-8+.",
+        "Dead piglets, wounded animals, and wildfire/weather danger may need prose context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 60,
+      "file": "data.js",
+      "title": "Jane",
+      "year": "2017",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/jane",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js / MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Nature-documentary violence includes chimp fights, lions killing a zebra, aftermath of bloody conflict, and mild animal-human peril."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "One humorous but stronger scatological phrase is used."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Chimp mating is shown while reproductive behavior is discussed, and a young child is briefly shown naked in a nonsexual context."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Smoking is discussed disapprovingly."
+        }
+      },
+      "handoffNotes": [
+        "Bloody animal conflict and chimp mating/reproductive discussion may need prose context."
+      ],
+      "confidence": "high"
+    }
+  ],
+  "handoffSummary": {
+    "refetchedEntries": 20,
+    "sourceBasis": "live CSM refetch by subagent",
+    "firstNum": 41,
+    "lastNum": 60,
+    "implementationNote": "This artifact covers the previously missed data.js / MOVIES_BASE scope.",
+    "unavailablePages": [],
+    "labelDetailConflicts": [
+      {
+        "num": 42,
+        "title": "Peter Pan (Broadway Musical)",
+        "note": "Catalog used a non-CSM source; targeted lookup found the CSM Peter Pan (2000) review. CSM labels Language as not present while the detail text mentions repeated older-context ass wording."
+      },
+      {
+        "num": 50,
+        "title": "Abominable",
+        "note": "CSM labels Language as not present while the detail text mentions burp jokes and smell-based teasing."
+      },
+      {
+        "num": 56,
+        "title": "The One and Only Ivan",
+        "note": "CSM labels Language as not present while the detail text mentions a harsh comment and fart joke."
+      },
+      {
+        "num": 58,
+        "title": "The Biggest Little Farm",
+        "note": "CSM labels Sex, Romance & Nudity as not present while the detail text mentions animal births."
+      }
+    ],
+    "emotionalProseAttention": [
+      {
+        "num": 41,
+        "title": "Mighty Joe Young",
+        "note": "Opening parental deaths and burning Ferris wheel rescue may need emotional prose context."
+      },
+      {
+        "num": 42,
+        "title": "Peter Pan (Broadway Musical)",
+        "note": "Dated Native American stereotypes and Wendy's gendered caregiving role may need prose context."
+      },
+      {
+        "num": 43,
+        "title": "Strike",
+        "note": "Parent death in a mine explosion and suggestive manipulation scene may need prose context."
+      },
+      {
+        "num": 48,
+        "title": "Raya and the Last Dragon",
+        "note": "Mass petrification, self-sacrifice, parental loss, and presumed death may need prose context."
+      },
+      {
+        "num": 49,
+        "title": "Soul",
+        "note": "Apparent death and existential/self-worth dialogue may need prose context."
+      },
+      {
+        "num": 55,
+        "title": "The Sea Beast",
+        "note": "Gun pointed at a child, serious child injury, orphan backstory, and drowning danger may need prose context."
+      },
+      {
+        "num": 56,
+        "title": "The One and Only Ivan",
+        "note": "Animal family separation, poaching, and Stella's death need emotional prose context."
+      },
+      {
+        "num": 58,
+        "title": "The Biggest Little Farm",
+        "note": "Animal deaths, euthanasia discussions, pet death, cancer death, and wildfire danger need prose context."
+      },
+      {
+        "num": 59,
+        "title": "The Biggest Little Farm: The Return",
+        "note": "Dead piglets, wounded animals, and wildfire/weather danger may need prose context."
+      }
+    ],
+    "nextClaudeAction": "Review label/detail conflicts, catalog age differences, and emotional prose notes before importing any production catalog content flags."
+  }
+}

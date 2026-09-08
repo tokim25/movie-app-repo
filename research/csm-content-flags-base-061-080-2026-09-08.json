@@ -1,0 +1,779 @@
+{
+  "researchBatch": "csm-content-flags-base-061-080-2026-09-08",
+  "researchedAt": "2026-09-08",
+  "researcher": "Codex",
+  "purpose": "Research-only handoff for missed base-list nums 61-80 in data.js / MOVIES_BASE. Built from live Common Sense Media refetches of catalog srcUrl pages. Do not treat as production data until reviewed and transformed through the official workflow.",
+  "contentFlagModel": {
+    "version": 1,
+    "flags": [
+      "violence",
+      "language",
+      "romance",
+      "drinking"
+    ],
+    "scale": {
+      "1": "none / not present",
+      "2": "very little / a little",
+      "3": "some",
+      "4": "a lot"
+    },
+    "mappingNote": "This refetch preserves CSM's current visible category label and proposes the nearest app level. Production catalog edits should be made only by the follow-up importer/reviewer."
+  },
+  "entries": [
+    {
+      "num": 61,
+      "file": "data.js",
+      "title": "Dream Big: Engineering Our World",
+      "year": "2017",
+      "currentCatalogCa": "~8+ (approximate)",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/dream-big-engineering-our-world",
+      "csmAge": "7+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Documentary footage includes earthquake devastation, a described drowning death, and a brief covered dead body."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Live CSM age is 7+, while current catalog CA is approximate 8+."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 62,
+      "file": "data.js",
+      "title": "Paper Planes",
+      "year": "2014",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/paper-planes",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A boy is pushed down stairs and sprains his ankle, bullying includes taunts and thrown paper, a WWII fighter-plane fantasy has bullets and a near-crash, and the dead mother is discussed."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Very mild language includes \"hell,\" \"loser,\" and \"sucks.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A man and woman kiss briefly."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Dad appears hungover after waking up."
+        }
+      },
+      "handoffNotes": [
+        "Parent death is a recurring emotional context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 63,
+      "file": "data.js",
+      "title": "The Eagle Huntress",
+      "year": "2016",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-eagle-huntress",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Hunting imagery includes animal skinning, eagles hunting foxes, and dead animals draped on saddles."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Real animal hunting may need context for sensitive viewers."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 64,
+      "file": "data.js",
+      "title": "Elemental",
+      "year": "2023",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/elemental",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Fire bursts, water disasters, waves endangering communities, temporary apparent death, fire characters being snuffed out, a grandmother's ash-like death memory, and arguments drive the scariness."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Mild words, curse-word substitutes, religious exclamations, and element-based insults appear, along with discriminatory comments toward fire people."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Main characters flirt, dance, embrace, kiss, and try to touch across elements; background couples date and kiss, and there are light pruning and \"hot\" jokes."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Discrimination language is surfaced under CSM's language detail."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 65,
+      "file": "data.js",
+      "title": "We Can Be Heroes",
+      "year": "2020",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/we-can-be-heroes",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Comical superhero action includes punching and slapping aliens, kids using martial-arts moves on aliens and guards, aliens frozen or zapped by lasers, accidental kid injuries, and a deceased mother reference."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild language includes \"Oh my God,\" a child calling an alien dumb, and a character saying she is a nobody."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 66,
+      "file": "data.js",
+      "title": "A Beautiful Planet",
+      "year": "2016",
+      "currentCatalogCa": "~7+ (approximate)",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/a-beautiful-planet",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A spacewalk suit struggle includes discussion that a tangled cable or tiny suit hole could be deadly, and climate imagery shows fires, drought, melting glaciers, and global-warming consequences."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Live CSM age is 6+, while current catalog CA is approximate 7+."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 67,
+      "file": "data.js",
+      "title": "Willy Wonka & the Chocolate Factory",
+      "year": "1971",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/willy-wonka-the-chocolate-factory",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Children face seemingly fatal factory dangers, fan blades, explosions, river falls, swelling, body rearrangement, pipes and hatches, a creepy tunnel with disturbing images, a toy-gun/real-gun exchange, and a ransom joke."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild language includes British-style swears, insults, a near-strong-word stand-in, and \"shut up.\""
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A main character briefly smokes a cigar, a song mentions smoking, and dialogue references tobacco, butter gin, and liquor."
+        }
+      },
+      "handoffNotes": [
+        "Live CSM age is 8+, while current catalog CA is 6+."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 68,
+      "file": "data.js",
+      "title": "Finding 'Ohana",
+      "year": "2021",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/finding-ohana",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Treasure-hunt peril includes spider bites, lava, cliffs, waterfalls, collapsing floors, rocks, nightmarcher spirits, jump scares, near-drowning with CPR, bike danger, skeletons, heart attack recovery, pirate sword and knife duels, implied pirate deaths, family grief, and sibling fights."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Sibling and teen teasing includes many butt, body, bathroom, and mild profanity terms, plus some subtitled Hawaiian lines."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A teen awkwardly hits on another teen before earning trust and kissing her, and someone mentions being promised a makeout."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Grandpa needs medication after a heart attack."
+        }
+      },
+      "handoffNotes": [
+        "This is a level 4 violence/scariness entry because of sustained adventure peril."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 69,
+      "file": "data.js",
+      "title": "Kubo and the Two Strings",
+      "year": "2016",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/kubo-and-the-two-strings",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Intense fantasy violence includes injury and death, Kubo's stolen eye, his father's death, fierce battles, an unexpected stabbing, a huge skeleton, near-drowning by hypnotic sea creatures, a serpent-like Moon King, a burned village, and eerie masked aunts."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Mild insults and swear stand-ins include words like \"stupid,\" \"idiot,\" \"weak,\" and \"ohhh foot.\""
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Kubo's mother recalls falling in love with his father, and Monkey and Beetle lightly flirt while bickering."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A villager smokes a pipe."
+        }
+      },
+      "handoffNotes": [
+        "Family death and eye-removal backstory are important scariness context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 70,
+      "file": "data.js",
+      "title": "The Princess Bride",
+      "year": "1987",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-princess-bride",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Fairy-tale violence includes a torture machine, sword fights, poisoning death, quicksand, fire pits, flesh-eating eels, giant rodents that bite and are burned or stabbed, strangling, kidnapping, suicide reference with a knife, blood, murder stories, mutilation threats, and a threatened slap."
+        },
+        "language": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Occasional profanity, religious exclamations, and colorful insults appear."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "True love drives the story, with flirtation, a few kisses including one on a bed while clothed, and a reference to Buttercup's breasts."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Inigo appears drunk and has past drinking references, characters drink wine, and a fictional poison is used."
+        }
+      },
+      "handoffNotes": [
+        "Live CSM age is 9+, while current catalog CA is 8+.",
+        "Suicide reference, torture, and blood are worth preserving despite the comic tone."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 71,
+      "file": "data.js",
+      "title": "The Sandlot",
+      "year": "1993",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-sandlot",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A scary dog and risky-looking physical comedy are noted, and one boy tricks a lifeguard into kissing him."
+        },
+        "language": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Kids use several instances of censored stronger profanity, other mild-to-moderate swears, and lots of insults."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Boys ogle teenage girls, the camera lingers on women's bodies, and one boy tricks a lifeguard into kissing him."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Kids chew tobacco, get sick, and regret it; Babe Ruth smokes a cigar in a dream sequence."
+        }
+      },
+      "handoffNotes": [
+        "Language is a level 4 signal, and the tricked-kiss scene appears under both violence and romance context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 72,
+      "file": "data.js",
+      "title": "Zarafa",
+      "year": "2012",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/zarafa",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Animated danger has emotional weight: a slave trader kicks a dog, chains children, shoots animals and a hero, threatens the leads, and kids face a ferocious dog, cave-in, falls, desert danger, pirates, burned village, captured parents, deaths, and grief."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "One subtitled use of \"damn\" is noted."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A man becomes disoriented after smoking a long pipe, a distraught adult turns to alcohol in a desert-saloon setting, and wine drinking appears."
+        }
+      },
+      "handoffNotes": [
+        "Child captivity and slavery context should be explicit in any production copy."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 73,
+      "file": "data.js",
+      "title": "The Colors Within",
+      "year": "2025",
+      "currentCatalogCa": "8+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-colors-within",
+      "csmAge": "8+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Teens are disciplined for an unsanctioned sleepover, perform community service, and one teen is hurt by a dodgeball."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Students gossip that Kimi may have left school because a teacher found out she had a boyfriend."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 74,
+      "file": "data.js",
+      "title": "Dog Man",
+      "year": "2025",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/dog-man",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Cartoon violence includes Dog Man being created after an explosion nearly kills a police officer and dog, more explosions, slapstick accidents, police fighting sentient buildings, scary inventions, reanimated villainy, and lab-made inventions used against authorities."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Repeated catchphrases and mild insults include \"suckers,\" \"sucks,\" \"idiot,\" \"stupid,\" \"losers,\" bathroom insults, mild exclamations, and a cleaned-up action-movie quote."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Two adults express feelings and briefly embrace, and Dog Man is upset that his former owner or girlfriend has moved away with someone new."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [],
+      "confidence": "high"
+    },
+    {
+      "num": 75,
+      "file": "data.js",
+      "title": "Elio",
+      "year": "2025",
+      "currentCatalogCa": "6+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/elio",
+      "csmAge": "6+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "Camp bullying, a near punch, bruising and a bloody nose, an eye injury, clone disintegration, space-debris peril, an alien war threat, hostage-taking, a skeleton in a cell, weapons, lava danger, apparent character peril, dead parents, arguments, and off-screen vomiting are noted."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Infrequent mild words include \"stupid,\" \"butt,\" \"weird,\" \"crazy,\" \"oh my gosh,\" an unfinished phrase, and symbolic swearing in Elio's private language."
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Olga drinks wine with dinner, and aliens offer Elio a colorful drink in a cocktail-style glass that is not implied to be alcoholic."
+        }
+      },
+      "handoffNotes": [
+        "Dead parents and bullying are key emotional context."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 76,
+      "file": "data.js",
+      "title": "How to Train Your Dragon (live-action)",
+      "year": "2025",
+      "currentCatalogCa": "9+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/how-to-train-your-dragon-2025",
+      "csmAge": "9+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Dragons attack, create fiery explosions, snatch sheep, and endanger key characters; Viking battles are intense, weapons threaten dragons, characters plummet through the sky, a main character appears to die, a father yells and pushes his son down, and a tough girl punches boys."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "A battle cry includes a reference to sending a dragon back to hell."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "CSM notes a kiss, crushes, and a humorous breastplate reference."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Dragon battle intensity is the strongest flag."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 77,
+      "file": "data.js",
+      "title": "Liyana",
+      "year": "2017",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/liyana",
+      "csmAge": "11+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a lot",
+          "proposedLevel": 4,
+          "summary": "Storybook violence includes abuse by a father, armed kidnappers beating and tying up a girl, a child using a pan as a weapon, illness death, monsters and predators, plus real orphan trauma involving parental death, possible AIDS, abandonment, and a child tied by a guardian."
+        },
+        "language": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface language content."
+        },
+        "romance": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Children tell a story about a married father meeting a woman in a club and later contracting HIV, without explicit explanation, and childbirth is part of the story."
+        },
+        "drinking": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A storybook father drinks heavily and makes harmful choices, and both he and another woman smoke cigarettes."
+        }
+      },
+      "handoffNotes": [
+        "Real child trauma and implied HIV/AIDS context should be treated carefully."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 78,
+      "file": "data.js",
+      "title": "The Boy Who Harnessed the Wind",
+      "year": "2019",
+      "currentCatalogCa": "11+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/the-boy-who-harnessed-the-wind",
+      "csmAge": "12+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A village chief is beaten bloody, rifles are fired to disperse a crowd, a man drops dead, thieves threaten two women, a father rages at his son, and a mother slaps her daughter."
+        },
+        "language": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "A few curse words include \"damn,\" censored stronger language, and \"hell.\""
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface drinking, drug, or smoking content."
+        }
+      },
+      "handoffNotes": [
+        "Live CSM age is 12+, while current catalog CA is 11+."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 79,
+      "file": "data.js",
+      "title": "If You Build It",
+      "year": "2013",
+      "currentCatalogCa": "~10+ (approximate)",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/if-you-build-it",
+      "csmAge": "13+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "none",
+          "proposedLevel": 1,
+          "summary": "CSM labels violence as none and notes only mild bickering."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "The roughest language is mild, including \"dangit\" and \"piss off.\""
+        },
+        "romance": {
+          "csmLabel": "not present",
+          "proposedLevel": 1,
+          "summary": "CSM does not surface sex, romance, or nudity content."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults drink beer while relaxing, and one person mentions wanting a few beers after work."
+        }
+      },
+      "handoffNotes": [
+        "Live CSM age is 13+, while current catalog CA is approximate 10+."
+      ],
+      "confidence": "high"
+    },
+    {
+      "num": 80,
+      "file": "data.js",
+      "title": "Queen of Katwe",
+      "year": "2016",
+      "currentCatalogCa": "10+",
+      "csmStatus": "found",
+      "csmUrl": "https://www.commonsensemedia.org/movie-reviews/queen-of-katwe",
+      "csmAge": "10+",
+      "researchBasis": "live CSM refetch by subagent",
+      "implementationNote": "This entry covers the previously missed data.js/MOVIES_BASE scope.",
+      "flags": {
+        "violence": {
+          "csmLabel": "some",
+          "proposedLevel": 3,
+          "summary": "A boy is hit by a motorcycle and later stitched without painkillers, a toddler is nearly swept away in a flood, the family is homeless and sleeps outside, Harriet drags children by the ears and threatens a boyfriend, parental death is recalled, and poverty creates tense situations."
+        },
+        "language": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Children insult Phiona's smell, others call kids slum children, and \"Oh my God\" appears."
+        },
+        "romance": {
+          "csmLabel": "a little",
+          "proposedLevel": 2,
+          "summary": "Phiona's sister is drawn into a relationship her mother calls sinful, becomes pregnant, and Harriet is propositioned after flirting with a shop owner."
+        },
+        "drinking": {
+          "csmLabel": "very little",
+          "proposedLevel": 2,
+          "summary": "Adults briefly drink and smoke in a few scenes."
+        }
+      },
+      "handoffNotes": [
+        "Poverty, injury, and possible sexual exploitation pressure are key context beyond simple flag levels."
+      ],
+      "confidence": "high"
+    }
+  ]
+}
