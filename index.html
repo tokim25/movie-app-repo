@@ -11,6 +11,80 @@
   }catch(e){ /* storage unavailable; fall back to system preference */ }
 })();
 </script>
+<!-- Sentry crash/error tracking. Loaded first (before anything else in <head>) so it
+     can catch errors from every script that follows. The plain core bundle never pulls
+     in Session Replay or Performance Tracing code at all, so there's no DOM/session
+     recording to disable -- it structurally isn't present. sendDefaultPii is off (no
+     IP/cookies/user context), and the DOM click/input breadcrumb capture that IS part
+     of the core bundle is explicitly turned off below rather than left on its default,
+     since that's the one automatic capture path that could otherwise pick up a typed
+     child name or age from the Family tab. beforeSend is a second, independent layer:
+     it redacts any current child's name out of an event's serialized payload before
+     it's sent, so a child's name can't reach Sentry even via an error message or extra
+     data that isn't a DOM breadcrumb at all.
+
+     The script src below is pinned to Sentry's own CDN (browser.sentry-cdn.com), not
+     jsDelivr -- an earlier version of this pointed at
+     cdn.jsdelivr.net/npm/@sentry/browser@8/build/bundle.min.js, which 404s: that npm
+     package only ships ESM/CJS under build/npm/, no UMD bundle at that path. Because
+     the script tag failed silently (no console error surfaced it), `Sentry` stayed
+     undefined and every capture call below no-opped through its own `typeof Sentry ===
+     'undefined'` guard -- verified live, in a real browser with real network access,
+     by tokim25. Confirmed reachable (200) the same way. If this ever needs bumping to
+     a newer version, verify the URL 200s in a real browser first -- a wrong path here
+     fails silent, not loud. -->
+<script src="https://browser.sentry-cdn.com/8.55.2/bundle.min.js" crossorigin="anonymous"></script>
+<script>
+(function(){
+  if(typeof Sentry === 'undefined') return;
+  Sentry.init({
+    dsn: 'https://8d540029561cc485798c22e89cdde64b@o4512053601763328.ingest.us.sentry.io/4512053624307712',
+    sendDefaultPii: false,
+    integrations: [
+      Sentry.dedupeIntegration(),
+      Sentry.globalHandlersIntegration(),
+      Sentry.linkedErrorsIntegration(),
+      Sentry.httpContextIntegration(),
+      Sentry.breadcrumbsIntegration({ dom: false, console: true, fetch: true, history: true, sentry: true, xhr: true })
+    ],
+    beforeSend: function(event){
+      try{
+        var names = (typeof state !== 'undefined' && state.children ? state.children : [])
+          .map(function(c){ return c && c.name; })
+          .filter(function(n){ return n && n.length > 1; });
+        if(!names.length) return event;
+        return redactNames(event, names);
+      }catch(e){
+        return event;
+      }
+    }
+  });
+})();
+// Redacts each name in `names` out of every string value in `value`, recursing through
+// arrays/objects. Walks the *parsed* structure and matches real characters -- not
+// JSON.stringify's escaped form (`"` -> `\"`, `\` -> `\\`), which a plain
+// stringify-then-replace would silently miss for any name containing either character.
+function redactNames(value, names){
+  if(typeof value === 'string'){
+    names.forEach(function(name){ value = value.split(name).join('[redacted]'); });
+    return value;
+  }
+  if(Array.isArray(value)){
+    return value.map(function(v){ return redactNames(v, names); });
+  }
+  if(value && typeof value === 'object'){
+    var out = {};
+    Object.keys(value).forEach(function(k){ out[k] = redactNames(value[k], names); });
+    return out;
+  }
+  return value;
+}
+function reportError(err){
+  if(typeof Sentry !== 'undefined' && Sentry.captureException){
+    try{ Sentry.captureException(err); }catch(e){ /* never let error reporting itself throw */ }
+  }
+}
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#fbf7f1" media="(prefers-color-scheme: light)">
@@ -2926,7 +3000,7 @@ function loadState(){
 function persistLocalState(){
   try{
     localStorage.setItem(STORAGE_KEY, JSON.stringify(serializeState()));
-  }catch(e){ console.error('save failed', e); }
+  }catch(e){ console.error('save failed', e); reportError(e); }
 }
 
 function saveState(){
@@ -4071,6 +4145,7 @@ async function syncFromGoogleDrive(){
     }
   }catch(e){
     console.error('Google sync failed', e);
+    reportError(e);
     googleSyncPending = !!googleAccessToken;
     if(googleAccessToken) setGoogleSyncStatus('Saved here — Google sync needs retry', true);
     showToast('Google sync failed — try again');
@@ -4107,6 +4182,7 @@ async function pushToGoogleDrive(){
     setGoogleSyncUI(true);
   }catch(e){
     console.error('Google push failed', e);
+    reportError(e);
     googleSyncPending = !!googleAccessToken;
     if(googleAccessToken) setGoogleSyncStatus('Saved here — Google sync needs retry', true);
     showToast(googleAccessToken ? 'Google sync failed — saved here' : 'Google sync needs reconnect');
@@ -4948,7 +5024,7 @@ window.addEventListener('appinstalled', ()=>{
 
 if('serviceWorker' in navigator){
   window.addEventListener('load', ()=>{
-    navigator.serviceWorker.register('/sw.js').catch(err => console.error('service worker registration failed', err));
+    navigator.serviceWorker.register('/sw.js').catch(err => { console.error('service worker registration failed', err); reportError(err); });
   });
 }
 
