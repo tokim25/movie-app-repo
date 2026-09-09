@@ -21,8 +21,19 @@
      child name or age from the Family tab. beforeSend is a second, independent layer:
      it redacts any current child's name out of an event's serialized payload before
      it's sent, so a child's name can't reach Sentry even via an error message or extra
-     data that isn't a DOM breadcrumb at all. -->
-<script src="https://cdn.jsdelivr.net/npm/@sentry/browser@8/build/bundle.min.js" crossorigin="anonymous"></script>
+     data that isn't a DOM breadcrumb at all.
+
+     The script src below is pinned to Sentry's own CDN (browser.sentry-cdn.com), not
+     jsDelivr -- an earlier version of this pointed at
+     cdn.jsdelivr.net/npm/@sentry/browser@8/build/bundle.min.js, which 404s: that npm
+     package only ships ESM/CJS under build/npm/, no UMD bundle at that path. Because
+     the script tag failed silently (no console error surfaced it), `Sentry` stayed
+     undefined and every capture call below no-opped through its own `typeof Sentry ===
+     'undefined'` guard -- verified live, in a real browser with real network access,
+     by tokim25. Confirmed reachable (200) the same way. If this ever needs bumping to
+     a newer version, verify the URL 200s in a real browser first -- a wrong path here
+     fails silent, not loud. -->
+<script src="https://browser.sentry-cdn.com/8.55.2/bundle.min.js" crossorigin="anonymous"></script>
 <script>
 (function(){
   if(typeof Sentry === 'undefined') return;

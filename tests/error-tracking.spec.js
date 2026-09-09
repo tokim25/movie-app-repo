@@ -27,10 +27,36 @@ window.Sentry = (function(){
 })();
 `;
 
+// Must match index.html's actual <script src> exactly -- an earlier version of this
+// file stubbed the old, broken jsDelivr URL. Since page.route matches by URL, once the
+// real script tag pointed somewhere else (or 404s), that stub silently stopped being
+// served at all -- Sentry.init's own guard is what avoided a hard failure, so an
+// intercept mismatch here would fail exactly like a real missing/renamed script tag,
+// which is precisely the regression this whole file needs to catch.
+const SENTRY_SDK_URL = 'https://browser.sentry-cdn.com/8.55.2/bundle.min.js';
+
 test.beforeEach(async ({ page }) => {
-  await page.route('https://cdn.jsdelivr.net/npm/@sentry/browser@8/build/bundle.min.js', (route) => {
+  await page.route(SENTRY_SDK_URL, (route) => {
     return route.fulfill({ status: 200, contentType: 'application/javascript', body: SENTRY_STUB });
   });
+});
+
+test('the SDK script tag points at a URL matching Sentry\'s own CDN, not a guessed npm/jsDelivr path', async ({ page }) => {
+  // Regression test for a real, live-verified bug: an earlier version pointed at
+  // cdn.jsdelivr.net/npm/@sentry/browser@8/build/bundle.min.js, which 404s -- that npm
+  // package ships no UMD bundle at that path. The failure was silent: Sentry.init's own
+  // "if (typeof Sentry === 'undefined') return" guard swallowed it, so nothing in the
+  // console or this test suite (which stubs the URL and never exercises a real 404)
+  // caught it until tokim25 ran it in a real browser with real network access. This
+  // test can't verify the URL actually 200s (no network from this sandbox either), but
+  // it does pin the exact URL in index.html to Sentry's official CDN host and a
+  // pinned-version bundle path, so a future edit that silently drifts back to a guessed
+  // or unpinned URL fails loud, here, instead of failing silent in production.
+  await page.goto('/');
+  const source = await page.content();
+  const match = source.match(/<script src="([^"]+bundle\.min\.js)"/);
+  expect(match, 'no Sentry SDK <script> tag found').toBeTruthy();
+  expect(match[1]).toMatch(/^https:\/\/browser\.sentry-cdn\.com\/\d+\.\d+\.\d+\/bundle\.min\.js$/);
 });
 
 test('Sentry.init is called with PII off, DOM breadcrumbs off, and a beforeSend hook', async ({ page }) => {
