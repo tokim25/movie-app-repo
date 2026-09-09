@@ -130,3 +130,30 @@ test('beforeSend redacts a current child name out of the event payload', async (
   expect(serialized).not.toContain('Nora');
   expect(serialized).toContain('[redacted]');
 });
+
+test('beforeSend redacts a child name containing JSON-special characters (" and \\)', async ({ page }) => {
+  // Regression test for a real bug: an earlier version of beforeSend ran its
+  // find-and-replace against JSON.stringify(event) instead of the parsed values.
+  // JSON.stringify escapes " as \" and \ as \\ inside strings, so a raw name
+  // containing either character never appears as a literal substring in the
+  // escaped text -- the redaction silently no-oped and the name leaked through.
+  await page.goto('/');
+  await setupSampleFamily(page);
+
+  const trickyName = 'D"an\\special';
+  await page.evaluate((name) => {
+    addChild(name, '6');
+  }, trickyName);
+
+  const result = await page.evaluate((name) => {
+    const fakeEvent = {
+      message: `Something went wrong for ${name} during sync`,
+      extra: { note: `${name} was selected` },
+    };
+    return window.__sentryInitConfig.beforeSend(fakeEvent);
+  }, trickyName);
+
+  const serialized = JSON.stringify(result);
+  expect(serialized).not.toContain(trickyName);
+  expect(serialized).toContain('[redacted]');
+});

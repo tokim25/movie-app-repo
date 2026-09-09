@@ -42,19 +42,32 @@
           .map(function(c){ return c && c.name; })
           .filter(function(n){ return n && n.length > 1; });
         if(!names.length) return event;
-        var json = JSON.stringify(event);
-        names.forEach(function(name){
-          if(json.indexOf(name) !== -1){
-            json = json.split(name).join('[redacted]');
-          }
-        });
-        return JSON.parse(json);
+        return redactNames(event, names);
       }catch(e){
         return event;
       }
     }
   });
 })();
+// Redacts each name in `names` out of every string value in `value`, recursing through
+// arrays/objects. Walks the *parsed* structure and matches real characters -- not
+// JSON.stringify's escaped form (`"` -> `\"`, `\` -> `\\`), which a plain
+// stringify-then-replace would silently miss for any name containing either character.
+function redactNames(value, names){
+  if(typeof value === 'string'){
+    names.forEach(function(name){ value = value.split(name).join('[redacted]'); });
+    return value;
+  }
+  if(Array.isArray(value)){
+    return value.map(function(v){ return redactNames(v, names); });
+  }
+  if(value && typeof value === 'object'){
+    var out = {};
+    Object.keys(value).forEach(function(k){ out[k] = redactNames(value[k], names); });
+    return out;
+  }
+  return value;
+}
 function reportError(err){
   if(typeof Sentry !== 'undefined' && Sentry.captureException){
     try{ Sentry.captureException(err); }catch(e){ /* never let error reporting itself throw */ }
