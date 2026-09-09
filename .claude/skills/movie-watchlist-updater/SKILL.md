@@ -24,10 +24,40 @@ purge-and-poll) is dead. Do not use it. If `index.html` still references
 
 This skill runs from more than one place: a scheduled multi-agent pipeline
 (PM/Coder/Reviewer/Tech Lead/Comms sessions, weekly) and interactive or
-locally-run sessions. Neither needs to know the other by name -- Step 1's
-`origin/master` + open-PR sync below is the actual coordination mechanism,
-and it applies automatically to whoever runs this file next. One asymmetry
-worth knowing: some sessions' network egress blocks
+locally-run sessions. Neither needs to know the other by name -- the two
+hard rules below are the actual coordination mechanism, and they apply
+automatically to whoever runs this file next.
+
+**Data-file re-sync (hard rule, generalized 2026-09-08).** Any session about
+to write to a `data-*.js` file must (1) fetch `origin/master` fresh
+immediately before computing what it's about to change -- never trust a
+local checkout's age, no matter how recent the session start was, and (2)
+fetch one more time immediately before the final commit/push, re-diff the
+surviving change set against master's current tip, and drop anything that's
+become a duplicate or been superseded in the interim. A `git push` rejection
+here is this safeguard working as intended, not an error to route around --
+re-fetch, re-diff, retry. Never force-push to resolve it.
+
+This isn't a hypothetical risk -- it's a demonstrated recurring failure,
+caught by luck three times running rather than by design: the 8/27-28
+collision that prompted this section originally (two sessions independently
+processed the same request-sheet rows; the one working from a stale local
+snapshot wrote 14 titles a parallel session had already merged, at
+colliding `num`s), plus a worktree collision and a duplicate-research pick
+during the 2026-09-08 content-flag backfill, both caught only because
+someone happened to re-diff before pushing rather than by any rule
+requiring it. Step 1 and Step 6 below are where this rule plugs into this
+skill's own pipeline; treat it as repo-wide, not scoped only to the
+weekly-triage flow.
+
+**Worktree/branch collisions (added 2026-09-08).** A different failure mode
+from the rule above -- two sessions colliding on the *same working-directory
+path*, not on data content. Derive worktree paths and branch names uniquely
+per session (e.g. include a session id or timestamp) so two concurrent
+automations can never collide on the same directory, even starting at the
+exact same moment.
+
+One asymmetry worth knowing: some sessions' network egress blocks
 `commonsensemedia.org`/`wikipedia.org`/`upload.wikimedia.org` and ship
 batches with posters omitted (Step 3's fallback). A session that *can* reach
 those hosts should treat backfilling those gaps as a normal part of its own
@@ -94,15 +124,9 @@ This discovery step only applies to the weekly scheduled run. A one-off
 
 ## Step 1 — Dedupe
 
-**Sync with `origin/master` first, before building the dedupe set.** Run
-`git fetch origin` and diff against `origin/master` (not just whatever the
-local checkout happens to have) -- another session can merge a batch between
-when this run started and when it gets to writing files, and a stale local
-`master` will miss it. This isn't hypothetical: on 2026-08-27/28 two sessions
-independently processed the same request-sheet rows, and the one that deduped
-against a local snapshot ended up researching and writing 14 titles that a
-parallel session had already merged, at colliding `num`s -- caught only by
-manually diffing against `origin/master` right before pushing. Also run
+**Sync with `origin/master` first, before building the dedupe set** -- this is
+the data-file re-sync hard rule from "Coordination across sessions" above,
+part (1): fetch fresh, never trust a local checkout's age. Also run
 `gh pr list` and skim any open PR that touches `data-extra.js` or the other
 data files -- an in-flight PR covering an overlapping batch is a second
 signal a local-only check won't see.
@@ -114,9 +138,8 @@ used all along: parse each file's array, build a set, filter.
 
 Research (Step 2 below) can take several minutes per title. If a run is large
 enough that meaningful time passes between this dedupe pass and Step 6's
-commit, re-fetch `origin/master` right before writing/committing and re-check
-the surviving title list against it -- cheap insurance against exactly the
-race above.
+commit, that gap is exactly what the hard rule's part (2) re-fetch-and-re-diff
+right before commit/push is for.
 
 ## Step 2 — Research each title
 
@@ -269,10 +292,11 @@ new total movie count, and the "curated lists" count if a new file was added.
 
 ## Step 6 — Commit, push, verify
 
-**Before committing, re-fetch `origin/master` and confirm nothing landed there
-since Step 1's dedupe pass** (see the note there) -- if something did, diff it
-against the titles this run is about to write and drop anything that's now a
-duplicate before proceeding.
+**Before committing, apply the data-file re-sync hard rule's part (2)** from
+"Coordination across sessions" above: re-fetch `origin/master`, confirm
+nothing landed there since Step 1's dedupe pass, and if something did, diff
+it against the titles this run is about to write and drop anything that's
+now a duplicate before proceeding.
 
 ```bash
 git add -A
@@ -280,11 +304,11 @@ git commit -m "..."
 git push
 ```
 
-If `git push` is rejected as non-fast-forward, that's the coordination
-mechanism working as intended, not an error to force past -- something landed
-on `origin/master` since the last sync. Re-fetch, re-run the dedupe check from
-Step 1 against the new tip, drop anything that's now a duplicate, and push
-again. Never `git push --force` here.
+If `git push` is rejected as non-fast-forward, that's the hard rule's
+safeguard working as intended, not an error to force past -- something
+landed on `origin/master` since the last sync. Re-fetch, re-run the dedupe
+check from Step 1 against the new tip, drop anything that's now a duplicate,
+and push again. Never `git push --force` here.
 
 That's the whole deploy. Then verify on the live production URL
 (https://family-movie-watchlist-kim-family-projects.vercel.app/) -- open it, check
