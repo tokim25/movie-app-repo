@@ -247,8 +247,13 @@ function reportError(err){
     letter-spacing:-0.01em;
   }
   .syncAlert{
+    position:fixed;
+    top:calc(12px + env(safe-area-inset-top, 0px));
+    left:0;
+    right:0;
+    z-index:25;
     max-width:680px;
-    margin:0 auto 18px;
+    margin:0 auto;
     padding:0 20px;
   }
   .syncAlertInner{
@@ -260,6 +265,7 @@ function reportError(err){
     border-radius:10px;
     padding:12px 14px;
     color:var(--ink);
+    box-shadow:0 4px 16px rgba(51,40,33,0.16);
   }
   .syncAlertCopy{
     flex:1;
@@ -2196,15 +2202,6 @@ function reportError(err){
   <div class="homeSection">
     <span class="homeSectionLabel">Account &amp; sync</span>
     <div class="familyCard">
-      <div id="googleSyncAlert" class="syncAlert" style="display:none;" role="status" aria-live="polite">
-        <div class="syncAlertInner">
-          <div class="syncAlertCopy">
-            <span class="syncAlertTitle">Google sync needs attention</span>
-            <span id="googleSyncAlertMessage" class="syncAlertMessage"></span>
-          </div>
-          <button id="googleSyncAlertBtn" type="button">Reconnect</button>
-        </div>
-      </div>
       <button id="familySyncBtn" class="familyBtn" type="button">Open sync settings</button>
       <div class="syncPanel" id="syncPanel" style="display:none;">
         <div class="syncRow" id="googleSyncRow" style="display:none;">
@@ -2285,6 +2282,16 @@ function reportError(err){
     <option value="custom">Custom order</option>
   </select>
   <button type="button" id="applyFiltersBtn" class="applyBtn">Show movies</button>
+</div>
+
+<div id="googleSyncAlert" class="syncAlert" style="display:none;" role="status" aria-live="polite">
+  <div class="syncAlertInner">
+    <div class="syncAlertCopy">
+      <span class="syncAlertTitle">Google sync needs attention</span>
+      <span id="googleSyncAlertMessage" class="syncAlertMessage"></span>
+    </div>
+    <button id="googleSyncAlertBtn" type="button">Reconnect</button>
+  </div>
 </div>
 
 <div class="toast" id="toast"></div>
