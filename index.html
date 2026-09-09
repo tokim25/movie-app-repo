@@ -314,6 +314,10 @@
     background:var(--new-bg);
     color:var(--new);
   }
+  .filterRow button.priorityToggle:disabled{
+    opacity:0.5;
+    cursor:not-allowed;
+  }
 
   .sortbar{
     max-width:680px;
@@ -1992,8 +1996,6 @@
       <button data-filter="priority">Want to watch</button>
     </div>
   </div>
-  <ul id="list"></ul>
-  <div class="empty" id="emptyMsg" style="display:none;">No movies match your search.</div>
   <section class="requestPanel" id="requestMoviePanel" aria-labelledby="requestMovieTitle">
     <h2 id="requestMovieTitle">Request a movie</h2>
     <p>Ask for a title to be added to the shelf.</p>
@@ -2003,6 +2005,8 @@
       <button type="submit">Send</button>
     </form>
   </section>
+  <ul id="list"></ul>
+  <div class="empty" id="emptyMsg" style="display:none;">No movies match your search.</div>
 </div>
 
 <div id="watchlistScreen" class="screenWrap" style="display:none;">
@@ -2169,6 +2173,17 @@
   </div>
 
   <div class="homeSection">
+    <section class="requestPanel" id="requestMoviePanelFamily" aria-labelledby="requestMovieTitleFamily">
+      <h2 id="requestMovieTitleFamily">Request a movie</h2>
+      <p>Ask for a title to be added to the shelf.</p>
+      <form id="requestMovieFormFamily" class="requestForm" action="https://docs.google.com/forms/d/e/1FAIpQLSf6gLu-Z9LO-ZnPQ70yuOmYC8_9O1Jk7Kwsk0BF-FepiWH8tQ/formResponse" method="POST" target="hiddenRequestFrame">
+        <input type="text" name="entry.1104459577" id="requestMovieInputFamily" placeholder="Movie title" autocomplete="off" required>
+        <button type="submit">Send</button>
+      </form>
+    </section>
+  </div>
+
+  <div class="homeSection">
     <span class="homeSectionLabel">About</span>
     <div class="moreCard aboutPanel">
       <p>Family Feature combines the movie catalog, Common Sense Media age guidance, your watched and Want to watch marks, and each child's content settings.</p>
@@ -2203,6 +2218,9 @@
   <div class="filterRow">
     <button id="newToggleBtn" class="priorityToggle newToggle">New this week</button>
     <button id="priorityToggleBtn" class="priorityToggle">&#9733; Want to watch</button>
+  </div>
+  <div class="filterRow">
+    <button id="hideAboveSettingsBtn" type="button" class="priorityToggle">Hide above settings</button>
   </div>
   <select id="sortMode" class="sortSelect" aria-label="Sort movies">
     <option value="year">Sort by year</option>
@@ -2374,6 +2392,7 @@ let state = { order: defaultOrder(), orderUpdatedAt: 0, orderDevice: '', checked
 let filter = "all";
 let priorityOnly = false;
 let newOnly = false;
+let hideAboveSettings = false;
 let query = "";
 let openDetail = null;
 let decadeFilter = "";
@@ -2981,13 +3000,14 @@ function resetOrder(){
 }
 
 function browseStudio(studio){
-  decadeFilter = ''; ageFilter = ''; genreFilter = ''; priorityOnly = false; newOnly = false; query = '';
+  decadeFilter = ''; ageFilter = ''; genreFilter = ''; priorityOnly = false; newOnly = false; hideAboveSettings = false; query = '';
   document.getElementById('decadeFilter').value = '';
   document.getElementById('ageFilter').value = '';
   document.getElementById('genreFilter').value = '';
   document.getElementById('search').value = '';
   document.getElementById('priorityToggleBtn').classList.remove('on');
   document.getElementById('newToggleBtn').classList.remove('on');
+  document.getElementById('hideAboveSettingsBtn').classList.remove('on');
   sortMode = 'year';
   document.getElementById('sortMode').value = sortMode;
   studioFilter = studio;
@@ -2996,13 +3016,14 @@ function browseStudio(studio){
 }
 
 function browseNew(){
-  decadeFilter = ''; ageFilter = ''; genreFilter = ''; studioFilter = ''; priorityOnly = false; query = '';
+  decadeFilter = ''; ageFilter = ''; genreFilter = ''; studioFilter = ''; priorityOnly = false; hideAboveSettings = false; query = '';
   document.getElementById('decadeFilter').value = '';
   document.getElementById('ageFilter').value = '';
   document.getElementById('genreFilter').value = '';
   document.getElementById('studioFilter').value = '';
   document.getElementById('search').value = '';
   document.getElementById('priorityToggleBtn').classList.remove('on');
+  document.getElementById('hideAboveSettingsBtn').classList.remove('on');
   sortMode = 'year';
   document.getElementById('sortMode').value = sortMode;
   newOnly = true;
@@ -3180,6 +3201,10 @@ function movieContentProfile(movie){
     romance: Math.min(4, Math.max(age >= 10 ? 3 : age >= 7 ? 2 : 1, score(['romance', 'kiss', 'crush', 'flirt', 'dating']) >= 1 ? 2 : 1)),
     drinking: Math.min(4, Math.max(age >= 10 ? 3 : age >= 7 ? 2 : 1, score(['drink', 'drinking', 'alcohol', 'smoking', 'party']) >= 1 ? 2 : 1))
   };
+}
+
+function hasConfirmedContentData(movie){
+  return !!(movie.flags && typeof movie.flags === 'object');
 }
 
 function clampScore(value, min, max){
@@ -4135,6 +4160,10 @@ function render(){
     if(studioFilter && m.studio !== studioFilter) return false;
     if(priorityOnly && !markValue(state.priority, idx)) return false;
     if(newOnly && !isRecent(m)) return false;
+    if(hideAboveSettings){
+      const kids = selectedKids();
+      if(kids.length && hasConfirmedContentData(m) && movieFitForKids(m, kids).verdict === 'red') return false;
+    }
     return true;
   });
   visibleOrder = sortMovieIndices(visibleOrder, sortMode);
@@ -4693,6 +4722,12 @@ document.getElementById('requestMovieForm').addEventListener('submit', ()=>{
   setTimeout(()=>{ input.value = ''; }, 300);
 });
 
+document.getElementById('requestMovieFormFamily').addEventListener('submit', ()=>{
+  showToast("Thanks — we'll take a look!");
+  const input = document.getElementById('requestMovieInputFamily');
+  setTimeout(()=>{ input.value = ''; }, 300);
+});
+
 document.getElementById('syncLoadBtn').addEventListener('click', ()=>{
   const input = document.getElementById('syncCodeIn');
   if(!input.value.trim()) return;
@@ -4854,6 +4889,13 @@ document.querySelectorAll('#tonightMoodChoices .choiceChip').forEach(btn=>{
 document.getElementById('filterSheetBtn').addEventListener('click', ()=>{
   document.getElementById('filterScrim').style.display = 'block';
   document.getElementById('filterSheet').style.display = 'block';
+  document.getElementById('hideAboveSettingsBtn').disabled = selectedKids().length === 0;
+});
+
+document.getElementById('hideAboveSettingsBtn').addEventListener('click', ()=>{
+  hideAboveSettings = !hideAboveSettings;
+  document.getElementById('hideAboveSettingsBtn').classList.toggle('on', hideAboveSettings);
+  renderCurrentView();
 });
 
 function closeFilterSheet(){
@@ -4896,13 +4938,14 @@ document.getElementById('newToggleBtn').addEventListener('click', ()=>{
 });
 
 document.getElementById('clearFiltersBtn').addEventListener('click', ()=>{
-  decadeFilter = ''; ageFilter = ''; genreFilter = ''; studioFilter = ''; priorityOnly = false; newOnly = false;
+  decadeFilter = ''; ageFilter = ''; genreFilter = ''; studioFilter = ''; priorityOnly = false; newOnly = false; hideAboveSettings = false;
   document.getElementById('decadeFilter').value = '';
   document.getElementById('ageFilter').value = '';
   document.getElementById('genreFilter').value = '';
   document.getElementById('studioFilter').value = '';
   document.getElementById('priorityToggleBtn').classList.remove('on');
   document.getElementById('newToggleBtn').classList.remove('on');
+  document.getElementById('hideAboveSettingsBtn').classList.remove('on');
   renderCurrentView();
 });
 
