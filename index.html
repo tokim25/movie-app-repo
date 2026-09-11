@@ -2413,7 +2413,11 @@ const CONTENT_FLAG_IDS = CONTENT_FLAGS.map(flag => flag.id);
 // invalidates previously-researched `ca` content ratings (e.g. merging or
 // dropping a flag) -- stamped into movie entries as `csmRecheckVersion` so a
 // backfill can tell which entries were rated under an older content model.
-const CONTENT_MODEL_VERSION = 1;
+// Bumped to 2 on 2026-09-11: the violence+scariness merge (dropping the
+// separate `scary` flag) had already shipped and the 2026-09-08 backfill had
+// already stamped every entry's csmRecheckVersion as 2 to match -- this
+// constant was the one place that never got updated to agree with them.
+const CONTENT_MODEL_VERSION = 2;
 function defaultChildren(){
   return [];
 }
