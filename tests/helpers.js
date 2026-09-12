@@ -1,4 +1,13 @@
 export async function setupSampleFamily(page) {
+  // On a device with prior Google sync history, boot's decideInitialScreen()
+  // waits for the initial Drive sync to settle (or a bounded timeout) before
+  // showing setup or home, behind #bootSyncLoading -- so #setupScreen's
+  // visibility isn't settled until that gate clears. isVisible() doesn't
+  // auto-wait, so checking it while the gate is still up would see neither
+  // screen and silently skip setup. Waiting for the (normally already-hidden)
+  // loading overlay first is a no-op for every other test and makes this
+  // helper race-free for that one.
+  await page.locator('#bootSyncLoading').waitFor({ state: 'hidden' });
   if (await page.locator('#setupScreen').isVisible()) {
     await page.locator('#setupSampleFamilyBtn').click();
     await page.locator('#homeScreen').waitFor({ state: 'visible' });

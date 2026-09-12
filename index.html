@@ -1949,6 +1949,8 @@ function reportError(err){
 </head>
 <body>
 
+<div id="bootSyncLoading" style="display:none;position:fixed;inset:0;align-items:center;justify-content:center;background:var(--bg);color:var(--ink);font-size:15px;z-index:9999;">Loading your family's list…</div>
+
 <div id="setupScreen" class="setupScreen" style="display:none;">
   <div class="setupCard">
     <h1>Set up your family</h1>
@@ -2455,6 +2457,11 @@ const GOOGLE_SYNC_FLAG = "family-feature-google-sync-v3-enabled";
 const GOOGLE_SYNC_META_KEY = "family-feature-google-sync-v3-meta";
 const GOOGLE_TOKEN_TIMEOUT_MS = 7000;
 const GOOGLE_INITIAL_TOAST_SESSION_KEY = "family-feature-google-initial-toast-shown";
+// How long boot waits for a returning signed-in device's first Drive sync to
+// resolve before deciding setup vs. home off local state alone -- see
+// decideInitialScreen() and settleInitialGoogleSync() below. Bounded so a
+// slow or unreachable network can't hang the app on launch.
+const BOOT_SYNC_WAIT_TIMEOUT_MS = 4000;
 let googleCodeClient = null;
 let googleAccessToken = null;
 let googleDriveFileId = null;
@@ -2467,6 +2474,18 @@ let googleSyncRetryTimer = null;
 let googleTokenRequestTimer = null;
 let hasShownInitialSyncToast = false;
 let deferredInstallPrompt = null;
+// Resolves once this session's first Google Drive sync attempt (success,
+// failure, or "never going to happen") has settled, so boot can wait for it
+// before deciding whether to show setup or home -- see tryInitGoogleSync(),
+// trySilentReconnect(), and syncFromGoogleDrive()'s finally block.
+let resolveInitialGoogleSync = null;
+const initialGoogleSyncSettled = new Promise(resolve => { resolveInitialGoogleSync = resolve; });
+function settleInitialGoogleSync(){
+  if(resolveInitialGoogleSync){
+    resolveInitialGoogleSync();
+    resolveInitialGoogleSync = null;
+  }
+}
 let posterEagerBudget = 24;
 
 function parseAge(ca){
@@ -3812,6 +3831,7 @@ async function trySilentReconnect(){
   const ok = await refreshAccessToken();
   if(!ok){
     setGoogleSyncError('Google authorization expired');
+    settleInitialGoogleSync();
     return;
   }
   writeGoogleSyncMeta({
@@ -3824,12 +3844,16 @@ async function trySilentReconnect(){
 }
 
 function tryInitGoogleSync(attempts){
-  if(!GOOGLE_CLIENT_ID) return;
+  if(!GOOGLE_CLIENT_ID){
+    settleInitialGoogleSync();
+    return;
+  }
   attempts = attempts || 0;
   document.getElementById('googleSyncRow').style.display = 'block';
   if(attempts === 0){
     googleSyncIntent = !!readGoogleSyncMeta().enabled;
     if(googleSyncIntent) setGoogleSyncUI(false, 'Connecting to Google…');
+    else settleInitialGoogleSync();
   }
   if(window.google && window.google.accounts && window.google.accounts.oauth2){
     initGoogleSync();
@@ -3837,6 +3861,7 @@ function tryInitGoogleSync(attempts){
     setTimeout(()=>tryInitGoogleSync(attempts+1), 250);
   } else if(googleSyncIntent && !googleAccessToken){
     setGoogleSyncError('Google sign-in unavailable');
+    settleInitialGoogleSync();
   }
 }
 
@@ -4050,6 +4075,7 @@ async function syncFromGoogleDrive(){
     showToast('Google sync failed — try again');
   }finally{
     googleSyncBusy = false;
+    settleInitialGoogleSync();
     scheduleGoogleSyncRetry(syncFromGoogleDrive);
   }
 }
@@ -4068,6 +4094,18 @@ async function pushToGoogleDrive(){
   googleSyncBusy = true;
   googleSyncPending = false;
   try{
+    // Never blind-overwrite: read whatever's currently on Drive and merge it
+    // into local state before writing, the same way syncFromGoogleDrive()
+    // already does. Without this, a push could destroy remote data local
+    // hasn't seen yet -- e.g. from another device, or from an initial sync
+    // that hadn't finished landing before this device made its own edit.
+    let fileId = googleDriveFileId || await findDriveFile();
+    googleDriveFileId = fileId;
+    if(fileId){
+      const remote = await readDriveFile(fileId);
+      state = mergeState(state, remote);
+      persistLocalState();
+    }
     const uploaded = await writeDriveFile(googleDriveFileId, serializeState());
     if(uploaded && uploaded.id) googleDriveFileId = uploaded.id;
     googleSyncLastOkAt = now();
@@ -4079,6 +4117,7 @@ async function pushToGoogleDrive(){
     });
     googleSyncRetryDelay = 1600;
     setGoogleSyncUI(true);
+    renderCurrentView();
   }catch(e){
     console.error('Google push failed', e);
     reportError(e);
@@ -4980,13 +5019,39 @@ function initTheme(){
   });
 }
 
+async function decideInitialScreen(){
+  // A returning signed-in device's local storage can be empty or stale (a
+  // cleared browser, a new device, this device just never having synced
+  // yet) while Drive still holds the real family data. Deciding setup vs.
+  // home off local state alone in that window is what let a boot race turn
+  // into data loss: showScreen() picks "setup", the user (re-)enters
+  // children, and that save pushes over the real remote data. So when this
+  // device has sync history, wait for the initial syncFromGoogleDrive()
+  // attempt to settle -- bounded by BOOT_SYNC_WAIT_TIMEOUT_MS so an
+  // unreachable network can't hang the app -- before deciding.
+  if(readGoogleSyncMeta().enabled){
+    const loadingEl = document.getElementById('bootSyncLoading');
+    if(loadingEl) loadingEl.style.display = 'flex';
+    await Promise.race([
+      initialGoogleSyncSettled,
+      new Promise(resolve => setTimeout(resolve, BOOT_SYNC_WAIT_TIMEOUT_MS))
+    ]);
+    if(loadingEl) loadingEl.style.display = 'none';
+    // state.children may have just changed via the merge in
+    // syncFromGoogleDrive() -- recompute rather than use the value from
+    // before the wait.
+    tonightSelection.childIds = new Set((state.children || []).map(child => child.id));
+  }
+  showScreen(state.children && state.children.length ? 'home' : 'setup');
+}
+
 initScreens();
 initTheme();
 loadState();
 tryInitGoogleSync();
 renderStudioGrid();
 tonightSelection.childIds = new Set((state.children || []).map(child => child.id));
-showScreen(state.children && state.children.length ? 'home' : 'setup');
+decideInitialScreen();
 </script>
 </body>
 </html>
