@@ -11,17 +11,15 @@
   }catch(e){ /* storage unavailable; fall back to system preference */ }
 })();
 </script>
-<!-- Sentry crash/error tracking. Loaded first (before anything else in <head>) so it
-     can catch errors from every script that follows. The plain core bundle never pulls
-     in Session Replay or Performance Tracing code at all, so there's no DOM/session
-     recording to disable -- it structurally isn't present. sendDefaultPii is off (no
-     IP/cookies/user context), and the DOM click/input breadcrumb capture that IS part
-     of the core bundle is explicitly turned off below rather than left on its default,
-     since that's the one automatic capture path that could otherwise pick up a typed
-     child name or age from the Family tab. beforeSend is a second, independent layer:
-     it redacts any current child's name out of an event's serialized payload before
-     it's sent, so a child's name can't reach Sentry even via an error message or extra
-     data that isn't a DOM breadcrumb at all.
+<!-- Sentry crash/error tracking + user feedback widget. Loaded first (before anything
+     else in <head>) so it can catch errors from every script that follows. sendDefaultPii
+     is off (no IP/cookies/user context), and the DOM click/input breadcrumb capture that
+     IS part of the core bundle is explicitly turned off below rather than left on its
+     default, since that's the one automatic capture path that could otherwise pick up a
+     typed child name or age from the Family tab. beforeSend is a second, independent
+     layer: it redacts any current child's name out of an event's serialized payload
+     before it's sent, so a child's name can't reach Sentry even via an error message or
+     extra data that isn't a DOM breadcrumb at all.
 
      The script src below is pinned to Sentry's own CDN (browser.sentry-cdn.com), not
      jsDelivr -- an earlier version of this pointed at
@@ -29,11 +27,20 @@
      package only ships ESM/CJS under build/npm/, no UMD bundle at that path. Because
      the script tag failed silently (no console error surfaced it), `Sentry` stayed
      undefined and every capture call below no-opped through its own `typeof Sentry ===
-     'undefined'` guard -- verified live, in a real browser with real network access,
-     by tokim25. Confirmed reachable (200) the same way. If this ever needs bumping to
-     a newer version, verify the URL 200s in a real browser first -- a wrong path here
-     fails silent, not loud. -->
-<script src="https://browser.sentry-cdn.com/8.55.2/bundle.min.js" crossorigin="anonymous"></script>
+     'undefined'` guard. If this ever needs bumping to a newer version, verify the URL
+     200s in a real browser first -- a wrong path here fails silent, not loud.
+
+     `bundle.feedback.min.js` (added 2026-09-12, replacing plain `bundle.min.js`) is
+     Sentry's own CDN variant that adds ONLY the User Feedback widget on top of the same
+     core -- per Sentry's bundle build matrix (bundle / bundle.feedback / bundle.tracing /
+     bundle.replay / combinations thereof), Feedback is composed independently of Replay
+     and Tracing, so this does not pull in session recording or performance monitoring --
+     confirmed against the SDK's own source/build config, not guessed. This sandbox's
+     network policy blocks browser.sentry-cdn.com, so the URL could not be given a live
+     200 check the way the original bundle.min.js swap was (see above) -- please verify
+     it loads in a real browser (Sentry global should be defined, no 404 in the network
+     tab) before/soon after merge. -->
+<script src="https://browser.sentry-cdn.com/8.55.2/bundle.feedback.min.js" crossorigin="anonymous"></script>
 <script>
 (function(){
   if(typeof Sentry === 'undefined') return;
@@ -45,7 +52,22 @@
       Sentry.globalHandlersIntegration(),
       Sentry.linkedErrorsIntegration(),
       Sentry.httpContextIntegration(),
-      Sentry.breadcrumbsIntegration({ dom: false, console: true, fetch: true, history: true, sentry: true, xhr: true })
+      Sentry.breadcrumbsIntegration({ dom: false, console: true, fetch: true, history: true, sentry: true, xhr: true }),
+      // Widget is opened programmatically from the "Report a bug" button (see
+      // reportBugBtn's click handler below), not Sentry's own auto-injected floating
+      // button. No name/email fields, no screenshot capture, and useSentryUser is off
+      // so it can't backfill those fields from Sentry.setUser() (this app never calls
+      // that, but the option is explicit rather than relying on that staying true) --
+      // the widget collects only the free-text message the user types.
+      Sentry.feedbackIntegration({
+        autoInject: false,
+        showName: false,
+        showEmail: false,
+        isNameRequired: false,
+        isEmailRequired: false,
+        useSentryUser: false,
+        enableScreenshot: false
+      })
     ],
     beforeSend: function(event){
       try{
@@ -4262,22 +4284,15 @@ document.querySelectorAll('#filterSeg button').forEach(btn=>{
 
 document.getElementById('resortBtn').addEventListener('click', resetOrder);
 
-document.getElementById('reportBugBtn').addEventListener('click', ()=>{
-  const subject = encodeURIComponent('Family Feature bug report');
-  const body = encodeURIComponent([
-    'What happened?',
-    '',
-    '',
-    'What did you expect?',
-    '',
-    '',
-    'Where were you in the app?',
-    currentScreen,
-    '',
-    `App URL: ${window.location.href}`,
-    `Browser: ${navigator.userAgent}`
-  ].join('\n'));
-  window.location.href = `mailto:tokim25@gmail.com?subject=${subject}&body=${body}`;
+document.getElementById('reportBugBtn').addEventListener('click', async ()=>{
+  if(typeof Sentry === 'undefined' || !Sentry.getFeedback){
+    showToast('Bug reporting is unavailable right now');
+    return;
+  }
+  const feedback = Sentry.getFeedback();
+  const form = await feedback.createForm();
+  form.appendToDom();
+  form.open();
 });
 
 document.querySelectorAll('[data-edit-child]').forEach(btn=>{
