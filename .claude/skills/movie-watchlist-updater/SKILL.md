@@ -445,6 +445,28 @@ fast relative to (title count × realistic per-title research time) is a
 signal something got shortcut, not a sign of efficiency -- worth flagging
 in the PR description rather than treated as a win.
 
+**Depicted-on-screen vs. merely-referenced (added 2026-09-12, from the
+content-flag audit that fixed Romeo and Juliet's under-tagged flags).** A
+severe event that's actually *shown happening* generally warrants a higher
+flag level than the same event that's only referenced, discussed, or
+implied off-screen -- even when both are nominally "the same" content type.
+"A death occurs" (mentioned in dialogue, described in a news report, part of
+a character's backstory) and "a death is shown occurring" (on-screen, in the
+moment) are not the same severity, and the flags should reflect that
+difference, not just whether the topic came up at all. This is the exact
+gap that let Romeo and Juliet through originally: its `full` text described
+two on-screen killings and a depicted double suicide, but `flags.violence`
+was 3 -- a level that fits an off-screen or narrated equivalent, not what
+was actually shown. Concrete examples from applying this rule across a real
+audit batch (2026-09-12, `PENDING_REQUESTS.md`/PR history has the full
+list): *Fly Away Home*'s opening car crash is shown "from inside the
+flipping vehicle" and got bumped (violence 2->3); *Akeelah and the Bee*'s
+and *Now and Then*'s violent deaths are only ever referenced in dialogue or
+news accounts and did not get bumped on that basis alone. Apply this
+distinction consistently when scoring violence/language/romance/drinking
+flags, for both a fresh Step 2 research pass and a re-research pass in this
+section.
+
 **Rate-limit coordination is mandatory, not a nice-to-have, for this mode.**
 Run `node scripts/csm-rate-guard.mjs acquire` immediately before *every*
 fetch against `commonsensemedia.org` (or a Wikipedia/IMDb fallback source)
