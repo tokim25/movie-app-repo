@@ -3333,8 +3333,17 @@ function movieFitForKids(movie, kids){
     CONTENT_FLAGS.forEach(flag=>{
       const level = profile[flag.id] || 1;
       const limit = settingForChildFlag(child, flag.id).value;
-      if(level >= limit + 2) issues.push({ child, flag, severity: 'red' });
-      else if(level === limit + 1) issues.push({ child, flag, severity: 'amber' });
+      // On this fixed 4-level scale, level - limit can never reach 2 once
+      // limit is 3 or 4 (max level 4 - limit 3 = 1) -- so red was
+      // permanently unreachable in a category the moment a parent set that
+      // category's limit to 3 or 4, no matter how extreme a future title's
+      // content in that category turned out to be. The top of the scale
+      // (the most extreme tier this app defines) should always be able to
+      // trigger red for a parent who hasn't opted into that same ceiling.
+      // A parent who has set limit=4 has explicitly opted into the most
+      // mature tier, so green at level 4 in that case is unchanged.
+      if(level - limit >= 2 || (level === 4 && limit < 4)) issues.push({ child, flag, severity: 'red' });
+      else if(level === limit + 1 && level < 4) issues.push({ child, flag, severity: 'amber' });
     });
   });
   if(issues.some(issue => issue.severity === 'red')){
