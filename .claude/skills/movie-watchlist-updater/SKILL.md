@@ -256,20 +256,38 @@ actually added recently. Run `node scripts/validate-data.mjs` after writing —
 it checks `addedAt` is a real date and `addedVia` is one of the two allowed
 values, among everything else it already checks.
 
-**Also set going forward (added 2026-09-07, tracks content-model coverage for
-the backfill job):** `csmRecheckedAt`, today's date as `"YYYY-MM-DD"`, and
-`csmRecheckVersion`, the current value of `CONTENT_MODEL_VERSION` in
-`index.html`. Since a freshly-added entry's `ca` rating is by definition
-researched under the current content model, stamp both fields at creation
-time for every new title, right after `addedAt`/`addedVia`. Both fields are
-optional and only meaningful together -- never write one without the other,
-and never stamp them until the researched content is actually confirmed
-good (they assert "this entry's content rating reflects content-model
-version N," not "this entry exists"). Older entries don't have these
-fields — don't backfill them here; that backfill is its own job (see
-"Re-researching an existing entry" below). `validate-data.mjs` checks both
+**Also set going forward (added 2026-09-07, corrected 2026-09-11 -- tracks
+content-model coverage for the backfill job):** `csmRecheckedAt`, today's
+date as `"YYYY-MM-DD"`, and `csmRecheckVersion`, the current value of
+`CONTENT_MODEL_VERSION` in `index.html`. **The trigger for stamping these is
+`flags`, not "the title is new."** Stamp all three together -- `flags` (real
+per-category scores: `violence`/`language`/`romance`/`drinking`, each an
+integer 1-4, derived from actually reading a full CSM review page) plus
+`csmRecheckedAt`/`csmRecheckVersion` -- only when this run's research for
+this title produced real structured `flags` data. If the research for this
+title was snippet-only or used a fallback source (CSM sandbox-blocked, no
+CSM review exists yet, etc. -- see Step 2's fallback note), leave all three
+fields off entirely, even though `ca`/`full` are still written normally.
+
+The three fields assert "this entry has real structured content-flag data,
+current as of content-model version N" -- not "this entry exists" and not
+"this entry was added recently." Getting this wrong has a real, non-obvious
+failure mode: `csmRecheckedAt`/`csmRecheckVersion` present without `flags`
+would be silently indistinguishable, to a future backfill run's own
+selection logic, from a title that's genuinely already covered -- causing
+that title to be skipped forever even though it never got real per-category
+research. As of 2026-09-11, every one of the ~1011 backfilled entries has
+`flags` and `csmRecheckedAt` either both present or both absent, with zero
+exceptions -- keep it that way.
+
+Never stamp any of the three until the researched content is actually
+confirmed good. Older entries don't have these fields — don't backfill
+them here; that backfill is its own job (see "Re-researching an existing
+entry" below). `validate-data.mjs` checks `csmRecheckedAt`/`csmRecheckVersion`
 are present-or-absent together, that `csmRecheckedAt` is a real date, and
-that `csmRecheckVersion` is an integer.
+that `csmRecheckVersion` is an integer -- it does not (yet) enforce the
+`flags`-implies-recheck-fields direction of this rule, so this is currently
+a discipline convention, not something the validator catches for you.
 
 ## Step 5 — Assign nums and write the files
 
@@ -280,15 +298,27 @@ of them, the max isn't always in the most recently added file). Small batches
 franchise, a whole studio, a themed list) get their own new `data-<source>.js`
 file, matching the existing convention -- if you add a new file, wire it into
 `index.html`: a new `<script src="data-<source>.js"></script>` tag (plain relative
-path, not jsDelivr), a new `.concat(...)` in the `MOVIES` array, and a new entry in
-the `sourceLabels` object used by `render()`/`renderGroupedView()`.
+path, not jsDelivr) and a new `.concat(...)` in the `MOVIES` array. `source` itself
+(the value every entry gets, matching which data file it lives in -- `"EXTRA"`,
+`"DCOM"`, etc.) is still part of the schema and Step 4 still expects it, but it's
+pure data provenance now with no UI display -- `renderGroupedView()` and the
+`sourceLabels` object that used to read it were removed in PR #29 (2026-09-06)
+along with the dead Watchlist/Search screens, and nothing replaced them.
 
 Poster entries go into `data-posters.js`'s `MOVIE_POSTERS` object, keyed by the
 same `num`, in the `{u, w, h, p}` shape already established (url, width, height,
 Wikipedia page title).
 
-Update the header subtitle and the `statLeft` initial value in `index.html` to the
-new total movie count, and the "curated lists" count if a new file was added.
+**No movie-count display needs updating (corrected 2026-09-11).** This section
+used to say to update "the header subtitle and the `statLeft` initial value" to
+the new total, and a "curated lists" count -- both are stale, predating this
+session's mobile-nav/tab redesign. `statLeft`'s value in `index.html` is a
+pre-render placeholder for the *unwatched* count only (`MOVIES.length -
+checkedCount`, overwritten by `render()` on every load, before a user can ever
+see the hardcoded number); it was never a total-catalog display and updating it
+to match a new total would be actively wrong, not merely unnecessary. There is
+no static subtitle or "curated lists" count anywhere in the current UI at all --
+if a future redesign adds one back, update this paragraph to say where.
 
 ## Step 6 — Commit, push, verify
 
@@ -349,11 +379,13 @@ schema when writing new entries (Step 4 still requires it) since older code
 or a future feature may still reference it, just don't add new display logic
 for it.
 
-This only changes the per-row badge. `m.source` and `sourceLabels` are
-unrelated plumbing that still matters -- they drive `renderGroupedView()`'s
-studio/franchise sections and the "curated lists" count, and Step 5's
-instructions to wire a new `data-<source>.js` file into `sourceLabels` still
-apply as written.
+This only changes the per-row badge. **Correction, 2026-09-11: the line this
+replaced used to say `m.source`/`sourceLabels` were "unrelated plumbing that
+still matters," driving `renderGroupedView()`'s studio/franchise sections and
+a "curated lists" count -- that's now stale too.** `renderGroupedView()` and
+`sourceLabels` were removed entirely in PR #29 (2026-09-06); `m.source` is
+still part of the schema (Step 5 above covers what to set it to for a new
+data file) but has no UI role of any kind anymore.
 
 ## Re-researching an existing entry (content-flag backfill mode, added 2026-09-07)
 
