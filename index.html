@@ -3993,6 +3993,61 @@ async function writeDriveFile(fileId, body){
   return data;
 }
 
+const DRIVE_WRITE_MAX_ATTEMPTS = 3;
+const DRIVE_WRITE_RETRY_BASE_DELAY_MS = 400;
+
+async function getDriveFileModifiedTime(fileId){
+  const res = await driveFetch(`https://www.googleapis.com/drive/v3/files/${fileId}?fields=modifiedTime`);
+  const data = await driveJson(res, 'Check sync file revision');
+  return data.modifiedTime || null;
+}
+
+// Reads the current remote file (if one exists), merges it into local
+// state, and writes the merged result back -- with optimistic-concurrency
+// protection against a second device writing to the same file in the same
+// short window (e.g. both parents' phones saving within moments of each
+// other). Drive's REST API has no true atomic conditional write for an
+// appDataFolder file (no If-Match support here), so this approximates one:
+// capture the remote file's modifiedTime right after reading it, re-check
+// that marker immediately before the write, and if it drifted (another
+// device wrote in between), redo the read-merge against the now-current
+// remote content and retry -- bounded to DRIVE_WRITE_MAX_ATTEMPTS, so
+// sustained near-simultaneous writes from multiple devices fail the same
+// way any other push failure already does today (the caller's existing
+// catch block, googleSyncPending, retry-on-next-save), rather than
+// retrying forever. Shared by syncFromGoogleDrive() and pushToGoogleDrive()
+// so this protection and its retry logic exist in exactly one place.
+async function mergeAndWriteToDrive(){
+  let fileId = googleDriveFileId || await findDriveFile();
+  googleDriveFileId = fileId;
+
+  if(!fileId){
+    const uploaded = await writeDriveFile(fileId, serializeState());
+    if(uploaded && uploaded.id) googleDriveFileId = uploaded.id;
+    return uploaded;
+  }
+
+  for(let attempt = 1; attempt <= DRIVE_WRITE_MAX_ATTEMPTS; attempt++){
+    const remote = await readDriveFile(fileId);
+    const readAtModifiedTime = await getDriveFileModifiedTime(fileId);
+    state = mergeState(state, remote);
+    persistLocalState();
+
+    const beforeWriteModifiedTime = await getDriveFileModifiedTime(fileId);
+    if(beforeWriteModifiedTime === readAtModifiedTime){
+      const uploaded = await writeDriveFile(fileId, serializeState());
+      if(uploaded && uploaded.id) googleDriveFileId = uploaded.id;
+      return uploaded;
+    }
+
+    if(attempt < DRIVE_WRITE_MAX_ATTEMPTS){
+      await new Promise(resolve => setTimeout(resolve, DRIVE_WRITE_RETRY_BASE_DELAY_MS * attempt));
+    }
+  }
+
+  throw new Error('Google Drive sync conflict: remote file changed on every retry attempt');
+}
+
 function scheduleGoogleSyncRetry(fn){
   if(!googleSyncPending || !googleAccessToken || !navigator.onLine) return;
   clearTimeout(googleSyncRetryTimer);
@@ -4051,21 +4106,13 @@ async function syncFromGoogleDrive(){
   googleSyncPending = false;
   setGoogleSyncUI(true, 'Syncing with Google…');
   try{
-    let fileId = googleDriveFileId || await findDriveFile();
-    googleDriveFileId = fileId;
-    if(fileId){
-      const remote = await readDriveFile(fileId);
-      state = mergeState(state, remote);
-      // Local-only write: this just persists the merged-in remote state to
-      // localStorage. Using the full saveState() here re-armed
-      // googleSyncPending and queued a redundant pushToGoogleDrive, which in
-      // turn kept scheduleGoogleSyncRetry() treating this sync as still
-      // "pending" after it succeeded -- creating a self-sustaining loop of
-      // full syncs (and a "Synced with Google" toast) every ~1.6s forever.
-      persistLocalState();
-    }
-    const uploaded = await writeDriveFile(googleDriveFileId, serializeState());
-    if(uploaded && uploaded.id) googleDriveFileId = uploaded.id;
+    // mergeAndWriteToDrive() does the local-only persistLocalState() of any
+    // merged-in remote state itself. Using the full saveState() there re-armed
+    // googleSyncPending and queued a redundant pushToGoogleDrive, which in
+    // turn kept scheduleGoogleSyncRetry() treating this sync as still
+    // "pending" after it succeeded -- creating a self-sustaining loop of
+    // full syncs (and a "Synced with Google" toast) every ~1.6s forever.
+    await mergeAndWriteToDrive();
     googleSyncLastOkAt = now();
     writeGoogleSyncMeta({
       enabled: true,
@@ -4107,20 +4154,14 @@ async function pushToGoogleDrive(){
   googleSyncBusy = true;
   googleSyncPending = false;
   try{
-    // Never blind-overwrite: read whatever's currently on Drive and merge it
-    // into local state before writing, the same way syncFromGoogleDrive()
-    // already does. Without this, a push could destroy remote data local
-    // hasn't seen yet -- e.g. from another device, or from an initial sync
-    // that hadn't finished landing before this device made its own edit.
-    let fileId = googleDriveFileId || await findDriveFile();
-    googleDriveFileId = fileId;
-    if(fileId){
-      const remote = await readDriveFile(fileId);
-      state = mergeState(state, remote);
-      persistLocalState();
-    }
-    const uploaded = await writeDriveFile(googleDriveFileId, serializeState());
-    if(uploaded && uploaded.id) googleDriveFileId = uploaded.id;
+    // Never blind-overwrite: mergeAndWriteToDrive() reads whatever's
+    // currently on Drive and merges it into local state before writing, the
+    // same way syncFromGoogleDrive() does, with optimistic-concurrency
+    // protection against a second device writing in the same short window.
+    // Without this, a push could destroy remote data local hasn't seen yet
+    // -- e.g. from another device, or from an initial sync that hadn't
+    // finished landing before this device made its own edit.
+    await mergeAndWriteToDrive();
     googleSyncLastOkAt = now();
     writeGoogleSyncMeta({
       enabled: true,
