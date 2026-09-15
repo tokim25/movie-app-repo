@@ -63,6 +63,29 @@ batches with posters omitted (Step 3's fallback). A session that *can* reach
 those hosts should treat backfilling those gaps as a normal part of its own
 run (see Step 3) -- not something that needs to be requested.
 
+**Weekly triage routing (updated 2026-09-15, confirmed by tokim25): no
+dedicated poster-resolution hop.** For a while, the weekly PM/triage session
+routed each week's batch through a separate session whose only job was to
+resolve poster art (it had network egress to the hosts above) before
+forwarding to the session that does the actual research/schema/commit work.
+That intermediate hop depended on a machine being on and connected, and in
+practice was unreliable enough that the fallback-after-a-few-hours path
+became the norm rather than the exception (see the 9/12-9/15 incident that
+prompted this note: the poster-resolution session sat `PENDING` for three
+days while, per this section's own guidance, the batch it was supposedly
+blocking on had already been fully handled by an earlier run -- the
+session's status was just stale, which is its own lesson about not trusting
+a session's displayed status over what's actually on `origin/master`).
+
+Current routing: the weekly triage session hands new titles straight to
+whichever session does Steps 1-6, no separate poster-resolution stop.
+Poster art is resolved as part of that same run when network egress allows
+(Step 3), and any gaps left by a run whose egress is blocked get picked up
+as a normal, periodic backfill pass by a later run that can reach those
+hosts -- same pattern as the earlier "Backfill 14 missing posters" batch.
+Nothing about Step 3 itself changed; what changed is that poster resolution
+is no longer a gate the weekly batch waits on before research even starts.
+
 ## Input: what to add
 
 Titles come from up to three places:
