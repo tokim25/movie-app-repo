@@ -86,6 +86,17 @@ hosts -- same pattern as the earlier "Backfill 14 missing posters" batch.
 Nothing about Step 3 itself changed; what changed is that poster resolution
 is no longer a gate the weekly batch waits on before research even starts.
 
+**Handoffs are a message, not a silent wait (added 2026-09-15).** Whenever
+a session's next step depends on another session doing something first --
+a batch handed off for research, a fix handed off to Coder, work handed off
+to Comms or anyone else -- send that session a message describing what's
+needed at the moment of handoff, the same way the routing rule above got
+sent. Don't just create a dependency and passively wait for it to resolve
+on its own; that's exactly how the poster-resolution session sat `PENDING`
+for three days unnoticed (see above). If a handoff needs a check-in later
+(a fallback deadline, a "did this actually land" follow-up), schedule that
+follow-up explicitly rather than assuming it'll surface itself.
+
 ## Input: what to add
 
 Titles come from up to three places:
