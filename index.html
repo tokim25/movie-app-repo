@@ -2527,6 +2527,61 @@ function sortMovieIndices(indices, mode){
   return sorted.sort(compareByYear);
 }
 
+// Typo-tolerant search matching (added 2026-09-12). Exact substring match
+// stays the primary, fastest check in render() -- this only runs for
+// titles that DON'T already contain the query, as a fallback so a small
+// typo ("desendants", "discendants") still surfaces "Descendants". Small
+// hand-rolled Levenshtein rather than a library: this is core UI filtering
+// logic exercised on every keystroke, and the app has no bundler/dependency
+// pattern to plug a library into anyway (same reasoning as the Sentry SDK
+// being a plain CDN script tag, not an npm import).
+function levenshteinWithin(a, b, maxDist){
+  const la = a.length, lb = b.length;
+  if(Math.abs(la - lb) > maxDist) return false;
+  let prev = new Array(lb + 1);
+  for(let j = 0; j <= lb; j++) prev[j] = j;
+  for(let i = 1; i <= la; i++){
+    const curr = new Array(lb + 1);
+    curr[0] = i;
+    let rowMin = curr[0];
+    for(let j = 1; j <= lb; j++){
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      curr[j] = Math.min(prev[j] + 1, curr[j - 1] + 1, prev[j - 1] + cost);
+      if(curr[j] < rowMin) rowMin = curr[j];
+    }
+    if(rowMin > maxDist) return false; // whole row already past budget, bail early
+    prev = curr;
+  }
+  return prev[lb] <= maxDist;
+}
+
+function fuzzyTypoThreshold(len){
+  if(len <= 4) return 1;
+  if(len <= 9) return 2;
+  return 3;
+}
+
+// Word-tokenizes the title and compares the query against single words (or,
+// for a multi-word query, against same-length runs of consecutive words) --
+// cheaper and more precise than sliding a raw-character window across the
+// whole title, and it's how real typos actually happen (within one word).
+function titleFuzzyMatches(title, q){
+  const words = title.split(/[^a-z0-9]+/i).filter(Boolean).map(w => w.toLowerCase());
+  if(!words.length) return false;
+  const qWords = q.split(/\s+/).filter(Boolean);
+  const threshold = fuzzyTypoThreshold(q.length);
+  if(qWords.length <= 1){
+    return words.some(word => levenshteinWithin(word, q, threshold));
+  }
+  for(let start = 0; start + qWords.length <= words.length; start++){
+    const window = words.slice(start, start + qWords.length).join(' ');
+    if(levenshteinWithin(window, q, threshold)) return true;
+  }
+  return false;
+}
+
+const FUZZY_SEARCH_MIN_QUERY_LENGTH = 3;
+
 function decadeOf(y){
   const n = parseInt(y, 10);
   if(isNaN(n)) return null;
@@ -4149,7 +4204,14 @@ function render(){
   const orderPosition = new Map(state.order.map((idx, pos) => [idx, pos]));
   let visibleOrder = state.order.filter(idx=>{
     const m = MOVIES[idx];
-    if(q && !m.t.toLowerCase().includes(q)) return false;
+    if(q){
+      const title = m.t.toLowerCase();
+      const isExactMatch = title.includes(q);
+      if(!isExactMatch){
+        const canFuzzyMatch = q.length >= FUZZY_SEARCH_MIN_QUERY_LENGTH;
+        if(!canFuzzyMatch || !titleFuzzyMatches(title, q)) return false;
+      }
+    }
     const isChecked = markValue(state.checked, idx);
     if(filter === 'todo' && isChecked) return false;
     if(filter === 'done' && !isChecked) return false;
@@ -4169,6 +4231,16 @@ function render(){
     return true;
   });
   visibleOrder = sortMovieIndices(visibleOrder, sortMode);
+  if(q){
+    // Exact substring matches stay the strongest signal: keep them (in
+    // whatever order sortMovieIndices just gave them) ahead of titles that
+    // only matched via typo tolerance, rather than mixing the two tiers.
+    const exact = [], fuzzy = [];
+    visibleOrder.forEach(idx => {
+      (MOVIES[idx].t.toLowerCase().includes(q) ? exact : fuzzy).push(idx);
+    });
+    visibleOrder = exact.concat(fuzzy);
+  }
 
   listEl.replaceChildren();
   emptyMsg.style.display = visibleOrder.length ? 'none' : 'block';
