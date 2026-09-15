@@ -15,6 +15,8 @@ const SENTRY_STUB = `
 window.Sentry = (function(){
   window.__sentryInitConfig = null;
   window.__sentryCaptured = [];
+  window.__sentryFeedbackOpts = null;
+  window.__sentryFeedbackFormCalls = [];
   return {
     init(cfg){ window.__sentryInitConfig = cfg; },
     captureException(err){ window.__sentryCaptured.push(String(err && err.message || err)); },
@@ -22,7 +24,25 @@ window.Sentry = (function(){
     globalHandlersIntegration(){ return { name: 'GlobalHandlers' }; },
     linkedErrorsIntegration(){ return { name: 'LinkedErrors' }; },
     httpContextIntegration(){ return { name: 'HttpContext' }; },
-    breadcrumbsIntegration(opts){ window.__sentryBreadcrumbsOpts = opts; return { name: 'Breadcrumbs' }; }
+    breadcrumbsIntegration(opts){ window.__sentryBreadcrumbsOpts = opts; return { name: 'Breadcrumbs' }; },
+    feedbackIntegration(opts){ window.__sentryFeedbackOpts = opts; return { name: 'Feedback' }; },
+    getFeedback(){
+      return {
+        createForm(){
+          return Promise.resolve({
+            appendToDom(){ window.__sentryFeedbackFormCalls.push('appendToDom'); },
+            open(){ window.__sentryFeedbackFormCalls.push('open'); }
+          });
+        }
+      };
+    },
+    getClient(){
+      return {
+        on(hookName, callback){
+          if(hookName === 'beforeSendFeedback') window.__sentryBeforeSendFeedback = callback;
+        }
+      };
+    }
   };
 })();
 `;
@@ -33,7 +53,7 @@ window.Sentry = (function(){
 // served at all -- Sentry.init's own guard is what avoided a hard failure, so an
 // intercept mismatch here would fail exactly like a real missing/renamed script tag,
 // which is precisely the regression this whole file needs to catch.
-const SENTRY_SDK_URL = 'https://browser.sentry-cdn.com/8.55.2/bundle.min.js';
+const SENTRY_SDK_URL = 'https://browser.sentry-cdn.com/8.55.2/bundle.feedback.min.js';
 
 test.beforeEach(async ({ page }) => {
   await page.route(SENTRY_SDK_URL, (route) => {
@@ -54,9 +74,9 @@ test('the SDK script tag points at a URL matching Sentry\'s own CDN, not a guess
   // or unpinned URL fails loud, here, instead of failing silent in production.
   await page.goto('/');
   const source = await page.content();
-  const match = source.match(/<script src="([^"]+bundle\.min\.js)"/);
+  const match = source.match(/<script src="([^"]+bundle\.feedback\.min\.js)"/);
   expect(match, 'no Sentry SDK <script> tag found').toBeTruthy();
-  expect(match[1]).toMatch(/^https:\/\/browser\.sentry-cdn\.com\/\d+\.\d+\.\d+\/bundle\.min\.js$/);
+  expect(match[1]).toMatch(/^https:\/\/browser\.sentry-cdn\.com\/\d+\.\d+\.\d+\/bundle\.feedback\.min\.js$/);
 });
 
 test('Sentry.init is called with PII off, DOM breadcrumbs off, and a beforeSend hook', async ({ page }) => {
@@ -84,6 +104,63 @@ test('no Replay or BrowserTracing integration is ever referenced', async ({ page
   const source = await page.content();
   expect(source).not.toContain('replayIntegration');
   expect(source).not.toContain('browserTracingIntegration');
+});
+
+test('the feedback widget is configured with no PII fields, no auto-inject, and no screenshot capture', async ({ page }) => {
+  await page.goto('/');
+  const opts = await page.evaluate(() => window.__sentryFeedbackOpts);
+  expect(opts).toBeTruthy();
+  expect(opts.autoInject).toBe(false);
+  expect(opts.showName).toBe(false);
+  expect(opts.showEmail).toBe(false);
+  expect(opts.isNameRequired).toBe(false);
+  expect(opts.isEmailRequired).toBe(false);
+  expect(opts.useSentryUser).toBe(false);
+  expect(opts.enableScreenshot).toBe(false);
+  expect(opts.messagePlaceholder).toMatch(/name/i);
+});
+
+test('a feedback submission has a current child name redacted before it would be sent', async ({ page }) => {
+  // Regression test for a real gap: beforeSend (tested above for error events) never
+  // runs for feedback submissions -- confirmed against the Sentry SDK's own source,
+  // which gates beforeSend to error-type events only. The feedback widget needs its
+  // own hook (client.on('beforeSendFeedback', ...)) wired up separately.
+  await page.goto('/');
+  await setupSampleFamily(page);
+
+  const hasHook = await page.evaluate(() => typeof window.__sentryBeforeSendFeedback === 'function');
+  expect(hasHook, 'beforeSendFeedback hook was never registered').toBe(true);
+
+  const result = await page.evaluate(() => {
+    const fakeFeedbackEvent = {
+      type: 'feedback',
+      contexts: { feedback: { message: 'It broke when I tapped on Simon and Nora together' } }
+    };
+    window.__sentryBeforeSendFeedback(fakeFeedbackEvent);
+    // beforeSendFeedback mutates its argument in place (no return value used) --
+    // assert on the same object reference, not a return value.
+    return fakeFeedbackEvent;
+  });
+
+  const serialized = JSON.stringify(result);
+  expect(serialized).not.toContain('Simon');
+  expect(serialized).not.toContain('Nora');
+  expect(serialized).toContain('[redacted]');
+});
+
+test('the "Report a bug" button opens the Sentry feedback form, not a mailto: link', async ({ page }) => {
+  await page.goto('/');
+  await setupSampleFamily(page);
+  await page.locator('#tabFamily').click();
+  await page.locator('#reportBugBtn').click();
+  await expect.poll(() => page.evaluate(() => window.__sentryFeedbackFormCalls)).toEqual(['appendToDom', 'open']);
+});
+
+test('no hardcoded mailto: link or email address remains in the source', async ({ page }) => {
+  await page.goto('/');
+  const source = await page.content();
+  expect(source).not.toContain('mailto:');
+  expect(source).not.toContain('tokim25@gmail.com');
 });
 
 test('a localStorage save failure is captured', async ({ page }) => {
