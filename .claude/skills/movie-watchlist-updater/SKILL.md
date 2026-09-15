@@ -354,6 +354,18 @@ pattern the poster-thumbnails addition used. For a small human-supervised batch 
 an interactive session, direct-to-`master` is fine, same as every batch before this
 one.
 
+**Whenever a PR gets opened, call `subscribe_pr_activity` on it immediately --
+before doing anything else, not left as a "check back on it periodically"
+habit.** This isn't optional cleanup; it's the only thing that turns a
+reviewer's CHANGES REQUESTED into an actual wake-up event in the session that
+owns the PR. PR #47 (Google Drive sync hardening) sat with a real,
+substantive review unaddressed for 3 days in September 2026 because the
+session that opened it never subscribed -- Reviewer's findings just sat
+there with no event to surface them, and it only got caught by an unrelated
+status sweep days later. Subscribe right after the PR is created, in the
+same breath as opening it, regardless of role -- this applies to any session
+opening a PR from this skill, not just the weekly-triage flow.
+
 ## Displaying the source link to users
 
 `index.html`'s row-detail rendering (`render()` and `renderGroupedView()`) should
