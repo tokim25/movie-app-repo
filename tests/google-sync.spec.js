@@ -462,6 +462,49 @@ test('a concurrent remote write between read and write is detected, re-merged, a
   expect(pending).toBe(false);
 });
 
+test('modifiedTime is captured before the content read, not after', async ({ page }) => {
+  // Regression test for a real, reviewer-caught bug: an earlier version of
+  // mergeAndWriteToDrive() read content first and captured modifiedTime
+  // second. A write landing in the gap between those two calls then left
+  // modifiedTime already reflecting the collision while the just-read
+  // content stayed stale -- and since the pre-write recheck only compares
+  // against that same post-collision modifiedTime, no drift was detected
+  // and the stale merge got written over the collision, silently. Capturing
+  // modifiedTime first closes that gap: any write landing after it (through
+  // the content read) shows up as drift against the pre-write recheck.
+  const callOrder = [];
+  await page.route('https://www.googleapis.com/**', async (route) => {
+    const url = route.request().url();
+
+    if (url.includes('/upload/drive/v3/files')) {
+      return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ id: 'mock-file-id' }) });
+    }
+    if (url.includes('/drive/v3/files/') && url.includes('fields=modifiedTime')) {
+      callOrder.push('modifiedTime');
+      return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ modifiedTime: 'v1' }) });
+    }
+    if (url.includes('/drive/v3/files/') && url.includes('alt=media')) {
+      callOrder.push('content');
+      return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ v: 3, checked: {}, priority: {}, order: [] }) });
+    }
+    if (url.includes('/drive/v3/files?')) {
+      return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ files: [] }) });
+    }
+    return route.continue();
+  });
+
+  await page.goto('/');
+  await setupSampleFamily(page);
+  await page.evaluate(() => {
+    googleAccessToken = 'fake-token';
+    googleDriveFileId = 'mock-file-id';
+  });
+
+  await page.evaluate(() => pushToGoogleDrive());
+
+  expect(callOrder.slice(0, 2)).toEqual(['modifiedTime', 'content']);
+});
+
 test('sustained conflicting writes exhaust retries and fail the same way any other push failure does', async ({ page }) => {
   // modifiedTime never stabilizes -- every check sees a fresh value, as if
   // another device were writing continuously. mergeAndWriteToDrive() must
