@@ -108,3 +108,72 @@ test('confirming removal deletes the child and persists after reload', async ({ 
   await expect(page.locator('#childEditorList .childEditRow')).toHaveCount(before - 1);
   await expect(page.locator('#childName-nora')).toHaveCount(0);
 });
+
+test('a 10+ child can be registered and their age is not clamped down to 9', async ({ page }) => {
+  // Regression test for issue #51: the age select and both clamp paths
+  // (clampChildAge(), normalizeChild()) used to cap at 9, silently rewriting
+  // any higher age a parent tried to enter -- and persistence went through
+  // normalizeChild() on load, so even bypassing the UI clamp via
+  // selectOption() wouldn't have been enough to prove the real fix; it has
+  // to survive a reload.
+  await page.locator('#addChildBtn').click();
+  await page.locator('#newChildName').fill('Priya');
+  await page.locator('#newChildAge').selectOption('12');
+  await page.locator('#saveNewChildBtn').click();
+  await expect(page.locator('#toast')).toContainText('Priya added with starter settings');
+
+  await page.reload();
+  await page.locator('#tabFamily').click();
+  await page.locator('#familyScreen').waitFor({ state: 'visible' });
+
+  // Find the row whose name input has value 'Priya' and check its age
+  // select -- ids are randomly generated (makeChildId()), not name-derived,
+  // so there's no '#childAge-priya' shortcut the way the sample family's
+  // fixed ids ('simon', 'nora') allow elsewhere in this file.
+  const rows = page.locator('#childEditorList .childEditRow');
+  const count = await rows.count();
+  let found = false;
+  for (let i = 0; i < count; i++) {
+    const row = rows.nth(i);
+    const nameInput = row.locator('input[type="text"]');
+    if ((await nameInput.inputValue()) === 'Priya') {
+      await expect(row.locator('select')).toHaveValue('12');
+      found = true;
+      break;
+    }
+  }
+  expect(found, 'Priya\'s row was not found after reload').toBe(true);
+});
+
+test('every age select offers options through at least age 12', async ({ page }) => {
+  // Covers all three places issue #51 named: first-run setup, the "Add
+  // child" onboarding select, and a per-child edit row's select.
+  await page.goto('/');
+  const setupOptions = await page.locator('#setupChildAge option').allTextContents();
+  expect(setupOptions).toContain('12');
+
+  await setupSampleFamily(page);
+  await page.locator('#tabFamily').click();
+  await page.locator('#familyScreen').waitFor({ state: 'visible' });
+
+  await page.locator('#addChildBtn').click();
+  const newChildOptions = await page.locator('#newChildAge option').allTextContents();
+  expect(newChildOptions).toContain('12');
+
+  const editOptions = await page.locator('#childAge-simon option').allTextContents();
+  expect(editOptions).toContain('12');
+});
+
+test('a 12-year-old\'s starter settings can reach the highest content tier', async ({ page }) => {
+  // Before issue #51's fix, starterLimitForFlagAge()'s matrix only covered
+  // ages 3-9 and never reached level 4 -- an age this old couldn't even be
+  // registered, so this scenario was unreachable at all.
+  await page.locator('#addChildBtn').click();
+  await page.locator('#newChildName').fill('Marcus');
+  await page.locator('#newChildAge').selectOption('12');
+  await page.locator('#saveNewChildBtn').click();
+
+  await expect(page.locator('#familySettingsChildName')).toHaveText("Marcus's content settings");
+  const violenceRow = page.locator('#familySettingsRows .familySettingRow[data-flag="violence"]');
+  await expect(violenceRow.locator('.limitControl button.selected')).toHaveText('4');
+});

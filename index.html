@@ -2023,15 +2023,7 @@ function reportError(err){
       </div>
       <div class="childField">
         <label for="setupChildAge">Age</label>
-        <select id="setupChildAge">
-          <option selected>3</option>
-          <option>4</option>
-          <option>5</option>
-          <option>6</option>
-          <option>7</option>
-          <option>8</option>
-          <option>9</option>
-        </select>
+        <select id="setupChildAge"></select>
       </div>
     </div>
     <div class="setupActions">
@@ -2182,15 +2174,7 @@ function reportError(err){
             </div>
             <div class="childField">
               <label for="newChildAge">Age</label>
-              <select id="newChildAge">
-                <option selected>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option>9</option>
-              </select>
+              <select id="newChildAge"></select>
             </div>
             <div class="childActions">
               <button type="button" id="saveNewChildBtn">Save child</button>
@@ -2481,6 +2465,14 @@ const CONTENT_FLAG_IDS = CONTENT_FLAGS.map(flag => flag.id);
 // already stamped every entry's csmRecheckVersion as 2 to match -- this
 // constant was the one place that never got updated to agree with them.
 const CONTENT_MODEL_VERSION = 2;
+// The registerable child-age range (issue #51: capped at 9 with no way to
+// register a 10+ kid, forcing parents to misreport their child's age). 13
+// covers "at least 12, ideally higher" through early teens per the issue,
+// without stretching into a "teen" product the app was never designed as.
+// Single source of truth for every age <select> (see populateAgeSelect())
+// and both age-clamping paths (clampChildAge(), normalizeChild()).
+const MIN_CHILD_AGE = 3;
+const MAX_CHILD_AGE = 13;
 function defaultChildren(){
   return [];
 }
@@ -2894,12 +2886,15 @@ function normalizeChild(raw){
   if(!raw || typeof raw !== 'object') return null;
   const name = typeof raw.name === 'string' ? raw.name.trim().slice(0, 60) : '';
   if(!name) return null;
-  const age = parseInt(raw.age, 10);
   const hadParentSad = parentSetValue(raw.settings && raw.settings.sad) !== null;
   return {
     id: (typeof raw.id === 'string' && raw.id) ? raw.id : makeChildId(),
     name,
-    age: Number.isInteger(age) ? Math.min(Math.max(age, 3), 9) : 3,
+    // clampChildAge() rather than a second inline Math.min/max: this is the
+    // exact duplication that let issue #51 slip through -- the two clamps
+    // drifted out of sync with the select's own range for a while before
+    // anyone noticed, since nothing forced them to move together.
+    age: clampChildAge(raw.age),
     settings: normalizeContentSettings(raw.settings),
     // Sticky once set (added 2026-09-07): stays true across saves until the
     // parent explicitly dismisses the one-time "Sad moments removed" notice,
@@ -3283,14 +3278,19 @@ function starterLimitForFlagAge(flagId, age){
   // violence's row merges the old separate 'violence'/'scary' matrices,
   // taking the more cautious (lower) value at every age -- they only
   // differed at age 7, where scary's [..2..] was stricter than violence's [..3..].
+  // Ages 3-9 are the original matrix; 10-13 (issue #51) extend each row
+  // toward CONTENT_FLAGS' own level-4 "Older-kid intensity" tier, which
+  // nothing below age 10 ever reached. Drinking stays capped at 3 through
+  // 13 -- explicit substance content ("Older-kid context") staying out of
+  // starter defaults even for early teens is the more cautious call.
   const matrix = {
-    violence: [1, 1, 2, 2, 2, 3, 3],
-    language: [1, 1, 1, 2, 2, 2, 3],
-    romance: [1, 1, 1, 1, 2, 2, 2],
-    drinking: [1, 1, 1, 1, 2, 2, 2]
+    violence: [1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4],
+    language: [1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4],
+    romance: [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 4],
+    drinking: [1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3]
   };
   const values = matrix[flagId] || matrix.violence;
-  return values[safeAge - 3] || 1;
+  return values[safeAge - MIN_CHILD_AGE] || 1;
 }
 
 function starterLimitForAge(age){
@@ -3713,6 +3713,12 @@ function initScreens(){
   tabs.browse = document.getElementById('tabBrowse');
   tabs.family = document.getElementById('tabFamily');
   tabs.setup = null;
+
+  // These two age selects exist in the DOM from page load (unlike a
+  // per-child edit row's select, built fresh by renderChildren()), so they
+  // need populating once here rather than at the point a child is created.
+  populateAgeSelect(document.getElementById('setupChildAge'), MIN_CHILD_AGE);
+  populateAgeSelect(document.getElementById('newChildAge'), MIN_CHILD_AGE);
 }
 
 function renderStudioGrid(){
@@ -4469,7 +4475,21 @@ document.querySelectorAll('[data-edit-child]').forEach(btn=>{
 
 function clampChildAge(rawAge){
   const age = parseInt(rawAge, 10);
-  return Number.isInteger(age) ? Math.min(Math.max(age, 3), 9) : 3;
+  return Number.isInteger(age) ? Math.min(Math.max(age, MIN_CHILD_AGE), MAX_CHILD_AGE) : MIN_CHILD_AGE;
+}
+
+// Fills an age <select> with MIN_CHILD_AGE..MAX_CHILD_AGE, one <option> per
+// value -- the single place every age select's option list comes from, so
+// extending the age range again only ever means moving MAX_CHILD_AGE.
+function populateAgeSelect(selectEl, selectedAge){
+  selectEl.replaceChildren();
+  for(let age = MIN_CHILD_AGE; age <= MAX_CHILD_AGE; age++){
+    const opt = document.createElement('option');
+    opt.value = String(age);
+    opt.textContent = String(age);
+    if(age === selectedAge) opt.selected = true;
+    selectEl.appendChild(opt);
+  }
 }
 
 function saveChild(id, rawName, rawAge){
@@ -4780,13 +4800,7 @@ function renderChildren(){
     ageLabel.textContent = 'Age';
     const ageSelect = document.createElement('select');
     ageSelect.id = ageId;
-    for(let age = 3; age <= 9; age++){
-      const opt = document.createElement('option');
-      opt.value = String(age);
-      opt.textContent = String(age);
-      if(age === child.age) opt.selected = true;
-      ageSelect.appendChild(opt);
-    }
+    populateAgeSelect(ageSelect, child.age);
     ageField.appendChild(ageLabel);
     ageField.appendChild(ageSelect);
 
