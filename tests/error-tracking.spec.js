@@ -35,6 +35,13 @@ window.Sentry = (function(){
           });
         }
       };
+    },
+    getClient(){
+      return {
+        on(hookName, callback){
+          if(hookName === 'beforeSendFeedback') window.__sentryBeforeSendFeedback = callback;
+        }
+      };
     }
   };
 })();
@@ -110,6 +117,35 @@ test('the feedback widget is configured with no PII fields, no auto-inject, and 
   expect(opts.isEmailRequired).toBe(false);
   expect(opts.useSentryUser).toBe(false);
   expect(opts.enableScreenshot).toBe(false);
+  expect(opts.messagePlaceholder).toMatch(/name/i);
+});
+
+test('a feedback submission has a current child name redacted before it would be sent', async ({ page }) => {
+  // Regression test for a real gap: beforeSend (tested above for error events) never
+  // runs for feedback submissions -- confirmed against the Sentry SDK's own source,
+  // which gates beforeSend to error-type events only. The feedback widget needs its
+  // own hook (client.on('beforeSendFeedback', ...)) wired up separately.
+  await page.goto('/');
+  await setupSampleFamily(page);
+
+  const hasHook = await page.evaluate(() => typeof window.__sentryBeforeSendFeedback === 'function');
+  expect(hasHook, 'beforeSendFeedback hook was never registered').toBe(true);
+
+  const result = await page.evaluate(() => {
+    const fakeFeedbackEvent = {
+      type: 'feedback',
+      contexts: { feedback: { message: 'It broke when I tapped on Simon and Nora together' } }
+    };
+    window.__sentryBeforeSendFeedback(fakeFeedbackEvent);
+    // beforeSendFeedback mutates its argument in place (no return value used) --
+    // assert on the same object reference, not a return value.
+    return fakeFeedbackEvent;
+  });
+
+  const serialized = JSON.stringify(result);
+  expect(serialized).not.toContain('Simon');
+  expect(serialized).not.toContain('Nora');
+  expect(serialized).toContain('[redacted]');
 });
 
 test('the "Report a bug" button opens the Sentry feedback form, not a mailto: link', async ({ page }) => {

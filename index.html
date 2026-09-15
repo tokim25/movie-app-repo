@@ -17,9 +17,19 @@
      IS part of the core bundle is explicitly turned off below rather than left on its
      default, since that's the one automatic capture path that could otherwise pick up a
      typed child name or age from the Family tab. beforeSend is a second, independent
-     layer: it redacts any current child's name out of an event's serialized payload
+     layer: it redacts any current child's name out of an error event's serialized payload
      before it's sent, so a child's name can't reach Sentry even via an error message or
      extra data that isn't a DOM breadcrumb at all.
+
+     beforeSend does NOT run for User Feedback widget submissions -- confirmed against the
+     SDK's own source (packages/core/src/client.ts gates beforeSend to error-type events
+     only), not assumed. The feedback form's free-text message box is redacted separately
+     below via the client's `beforeSendFeedback` hook (a real, documented interception
+     point that fires before the network send, distinct from the onSubmitSuccess/
+     onSubmitError callbacks which only fire after), reusing the same redactNames() used
+     for error events. Belt-and-suspenders: the form's placeholder copy also tells parents
+     not to include names, since redaction is a safety net, not an excuse to skip asking
+     nicely.
 
      The script src below is pinned to Sentry's own CDN (browser.sentry-cdn.com), not
      jsDelivr -- an earlier version of this pointed at
@@ -66,22 +76,51 @@
         isNameRequired: false,
         isEmailRequired: false,
         useSentryUser: false,
-        enableScreenshot: false
+        enableScreenshot: false,
+        messagePlaceholder: "What happened? Please don't include your child's name -- describe them as \"my child\" or by age instead."
       })
     ],
     beforeSend: function(event){
       try{
-        var names = (typeof state !== 'undefined' && state.children ? state.children : [])
-          .map(function(c){ return c && c.name; })
-          .filter(function(n){ return n && n.length > 1; });
-        if(!names.length) return event;
-        return redactNames(event, names);
+        return redactCurrentChildNames(event);
       }catch(e){
         return event;
       }
     }
   });
+  // beforeSend (above) only ever runs for error-type events -- the feedback widget's
+  // free-text message needs its own hook, since a "Report a bug" box is a much easier
+  // place for a parent to type "when I tapped on Simon's icon..." than any error path.
+  // Unlike beforeSend, beforeSendFeedback doesn't use a return value -- it hands you the
+  // event to mutate directly -- so this reassigns each top-level key in place rather than
+  // returning a replacement object the way redactCurrentChildNames does for beforeSend.
+  if(Sentry.getClient){
+    var client = Sentry.getClient();
+    if(client && client.on){
+      client.on('beforeSendFeedback', function(feedbackEvent){
+        try{
+          var names = currentChildNames();
+          if(!names.length || !feedbackEvent) return;
+          Object.keys(feedbackEvent).forEach(function(k){
+            feedbackEvent[k] = redactNames(feedbackEvent[k], names);
+          });
+        }catch(e){ /* never let redaction itself block feedback from sending */ }
+      });
+    }
+  }
 })();
+// Shared by beforeSend (error events) and the beforeSendFeedback hook (feedback events) --
+// looks up the current children fresh each call rather than once at init, since who's in
+// the Family tab can change over the life of the page.
+function currentChildNames(){
+  return (typeof state !== 'undefined' && state.children ? state.children : [])
+    .map(function(c){ return c && c.name; })
+    .filter(function(n){ return n && n.length > 1; });
+}
+function redactCurrentChildNames(value){
+  var names = currentChildNames();
+  return names.length ? redactNames(value, names) : value;
+}
 // Redacts each name in `names` out of every string value in `value`, recursing through
 // arrays/objects. Walks the *parsed* structure and matches real characters -- not
 // JSON.stringify's escaped form (`"` -> `\"`, `\` -> `\\`), which a plain
