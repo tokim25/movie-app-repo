@@ -1264,6 +1264,23 @@ function reportError(err){
     font-size:14px;
     line-height:1.45;
   }
+  .pickCard .detailLink{
+    display:inline-block;
+    margin-top:10px;
+  }
+  /* Issue #78: Shelf's .detail carries left padding sized for its list rows'
+     number/poster gutter (see the base .detail rule and its media-query
+     variants above) -- inside the pick card there's no such gutter, so this
+     override keeps the same look-and-feel (color, size, line-height, the
+     collapsed-by-default .open toggle) without inheriting padding that would
+     misalign the text. Specificity (two classes) beats the plain .detail
+     rules regardless of the media query's source order. */
+  .pickCard .detail{
+    max-width:none;
+    margin:10px 0 0;
+    padding:0;
+    border-bottom:none;
+  }
   .shelfTools{
     display:grid;
     gap:14px;
@@ -2122,6 +2139,8 @@ function reportError(err){
         <div class="pickMeta" id="tonightVerdict">Green Light</div>
         <div class="pickTitle" id="tonightPickTitle"></div>
         <ul class="pickReasons" id="tonightPickReasons"></ul>
+        <button type="button" class="detailLink" id="tonightDetailBtn">Details</button>
+        <div class="detail" id="tonightDetailBody"></div>
         <div class="setupActions">
           <button type="button" class="primaryBtn" id="tonightWatchBtn">Mark watched</button>
           <button type="button" class="secondaryBtn" id="tonightWatchAnywayBtn">Watch anyway</button>
@@ -3689,6 +3708,32 @@ function findTonightCandidate(){
   return MOVIES.length ? { idx: 0, source: 'Shelf' } : null;
 }
 
+// Issue #78: whether tonight's pick card is showing its full CSM-style
+// description. Deliberately separate from Shelf's openDetail (which tracks a
+// movie index across a whole rendered list) -- the pick card only ever shows
+// one movie at a time, so a plain open/closed flag is all it needs, and
+// keeping it separate means toggling one screen's detail can never leave the
+// other screen's detail state stale.
+let tonightDetailOpen = false;
+
+// Issue #78: renders the same full CSM-style description (movie.full) that
+// Shelf's toggleDetail()/.detail element show, so a parent doesn't have to
+// leave Tonight and re-search Shelf to read more about the current pick.
+function renderTonightDetail(){
+  const btn = document.getElementById('tonightDetailBtn');
+  const body = document.getElementById('tonightDetailBody');
+  if(!btn || !body) return;
+  btn.textContent = tonightDetailOpen ? 'Hide' : 'Details';
+  body.classList.toggle('open', tonightDetailOpen);
+  const idx = tonightSelection.currentPickIdx;
+  body.textContent = (tonightDetailOpen && idx !== null) ? (MOVIES[idx].full || '') : '';
+}
+
+function toggleTonightDetail(){
+  tonightDetailOpen = !tonightDetailOpen;
+  renderTonightDetail();
+}
+
 function updateTonightWatchBtn(){
   const btn = document.getElementById('tonightWatchBtn');
   if(!btn) return;
@@ -3728,6 +3773,11 @@ function showTonightPick(){
   updateTonightWatchBtn();
   verdictEl.textContent = tonightVerdictLabel(verdict.verdict);
   document.getElementById('tonightPickTitle').textContent = `${movie.t} (${movie.y})`;
+  // Issue #78: a new pick showing (including via Skip) always starts with its
+  // details collapsed, same as Shelf's detail never carries over between
+  // different movies.
+  tonightDetailOpen = false;
+  renderTonightDetail();
 
   const reasons = document.getElementById('tonightPickReasons');
   reasons.replaceChildren();
@@ -5230,6 +5280,8 @@ document.getElementById('tonightWatchBtn').addEventListener('click', ()=>{
 });
 
 document.getElementById('tonightWatchAnywayBtn').addEventListener('click', logWatchAnywaySignal);
+
+document.getElementById('tonightDetailBtn').addEventListener('click', toggleTonightDetail);
 
 document.getElementById('tonightSkipBtn').addEventListener('click', ()=>{
   skipCurrentTonightPick();
