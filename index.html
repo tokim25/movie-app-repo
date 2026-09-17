@@ -175,6 +175,15 @@ function reportError(err){
     --line:#e6dbc9;
     --accent:#bb5938;
     --accent-rgb:187,89,56;
+    /* #bb5938 on this screen's --bg (#faf5ee) is 4.21:1, which fails WCAG
+       AA's 4.5:1 threshold for normal-size text. --accent-text is a darker
+       variant reserved for text/link uses of the accent color;
+       background+white-text uses (e.g. .iconBtn) keep --accent unchanged
+       since those already pass at 4.57:1. #9d4b2f is 5.56:1 against --bg
+       (#faf5ee) and 4.93:1 against --bg-sub (#f1e7d8, the "New this week"
+       teaser's background, which .detailLink/.sourceLink also render on) --
+       both comfortably above 4.5:1. */
+    --accent-text:#9d4b2f;
     --on-accent:#fff;
     --select-rgb:42,91,76;
     --error-bg:#f7e8df;
@@ -200,6 +209,9 @@ function reportError(err){
       --line:#3a332b;
       --accent:#df8066;
       --accent-rgb:223,128,102;
+      /* Dark mode's accent already passes AA as text (6.48:1 on --bg), so
+         --accent-text just mirrors --accent here. */
+      --accent-text:#df8066;
       --on-accent:#332821;
       --select-rgb:131,173,181;
       --error-bg:#3a211f;
@@ -225,6 +237,7 @@ function reportError(err){
     --line:#3a332b;
     --accent:#df8066;
     --accent-rgb:223,128,102;
+    --accent-text:#df8066;
     --on-accent:#332821;
     --select-rgb:131,173,181;
     --error-bg:#3a211f;
@@ -711,7 +724,7 @@ function reportError(err){
   .detailLink{
     background:none;
     border:none;
-    color:var(--accent);
+    color:var(--accent-text);
     font-family:inherit;
     font-size:13px;
     font-weight:500;
@@ -719,7 +732,7 @@ function reportError(err){
     padding:0;
   }
   .sourceLink{
-    color:var(--accent);
+    color:var(--accent-text);
     font-size:13px;
     font-weight:500;
     text-decoration:none;
@@ -844,6 +857,58 @@ function reportError(err){
     z-index:10;
   }
 
+  .skipLink{
+    position:absolute;
+    top:-1000px;
+    left:8px;
+    z-index:100;
+    background:var(--accent-text);
+    color:var(--on-accent);
+    font-weight:600;
+    font-size:14px;
+    padding:10px 16px;
+    border-radius:8px;
+    text-decoration:none;
+  }
+  .skipLink:focus{
+    top:8px;
+    outline:2px solid var(--ink);
+    outline-offset:2px;
+  }
+  .quickBar:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:-2px;
+  }
+  .listPagination{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    padding:16px 0 8px;
+  }
+  .listPagination button{
+    background:var(--bg-sub);
+    border:1px solid var(--line);
+    color:var(--ink);
+    font-family:inherit;
+    font-size:14px;
+    font-weight:500;
+    padding:8px 16px;
+    border-radius:9px;
+    cursor:pointer;
+  }
+  .listPagination button:disabled{
+    opacity:0.45;
+    cursor:default;
+  }
+  .listPagination button:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:1px;
+  }
+  #listPageStatus{
+    color:var(--ink-soft);
+    font-size:13px;
+  }
   .quickBar{
     position:fixed;
     left:0; right:0; bottom:0;
@@ -875,7 +940,7 @@ function reportError(err){
   .qbBtn svg{ width:22px; height:22px; }
   .qbBtn span{ font-size:11px; font-weight:500; letter-spacing:-0.01em; }
   .qbBtn:active{ background:var(--bg-sub); }
-  .qbBtn.on{ color:var(--accent); }
+  .qbBtn.on{ color:var(--accent-text); }
   .toast.show{ opacity:1; }
 
   .homeScreen{
@@ -1641,10 +1706,12 @@ function reportError(err){
     text-align:left;
     cursor:pointer;
   }
-  .scaleCard:hover,
-  .scaleCard:focus-visible{
+  .scaleCard:hover{
     border-color:rgba(var(--select-rgb),0.32);
-    outline:none;
+  }
+  .scaleCard:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:1px;
   }
   .scaleCard.active{
     border-color:rgba(var(--select-rgb),0.42);
@@ -2133,6 +2200,7 @@ function reportError(err){
 </div>
 
 <div id="browseScreen" class="screenWrap" style="display:none;">
+  <a href="#quickBar" class="skipLink" id="skipToNavLink">Skip to navigation</a>
   <div class="screenTopBar">
     <h1>Shelf</h1>
     <button type="button" class="iconBtn" id="filterSheetBtn" aria-label="Filter and sort">
@@ -2164,6 +2232,11 @@ function reportError(err){
     </form>
   </section>
   <ul id="list"></ul>
+  <div class="listPagination" id="listPagination" style="display:none;">
+    <button type="button" id="listPagePrevBtn">Previous</button>
+    <span id="listPageStatus" aria-live="polite"></span>
+    <button type="button" id="listPageNextBtn">Next</button>
+  </div>
   <div class="empty" id="emptyMsg" style="display:none;">No movies match your search.</div>
 </div>
 
@@ -2224,7 +2297,7 @@ function reportError(err){
   <div class="homeSection">
     <span class="homeSectionLabel">Content settings</span>
     <div class="familyCard" id="familySettingsPanel">
-      <h3 id="familySettingsChildName">No children yet</h3>
+      <h3 id="familySettingsChildName" tabindex="-1">No children yet</h3>
       <p>Adjust content limits for one child at a time. Starter settings come from the child's age; parent changes stay fixed until you switch them back.</p>
       <div class="settingsChildPicker" id="familySettingsChildPicker" aria-label="Choose child for content settings"></div>
       <div id="familySettingsNotice"></div>
@@ -2356,7 +2429,7 @@ function reportError(err){
 
 <div class="toast" id="toast"></div>
 
-<nav class="quickBar" id="quickBar" aria-label="Main navigation">
+<nav class="quickBar" id="quickBar" aria-label="Main navigation" tabindex="-1">
   <button type="button" class="qbBtn" id="tabHome">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h14v14H5z"/><path d="M9 9h6"/><path d="M9 13h4"/></svg>
     <span>Tonight</span>
@@ -2540,6 +2613,14 @@ let genreFilter = "";
 let studioFilter = "";
 let sortMode = "year";
 let currentScreen = "setup";
+// The Shelf list can hold 1,000+ movies. Rendering it all unpaginated makes
+// every row's controls (check/star/details/source/move) into keyboard tab
+// stops, so reaching the nav bar from deep in the list can take thousands of
+// Tab presses. Paginating keeps each render's DOM (and tab-stop count) to a
+// manageable page instead. See render()'s LIST_PAGE_SIZE use and
+// renderListPagination().
+let listPage = 1;
+let lastListSignature = "";
 let tonightSelection = { childIds: new Set(), time: 90, mood: 'calm', currentPickIdx: null, currentPickSource: '', verdict: 'green', skippedMovieNums: new Set() };
 let selectedFamilyChildId = null;
 
@@ -3106,6 +3187,7 @@ function createStarButton(idx, isPriority){
   star.className = 'star' + (isPriority ? ' on' : '');
   star.textContent = isPriority ? '\u2605' : '\u2606';
   star.setAttribute('aria-label', 'Want to watch');
+  star.dataset.idx = idx;
   star.onclick = () => togglePriority(idx);
   return star;
 }
@@ -3237,28 +3319,62 @@ function saveState(){
   }
 }
 
+// renderCurrentView() rebuilds the list/newRow DOM from scratch, so the
+// button that was just activated (and had focus) is destroyed. Without
+// restoring focus to its replacement, keyboard focus silently falls back to
+// <body> and the next Tab press starts over from the top of the page.
+// Captures which control (check/star/moveUp/moveDown) had focus and which
+// container it lived in before a rebuild, then re-focuses the equivalent
+// control for the same movie idx afterward, if one still exists post-render
+// (e.g. it wasn't filtered out).
+const FOCUS_PRESERVING_ROLES = ['check', 'star', 'moveUp', 'moveDown'];
+function focusPreservingRerender(idx, rerender){
+  const active = document.activeElement;
+  let role = null;
+  if(active){
+    role = FOCUS_PRESERVING_ROLES.find(r => active.classList.contains(r)) || null;
+  }
+  const activeIdx = role && active.dataset.idx !== undefined ? Number(active.dataset.idx) : null;
+  const container = role
+    ? (active.closest('.newRow') ? '#newSection' : active.closest('li.row') ? '#list' : null)
+    : null;
+
+  rerender();
+
+  if(role && container && activeIdx === idx){
+    const target = document.querySelector(`${container} .${role}[data-idx="${idx}"]`);
+    if(target) target.focus();
+  }
+}
+
 function toggleCheck(idx){
-  setMark('checked', idx, !markValue(state.checked, idx));
-  saveState();
-  renderCurrentView();
+  focusPreservingRerender(idx, () => {
+    setMark('checked', idx, !markValue(state.checked, idx));
+    saveState();
+    renderCurrentView();
+  });
 }
 
 function togglePriority(idx){
-  setMark('priority', idx, !markValue(state.priority, idx));
-  saveState();
-  renderCurrentView();
+  focusPreservingRerender(idx, () => {
+    setMark('priority', idx, !markValue(state.priority, idx));
+    saveState();
+    renderCurrentView();
+  });
 }
 
 function move(idx, dir){
   const pos = state.order.indexOf(idx);
   const newPos = pos + dir;
   if(newPos < 0 || newPos >= state.order.length) return;
-  const arr = state.order;
-  [arr[pos], arr[newPos]] = [arr[newPos], arr[pos]];
-  state.orderUpdatedAt = now();
-  state.orderDevice = DEVICE_ID;
-  saveState();
-  renderCurrentView();
+  focusPreservingRerender(idx, () => {
+    const arr = state.order;
+    [arr[pos], arr[newPos]] = [arr[newPos], arr[pos]];
+    state.orderUpdatedAt = now();
+    state.orderDevice = DEVICE_ID;
+    saveState();
+    renderCurrentView();
+  });
 }
 
 function toggleDetail(idx){
@@ -3958,6 +4074,7 @@ function renderNewSection(){
     const check = document.createElement('button');
     check.className = 'check' + (isChecked ? ' on' : '');
     check.setAttribute('aria-label', 'Mark watched');
+    check.dataset.idx = idx;
     check.onclick = () => toggleCheck(idx);
 
     const star = createStarButton(idx, isPriority);
@@ -4541,7 +4658,28 @@ function render(){
     }
   }
 
-  visibleOrder.forEach((idx, visiblePos) => {
+  // Reset back to page 1 whenever the search/filter/sort combination
+  // actually changed (a fresh list of results). A re-render triggered by
+  // something else (e.g. toggling a check/star mark) keeps the page the
+  // user was on.
+  const listSignature = JSON.stringify([
+    q, filter, decadeFilter, ageFilter, genreFilter, studioFilter,
+    priorityOnly, newOnly, hideAboveSettings, sortMode
+  ]);
+  if(listSignature !== lastListSignature){
+    listPage = 1;
+    lastListSignature = listSignature;
+  }
+  const LIST_PAGE_SIZE = 50;
+  const totalPages = Math.max(1, Math.ceil(visibleOrder.length / LIST_PAGE_SIZE));
+  if(listPage > totalPages) listPage = totalPages;
+  if(listPage < 1) listPage = 1;
+  const pageStart = (listPage - 1) * LIST_PAGE_SIZE;
+  const pageItems = visibleOrder.slice(pageStart, pageStart + LIST_PAGE_SIZE);
+  renderListPagination(totalPages, visibleOrder.length);
+
+  pageItems.forEach((idx, i) => {
+    const visiblePos = pageStart + i;
     const m = MOVIES[idx];
     const isChecked = markValue(state.checked, idx);
     const globalPos = orderPosition.get(idx);
@@ -4556,6 +4694,7 @@ function render(){
     const check = document.createElement('button');
     check.className = 'check' + (isChecked ? ' on' : '');
     check.setAttribute('aria-label', 'Mark watched');
+    check.dataset.idx = idx;
     check.onclick = () => toggleCheck(idx);
 
     const isPriority = markValue(state.priority, idx);
@@ -4578,11 +4717,17 @@ function render(){
     const moves = document.createElement('div');
     moves.className = 'moves';
     const up = document.createElement('button');
+    up.className = 'moveUp';
+    up.dataset.idx = idx;
     up.textContent = '\u25b2';
+    up.setAttribute('aria-label', `Move ${m.t} up`);
     up.disabled = globalPos === 0;
     up.onclick = () => move(idx, -1);
     const down = document.createElement('button');
+    down.className = 'moveDown';
+    down.dataset.idx = idx;
     down.textContent = '\u25bc';
+    down.setAttribute('aria-label', `Move ${m.t} down`);
     down.disabled = globalPos === state.order.length - 1;
     down.onclick = () => move(idx, 1);
     moves.appendChild(up);
@@ -4607,6 +4752,43 @@ function render(){
 
   updateStats();
 }
+
+const listPaginationEl = document.getElementById('listPagination');
+const listPagePrevBtn = document.getElementById('listPagePrevBtn');
+const listPageNextBtn = document.getElementById('listPageNextBtn');
+const listPageStatusEl = document.getElementById('listPageStatus');
+
+// Updates the existing pagination controls in place (never recreates them)
+// so a click on Prev/Next never loses focus the way rebuilding the row list
+// would.
+function renderListPagination(totalPages, totalCount){
+  if(!listPaginationEl) return;
+  if(totalPages <= 1){
+    listPaginationEl.style.display = 'none';
+    return;
+  }
+  listPaginationEl.style.display = 'flex';
+  listPagePrevBtn.disabled = listPage <= 1;
+  listPageNextBtn.disabled = listPage >= totalPages;
+  listPageStatusEl.textContent = `Page ${listPage} of ${totalPages} (${totalCount} movies)`;
+}
+
+if(listPagePrevBtn) listPagePrevBtn.addEventListener('click', ()=>{
+  if(listPage > 1){
+    listPage -= 1;
+    render();
+  }
+});
+if(listPageNextBtn) listPageNextBtn.addEventListener('click', ()=>{
+  listPage += 1;
+  render();
+});
+
+document.getElementById('skipToNavLink').addEventListener('click', e=>{
+  e.preventDefault();
+  const quickBar = document.getElementById('quickBar');
+  if(quickBar) quickBar.focus();
+});
 
 document.getElementById('search').addEventListener('input', e=>{
   query = e.target.value;
@@ -4828,6 +5010,7 @@ function renderFamilySettings(){
       ].filter(Boolean).join(' ');
       btn.setAttribute('aria-pressed', level === effective.value ? 'true' : 'false');
       btn.setAttribute('title', `${level}: ${flag.levels[level - 1].name}`);
+      btn.setAttribute('aria-label', `Level ${level}: ${flag.levels[level - 1].name}`);
       btn.addEventListener('click', () => setChildFlagLimit(selectedChild.id, flag.id, level));
       limitControl.appendChild(btn);
     }
@@ -4909,6 +5092,8 @@ function renderChildren(){
         setSelectedFamilyChild(child.id);
         const panel = document.getElementById('familySettingsPanel');
         if(panel) panel.scrollIntoView({ behavior:'smooth', block:'start' });
+        const heading = document.getElementById('familySettingsChildName');
+        if(heading) setTimeout(()=>heading.focus(), 260);
       });
       const edit = document.createElement('button');
       edit.type = 'button';
