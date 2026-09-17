@@ -97,6 +97,25 @@ for three days unnoticed (see above). If a handoff needs a check-in later
 (a fallback deadline, a "did this actually land" follow-up), schedule that
 follow-up explicitly rather than assuming it'll surface itself.
 
+**Investigating a bug means `origin/master`, not whatever's on disk (added
+2026-09-17).** The data-file re-sync hard rule above only ever applied to
+*writes*. It turns out the identical failure mode hits *reads*: on
+2026-09-17, two separate bug reports (issues #68 and #75) were filed as
+apparent regressions of fixes merged hours earlier in PR #64 -- both
+investigators quoted "current source" that was byte-for-byte the *stale,
+pre-PR-#64* code sitting in a local checkout that hadn't been fetched in two
+days. The fixes were actually intact and correct on `origin/master` the
+whole time. Both reports were confident and specific (exact line numbers,
+exact quoted code) precisely because the stale local file really did match
+what they were reading -- there was no way to tell from inside that checkout
+alone. This cost real investigation and triage time chasing regressions that
+didn't exist. Before reproducing, confirming, or investigating *any* filed
+bug -- not just before writing a data file -- `git fetch origin master` and
+diff or read against `origin/master`, never trust however old the working
+directory happens to be, even mid-session, even if it felt recently synced.
+A subagent spawned to investigate should be told to do this itself as its
+first step, not assume the parent session's checkout is current.
+
 ## Input: what to add
 
 Titles come from up to three places:
