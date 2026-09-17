@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import vm from 'node:vm';
+import { computeDataHash, currentSwDataVersion } from './data-version.mjs';
 
 const dataFiles = [
   'data.js',
@@ -174,6 +175,21 @@ for (const movie of movies) {
     } catch {
       errors.push(`${movie.num} ${movie.t}: invalid poster URL`);
     }
+  }
+}
+
+// Issue #63: sw.js's DATA_VERSION must match the data files' current
+// content, or a browser with an existing service-worker registration can
+// keep serving a stale catalog after a content-only commit (sw.js's own
+// bytes wouldn't have changed, so the browser never detects an update).
+// Catch a forgotten `node scripts/data-version.mjs` re-stamp here, since
+// this script already runs on every batch.
+{
+  const expectedHash = computeDataHash();
+  const swSource = fs.readFileSync('sw.js', 'utf8');
+  const currentHash = currentSwDataVersion(swSource);
+  if (currentHash !== expectedHash) {
+    errors.push(`sw.js's DATA_VERSION (${currentHash}) is stale, data files hash to ${expectedHash}. Run \`node scripts/data-version.mjs\` and commit the result.`);
   }
 }
 

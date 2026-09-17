@@ -177,3 +177,68 @@ test('a 12-year-old\'s starter settings can reach the highest content tier', asy
   const violenceRow = page.locator('#familySettingsRows .familySettingRow[data-flag="violence"]');
   await expect(violenceRow.locator('.limitControl button.selected')).toHaveText('4');
 });
+
+test('a toddler under 3 can be registered and their age is not clamped up to 3', async ({ page }) => {
+  // Regression test for issue #61: the mirror of #51 above, but for the
+  // floor instead of the ceiling. Same reload-survival requirement --
+  // normalizeChild() re-clamps on load, so the fix has to hold past a reload,
+  // not just bypass the UI select.
+  await page.locator('#addChildBtn').click();
+  await page.locator('#newChildName').fill('Nova');
+  await page.locator('#newChildAge').selectOption('2');
+  await page.locator('#saveNewChildBtn').click();
+  await expect(page.locator('#toast')).toContainText('Nova added with starter settings');
+
+  await page.reload();
+  await page.locator('#tabFamily').click();
+  await page.locator('#familyScreen').waitFor({ state: 'visible' });
+
+  const rows = page.locator('#childEditorList .childEditRow');
+  const count = await rows.count();
+  let found = false;
+  for (let i = 0; i < count; i++) {
+    const row = rows.nth(i);
+    const nameInput = row.locator('input[type="text"]');
+    if ((await nameInput.inputValue()) === 'Nova') {
+      await expect(row.locator('select')).toHaveValue('2');
+      found = true;
+      break;
+    }
+  }
+  expect(found, 'Nova\'s row was not found after reload').toBe(true);
+});
+
+test('every age select offers age 1', async ({ page }) => {
+  // Covers the same three places as issue #51's "at least age 12" test
+  // above, but for the new floor.
+  await page.goto('/');
+  const setupOptions = await page.locator('#setupChildAge option').allTextContents();
+  expect(setupOptions).toContain('1');
+
+  await setupSampleFamily(page);
+  await page.locator('#tabFamily').click();
+  await page.locator('#familyScreen').waitFor({ state: 'visible' });
+
+  await page.locator('#addChildBtn').click();
+  const newChildOptions = await page.locator('#newChildAge option').allTextContents();
+  expect(newChildOptions).toContain('1');
+
+  const editOptions = await page.locator('#childAge-simon option').allTextContents();
+  expect(editOptions).toContain('1');
+});
+
+test('a 1-year-old gets the most cautious starter settings in every category', async ({ page }) => {
+  // Before issue #61's fix, age 1-2 couldn't be registered at all -- this
+  // scenario was unreachable, and starterLimitForFlagAge()'s matrix had no
+  // entries below age 3.
+  await page.locator('#addChildBtn').click();
+  await page.locator('#newChildName').fill('Nova');
+  await page.locator('#newChildAge').selectOption('1');
+  await page.locator('#saveNewChildBtn').click();
+
+  await expect(page.locator('#familySettingsChildName')).toHaveText("Nova's content settings");
+  for (const flag of ['violence', 'language', 'romance', 'drinking']) {
+    const row = page.locator(`#familySettingsRows .familySettingRow[data-flag="${flag}"]`);
+    await expect(row.locator('.limitControl button.selected')).toHaveText('1');
+  }
+});

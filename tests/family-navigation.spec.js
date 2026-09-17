@@ -27,13 +27,13 @@ test('first-run setup leads to Tonight, Shelf, and Family', async ({ page }) => 
   await page.locator('#addChildBtn').click();
   await expect(page.locator('#childOnboardingPanel')).toBeVisible();
   await expect(page.locator('#newChildName')).toBeFocused();
-  await expect(page.locator('#childOnboardingPanel')).toContainText('Starts with product-owned starter settings');
+  await expect(page.locator('#childOnboardingPanel')).toContainText('Starts with age-based starter settings');
   await expect(page.locator('#familySettingsPanel')).toContainText('Adjust content limits');
   await expect(page.locator('#familySettingsPanel .limitControl')).toHaveCount(4);
   await expect(page.locator('#familyScreen')).not.toContainText('Clear all watched marks');
   await expect(page.locator('#reportBugBtn')).toHaveText('Report a bug');
   await expect(page.locator('#familyScreen')).toContainText('Recommendations pull from Want to watch first');
-  await expect(page.locator('#familyScreen')).toContainText('Starter settings are product-owned age defaults');
+  await expect(page.locator('#familyScreen')).toContainText('Starter settings are age-based defaults');
 
   await page.locator('#familySyncBtn').click();
   await expect(page.locator('#familyScreen')).toBeVisible();
@@ -71,4 +71,27 @@ test('mobile tab bar stays horizontal after setup', async ({ page }) => {
   expect(centers[1]).toBeLessThan(centers[2]);
   expect(Math.max(...tabs.map((tab) => tab.y)) - Math.min(...tabs.map((tab) => tab.y))).toBeLessThan(8);
   expect(navBox.height).toBeLessThan(96);
+});
+
+test('first-run setup copy is parent-facing, and the sample-family option is clearly a shortcut (#50)', async ({ page }) => {
+  await page.goto('/');
+
+  const setupText = await page.locator('#setupScreen').textContent();
+  expect(setupText).not.toContain('product-owned');
+  expect(setupText).not.toContain('required system state');
+
+  await expect(page.locator('#setupScreen')).toContainText("We'll set starting content limits based on their age");
+  await expect(page.locator('#setupScreen')).toContainText("your changes always come first");
+
+  // The sample-family button used to sit directly under Continue with no
+  // hint it's a shortcut rather than a second real setup option -- it now
+  // has its own label and an explanatory caption.
+  await expect(page.locator('#setupSampleFamilyBtn')).toHaveText('Explore with a sample family instead');
+  await expect(page.locator('.setupDemoNote')).toContainText('Adds two example kids');
+
+  await setupSampleFamily(page);
+  await page.locator('#tabFamily').click();
+  const familyText = await page.locator('#familyScreen').textContent();
+  expect(familyText).not.toContain('product-owned');
+  expect(familyText).not.toContain('required system state');
 });

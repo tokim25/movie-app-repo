@@ -1,4 +1,15 @@
-const CACHE_VERSION = 'family-feature-v19-20260906-watch-button';
+// DATA_VERSION is a content hash of every data-*.js file, auto-written by
+// `node scripts/data-version.mjs` (issue #63). Folding it into CACHE_VERSION
+// means sw.js's own byte content changes whenever the catalog changes, even
+// if nothing else in this file was touched -- browsers detect a service
+// worker update by byte-diffing the script, so a content-only commit that
+// never bumped this by hand (every commit before this fix) never triggered
+// a real reinstall, and a returning visitor kept seeing the previously
+// cached catalog for a full extra page load with no indication anything
+// was stale. Bump the "v20-20260917-..." prefix by hand for a real code
+// change to this file; DATA_VERSION takes care of itself.
+const DATA_VERSION = '61e9f4258c';
+const CACHE_VERSION = `family-feature-v20-20260917-${DATA_VERSION}`;
 const APP_SHELL = [
   '/',
   '/index.html',
