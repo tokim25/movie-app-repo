@@ -57,7 +57,10 @@ test('new child gets selectable adjustable content settings', async ({ page }) =
   await expect(page.locator('#familySettingsIntro')).toContainText('Age 4 starter settings');
   await expect(page.locator('#familySettingsChildPicker .settingsChildChip.selected')).toHaveText('Theo');
   await expect(page.locator('#familySettingsRows .familySettingRow')).toHaveCount(4);
-  await expect(page.locator('#familySettingsRows .familySettingRow').first()).toContainText('Example: Cars');
+  // Example title for violence level 1 changed from 'Cars' to 'A Charlie Brown
+  // Christmas' by issue #71's fix (de-duplicating CONTENT_FLAGS' repeated
+  // example strings across categories/levels).
+  await expect(page.locator('#familySettingsRows .familySettingRow').first()).toContainText('Example: A Charlie Brown Christmas');
 
   const violenceRow = page.locator('#familySettingsRows .familySettingRow[data-flag="violence"]');
   await expect(violenceRow.locator('.limitControl button.selected')).toHaveText('1');
