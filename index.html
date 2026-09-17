@@ -2505,7 +2505,7 @@ let genreFilter = "";
 let studioFilter = "";
 let sortMode = "year";
 let currentScreen = "setup";
-let tonightSelection = { childIds: new Set(), time: 90, mood: 'calm', currentPickIdx: null, currentPickSource: '', amber: false, skippedMovieNums: new Set() };
+let tonightSelection = { childIds: new Set(), time: 90, mood: 'calm', currentPickIdx: null, currentPickSource: '', verdict: 'green', skippedMovieNums: new Set() };
 let selectedFamilyChildId = null;
 
 const GOOGLE_CLIENT_ID = "987776124251-t4skn7ia6qd1r88ftass906jinm98v1q.apps.googleusercontent.com";
@@ -3471,6 +3471,16 @@ function movieFitForKids(movie, kids){
   return { verdict: 'green', summary: 'Fits settings', issues: [] };
 }
 
+// Shared Oxford-comma joiner: "Ava" / "Ava and Ben" / "Ava, Ben, and Cora".
+// Used both for summarizeChildUnderstanding()'s personalized-flag list and
+// movieVerdictForKids()'s green-verdict child list, since both need the same
+// "join N names, comma-separated, with a trailing 'and'" shape.
+function joinWithAnd(names){
+  if(names.length <= 1) return names[0] || '';
+  if(names.length === 2) return `${names[0]} and ${names[1]}`;
+  return `${names.slice(0, -1).join(', ')}, and ${names[names.length - 1]}`;
+}
+
 function movieVerdictForKids(movie, kids){
   if(kids.length === 0) return { verdict: 'green', reasons: ['Adults-only night: safety limits are not applied.'] };
   const fit = movieFitForKids(movie, kids);
@@ -3478,15 +3488,27 @@ function movieVerdictForKids(movie, kids){
   const amber = fit.issues.filter(issue => issue.severity === 'amber').map(issue => `${issue.child.name}: ${issue.flag.plain}`);
   if(red.length) return { verdict: 'red', reasons: red };
   if(amber.length) return { verdict: 'amber', reasons: amber };
-  return { verdict: 'green', reasons: kids.map(child => `Within ${child.name}'s starter settings.`).slice(0, 2) };
+  // Issue #59: this used to be one reason per kid, capped with .slice(0, 2)
+  // -- so with 3+ kids selected, only the first one or two ever got cited as
+  // why the pick is a good fit. A single summarized reason naming everyone
+  // selected scales to any number of kids and keeps showTonightPick()'s
+  // single-element reasons[0] read working unchanged.
+  return { verdict: 'green', reasons: [`Within ${joinWithAnd(kids.map(child => child.name))}'s starter settings.`] };
 }
 
-function isTonightEligible(idx, kids, maxAge, includeSkipped){
+function isTonightEligible(idx, kids, maxAge, includeSkipped, requireGreen){
   const movie = MOVIES[idx];
   const age = parseAge(movie.ca) || 99;
   if(kids.length && age > maxAge + 2) return false;
   if(markValue(state.checked, idx) && tonightSelection.mood !== 'favorite') return false;
   if(!includeSkipped && tonightSelection.skippedMovieNums.has(movieKey(idx))) return false;
+  // Issue #49: candidate selection used to ignore content fit entirely, so
+  // the first pick could legitimately be red/amber for every selected kid
+  // even when a green option existed further down the list. requireGreen
+  // (set only in findTonightCandidate()'s strict pass) makes green the
+  // preferred outcome without ever blocking a pick outright -- the relaxed
+  // pass right after it still accepts any eligible movie, same as before.
+  if(requireGreen && movieFitForKids(movie, kids).verdict !== 'green') return false;
   return true;
 }
 
@@ -3554,13 +3576,13 @@ function findTonightCandidate(){
   const tiered = tonightSourceTiers();
 
   for(const tier of tiered){
-    const idx = tier.indices.find(candidate => isTonightEligible(candidate, kids, maxAge, false));
+    const idx = tier.indices.find(candidate => isTonightEligible(candidate, kids, maxAge, false, true));
     if(idx !== undefined) return { idx, source: tier.source };
   }
 
   tonightSelection.skippedMovieNums.clear();
   for(const tier of tiered){
-    const idx = tier.indices.find(candidate => isTonightEligible(candidate, kids, maxAge, true));
+    const idx = tier.indices.find(candidate => isTonightEligible(candidate, kids, maxAge, true, false));
     if(idx !== undefined) return { idx, source: tier.source };
   }
 
@@ -3576,6 +3598,15 @@ function updateTonightWatchBtn(){
   btn.classList.toggle('done', isWatched);
 }
 
+// Issue #49B: shared by showTonightPick() and the tonightWatchBtn handler so
+// the red/amber/green label text can't drift between the two places that
+// render it.
+function tonightVerdictLabel(verdict){
+  if(verdict === 'red') return 'Red: above settings';
+  if(verdict === 'amber') return 'Amber: worth a quick look';
+  return 'Green Light';
+}
+
 function showTonightPick(){
   setTonightEditOpen(false);
   const candidate = findTonightCandidate();
@@ -3586,18 +3617,24 @@ function showTonightPick(){
   const verdict = movieVerdictForKids(movie, kids);
   tonightSelection.currentPickIdx = idx;
   tonightSelection.currentPickSource = candidate.source;
-  tonightSelection.amber = verdict.verdict === 'amber';
+  // Issue #49B: red is reachable here too (findTonightCandidate()'s green
+  // preference is a preference, not a guarantee -- its relaxed fallback pass
+  // can still surface a red pick when nothing green is available at all), so
+  // this tracks the full verdict rather than a red/non-red boolean.
+  tonightSelection.verdict = verdict.verdict;
 
   const verdictEl = document.getElementById('tonightVerdict');
   document.getElementById('tonightPickCard').classList.toggle('watched', markValue(state.checked, idx));
   updateTonightWatchBtn();
-  verdictEl.textContent = verdict.verdict === 'amber' ? 'Amber: worth a quick look' : 'Green Light';
+  verdictEl.textContent = tonightVerdictLabel(verdict.verdict);
   document.getElementById('tonightPickTitle').textContent = `${movie.t} (${movie.y})`;
 
   const reasons = document.getElementById('tonightPickReasons');
   reasons.replaceChildren();
   const copy = [];
-  if(verdict.verdict === 'amber'){
+  if(verdict.verdict === 'red'){
+    copy.push(verdict.reasons.length > 2 ? `Above settings for ${verdict.reasons.length} of the kids watching.` : `Above ${verdict.reasons.join(' and ')}.`);
+  }else if(verdict.verdict === 'amber'){
     copy.push(verdict.reasons.length > 2 ? `Goes over the line for ${verdict.reasons.length} of the kids watching.` : `Over ${verdict.reasons.join(' and ')}.`);
   }else{
     copy.push(verdict.reasons[0] || 'Within the selected child settings.');
@@ -3609,8 +3646,17 @@ function showTonightPick(){
     li.textContent = text;
     reasons.appendChild(li);
   });
-  document.getElementById('tonightWatchAnywayBtn').style.display = verdict.verdict === 'amber' ? 'inline-block' : 'none';
+  // Issue #49B: "Watch anyway" is the same override workflow for red as for
+  // amber -- a parent choosing to proceed past a caution -- so it shows for
+  // either non-green verdict, not just amber.
+  document.getElementById('tonightWatchAnywayBtn').style.display = verdict.verdict !== 'green' ? 'inline-block' : 'none';
   document.getElementById('tonightPickCard').style.display = 'block';
+  // Issue #57: the button's static markup says "Find tonight's pick", but a
+  // pick showing switches its own click handler over to skip-behavior. Keep
+  // the label honest about which action it now performs; resetTonightSkips()
+  // (the one function every Change-panel handler already calls to invalidate
+  // the current pick) is the matching place that reverts it.
+  document.getElementById('findTonightPickBtn').textContent = 'Skip to next pick';
 }
 
 function skipCurrentTonightPick(){
@@ -3622,7 +3668,7 @@ function skipCurrentTonightPick(){
 
 function logWatchAnywaySignal(){
   const idx = tonightSelection.currentPickIdx;
-  if(idx === null || !tonightSelection.amber) return;
+  if(idx === null || tonightSelection.verdict === 'green') return;
   const movie = MOVIES[idx];
   const kids = selectedKids();
   const events = kids.map(child => ({
@@ -3642,6 +3688,12 @@ function resetTonightSkips(){
   tonightSelection.skippedMovieNums.clear();
   tonightSelection.currentPickIdx = null;
   tonightSelection.currentPickSource = '';
+  // Issue #57: revert the button label showTonightPick() switches to
+  // 'Skip to next pick' -- this is the single function every handler that
+  // invalidates the current pick (kid/mood/time chips, Adults only) already
+  // calls, so it's the one place needed to reset it too.
+  const findBtn = document.getElementById('findTonightPickBtn');
+  if(findBtn) findBtn.textContent = "Find tonight's pick";
 }
 
 function renderTonightKidChoices(){
@@ -4538,8 +4590,7 @@ function summarizeChildUnderstanding(child){
     return setting && setting.source === 'parent';
   });
   if(personalized.length === 0) return 'Using product-owned starter settings for this age.';
-  const names = personalized.map(flag => flag.plain);
-  const joined = names.length === 1 ? names[0] : names.length === 2 ? `${names[0]} and ${names[1]}` : `${names.slice(0, -1).join(', ')}, and ${names[names.length - 1]}`;
+  const joined = joinWithAnd(personalized.map(flag => flag.plain));
   return `Personalized for ${joined}. Everything else follows starter settings for age ${child.age}.`;
 }
 
@@ -5046,7 +5097,7 @@ document.getElementById('tonightWatchBtn').addEventListener('click', ()=>{
   document.getElementById('tonightPickCard').classList.toggle('watched', isWatched);
   document.getElementById('tonightVerdict').textContent = isWatched
     ? 'Watched'
-    : (tonightSelection.amber ? 'Amber: worth a quick look' : 'Green Light');
+    : tonightVerdictLabel(tonightSelection.verdict);
   updateTonightWatchBtn();
   showToast(isWatched ? 'Marked watched' : 'Removed from watched');
 });
@@ -5064,7 +5115,6 @@ document.querySelectorAll('#tonightTimeChoices .choiceChip').forEach(btn=>{
     resetTonightSkips();
     setSelectedChoice('tonightTimeChoices', 'time', tonightSelection.time);
     renderTonightSummary();
-    setTonightEditOpen(false);
   });
 });
 
@@ -5074,7 +5124,6 @@ document.querySelectorAll('#tonightMoodChoices .choiceChip').forEach(btn=>{
     resetTonightSkips();
     setSelectedChoice('tonightMoodChoices', 'mood', tonightSelection.mood);
     renderTonightSummary();
-    setTonightEditOpen(false);
   });
 });
 
