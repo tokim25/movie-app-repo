@@ -425,6 +425,26 @@ status sweep days later. Subscribe right after the PR is created, in the
 same breath as opening it, regardless of role -- this applies to any session
 opening a PR from this skill, not just the weekly-triage flow.
 
+**This isn't just the opener's job -- every role gets looped into a PR at some
+point, and each one subscribes the moment they are, not on a "poll and see"
+basis.** Per tokim25 (September 2026), replacing three hourly polling
+Routines (Coder/Reviewer/Tech Lead each burning a full turn hourly just to
+confirm nothing changed) with this instead:
+- Coder subscribes on open (the rule above).
+- Reviewer subscribes the moment Coder's "ready for review" notice reaches
+  them.
+- Tech Lead subscribes the moment they're told a PR exists / is awaiting
+  eventual merge authorization -- whether they noticed it themselves or
+  someone flagged it to them.
+
+Once everyone relevant to a PR is subscribed, a real GitHub event (an
+APPROVED review, a new commit, a CI status change) wakes every subscribed
+session automatically -- no polling, no manual relay needed for those hops.
+The one push that still has to happen by hand is the initial "a PR exists"
+notice from Coder to Reviewer: there's no generic "watch all new PRs"
+subscription, so that first handoff message is what gets everyone else
+started.
+
 ## Displaying the source link to users
 
 `index.html`'s row-detail rendering (`render()` and `renderGroupedView()`) should
