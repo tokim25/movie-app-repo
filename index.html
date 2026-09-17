@@ -2540,7 +2540,16 @@ let genreFilter = "";
 let studioFilter = "";
 let sortMode = "year";
 let currentScreen = "setup";
-let tonightSelection = { childIds: new Set(), time: 90, mood: 'calm', currentPickIdx: null, currentPickSource: '', verdict: 'green', skippedMovieNums: new Set() };
+// excludedChildIds (not an opt-in childIds allowlist) so every child-roster
+// mutation path -- local addChild(), completeSetupWithChildren(), boot,
+// a Drive sync-merge, or any future path (import, invite, undo) -- includes
+// new children by default with zero special-case code. Inclusion is derived
+// (selectedKids() below), not a fact each mutation path has to remember to
+// record; this fixed issue #48 and #79, both cases of a childIds allowlist
+// not being told about a child it hadn't seen yet. tonightSelection is
+// session-only (never saved/serialized -- see selectedKids()), so there's no
+// persisted-format migration concern with this shape.
+let tonightSelection = { excludedChildIds: new Set(), time: 90, mood: 'calm', currentPickIdx: null, currentPickSource: '', verdict: 'green', skippedMovieNums: new Set() };
 let selectedFamilyChildId = null;
 
 const GOOGLE_CLIENT_ID = "987776124251-t4skn7ia6qd1r88ftass906jinm98v1q.apps.googleusercontent.com";
@@ -3316,13 +3325,14 @@ function completeSetupWithChildren(children){
   selectedFamilyChildId = state.children[0] ? state.children[0].id : null;
   touchChildren();
   saveState();
-  tonightSelection.childIds = new Set(state.children.map(child => child.id));
+  // Fresh setup: nobody has been deselected yet, so everyone starts included.
+  tonightSelection.excludedChildIds = new Set();
   showScreen('home');
   showToast('Family setup saved');
 }
 
 function selectedKids(){
-  return state.children.filter(child => tonightSelection.childIds.has(child.id));
+  return state.children.filter(child => !tonightSelection.excludedChildIds.has(child.id));
 }
 
 function tonightTimeLabel(){
@@ -3803,11 +3813,11 @@ function renderTonightKidChoices(){
   state.children.forEach(child=>{
     const btn = document.createElement('button');
     btn.type = 'button';
-    btn.className = 'choiceChip' + (tonightSelection.childIds.has(child.id) ? ' selected' : '');
+    btn.className = 'choiceChip' + (!tonightSelection.excludedChildIds.has(child.id) ? ' selected' : '');
     btn.textContent = child.name;
     btn.addEventListener('click', ()=>{
-      if(tonightSelection.childIds.has(child.id)) tonightSelection.childIds.delete(child.id);
-      else tonightSelection.childIds.add(child.id);
+      if(tonightSelection.excludedChildIds.has(child.id)) tonightSelection.excludedChildIds.delete(child.id);
+      else tonightSelection.excludedChildIds.add(child.id);
       resetTonightSkips();
       renderTonightKidChoices();
       renderTonightSummary();
@@ -3816,10 +3826,10 @@ function renderTonightKidChoices(){
   });
   const adultsOnly = document.createElement('button');
   adultsOnly.type = 'button';
-  adultsOnly.className = 'choiceChip' + (tonightSelection.childIds.size === 0 ? ' selected' : '');
+  adultsOnly.className = 'choiceChip' + (selectedKids().length === 0 ? ' selected' : '');
   adultsOnly.textContent = 'Adults only';
   adultsOnly.addEventListener('click', ()=>{
-    tonightSelection.childIds.clear();
+    tonightSelection.excludedChildIds = new Set(state.children.map(child => child.id));
     resetTonightSkips();
     renderTonightKidChoices();
     renderTonightSummary();
@@ -4318,6 +4328,12 @@ async function mergeAndWriteToDrive(){
     // beforeWrite recheck sees no further drift and writes over the collision unnoticed.
     const readAtModifiedTime = await getDriveFileModifiedTime(fileId);
     const remote = await readDriveFile(fileId);
+    // state.children may be wholesale-replaced here when the remote side's
+    // childrenUpdatedAt is newer (e.g. another device added a child) -- see
+    // issue #79. No tonightSelection recompute needed afterwards:
+    // tonightSelection.excludedChildIds is opt-out, so a child that just
+    // arrived via this merge and was never explicitly excluded is already
+    // included in selectedKids().
     state = mergeState(state, remote);
     persistLocalState();
 
@@ -4690,6 +4706,7 @@ function removeChild(id){
   if(!window.confirm(`Remove ${child.name}? This can't be undone.`)) return;
   state.children = state.children.filter(c => c.id !== id);
   if(selectedFamilyChildId === id) selectedFamilyChildId = state.children[0] ? state.children[0].id : null;
+  tonightSelection.excludedChildIds.delete(id);
   touchChildren();
   saveState();
   renderChildren();
@@ -4702,7 +4719,8 @@ function addChild(rawName, rawAge){
   const child = createChild(name, rawAge);
   state.children.push(child);
   selectedFamilyChildId = child.id;
-  tonightSelection.childIds.add(child.id);
+  // No tonightSelection bookkeeping needed: excludedChildIds is opt-out, so
+  // a brand-new child is included by default just by not being in it yet.
   touchChildren();
   saveState();
   renderChildren();
@@ -5417,9 +5435,11 @@ async function decideInitialScreen(){
     ]);
     if(loadingEl) loadingEl.style.display = 'none';
     // state.children may have just changed via the merge in
-    // syncFromGoogleDrive() -- recompute rather than use the value from
-    // before the wait.
-    tonightSelection.childIds = new Set((state.children || []).map(child => child.id));
+    // syncFromGoogleDrive() -- no recompute needed here: selectedKids()
+    // derives inclusion from tonightSelection.excludedChildIds (opt-out),
+    // so a child that just arrived via merge and was never explicitly
+    // excluded is already included, with no bookkeeping required at any
+    // children-mutating call site (see tonightSelection's declaration).
   }
   showScreen(state.children && state.children.length ? 'home' : 'setup');
 }
@@ -5429,7 +5449,9 @@ initTheme();
 loadState();
 tryInitGoogleSync();
 renderStudioGrid();
-tonightSelection.childIds = new Set((state.children || []).map(child => child.id));
+// No tonightSelection seeding needed here: excludedChildIds starts empty
+// (see its declaration), so every child loadState() just populated is
+// already included by default.
 decideInitialScreen();
 </script>
 </body>
