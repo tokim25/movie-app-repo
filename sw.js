@@ -8,7 +8,7 @@
 // cached catalog for a full extra page load with no indication anything
 // was stale. Bump the "v20-20260917-..." prefix by hand for a real code
 // change to this file; DATA_VERSION takes care of itself.
-const DATA_VERSION = '61e9f4258c';
+const DATA_VERSION = 'd6cc137ac0';
 const CACHE_VERSION = `family-feature-v20-20260917-${DATA_VERSION}`;
 const APP_SHELL = [
   '/',
