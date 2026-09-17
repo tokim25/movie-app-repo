@@ -1115,6 +1115,15 @@ function reportError(err){
     font-size:13px;
     line-height:1.45;
   }
+  .setupDemoOption{
+    margin-top:14px;
+  }
+  .setupDemoNote{
+    margin-top:6px;
+    color:var(--ink-soft);
+    font-size:12px;
+    line-height:1.4;
+  }
   .tonightAsk{
     display:grid;
     gap:14px;
@@ -2033,7 +2042,7 @@ function reportError(err){
 <div id="setupScreen" class="setupScreen" style="display:none;">
   <div class="setupCard">
     <h1>Set up your family</h1>
-    <p>Add a child first. Family Feature creates product-owned starter settings from age so Tonight can make a verdict immediately; parent changes can happen now or later in Family.</p>
+    <p>Add a child first. We'll set starting content limits based on their age so Tonight can make a recommendation right away — change anything now or later in Family, and your changes always stick.</p>
     <div class="setupFields">
       <div class="childField">
         <label for="setupChildName">Child name</label>
@@ -2046,9 +2055,12 @@ function reportError(err){
     </div>
     <div class="setupActions">
       <button type="button" class="primaryBtn" id="setupSaveChildBtn">Continue</button>
-      <button type="button" class="secondaryBtn" id="setupSampleFamilyBtn">Use Simon and Nora for review</button>
     </div>
-    <div class="logicNote">Starter settings are required system state, not external age recommendations. They can evolve only where a parent has not already changed a setting.</div>
+    <div class="setupDemoOption">
+      <button type="button" class="secondaryBtn" id="setupSampleFamilyBtn">Explore with a sample family instead</button>
+      <p class="setupDemoNote">Adds two example kids (Simon &amp; Nora) so you can look around before adding your own — rename, edit, or remove them anytime in Family.</p>
+    </div>
+    <div class="logicNote">Starter settings are based on your child's age, not an official recommendation. They'll keep adjusting with age wherever you haven't set something yourself — your changes always come first.</div>
   </div>
 </div>
 
@@ -2200,7 +2212,7 @@ function reportError(err){
             </div>
           </div>
           <ul class="childOnboardingSteps" aria-label="Child setup flow">
-            <li>Starts with product-owned starter settings the moment your child is added.</li>
+            <li>Starts with age-based starter settings the moment your child is added.</li>
             <li>Flags settings worth a second look, without changing them for you.</li>
             <li>Keeps up with their age, but never overrides a setting you've already changed.</li>
           </ul>
@@ -2292,8 +2304,8 @@ function reportError(err){
         <li>Tonight checks the selected kids first. Adults-only nights do not apply child safety limits.</li>
         <li>Recommendations pull from Want to watch first, recent releases second, and the rest of Shelf last.</li>
         <li>The kind of night changes the order inside those pools: calm favors lower energy and lower intensity, silly favors comedy and animation, something new favors recent release years, and old favourite favors watched titles.</li>
-        <li>Each movie gets a product-owned experience profile from its age guidance, genre, release year, description, watched state, and Want to watch state.</li>
-        <li>Starter settings are product-owned age defaults. Parent-set limits stay fixed unless you switch them back to starter settings.</li>
+        <li>Each movie gets an experience profile built from its age guidance, genre, release year, description, watched state, and Want to watch state.</li>
+        <li>Starter settings are age-based defaults. Parent-set limits stay fixed unless you switch them back to starter settings.</li>
         <li>CSM means Common Sense Media. DCOM means Disney Channel Original Movie.</li>
       </ul>
       <p>Your family data stays in this browser unless you turn on sync. Google sync stores a small app-only file in your Google Drive.</p>
@@ -2488,9 +2500,13 @@ const CONTENT_MODEL_VERSION = 2;
 // register a 10+ kid, forcing parents to misreport their child's age). 13
 // covers "at least 12, ideally higher" through early teens per the issue,
 // without stretching into a "teen" product the app was never designed as.
+// Floor lowered from 3 to 1 for issue #61: a real toddler under 3 was
+// silently clamped up to 3, misrepresenting their age in every
+// age-scaled starter limit. 1 admits real toddlers without stretching into
+// infant-specific content guidance the app has no data model for.
 // Single source of truth for every age <select> (see populateAgeSelect())
 // and both age-clamping paths (clampChildAge(), normalizeChild()).
-const MIN_CHILD_AGE = 3;
+const MIN_CHILD_AGE = 1;
 const MAX_CHILD_AGE = 13;
 function defaultChildren(){
   return [];
@@ -3364,11 +3380,14 @@ function starterLimitForFlagAge(flagId, age){
   // nothing below age 10 ever reached. Drinking stays capped at 3 through
   // 13 -- explicit substance content ("Older-kid context") staying out of
   // starter defaults even for early teens is the more cautious call.
+  // Ages 1-2 (issue #61) stay at level 1 in every category -- the same
+  // value every row already used at ages 3-4, so a toddler gets the
+  // matrix's existing most-cautious tier rather than a new one.
   const matrix = {
-    violence: [1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4],
-    language: [1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4],
-    romance: [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 4],
-    drinking: [1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3]
+    violence: [1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4],
+    language: [1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4],
+    romance: [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 4],
+    drinking: [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3]
   };
   const values = matrix[flagId] || matrix.violence;
   return values[safeAge - MIN_CHILD_AGE] || 1;
@@ -4697,7 +4716,7 @@ function summarizeChildUnderstanding(child){
     const setting = child.settings && child.settings[flag.id];
     return setting && setting.source === 'parent';
   });
-  if(personalized.length === 0) return 'Using product-owned starter settings for this age.';
+  if(personalized.length === 0) return 'Using age-based starter settings.';
   const joined = joinWithAnd(personalized.map(flag => flag.plain));
   return `Personalized for ${joined}. Everything else follows starter settings for age ${child.age}.`;
 }
@@ -4754,7 +4773,7 @@ function renderFamilySettings(){
     box.appendChild(dismiss);
     notice.appendChild(box);
   }
-  intro.textContent = `Age ${selectedChild.age} starter settings are shown with an outline. The numbered levels are product-owned calibration steps, not external ratings.`;
+  intro.textContent = `Age ${selectedChild.age} starter settings are shown with an outline. The numbered levels are our own calibration steps, not official ratings.`;
 
   CONTENT_FLAGS.forEach(flag=>{
     const effective = settingForChildFlag(selectedChild, flag.id);

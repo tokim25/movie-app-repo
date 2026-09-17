@@ -112,6 +112,16 @@ Titles come from up to three places:
    timestamps against the running log kept in `PENDING_REQUESTS.md`
    (repurposed as a processed-log, not a queue -- see that file) before
    treating a row as new.
+
+   **Where the in-app form itself lives (corrected 2026-09-17, issue #26
+   sub-item 3).** An earlier PM amendment called for folding "Request a
+   movie" into a Search screen. That's now moot: PR #29 (2026-09-06) removed
+   the app's Watchlist/Search screens outright, and nothing replaced them --
+   there is no Search surface for Request to belong to. The form lives in
+   the Browse/Shelf screen today (`#requestMoviePanel`), which is where it
+   should stay unless a real Search surface gets built for other reasons; if
+   that ever happens, revisit this note rather than assuming Request should
+   move with it.
 3. **Weekly new-release discovery** (scheduled-task runs only -- see the
    section below) -- proactively found titles, not requested by anyone.
 
@@ -289,6 +299,21 @@ the "New this week" section, which is the correct behavior for anything not
 actually added recently. Run `node scripts/validate-data.mjs` after writing —
 it checks `addedAt` is a real date and `addedVia` is one of the two allowed
 values, among everything else it already checks.
+
+**Also run `node scripts/data-version.mjs` after any data-file change, before
+committing (added 2026-09-17, issue #63).** It re-stamps `sw.js`'s
+`DATA_VERSION` constant with a content hash of every `data-*.js` file, which
+folds into `CACHE_VERSION` -- so `sw.js`'s own bytes change whenever the
+catalog changes, even if nothing else in that file was touched. Browsers
+detect a service-worker update by byte-diffing the script, so this is what
+makes a content-only commit actually trigger a real reinstall on a
+returning visitor's next page load, instead of silently serving the
+previous catalog for a full extra reload. `validate-data.mjs` already fails
+loudly if this is forgotten (it runs the same check), so this is a
+belt-and-suspenders reminder, not the only place this gets caught -- but
+running it directly is simpler than puzzling out `validate-data.mjs`'s
+error message. Stage the resulting one-line `sw.js` diff along with
+everything else in this run's commit.
 
 **Also set going forward (added 2026-09-07, corrected 2026-09-11 -- tracks
 content-model coverage for the backfill job):** `csmRecheckedAt`, today's
