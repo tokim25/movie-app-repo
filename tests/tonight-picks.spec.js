@@ -111,6 +111,36 @@ test('watching tonight pick shows watched visual state', async ({ page }) => {
   await expect(page.locator('#tonightWatchBtn')).not.toHaveClass(/done/);
 });
 
+test('tonight pick card reveals the same full CSM-style detail Shelf shows (#78)', async ({ page }) => {
+  await page.locator('#findTonightPickBtn').click();
+  const expectedFull = await page.evaluate(() => MOVIES[tonightSelection.currentPickIdx].full);
+
+  await expect(page.locator('#tonightDetailBtn')).toHaveText('Details');
+  await expect(page.locator('#tonightDetailBody')).toBeHidden();
+
+  await page.locator('#tonightDetailBtn').click();
+
+  await expect(page.locator('#tonightDetailBtn')).toHaveText('Hide');
+  await expect(page.locator('#tonightDetailBody')).toBeVisible();
+  await expect(page.locator('#tonightDetailBody')).toHaveText(expectedFull);
+
+  await page.locator('#tonightDetailBtn').click();
+
+  await expect(page.locator('#tonightDetailBtn')).toHaveText('Details');
+  await expect(page.locator('#tonightDetailBody')).toBeHidden();
+});
+
+test('tonight detail collapses again once a new pick shows (#78)', async ({ page }) => {
+  await page.locator('#findTonightPickBtn').click();
+  await page.locator('#tonightDetailBtn').click();
+  await expect(page.locator('#tonightDetailBody')).toBeVisible();
+
+  await page.locator('#tonightSkipBtn').click();
+
+  await expect(page.locator('#tonightDetailBtn')).toHaveText('Details');
+  await expect(page.locator('#tonightDetailBody')).toBeHidden();
+});
+
 test('night mood changes the selected movie', async ({ page }) => {
   await page.evaluate(() => {
     // Issue #49 makes findTonightCandidate() prefer a green pick globally,
