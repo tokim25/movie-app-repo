@@ -1408,6 +1408,14 @@ function reportError(err){
     font-size:12px;
     font-style:normal;
   }
+  .familyCueActions{
+    display:flex;
+    gap:16px;
+    margin-top:8px;
+  }
+  .familyCueActions .linkBtn{
+    font-size:12px;
+  }
   .sadRemovedNotice{
     display:flex;
     justify-content:space-between;
@@ -2979,6 +2987,22 @@ function normalizeContentSettings(rawSettings){
   return settings;
 }
 
+// Issue #72: per-flag "Not now" dismissal timestamps for the Family tab's
+// personalization cue, in the same sticky-until-dismissed spirit as
+// sadRemovedNoticePending above -- normalized here so it survives a reload
+// or a Google sync merge instead of quietly resetting the cue to visible.
+function normalizeWatchCueDismissedAt(raw){
+  const out = {};
+  if(!raw || typeof raw !== 'object') return out;
+  CONTENT_FLAG_IDS.forEach(flagId=>{
+    const value = raw[flagId];
+    if(typeof value === 'number' && Number.isFinite(value) && value > 0){
+      out[flagId] = value;
+    }
+  });
+  return out;
+}
+
 function normalizeChild(raw){
   if(!raw || typeof raw !== 'object') return null;
   const name = typeof raw.name === 'string' ? raw.name.trim().slice(0, 60) : '';
@@ -2996,7 +3020,8 @@ function normalizeChild(raw){
     // Sticky once set (added 2026-09-07): stays true across saves until the
     // parent explicitly dismisses the one-time "Sad moments removed" notice,
     // even after the underlying legacy 'sad' setting itself is gone.
-    sadRemovedNoticePending: hadParentSad || !!raw.sadRemovedNoticePending
+    sadRemovedNoticePending: hadParentSad || !!raw.sadRemovedNoticePending,
+    watchCueDismissedAt: normalizeWatchCueDismissedAt(raw.watchCueDismissedAt)
   };
 }
 
@@ -3451,6 +3476,37 @@ function dismissSadRemovedNotice(childId){
   renderChildren();
 }
 
+// Issue #72: "Not now" for the Family tab's personalization cue. Follows the
+// same persisted-flag-on-the-child shape as dismissSadRemovedNotice() above,
+// but keyed per content flag (a child can dismiss a Language suggestion
+// without silencing a later Violence & Scariness one) and stores a timestamp
+// rather than a boolean, so a fresh run of 3 watch-anyway overrides logged
+// after the dismissal can surface a new suggestion instead of being
+// suppressed forever.
+function dismissWatchAnywayCue(childId, flagId){
+  const child = state.children.find(c => c.id === childId);
+  if(!child || !CONTENT_FLAG_IDS.includes(flagId)) return;
+  if(!child.watchCueDismissedAt || typeof child.watchCueDismissedAt !== 'object') child.watchCueDismissedAt = {};
+  child.watchCueDismissedAt[flagId] = now();
+  touchChildren();
+  saveState();
+  renderChildren();
+}
+
+// Issue #72's actionable control: jumps to and focuses the flagged
+// category's row in the Family settings panel so a parent can act on the
+// suggestion directly, instead of hunting for it themselves.
+function reviewChildFlagSetting(childId, flagId){
+  setSelectedFamilyChild(childId);
+  const panel = document.getElementById('familySettingsPanel');
+  if(panel) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const row = document.querySelector(`#familySettingsRows [data-flag="${flagId}"]`);
+  if(row){
+    row.setAttribute('tabindex', '-1');
+    setTimeout(() => row.focus(), 260);
+  }
+}
+
 function inferredMovieFlagLevel(movie){
   const age = parseAge(movie.ca) || 6;
   if(age <= 5) return 1;
@@ -3594,6 +3650,22 @@ function movieVerdictForKids(movie, kids){
   // selected scales to any number of kids and keeps showTonightPick()'s
   // single-element reasons[0] read working unchanged.
   return { verdict: 'green', reasons: [`Within ${joinWithAnd(kids.map(child => child.name))}'s starter settings.`] };
+}
+
+// Issue #70: the flag actually responsible for a single child's amber/red
+// verdict on this movie, so "Watch anyway" events can be logged against the
+// real category instead of a hardcoded one. Worst-first: a red issue (any
+// category) always outranks an amber one; ties within a severity keep
+// CONTENT_FLAGS' order (Violence & Scariness, Language, Romance, Drinking).
+// Returns null when this child has no issue at all for this movie (e.g. the
+// overall pick verdict is non-green only because of a different selected
+// child).
+function primaryOverrideFlagForChild(movie, child){
+  const fit = movieFitForKids(movie, [child]);
+  const redIssue = fit.issues.find(issue => issue.severity === 'red');
+  if(redIssue) return redIssue.flag.id;
+  const amberIssue = fit.issues.find(issue => issue.severity === 'amber');
+  return amberIssue ? amberIssue.flag.id : null;
 }
 
 function isTonightEligible(idx, kids, maxAge, includeSkipped, requireGreen){
@@ -3771,14 +3843,27 @@ function logWatchAnywaySignal(){
   if(idx === null || tonightSelection.verdict === 'green') return;
   const movie = MOVIES[idx];
   const kids = selectedKids();
-  const events = kids.map(child => ({
-    id: makeChildId(),
-    type: 'watch_anyway',
-    titleId: movie.num,
-    childId: child.id,
-    flag: 'violence',
-    createdAt: now()
-  }));
+  // Issue #70: log the flag that actually produced this child's amber/red
+  // verdict (movieFitForKids()'s per-child, per-flag issues), not a
+  // hardcoded 'violence' -- otherwise the Family tab's cue always names
+  // Violence & Scariness even when the repeated override was e.g. Language.
+  // A child with no personal issue on this pick (the aggregate verdict came
+  // from a different selected child) gets no event -- there is no real
+  // category to attribute an override to for them.
+  const events = kids
+    .map(child => {
+      const flagId = primaryOverrideFlagForChild(movie, child);
+      if(!flagId) return null;
+      return {
+        id: makeChildId(),
+        type: 'watch_anyway',
+        titleId: movie.num,
+        childId: child.id,
+        flag: flagId,
+        createdAt: now()
+      };
+    })
+    .filter(Boolean);
   state.events = (state.events || []).concat(events);
   saveState();
   showToast('Logged as a gentle Family review signal');
@@ -4933,18 +5018,44 @@ function renderChildren(){
       summary.textContent = summarizeChildUnderstanding(child);
       article.appendChild(summary);
 
-      const watchSignals = (state.events || []).filter(event => event.type === 'watch_anyway' && event.childId === child.id && event.flag === 'violence');
-      if(watchSignals.length >= 3){
+      // Issue #70: check every flag, not just violence, and worst/first
+      // severity-style ordering picks one to surface if several qualify at
+      // once. Issue #72: a per-flag dismissedAt timestamp (set by "Not now")
+      // excludes events logged before that dismissal, so an already-acted-on
+      // signal stays quiet until a fresh run of 3 new overrides accumulates.
+      const dismissedAt = (child.watchCueDismissedAt && typeof child.watchCueDismissedAt === 'object') ? child.watchCueDismissedAt : {};
+      const cueFlagId = CONTENT_FLAG_IDS.find(flagId => {
+        const cutoff = dismissedAt[flagId] || 0;
+        const count = (state.events || []).filter(event => event.type === 'watch_anyway' && event.childId === child.id && event.flag === flagId && event.createdAt > cutoff).length;
+        return count >= 3;
+      });
+      if(cueFlagId){
         activeSuggestionCount += 1;
+        const cueFlag = CONTENT_FLAGS.find(flag => flag.id === cueFlagId);
         const cue = document.createElement('div');
         cue.className = 'familyCue';
         const span = document.createElement('span');
         const strong = document.createElement('strong');
-        strong.textContent = `Review ${child.name}'s Violence & Scariness setting.`;
+        strong.textContent = `Review ${child.name}'s ${cueFlag.label} setting.`;
         const em = document.createElement('em');
         em.textContent = 'Based on repeated Watch anyway choices. No limit changed automatically.';
         span.appendChild(strong);
         span.appendChild(em);
+        const actions = document.createElement('div');
+        actions.className = 'familyCueActions';
+        const review = document.createElement('button');
+        review.type = 'button';
+        review.className = 'linkBtn';
+        review.textContent = `Review ${cueFlag.label} setting`;
+        review.addEventListener('click', () => reviewChildFlagSetting(child.id, cueFlagId));
+        const notNow = document.createElement('button');
+        notNow.type = 'button';
+        notNow.className = 'linkBtn';
+        notNow.textContent = 'Not now';
+        notNow.addEventListener('click', () => dismissWatchAnywayCue(child.id, cueFlagId));
+        actions.appendChild(review);
+        actions.appendChild(notNow);
+        span.appendChild(actions);
         cue.appendChild(span);
         article.appendChild(cue);
       }
