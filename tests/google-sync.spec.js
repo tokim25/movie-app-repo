@@ -505,6 +505,84 @@ test('modifiedTime is captured before the content read, not after', async ({ pag
   expect(callOrder.slice(0, 2)).toEqual(['modifiedTime', 'content']);
 });
 
+test('a mid-session Drive sync-merge that pulls in a remotely-added child updates the Tonight selection immediately', async ({ page }) => {
+  // Regression test for issue #79: mergeState() (called from
+  // mergeAndWriteToDrive(), shared by syncFromGoogleDrive() and
+  // pushToGoogleDrive()) can replace state.children wholesale when the
+  // remote side's childrenUpdatedAt is newer -- e.g. a second parent added a
+  // child on another device -- but nothing after that reassignment used to
+  // recompute which kids are selected for Tonight. decideInitialScreen()
+  // already recomputes this once at boot (see its comment), so this drives
+  // a sync *after* boot/setup have already settled, to exercise the merge
+  // path that still lacked the recompute.
+  const remoteChildrenUpdatedAt = Date.now() + 100000;
+  await page.route('https://www.googleapis.com/**', async (route) => {
+    const url = route.request().url();
+    if (url.includes('/upload/drive/v3/files')) {
+      return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ id: 'mock-file-id' }) });
+    }
+    if (url.includes('/drive/v3/files/') && url.includes('fields=modifiedTime')) {
+      return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ modifiedTime: 'v1' }) });
+    }
+    if (url.includes('/drive/v3/files/') && url.includes('alt=media')) {
+      return route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          v: 3,
+          checked: {},
+          priority: {},
+          order: [],
+          children: {
+            // Same ids setupSampleFamily() seeds locally (defaultChildren()
+            // uses 'simon'/'nora'), plus a third child ('wes') that only
+            // exists on "the other device" -- a newer childrenUpdatedAt
+            // makes mergeState() take this whole remote list over local's.
+            list: [
+              { id: 'simon', name: 'Simon', age: 6, settings: {} },
+              { id: 'nora', name: 'Nora', age: 3, settings: {} },
+              { id: 'wes', name: 'Wes', age: 6, settings: {} },
+            ],
+            updatedAt: remoteChildrenUpdatedAt,
+            device: 'other-device',
+          },
+        }),
+      });
+    }
+    if (url.includes('/drive/v3/files?')) {
+      return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ files: [] }) });
+    }
+    return route.continue();
+  });
+
+  await page.goto('/');
+  await setupSampleFamily(page);
+  await page.evaluate(() => {
+    googleAccessToken = 'fake-token';
+    googleDriveFileId = 'mock-file-id';
+  });
+
+  // A later, routine sync in the same session -- not the boot-time sync that
+  // decideInitialScreen() already waits on and recomputes after.
+  await page.evaluate(() => syncFromGoogleDrive());
+
+  const selectedNames = await page.evaluate(() => selectedKids().map((c) => c.name).sort());
+  expect(selectedNames).toEqual(['Nora', 'Simon', 'Wes']);
+
+  // Same bug, seen through the real UI: Tonight's kid chip for the
+  // remotely-added child must already be selected, without a reload.
+  await page.locator('#tabHome').click();
+  await page.locator('#homeScreen').waitFor({ state: 'visible' });
+  const wesChip = page.locator('#tonightKidChoices .choiceChip', { hasText: 'Wes' });
+  await expect(wesChip).toHaveClass(/selected/);
+
+  // And the Shelf fit badge should describe the whole family, not a stale
+  // two-child subset.
+  await page.locator('#tabBrowse').click();
+  await page.locator('#browseScreen').waitFor({ state: 'visible' });
+  await expect(page.locator('#list .fitSignal').first()).toContainText('selected kids');
+});
+
 test('sustained conflicting writes exhaust retries and fail the same way any other push failure does', async ({ page }) => {
   // modifiedTime never stabilizes -- every check sees a fresh value, as if
   // another device were writing continuously. mergeAndWriteToDrive() must
