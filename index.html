@@ -966,6 +966,7 @@ function reportError(err){
     margin:0;
   }
   .iconBtn{
+    position:relative;
     width:40px;
     height:40px;
     border-radius:10px;
@@ -979,6 +980,23 @@ function reportError(err){
     flex-shrink:0;
   }
   .iconBtn svg{ width:20px; height:20px; }
+  .filterBadge{
+    position:absolute;
+    top:-4px;
+    right:-4px;
+    min-width:18px;
+    height:18px;
+    padding:0 4px;
+    border-radius:999px;
+    background:var(--error);
+    color:#fff;
+    font-size:11px;
+    font-weight:700;
+    line-height:1;
+    align-items:center;
+    justify-content:center;
+    border:2px solid var(--surface);
+  }
   .requestPanel{
     margin:16px 0 4px;
     padding:16px;
@@ -2107,6 +2125,7 @@ function reportError(err){
     <h1>Shelf</h1>
     <button type="button" class="iconBtn" id="filterSheetBtn" aria-label="Filter and sort">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><circle cx="9" cy="7" r="2" fill="currentColor" stroke="none"/><line x1="4" y1="17" x2="20" y2="17"/><circle cx="15" cy="17" r="2" fill="currentColor" stroke="none"/></svg>
+      <span class="filterBadge" id="filterBadge" style="display:none;"></span>
     </button>
   </div>
   <div class="controls">
@@ -2614,22 +2633,84 @@ function fuzzyTypoThreshold(len){
   return 3;
 }
 
+// A small set of low-signal leading/trailing words that are safe to add or
+// drop without changing what someone is searching for (see the -1 pass
+// below). Deliberately short and conservative -- widening this list widens
+// what counts as a "free" word and risks false positives.
+const FUZZY_DROPPABLE_WORDS = new Set(['the', 'a', 'an']);
+
 // Word-tokenizes the title and compares the query against single words (or,
 // for a multi-word query, against same-length runs of consecutive words) --
 // cheaper and more precise than sliding a raw-character window across the
 // whole title, and it's how real typos actually happen (within one word).
+//
+// Two extra passes handle cases the exact-word-count window misses:
+//  - a leading/trailing article the query has that the title doesn't, e.g.
+//    "The Moana" (2 words) vs "Moana" (1 word) (#60). This intentionally
+//    only drops a *stopword* rather than trying every possible shorter word
+//    run: matching a shorter run against any arbitrary leftover single
+//    query word (e.g. "toy" from "toy story") would fuzzy-match tons of
+//    unrelated short words elsewhere in the catalog, which is far too broad
+//    to be useful.
+//  - a punctuation-collapsed comparison (title words joined with no
+//    separator vs the query with its own whitespace stripped), so a query
+//    like "spiderman" still matches a punctuated title like "Spider-Man"
+//    that the whitespace-only query tokenizer can't reproduce (#58). Its
+//    threshold is deliberately just "how many separators a window of this
+//    length could have had" rather than the normal length-scaled typo
+//    threshold -- that keeps it a punctuation-only pass instead of quietly
+//    re-opening the same overly-loose long-string matching the word-count
+//    passes above were built to avoid (e.g. "descendants" coincidentally
+//    matching "Au Revoir, les Enfants" once joined and compared raw).
 function titleFuzzyMatches(title, q){
   const words = title.split(/[^a-z0-9]+/i).filter(Boolean).map(w => w.toLowerCase());
   if(!words.length) return false;
   const qWords = q.split(/\s+/).filter(Boolean);
-  const threshold = fuzzyTypoThreshold(q.length);
-  if(qWords.length <= 1){
-    return words.some(word => levenshteinWithin(word, q, threshold));
+  if(!qWords.length) return false;
+
+  // Does any length-`len` run of title words match `text` within its
+  // length-appropriate typo threshold?
+  const matchesAnyWindow = (text, len) => {
+    if(len < 1 || len > words.length) return false;
+    const threshold = fuzzyTypoThreshold(text.length);
+    for(let start = 0; start + len <= words.length; start++){
+      const window = words.slice(start, start + len).join(' ');
+      if(levenshteinWithin(window, text, threshold)) return true;
+    }
+    return false;
+  };
+
+  // Exact word count first (cheapest, most precise).
+  if(matchesAnyWindow(q, qWords.length)) return true;
+
+  // The query has one extra/fewer word versus the title -- only worth
+  // trying when that word is a droppable stopword, otherwise dropping any
+  // other single word (see FUZZY_DROPPABLE_WORDS above) is too permissive.
+  if(qWords.length >= 2){
+    if(FUZZY_DROPPABLE_WORDS.has(qWords[0])){
+      const trimmed = qWords.slice(1).join(' ');
+      if(matchesAnyWindow(trimmed, qWords.length - 1)) return true;
+    }
+    if(FUZZY_DROPPABLE_WORDS.has(qWords[qWords.length - 1])){
+      const trimmed = qWords.slice(0, -1).join(' ');
+      if(matchesAnyWindow(trimmed, qWords.length - 1)) return true;
+    }
   }
-  for(let start = 0; start + qWords.length <= words.length; start++){
-    const window = words.slice(start, start + qWords.length).join(' ');
-    if(levenshteinWithin(window, q, threshold)) return true;
+
+  // Punctuation-collapsed fallback: compare the query with its whitespace
+  // stripped against same/adjacent-length runs of title words joined with
+  // no separator. A length-`len` window has at most `len - 1` separators to
+  // lose, so that -- not the normal length-scaled threshold -- is the cap.
+  const qCollapsed = q.replace(/\s+/g, '');
+  for(const len of new Set([qWords.length, qWords.length + 1])){
+    if(len > words.length) continue;
+    const collapsedThreshold = Math.max(0, len - 1);
+    for(let start = 0; start + len <= words.length; start++){
+      const collapsedWindow = words.slice(start, start + len).join('');
+      if(levenshteinWithin(collapsedWindow, qCollapsed, collapsedThreshold)) return true;
+    }
   }
+
   return false;
 }
 
@@ -4315,6 +4396,15 @@ async function pushToGoogleDrive(){
   }
 }
 
+const filterSheetBtnEl = document.getElementById('filterSheetBtn');
+const filterBadgeEl = document.getElementById('filterBadge');
+function updateFilterBadge(count){
+  if(!filterBadgeEl || !filterSheetBtnEl) return;
+  filterBadgeEl.textContent = count > 0 ? String(count) : '';
+  filterBadgeEl.style.display = count > 0 ? 'flex' : 'none';
+  filterSheetBtnEl.setAttribute('aria-label', count > 0 ? `Filter and sort (${count} active)` : 'Filter and sort');
+}
+
 function render(){
   posterEagerBudget = 24;
   const q = query.trim().toLowerCase();
@@ -4360,7 +4450,20 @@ function render(){
   }
 
   listEl.replaceChildren();
+  const activeFilterCount = [decadeFilter, ageFilter, genreFilter, studioFilter].filter(Boolean).length
+    + (priorityOnly ? 1 : 0) + (newOnly ? 1 : 0) + (hideAboveSettings ? 1 : 0);
+  updateFilterBadge(activeFilterCount);
   emptyMsg.style.display = visibleOrder.length ? 'none' : 'block';
+  if(!visibleOrder.length){
+    if(activeFilterCount > 0){
+      const filterWord = activeFilterCount === 1 ? 'filter' : 'filters';
+      emptyMsg.textContent = q
+        ? `No matches for "${query.trim()}" — ${activeFilterCount} ${filterWord} may be hiding results.`
+        : `${activeFilterCount} ${filterWord} may be hiding all results.`;
+    } else {
+      emptyMsg.textContent = 'No movies match your search.';
+    }
+  }
 
   visibleOrder.forEach((idx, visiblePos) => {
     const m = MOVIES[idx];
