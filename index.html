@@ -3771,6 +3771,11 @@ function refreshCatalogData(){
 
 function renderNewSection(){
   const section = document.getElementById('newSection');
+  if(query.trim()){
+    section.style.display = 'none';
+    section.replaceChildren();
+    return;
+  }
   const indices = getNewIndices();
 
   if(indices.length === 0){
@@ -4523,7 +4528,7 @@ function addChild(rawName, rawAge){
   const child = createChild(name, rawAge);
   state.children.push(child);
   selectedFamilyChildId = child.id;
-  if(tonightSelection.childIds.size === 0) tonightSelection.childIds.add(child.id);
+  tonightSelection.childIds.add(child.id);
   touchChildren();
   saveState();
   renderChildren();
