@@ -429,21 +429,35 @@ opening a PR from this skill, not just the weekly-triage flow.
 point, and each one subscribes the moment they are, not on a "poll and see"
 basis.** Per tokim25 (September 2026), replacing three hourly polling
 Routines (Coder/Reviewer/Tech Lead each burning a full turn hourly just to
-confirm nothing changed) with this instead:
-- Coder subscribes on open (the rule above).
-- Reviewer subscribes the moment Coder's "ready for review" notice reaches
-  them.
-- Tech Lead subscribes the moment they're told a PR exists / is awaiting
-  eventual merge authorization -- whether they noticed it themselves or
-  someone flagged it to them.
+confirm nothing changed) with this instead: Coder subscribes on open (the
+rule above), and broadcasts to Reviewer and Tech Lead *together, in the same
+breath* -- one message to each, sent at the same time, not staged
+(Reviewer first, Tech Lead only once Reviewer gets around to approving).
+Each recipient's first action on receiving that broadcast is to self-subscribe
+via `subscribe_pr_activity`, before doing anything else.
+
+**Why simultaneous, not staged (September 2026 correction).** The first
+version of this rule had Tech Lead subscribe only once told the PR "exists
+or awaits merge authorization" -- which in practice meant waiting on
+Reviewer to approve and someone to relay that fact. PR #65 hit exactly the
+gap that design created: Reviewer approved it, but nobody had sent Tech
+Lead the initial notice, so Tech Lead was never subscribed and the approval
+event had nowhere to land -- the exact same shape of failure as PR #47
+(above), just moved one hop down the chain. Staging the notice always
+leaves a window where a later recipient isn't subscribed yet and can miss
+anything that happens in that window, including the approval itself if the
+relay step gets dropped. Broadcasting to everyone at PR-open time closes
+that window entirely: Tech Lead is subscribed from the moment the PR
+exists, so Reviewer's approval reaches Tech Lead directly as a wake event
+-- no separate "now tell Tech Lead it's approved" relay required.
 
 Once everyone relevant to a PR is subscribed, a real GitHub event (an
 APPROVED review, a new commit, a CI status change) wakes every subscribed
 session automatically -- no polling, no manual relay needed for those hops.
-The one push that still has to happen by hand is the initial "a PR exists"
-notice from Coder to Reviewer: there's no generic "watch all new PRs"
-subscription, so that first handoff message is what gets everyone else
-started.
+The one push that still has to happen by hand is Coder's initial
+PR-exists broadcast itself: there's no generic "watch all new PRs"
+subscription, so that first message (to both Reviewer and Tech Lead at
+once) is what gets everyone else started.
 
 ## Displaying the source link to users
 
