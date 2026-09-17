@@ -77,3 +77,70 @@ test('typing a search query does not visibly lag against the full catalog', asyn
   });
   expect(renderMs).toBeLessThan(300);
 });
+
+test('a query missing the title\'s punctuation still matches (#58)', async ({ page }) => {
+  await page.goto('/');
+  await switchToFlatView(page);
+
+  // "Spiderman" has no hyphen; the stored title is "Spider-Man". Title
+  // tokenization splits on punctuation ("spider", "man") while the query
+  // tokenizes on whitespace only ("spiderman") -- these must still match.
+  const titles = await titlesFor(page, 'spiderman');
+  expect(titles.length).toBeGreaterThan(0);
+  expect(titles.some((t) => t.toLowerCase().includes('spider-man'))).toBe(true);
+});
+
+test('a query with an extra word still matches a shorter title (#60)', async ({ page }) => {
+  await page.goto('/');
+  await switchToFlatView(page);
+
+  // "The Moana" (2 words) should still find "Moana" (1 word) -- the sliding
+  // window must tolerate one extra/missing word, not just exact word counts.
+  const titles = await titlesFor(page, 'the moana');
+  expect(titles.length).toBeGreaterThan(0);
+  expect(titles.some((t) => /^moana\s*\(/i.test(t.trim()))).toBe(true);
+});
+
+test('an active filter that zeroes search results is called out in the empty state, with a badge on the filter button (#62)', async ({ page }) => {
+  await page.goto('/');
+  await switchToFlatView(page);
+
+  // Baseline: no filters, no query match -- the plain message, no badge.
+  const baseline = await page.evaluate(() => {
+    // "xq" matches no title, exactly or fuzzily (2 chars is below the fuzzy
+    // minimum, so this is a deterministic zero-exact-match query).
+    query = 'xq';
+    render();
+    return {
+      emptyText: document.getElementById('emptyMsg').textContent,
+      emptyVisible: document.getElementById('emptyMsg').style.display !== 'none',
+      badgeVisible: document.getElementById('filterBadge').style.display !== 'none',
+    };
+  });
+  expect(baseline.emptyVisible).toBe(true);
+  expect(baseline.emptyText).toBe('No movies match your search.');
+  expect(baseline.badgeVisible).toBe(false);
+
+  // A query that matches plenty of titles, but a studio filter that excludes
+  // all of them, should say a filter may be the cause -- and the filter
+  // button should show a badge.
+  const filtered = await page.evaluate(() => {
+    query = 'moana';
+    studioFilter = '__no_such_studio__';
+    render();
+    const result = {
+      emptyText: document.getElementById('emptyMsg').textContent,
+      emptyVisible: document.getElementById('emptyMsg').style.display !== 'none',
+      badgeVisible: document.getElementById('filterBadge').style.display !== 'none',
+      badgeText: document.getElementById('filterBadge').textContent,
+    };
+    studioFilter = '';
+    render();
+    return result;
+  });
+  expect(filtered.emptyVisible).toBe(true);
+  expect(filtered.emptyText).toContain('filter');
+  expect(filtered.emptyText.toLowerCase()).toContain('moana');
+  expect(filtered.badgeVisible).toBe(true);
+  expect(filtered.badgeText).toBe('1');
+});
