@@ -513,6 +513,13 @@ function reportError(err){
   #installAppBtn.canInstall{
     display:inline-block;
   }
+  .iosInstallHint{
+    margin:0;
+    padding:10px 14px;
+    font-size:13px;
+    line-height:1.5;
+    color:var(--ink-soft);
+  }
 
   .syncPanel{
     max-width:680px;
@@ -2280,6 +2287,7 @@ function reportError(err){
     <span class="homeSectionLabel">App</span>
     <div class="moreCard">
       <button id="installAppBtn" class="moreRow">Install app on this device</button>
+      <p id="iosInstallHint" class="iosInstallHint" style="display:none;">To add this app to your Home Screen: tap the Share icon, then "Add to Home Screen".</p>
       <button id="resortBtn" class="moreRow">Reset custom order</button>
       <button id="reportBugBtn" class="moreRow">Report a bug</button>
     </div>
@@ -4024,12 +4032,39 @@ function encodeState(){
   return btoa(JSON.stringify(serializeState()));
 }
 
+// Returns the RAW parsed payload -- the same v3 serializeState() shape that
+// encodeState() produces and that Google Drive stores -- rather than an
+// already-normalized state object. Callers feed this straight into
+// mergeState(), which normalizes it internally and needs the raw
+// v/order.movieNums/mark-record shape to recover each mark's updatedAt/device
+// for last-write-wins merging. Normalizing here AND inside mergeState would
+// double-normalize: the second pass wouldn't see a `v` field, would mis-parse
+// the already-flat data as legacy v1, and would stamp every mark with
+// now()/this device instead of preserving its real origin -- silently making
+// the "merge" always win with stale pasted data. normalizeState() is still
+// called here, once, purely to validate the payload's shape before returning.
 function decodeState(code){
-  const parsed = normalizeState(JSON.parse(atob(code.trim())));
+  const raw = JSON.parse(atob(code.trim()));
+  const parsed = normalizeState(raw);
   if(!parsed || !Array.isArray(parsed.order) || parsed.order.length !== MOVIES.length){
     throw new Error('invalid sync code');
   }
-  return parsed;
+  return raw;
+}
+
+// Shape used to detect whether loading a sync code actually combined data
+// from both sides, vs. a no-op merge (e.g. re-pasting the same code, or a
+// code that only reflects an already-known state). Deliberately leaves out
+// `events` (mergeState always concats event logs, so comparing them would
+// make even a true no-op report as "merged") and any timestamp/device
+// bookkeeping fields, which change on every save regardless of content.
+function mergeSignature(s){
+  return JSON.stringify({
+    order: s.order,
+    checked: s.checked,
+    priority: s.priority,
+    children: s.children
+  });
 }
 
 function setGoogleSyncStatus(message, isError){
@@ -5102,12 +5137,14 @@ document.getElementById('syncLoadBtn').addEventListener('click', ()=>{
   const input = document.getElementById('syncCodeIn');
   if(!input.value.trim()) return;
   try{
-    state = decodeState(input.value);
+    const beforeSignature = mergeSignature(state);
+    state = mergeState(state, decodeState(input.value));
     saveState();
     input.value = '';
     if(currentScreen === 'family') refreshCatalogData();
     else renderCurrentView();
-    showToast('Synced from code');
+    const combinedChanges = mergeSignature(state) !== beforeSignature;
+    showToast(combinedChanges ? 'Synced — merged in changes from the other code' : 'Synced — already up to date');
   }catch(e){
     showToast("That code doesn't look right");
   }
@@ -5326,10 +5363,61 @@ document.addEventListener('visibilitychange', ()=>{
   }
 });
 
+function isStandaloneDisplay(){
+  try{
+    if(window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) return true;
+  }catch(e){ /* matchMedia unavailable */ }
+  return navigator.standalone === true;
+}
+
+// iOS/iPadOS Safari (and other iOS browsers, which are all WebKit wrappers
+// with the same Share-sheet install flow) never fire beforeinstallprompt --
+// it's a Chromium-only API -- so the native install button would otherwise
+// stay hidden there forever with no fallback. iPadOS 13+ reports its
+// navigator.platform as a Mac, so real iPads are caught via the touch-point
+// check rather than the UA string alone.
+function isIOSDevice(){
+  const ua = navigator.userAgent || '';
+  if(/iPad|iPhone|iPod/.test(ua)) return true;
+  return navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
+}
+
+function showIOSInstallHint(){
+  const hint = document.getElementById('iosInstallHint');
+  if(hint) hint.style.display = 'block';
+}
+
+function hideIOSInstallHint(){
+  const hint = document.getElementById('iosInstallHint');
+  if(hint) hint.style.display = 'none';
+}
+
+const INSTALL_FALLBACK_DELAY_MS = 2500;
+
+// Called once at startup. iOS gets the static instructions immediately
+// (beforeinstallprompt will just never come). Any other touch-capable
+// browser (e.g. Firefox for Android) gets the same fallback copy, but only
+// after a short grace period with no beforeinstallprompt, so a Chromium
+// browser that's just slightly slow to fire it isn't shown a redundant hint
+// alongside its own native button.
+function maybeShowInstallFallback(){
+  if(isStandaloneDisplay()) return;
+  if(isIOSDevice()){
+    showIOSInstallHint();
+    return;
+  }
+  if(navigator.maxTouchPoints > 0){
+    setTimeout(()=>{
+      if(!deferredInstallPrompt && !isStandaloneDisplay()) showIOSInstallHint();
+    }, INSTALL_FALLBACK_DELAY_MS);
+  }
+}
+
 window.addEventListener('beforeinstallprompt', event=>{
   event.preventDefault();
   deferredInstallPrompt = event;
   document.getElementById('installAppBtn').classList.add('canInstall');
+  hideIOSInstallHint();
 });
 
 document.getElementById('installAppBtn').addEventListener('click', async ()=>{
@@ -5344,6 +5432,7 @@ document.getElementById('installAppBtn').addEventListener('click', async ()=>{
 window.addEventListener('appinstalled', ()=>{
   deferredInstallPrompt = null;
   document.getElementById('installAppBtn').classList.remove('canInstall');
+  hideIOSInstallHint();
 });
 
 if('serviceWorker' in navigator){
@@ -5431,6 +5520,7 @@ tryInitGoogleSync();
 renderStudioGrid();
 tonightSelection.childIds = new Set((state.children || []).map(child => child.id));
 decideInitialScreen();
+maybeShowInstallFallback();
 </script>
 </body>
 </html>
