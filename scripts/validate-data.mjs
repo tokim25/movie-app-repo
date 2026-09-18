@@ -57,6 +57,8 @@ const allowedGenres = new Set([
 ]);
 
 const errors = [];
+// WARN-only findings: worth printing, but not worth failing the build over.
+const warnings = [];
 const context = {};
 vm.createContext(context);
 
@@ -191,6 +193,43 @@ for (const movie of movies) {
   if (currentHash !== expectedHash) {
     errors.push(`sw.js's DATA_VERSION (${currentHash}) is stale, data files hash to ${expectedHash}. Run \`node scripts/data-version.mjs\` and commit the result.`);
   }
+}
+
+// Issue #71: CONTENT_FLAGS' four categories x four levels each carry a short
+// `example` movie title. A reused example string (e.g. the same title copy-
+// pasted into more than one category/level pair while authoring) quietly
+// erodes what that tier communicates to a parent -- most visibly when it
+// happens to the highest ("ceiling") level. This is a duplicate-authoring
+// smell, not a data-integrity error, so it only warns; it never fails the
+// build the way the `errors` checks above do.
+{
+  const indexSource = fs.readFileSync('index.html', 'utf8');
+  const contentFlagsMatch = indexSource.match(/const CONTENT_FLAGS = (\[[\s\S]*?\n\]);/);
+  if (!contentFlagsMatch) {
+    warnings.push('index.html: could not locate CONTENT_FLAGS to check for duplicate examples');
+  } else {
+    const flagsContext = {};
+    vm.createContext(flagsContext);
+    vm.runInContext(`this.__CONTENT_FLAGS__ = ${contentFlagsMatch[1]};`, flagsContext, { filename: 'index.html (CONTENT_FLAGS)' });
+    const contentFlags = flagsContext.__CONTENT_FLAGS__;
+    const usagesByExample = new Map();
+    for (const flag of contentFlags) {
+      flag.levels.forEach((level, levelIndex) => {
+        const usage = `${flag.id} level ${levelIndex + 1} (${level.name})`;
+        if (!usagesByExample.has(level.example)) usagesByExample.set(level.example, []);
+        usagesByExample.get(level.example).push(usage);
+      });
+    }
+    for (const [example, usages] of usagesByExample) {
+      if (usages.length > 1) {
+        warnings.push(`CONTENT_FLAGS: example "${example}" is reused across ${usages.length} category/level pairs: ${usages.join('; ')}`);
+      }
+    }
+  }
+}
+
+if (warnings.length) {
+  console.warn(`Warnings:\n${warnings.join('\n')}`);
 }
 
 if (errors.length) {

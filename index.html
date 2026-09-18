@@ -175,6 +175,15 @@ function reportError(err){
     --line:#e6dbc9;
     --accent:#bb5938;
     --accent-rgb:187,89,56;
+    /* #bb5938 on this screen's --bg (#faf5ee) is 4.21:1, which fails WCAG
+       AA's 4.5:1 threshold for normal-size text. --accent-text is a darker
+       variant reserved for text/link uses of the accent color;
+       background+white-text uses (e.g. .iconBtn) keep --accent unchanged
+       since those already pass at 4.57:1. #9d4b2f is 5.56:1 against --bg
+       (#faf5ee) and 4.93:1 against --bg-sub (#f1e7d8, the "New this week"
+       teaser's background, which .detailLink/.sourceLink also render on) --
+       both comfortably above 4.5:1. */
+    --accent-text:#9d4b2f;
     --on-accent:#fff;
     --select-rgb:42,91,76;
     --error-bg:#f7e8df;
@@ -200,6 +209,9 @@ function reportError(err){
       --line:#3a332b;
       --accent:#df8066;
       --accent-rgb:223,128,102;
+      /* Dark mode's accent already passes AA as text (6.48:1 on --bg), so
+         --accent-text just mirrors --accent here. */
+      --accent-text:#df8066;
       --on-accent:#332821;
       --select-rgb:131,173,181;
       --error-bg:#3a211f;
@@ -225,6 +237,7 @@ function reportError(err){
     --line:#3a332b;
     --accent:#df8066;
     --accent-rgb:223,128,102;
+    --accent-text:#df8066;
     --on-accent:#332821;
     --select-rgb:131,173,181;
     --error-bg:#3a211f;
@@ -513,6 +526,13 @@ function reportError(err){
   #installAppBtn.canInstall{
     display:inline-block;
   }
+  .iosInstallHint{
+    margin:0;
+    padding:10px 14px;
+    font-size:13px;
+    line-height:1.5;
+    color:var(--ink-soft);
+  }
 
   .syncPanel{
     max-width:680px;
@@ -711,7 +731,7 @@ function reportError(err){
   .detailLink{
     background:none;
     border:none;
-    color:var(--accent);
+    color:var(--accent-text);
     font-family:inherit;
     font-size:13px;
     font-weight:500;
@@ -719,7 +739,7 @@ function reportError(err){
     padding:0;
   }
   .sourceLink{
-    color:var(--accent);
+    color:var(--accent-text);
     font-size:13px;
     font-weight:500;
     text-decoration:none;
@@ -844,6 +864,58 @@ function reportError(err){
     z-index:10;
   }
 
+  .skipLink{
+    position:absolute;
+    top:-1000px;
+    left:8px;
+    z-index:100;
+    background:var(--accent-text);
+    color:var(--on-accent);
+    font-weight:600;
+    font-size:14px;
+    padding:10px 16px;
+    border-radius:8px;
+    text-decoration:none;
+  }
+  .skipLink:focus{
+    top:8px;
+    outline:2px solid var(--ink);
+    outline-offset:2px;
+  }
+  .quickBar:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:-2px;
+  }
+  .listPagination{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    padding:16px 0 8px;
+  }
+  .listPagination button{
+    background:var(--bg-sub);
+    border:1px solid var(--line);
+    color:var(--ink);
+    font-family:inherit;
+    font-size:14px;
+    font-weight:500;
+    padding:8px 16px;
+    border-radius:9px;
+    cursor:pointer;
+  }
+  .listPagination button:disabled{
+    opacity:0.45;
+    cursor:default;
+  }
+  .listPagination button:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:1px;
+  }
+  #listPageStatus{
+    color:var(--ink-soft);
+    font-size:13px;
+  }
   .quickBar{
     position:fixed;
     left:0; right:0; bottom:0;
@@ -875,7 +947,7 @@ function reportError(err){
   .qbBtn svg{ width:22px; height:22px; }
   .qbBtn span{ font-size:11px; font-weight:500; letter-spacing:-0.01em; }
   .qbBtn:active{ background:var(--bg-sub); }
-  .qbBtn.on{ color:var(--accent); }
+  .qbBtn.on{ color:var(--accent-text); }
   .toast.show{ opacity:1; }
 
   .homeScreen{
@@ -1264,6 +1336,23 @@ function reportError(err){
     font-size:14px;
     line-height:1.45;
   }
+  .pickCard .detailLink{
+    display:inline-block;
+    margin-top:10px;
+  }
+  /* Issue #78: Shelf's .detail carries left padding sized for its list rows'
+     number/poster gutter (see the base .detail rule and its media-query
+     variants above) -- inside the pick card there's no such gutter, so this
+     override keeps the same look-and-feel (color, size, line-height, the
+     collapsed-by-default .open toggle) without inheriting padding that would
+     misalign the text. Specificity (two classes) beats the plain .detail
+     rules regardless of the media query's source order. */
+  .pickCard .detail{
+    max-width:none;
+    margin:10px 0 0;
+    padding:0;
+    border-bottom:none;
+  }
   .shelfTools{
     display:grid;
     gap:14px;
@@ -1407,6 +1496,14 @@ function reportError(err){
     color:var(--ink-soft);
     font-size:12px;
     font-style:normal;
+  }
+  .familyCueActions{
+    display:flex;
+    gap:16px;
+    margin-top:8px;
+  }
+  .familyCueActions .linkBtn{
+    font-size:12px;
   }
   .sadRemovedNotice{
     display:flex;
@@ -1641,10 +1738,12 @@ function reportError(err){
     text-align:left;
     cursor:pointer;
   }
-  .scaleCard:hover,
-  .scaleCard:focus-visible{
+  .scaleCard:hover{
     border-color:rgba(var(--select-rgb),0.32);
-    outline:none;
+  }
+  .scaleCard:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:1px;
   }
   .scaleCard.active{
     border-color:rgba(var(--select-rgb),0.42);
@@ -2122,6 +2221,8 @@ function reportError(err){
         <div class="pickMeta" id="tonightVerdict">Green Light</div>
         <div class="pickTitle" id="tonightPickTitle"></div>
         <ul class="pickReasons" id="tonightPickReasons"></ul>
+        <button type="button" class="detailLink" id="tonightDetailBtn">Details</button>
+        <div class="detail" id="tonightDetailBody"></div>
         <div class="setupActions">
           <button type="button" class="primaryBtn" id="tonightWatchBtn">Mark watched</button>
           <button type="button" class="secondaryBtn" id="tonightWatchAnywayBtn">Watch anyway</button>
@@ -2133,6 +2234,7 @@ function reportError(err){
 </div>
 
 <div id="browseScreen" class="screenWrap" style="display:none;">
+  <a href="#quickBar" class="skipLink" id="skipToNavLink">Skip to navigation</a>
   <div class="screenTopBar">
     <h1>Shelf</h1>
     <button type="button" class="iconBtn" id="filterSheetBtn" aria-label="Filter and sort">
@@ -2164,6 +2266,11 @@ function reportError(err){
     </form>
   </section>
   <ul id="list"></ul>
+  <div class="listPagination" id="listPagination" style="display:none;">
+    <button type="button" id="listPagePrevBtn">Previous</button>
+    <span id="listPageStatus" aria-live="polite"></span>
+    <button type="button" id="listPageNextBtn">Next</button>
+  </div>
   <div class="empty" id="emptyMsg" style="display:none;">No movies match your search.</div>
 </div>
 
@@ -2224,7 +2331,7 @@ function reportError(err){
   <div class="homeSection">
     <span class="homeSectionLabel">Content settings</span>
     <div class="familyCard" id="familySettingsPanel">
-      <h3 id="familySettingsChildName">No children yet</h3>
+      <h3 id="familySettingsChildName" tabindex="-1">No children yet</h3>
       <p>Adjust content limits for one child at a time. Starter settings come from the child's age; parent changes stay fixed until you switch them back.</p>
       <div class="settingsChildPicker" id="familySettingsChildPicker" aria-label="Choose child for content settings"></div>
       <div id="familySettingsNotice"></div>
@@ -2280,6 +2387,7 @@ function reportError(err){
     <span class="homeSectionLabel">App</span>
     <div class="moreCard">
       <button id="installAppBtn" class="moreRow">Install app on this device</button>
+      <p id="iosInstallHint" class="iosInstallHint" style="display:none;">To add this app to your Home Screen: tap the Share icon, then "Add to Home Screen".</p>
       <button id="resortBtn" class="moreRow">Reset custom order</button>
       <button id="reportBugBtn" class="moreRow">Report a bug</button>
     </div>
@@ -2356,7 +2464,7 @@ function reportError(err){
 
 <div class="toast" id="toast"></div>
 
-<nav class="quickBar" id="quickBar" aria-label="Main navigation">
+<nav class="quickBar" id="quickBar" aria-label="Main navigation" tabindex="-1">
   <button type="button" class="qbBtn" id="tabHome">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h14v14H5z"/><path d="M9 9h6"/><path d="M9 13h4"/></svg>
     <span>Tonight</span>
@@ -2446,7 +2554,7 @@ const CONTENT_FLAGS = [
     label: 'Violence & Scariness',
     plain: 'violence and scariness',
     levels: [
-      { name: 'Very mild', meaning: 'Brief surprises, bumps, or falls; no lasting harm or real menace.', example: 'Cars' },
+      { name: 'Very mild', meaning: 'Brief surprises, bumps, or falls; no lasting harm or real menace.', example: 'A Charlie Brown Christmas' },
       { name: 'Mild peril or slapstick', meaning: 'Chases, crashes, or brief tension, still playful.', example: 'Toy Story 2 (action); Monsters University (scary)' },
       { name: 'Moderate scares or action', meaning: 'Longer suspense, darker images, weapons/battles, or repeated peril.', example: 'The Incredibles (action); Toy Story 3 (scary)' },
       { name: 'Older-kid intensity', meaning: 'Horror flavor, sustained fear, or more realistic fighting/threat.', example: 'The Karate Kid (action); Night of the Zoopocalypse (scary)' }
@@ -2457,10 +2565,10 @@ const CONTENT_FLAGS = [
     label: 'Language',
     plain: 'language',
     levels: [
-      { name: 'Almost none', meaning: 'No real swearing; maybe silly words.', example: 'Finding Dory' },
+      { name: 'Almost none', meaning: 'No real swearing; maybe silly words.', example: 'WALL-E' },
       { name: 'Mild words', meaning: 'Words like stupid, loser, or hell.', example: 'Ratatouille' },
       { name: 'Frequent mild', meaning: 'More insults or repeated mild swears.', example: 'School of Rock' },
-      { name: 'Stronger edge', meaning: 'Older-kid language or dated insults.', example: 'Back to the Future' }
+      { name: 'Stronger edge', meaning: 'Older-kid language or dated insults.', example: 'The Color of Friendship' }
     ]
   },
   {
@@ -2468,10 +2576,10 @@ const CONTENT_FLAGS = [
     label: 'Romance',
     plain: 'romance',
     levels: [
-      { name: 'Little to none', meaning: 'No real romance focus.', example: 'Finding Dory' },
+      { name: 'Little to none', meaning: 'No real romance focus.', example: 'Luca' },
       { name: 'Brief affection', meaning: 'A crush, flirtation, or quick kiss.', example: 'Toy Story 2' },
       { name: 'Story romance', meaning: 'Romance is a visible plot thread.', example: 'The Princess Bride' },
-      { name: 'Older-kid themes', meaning: 'More mature dating or innuendo.', example: 'Back to the Future' }
+      { name: 'Older-kid themes', meaning: 'More mature dating or innuendo.', example: 'Fun Size' }
     ]
   },
   {
@@ -2479,10 +2587,10 @@ const CONTENT_FLAGS = [
     label: 'Drinking',
     plain: 'drinking',
     levels: [
-      { name: 'None shown', meaning: 'No meaningful substance content.', example: 'Cars' },
+      { name: 'None shown', meaning: 'No meaningful substance content.', example: "Charlotte's Web" },
       { name: 'Brief background', meaning: 'Adults or parties appear briefly.', example: 'Monsters University' },
       { name: 'Noticeable', meaning: 'Alcohol, smoking, or partying is discussed.', example: 'The Sandlot' },
-      { name: 'Older-kid context', meaning: 'Substances are part of the world.', example: 'Back to the Future' }
+      { name: 'Older-kid context', meaning: 'Substances are part of the world.', example: "Pete's Dragon" }
     ]
   }
 ];
@@ -2540,7 +2648,24 @@ let genreFilter = "";
 let studioFilter = "";
 let sortMode = "year";
 let currentScreen = "setup";
-let tonightSelection = { childIds: new Set(), time: 90, mood: 'calm', currentPickIdx: null, currentPickSource: '', verdict: 'green', skippedMovieNums: new Set() };
+// The Shelf list can hold 1,000+ movies. Rendering it all unpaginated makes
+// every row's controls (check/star/details/source/move) into keyboard tab
+// stops, so reaching the nav bar from deep in the list can take thousands of
+// Tab presses. Paginating keeps each render's DOM (and tab-stop count) to a
+// manageable page instead. See render()'s LIST_PAGE_SIZE use and
+// renderListPagination().
+let listPage = 1;
+let lastListSignature = "";
+// excludedChildIds (not an opt-in childIds allowlist) so every child-roster
+// mutation path -- local addChild(), completeSetupWithChildren(), boot,
+// a Drive sync-merge, or any future path (import, invite, undo) -- includes
+// new children by default with zero special-case code. Inclusion is derived
+// (selectedKids() below), not a fact each mutation path has to remember to
+// record; this fixed issue #48 and #79, both cases of a childIds allowlist
+// not being told about a child it hadn't seen yet. tonightSelection is
+// session-only (never saved/serialized -- see selectedKids()), so there's no
+// persisted-format migration concern with this shape.
+let tonightSelection = { excludedChildIds: new Set(), time: 90, mood: 'calm', currentPickIdx: null, currentPickSource: '', verdict: 'green', skippedMovieNums: new Set() };
 let selectedFamilyChildId = null;
 
 const GOOGLE_CLIENT_ID = "987776124251-t4skn7ia6qd1r88ftass906jinm98v1q.apps.googleusercontent.com";
@@ -2979,6 +3104,22 @@ function normalizeContentSettings(rawSettings){
   return settings;
 }
 
+// Issue #72: per-flag "Not now" dismissal timestamps for the Family tab's
+// personalization cue, in the same sticky-until-dismissed spirit as
+// sadRemovedNoticePending above -- normalized here so it survives a reload
+// or a Google sync merge instead of quietly resetting the cue to visible.
+function normalizeWatchCueDismissedAt(raw){
+  const out = {};
+  if(!raw || typeof raw !== 'object') return out;
+  CONTENT_FLAG_IDS.forEach(flagId=>{
+    const value = raw[flagId];
+    if(typeof value === 'number' && Number.isFinite(value) && value > 0){
+      out[flagId] = value;
+    }
+  });
+  return out;
+}
+
 function normalizeChild(raw){
   if(!raw || typeof raw !== 'object') return null;
   const name = typeof raw.name === 'string' ? raw.name.trim().slice(0, 60) : '';
@@ -2996,7 +3137,8 @@ function normalizeChild(raw){
     // Sticky once set (added 2026-09-07): stays true across saves until the
     // parent explicitly dismisses the one-time "Sad moments removed" notice,
     // even after the underlying legacy 'sad' setting itself is gone.
-    sadRemovedNoticePending: hadParentSad || !!raw.sadRemovedNoticePending
+    sadRemovedNoticePending: hadParentSad || !!raw.sadRemovedNoticePending,
+    watchCueDismissedAt: normalizeWatchCueDismissedAt(raw.watchCueDismissedAt)
   };
 }
 
@@ -3106,6 +3248,7 @@ function createStarButton(idx, isPriority){
   star.className = 'star' + (isPriority ? ' on' : '');
   star.textContent = isPriority ? '\u2605' : '\u2606';
   star.setAttribute('aria-label', 'Want to watch');
+  star.dataset.idx = idx;
   star.onclick = () => togglePriority(idx);
   return star;
 }
@@ -3237,28 +3380,62 @@ function saveState(){
   }
 }
 
+// renderCurrentView() rebuilds the list/newRow DOM from scratch, so the
+// button that was just activated (and had focus) is destroyed. Without
+// restoring focus to its replacement, keyboard focus silently falls back to
+// <body> and the next Tab press starts over from the top of the page.
+// Captures which control (check/star/moveUp/moveDown) had focus and which
+// container it lived in before a rebuild, then re-focuses the equivalent
+// control for the same movie idx afterward, if one still exists post-render
+// (e.g. it wasn't filtered out).
+const FOCUS_PRESERVING_ROLES = ['check', 'star', 'moveUp', 'moveDown'];
+function focusPreservingRerender(idx, rerender){
+  const active = document.activeElement;
+  let role = null;
+  if(active){
+    role = FOCUS_PRESERVING_ROLES.find(r => active.classList.contains(r)) || null;
+  }
+  const activeIdx = role && active.dataset.idx !== undefined ? Number(active.dataset.idx) : null;
+  const container = role
+    ? (active.closest('.newRow') ? '#newSection' : active.closest('li.row') ? '#list' : null)
+    : null;
+
+  rerender();
+
+  if(role && container && activeIdx === idx){
+    const target = document.querySelector(`${container} .${role}[data-idx="${idx}"]`);
+    if(target) target.focus();
+  }
+}
+
 function toggleCheck(idx){
-  setMark('checked', idx, !markValue(state.checked, idx));
-  saveState();
-  renderCurrentView();
+  focusPreservingRerender(idx, () => {
+    setMark('checked', idx, !markValue(state.checked, idx));
+    saveState();
+    renderCurrentView();
+  });
 }
 
 function togglePriority(idx){
-  setMark('priority', idx, !markValue(state.priority, idx));
-  saveState();
-  renderCurrentView();
+  focusPreservingRerender(idx, () => {
+    setMark('priority', idx, !markValue(state.priority, idx));
+    saveState();
+    renderCurrentView();
+  });
 }
 
 function move(idx, dir){
   const pos = state.order.indexOf(idx);
   const newPos = pos + dir;
   if(newPos < 0 || newPos >= state.order.length) return;
-  const arr = state.order;
-  [arr[pos], arr[newPos]] = [arr[newPos], arr[pos]];
-  state.orderUpdatedAt = now();
-  state.orderDevice = DEVICE_ID;
-  saveState();
-  renderCurrentView();
+  focusPreservingRerender(idx, () => {
+    const arr = state.order;
+    [arr[pos], arr[newPos]] = [arr[newPos], arr[pos]];
+    state.orderUpdatedAt = now();
+    state.orderDevice = DEVICE_ID;
+    saveState();
+    renderCurrentView();
+  });
 }
 
 function toggleDetail(idx){
@@ -3316,13 +3493,14 @@ function completeSetupWithChildren(children){
   selectedFamilyChildId = state.children[0] ? state.children[0].id : null;
   touchChildren();
   saveState();
-  tonightSelection.childIds = new Set(state.children.map(child => child.id));
+  // Fresh setup: nobody has been deselected yet, so everyone starts included.
+  tonightSelection.excludedChildIds = new Set();
   showScreen('home');
   showToast('Family setup saved');
 }
 
 function selectedKids(){
-  return state.children.filter(child => tonightSelection.childIds.has(child.id));
+  return state.children.filter(child => !tonightSelection.excludedChildIds.has(child.id));
 }
 
 function tonightTimeLabel(){
@@ -3449,6 +3627,37 @@ function dismissSadRemovedNotice(childId){
   touchChildren();
   saveState();
   renderChildren();
+}
+
+// Issue #72: "Not now" for the Family tab's personalization cue. Follows the
+// same persisted-flag-on-the-child shape as dismissSadRemovedNotice() above,
+// but keyed per content flag (a child can dismiss a Language suggestion
+// without silencing a later Violence & Scariness one) and stores a timestamp
+// rather than a boolean, so a fresh run of 3 watch-anyway overrides logged
+// after the dismissal can surface a new suggestion instead of being
+// suppressed forever.
+function dismissWatchAnywayCue(childId, flagId){
+  const child = state.children.find(c => c.id === childId);
+  if(!child || !CONTENT_FLAG_IDS.includes(flagId)) return;
+  if(!child.watchCueDismissedAt || typeof child.watchCueDismissedAt !== 'object') child.watchCueDismissedAt = {};
+  child.watchCueDismissedAt[flagId] = now();
+  touchChildren();
+  saveState();
+  renderChildren();
+}
+
+// Issue #72's actionable control: jumps to and focuses the flagged
+// category's row in the Family settings panel so a parent can act on the
+// suggestion directly, instead of hunting for it themselves.
+function reviewChildFlagSetting(childId, flagId){
+  setSelectedFamilyChild(childId);
+  const panel = document.getElementById('familySettingsPanel');
+  if(panel) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const row = document.querySelector(`#familySettingsRows [data-flag="${flagId}"]`);
+  if(row){
+    row.setAttribute('tabindex', '-1');
+    setTimeout(() => row.focus(), 260);
+  }
 }
 
 function inferredMovieFlagLevel(movie){
@@ -3596,6 +3805,22 @@ function movieVerdictForKids(movie, kids){
   return { verdict: 'green', reasons: [`Within ${joinWithAnd(kids.map(child => child.name))}'s starter settings.`] };
 }
 
+// Issue #70: the flag actually responsible for a single child's amber/red
+// verdict on this movie, so "Watch anyway" events can be logged against the
+// real category instead of a hardcoded one. Worst-first: a red issue (any
+// category) always outranks an amber one; ties within a severity keep
+// CONTENT_FLAGS' order (Violence & Scariness, Language, Romance, Drinking).
+// Returns null when this child has no issue at all for this movie (e.g. the
+// overall pick verdict is non-green only because of a different selected
+// child).
+function primaryOverrideFlagForChild(movie, child){
+  const fit = movieFitForKids(movie, [child]);
+  const redIssue = fit.issues.find(issue => issue.severity === 'red');
+  if(redIssue) return redIssue.flag.id;
+  const amberIssue = fit.issues.find(issue => issue.severity === 'amber');
+  return amberIssue ? amberIssue.flag.id : null;
+}
+
 function isTonightEligible(idx, kids, maxAge, includeSkipped, requireGreen){
   const movie = MOVIES[idx];
   const age = parseAge(movie.ca) || 99;
@@ -3689,6 +3914,32 @@ function findTonightCandidate(){
   return MOVIES.length ? { idx: 0, source: 'Shelf' } : null;
 }
 
+// Issue #78: whether tonight's pick card is showing its full CSM-style
+// description. Deliberately separate from Shelf's openDetail (which tracks a
+// movie index across a whole rendered list) -- the pick card only ever shows
+// one movie at a time, so a plain open/closed flag is all it needs, and
+// keeping it separate means toggling one screen's detail can never leave the
+// other screen's detail state stale.
+let tonightDetailOpen = false;
+
+// Issue #78: renders the same full CSM-style description (movie.full) that
+// Shelf's toggleDetail()/.detail element show, so a parent doesn't have to
+// leave Tonight and re-search Shelf to read more about the current pick.
+function renderTonightDetail(){
+  const btn = document.getElementById('tonightDetailBtn');
+  const body = document.getElementById('tonightDetailBody');
+  if(!btn || !body) return;
+  btn.textContent = tonightDetailOpen ? 'Hide' : 'Details';
+  body.classList.toggle('open', tonightDetailOpen);
+  const idx = tonightSelection.currentPickIdx;
+  body.textContent = (tonightDetailOpen && idx !== null) ? (MOVIES[idx].full || '') : '';
+}
+
+function toggleTonightDetail(){
+  tonightDetailOpen = !tonightDetailOpen;
+  renderTonightDetail();
+}
+
 function updateTonightWatchBtn(){
   const btn = document.getElementById('tonightWatchBtn');
   if(!btn) return;
@@ -3728,6 +3979,11 @@ function showTonightPick(){
   updateTonightWatchBtn();
   verdictEl.textContent = tonightVerdictLabel(verdict.verdict);
   document.getElementById('tonightPickTitle').textContent = `${movie.t} (${movie.y})`;
+  // Issue #78: a new pick showing (including via Skip) always starts with its
+  // details collapsed, same as Shelf's detail never carries over between
+  // different movies.
+  tonightDetailOpen = false;
+  renderTonightDetail();
 
   const reasons = document.getElementById('tonightPickReasons');
   reasons.replaceChildren();
@@ -3771,14 +4027,27 @@ function logWatchAnywaySignal(){
   if(idx === null || tonightSelection.verdict === 'green') return;
   const movie = MOVIES[idx];
   const kids = selectedKids();
-  const events = kids.map(child => ({
-    id: makeChildId(),
-    type: 'watch_anyway',
-    titleId: movie.num,
-    childId: child.id,
-    flag: 'violence',
-    createdAt: now()
-  }));
+  // Issue #70: log the flag that actually produced this child's amber/red
+  // verdict (movieFitForKids()'s per-child, per-flag issues), not a
+  // hardcoded 'violence' -- otherwise the Family tab's cue always names
+  // Violence & Scariness even when the repeated override was e.g. Language.
+  // A child with no personal issue on this pick (the aggregate verdict came
+  // from a different selected child) gets no event -- there is no real
+  // category to attribute an override to for them.
+  const events = kids
+    .map(child => {
+      const flagId = primaryOverrideFlagForChild(movie, child);
+      if(!flagId) return null;
+      return {
+        id: makeChildId(),
+        type: 'watch_anyway',
+        titleId: movie.num,
+        childId: child.id,
+        flag: flagId,
+        createdAt: now()
+      };
+    })
+    .filter(Boolean);
   state.events = (state.events || []).concat(events);
   saveState();
   showToast('Logged as a gentle Family review signal');
@@ -3803,11 +4072,11 @@ function renderTonightKidChoices(){
   state.children.forEach(child=>{
     const btn = document.createElement('button');
     btn.type = 'button';
-    btn.className = 'choiceChip' + (tonightSelection.childIds.has(child.id) ? ' selected' : '');
+    btn.className = 'choiceChip' + (!tonightSelection.excludedChildIds.has(child.id) ? ' selected' : '');
     btn.textContent = child.name;
     btn.addEventListener('click', ()=>{
-      if(tonightSelection.childIds.has(child.id)) tonightSelection.childIds.delete(child.id);
-      else tonightSelection.childIds.add(child.id);
+      if(tonightSelection.excludedChildIds.has(child.id)) tonightSelection.excludedChildIds.delete(child.id);
+      else tonightSelection.excludedChildIds.add(child.id);
       resetTonightSkips();
       renderTonightKidChoices();
       renderTonightSummary();
@@ -3816,10 +4085,10 @@ function renderTonightKidChoices(){
   });
   const adultsOnly = document.createElement('button');
   adultsOnly.type = 'button';
-  adultsOnly.className = 'choiceChip' + (tonightSelection.childIds.size === 0 ? ' selected' : '');
+  adultsOnly.className = 'choiceChip' + (selectedKids().length === 0 ? ' selected' : '');
   adultsOnly.textContent = 'Adults only';
   adultsOnly.addEventListener('click', ()=>{
-    tonightSelection.childIds.clear();
+    tonightSelection.excludedChildIds = new Set(state.children.map(child => child.id));
     resetTonightSkips();
     renderTonightKidChoices();
     renderTonightSummary();
@@ -3958,6 +4227,7 @@ function renderNewSection(){
     const check = document.createElement('button');
     check.className = 'check' + (isChecked ? ' on' : '');
     check.setAttribute('aria-label', 'Mark watched');
+    check.dataset.idx = idx;
     check.onclick = () => toggleCheck(idx);
 
     const star = createStarButton(idx, isPriority);
@@ -4024,12 +4294,39 @@ function encodeState(){
   return btoa(JSON.stringify(serializeState()));
 }
 
+// Returns the RAW parsed payload -- the same v3 serializeState() shape that
+// encodeState() produces and that Google Drive stores -- rather than an
+// already-normalized state object. Callers feed this straight into
+// mergeState(), which normalizes it internally and needs the raw
+// v/order.movieNums/mark-record shape to recover each mark's updatedAt/device
+// for last-write-wins merging. Normalizing here AND inside mergeState would
+// double-normalize: the second pass wouldn't see a `v` field, would mis-parse
+// the already-flat data as legacy v1, and would stamp every mark with
+// now()/this device instead of preserving its real origin -- silently making
+// the "merge" always win with stale pasted data. normalizeState() is still
+// called here, once, purely to validate the payload's shape before returning.
 function decodeState(code){
-  const parsed = normalizeState(JSON.parse(atob(code.trim())));
+  const raw = JSON.parse(atob(code.trim()));
+  const parsed = normalizeState(raw);
   if(!parsed || !Array.isArray(parsed.order) || parsed.order.length !== MOVIES.length){
     throw new Error('invalid sync code');
   }
-  return parsed;
+  return raw;
+}
+
+// Shape used to detect whether loading a sync code actually combined data
+// from both sides, vs. a no-op merge (e.g. re-pasting the same code, or a
+// code that only reflects an already-known state). Deliberately leaves out
+// `events` (mergeState always concats event logs, so comparing them would
+// make even a true no-op report as "merged") and any timestamp/device
+// bookkeeping fields, which change on every save regardless of content.
+function mergeSignature(s){
+  return JSON.stringify({
+    order: s.order,
+    checked: s.checked,
+    priority: s.priority,
+    children: s.children
+  });
 }
 
 function setGoogleSyncStatus(message, isError){
@@ -4318,6 +4615,12 @@ async function mergeAndWriteToDrive(){
     // beforeWrite recheck sees no further drift and writes over the collision unnoticed.
     const readAtModifiedTime = await getDriveFileModifiedTime(fileId);
     const remote = await readDriveFile(fileId);
+    // state.children may be wholesale-replaced here when the remote side's
+    // childrenUpdatedAt is newer (e.g. another device added a child) -- see
+    // issue #79. No tonightSelection recompute needed afterwards:
+    // tonightSelection.excludedChildIds is opt-out, so a child that just
+    // arrived via this merge and was never explicitly excluded is already
+    // included in selectedKids().
     state = mergeState(state, remote);
     persistLocalState();
 
@@ -4541,7 +4844,28 @@ function render(){
     }
   }
 
-  visibleOrder.forEach((idx, visiblePos) => {
+  // Reset back to page 1 whenever the search/filter/sort combination
+  // actually changed (a fresh list of results). A re-render triggered by
+  // something else (e.g. toggling a check/star mark) keeps the page the
+  // user was on.
+  const listSignature = JSON.stringify([
+    q, filter, decadeFilter, ageFilter, genreFilter, studioFilter,
+    priorityOnly, newOnly, hideAboveSettings, sortMode
+  ]);
+  if(listSignature !== lastListSignature){
+    listPage = 1;
+    lastListSignature = listSignature;
+  }
+  const LIST_PAGE_SIZE = 50;
+  const totalPages = Math.max(1, Math.ceil(visibleOrder.length / LIST_PAGE_SIZE));
+  if(listPage > totalPages) listPage = totalPages;
+  if(listPage < 1) listPage = 1;
+  const pageStart = (listPage - 1) * LIST_PAGE_SIZE;
+  const pageItems = visibleOrder.slice(pageStart, pageStart + LIST_PAGE_SIZE);
+  renderListPagination(totalPages, visibleOrder.length);
+
+  pageItems.forEach((idx, i) => {
+    const visiblePos = pageStart + i;
     const m = MOVIES[idx];
     const isChecked = markValue(state.checked, idx);
     const globalPos = orderPosition.get(idx);
@@ -4556,6 +4880,7 @@ function render(){
     const check = document.createElement('button');
     check.className = 'check' + (isChecked ? ' on' : '');
     check.setAttribute('aria-label', 'Mark watched');
+    check.dataset.idx = idx;
     check.onclick = () => toggleCheck(idx);
 
     const isPriority = markValue(state.priority, idx);
@@ -4578,11 +4903,17 @@ function render(){
     const moves = document.createElement('div');
     moves.className = 'moves';
     const up = document.createElement('button');
+    up.className = 'moveUp';
+    up.dataset.idx = idx;
     up.textContent = '\u25b2';
+    up.setAttribute('aria-label', `Move ${m.t} up`);
     up.disabled = globalPos === 0;
     up.onclick = () => move(idx, -1);
     const down = document.createElement('button');
+    down.className = 'moveDown';
+    down.dataset.idx = idx;
     down.textContent = '\u25bc';
+    down.setAttribute('aria-label', `Move ${m.t} down`);
     down.disabled = globalPos === state.order.length - 1;
     down.onclick = () => move(idx, 1);
     moves.appendChild(up);
@@ -4607,6 +4938,43 @@ function render(){
 
   updateStats();
 }
+
+const listPaginationEl = document.getElementById('listPagination');
+const listPagePrevBtn = document.getElementById('listPagePrevBtn');
+const listPageNextBtn = document.getElementById('listPageNextBtn');
+const listPageStatusEl = document.getElementById('listPageStatus');
+
+// Updates the existing pagination controls in place (never recreates them)
+// so a click on Prev/Next never loses focus the way rebuilding the row list
+// would.
+function renderListPagination(totalPages, totalCount){
+  if(!listPaginationEl) return;
+  if(totalPages <= 1){
+    listPaginationEl.style.display = 'none';
+    return;
+  }
+  listPaginationEl.style.display = 'flex';
+  listPagePrevBtn.disabled = listPage <= 1;
+  listPageNextBtn.disabled = listPage >= totalPages;
+  listPageStatusEl.textContent = `Page ${listPage} of ${totalPages} (${totalCount} movies)`;
+}
+
+if(listPagePrevBtn) listPagePrevBtn.addEventListener('click', ()=>{
+  if(listPage > 1){
+    listPage -= 1;
+    render();
+  }
+});
+if(listPageNextBtn) listPageNextBtn.addEventListener('click', ()=>{
+  listPage += 1;
+  render();
+});
+
+document.getElementById('skipToNavLink').addEventListener('click', e=>{
+  e.preventDefault();
+  const quickBar = document.getElementById('quickBar');
+  if(quickBar) quickBar.focus();
+});
 
 document.getElementById('search').addEventListener('input', e=>{
   query = e.target.value;
@@ -4690,6 +5058,7 @@ function removeChild(id){
   if(!window.confirm(`Remove ${child.name}? This can't be undone.`)) return;
   state.children = state.children.filter(c => c.id !== id);
   if(selectedFamilyChildId === id) selectedFamilyChildId = state.children[0] ? state.children[0].id : null;
+  tonightSelection.excludedChildIds.delete(id);
   touchChildren();
   saveState();
   renderChildren();
@@ -4702,7 +5071,8 @@ function addChild(rawName, rawAge){
   const child = createChild(name, rawAge);
   state.children.push(child);
   selectedFamilyChildId = child.id;
-  tonightSelection.childIds.add(child.id);
+  // No tonightSelection bookkeeping needed: excludedChildIds is opt-out, so
+  // a brand-new child is included by default just by not being in it yet.
   touchChildren();
   saveState();
   renderChildren();
@@ -4828,6 +5198,7 @@ function renderFamilySettings(){
       ].filter(Boolean).join(' ');
       btn.setAttribute('aria-pressed', level === effective.value ? 'true' : 'false');
       btn.setAttribute('title', `${level}: ${flag.levels[level - 1].name}`);
+      btn.setAttribute('aria-label', `Level ${level}: ${flag.levels[level - 1].name}`);
       btn.addEventListener('click', () => setChildFlagLimit(selectedChild.id, flag.id, level));
       limitControl.appendChild(btn);
     }
@@ -4909,6 +5280,8 @@ function renderChildren(){
         setSelectedFamilyChild(child.id);
         const panel = document.getElementById('familySettingsPanel');
         if(panel) panel.scrollIntoView({ behavior:'smooth', block:'start' });
+        const heading = document.getElementById('familySettingsChildName');
+        if(heading) setTimeout(()=>heading.focus(), 260);
       });
       const edit = document.createElement('button');
       edit.type = 'button';
@@ -4933,18 +5306,44 @@ function renderChildren(){
       summary.textContent = summarizeChildUnderstanding(child);
       article.appendChild(summary);
 
-      const watchSignals = (state.events || []).filter(event => event.type === 'watch_anyway' && event.childId === child.id && event.flag === 'violence');
-      if(watchSignals.length >= 3){
+      // Issue #70: check every flag, not just violence, and worst/first
+      // severity-style ordering picks one to surface if several qualify at
+      // once. Issue #72: a per-flag dismissedAt timestamp (set by "Not now")
+      // excludes events logged before that dismissal, so an already-acted-on
+      // signal stays quiet until a fresh run of 3 new overrides accumulates.
+      const dismissedAt = (child.watchCueDismissedAt && typeof child.watchCueDismissedAt === 'object') ? child.watchCueDismissedAt : {};
+      const cueFlagId = CONTENT_FLAG_IDS.find(flagId => {
+        const cutoff = dismissedAt[flagId] || 0;
+        const count = (state.events || []).filter(event => event.type === 'watch_anyway' && event.childId === child.id && event.flag === flagId && event.createdAt > cutoff).length;
+        return count >= 3;
+      });
+      if(cueFlagId){
         activeSuggestionCount += 1;
+        const cueFlag = CONTENT_FLAGS.find(flag => flag.id === cueFlagId);
         const cue = document.createElement('div');
         cue.className = 'familyCue';
         const span = document.createElement('span');
         const strong = document.createElement('strong');
-        strong.textContent = `Review ${child.name}'s Violence & Scariness setting.`;
+        strong.textContent = `Review ${child.name}'s ${cueFlag.label} setting.`;
         const em = document.createElement('em');
         em.textContent = 'Based on repeated Watch anyway choices. No limit changed automatically.';
         span.appendChild(strong);
         span.appendChild(em);
+        const actions = document.createElement('div');
+        actions.className = 'familyCueActions';
+        const review = document.createElement('button');
+        review.type = 'button';
+        review.className = 'linkBtn';
+        review.textContent = `Review ${cueFlag.label} setting`;
+        review.addEventListener('click', () => reviewChildFlagSetting(child.id, cueFlagId));
+        const notNow = document.createElement('button');
+        notNow.type = 'button';
+        notNow.className = 'linkBtn';
+        notNow.textContent = 'Not now';
+        notNow.addEventListener('click', () => dismissWatchAnywayCue(child.id, cueFlagId));
+        actions.appendChild(review);
+        actions.appendChild(notNow);
+        span.appendChild(actions);
         cue.appendChild(span);
         article.appendChild(cue);
       }
@@ -5102,12 +5501,14 @@ document.getElementById('syncLoadBtn').addEventListener('click', ()=>{
   const input = document.getElementById('syncCodeIn');
   if(!input.value.trim()) return;
   try{
-    state = decodeState(input.value);
+    const beforeSignature = mergeSignature(state);
+    state = mergeState(state, decodeState(input.value));
     saveState();
     input.value = '';
     if(currentScreen === 'family') refreshCatalogData();
     else renderCurrentView();
-    showToast('Synced from code');
+    const combinedChanges = mergeSignature(state) !== beforeSignature;
+    showToast(combinedChanges ? 'Synced — merged in changes from the other code' : 'Synced — already up to date');
   }catch(e){
     showToast("That code doesn't look right");
   }
@@ -5231,6 +5632,8 @@ document.getElementById('tonightWatchBtn').addEventListener('click', ()=>{
 
 document.getElementById('tonightWatchAnywayBtn').addEventListener('click', logWatchAnywaySignal);
 
+document.getElementById('tonightDetailBtn').addEventListener('click', toggleTonightDetail);
+
 document.getElementById('tonightSkipBtn').addEventListener('click', ()=>{
   skipCurrentTonightPick();
   showToast('Skipped for tonight');
@@ -5326,10 +5729,61 @@ document.addEventListener('visibilitychange', ()=>{
   }
 });
 
+function isStandaloneDisplay(){
+  try{
+    if(window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) return true;
+  }catch(e){ /* matchMedia unavailable */ }
+  return navigator.standalone === true;
+}
+
+// iOS/iPadOS Safari (and other iOS browsers, which are all WebKit wrappers
+// with the same Share-sheet install flow) never fire beforeinstallprompt --
+// it's a Chromium-only API -- so the native install button would otherwise
+// stay hidden there forever with no fallback. iPadOS 13+ reports its
+// navigator.platform as a Mac, so real iPads are caught via the touch-point
+// check rather than the UA string alone.
+function isIOSDevice(){
+  const ua = navigator.userAgent || '';
+  if(/iPad|iPhone|iPod/.test(ua)) return true;
+  return navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
+}
+
+function showIOSInstallHint(){
+  const hint = document.getElementById('iosInstallHint');
+  if(hint) hint.style.display = 'block';
+}
+
+function hideIOSInstallHint(){
+  const hint = document.getElementById('iosInstallHint');
+  if(hint) hint.style.display = 'none';
+}
+
+const INSTALL_FALLBACK_DELAY_MS = 2500;
+
+// Called once at startup. iOS gets the static instructions immediately
+// (beforeinstallprompt will just never come). Any other touch-capable
+// browser (e.g. Firefox for Android) gets the same fallback copy, but only
+// after a short grace period with no beforeinstallprompt, so a Chromium
+// browser that's just slightly slow to fire it isn't shown a redundant hint
+// alongside its own native button.
+function maybeShowInstallFallback(){
+  if(isStandaloneDisplay()) return;
+  if(isIOSDevice()){
+    showIOSInstallHint();
+    return;
+  }
+  if(navigator.maxTouchPoints > 0){
+    setTimeout(()=>{
+      if(!deferredInstallPrompt && !isStandaloneDisplay()) showIOSInstallHint();
+    }, INSTALL_FALLBACK_DELAY_MS);
+  }
+}
+
 window.addEventListener('beforeinstallprompt', event=>{
   event.preventDefault();
   deferredInstallPrompt = event;
   document.getElementById('installAppBtn').classList.add('canInstall');
+  hideIOSInstallHint();
 });
 
 document.getElementById('installAppBtn').addEventListener('click', async ()=>{
@@ -5344,6 +5798,7 @@ document.getElementById('installAppBtn').addEventListener('click', async ()=>{
 window.addEventListener('appinstalled', ()=>{
   deferredInstallPrompt = null;
   document.getElementById('installAppBtn').classList.remove('canInstall');
+  hideIOSInstallHint();
 });
 
 if('serviceWorker' in navigator){
@@ -5417,9 +5872,11 @@ async function decideInitialScreen(){
     ]);
     if(loadingEl) loadingEl.style.display = 'none';
     // state.children may have just changed via the merge in
-    // syncFromGoogleDrive() -- recompute rather than use the value from
-    // before the wait.
-    tonightSelection.childIds = new Set((state.children || []).map(child => child.id));
+    // syncFromGoogleDrive() -- no recompute needed here: selectedKids()
+    // derives inclusion from tonightSelection.excludedChildIds (opt-out),
+    // so a child that just arrived via merge and was never explicitly
+    // excluded is already included, with no bookkeeping required at any
+    // children-mutating call site (see tonightSelection's declaration).
   }
   showScreen(state.children && state.children.length ? 'home' : 'setup');
 }
@@ -5429,8 +5886,11 @@ initTheme();
 loadState();
 tryInitGoogleSync();
 renderStudioGrid();
-tonightSelection.childIds = new Set((state.children || []).map(child => child.id));
+// No tonightSelection seeding needed here: excludedChildIds starts empty
+// (see its declaration), so every child loadState() just populated is
+// already included by default.
 decideInitialScreen();
+maybeShowInstallFallback();
 </script>
 </body>
 </html>

@@ -21,6 +21,13 @@ test('a child added via the Family tab after the first one is included in fit ba
   // completeSetupWithChildren(), which sets tonightSelection.childIds
   // unconditionally and so doesn't exercise this bug; a third child must be
   // registered through the Family tab's "Add child" UI to reproduce it.
+  //
+  // (Issue #79 later inverted tonightSelection from an opt-in `childIds`
+  // allowlist to an opt-out `excludedChildIds` set, closing this whole bug
+  // class -- a newly added child is now included by default with no
+  // per-mutation-path bookkeeping. This test's scenario and assertions still
+  // hold unchanged under that model; only the underlying mechanism they're
+  // guarding against regressing is different now.)
   await page.goto('/');
   await setupSampleFamily(page);
 
@@ -33,8 +40,9 @@ test('a child added via the Family tab after the first one is included in fit ba
   await page.locator('#saveNewChildBtn').click();
   await expect(page.locator('#toast')).toContainText('Wes added with starter settings');
 
-  // The Tonight kid-choice chips on Home directly reflect
-  // tonightSelection.childIds membership -- Wes's chip must be selected.
+  // The Tonight kid-choice chips on Home directly reflect selectedKids()
+  // (derived from tonightSelection.excludedChildIds since #79) -- Wes's chip
+  // must be selected.
   await page.locator('#tabHome').click();
   await page.locator('#homeScreen').waitFor({ state: 'visible' });
   const wesChip = page.locator('#tonightKidChoices .choiceChip', { hasText: 'Wes' });
