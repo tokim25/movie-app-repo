@@ -40,6 +40,17 @@ test('first-run setup leads to Tonight, Shelf, and Family', async ({ page }) => 
   await expect(page.locator('#syncPanel')).toBeVisible();
   await expect(page.locator('#tabFamily')).toHaveClass(/on/);
 
+  // Google Drive sync is the promoted default path (product decision after
+  // #80): the "Recommended" badge sits on the Google row, which comes before
+  // the demoted manual-code group in DOM/visual order, and the manual group
+  // is framed as the no-account fallback rather than a peer option.
+  await expect(page.locator('#googleSyncRow .syncRecommendedBadge')).toHaveText('Recommended');
+  const syncPanelHtml = await page.locator('#syncPanel').innerHTML();
+  expect(syncPanelHtml.indexOf('id="googleSyncRow"')).toBeLessThan(syncPanelHtml.indexOf('syncManualGroup'));
+  await expect(page.locator('.syncManualIntro')).toContainText('Or, without a Google account');
+  await expect(page.locator('.syncManualGroup #syncCodeOut')).toBeVisible();
+  await expect(page.locator('.syncManualGroup #syncCodeIn')).toBeVisible();
+
   await page.locator('#tabBrowse').click();
   await expect(page.locator('#browseScreen')).toBeVisible();
   await expect(page.locator('#familyScreen')).toBeHidden();

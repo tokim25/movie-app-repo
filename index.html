@@ -609,6 +609,29 @@ function reportError(err){
   .googleSyncControls #googleSyncStatus.syncError{
     color:var(--error);
   }
+  .syncRecommendedBadge{
+    display:inline-block;
+    background:var(--accent);
+    color:var(--on-accent);
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.02em;
+    text-transform:uppercase;
+    padding:2px 8px;
+    border-radius:10px;
+    margin-right:6px;
+    vertical-align:middle;
+  }
+  .syncManualGroup{
+    margin-top:18px;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+  }
+  .syncManualIntro{
+    font-size:12px;
+    color:var(--ink-soft);
+    margin:0 0 12px;
+  }
 
   ul#list{
     list-style:none;
@@ -2357,26 +2380,29 @@ function reportError(err){
     <div class="familyCard">
       <button id="familySyncBtn" class="familyBtn" type="button">Open sync settings</button>
       <div class="syncPanel" id="syncPanel" style="display:none;">
-        <div class="syncRow" id="googleSyncRow" style="display:none;">
-          <label>Sync automatically with your Google account — saves your list as a small file in your Google Drive that only this app can read or edit. See our <a href="/privacy.html">Privacy Policy</a> and <a href="/terms.html">Terms</a>.</label>
+        <div class="syncRow syncPrimaryRow" id="googleSyncRow" style="display:none;">
+          <label><span class="syncRecommendedBadge">Recommended</span> Sign in with Google to keep your list backed up and merged automatically across every device, so nothing gets overwritten. Saves a small file in your Google Drive that only this app can read or edit. See our <a href="/privacy.html">Privacy Policy</a> and <a href="/terms.html">Terms</a>.</label>
           <div class="googleSyncControls">
             <button id="googleSignInBtn">Sign in with Google</button>
             <span id="googleSyncStatus" style="display:none;"></span>
             <button id="googleSignOutBtn" style="display:none;">Disconnect</button>
           </div>
         </div>
-        <div class="syncRow">
-          <label>Or copy a code — paste it into this app on another device to load your progress there.</label>
-          <div class="syncCodeRow">
-            <textarea id="syncCodeOut" readonly rows="3"></textarea>
-            <button id="syncCopyBtn">Copy</button>
+        <div class="syncManualGroup">
+          <p class="syncManualIntro">Or, without a Google account — copy a code by hand between devices. Fully offline and nothing leaves this device, but you'll need to copy a fresh code each time you want another device caught up, and loading an old code can't automatically know what changed since.</p>
+          <div class="syncRow">
+            <label>Copy a code — paste it into this app on another device to load your progress there.</label>
+            <div class="syncCodeRow">
+              <textarea id="syncCodeOut" readonly rows="3"></textarea>
+              <button id="syncCopyBtn">Copy</button>
+            </div>
           </div>
-        </div>
-        <div class="syncRow">
-          <label>Paste a code from another device here to load it on this one.</label>
-          <div class="syncCodeRow">
-            <textarea id="syncCodeIn" rows="3" placeholder="Paste code here"></textarea>
-            <button id="syncLoadBtn">Load</button>
+          <div class="syncRow">
+            <label>Paste a code from another device here to load it on this one.</label>
+            <div class="syncCodeRow">
+              <textarea id="syncCodeIn" rows="3" placeholder="Paste code here"></textarea>
+              <button id="syncLoadBtn">Load</button>
+            </div>
           </div>
         </div>
       </div>
