@@ -1,6 +1,6 @@
 # Family Feature UX Design Treatment
 
-**Status:** Approved design direction  
+**Status:** Implemented in PR #83; device and assistive-technology validation pending
 **Date:** September 20, 2026  
 **Product:** [Family Feature](https://movies.tonykim.io/)  
 **Repository:** `tokim25/movie-app-repo`  
@@ -19,6 +19,32 @@ The next design phase should prioritize trust and accessibility before visual po
 5. Adapt navigation and filtering for desktop rather than stretching mobile patterns.
 
 The Family page is visually dense, but it is not the product's most consequential problem. The product promise is the recommendation. A trustworthy recommendation system is therefore the first design priority.
+
+## Implementation handoff
+
+This treatment is the design source of truth for issues #84–#88 and the corresponding implementation in PR #83. The implementation intentionally preserves the existing recommendation scoring, stored family data, sync format, offline shell, and destructive confirmations. It changes presentation, interaction semantics, and explanatory copy without silently changing the rules that decide whether a title is within a family's settings.
+
+| Issue | Shipped treatment | Acceptance signal |
+|---|---|---|
+| #84 — Cinema Blue visual system | Light/dark semantic tokens, cobalt actions, cool-neutral surfaces, visible focus rings, 44px critical targets, updated browser/PWA theme colors | Both themes use the token table below; beige/terracotta chrome is removed |
+| #85 — Accessible interaction states | `aria-pressed`/`aria-current`, inline onboarding error, assertive and polite live regions, labeled filters, focus return/trap for the compact filter sheet | Selection, error, status, and navigation state are programmatically exposed |
+| #86 — Recommendation trust | “Tonight's pick,” “Review fit,” and “Above settings”; adults-only explanation; visible evidence and source; two alternatives; optional session-only Skip reason | Provenance and uncertainty appear without opening Details; feedback does not change family limits |
+| #87 — Family information architecture | Family members, Content limits, Appearance and sync, and About; one card and one inline editor per member; “Personalization” removed | Only one member editor is open at a time and focus moves into the requested task |
+| #88 — Responsive Shelf and navigation | Compact bottom navigation and filter sheet; desktop left navigation and filter popover; search result count, clear action, focused zero-results recovery | Search suppresses unrelated Browse by content and prefills Request a movie when empty |
+
+### Product boundaries
+
+- Skip reasons are optional, toggleable, and held for the current session only.
+- “Adults only” means child content limits do not apply; it is not an adult-content preference.
+- Recommendation provenance is separate from the green/amber/red fit calculation.
+- The implementation does not add behavioral inference, automatic profile changes, analytics, or a new persistence schema.
+- Exactly two alternatives are shown when the eligible catalog can supply them; the primary recommendation remains the default path.
+
+### Verification status
+
+- Source-level JavaScript parsing, diff hygiene, service-worker data-version checks, canonical redirect checks, and Playwright test discovery pass locally.
+- Regression coverage was added for inline validation, state semantics, recommendation evidence and alternatives, search recovery, single-editor Family behavior, and compact/desktop filter behavior.
+- The full browser suite remains required in CI. The local environment could not download its pinned Chromium binary, so this document does not claim a completed device, VoiceOver, NVDA, or cross-browser pass.
 
 ## Review basis and limits
 
@@ -78,6 +104,7 @@ The existing beige and terracotta system is replaced by a cool neutral canvas, w
 | On-action text | `--on-accent` | `#FFFFFF` | Text on cobalt buttons |
 | Selection | `--select-rgb` | `47,95,234` | Selected controls and focus-adjacent fills |
 | Highlight | `--star` | `#D59B16` | Want-to-watch star and rare highlights |
+| On-highlight text | `--on-star` | `#172033` | Text on gold selected states |
 | New label | `--new` | `#2354B8` | New-content label text |
 | New label surface | `--new-bg` | `#E7EEFF` | New-content label background |
 | Success | `--success` | `#18794E` | Confirmed completion |
@@ -107,6 +134,7 @@ Gold is not a general-purpose brand color. Reserve it for the Want-to-watch star
 | On-action text | `--on-accent` | `#0B1020` |
 | Selection | `--select-rgb` | `127,162,255` |
 | Highlight | `--star` | `#F2C14E` |
+| On-highlight text | `--on-star` | `#0B1020` |
 | New label | `--new` | `#AAC0FF` |
 | New label surface | `--new-bg` | `#202D50` |
 | Success | `--success` | `#4CC38A` |
