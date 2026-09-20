@@ -118,7 +118,7 @@ test('an active filter that zeroes search results is called out in the empty sta
     };
   });
   expect(baseline.emptyVisible).toBe(true);
-  expect(baseline.emptyText).toBe('No movies match your search.');
+  expect(baseline.emptyText).toBe('No movies match “xq”.');
   expect(baseline.badgeVisible).toBe(false);
 
   // A query that matches plenty of titles, but a studio filter that excludes
