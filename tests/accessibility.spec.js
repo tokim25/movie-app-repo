@@ -38,6 +38,20 @@ test('the active bottom-nav tab label meets AA text contrast in light mode (#77)
   );
 });
 
+test('the active Want to watch filter meets AA contrast in dark mode', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'dark' });
+  await switchToFlatView(page);
+  await page.locator('#filterSheetBtn').click();
+  await page.locator('#priorityToggleBtn').click();
+  await expect(page.locator('#priorityToggleBtn')).toHaveAttribute('aria-pressed', 'true');
+
+  await expectNoA11yViolations(
+    page,
+    ['#priorityToggleBtn'],
+    { runOnly: { type: 'rule', values: ['color-contrast'] } }
+  );
+});
+
 // Issue #74 part 1: toggleCheck()/togglePriority() call renderCurrentView(),
 // which rebuilds the whole list's DOM. Without restoring focus to the
 // equivalent control afterward, the activated button is destroyed and

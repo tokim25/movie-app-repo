@@ -268,13 +268,13 @@ test('a green top pick with multiple kids selected cites every kid in its reason
     };
   });
 
-  expect(result.verdictText).toBe('Green Light');
+  expect(result.verdictText).toBe("Tonight's pick");
   // Both selected kids (Simon and Nora), not just the first, per #59.
   expect(result.reasons[0]).toBe("Within Simon and Nora's starter settings.");
   expect(result.watchAnywayDisplay).toBe('none');
 });
 
-test('a red top pick is labeled Red (not Green Light) and Watch anyway works for it (#49)', async ({ page }) => {
+test('a red top pick is labeled Above settings and Watch anyway works for it (#49)', async ({ page }) => {
   const result = await page.evaluate(() => {
     const redIdx = MOVIES.push({ t: 'DDD Regression Red Fixture', y: '2005', ca: '6+', genre: [], num: 9000102, flags: { violence: 1, language: 4, romance: 1, drinking: 1 } }) - 1;
     state.children.forEach(child => setChildFlagLimit(child.id, 'language', 1));
@@ -291,7 +291,7 @@ test('a red top pick is labeled Red (not Green Light) and Watch anyway works for
     };
   });
 
-  expect(result.verdictText).toBe('Red: above settings');
+  expect(result.verdictText).toBe('Above settings');
   expect(result.reasons[0]).toBe('Above Simon: language and Nora: language.');
   // "Watch anyway" is the same override-a-caution workflow for red as it is
   // for amber, so it should show (and log) for a red pick too.
@@ -299,7 +299,7 @@ test('a red top pick is labeled Red (not Green Light) and Watch anyway works for
   expect(result.loggedForRed).toBe(true);
 });
 
-test('an amber top pick is still labeled Amber, distinct from red and green (#49)', async ({ page }) => {
+test('an amber top pick is labeled Review fit, distinct from red and green (#49)', async ({ page }) => {
   const result = await page.evaluate(() => {
     const amberIdx = MOVIES.push({ t: 'EEE Regression Amber Fixture', y: '2005', ca: '6+', genre: [], num: 9000103, flags: { violence: 1, language: 3, romance: 1, drinking: 1 } }) - 1;
     state.children.forEach(child => setChildFlagLimit(child.id, 'language', 2));
@@ -311,6 +311,6 @@ test('an amber top pick is still labeled Amber, distinct from red and green (#49
     };
   });
 
-  expect(result.verdictText).toBe('Amber: worth a quick look');
+  expect(result.verdictText).toBe('Review fit');
   expect(result.watchAnywayDisplay).toBe('inline-block');
 });

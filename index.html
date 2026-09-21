@@ -148,8 +148,8 @@ function reportError(err){
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#fbf7f1" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#171411" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F4F6FA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B1020" media="(prefers-color-scheme: dark)">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Family Feature">
@@ -165,93 +165,112 @@ function reportError(err){
 <style>
   :root{
     color-scheme:light dark;
-    --bg:#faf5ee;
-    --bg-sub:#f1e7d8;
-    --surface:#fffdf8;
-    --ink:#332821;
-    --on-ink:#fff;
-    --ink-soft:#7d6c5c;
-    --ink-faint:#a89985;
-    --line:#e6dbc9;
-    --accent:#bb5938;
-    --accent-rgb:187,89,56;
-    /* #bb5938 on this screen's --bg (#faf5ee) is 4.21:1, which fails WCAG
-       AA's 4.5:1 threshold for normal-size text. --accent-text is a darker
-       variant reserved for text/link uses of the accent color;
-       background+white-text uses (e.g. .iconBtn) keep --accent unchanged
-       since those already pass at 4.57:1. #9d4b2f is 5.56:1 against --bg
-       (#faf5ee) and 4.93:1 against --bg-sub (#f1e7d8, the "New this week"
-       teaser's background, which .detailLink/.sourceLink also render on) --
-       both comfortably above 4.5:1. */
-    --accent-text:#9d4b2f;
-    --on-accent:#fff;
-    --select-rgb:42,91,76;
-    --error-bg:#f7e8df;
+    --bg:#F4F6FA;
+    --bg-sub:#E9EEF7;
+    --surface:#FFFFFF;
+    --ink:#172033;
+    --on-ink:#FFFFFF;
+    --ink-soft:#566176;
+    --ink-faint:#626D83;
+    --line:#CFD7E6;
+    --accent:#2F5FEA;
+    --accent-rgb:47,95,234;
+    --accent-text:#2348B7;
+    --on-accent:#FFFFFF;
+    --select-rgb:47,95,234;
+    --error-bg:#FDECEA;
     --check:var(--ink);
-    --star:#d9932f;
-    --new:#3d5f68;
-    --new-bg:#e2ecec;
-    --error:#9c3b3b;
-    --warning:#9a6a20;
-    --warning-soft:#f4ead2;
-    --shadow-soft:0 10px 28px rgba(27,32,28,0.05);
-    --shadow-card:0 14px 36px rgba(48,38,31,0.06);
+    --star:#D59B16;
+    --on-star:#172033;
+    --new:#2354B8;
+    --new-bg:#E7EEFF;
+    --success:#18794E;
+    --error:#B42318;
+    --warning:#8A5A00;
+    --warning-rgb:138,90,0;
+    --warning-soft:#FFF4D6;
+    --error-rgb:180,35,24;
+    --shadow-rgb:11,16,32;
+    --focus:#5B8DEF;
+    --shadow-soft:0 10px 28px rgba(23,32,51,0.06);
+    --shadow-card:0 14px 36px rgba(23,32,51,0.08);
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --bg:#171411;
-      --bg-sub:#2b251f;
-      --surface:#211d19;
-      --ink:#f5eee5;
-      --on-ink:#171411;
-      --ink-soft:#c7b9aa;
-      --ink-faint:#9c8d7f;
-      --line:#3a332b;
-      --accent:#df8066;
-      --accent-rgb:223,128,102;
-      /* Dark mode's accent already passes AA as text (6.48:1 on --bg), so
-         --accent-text just mirrors --accent here. */
-      --accent-text:#df8066;
-      --on-accent:#332821;
-      --select-rgb:131,173,181;
-      --error-bg:#3a211f;
-      --check:#f5eee5;
-      --star:#e0a34a;
-      --new:#83adb5;
-      --new-bg:#24343a;
-      --error:#e08b82;
-      --warning:#d8ad63;
-      --warning-soft:#3a2f1d;
+      --bg:#0B1020;
+      --bg-sub:#1C2540;
+      --surface:#131A2C;
+      --ink:#F7F9FC;
+      --on-ink:#0B1020;
+      --ink-soft:#B6C0D2;
+      --ink-faint:#929DB2;
+      --line:#2B3654;
+      --accent:#7FA2FF;
+      --accent-rgb:127,162,255;
+      --accent-text:#9AB4FF;
+      --on-accent:#0B1020;
+      --select-rgb:127,162,255;
+      --error-bg:#3B2024;
+      --check:#F7F9FC;
+      --star:#F2C14E;
+      --on-star:#0B1020;
+      --new:#AAC0FF;
+      --new-bg:#202D50;
+      --success:#4CC38A;
+      --error:#FF7A70;
+      --warning:#F2C14E;
+      --warning-rgb:242,193,78;
+      --warning-soft:#382F18;
+      --error-rgb:255,122,112;
+      --shadow-rgb:0,0,0;
+      --focus:#9AB4FF;
       --shadow-soft:0 10px 28px rgba(0,0,0,0.2);
       --shadow-card:0 18px 44px rgba(0,0,0,0.28);
     }
   }
   :root[data-theme="dark"]{
-    --bg:#171411;
-    --bg-sub:#2b251f;
-    --surface:#211d19;
-    --ink:#f5eee5;
-    --on-ink:#171411;
-    --ink-soft:#c7b9aa;
-    --ink-faint:#9c8d7f;
-    --line:#3a332b;
-    --accent:#df8066;
-    --accent-rgb:223,128,102;
-    --accent-text:#df8066;
-    --on-accent:#332821;
-    --select-rgb:131,173,181;
-    --error-bg:#3a211f;
-    --check:#f5eee5;
-    --star:#e0a34a;
-    --new:#83adb5;
-    --new-bg:#24343a;
-    --error:#e08b82;
-    --warning:#d8ad63;
-    --warning-soft:#3a2f1d;
+    --bg:#0B1020;
+    --bg-sub:#1C2540;
+    --surface:#131A2C;
+    --ink:#F7F9FC;
+    --on-ink:#0B1020;
+    --ink-soft:#B6C0D2;
+    --ink-faint:#929DB2;
+    --line:#2B3654;
+    --accent:#7FA2FF;
+    --accent-rgb:127,162,255;
+    --accent-text:#9AB4FF;
+    --on-accent:#0B1020;
+    --select-rgb:127,162,255;
+    --error-bg:#3B2024;
+    --check:#F7F9FC;
+    --star:#F2C14E;
+    --on-star:#0B1020;
+    --new:#AAC0FF;
+    --new-bg:#202D50;
+    --success:#4CC38A;
+    --error:#FF7A70;
+    --warning:#F2C14E;
+    --warning-rgb:242,193,78;
+    --warning-soft:#382F18;
+    --error-rgb:255,122,112;
+    --shadow-rgb:0,0,0;
+    --focus:#9AB4FF;
     --shadow-soft:0 10px 28px rgba(0,0,0,0.2);
     --shadow-card:0 18px 44px rgba(0,0,0,0.28);
   }
   *{box-sizing:border-box; -webkit-font-smoothing:antialiased;}
+  .srOnly{
+    position:absolute !important;
+    width:1px !important;
+    height:1px !important;
+    padding:0 !important;
+    margin:-1px !important;
+    overflow:hidden !important;
+    clip:rect(0,0,0,0) !important;
+    white-space:nowrap !important;
+    border:0 !important;
+  }
   html{
     -webkit-text-size-adjust:100%;
     text-size-adjust:100%;
@@ -266,6 +285,10 @@ function reportError(err){
   button,
   a{
     touch-action:manipulation;
+  }
+  :focus-visible{
+    outline:2px solid var(--focus) !important;
+    outline-offset:2px !important;
   }
   body{
     background:var(--bg);
@@ -335,11 +358,11 @@ function reportError(err){
     align-items:center;
     gap:12px;
     background:var(--error-bg);
-    border:1px solid rgba(156,59,59,0.18);
+    border:1px solid rgba(var(--error-rgb),0.24);
     border-radius:10px;
     padding:12px 14px;
     color:var(--ink);
-    box-shadow:0 4px 16px rgba(51,40,33,0.16);
+    box-shadow:0 4px 16px rgba(var(--shadow-rgb),0.16);
   }
   .syncAlertCopy{
     flex:1;
@@ -416,8 +439,9 @@ function reportError(err){
     font-size:14px;
     cursor:pointer;
     font-weight:500;
+    min-height:44px;
   }
-  .seg button.active{ background:var(--bg); color:var(--ink); box-shadow:0 1px 3px rgba(51,40,33,0.08); border-radius:8px; margin:2px; padding:9px 12px; }
+  .seg button.active{ background:var(--bg); color:var(--ink); box-shadow:0 1px 3px rgba(var(--shadow-rgb),0.08); border-radius:8px; margin:2px; padding:9px 12px; }
 
   .filterRow{
     max-width:680px;
@@ -453,6 +477,7 @@ function reportError(err){
     font-weight:500;
     cursor:pointer;
     flex-shrink:0;
+    min-height:44px;
   }
   .filterRow button.priorityToggle{
     background:var(--bg-sub);
@@ -462,7 +487,7 @@ function reportError(err){
   }
   .filterRow button.priorityToggle.on{
     background:var(--star);
-    color:var(--ink);
+    color:var(--on-star);
   }
   .filterRow button.newToggle.on{
     background:var(--new-bg);
@@ -655,8 +680,8 @@ function reportError(err){
     border-radius:6px;
     overflow:hidden;
     background:var(--bg-sub);
-    box-shadow:0 1px 3px rgba(51,40,33,0.22);
-    border:1px solid rgba(51,40,33,0.08);
+    box-shadow:0 1px 3px rgba(var(--shadow-rgb),0.22);
+    border:1px solid rgba(var(--shadow-rgb),0.08);
     flex-shrink:0;
   }
   .poster img{
@@ -694,7 +719,7 @@ function reportError(err){
     font-variant-numeric:tabular-nums;
   }
   .check{
-    width:24px; height:24px;
+    width:44px; height:44px;
     border-radius:50%;
     border:1.5px solid var(--ink-faint);
     flex-shrink:0;
@@ -709,7 +734,7 @@ function reportError(err){
   .check.on{ background:var(--check); border-color:var(--check); }
   .check.on::after{ content:"\2713"; color:var(--on-ink); font-size:13px; font-weight:700; }
   .star{
-    width:24px; height:24px;
+    width:44px; height:44px;
     border:none;
     flex-shrink:0;
     cursor:pointer;
@@ -752,6 +777,9 @@ function reportError(err){
     align-items:center;
   }
   .detailLink{
+    display:inline-flex;
+    min-height:44px;
+    align-items:center;
     background:none;
     border:none;
     color:var(--accent-text);
@@ -762,6 +790,9 @@ function reportError(err){
     padding:0;
   }
   .sourceLink{
+    display:inline-flex;
+    min-height:44px;
+    align-items:center;
     color:var(--accent-text);
     font-size:13px;
     font-weight:500;
@@ -776,7 +807,7 @@ function reportError(err){
     flex-shrink:0;
   }
   .moves button{
-    width:26px; height:22px;
+    width:44px; height:44px;
     background:none;
     border:none;
     color:var(--ink-faint);
@@ -884,7 +915,9 @@ function reportError(err){
     opacity:0;
     pointer-events:none;
     transition:opacity 0.3s;
-    z-index:10;
+    z-index:30;
+    max-width:min(420px, calc(100vw - 32px));
+    text-align:center;
   }
 
   .skipLink{
@@ -947,7 +980,7 @@ function reportError(err){
     background:var(--bg);
     border-top:1px solid var(--line);
     padding:8px 6px calc(14px + env(safe-area-inset-bottom, 0px));
-    box-shadow:0 -2px 10px rgba(51,40,33,0.06);
+    box-shadow:0 -2px 10px rgba(var(--shadow-rgb),0.06);
     transition:transform 0.22s ease;
   }
   .quickBar.qbHidden{
@@ -964,6 +997,7 @@ function reportError(err){
     font-family:inherit;
     color:var(--ink-soft);
     padding:8px 4px 7px;
+    min-height:52px;
     border-radius:10px;
     cursor:pointer;
   }
@@ -991,11 +1025,12 @@ function reportError(err){
     margin-bottom:10px;
   }
   .homeSectionLabel{
-    font-size:12px;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:0.04em;
-    color:var(--ink-faint);
+    display:block;
+    margin:0 0 10px;
+    font-size:20px;
+    line-height:26px;
+    font-weight:600;
+    color:var(--ink);
   }
   .homeSeeAll{
     font-family:inherit;
@@ -1057,13 +1092,14 @@ function reportError(err){
     margin-bottom:16px;
   }
   .screenTopBar h1{
-    font-size:28px;
+    font-size:32px;
+    line-height:1.125;
     margin:0;
   }
   .iconBtn{
     position:relative;
-    width:40px;
-    height:40px;
+    width:44px;
+    height:44px;
     border-radius:10px;
     background:var(--accent);
     color:var(--on-accent);
@@ -1185,7 +1221,7 @@ function reportError(err){
     cursor:pointer;
   }
   .secondaryBtn{
-    min-height:42px;
+    min-height:44px;
     border:1px solid var(--line);
     border-radius:12px;
     background:var(--surface);
@@ -1259,7 +1295,7 @@ function reportError(err){
     text-wrap:pretty;
   }
   .tonightChangeButton{
-    min-height:34px;
+    min-height:44px;
     border:0;
     background:transparent;
     padding:2px 0 2px 12px;
@@ -1308,8 +1344,9 @@ function reportError(err){
     gap:8px;
     margin-top:10px;
   }
+  .choiceGrid[hidden]{ display:none; }
   .choiceChip{
-    min-height:36px;
+    min-height:44px;
     border:1px solid var(--line);
     border-radius:999px;
     background:var(--surface);
@@ -1396,8 +1433,8 @@ function reportError(err){
   .familyCard p{
     margin:0;
     color:var(--ink-soft);
-    font-size:14px;
-    line-height:1.55;
+    font-size:16px;
+    line-height:1.5;
   }
   .familyChildren{
     display:grid;
@@ -1434,13 +1471,13 @@ function reportError(err){
     border-radius:13px;
     display:grid;
     place-items:center;
-    background:#d8d2c6;
+    background:rgba(var(--accent-rgb),0.12);
     color:var(--ink);
     font-size:15px;
     font-weight:600;
     flex:0 0 auto;
   }
-  .familyAvatar.alt{ background:#dce8eb; }
+  .familyAvatar.alt{ background:rgba(var(--accent-rgb),0.2); }
   .familyName{
     color:var(--ink);
     font-size:16px;
@@ -1458,7 +1495,7 @@ function reportError(err){
     display:inline-flex;
     align-items:center;
     padding:6px 10px;
-    background:rgba(21,25,22,0.045);
+    background:rgba(var(--accent-rgb),0.07);
     color:var(--ink-soft);
     font-size:12px;
     font-weight:500;
@@ -1469,7 +1506,7 @@ function reportError(err){
     background:var(--warning-soft);
   }
   .familyEditBtn{
-    min-height:34px;
+    min-height:44px;
     border:1px solid var(--line);
     border-radius:10px;
     background:var(--surface);
@@ -1498,14 +1535,14 @@ function reportError(err){
     border-radius:12px;
     padding:12px 14px;
     background:var(--surface);
-    border:1px solid rgba(155,106,47,0.2);
+    border:1px solid rgba(var(--warning-rgb),0.28);
   }
   .familyCue::before{
     content:"";
     width:7px;
     height:7px;
     border-radius:999px;
-    background:var(--review);
+    background:var(--warning);
   }
   .familyCue strong{
     display:block;
@@ -1537,7 +1574,7 @@ function reportError(err){
     border-radius:12px;
     padding:12px 14px;
     background:var(--surface);
-    border:1px solid rgba(155,106,47,0.2);
+    border:1px solid rgba(var(--warning-rgb),0.28);
   }
   .sadRemovedNotice strong{
     display:block;
@@ -1569,7 +1606,7 @@ function reportError(err){
     margin:14px 0 4px;
   }
   .settingsChildChip{
-    min-height:36px;
+    min-height:44px;
     border:1px solid var(--line);
     border-radius:999px;
     background:var(--surface);
@@ -1608,6 +1645,9 @@ function reportError(err){
     border-radius:13px;
     background:var(--bg-sub);
   }
+  .childEditRow[hidden]{
+    display:none;
+  }
   .childField label{
     display:block;
     margin-bottom:6px;
@@ -1620,7 +1660,7 @@ function reportError(err){
   .childField input,
   .childField select{
     width:100%;
-    min-height:40px;
+    min-height:44px;
     border:1px solid transparent;
     border-radius:10px;
     background:var(--surface);
@@ -1640,7 +1680,7 @@ function reportError(err){
     justify-content:flex-end;
   }
   .childActions button{
-    min-height:40px;
+    min-height:44px;
     border:0;
     border-radius:10px;
     background:var(--surface);
@@ -1811,7 +1851,7 @@ function reportError(err){
   .limitControl button.selected{
     background:var(--ink);
     color:var(--on-ink);
-    box-shadow:0 3px 10px rgba(21,25,22,0.18);
+    box-shadow:0 3px 10px rgba(var(--shadow-rgb),0.18);
   }
   .limitControl button.starter{
     box-shadow:inset 0 0 0 2px rgba(var(--accent-rgb),0.35);
@@ -1838,7 +1878,7 @@ function reportError(err){
     color:var(--warning);
   }
   .fitSignal.red{
-    background:rgba(156,59,59,0.1);
+    background:rgba(var(--error-rgb),0.1);
     color:var(--error);
   }
   .ageDefault{
@@ -1857,10 +1897,9 @@ function reportError(err){
       text-align:left;
     }
     h1{
-      font-family:-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-      font-size:29px;
-      line-height:1.08;
-      font-weight:680;
+      font-size:32px;
+      line-height:1.125;
+      font-weight:650;
       margin-bottom:6px;
     }
     .subtitle{
@@ -1976,7 +2015,7 @@ function reportError(err){
   .scrim{
     position:fixed;
     inset:0;
-    background:rgba(51,40,33,0.32);
+    background:rgba(var(--shadow-rgb),0.38);
     z-index:29;
   }
   .sheet{
@@ -1988,7 +2027,7 @@ function reportError(err){
     padding:10px 20px calc(20px + env(safe-area-inset-bottom, 0px));
     max-height:80vh;
     overflow-y:auto;
-    box-shadow:0 -4px 20px rgba(51,40,33,0.16);
+    box-shadow:0 -4px 20px rgba(var(--shadow-rgb),0.16);
   }
   .sheetHandle{
     width:36px;
@@ -2124,6 +2163,110 @@ function reportError(err){
     margin-top:4px;
   }
 
+  @media (min-width:900px){
+    body{ padding-bottom:32px; padding-left:188px; }
+    .quickBar{
+      top:0;
+      bottom:0;
+      right:auto;
+      width:188px;
+      flex-direction:column;
+      justify-content:flex-start;
+      gap:6px;
+      padding:28px 14px;
+      border-top:0;
+      border-right:1px solid var(--line);
+      box-shadow:none;
+    }
+    .quickBar.qbHidden{
+      transform:none;
+    }
+    .qbBtn{
+      flex:0 0 auto;
+      min-height:48px;
+      flex-direction:row;
+      justify-content:flex-start;
+      gap:12px;
+      padding:10px 12px;
+    }
+    .qbBtn span{ font-size:15px; }
+    .qbBtn.on{ background:rgba(var(--accent-rgb),0.1); }
+    .sheet{
+      left:auto;
+      right:24px;
+      bottom:auto;
+      top:82px;
+      width:min(420px, calc(100vw - 236px));
+      border:1px solid var(--line);
+      border-radius:16px;
+      box-shadow:var(--shadow-card);
+    }
+    .sheetHandle{ display:none; }
+    #filterScrim{ display:none !important; }
+  }
+
+  .fieldError{
+    margin:6px 0 0;
+    color:var(--error);
+    font-size:14px;
+    line-height:1.4;
+  }
+  .searchStatusRow{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    min-height:28px;
+    margin:10px 20px 0;
+    color:var(--ink-soft);
+    font-size:14px;
+  }
+  .searchStatusRow[hidden]{ display:none; }
+  .searchStatusRow button{
+    min-height:44px;
+    border:0;
+    background:transparent;
+    color:var(--accent-text);
+    font:600 14px/1 inherit;
+    cursor:pointer;
+  }
+  .recommendationEvidence{
+    margin-top:12px;
+    padding:12px;
+    border-radius:12px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    color:var(--ink-soft);
+    font-size:14px;
+    line-height:1.45;
+  }
+  .recommendationEvidence strong{ color:var(--ink); }
+  .recommendationSource{
+    display:inline-flex;
+    min-height:44px;
+    align-items:center;
+    color:var(--accent-text);
+    font-weight:600;
+  }
+  .skipFeedback{
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px solid var(--line);
+  }
+  .skipFeedback[hidden]{ display:none; }
+  .skipFeedback p{ margin:0 0 8px; font-size:14px; color:var(--ink-soft); }
+  .skipFeedback .choiceChip{ margin:0 5px 6px 0; }
+  .filterField{ flex:1 1 130px; }
+  .filterField label{
+    display:block;
+    margin:0 0 5px;
+    color:var(--ink-soft);
+    font-size:13px;
+    font-weight:600;
+  }
+  .filterField select{ width:100%; }
+
+
   @media (max-width:430px){
     .row{
       gap:10px;
@@ -2139,9 +2282,7 @@ function reportError(err){
       width:20px;
       font-size:13px;
     }
-    .moves button{
-      width:22px;
-    }
+    .moves button{ width:44px; }
     .detail{
       padding-left:92px;
     }
@@ -2168,7 +2309,8 @@ function reportError(err){
     <div class="setupFields">
       <div class="childField">
         <label for="setupChildName">Child name</label>
-        <input id="setupChildName" type="text" placeholder="Name" autocomplete="off">
+        <input id="setupChildName" type="text" placeholder="Name" autocomplete="off" aria-describedby="setupChildNameError">
+        <p class="fieldError" id="setupChildNameError" hidden>Enter a child name to continue.</p>
       </div>
       <div class="childField">
         <label for="setupChildAge">Age</label>
@@ -2212,24 +2354,24 @@ function reportError(err){
       <div class="tonightEditPanel" id="tonightEditPanel" hidden>
         <div>
           <h2>Who is watching?</h2>
-          <p>Pick any combination of kids. Choose nobody for an adults-only night.</p>
-          <div class="choiceGrid" id="tonightKidChoices"></div>
+          <p>Select the children watching, or choose Adults only. Child content limits won't apply to an adults-only night.</p>
+          <div class="choiceGrid" id="tonightKidChoices" aria-label="People watching"></div>
         </div>
         <div>
           <h3>How much time?</h3>
-          <div class="choiceGrid" id="tonightTimeChoices">
-            <button type="button" class="choiceChip selected" data-time="90">About 90 minutes</button>
-            <button type="button" class="choiceChip" data-time="120">Up to 2 hours</button>
-            <button type="button" class="choiceChip" data-time="999">Any length</button>
+          <div class="choiceGrid" id="tonightTimeChoices" aria-label="Time available">
+            <button type="button" class="choiceChip selected" data-time="90" aria-pressed="true">About 90 minutes</button>
+            <button type="button" class="choiceChip" data-time="120" aria-pressed="false">Up to 2 hours</button>
+            <button type="button" class="choiceChip" data-time="999" aria-pressed="false">Any length</button>
           </div>
         </div>
         <div>
           <h3>What kind of night?</h3>
-          <div class="choiceGrid" id="tonightMoodChoices">
-            <button type="button" class="choiceChip selected" data-mood="calm">Calm it down</button>
-            <button type="button" class="choiceChip" data-mood="silly">Big and silly</button>
-            <button type="button" class="choiceChip" data-mood="new">Something new</button>
-            <button type="button" class="choiceChip" data-mood="favorite">Old favourite</button>
+          <div class="choiceGrid" id="tonightMoodChoices" aria-label="Mood">
+            <button type="button" class="choiceChip selected" data-mood="calm" aria-pressed="true">Calm it down</button>
+            <button type="button" class="choiceChip" data-mood="silly" aria-pressed="false">Big and silly</button>
+            <button type="button" class="choiceChip" data-mood="new" aria-pressed="false">Something new</button>
+            <button type="button" class="choiceChip" data-mood="favorite" aria-pressed="false">Old favourite</button>
           </div>
         </div>
         <div class="setupActions">
@@ -2241,15 +2383,27 @@ function reportError(err){
         <button type="button" class="secondaryBtn" id="tonightShelfBtn">Browse Shelf instead</button>
       </div>
       <div class="pickCard" id="tonightPickCard" style="display:none;">
-        <div class="pickMeta" id="tonightVerdict">Green Light</div>
+        <div class="pickMeta" id="tonightVerdict">Tonight's pick</div>
         <div class="pickTitle" id="tonightPickTitle"></div>
         <ul class="pickReasons" id="tonightPickReasons"></ul>
-        <button type="button" class="detailLink" id="tonightDetailBtn">Details</button>
+        <div class="recommendationEvidence" id="tonightEvidence"></div>
+        <button type="button" class="detailLink" id="tonightDetailBtn" aria-expanded="false" aria-controls="tonightDetailBody">Details</button>
         <div class="detail" id="tonightDetailBody"></div>
         <div class="setupActions">
           <button type="button" class="primaryBtn" id="tonightWatchBtn">Mark watched</button>
           <button type="button" class="secondaryBtn" id="tonightWatchAnywayBtn">Watch anyway</button>
-          <button type="button" class="secondaryBtn" id="tonightSkipBtn">Skip</button>
+          <button type="button" class="secondaryBtn" id="tonightSkipBtn" aria-expanded="false" aria-controls="tonightSkipFeedback">Skip</button>
+          <button type="button" class="secondaryBtn" id="tonightAlternativesBtn" aria-expanded="false" aria-controls="tonightAlternatives">See two alternatives</button>
+        </div>
+        <div class="choiceGrid" id="tonightAlternatives" aria-label="Alternative recommendations" hidden></div>
+        <div class="skipFeedback" id="tonightSkipFeedback" role="group" aria-labelledby="tonightSkipPrompt" hidden>
+          <p id="tonightSkipPrompt" aria-live="polite">What missed? Optional—this won't change your family settings.</p>
+          <button type="button" class="choiceChip" data-skip-reason="Wrong mood" aria-pressed="false">Wrong mood</button>
+          <button type="button" class="choiceChip" data-skip-reason="Not interested" aria-pressed="false">Not interested</button>
+          <button type="button" class="choiceChip" data-skip-reason="Already seen" aria-pressed="false">Already seen</button>
+          <button type="button" class="choiceChip" data-skip-reason="Not available to us" aria-pressed="false">Not available to us</button>
+          <button type="button" class="choiceChip" data-skip-reason="Content concern" aria-pressed="false">Content concern</button>
+          <button type="button" class="linkBtn" id="tonightSkipContinueBtn">Continue</button>
         </div>
       </div>
     </div>
@@ -2260,22 +2414,27 @@ function reportError(err){
   <a href="#quickBar" class="skipLink" id="skipToNavLink">Skip to navigation</a>
   <div class="screenTopBar">
     <h1>Shelf</h1>
-    <button type="button" class="iconBtn" id="filterSheetBtn" aria-label="Filter and sort">
+    <button type="button" class="iconBtn" id="filterSheetBtn" aria-label="Filter and sort" aria-expanded="false" aria-controls="filterSheet">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><circle cx="9" cy="7" r="2" fill="currentColor" stroke="none"/><line x1="4" y1="17" x2="20" y2="17"/><circle cx="15" cy="17" r="2" fill="currentColor" stroke="none"/></svg>
       <span class="filterBadge" id="filterBadge" style="display:none;"></span>
     </button>
   </div>
   <div class="controls">
-    <input type="text" id="search" placeholder="Search">
+    <label class="srOnly" for="search">Search movies</label>
+    <input type="text" id="search" placeholder="Search movies" autocomplete="off">
     <div class="seg" id="filterSeg">
-      <button data-filter="all" class="active">All</button>
-      <button data-filter="todo">To watch</button>
-      <button data-filter="done">Watched</button>
-      <button data-filter="priority">Want to watch</button>
+      <button data-filter="all" class="active" aria-pressed="true">All</button>
+      <button data-filter="todo" aria-pressed="false">To watch</button>
+      <button data-filter="done" aria-pressed="false">Watched</button>
+      <button data-filter="priority" aria-pressed="false">Want to watch</button>
     </div>
   </div>
+  <div class="searchStatusRow" id="searchStatusRow" hidden>
+    <span id="searchResultCount" role="status" aria-live="polite"></span>
+    <button type="button" id="clearSearchBtn">Clear search</button>
+  </div>
   <div id="newSection" class="newSection" style="display:none;"></div>
-  <div class="homeSection">
+  <div class="homeSection" id="browseBySection">
     <span class="homeSectionLabel">Browse by</span>
     <div class="studioGrid" id="studioGrid"></div>
   </div>
@@ -2308,21 +2467,12 @@ function reportError(err){
   </div>
 
   <div class="homeSection">
-    <span class="homeSectionLabel">Personalization</span>
-    <div class="familyCard">
-      <h2>How Family Feature understands each kid right now</h2>
-      <p>We set starting limits based on your child's age. Change something yourself, and it sticks — we'll never undo it. If your child seems ready for a little more, we'll suggest it, but you always decide.</p>
-      <div class="familyChildren" id="familyChildrenList"></div>
-    </div>
-  </div>
-
-  <div class="homeSection">
-    <span class="homeSectionLabel">Children</span>
+    <h2 class="homeSectionLabel">Family members</h2>
     <div class="familyCard" id="childrenSettingsPanel">
-      <p>Add a child or update their name and age. Age changes update starter guidance only where a parent has not already set a custom limit.</p>
-      <div class="childEditor" id="childEditorList"></div>
+      <p>Add or update a family member. Age changes update starter guidance only where you have not set a custom limit.</p>
+      <div class="familyChildren" id="familyChildrenList"><div class="childEditor" id="childEditorList"></div></div>
       <div class="familyActions" style="margin-top:14px;">
-        <button class="familyBtn" id="addChildBtn" type="button">Add child</button>
+        <button class="secondaryBtn" id="addChildBtn" type="button">Add family member</button>
       </div>
       <div class="childOnboarding" id="childOnboardingPanel" style="display:none;">
         <h3>Set up a child</h3>
@@ -2352,7 +2502,7 @@ function reportError(err){
   </div>
 
   <div class="homeSection">
-    <span class="homeSectionLabel">Content settings</span>
+    <h2 class="homeSectionLabel">Content limits</h2>
     <div class="familyCard" id="familySettingsPanel">
       <h3 id="familySettingsChildName" tabindex="-1">No children yet</h3>
       <p>Adjust content limits for one child at a time. Starter settings come from the child's age; parent changes stay fixed until you switch them back.</p>
@@ -2364,19 +2514,19 @@ function reportError(err){
   </div>
 
   <div class="homeSection">
-    <span class="homeSectionLabel">Appearance</span>
+    <h2 class="homeSectionLabel">Appearance and sync</h2>
     <div class="familyCard">
       <p>Choose how Family Feature looks on this device.</p>
       <div class="choiceGrid" id="themeChoices">
-        <button type="button" class="choiceChip" data-theme-choice="system">Match device</button>
-        <button type="button" class="choiceChip" data-theme-choice="light">Light</button>
-        <button type="button" class="choiceChip" data-theme-choice="dark">Dark</button>
+        <button type="button" class="choiceChip" data-theme-choice="system" aria-pressed="false">Match device</button>
+        <button type="button" class="choiceChip" data-theme-choice="light" aria-pressed="false">Light</button>
+        <button type="button" class="choiceChip" data-theme-choice="dark" aria-pressed="false">Dark</button>
       </div>
     </div>
   </div>
 
   <div class="homeSection">
-    <span class="homeSectionLabel">Account &amp; sync</span>
+    <h3 class="homeSectionLabel">Account and sync</h3>
     <div class="familyCard">
       <button id="familySyncBtn" class="familyBtn" type="button">Open sync settings</button>
       <div class="syncPanel" id="syncPanel" style="display:none;">
@@ -2410,7 +2560,7 @@ function reportError(err){
   </div>
 
   <div class="homeSection">
-    <span class="homeSectionLabel">App</span>
+    <h3 class="homeSectionLabel">App</h3>
     <div class="moreCard">
       <button id="installAppBtn" class="moreRow">Install app on this device</button>
       <p id="iosInstallHint" class="iosInstallHint" style="display:none;">To add this app to your Home Screen: tap the Share icon, then "Add to Home Screen".</p>
@@ -2431,7 +2581,7 @@ function reportError(err){
   </div>
 
   <div class="homeSection">
-    <span class="homeSectionLabel">About</span>
+    <h2 class="homeSectionLabel">About Family Feature</h2>
     <div class="moreCard aboutPanel">
       <p>Family Feature combines the movie catalog, Common Sense Media age guidance, your watched and Want to watch marks, and each child's content settings.</p>
       <ul>
@@ -2448,26 +2598,26 @@ function reportError(err){
 </div>
 
 <div class="scrim" id="filterScrim" style="display:none;"></div>
-<div class="sheet" id="filterSheet" style="display:none;">
+<div class="sheet" id="filterSheet" role="dialog" aria-labelledby="filterSheetTitle" tabindex="-1" style="display:none;">
   <div class="sheetHandle"></div>
   <div class="sheetHeader">
-    <span>Filter &amp; sort</span>
+    <span id="filterSheetTitle">Filter &amp; sort</span>
     <button type="button" id="clearFiltersBtn" class="linkBtn">Clear</button>
   </div>
   <div class="filterRow">
-    <select id="decadeFilter"><option value="">Any decade</option></select>
-    <select id="ageFilter"><option value="">Any age</option></select>
+    <div class="filterField"><label for="decadeFilter">Decade</label><select id="decadeFilter"><option value="">Any decade</option></select></div>
+    <div class="filterField"><label for="ageFilter">Recommended age</label><select id="ageFilter"><option value="">Any age</option></select></div>
   </div>
   <div class="filterRow">
-    <select id="genreFilter"><option value="">Any genre</option></select>
-    <select id="studioFilter"><option value="">Any studio</option></select>
+    <div class="filterField"><label for="genreFilter">Genre</label><select id="genreFilter"><option value="">Any genre</option></select></div>
+    <div class="filterField"><label for="studioFilter">Studio</label><select id="studioFilter"><option value="">Any studio</option></select></div>
   </div>
   <div class="filterRow">
-    <button id="newToggleBtn" class="priorityToggle newToggle">New this week</button>
-    <button id="priorityToggleBtn" class="priorityToggle">&#9733; Want to watch</button>
+    <button id="newToggleBtn" class="priorityToggle newToggle" aria-pressed="false">New this week</button>
+    <button id="priorityToggleBtn" class="priorityToggle" aria-pressed="false">&#9733; Want to watch</button>
   </div>
   <div class="filterRow">
-    <button id="hideAboveSettingsBtn" type="button" class="priorityToggle">Hide above settings</button>
+    <button id="hideAboveSettingsBtn" type="button" class="priorityToggle" aria-pressed="false">Hide above settings</button>
   </div>
   <select id="sortMode" class="sortSelect" aria-label="Sort movies">
     <option value="year">Sort by year</option>
@@ -2488,7 +2638,8 @@ function reportError(err){
   </div>
 </div>
 
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+<div class="srOnly" id="assertiveStatus" role="alert" aria-live="assertive" aria-atomic="true"></div>
 
 <nav class="quickBar" id="quickBar" aria-label="Main navigation" tabindex="-1">
   <button type="button" class="qbBtn" id="tabHome">
@@ -2667,6 +2818,7 @@ let priorityOnly = false;
 let newOnly = false;
 let hideAboveSettings = false;
 let query = "";
+let autoRequestMovieQuery = '';
 let openDetail = null;
 let decadeFilter = "";
 let ageFilter = "";
@@ -2692,6 +2844,7 @@ let lastListSignature = "";
 // session-only (never saved/serialized -- see selectedKids()), so there's no
 // persisted-format migration concern with this shape.
 let tonightSelection = { excludedChildIds: new Set(), time: 90, mood: 'calm', currentPickIdx: null, currentPickSource: '', verdict: 'green', skippedMovieNums: new Set() };
+let tonightSkipReason = '';
 let selectedFamilyChildId = null;
 
 const GOOGLE_CLIENT_ID = "987776124251-t4skn7ia6qd1r88ftass906jinm98v1q.apps.googleusercontent.com";
@@ -3274,6 +3427,7 @@ function createStarButton(idx, isPriority){
   star.className = 'star' + (isPriority ? ' on' : '');
   star.textContent = isPriority ? '\u2605' : '\u2606';
   star.setAttribute('aria-label', 'Want to watch');
+  star.setAttribute('aria-pressed', isPriority ? 'true' : 'false');
   star.dataset.idx = idx;
   star.onclick = () => togglePriority(idx);
   return star;
@@ -3344,6 +3498,12 @@ function showToast(msg){
   toastEl.classList.add('show');
   clearTimeout(showToast._t);
   showToast._t = setTimeout(()=>toastEl.classList.remove('show'), 1400);
+}
+
+function clearToast(){
+  clearTimeout(showToast._t);
+  toastEl.classList.remove('show');
+  toastEl.textContent = '';
 }
 
 function createPoster(m, className, isNew){
@@ -3570,7 +3730,9 @@ function setTonightEditOpen(open){
 
 function setSelectedChoice(containerId, attr, value){
   document.querySelectorAll(`#${containerId} .choiceChip`).forEach(btn=>{
-    btn.classList.toggle('selected', btn.dataset[attr] === String(value));
+    const selected = btn.dataset[attr] === String(value);
+    btn.classList.toggle('selected', selected);
+    btn.setAttribute('aria-pressed', selected ? 'true' : 'false');
   });
 }
 
@@ -3817,7 +3979,7 @@ function joinWithAnd(names){
 }
 
 function movieVerdictForKids(movie, kids){
-  if(kids.length === 0) return { verdict: 'green', reasons: ['Adults-only night: safety limits are not applied.'] };
+  if(kids.length === 0) return { verdict: 'green', reasons: ["No children watching—child content limits won't apply."] };
   const fit = movieFitForKids(movie, kids);
   const red = fit.issues.filter(issue => issue.severity === 'red').map(issue => `${issue.child.name}: ${issue.flag.plain}`);
   const amber = fit.issues.filter(issue => issue.severity === 'amber').map(issue => `${issue.child.name}: ${issue.flag.plain}`);
@@ -3956,6 +4118,7 @@ function renderTonightDetail(){
   const body = document.getElementById('tonightDetailBody');
   if(!btn || !body) return;
   btn.textContent = tonightDetailOpen ? 'Hide' : 'Details';
+  btn.setAttribute('aria-expanded', tonightDetailOpen ? 'true' : 'false');
   body.classList.toggle('open', tonightDetailOpen);
   const idx = tonightSelection.currentPickIdx;
   body.textContent = (tonightDetailOpen && idx !== null) ? (MOVIES[idx].full || '') : '';
@@ -3979,14 +4142,14 @@ function updateTonightWatchBtn(){
 // the red/amber/green label text can't drift between the two places that
 // render it.
 function tonightVerdictLabel(verdict){
-  if(verdict === 'red') return 'Red: above settings';
-  if(verdict === 'amber') return 'Amber: worth a quick look';
-  return 'Green Light';
+  if(verdict === 'red') return 'Above settings';
+  if(verdict === 'amber') return 'Review fit';
+  return 'Tonight\'s pick';
 }
 
-function showTonightPick(){
+function showTonightPick(candidateOverride){
   setTonightEditOpen(false);
-  const candidate = findTonightCandidate();
+  const candidate = candidateOverride || findTonightCandidate();
   if(!candidate) return;
   const idx = candidate.idx;
   const movie = MOVIES[idx];
@@ -4028,6 +4191,33 @@ function showTonightPick(){
     li.textContent = text;
     reasons.appendChild(li);
   });
+  const evidence = document.getElementById('tonightEvidence');
+  evidence.replaceChildren();
+  const sourceUrl = movie.srcUrl ? safeSourceUrl(movie.srcUrl) : '';
+  let sourceHost = '';
+  try{ sourceHost = sourceUrl ? new URL(sourceUrl).hostname : ''; }catch(e){ sourceHost = ''; }
+  const hasCsmSource = /(^|\.)commonsensemedia\.org$/i.test(sourceHost);
+  const evidenceTitle = document.createElement('strong');
+  evidenceTitle.textContent = movie.flags && hasCsmSource
+    ? 'Common Sense Media review available'
+    : movie.flags && sourceUrl
+      ? 'Content guidance with source'
+      : 'Limited guidance';
+  const evidenceCopy = document.createElement('div');
+  evidenceCopy.textContent = movie.flags
+    ? 'This recommendation uses title-specific content guidance and your current selections.'
+    : 'No direct Common Sense Media review is available. This suggestion uses general title information and comparison material.';
+  evidence.appendChild(evidenceTitle);
+  evidence.appendChild(evidenceCopy);
+  if(sourceUrl){
+    const source = document.createElement('a');
+    source.className = 'recommendationSource';
+    source.href = sourceUrl;
+    source.target = '_blank';
+    source.rel = 'noopener';
+    source.textContent = 'View source';
+    evidence.appendChild(source);
+  }
   // Issue #49B: "Watch anyway" is the same override workflow for red as for
   // amber -- a parent choosing to proceed past a caution -- so it shows for
   // either non-green verdict, not just amber.
@@ -4039,6 +4229,10 @@ function showTonightPick(){
   // (the one function every Change-panel handler already calls to invalidate
   // the current pick) is the matching place that reverts it.
   document.getElementById('findTonightPickBtn').textContent = 'Skip to next pick';
+  document.getElementById('tonightAlternatives').hidden = true;
+  document.getElementById('tonightAlternativesBtn').setAttribute('aria-expanded', 'false');
+  document.getElementById('tonightSkipFeedback').hidden = true;
+  document.getElementById('tonightSkipBtn').setAttribute('aria-expanded', 'false');
 }
 
 function skipCurrentTonightPick(){
@@ -4089,6 +4283,13 @@ function resetTonightSkips(){
   // calls, so it's the one place needed to reset it too.
   const findBtn = document.getElementById('findTonightPickBtn');
   if(findBtn) findBtn.textContent = "Find tonight's pick";
+  tonightSkipReason = '';
+  document.querySelectorAll('[data-skip-reason]').forEach(btn=>{
+    btn.classList.remove('selected');
+    btn.setAttribute('aria-pressed', 'false');
+  });
+  const skipFeedback = document.getElementById('tonightSkipFeedback');
+  if(skipFeedback) skipFeedback.hidden = true;
 }
 
 function renderTonightKidChoices(){
@@ -4100,6 +4301,7 @@ function renderTonightKidChoices(){
     btn.type = 'button';
     btn.className = 'choiceChip' + (!tonightSelection.excludedChildIds.has(child.id) ? ' selected' : '');
     btn.textContent = child.name;
+    btn.setAttribute('aria-pressed', tonightSelection.excludedChildIds.has(child.id) ? 'false' : 'true');
     btn.addEventListener('click', ()=>{
       if(tonightSelection.excludedChildIds.has(child.id)) tonightSelection.excludedChildIds.delete(child.id);
       else tonightSelection.excludedChildIds.add(child.id);
@@ -4113,6 +4315,7 @@ function renderTonightKidChoices(){
   adultsOnly.type = 'button';
   adultsOnly.className = 'choiceChip' + (selectedKids().length === 0 ? ' selected' : '');
   adultsOnly.textContent = 'Adults only';
+  adultsOnly.setAttribute('aria-pressed', selectedKids().length === 0 ? 'true' : 'false');
   adultsOnly.addEventListener('click', ()=>{
     tonightSelection.excludedChildIds = new Set(state.children.map(child => child.id));
     resetTonightSkips();
@@ -4140,9 +4343,14 @@ function showScreen(target){
   }
   const isSameScreen = target === currentScreen;
   currentScreen = target;
+  clearToast();
   SCREENS.forEach(name => {
     screens[name].style.display = name === target ? 'block' : 'none';
-    if(tabs[name]) tabs[name].classList.toggle('on', name === target);
+    if(tabs[name]){
+      tabs[name].classList.toggle('on', name === target);
+      if(name === target) tabs[name].setAttribute('aria-current', 'page');
+      else tabs[name].removeAttribute('aria-current');
+    }
   });
   const quickBar = document.getElementById('quickBar');
   if(quickBar) quickBar.style.display = target === 'setup' ? 'none' : 'flex';
@@ -4253,6 +4461,7 @@ function renderNewSection(){
     const check = document.createElement('button');
     check.className = 'check' + (isChecked ? ' on' : '');
     check.setAttribute('aria-label', 'Mark watched');
+    check.setAttribute('aria-pressed', isChecked ? 'true' : 'false');
     check.dataset.idx = idx;
     check.onclick = () => toggleCheck(idx);
 
@@ -4803,11 +5012,32 @@ async function pushToGoogleDrive(){
 
 const filterSheetBtnEl = document.getElementById('filterSheetBtn');
 const filterBadgeEl = document.getElementById('filterBadge');
+let filterSheetReturnFocus = null;
 function updateFilterBadge(count){
   if(!filterBadgeEl || !filterSheetBtnEl) return;
   filterBadgeEl.textContent = count > 0 ? String(count) : '';
   filterBadgeEl.style.display = count > 0 ? 'flex' : 'none';
   filterSheetBtnEl.setAttribute('aria-label', count > 0 ? `Filter and sort (${count} active)` : 'Filter and sort');
+}
+
+function syncFilterToggleState(){
+  const states = [
+    ['priorityToggleBtn', priorityOnly],
+    ['newToggleBtn', newOnly],
+    ['hideAboveSettingsBtn', hideAboveSettings]
+  ];
+  states.forEach(([id, selected])=>{
+    const button = document.getElementById(id);
+    if(!button) return;
+    button.classList.toggle('on', selected);
+    button.setAttribute('aria-pressed', selected ? 'true' : 'false');
+  });
+  const activeSegment = priorityOnly ? 'priority' : filter;
+  document.querySelectorAll('#filterSeg button').forEach(button=>{
+    const selected = button.dataset.filter === activeSegment;
+    button.classList.toggle('active', selected);
+    button.setAttribute('aria-pressed', selected ? 'true' : 'false');
+  });
 }
 
 function render(){
@@ -4858,16 +5088,39 @@ function render(){
   const activeFilterCount = [decadeFilter, ageFilter, genreFilter, studioFilter].filter(Boolean).length
     + (priorityOnly ? 1 : 0) + (newOnly ? 1 : 0) + (hideAboveSettings ? 1 : 0);
   updateFilterBadge(activeFilterCount);
+  syncFilterToggleState();
+  const trimmedQuery = query.trim();
+  const searchStatusRow = document.getElementById('searchStatusRow');
+  const searchResultCount = document.getElementById('searchResultCount');
+  const browseBySection = document.getElementById('browseBySection');
+  searchStatusRow.hidden = !trimmedQuery;
+  searchResultCount.textContent = trimmedQuery
+    ? `${visibleOrder.length} movie${visibleOrder.length === 1 ? '' : 's'} found`
+    : '';
+  browseBySection.style.display = trimmedQuery ? 'none' : '';
   emptyMsg.style.display = visibleOrder.length ? 'none' : 'block';
   if(!visibleOrder.length){
-    if(activeFilterCount > 0){
+    if(trimmedQuery){
+      const filterNote = activeFilterCount
+        ? ` ${activeFilterCount} ${activeFilterCount === 1 ? 'filter may' : 'filters may'} be hiding results.`
+        : '';
+      emptyMsg.textContent = `No movies match “${trimmedQuery}”.${filterNote}`;
+    }else if(activeFilterCount > 0){
       const filterWord = activeFilterCount === 1 ? 'filter' : 'filters';
-      emptyMsg.textContent = q
-        ? `No matches for "${query.trim()}" — ${activeFilterCount} ${filterWord} may be hiding results.`
-        : `${activeFilterCount} ${filterWord} may be hiding all results.`;
+      emptyMsg.textContent = `${activeFilterCount} ${filterWord} may be hiding all results.`;
     } else {
       emptyMsg.textContent = 'No movies match your search.';
     }
+  }
+  const requestInput = document.getElementById('requestMovieInput');
+  if(trimmedQuery && !visibleOrder.length){
+    if(!requestInput.value.trim() || requestInput.value === autoRequestMovieQuery){
+      requestInput.value = trimmedQuery;
+      autoRequestMovieQuery = trimmedQuery;
+    }
+  }else if(requestInput.value === autoRequestMovieQuery){
+    requestInput.value = '';
+    autoRequestMovieQuery = '';
   }
 
   // Reset back to page 1 whenever the search/filter/sort combination
@@ -4906,6 +5159,7 @@ function render(){
     const check = document.createElement('button');
     check.className = 'check' + (isChecked ? ' on' : '');
     check.setAttribute('aria-label', 'Mark watched');
+    check.setAttribute('aria-pressed', isChecked ? 'true' : 'false');
     check.dataset.idx = idx;
     check.onclick = () => toggleCheck(idx);
 
@@ -5007,6 +5261,14 @@ document.getElementById('search').addEventListener('input', e=>{
   renderCurrentView();
 });
 
+document.getElementById('clearSearchBtn').addEventListener('click', ()=>{
+  query = '';
+  const search = document.getElementById('search');
+  search.value = '';
+  renderCurrentView();
+  search.focus();
+});
+
 document.getElementById('sortMode').addEventListener('change', e=>{
   sortMode = e.target.value;
   render();
@@ -5014,8 +5276,6 @@ document.getElementById('sortMode').addEventListener('change', e=>{
 
 document.querySelectorAll('#filterSeg button').forEach(btn=>{
   btn.addEventListener('click', ()=>{
-    document.querySelectorAll('#filterSeg button').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
     filter = btn.dataset.filter === 'priority' ? 'all' : btn.dataset.filter;
     priorityOnly = btn.dataset.filter === 'priority';
     renderCurrentView();
@@ -5113,8 +5373,8 @@ function summarizeChildUnderstanding(child){
     return setting && setting.source === 'parent';
   });
   if(personalized.length === 0) return 'Using age-based starter settings.';
-  const joined = joinWithAnd(personalized.map(flag => flag.plain));
-  return `Personalized for ${joined}. Everything else follows starter settings for age ${child.age}.`;
+  const count = personalized.length;
+  return `${count} content limit${count === 1 ? '' : 's'} set by you; remaining limits use age ${child.age} starter settings.`;
 }
 
 function renderFamilySettings(){
@@ -5144,6 +5404,7 @@ function renderFamilySettings(){
     chip.type = 'button';
     chip.className = 'settingsChildChip' + (child.id === selectedFamilyChildId ? ' selected' : '');
     chip.textContent = child.name;
+    chip.setAttribute('aria-pressed', child.id === selectedFamilyChildId ? 'true' : 'false');
     chip.addEventListener('click', () => setSelectedFamilyChild(child.id));
     picker.appendChild(chip);
   });
@@ -5169,7 +5430,7 @@ function renderFamilySettings(){
     box.appendChild(dismiss);
     notice.appendChild(box);
   }
-  intro.textContent = `Age ${selectedChild.age} starter settings are shown with an outline. The numbered levels are our own calibration steps, not official ratings.`;
+  intro.textContent = `Age ${selectedChild.age} starter settings are outlined. These levels are Family Feature's guide, not official ratings.`;
 
   CONTENT_FLAGS.forEach(flag=>{
     const effective = settingForChildFlag(selectedChild, flag.id);
@@ -5263,13 +5524,13 @@ function renderChildren(){
     selectedFamilyChildId = state.children[0] ? state.children[0].id : null;
   }
   container.replaceChildren();
-  const landing = document.getElementById('familyChildrenList');
-  if(landing) landing.replaceChildren();
+  const landing = container;
   let activeSuggestionCount = 0;
 
   state.children.forEach(child=>{
+    let article = null;
     if(landing){
-      const article = document.createElement('article');
+      article = document.createElement('article');
       article.className = 'familyChild' + (child.id === selectedFamilyChildId ? ' active' : '');
 
       const top = document.createElement('div');
@@ -5313,11 +5574,19 @@ function renderChildren(){
       edit.type = 'button';
       edit.className = 'familyEditBtn';
       edit.textContent = 'Edit';
+      edit.setAttribute('aria-expanded', 'false');
+      edit.setAttribute('aria-controls', `childEditor-${child.id}`);
       edit.addEventListener('click', ()=>{
         const target = document.getElementById(`childName-${child.id}`);
-        const panel = document.getElementById('childrenSettingsPanel');
-        if(panel) panel.scrollIntoView({ behavior:'smooth', block:'start' });
-        if(target) setTimeout(()=>target.focus(), 260);
+        const editor = document.getElementById(`childEditor-${child.id}`);
+        const opening = !!(editor && editor.hidden);
+        document.querySelectorAll('#childEditorList .childEditRow').forEach(row=>{ row.hidden = true; });
+        document.querySelectorAll('#childEditorList .familyEditBtn[aria-controls]').forEach(button=>{
+          button.setAttribute('aria-expanded', 'false');
+        });
+        if(editor) editor.hidden = !opening;
+        edit.setAttribute('aria-expanded', opening ? 'true' : 'false');
+        if(opening && target) setTimeout(()=>target.focus(), 0);
       });
       meta.appendChild(pill);
       meta.appendChild(settings);
@@ -5374,11 +5643,12 @@ function renderChildren(){
         article.appendChild(cue);
       }
 
-      landing.appendChild(article);
     }
 
     const row = document.createElement('div');
     row.className = 'childEditRow';
+    row.id = `childEditor-${child.id}`;
+    row.hidden = true;
 
     const nameId = `childName-${child.id}`;
     const ageId = `childAge-${child.id}`;
@@ -5425,7 +5695,8 @@ function renderChildren(){
     row.appendChild(nameField);
     row.appendChild(ageField);
     row.appendChild(actions);
-    container.appendChild(row);
+    article.appendChild(row);
+    container.appendChild(article);
   });
 
   const settingsHeader = document.getElementById('familySettingsChildName');
@@ -5598,7 +5869,7 @@ document.getElementById('studioFilter').addEventListener('change', e=>{
 });
 document.getElementById('priorityToggleBtn').addEventListener('click', ()=>{
   priorityOnly = !priorityOnly;
-  document.getElementById('priorityToggleBtn').classList.toggle('on', priorityOnly);
+  filter = 'all';
   renderCurrentView();
 });
 
@@ -5613,9 +5884,25 @@ document.getElementById('tabFamily').addEventListener('click', ()=>{
 });
 
 document.getElementById('setupSaveChildBtn').addEventListener('click', ()=>{
-  const name = document.getElementById('setupChildName').value.trim();
-  if(!name){ showToast('Add a child name first'); return; }
+  const input = document.getElementById('setupChildName');
+  const error = document.getElementById('setupChildNameError');
+  const name = input.value.trim();
+  if(!name){
+    input.setAttribute('aria-invalid', 'true');
+    error.hidden = false;
+    document.getElementById('assertiveStatus').textContent = 'Enter a child name to continue.';
+    input.focus();
+    return;
+  }
+  input.removeAttribute('aria-invalid');
+  error.hidden = true;
   completeSetupWithChildren([createChild(name, document.getElementById('setupChildAge').value)]);
+});
+
+document.getElementById('setupChildName').addEventListener('input', e=>{
+  if(!e.target.value.trim()) return;
+  e.target.removeAttribute('aria-invalid');
+  document.getElementById('setupChildNameError').hidden = true;
 });
 
 document.getElementById('setupSampleFamilyBtn').addEventListener('click', ()=>{
@@ -5661,8 +5948,64 @@ document.getElementById('tonightWatchAnywayBtn').addEventListener('click', logWa
 document.getElementById('tonightDetailBtn').addEventListener('click', toggleTonightDetail);
 
 document.getElementById('tonightSkipBtn').addEventListener('click', ()=>{
+  const skippedTitle = tonightSelection.currentPickIdx === null ? 'that pick' : MOVIES[tonightSelection.currentPickIdx].t;
   skipCurrentTonightPick();
   showToast('Skipped for tonight');
+  document.getElementById('tonightSkipFeedback').hidden = false;
+  document.getElementById('tonightSkipPrompt').textContent = `What missed about ${skippedTitle}? Optional—this won't change your family settings.`;
+  document.getElementById('tonightSkipBtn').setAttribute('aria-expanded', 'true');
+  const firstReason = document.querySelector('[data-skip-reason]');
+  if(firstReason) firstReason.focus();
+});
+
+document.getElementById('tonightSkipContinueBtn').addEventListener('click', ()=>{
+  document.getElementById('tonightSkipFeedback').hidden = true;
+  document.getElementById('tonightSkipBtn').setAttribute('aria-expanded', 'false');
+  document.getElementById('tonightSkipBtn').focus();
+});
+
+document.querySelectorAll('[data-skip-reason]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    tonightSkipReason = tonightSkipReason === btn.dataset.skipReason ? '' : btn.dataset.skipReason;
+    document.querySelectorAll('[data-skip-reason]').forEach(reasonBtn=>{
+      const selected = reasonBtn.dataset.skipReason === tonightSkipReason;
+      reasonBtn.classList.toggle('selected', selected);
+      reasonBtn.setAttribute('aria-pressed', selected ? 'true' : 'false');
+    });
+    showToast(tonightSkipReason ? 'Reason saved for this session' : 'Skip reason cleared');
+  });
+});
+
+document.getElementById('tonightAlternativesBtn').addEventListener('click', ()=>{
+  const alternatives = document.getElementById('tonightAlternatives');
+  const originalSkipped = new Set(tonightSelection.skippedMovieNums);
+  const currentIdx = tonightSelection.currentPickIdx;
+  if(currentIdx !== null) tonightSelection.skippedMovieNums.add(movieKey(currentIdx));
+  const candidates = [];
+  const excluded = new Set(currentIdx === null ? [] : [movieKey(currentIdx)]);
+  for(let attempt = 0; attempt < 6 && candidates.length < 2; attempt++){
+    const candidate = findTonightCandidate();
+    if(!candidate) break;
+    const key = movieKey(candidate.idx);
+    if(excluded.has(key)) break;
+    candidates.push(candidate);
+    excluded.add(key);
+    tonightSelection.skippedMovieNums.add(key);
+  }
+  tonightSelection.skippedMovieNums = originalSkipped;
+  alternatives.replaceChildren();
+  candidates.forEach(candidate=>{
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'choiceChip';
+    btn.textContent = `${MOVIES[candidate.idx].t} (${MOVIES[candidate.idx].y})`;
+    btn.addEventListener('click', () => showTonightPick(candidate));
+    alternatives.appendChild(btn);
+  });
+  alternatives.hidden = false;
+  document.getElementById('tonightAlternativesBtn').setAttribute('aria-expanded', 'true');
+  const firstAlternative = alternatives.querySelector('button');
+  if(firstAlternative) firstAlternative.focus();
 });
 
 document.querySelectorAll('#tonightTimeChoices .choiceChip').forEach(btn=>{
@@ -5684,9 +6027,20 @@ document.querySelectorAll('#tonightMoodChoices .choiceChip').forEach(btn=>{
 });
 
 document.getElementById('filterSheetBtn').addEventListener('click', ()=>{
-  document.getElementById('filterScrim').style.display = 'block';
-  document.getElementById('filterSheet').style.display = 'block';
+  const sheet = document.getElementById('filterSheet');
+  if(sheet.style.display !== 'none'){
+    closeFilterSheet();
+    return;
+  }
+  const compact = !window.matchMedia('(min-width: 900px)').matches;
+  filterSheetReturnFocus = document.activeElement;
+  document.getElementById('filterScrim').style.display = compact ? 'block' : 'none';
+  sheet.style.display = 'block';
+  if(compact) sheet.setAttribute('aria-modal', 'true');
+  else sheet.removeAttribute('aria-modal');
+  document.getElementById('filterSheetBtn').setAttribute('aria-expanded', 'true');
   document.getElementById('hideAboveSettingsBtn').disabled = selectedKids().length === 0;
+  document.getElementById('decadeFilter').focus();
 });
 
 document.getElementById('hideAboveSettingsBtn').addEventListener('click', ()=>{
@@ -5695,19 +6049,53 @@ document.getElementById('hideAboveSettingsBtn').addEventListener('click', ()=>{
   renderCurrentView();
 });
 
-function closeFilterSheet(){
+function closeFilterSheet(options = {}){
   document.getElementById('filterScrim').style.display = 'none';
   document.getElementById('filterSheet').style.display = 'none';
+  document.getElementById('filterSheetBtn').setAttribute('aria-expanded', 'false');
+  if(options.restoreFocus !== false && filterSheetReturnFocus && typeof filterSheetReturnFocus.focus === 'function'){
+    filterSheetReturnFocus.focus();
+  }
+  filterSheetReturnFocus = null;
 }
 
 document.getElementById('filterScrim').addEventListener('click', closeFilterSheet);
 document.getElementById('applyFiltersBtn').addEventListener('click', closeFilterSheet);
+document.addEventListener('keydown', event=>{
+  const sheet = document.getElementById('filterSheet');
+  const open = sheet.style.display !== 'none';
+  if(event.key === 'Escape' && open){
+    event.preventDefault();
+    closeFilterSheet();
+    return;
+  }
+  if(event.key === 'Tab' && open && !window.matchMedia('(min-width: 900px)').matches){
+    const focusable = [...sheet.querySelectorAll('button:not([disabled]), select:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])')];
+    if(!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if(event.shiftKey && document.activeElement === first){
+      event.preventDefault();
+      last.focus();
+    }else if(!event.shiftKey && document.activeElement === last){
+      event.preventDefault();
+      first.focus();
+    }
+  }
+});
+document.addEventListener('click', event=>{
+  if(!window.matchMedia('(min-width: 900px)').matches) return;
+  const sheet = document.getElementById('filterSheet');
+  if(sheet.style.display === 'none') return;
+  if(sheet.contains(event.target) || event.target.closest('#filterSheetBtn')) return;
+  closeFilterSheet({ restoreFocus:false });
+});
 
 // The mobile keyboard resizing the viewport makes a raw `position:fixed` bar
 // jump/glitch unpredictably. Hide it on purpose with a real transition instead,
 // for any text entry on the page -- not just the two fields the bar itself focuses.
 document.addEventListener('focusin', e=>{
-  if(e.target.matches('input[type="text"], textarea')){
+  if(e.target.matches('input[type="text"], textarea') && !window.matchMedia('(min-width: 900px)').matches){
     document.getElementById('quickBar').classList.add('qbHidden');
   }
 });
@@ -5724,14 +6112,11 @@ document.getElementById('newToggleBtn').addEventListener('click', ()=>{
 });
 
 document.getElementById('clearFiltersBtn').addEventListener('click', ()=>{
-  decadeFilter = ''; ageFilter = ''; genreFilter = ''; studioFilter = ''; priorityOnly = false; newOnly = false; hideAboveSettings = false;
+  decadeFilter = ''; ageFilter = ''; genreFilter = ''; studioFilter = ''; filter = 'all'; priorityOnly = false; newOnly = false; hideAboveSettings = false;
   document.getElementById('decadeFilter').value = '';
   document.getElementById('ageFilter').value = '';
   document.getElementById('genreFilter').value = '';
   document.getElementById('studioFilter').value = '';
-  document.getElementById('priorityToggleBtn').classList.remove('on');
-  document.getElementById('newToggleBtn').classList.remove('on');
-  document.getElementById('hideAboveSettingsBtn').classList.remove('on');
   renderCurrentView();
 });
 
@@ -5852,7 +6237,7 @@ function updateThemeColorMeta(pref){
     meta.setAttribute('name', 'theme-color');
     document.head.appendChild(meta);
   }
-  meta.setAttribute('content', effectiveDark ? '#171411' : '#fbf7f1');
+  meta.setAttribute('content', effectiveDark ? '#0B1020' : '#F4F6FA');
 }
 
 function applyTheme(pref){
@@ -5868,7 +6253,9 @@ function applyTheme(pref){
 
   updateThemeColorMeta(pref);
   document.querySelectorAll('#themeChoices .choiceChip').forEach(btn=>{
-    btn.classList.toggle('selected', btn.dataset.themeChoice === pref);
+    const selected = btn.dataset.themeChoice === pref;
+    btn.classList.toggle('selected', selected);
+    btn.setAttribute('aria-pressed', selected ? 'true' : 'false');
   });
 }
 

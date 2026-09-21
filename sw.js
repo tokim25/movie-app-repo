@@ -6,10 +6,10 @@
 // never bumped this by hand (every commit before this fix) never triggered
 // a real reinstall, and a returning visitor kept seeing the previously
 // cached catalog for a full extra page load with no indication anything
-// was stale. Bump the "v20-20260917-..." prefix by hand for a real code
+// was stale. Bump the version/date prefix by hand for a real code
 // change to this file; DATA_VERSION takes care of itself.
 const DATA_VERSION = 'd6cc137ac0';
-const CACHE_VERSION = `family-feature-v20-20260917-${DATA_VERSION}`;
+const CACHE_VERSION = `family-feature-v21-20260920-${DATA_VERSION}`;
 const APP_SHELL = [
   '/',
   '/index.html',

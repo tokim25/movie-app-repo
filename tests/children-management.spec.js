@@ -12,6 +12,7 @@ test('editing a child name and age persists after reload', async ({ page }) => {
   const simonRow = page.locator('#childEditorList .childEditRow')
     .filter({ has: page.locator('#childName-simon') });
 
+  await page.locator('#familyChildrenList .familyChild').filter({ hasText: 'Simon' }).getByRole('button', { name: 'Edit' }).click();
   await page.locator('#childName-simon').fill('Simone');
   await page.locator('#childAge-simon').selectOption('8');
   await simonRow.locator('.childSaveBtn').click();
@@ -86,6 +87,7 @@ test('removing a child asks for confirmation and does not remove on cancel', asy
     .filter({ has: page.locator('#childName-nora') });
   const before = await page.locator('#childEditorList .childEditRow').count();
 
+  await page.locator('#familyChildrenList .familyChild').filter({ hasText: 'Nora' }).getByRole('button', { name: 'Edit' }).click();
   page.once('dialog', (dialog) => dialog.dismiss());
   await noraRow.locator('.childRemoveBtn').click();
 
@@ -98,6 +100,7 @@ test('confirming removal deletes the child and persists after reload', async ({ 
     .filter({ has: page.locator('#childName-nora') });
   const before = await page.locator('#childEditorList .childEditRow').count();
 
+  await page.locator('#familyChildrenList .familyChild').filter({ hasText: 'Nora' }).getByRole('button', { name: 'Edit' }).click();
   page.once('dialog', (dialog) => dialog.accept());
   await noraRow.locator('.childRemoveBtn').click();
 
