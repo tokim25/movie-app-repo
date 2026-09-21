@@ -132,3 +132,22 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
   schema, and the initial certified-subset count corrected from a double-subtracted 972
   to the verified 989 titles. `policyVersion: 1` is frozen. Phase 1 (certified catalog
   foundation) is unblocked and moved into the roadmap's "Now" section.
+- **2026-09-21** — Phase 1 (certified catalog foundation) implemented, opened as a PR
+  (not merged direct-to-master, per its own scope). Normalized `recommendedAge` (new
+  `scripts/catalog-schema.mjs`, mirrored into `index.html`) resolved 17 of the PRD's 18
+  non-normalizable ages via a `ca`-then-`la` fallback, plus one genuine data-bug fix
+  (`Scoob!`, num 1036, missing `+` suffix on `la`/`ca`) for the 18th. Implemented Gate 0
+  §3's 5-state `contentStatus` machine and the `runtimeMinutes`/`runtimeSourceId`/
+  `runtimeVerifiedAt` schema fields as computed-not-stored functions (documented reasoning
+  in-file) rather than the TRD's illustrative stored-field shape, wired into
+  `scripts/validate-data.mjs` as the de facto required gate (flagged honestly in the PR:
+  this repo has no GitHub Actions CI, so "CI-enforced" means `validate-data.mjs`'s
+  existing exit-1 gate, not a literal required status check). Re-verified Gate 0 §6's
+  subset against live data: 990 titles today (not the recorded 989 — expected drift from
+  the Scoob! fix, not a bug). **Blocked and flagged back to PM per Gate 0 §7's own
+  instruction:** `runtimeMinutes` backfill for the ~990-title candidate pool could not be
+  done in this session — CSM/Wikipedia/IMDb are all `EGRESS_BLOCKED` here — so nothing can
+  move from `provisional` to `certified` yet; this needs either a session with a different
+  network path or a scoping decision (a `policyVersion` 2 conversation per PM). No
+  candidate titles are marked `certified` in this PR as a result; all currently-eligible
+  titles resolve to `provisional`.
