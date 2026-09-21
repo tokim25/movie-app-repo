@@ -247,9 +247,14 @@ test('unfinished Google sign-in shows a reconnect warning and toast', async ({ p
 });
 
 test('failed writes back off instead of retrying aggressively, and a later success clears the warning', async ({ page }) => {
-  await page.goto('/');
   const mock = await mockDrive(page, '500');
   await page.clock.install();
+  await page.goto('/');
+  // Freeze page time before triggering the failed write. Installing the fake
+  // clock after page timers exist is undefined in Playwright, and allowing
+  // real time to flow here can fire the 1.6s retry while CI is still waiting
+  // on the status assertions below.
+  await page.clock.pauseAt(new Date());
 
   await page.evaluate(() => {
     googleAccessToken = 'fake-token';
