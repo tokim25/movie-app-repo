@@ -34,10 +34,12 @@ the Trusted Contextual Recommendations phases below, several of which they block
 ### Trusted Contextual Recommendations — Phase 0 (Trust corrections + policy)
 PRD: [`docs/prd-trusted-contextual-recommendations.md`](./prd-trusted-contextual-recommendations.md)
 TRD: [`docs/trd-trusted-contextual-recommendations.md`](./trd-trusted-contextual-recommendations.md)
-Status: **Proposed**, not yet started. Blocked on Gate 0 (a policy decision record —
-Product/Content-Safety/Engineering/Privacy sign-off on age semantics, hard-exclude vs.
-warning settings, critical triggers, runtime cap semantics). That decision record does
-not exist yet — first concrete PM deliverable on this initiative.
+Gate 0 policy contract: [`docs/gate0-policy-trusted-recommendations.md`](./gate0-policy-trusted-recommendations.md)
+— **drafted 2026-09-21**, answers all 7 of the PRD's open product decisions concretely.
+Pending Tech Lead engineering-feasibility review and tokim25 sign-off on §2 (the
+age-band/content-flag hard-exclude thresholds) and §7 (realistic staffing model for
+ongoing catalog review, since this project has no dedicated editorial ops team). Once
+both land, `policyVersion: 1` freezes and Phase 1 (certified catalog) can start for real.
 
 - [#89](https://github.com/tokim25/movie-app-repo/issues/89) — duration selection doesn't affect recommendations (no runtime field on any of 1,047 titles); Phase 0 says remove/disable the duration claim until this is resolved
 - Privacy corrections (#98, #99 above, plus #100, #102, #106 below) fold into Phase 0's "correct privacy disclosures" requirement
@@ -117,3 +119,7 @@ See PRD "Open product decisions" for the full list. Top of the list:
 - **2026-09-21** — Roadmap created. PM takes ownership of PRD/roadmap per tokim25. Seeded
   from the existing `prd-trusted-contextual-recommendations.md`/TRD (merged today as
   PR #90) plus a full sweep of the 30 open issues at time of writing.
+- **2026-09-21** — Drafted the Gate 0 policy decision record
+  (`gate0-policy-trusted-recommendations.md`), answering the PRD's 7 open product
+  decisions. Sent to Tech Lead for feasibility review; §2 and §7 need tokim25 sign-off
+  before `policyVersion: 1` freezes.
