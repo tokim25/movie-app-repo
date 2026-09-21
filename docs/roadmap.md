@@ -35,14 +35,22 @@ the Trusted Contextual Recommendations phases below, several of which they block
 PRD: [`docs/prd-trusted-contextual-recommendations.md`](./prd-trusted-contextual-recommendations.md)
 TRD: [`docs/trd-trusted-contextual-recommendations.md`](./trd-trusted-contextual-recommendations.md)
 Gate 0 policy contract: [`docs/gate0-policy-trusted-recommendations.md`](./gate0-policy-trusted-recommendations.md)
-— **drafted 2026-09-21**, answers all 7 of the PRD's open product decisions concretely.
-Pending Tech Lead engineering-feasibility review and tokim25 sign-off on §2 (the
-age-band/content-flag hard-exclude thresholds) and §7 (realistic staffing model for
-ongoing catalog review, since this project has no dedicated editorial ops team). Once
-both land, `policyVersion: 1` freezes and Phase 1 (certified catalog) can start for real.
+— **CLOSED 2026-09-21, `policyVersion: 1` frozen.** tokim25 confirmed the age-band
+content-flag thresholds (loosened the 9-12 band to match 13+) and the same-day-PM-triage
+staffing model; Tech Lead confirmed engineering feasibility with two corrections applied
+(`contentStatus` field naming, and the initial-certified-subset count corrected from a
+double-subtracted 972 to the verified 989). Phase 1 is unblocked.
 
 - [#89](https://github.com/tokim25/movie-app-repo/issues/89) — duration selection doesn't affect recommendations (no runtime field on any of 1,047 titles); Phase 0 says remove/disable the duration claim until this is resolved
 - Privacy corrections (#98, #99 above, plus #100, #102, #106 below) fold into Phase 0's "correct privacy disclosures" requirement
+
+### Trusted Contextual Recommendations — Phase 1 (Certified catalog foundation) — now actionable
+Per the frozen Gate 0 contract: normalize age data, add and verify `runtimeMinutes`,
+implement the versioned catalog schema/validator (with the `contentStatus` state machine
+from Gate 0 §3), and certify the initial ~989-title subset (real flags + not
+audit-flagged + normalizable age, per Gate 0 §6 — re-verify the exact count right before
+cutover since the underlying data keeps changing). Not yet started; next up for Coder
+once picked up, informed by this sequencing rather than issue-number order.
 
 ## Next
 
@@ -70,11 +78,6 @@ recommendations PRD will also touch — worth clearing before or alongside Phase
 - [#102](https://github.com/tokim25/movie-app-repo/issues/102) — Disconnect can't delete hidden Drive state file / all synced child data
 - [#106](https://github.com/tokim25/movie-app-repo/issues/106) — movie requests submitted to Google Forms without disclosure
 - [#107](https://github.com/tokim25/movie-app-repo/issues/107) — request form always reports success even when submission fails
-
-### Trusted Contextual Recommendations — Phase 1 (Certified catalog foundation)
-Blocked on Phase 0 (Gate 0 policy contract). Once unblocked: normalize age data, add
-runtime, build the versioned catalog schema/validator, certify an initial "Verified for
-Family Fit" subset rather than waiting on all 1,047 titles. See PRD "Rollout plan."
 
 ## Later
 
@@ -105,14 +108,13 @@ opens up or a related PR touches the same code.
   this work should be prioritized toward titles likely to enter the initial certified
   subset rather than run in ordinal catalog order.
 
-## Open product decisions (owned by PM, need answers before Phase 0 can close)
+## Open product decisions — RESOLVED 2026-09-21
 
-See PRD "Open product decisions" for the full list. Top of the list:
-
-1. Recommended age: strict default or advisory warning for automatic picks?
-2. Which settings are hard excludes vs. "warn me" preferences?
-3. Which content dimensions are mandatory for certification?
-4. What initial title subset gets "Verified for Family Fit" first?
+The PRD's "Open product decisions" list (recommended-age strictness, hard-excludes vs.
+warn-me settings, mandatory certification dimensions, initial certified subset, plus
+staffing/ownership) is now answered in full by the frozen Gate 0 policy contract —
+[`gate0-policy-trusted-recommendations.md`](./gate0-policy-trusted-recommendations.md).
+This section is kept only as a pointer; the PRD's own list is now historical, not open.
 
 ## Change log
 
@@ -121,5 +123,12 @@ See PRD "Open product decisions" for the full list. Top of the list:
   PR #90) plus a full sweep of the 30 open issues at time of writing.
 - **2026-09-21** — Drafted the Gate 0 policy decision record
   (`gate0-policy-trusted-recommendations.md`), answering the PRD's 7 open product
-  decisions. Sent to Tech Lead for feasibility review; §2 and §7 need tokim25 sign-off
-  before `policyVersion: 1` freezes.
+  decisions. Sent to Tech Lead for feasibility review; §2 and §7 flagged for tokim25
+  sign-off.
+- **2026-09-21** — Gate 0 CLOSED. tokim25 confirmed §2 (loosened the 9-12 age band to
+  match 13+) and §7 (same-day PM triage, no dedicated editorial staff) as the actual
+  content-safety and ownership decisions. Tech Lead confirmed engineering feasibility
+  with two corrections: `reviewStatus` renamed to `contentStatus` to match the TRD's real
+  schema, and the initial certified-subset count corrected from a double-subtracted 972
+  to the verified 989 titles. `policyVersion: 1` is frozen. Phase 1 (certified catalog
+  foundation) is unblocked and moved into the roadmap's "Now" section.
