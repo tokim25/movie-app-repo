@@ -1034,5 +1034,13 @@ const MOVIE_POSTERS = Object.freeze({
   1049: {"u":"https://upload.wikimedia.org/wikipedia/en/3/3e/Scrooge_A_Christmas_Carol_poster.png","w":282,"h":353,"p":"Scrooge: A Christmas Carol"},
   1050: {"u":"https://upload.wikimedia.org/wikipedia/en/6/63/Hilda-and-the-mountain-king-movie-poster-md.jpg","w":258,"h":386,"p":"Hilda and the Mountain King"},
   1051: {"u":"https://upload.wikimedia.org/wikipedia/en/5/56/Trouble_2019_poster.jpg","w":259,"h":383,"p":"Trouble (2019 film)"},
-  1052: {"u":"https://upload.wikimedia.org/wikipedia/en/b/b2/Orion_and_the_Dark_poster.jpg","w":259,"h":384,"p":"Orion and the Dark"}
+  1052: {"u":"https://upload.wikimedia.org/wikipedia/en/b/b2/Orion_and_the_Dark_poster.jpg","w":259,"h":384,"p":"Orion and the Dark"},
+  1056: {"u":"https://upload.wikimedia.org/wikipedia/en/5/50/Home_Alone_2.jpg","w":250,"h":370,"p":"Home Alone 2: Lost in New York"},
+  1057: {"u":"https://upload.wikimedia.org/wikipedia/en/c/cc/Home_Alone_3_film.jpg","w":250,"h":373,"p":"Home Alone 3"},
+  1058: {"u":"https://upload.wikimedia.org/wikipedia/en/1/1c/Descendants%2C_Wicked_Wonderland_poster.jpeg","w":236,"h":420,"p":"Descendants: Wicked Wonderland"},
+  1059: {"u":"https://upload.wikimedia.org/wikipedia/en/8/87/Mac_and_me_movie_poster.jpg","w":260,"h":383,"p":"Mac and Me"},
+  1060: {"u":"https://upload.wikimedia.org/wikipedia/en/a/a7/Tom_and_Jerry%2C_Forbidden_Compass_poster.jpeg","w":267,"h":374,"p":"Tom and Jerry: Forbidden Compass"},
+  1063: {"u":"https://upload.wikimedia.org/wikipedia/en/a/ab/La_La_Land_%28film%29.png","w":260,"h":385,"p":"La La Land"},
+  1064: {"u":"https://upload.wikimedia.org/wikipedia/en/c/c2/RocketMan_%281997_film%29.jpg","w":200,"h":297,"p":"RocketMan (1997 film)"},
+  1065: {"u":"https://upload.wikimedia.org/wikipedia/en/2/29/Camp_Rock_3_poster.jpeg","w":283,"h":354,"p":"Camp Rock 3"}
 });
