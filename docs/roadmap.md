@@ -21,6 +21,9 @@ across all of them.
 
 ## Now
 
+**Top priority as of 2026-09-22 (tokim25):** the Phase 1 runtime backfill below — everything
+else in this section is still real and still Now, but this is the one to unblock first.
+
 ### Trust & safety P0s (independent of the recommendations initiative)
 These are live correctness/privacy defects, not roadmap-gated — they should not wait on
 the Trusted Contextual Recommendations phases below, several of which they block anyway.
@@ -51,7 +54,7 @@ double-subtracted 972 to the verified 989). Phase 1 is unblocked.
 - [#89](https://github.com/tokim25/movie-app-repo/issues/89) — duration selection doesn't affect recommendations (no runtime field on any of 1,047 titles); Phase 0 says remove/disable the duration claim until this is resolved
 - Privacy corrections (#98, #99 above, plus #100, #102, #106 below) fold into Phase 0's "correct privacy disclosures" requirement
 
-### Trusted Contextual Recommendations — Phase 1 (Certified catalog foundation) — in progress
+### Trusted Contextual Recommendations — Phase 1 (Certified catalog foundation) — TOP PRIORITY, in progress
 [PR #127](https://github.com/tokim25/movie-app-repo/pull/127) — schema/validator work is
 done: `scripts/catalog-schema.mjs` implements normalized `recommendedAge` (resolved all
 18 of the PRD's non-normalizable ages, including a genuine data bug fix on `Scoob!`) and
@@ -71,6 +74,12 @@ this project has used for CSM content research all along, just hadn't been appli
 runtime specifically). Not a policy change; runtime backfill is now unblocked as its own
 follow-up work, batched like the content-flag backfill (~40-50 titles/PR) rather than
 gating #127's merge.
+
+**Elevated to top priority 2026-09-22 (tokim25) — dispatched to Coder to start
+immediately**, not on the whenever-convenient timeline this was originally scoped with.
+Coder was idle (both #127 and #128 merged) so nothing else was in the way. This is the
+critical path for every remaining phase of the initiative — no title reaches `certified`
+without it.
 
 ## Next
 
