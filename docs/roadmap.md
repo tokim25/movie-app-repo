@@ -299,3 +299,10 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
   escalation, now this) — worth noting as a pattern, not three unrelated incidents: PM's
   runtime-backfill calls this session have consistently underestimated verification needs
   on the first pass and needed Tech Lead's independent data-checking to catch it each time.
+- **2026-09-22** — PR #132 confirmed closed and fully reverted by Coder (all 990 titles
+  back to `provisional`, matching the pre-#130-integration baseline exactly) — closed with
+  an honest comment explaining the back-and-forth rather than a silent close. #129/#131
+  reopened, re-subscribed, pending the exact discrepant-title list from Reviewer (the
+  roadmap's own "5 titles" text and Reviewer's actual PR comments named slightly different
+  sets, 5 vs. 6 — Coder is getting the precise list before merging rather than guessing,
+  exactly the caution this whole thread has been about).
