@@ -48,6 +48,13 @@ export function hasCompleteFlags(movie) {
 // runtimeMinutes, so "verified" here can't drift from what the validator
 // itself considers verified if this function is ever used somewhere that
 // doesn't sit behind validate-data.mjs's exit-1 gate.
+//
+// Most current runtimeMinutes values (runtimeSourceId:
+// "imdb-noncommercial-dataset-2026-09-21") derive from the IMDb Non-Commercial
+// Datasets (data-runtimes.json is the retained source-of-record snapshot).
+// That dataset is licensed for personal/non-commercial use -- fine for this
+// app today, but re-check IMDb's licensing terms before any commercial use of
+// the catalog (ads, a paid tier, redistribution of the dataset itself, etc.).
 export function hasVerifiedRuntime(movie) {
   return Number.isInteger(movie.runtimeMinutes) && movie.runtimeMinutes > 0 &&
     typeof movie.runtimeSourceId === 'string' && movie.runtimeSourceId.trim() !== '' &&
