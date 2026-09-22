@@ -33,8 +33,8 @@ the Trusted Contextual Recommendations phases below, several of which they block
 | [#92](https://github.com/tokim25/movie-app-repo/issues/92) | Tonight age eligibility uses the oldest child, allowing titles above younger viewers' age guidance | **Dispatched to Coder 2026-09-22**, queued behind the in-flight runtime backfill. Has an exact policy answer now (Gate 0 §1: strict, per-child, no `+2`) |
 | [#93](https://github.com/tokim25/movie-app-repo/issues/93) | Tonight's terminal fallback returns `MOVIES[0]` even when no title is eligible | **Dispatched to Coder 2026-09-22** alongside #92 (same functions, one PR). tokim25 confirmed this reproduces on real production data today — a 1 or 2-year-old's age ceiling (3 or 4) is below the catalog's lowest guidance (5+), so it triggers right now, not just in a synthetic fixture |
 | [#96](https://github.com/tokim25/movie-app-repo/issues/96) | Tonight can label heuristic-only movies green without confirmed title-specific content data | **Dispatched to Coder 2026-09-22**, queued behind #92/#93. Connects directly to the `contentStatus` work from #127 — likely one combined PR with #92/#93 |
-| [#98](https://github.com/tokim25/movie-app-repo/issues/98) | Undisclosed Sentry processing contradicts "never sent" / "no third-party disclosure" claims | Privacy correction, blocks nothing else, should ship standalone |
-| [#99](https://github.com/tokim25/movie-app-repo/issues/99) | Policy/Terms omit child profiles, content limits, override history, device metadata | Same — standalone privacy fix, also a PRD Phase 0 dependency |
+| [#98](https://github.com/tokim25/movie-app-repo/issues/98) | Undisclosed Sentry processing contradicts "never sent" / "no third-party disclosure" claims | **Dispatched to Coder 2026-09-22**, queued behind #92/#93/#96. Combined with #99 (same fix class); doesn't touch Tonight code so can run parallel to the eligibility work if that's easier |
+| [#99](https://github.com/tokim25/movie-app-repo/issues/99) | Policy/Terms omit child profiles, content limits, override history, device metadata | **Dispatched to Coder 2026-09-22** alongside #98 — privacy.html/terms.html don't disclose what `serializeState()` actually persists/syncs (child names, ages, limits, override history, device IDs) |
 
 Also new since the last sweep, P1, not yet bucketed into a phase: [#94](https://github.com/tokim25/movie-app-repo/issues/94)
 (green explanation always says "starter settings" even with custom limits), [#95](https://github.com/tokim25/movie-app-repo/issues/95)
@@ -321,3 +321,11 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
   unrelated to runtime data specifically — so holding them behind a long data-coverage
   tail was the wrong tradeoff. Backfill resumes after, or interleaves, Coder's call on
   mechanics.
+- **2026-09-22** — PR #131 merged (nums 50-61 certified). Queued the last two "Now" P0s,
+  **#98 + #99**, behind #92/#93/#96 — both privacy-disclosure mismatches (undisclosed
+  Sentry telemetry; privacy.html/terms.html omitting the child data `serializeState()`
+  actually persists/syncs). Combined since they're the same fix class and both need a
+  regression test against future disclosure drift. Unlike #92/#93/#96, doesn't touch
+  Tonight's code at all, so Coder can run it parallel to the eligibility work if that's
+  more natural. This closes out the entire "Now" P0 table — every item in it is now
+  either merged or dispatched.
