@@ -56,9 +56,13 @@ test.describe('hasCompleteFlags / hasVerifiedRuntime', () => {
     expect(hasCompleteFlags(baseMovie({ flags: undefined }))).toBe(false);
   });
 
-  test('true only with a positive integer runtimeMinutes', () => {
-    expect(hasVerifiedRuntime(baseMovie({ runtimeMinutes: 94 }))).toBe(true);
-    expect(hasVerifiedRuntime(baseMovie({ runtimeMinutes: 0 }))).toBe(false);
+  test('true only when runtimeMinutes, runtimeSourceId, and runtimeVerifiedAt are all present and well-formed', () => {
+    const full = { runtimeMinutes: 94, runtimeSourceId: 'wikipedia', runtimeVerifiedAt: '2026-09-01' };
+    expect(hasVerifiedRuntime(baseMovie(full))).toBe(true);
+    expect(hasVerifiedRuntime(baseMovie({ ...full, runtimeMinutes: 0 }))).toBe(false);
+    expect(hasVerifiedRuntime(baseMovie({ ...full, runtimeSourceId: '' }))).toBe(false);
+    expect(hasVerifiedRuntime(baseMovie({ ...full, runtimeVerifiedAt: 'not-a-date' }))).toBe(false);
+    expect(hasVerifiedRuntime(baseMovie({ runtimeMinutes: 94 }))).toBe(false);
     expect(hasVerifiedRuntime(baseMovie())).toBe(false);
   });
 });

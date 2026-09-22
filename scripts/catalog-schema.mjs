@@ -43,8 +43,15 @@ export function hasCompleteFlags(movie) {
     CONTENT_FLAG_IDS.every(id => Number.isInteger(movie.flags[id])));
 }
 
+// Mirrors validate-data.mjs's runtimeMinutes/runtimeSourceId/runtimeVerifiedAt
+// co-required check -- all three must be present and well-formed, not just
+// runtimeMinutes, so "verified" here can't drift from what the validator
+// itself considers verified if this function is ever used somewhere that
+// doesn't sit behind validate-data.mjs's exit-1 gate.
 export function hasVerifiedRuntime(movie) {
-  return Number.isInteger(movie.runtimeMinutes) && movie.runtimeMinutes > 0;
+  return Number.isInteger(movie.runtimeMinutes) && movie.runtimeMinutes > 0 &&
+    typeof movie.runtimeSourceId === 'string' && movie.runtimeSourceId.trim() !== '' &&
+    typeof movie.runtimeVerifiedAt === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(movie.runtimeVerifiedAt);
 }
 
 // Gate 0 §4: current iff csmRecheckVersion matches the live
