@@ -32,7 +32,7 @@ the Trusted Contextual Recommendations phases below, several of which they block
 |---|---|---|
 | [#92](https://github.com/tokim25/movie-app-repo/issues/92) | Tonight age eligibility uses the oldest child, allowing titles above younger viewers' age guidance | **Dispatched to Coder 2026-09-22**, queued behind the in-flight runtime backfill. Has an exact policy answer now (Gate 0 §1: strict, per-child, no `+2`) |
 | [#93](https://github.com/tokim25/movie-app-repo/issues/93) | Tonight's terminal fallback returns `MOVIES[0]` even when no title is eligible | **Dispatched to Coder 2026-09-22** alongside #92 (same functions, one PR). tokim25 confirmed this reproduces on real production data today — a 1 or 2-year-old's age ceiling (3 or 4) is below the catalog's lowest guidance (5+), so it triggers right now, not just in a synthetic fixture |
-| [#96](https://github.com/tokim25/movie-app-repo/issues/96) | Tonight can label heuristic-only movies green without confirmed title-specific content data | This *is* the PRD's core P0 problem (see below) — fixing it is Phase 0/2 work, not separate |
+| [#96](https://github.com/tokim25/movie-app-repo/issues/96) | Tonight can label heuristic-only movies green without confirmed title-specific content data | **Dispatched to Coder 2026-09-22**, queued behind #92/#93. Connects directly to the `contentStatus` work from #127 — likely one combined PR with #92/#93 |
 | [#98](https://github.com/tokim25/movie-app-repo/issues/98) | Undisclosed Sentry processing contradicts "never sent" / "no third-party disclosure" claims | Privacy correction, blocks nothing else, should ship standalone |
 | [#99](https://github.com/tokim25/movie-app-repo/issues/99) | Policy/Terms omit child profiles, content limits, override history, device metadata | Same — standalone privacy fix, also a PRD Phase 0 dependency |
 
@@ -306,3 +306,10 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
   roadmap's own "5 titles" text and Reviewer's actual PR comments named slightly different
   sets, 5 vs. 6 — Coder is getting the precise list before merging rather than guessing,
   exactly the caution this whole thread has been about).
+- **2026-09-22** — PR #129 merged (47 titles certified, first real `certified` records in
+  the catalog) after Reviewer's own verification pass restored 2 holds and fixed 1 real
+  error the disputed-title cross-check had found. Coder now on a second runtime-backfill
+  batch. tokim25 told the team to keep going across the board; queued the next P0 behind
+  Coder's current work: **#96** (Tonight can show green on heuristic-only content with no
+  real researched flags) — connects directly to the `contentStatus` work from #127, likely
+  combinable with #92/#93 into one PR since all three touch the same eligibility path.
