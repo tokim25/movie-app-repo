@@ -44,13 +44,23 @@ double-subtracted 972 to the verified 989). Phase 1 is unblocked.
 - [#89](https://github.com/tokim25/movie-app-repo/issues/89) — duration selection doesn't affect recommendations (no runtime field on any of 1,047 titles); Phase 0 says remove/disable the duration claim until this is resolved
 - Privacy corrections (#98, #99 above, plus #100, #102, #106 below) fold into Phase 0's "correct privacy disclosures" requirement
 
-### Trusted Contextual Recommendations — Phase 1 (Certified catalog foundation) — now actionable
-Per the frozen Gate 0 contract: normalize age data, add and verify `runtimeMinutes`,
-implement the versioned catalog schema/validator (with the `contentStatus` state machine
-from Gate 0 §3), and certify the initial ~989-title subset (real flags + not
-audit-flagged + normalizable age, per Gate 0 §6 — re-verify the exact count right before
-cutover since the underlying data keeps changing). Not yet started; next up for Coder
-once picked up, informed by this sequencing rather than issue-number order.
+### Trusted Contextual Recommendations — Phase 1 (Certified catalog foundation) — in progress
+[PR #127](https://github.com/tokim25/movie-app-repo/pull/127) — schema/validator work is
+done: `scripts/catalog-schema.mjs` implements normalized `recommendedAge` (resolved all
+18 of the PRD's non-normalizable ages, including a genuine data bug fix on `Scoob!`) and
+the `contentStatus` 5-state machine from Gate 0 §3. CI green, no reviews yet as of
+2026-09-22 (following up on whether Reviewer/Tech Lead were broadcast to per SKILL.md).
+
+Current coverage: `certified=0, provisional=990, conflicted=21, unknown=36`. **Zero
+titles are certified yet** — `runtimeMinutes` backfill for the ~990-candidate pool
+(Gate 0 §6's count, revised up by 1 from 989 after the Scoob! fix) hasn't happened. Coder
+hit a real network-egress block on direct Wikipedia/IMDb fetches and correctly escalated
+rather than fabricating numbers or routing around it (per Gate 0 §7). Resolved 2026-09-22:
+WebSearch snippet extraction works around the block (verified directly — same fallback
+this project has used for CSM content research all along, just hadn't been applied to
+runtime specifically). Not a policy change; runtime backfill is now unblocked as its own
+follow-up work, batched like the content-flag backfill (~40-50 titles/PR) rather than
+gating #127's merge.
 
 ## Next
 
@@ -132,3 +142,13 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
   schema, and the initial certified-subset count corrected from a double-subtracted 972
   to the verified 989 titles. `policyVersion: 1` is frozen. Phase 1 (certified catalog
   foundation) is unblocked and moved into the roadmap's "Now" section.
+- **2026-09-21** — Weekly triage batch (34 titles + 1 discovery title) fell back to being
+  routed directly to Coder — the "Movie watchlist weekly update" session never picked up
+  the original handoff (sat in PENDING with zero progress for 9+ hours, confirmed via
+  `get_session`, not just a stale-looking status this time).
+- **2026-09-22** — Phase 1: Coder opened PR #127 (schema/validator, CI green). Escalated a
+  real blocker per Gate 0 §7 (network egress blocks direct Wikipedia/IMDb fetches, so
+  `runtimeMinutes` backfill couldn't proceed — 0 titles certified as a result). Resolved
+  same day: WebSearch snippet extraction works around the block (PM verified directly),
+  same pattern already used for CSM content research. Not a policy change — runtime
+  backfill unblocked as its own batched follow-up, decoupled from #127's merge.
