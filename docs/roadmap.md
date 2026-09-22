@@ -276,3 +276,11 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
   put to tokim25 directly and confirmed fine. PR #130 merged. Logged in full rather than
   quietly overwritten, since the roadmap should reflect real decisions including reversed
   ones, not just a clean final state.
+- **2026-09-22** — Reviewer cross-checked #129/#131's WebSearch-derived runtimes against
+  `data-runtimes.json` directly and found real disagreements, not rounding noise, on 5
+  titles (Over the Moon 95 vs. 100 min, March of the Penguins 2 76 vs. 82, The Secret of
+  Kells 75 vs. 79, plus two smaller deltas). Directed: merge #129/#131 as planned, but hold
+  those 5 specific titles at `provisional` (no `runtimeSourceId` stamped either way) until
+  a bounded verification pass resolves which number is right — could be a real error in
+  either source, or a legitimate cut-length difference (theatrical vs. extended, US vs.
+  international). Everything else in both PRs proceeds unaffected.
