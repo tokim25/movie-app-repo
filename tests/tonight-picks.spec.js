@@ -385,6 +385,82 @@ test('an amber top pick is labeled Review fit, distinct from red and green (#49)
   expect(result.watchAnywayDisplay).toBe('inline-block');
 });
 
+// Issue #108: the existing red/amber tests above both land exactly at
+// reasons.length === 2 (two children, one category each), so neither ever
+// exercises showTonightPick()'s summarized-copy branch (reasons.length > 2)
+// where affectedChildCount actually matters -- the one place the #108 bug
+// lived. These three cover the acceptance criteria's three scenarios
+// directly: one child/multiple categories, multiple children/one category
+// each, and a mixed case that proves affectedChildCount (distinct children)
+// is used instead of reasons.length (category-issue count).
+test.describe('summarized red copy counts distinct children, not category-issues (#108)', () => {
+  test('one child over multiple categories reports a single child', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      const idx = MOVIES.push({ t: 'SSS OneChild ThreeCategory Fixture', y: '2005', ca: '3+', genre: [], num: 9000214, flags: { violence: 4, language: 4, romance: 4, drinking: 1 } }) - 1;
+      state.children = [{ id: 'kid-solo', name: 'Solo', age: 12, settings: {} }];
+      tonightSelection.excludedChildIds = new Set();
+      ['violence', 'language', 'romance'].forEach(flagId => setChildFlagLimit('kid-solo', flagId, 1));
+      findTonightCandidate = () => ({ idx, source: 'Shelf' });
+      showTonightPick();
+      return {
+        verdictText: document.getElementById('tonightVerdict').textContent,
+        summary: document.querySelector('#tonightPickReasons li').textContent
+      };
+    });
+
+    expect(result.verdictText).toBe('Above settings');
+    expect(result.summary).toBe('Above settings for 1 child watching.');
+  });
+
+  test('three children with one category each report all three', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      const idx = MOVIES.push({ t: 'TTT ThreeChild OneCategory Fixture', y: '2005', ca: '3+', genre: [], num: 9000215, flags: { violence: 1, language: 4, romance: 1, drinking: 1 } }) - 1;
+      state.children = [
+        { id: 'kid-a', name: 'Ava', age: 12, settings: {} },
+        { id: 'kid-b', name: 'Ben', age: 12, settings: {} },
+        { id: 'kid-c', name: 'Cora', age: 12, settings: {} }
+      ];
+      tonightSelection.excludedChildIds = new Set();
+      state.children.forEach(child => setChildFlagLimit(child.id, 'language', 1));
+      findTonightCandidate = () => ({ idx, source: 'Shelf' });
+      showTonightPick();
+      return {
+        verdictText: document.getElementById('tonightVerdict').textContent,
+        summary: document.querySelector('#tonightPickReasons li').textContent
+      };
+    });
+
+    expect(result.verdictText).toBe('Above settings');
+    expect(result.summary).toBe('Above settings for 3 of the kids watching.');
+  });
+
+  test('mixed categories-per-child counts distinct children, not the category tally', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      const idx = MOVIES.push({ t: 'UUU Mixed Fixture', y: '2005', ca: '3+', genre: [], num: 9000216, flags: { violence: 4, language: 4, romance: 1, drinking: 1 } }) - 1;
+      state.children = [
+        { id: 'kid-x', name: 'Xena', age: 12, settings: {} },
+        { id: 'kid-y', name: 'Yara', age: 12, settings: {} }
+      ];
+      tonightSelection.excludedChildIds = new Set();
+      setChildFlagLimit('kid-x', 'violence', 1);
+      setChildFlagLimit('kid-x', 'language', 1);
+      setChildFlagLimit('kid-y', 'violence', 1);
+      findTonightCandidate = () => ({ idx, source: 'Shelf' });
+      showTonightPick();
+      return {
+        verdictText: document.getElementById('tonightVerdict').textContent,
+        summary: document.querySelector('#tonightPickReasons li').textContent
+      };
+    });
+
+    expect(result.verdictText).toBe('Above settings');
+    // 3 category-level reasons (Xena: violence, Xena: language, Yara:
+    // violence) but only 2 distinct children -- pre-#108 this would have
+    // read "for 3 of the kids watching," counting reasons instead of kids.
+    expect(result.summary).toBe('Above settings for 2 of the kids watching.');
+  });
+});
+
 // Issues #92/#93/#96 regression coverage. All three land in the same
 // isTonightEligible()/findTonightCandidate() pass, so they're covered
 // together here rather than split across files.

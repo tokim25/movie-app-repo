@@ -459,8 +459,12 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
   added. Full local suite green aside from the two documented pre-existing flakes (sandbox
   network on `catalog.spec.js`). PR #137 opened, Reviewer approved same day after independent
   verification (mutation-tested #97's flattening fix, re-verified the sessionId disclosure
-  update against the actual serialized shape rather than trusting the PR description) —
-  two minor non-blocking test-coverage notes vs. the issues' acceptance criteria, neither
-  needing a fix-and-repush per Reviewer. `mergeable_state` briefly went `dirty` when PR #136
-  merged (another `docs/roadmap.md` append-point collision, same shape as #133/#134 and
-  #134/#135, resolved the same way — both entries kept).
+  update against the actual serialized shape rather than trusting the PR description).
+  `mergeable_state` briefly went `dirty` when PR #136 merged (another `docs/roadmap.md`
+  append-point collision, same shape as #133/#134 and #134/#135, resolved the same way —
+  both entries kept). Tech Lead's own independent review then caught a real coverage gap:
+  #108's acceptance criteria call for tests covering one child/multiple categories, multiple
+  children/one category, and a mixed case, and none of that path (`reasons.length > 2` in
+  `showTonightPick()`) was exercised anywhere — the existing red/amber tests both land at
+  exactly 2 reasons. Traced by hand first and confirmed correct, then three tests added
+  covering all three scenarios; full suite re-run clean before pushing.
