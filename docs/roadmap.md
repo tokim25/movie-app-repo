@@ -30,8 +30,8 @@ the Trusted Contextual Recommendations phases below, several of which they block
 
 | Issue | Problem | Notes |
 |---|---|---|
-| [#92](https://github.com/tokim25/movie-app-repo/issues/92) | Tonight age eligibility uses the oldest child, allowing titles above younger viewers' age guidance | Filed 9/21, new. This is literally the oldest-child-plus-tolerance rule Gate 0 §1 already ruled out — fixable now against frozen policy, no new design needed |
-| [#93](https://github.com/tokim25/movie-app-repo/issues/93) | Tonight's terminal fallback returns `MOVIES[0]` even when no title is eligible | Filed 9/21, new. Directly contradicts the PRD's "no synthetic fallback" P0 requirement and Gate 0 — same situation as #92, ready to fix now |
+| [#92](https://github.com/tokim25/movie-app-repo/issues/92) | Tonight age eligibility uses the oldest child, allowing titles above younger viewers' age guidance | **Dispatched to Coder 2026-09-22**, queued behind the in-flight runtime backfill. Has an exact policy answer now (Gate 0 §1: strict, per-child, no `+2`) |
+| [#93](https://github.com/tokim25/movie-app-repo/issues/93) | Tonight's terminal fallback returns `MOVIES[0]` even when no title is eligible | **Dispatched to Coder 2026-09-22** alongside #92 (same functions, one PR). tokim25 confirmed this reproduces on real production data today — a 1 or 2-year-old's age ceiling (3 or 4) is below the catalog's lowest guidance (5+), so it triggers right now, not just in a synthetic fixture |
 | [#96](https://github.com/tokim25/movie-app-repo/issues/96) | Tonight can label heuristic-only movies green without confirmed title-specific content data | This *is* the PRD's core P0 problem (see below) — fixing it is Phase 0/2 work, not separate |
 | [#98](https://github.com/tokim25/movie-app-repo/issues/98) | Undisclosed Sentry processing contradicts "never sent" / "no third-party disclosure" claims | Privacy correction, blocks nothing else, should ship standalone |
 | [#99](https://github.com/tokim25/movie-app-repo/issues/99) | Policy/Terms omit child profiles, content limits, override history, device metadata | Same — standalone privacy fix, also a PRD Phase 0 dependency |
@@ -80,6 +80,41 @@ immediately**, not on the whenever-convenient timeline this was originally scope
 Coder was idle (both #127 and #128 merged) so nothing else was in the way. This is the
 critical path for every remaining phase of the initiative — no title reaches `certified`
 without it.
+
+[PR #129](https://github.com/tokim25/movie-app-repo/pull/129) — first WebSearch-snippet
+backfill batch (47 titles, first ever `certified` records) landed shortly after dispatch,
+open pending review.
+
+**[PR #130](https://github.com/tokim25/movie-app-repo/pull/130) merged same day — `data-runtimes.json`,
+a bulk reference sourced from the real IMDb Non-Commercial Datasets (`title.basics.tsv.gz`),
+covering 1,070 of 1,071 catalog titles. Initial handling of this was wrong and got
+corrected within the hour — logged honestly below rather than cleaned up after the fact.**
+
+PM's first call: told Coder to spot-check a sample and use #130 to finish the *entire*
+remaining backfill in bulk, superseding PR #129 (the in-flight WebSearch-snippet batch)
+and PR #131 (a second one Coder had already opened, 11 titles). Also cleared the dataset's
+non-commercial-use licensing note unilaterally as "not a blocker."
+
+**Tech Lead caught both of those as wrong**, independently, by actually reading the PR's
+content rather than trusting the description: 496 of 1,071 matches (46%) had multiple
+ambiguous IMDb candidates (title+year collisions — shorts, TV movies, re-release cuts)
+resolved silently to one pick with zero disambiguation trail — exactly the kind of
+unverified confidence Gate 0 exists to prevent, and something a "spot-check a handful"
+bar would never have caught. Tech Lead also correctly pushed back that the licensing
+question is tokim25's call, not PM's or Tech Lead's to wave through for a live public
+deployment.
+
+**Corrected plan, same day:** #129 and #131 stay as originally written (Tech Lead has no
+concerns with the field-on-record WebSearch pipeline itself — that's what Gate 0 actually
+committed to, and it's unaffected by any of this since it doesn't depend on IMDb's
+dataset). #130 is a QA-gated accelerator, not a bulk import: only `candidateCount: 1` +
+`confidence: "high"` matches auto-promote directly into `runtimeMinutes`/`runtimeSourceId`
+(stamped as IMDb-dataset-derived, distinct from the snippet-sourced records)/
+`runtimeVerifiedAt`; the ambiguous ~496 need the same real verification as everything
+else, not a silent import. Licensing question put to tokim25 directly rather than assumed
+— confirmed fine (non-commercial family app). Net effect: backfill keeps moving on the
+already-trusted pipeline the whole time; #130 speeds up only the unambiguous slice of it,
+once verified.
 
 ## Next
 
@@ -222,3 +257,52 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
   practice even though PM owns its content — anyone landing a PR that finishes work this
   file tracks may touch it too, so re-fetch before editing this file the same as any other
   shared file, not just the data-*.js files SKILL.md's hard rule names explicitly.
+- **2026-09-22** — tokim25 elevated the runtime backfill to top priority; dispatched to
+  Coder immediately. PR #129 (47-title WebSearch-snippet batch) landed shortly after, but
+  was itself superseded same day by PR #130 — a separate agent's bulk IMDb-dataset
+  reference (`data-runtimes.json`, 1,070/1,071 titles matched, documented confidence).
+  Dispatched Coder to verify and use #130 to finish the entire remaining backfill in bulk,
+  superseding #129's weaker-provenance data rather than merging it. Also dispatched P0s
+  #92 + #93 (Tonight eligibility bugs) as the next priority after the backfill, per
+  tokim25's confirmation — both have exact answers from frozen Gate 0/PRD policy now, no
+  new design work needed.
+- **2026-09-22** — PM's PR #130 decision (above) was wrong on two counts, both caught by
+  Tech Lead within the hour: (1) 46% of #130's matches were ambiguous, silently resolved
+  with no verification trail — the "spot-check a sample" bar PM set wouldn't have caught
+  this; (2) PM cleared the IMDb dataset's licensing note unilaterally instead of escalating
+  a real external-compliance question for a live public deployment. Corrected: #129/#131
+  reinstated as primary (never should have been marked superseded), #130 downgraded to a
+  QA-gated accelerator (`candidateCount:1` + `confidence:"high"` only), licensing question
+  put to tokim25 directly and confirmed fine. PR #130 merged. Logged in full rather than
+  quietly overwritten, since the roadmap should reflect real decisions including reversed
+  ones, not just a clean final state.
+- **2026-09-22** — Reviewer cross-checked #129/#131's WebSearch-derived runtimes against
+  `data-runtimes.json` directly and found real disagreements, not rounding noise, on 5
+  titles (Over the Moon 95 vs. 100 min, March of the Penguins 2 76 vs. 82, The Secret of
+  Kells 75 vs. 79, plus two smaller deltas). Directed: merge #129/#131 as planned, but hold
+  those 5 specific titles at `provisional` (no `runtimeSourceId` stamped either way) until
+  a bounded verification pass resolves which number is right — could be a real error in
+  either source, or a legitimate cut-length difference (theatrical vs. extended, US vs.
+  international). Everything else in both PRs proceeds unaffected.
+- **2026-09-22 — PR #132 blocked; the `candidateCount:1`/`confidence:"high"` QA bar itself
+  was wrong, not just unenforced.** Tech Lead verified #132 (Coder's consolidated
+  certification pass) against the real data: the agreed gate wasn't implemented (all 990
+  matched titles got certified uniformly, no filtering) — but the more important finding
+  is that 3 of the 4 titles Reviewer had already flagged as discrepant sit *inside* that
+  exact "safe" bucket. `candidateCount`/`confidence` measure whether the right film was
+  matched, not whether the recorded runtime number is accurate for that film — two
+  different questions #130's data only answers the first of. **Policy revised again:** no
+  title certifies from `data-runtimes.json` alone regardless of match-quality signals; it's
+  now a research accelerant for the WebSearch pipeline (a starting hypothesis to confirm,
+  same as #129/#131's proven method), never a certification shortcut on its own.
+  This is Tech Lead's third real catch in one session (ambiguous-match rate, licensing
+  escalation, now this) — worth noting as a pattern, not three unrelated incidents: PM's
+  runtime-backfill calls this session have consistently underestimated verification needs
+  on the first pass and needed Tech Lead's independent data-checking to catch it each time.
+- **2026-09-22** — PR #132 confirmed closed and fully reverted by Coder (all 990 titles
+  back to `provisional`, matching the pre-#130-integration baseline exactly) — closed with
+  an honest comment explaining the back-and-forth rather than a silent close. #129/#131
+  reopened, re-subscribed, pending the exact discrepant-title list from Reviewer (the
+  roadmap's own "5 titles" text and Reviewer's actual PR comments named slightly different
+  sets, 5 vs. 6 — Coder is getting the precise list before merging rather than guessing,
+  exactly the caution this whole thread has been about).
