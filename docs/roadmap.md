@@ -284,3 +284,18 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
   a bounded verification pass resolves which number is right — could be a real error in
   either source, or a legitimate cut-length difference (theatrical vs. extended, US vs.
   international). Everything else in both PRs proceeds unaffected.
+- **2026-09-22 — PR #132 blocked; the `candidateCount:1`/`confidence:"high"` QA bar itself
+  was wrong, not just unenforced.** Tech Lead verified #132 (Coder's consolidated
+  certification pass) against the real data: the agreed gate wasn't implemented (all 990
+  matched titles got certified uniformly, no filtering) — but the more important finding
+  is that 3 of the 4 titles Reviewer had already flagged as discrepant sit *inside* that
+  exact "safe" bucket. `candidateCount`/`confidence` measure whether the right film was
+  matched, not whether the recorded runtime number is accurate for that film — two
+  different questions #130's data only answers the first of. **Policy revised again:** no
+  title certifies from `data-runtimes.json` alone regardless of match-quality signals; it's
+  now a research accelerant for the WebSearch pipeline (a starting hypothesis to confirm,
+  same as #129/#131's proven method), never a certification shortcut on its own.
+  This is Tech Lead's third real catch in one session (ambiguous-match rate, licensing
+  escalation, now this) — worth noting as a pattern, not three unrelated incidents: PM's
+  runtime-backfill calls this session have consistently underestimated verification needs
+  on the first pass and needed Tech Lead's independent data-checking to catch it each time.
