@@ -61,7 +61,11 @@ const DOCUMENTED_SHAPE = {
   children: ['device', 'list', 'updatedAt'].sort(),
   child: ['age', 'id', 'name', 'sadRemovedNoticePending', 'settings', 'watchCueDismissedAt'].sort(),
   mark: ['device', 'updatedAt', 'value'].sort(),
-  event: ['childId', 'createdAt', 'flag', 'id', 'titleId', 'type'].sort()
+  // Issue #104: sessionId is the idempotency key that lets a repeated tap on
+  // "Watch anyway" for the same recommendation be recognized as the same
+  // decision instead of appending a new event -- see privacy.html's "What
+  // we collect" section, updated alongside this.
+  event: ['childId', 'createdAt', 'flag', 'id', 'sessionId', 'titleId', 'type'].sort()
 };
 
 test('serializeState() field shape matches the documented disclosure inventory (#99)', async ({ page }) => {

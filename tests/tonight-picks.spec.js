@@ -181,6 +181,13 @@ test('night mood changes the selected movie', async ({ page }) => {
     togglePriority(gentleIdx);
     togglePriority(actionIdx);
     toggleCheck(actionIdx);
+    // Issue #97: candidate selection now ranks by mood score across the
+    // whole flattened pool, not tier-by-tier -- so without this isolation, a
+    // real catalog title with an even better mood-score match than either
+    // fixture could win and mask the mood-based sorting this test is
+    // actually about. Restricting the pool to just these two keeps the test
+    // about mood scoring, same reasoning as the #49/#92 isolation above.
+    tonightSourceTiers = () => [{ source: 'Want to watch', indices: [gentleIdx, actionIdx] }];
   });
 
   await openTonightAskEditor(page);
@@ -194,14 +201,15 @@ test('night mood changes the selected movie', async ({ page }) => {
   await expect(page.locator('#tonightPickTitle')).toContainText('The Incredibles');
 });
 
-test('tonight picks from want to watch before new and general shelf', async ({ page }) => {
+test('a Want to watch pick renders the Want to watch source label', async ({ page }) => {
+  // Issue #97 note: this used to be titled "...before new and general
+  // shelf" and relied on tier order alone always surfacing a Want to watch
+  // pick ahead of every other tier -- that's exactly the bug #97 fixes
+  // (mood ranking now crosses tier boundaries), so this test is narrowed to
+  // an isolated single-tier fixture and now only covers what it should:
+  // that a pick sourced from Want to watch renders the right source label.
+  // See "mood ranking crosses tier boundaries..." below for #97 itself.
   const title = await page.evaluate(() => {
-    // Same reasoning as the mood test above: The Greatest Showman is amber
-    // for this sample family under starter settings, which would otherwise
-    // make issue #49's green-first fix (not tier ordering, this test's real
-    // subject) the reason it loses out to some other tier's green pick.
-    // Issue #92: it's also ca 8+, above Nora's real age (3) -- bump ages too
-    // so the strict per-child gate isn't what's under test here either.
     state.children.forEach(child => {
       child.age = 12;
       CONTENT_FLAG_IDS.forEach(flagId => setChildFlagLimit(child.id, flagId, 4));
@@ -209,6 +217,8 @@ test('tonight picks from want to watch before new and general shelf', async ({ p
     const idx = MOVIES.findIndex(movie => movie.t === 'The Greatest Showman');
     if(idx < 0) throw new Error('Test movie missing');
     togglePriority(idx);
+    resetTonightSkips();
+    tonightSourceTiers = () => [{ source: 'Want to watch', indices: [idx] }];
     return `${MOVIES[idx].t} (${MOVIES[idx].y})`;
   });
 
@@ -216,6 +226,34 @@ test('tonight picks from want to watch before new and general shelf', async ({ p
 
   await expect(page.locator('#tonightPickTitle')).toHaveText(title);
   await expect(page.locator('#tonightPickReasons')).toContainText('Pulled from Want to watch.');
+});
+
+test('mood ranking crosses tier boundaries instead of exhausting Want to watch first (#97)', async ({ page }) => {
+  const result = await page.evaluate(() => {
+    state.children.forEach(child => {
+      child.age = 12;
+      CONTENT_FLAG_IDS.forEach(flagId => setChildFlagLimit(child.id, flagId, 4));
+    });
+    const base = { y: '2005', ca: '3+', genre: [] };
+    // Want to watch fixture engineered to score badly under calm mood (high
+    // violence -> high intensity -> high calm score); Shelf fixture
+    // engineered to score well (low violence). Before #97, tier order alone
+    // meant the Want to watch tier was exhausted first regardless of mood
+    // fit, so this fixture would always win even though it's a worse match.
+    const wantIdx = MOVIES.push({ ...base, t: 'FFF Regression WantToWatch Fixture', num: 9000104, flags: { violence: 4, language: 1, romance: 1, drinking: 1 } }) - 1;
+    const shelfIdx = MOVIES.push({ ...base, t: 'GGG Regression Shelf Fixture', num: 9000105, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
+    resetTonightSkips();
+    tonightSourceTiers = () => [
+      { source: 'Want to watch', indices: [wantIdx] },
+      { source: 'Shelf', indices: [shelfIdx] }
+    ];
+    tonightSelection.mood = 'calm';
+    const candidate = findTonightCandidate();
+    return { title: MOVIES[candidate.idx].t, source: candidate.source };
+  });
+
+  expect(result.title).toBe('GGG Regression Shelf Fixture');
+  expect(result.source).toBe('Shelf');
 });
 
 test('adults-only new picks use recent releases instead of recently added titles', async ({ page }) => {
@@ -300,7 +338,9 @@ test('a green top pick with multiple kids selected cites every kid in its reason
 
   expect(result.verdictText).toBe("Tonight's pick");
   // Both selected kids (Simon and Nora), not just the first, per #59.
-  expect(result.reasons[0]).toBe("Within Simon and Nora's starter settings.");
+  // "current content limits" per #94 -- neutral regardless of whether a
+  // limit is the age-based starter default or an explicit parent override.
+  expect(result.reasons[0]).toBe("Within Simon and Nora's current content limits.");
   expect(result.watchAnywayDisplay).toBe('none');
 });
 
@@ -506,5 +546,152 @@ test.describe('typed no-match state instead of an unvalidated fallback pick (#93
 
     await page.locator('#tonightNoMatchShelfBtn').click();
     await expect(page.locator('#browseScreen')).toBeVisible();
+  });
+});
+
+test.describe('per-skip session-scoped feedback, not a single global reason (#103)', () => {
+  test('two consecutive skips record distinct events and never inherit the previous reason', async ({ page }) => {
+    const firstTitle = await page.evaluate(() => {
+      const idxA = MOVIES.push({ t: 'MMM Skip Fixture A', y: '2005', ca: '3+', genre: [], num: 9000208, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
+      const idxB = MOVIES.push({ t: 'NNN Skip Fixture B', y: '2005', ca: '3+', genre: [], num: 9000209, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
+      tonightSourceTiers = () => [{ source: 'Shelf', indices: [idxA, idxB] }];
+      resetTonightSkips();
+      showTonightPick();
+      return MOVIES[tonightSelection.currentPickIdx].t;
+    });
+    expect(firstTitle).toBe('MMM Skip Fixture A');
+
+    await page.locator('#tonightSkipBtn').click();
+    await expect(page.locator('#tonightSkipFeedback')).toBeVisible();
+    await page.locator('[data-skip-reason="Wrong mood"]').click();
+    await expect(page.locator('[data-skip-reason="Wrong mood"]')).toHaveClass(/selected/);
+
+    const secondTitle = await page.evaluate(() => MOVIES[tonightSelection.currentPickIdx].t);
+    expect(secondTitle).toBe('NNN Skip Fixture B');
+
+    await page.locator('#tonightSkipBtn').click();
+    // The crux of #103: a fresh skip's feedback prompt must start unselected,
+    // never carrying over the previous skipped movie's chosen reason.
+    await expect(page.locator('[data-skip-reason="Wrong mood"]')).not.toHaveClass(/selected/);
+    await page.locator('[data-skip-reason="Not interested"]').click();
+
+    const events = await page.evaluate(() => tonightSkipEvents.map(e => ({ titleId: e.titleId, reason: e.reason })));
+    expect(events).toEqual([
+      { titleId: 9000208, reason: 'Wrong mood' },
+      { titleId: 9000209, reason: 'Not interested' }
+    ]);
+  });
+
+  test('an unanswered skip still records a session-scoped event with no reason', async ({ page }) => {
+    await page.evaluate(() => {
+      const idx = MOVIES.push({ t: 'OOO Unanswered Skip Fixture', y: '2005', ca: '3+', genre: [], num: 9000210, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
+      tonightSourceTiers = () => [{ source: 'Shelf', indices: [idx] }];
+      resetTonightSkips();
+      showTonightPick();
+    });
+
+    await page.locator('#tonightSkipBtn').click();
+    await page.locator('#tonightSkipContinueBtn').click();
+
+    const events = await page.evaluate(() => tonightSkipEvents.map(e => ({ titleId: e.titleId, reason: e.reason })));
+    expect(events).toEqual([{ titleId: 9000210, reason: null }]);
+  });
+});
+
+test.describe('Watch anyway is idempotent per recommendation, not per tap (#104)', () => {
+  test('repeated taps on the same pick log once, then reverse -- never appending duplicates', async ({ page }) => {
+    await page.evaluate(() => {
+      const idx = MOVIES.push({ t: 'PPP WatchAnyway Fixture', y: '2005', ca: '3+', genre: [], num: 9000211, flags: { violence: 1, language: 4, romance: 1, drinking: 1 } }) - 1;
+      state.children.forEach(child => setChildFlagLimit(child.id, 'language', 1));
+      tonightSourceTiers = () => [{ source: 'Shelf', indices: [idx] }];
+      resetTonightSkips();
+      showTonightPick();
+    });
+
+    await page.locator('#tonightWatchAnywayBtn').click();
+    const afterFirst = await page.evaluate(() => (state.events || []).filter(e => e.type === 'watch_anyway').length);
+    expect(afterFirst).toBeGreaterThan(0);
+
+    // A repeated tap before anything else changes is a deliberate reversal,
+    // not more evidence -- it removes what the first tap logged.
+    await page.locator('#tonightWatchAnywayBtn').click();
+    const afterSecond = await page.evaluate(() => (state.events || []).filter(e => e.type === 'watch_anyway').length);
+    expect(afterSecond).toBe(0);
+  });
+
+  test('the button visibly acknowledges a saved decision', async ({ page }) => {
+    await page.evaluate(() => {
+      const idx = MOVIES.push({ t: 'QQQ WatchAnyway Ack Fixture', y: '2005', ca: '3+', genre: [], num: 9000212, flags: { violence: 1, language: 4, romance: 1, drinking: 1 } }) - 1;
+      state.children.forEach(child => setChildFlagLimit(child.id, 'language', 1));
+      tonightSourceTiers = () => [{ source: 'Shelf', indices: [idx] }];
+      resetTonightSkips();
+      showTonightPick();
+    });
+
+    await expect(page.locator('#tonightWatchAnywayBtn')).toHaveText('Watch anyway');
+    await page.locator('#tonightWatchAnywayBtn').click();
+    await expect(page.locator('#tonightWatchAnywayBtn')).toContainText('Logged');
+  });
+
+  test('one decision cannot satisfy the three-distinct-choice Family cue threshold', async ({ page }) => {
+    const count = await page.evaluate(() => {
+      const idx = MOVIES.push({ t: 'RRR ThreeTap Fixture', y: '2005', ca: '3+', genre: [], num: 9000213, flags: { violence: 1, language: 4, romance: 1, drinking: 1 } }) - 1;
+      state.children.forEach(child => setChildFlagLimit(child.id, 'language', 1));
+      tonightSourceTiers = () => [{ source: 'Shelf', indices: [idx] }];
+      resetTonightSkips();
+      showTonightPick();
+      // Three taps on one displayed recommendation: log, undo, log again --
+      // still at most one active event per child+flag out of this.
+      logWatchAnywaySignal();
+      logWatchAnywaySignal();
+      logWatchAnywaySignal();
+      return (state.events || []).filter(e => e.type === 'watch_anyway' && e.childId === 'simon' && e.flag === 'language').length;
+    });
+
+    expect(count).toBeLessThan(3);
+  });
+});
+
+test.describe('changing viewers, mood, or duration clears the stale recommendation (#105)', () => {
+  test('switching mood hides the previous pick card until a new one is found', async ({ page }) => {
+    await page.locator('#findTonightPickBtn').click();
+    await expect(page.locator('#tonightPickCard')).toBeVisible();
+
+    await openTonightAskEditor(page);
+    await page.locator('#tonightMoodChoices .choiceChip').filter({ hasText: 'Big and silly' }).click();
+
+    await expect(page.locator('#tonightPickCard')).toBeHidden();
+  });
+
+  test('switching to Adults only hides the previous child-context pick', async ({ page }) => {
+    await page.locator('#findTonightPickBtn').click();
+    await expect(page.locator('#tonightPickCard')).toBeVisible();
+
+    await openTonightAskEditor(page);
+    await page.locator('#tonightKidChoices .choiceChip').filter({ hasText: 'Adults only' }).click();
+
+    await expect(page.locator('#tonightPickCard')).toBeHidden();
+  });
+
+  test('changing duration hides the previous pick', async ({ page }) => {
+    await page.locator('#findTonightPickBtn').click();
+    await expect(page.locator('#tonightPickCard')).toBeVisible();
+
+    await openTonightAskEditor(page);
+    await page.locator('#tonightTimeChoices .choiceChip').filter({ hasText: 'Up to 2 hours' }).click();
+
+    await expect(page.locator('#tonightPickCard')).toBeHidden();
+  });
+
+  test('result actions are unavailable once currentPickIdx is cleared', async ({ page }) => {
+    await page.locator('#findTonightPickBtn').click();
+    await expect(page.locator('#tonightPickCard')).toBeVisible();
+
+    await openTonightAskEditor(page);
+    await page.locator('#tonightMoodChoices .choiceChip').filter({ hasText: 'Something new' }).click();
+
+    const currentPickIdx = await page.evaluate(() => tonightSelection.currentPickIdx);
+    expect(currentPickIdx).toBeNull();
+    await expect(page.locator('#tonightPickCard')).toBeHidden();
   });
 });

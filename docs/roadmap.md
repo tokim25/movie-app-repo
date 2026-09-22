@@ -389,3 +389,39 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
   keep going; nothing blocking on PM's end. Tonight-correctness P1 batch
   (#94/97/103/104/105/108) is now unblocked to start, since #134 (the thing it was queued
   behind) has landed.
+- **2026-09-22** — Tonight-correctness P1 batch (#94/#97/#103/#104/#105/#108) implemented,
+  all six in one PR since they land in the same `findTonightCandidate()`/
+  `movieVerdictForKids()`/`showTonightPick()` functions #92/#93/#96 already touched. **#94:**
+  `movieVerdictForKids()`'s green-verdict reason now always says "current content limits"
+  instead of unconditionally "starter settings," accurate whether a limit is the age-based
+  default or an explicit parent override. **#108:** `movieVerdictForKids()` now also returns
+  `affectedChildCount` (distinct children with an issue, via a `Set` of child IDs) alongside
+  `reasons` (one entry per child × content category); `showTonightPick()`'s summarized
+  red/amber copy uses the former instead of `reasons.length` so a child over the limit in
+  multiple categories is no longer counted as multiple children. **#97:** new
+  `flattenTonightPool()` merges all three of `tonightSourceTiers()`'s tiers into one pool
+  before mood-sorting it globally, so `findTonightCandidate()` can no longer let tier
+  membership (Want to watch / Recent releases / Shelf) override mood fit — `tonightSourceTiers()`
+  itself is untouched since several existing tests stub it directly. **#103:** the old
+  session-global `tonightSkipReason` is replaced with `tonightSkipEvents`, a session-scoped
+  log of one event per skip (skipped movie, viewers, mood, time, optional reason, timestamp)
+  plus `currentTonightSkipEventId` pointing the skip-reason buttons at exactly the event the
+  current feedback prompt is for; each new skip starts unselected instead of inheriting the
+  previous movie's chosen reason. Deliberately never added to `state.events` — skip feedback
+  stays session-only, never synced. **#104:** "Watch anyway" is now idempotent per
+  recommendation (session + movie + child + flag, via a new per-page-load `TONIGHT_SESSION_ID`)
+  — `findActiveWatchAnywayEvent()` checks before logging, repeated taps fill in only the
+  still-missing child/flag events, and once every affected child already has an active event
+  a further tap is treated as a deliberate reversal that removes them; `updateTonightWatchAnywayBtn()`
+  changes the button's own text to acknowledge a saved decision. This adds a `sessionId` field
+  to watch-anyway events in `state.events`, which the #99 disclosure-drift test (rightly)
+  caught — `privacy.html`'s "What we collect" section and `tests/privacy-disclosure.spec.js`'s
+  `DOCUMENTED_SHAPE` were both updated in the same PR. **#105:** `resetTonightSkips()` (already
+  called by every viewer/mood/time-change handler) now also hides `#tonightPickCard` and
+  `#tonightNoMatchCard`, so a stale title/verdict/evidence can no longer stay on screen under
+  a changed context — its actions were already unreachable once `currentPickIdx` went `null`,
+  but the card itself needed to go too. Two existing tests relied on absolute tier precedence
+  or the old "starter settings" copy and were updated/narrowed rather than left to encode the
+  bugs #97/#94 just fixed (see their own comments); one new #97-specific regression test
+  added. Full local suite green aside from the two documented pre-existing flakes (sandbox
+  network on `catalog.spec.js`). PR opened.
