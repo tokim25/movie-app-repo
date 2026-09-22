@@ -186,24 +186,47 @@ function printCandidates(title, candidates) {
   }
 }
 
-const opts = parseArgs(process.argv.slice(2));
-const movies = loadMovies();
+// Returns the Set of movie `num`s currently flagged for manual re-research
+// (Checks A + B combined, deduped) -- this is the "open, unresolved audit
+// finding" set Gate 0 §3/§4 (docs/gate0-policy-trusted-recommendations.md)
+// map to contentStatus 'conflicted' and to accelerated re-review. Exported so
+// scripts/validate-data.mjs (via scripts/catalog-schema.mjs) can compute
+// contentStatus without re-running this file as a subprocess. Uses the
+// default --min-age=13 calibration; not parameterized since nothing importing
+// this needs a different threshold today.
+export function getAuditCandidateNums(movies, minAge = 13) {
+  const aCandidates = checkA(movies, minAge);
+  const bCandidates = checkB(movies);
+  const combined = new Set();
+  for (const c of aCandidates) combined.add(c.movie.num);
+  for (const c of bCandidates) combined.add(c.movie.num);
+  return combined;
+}
 
-const aCandidates = checkA(movies, opts.minAge);
-const bCandidates = checkB(movies);
+function main() {
+  const opts = parseArgs(process.argv.slice(2));
+  const movies = loadMovies();
 
-const combined = new Map();
-for (const c of aCandidates) combined.set(c.movie.num, c.movie);
-for (const c of bCandidates) combined.set(c.movie.num, c.movie);
+  const aCandidates = checkA(movies, opts.minAge);
+  const bCandidates = checkB(movies);
 
-printCandidates(`Check A: ca >= ${opts.minAge}+ but no flag reaches level 4`, aCandidates);
-printCandidates('Check B: a severity keyword in `full` despite a low flag for that category', bCandidates);
+  const combined = new Map();
+  for (const c of aCandidates) combined.set(c.movie.num, c.movie);
+  for (const c of bCandidates) combined.set(c.movie.num, c.movie);
 
-console.log(`\nCombined, deduped candidate list for manual re-research (${combined.size} titles):`);
-if (!combined.size) {
-  console.log('  (none)');
-} else {
-  for (const movie of [...combined.values()].sort((a, b) => a.num - b.num)) {
-    console.log(`  ${movie.num} ${movie.t} (${movie.y}) — ${movie.ca} — ${formatFlags(movie.flags)}`);
+  printCandidates(`Check A: ca >= ${opts.minAge}+ but no flag reaches level 4`, aCandidates);
+  printCandidates('Check B: a severity keyword in `full` despite a low flag for that category', bCandidates);
+
+  console.log(`\nCombined, deduped candidate list for manual re-research (${combined.size} titles):`);
+  if (!combined.size) {
+    console.log('  (none)');
+  } else {
+    for (const movie of [...combined.values()].sort((a, b) => a.num - b.num)) {
+      console.log(`  ${movie.num} ${movie.t} (${movie.y}) — ${movie.ca} — ${formatFlags(movie.flags)}`);
+    }
   }
+}
+
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main();
 }
