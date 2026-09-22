@@ -1,7 +1,7 @@
 # Roadmap
 
 **Owner:** Movie Repo PM
-**Last updated:** 2026-09-21
+**Last updated:** 2026-09-22
 **Status:** Living document — updated as priorities, issues, and PRDs change. This is the
 single source of truth for "what's next and why"; PRDs/TRDs under `docs/` hold the
 detailed requirements for a given initiative, this file tracks sequencing and status
@@ -27,9 +27,16 @@ the Trusted Contextual Recommendations phases below, several of which they block
 
 | Issue | Problem | Notes |
 |---|---|---|
+| [#92](https://github.com/tokim25/movie-app-repo/issues/92) | Tonight age eligibility uses the oldest child, allowing titles above younger viewers' age guidance | Filed 9/21, new. This is literally the oldest-child-plus-tolerance rule Gate 0 §1 already ruled out — fixable now against frozen policy, no new design needed |
+| [#93](https://github.com/tokim25/movie-app-repo/issues/93) | Tonight's terminal fallback returns `MOVIES[0]` even when no title is eligible | Filed 9/21, new. Directly contradicts the PRD's "no synthetic fallback" P0 requirement and Gate 0 — same situation as #92, ready to fix now |
 | [#96](https://github.com/tokim25/movie-app-repo/issues/96) | Tonight can label heuristic-only movies green without confirmed title-specific content data | This *is* the PRD's core P0 problem (see below) — fixing it is Phase 0/2 work, not separate |
 | [#98](https://github.com/tokim25/movie-app-repo/issues/98) | Undisclosed Sentry processing contradicts "never sent" / "no third-party disclosure" claims | Privacy correction, blocks nothing else, should ship standalone |
 | [#99](https://github.com/tokim25/movie-app-repo/issues/99) | Policy/Terms omit child profiles, content limits, override history, device metadata | Same — standalone privacy fix, also a PRD Phase 0 dependency |
+
+Also new since the last sweep, P1, not yet bucketed into a phase: [#94](https://github.com/tokim25/movie-app-repo/issues/94)
+(green explanation always says "starter settings" even with custom limits), [#95](https://github.com/tokim25/movie-app-repo/issues/95)
+(CLOSED — `ca: "7"` Scoob! bug, fixed as a side effect of PR #127), [#97](https://github.com/tokim25/movie-app-repo/issues/97)
+(Tonight source-tier precedence can override selected mood). #97 was previously miscategorized as P2 in this doc's "Later" section — corrected, see below.
 
 ### Trusted Contextual Recommendations — Phase 0 (Trust corrections + policy)
 PRD: [`docs/prd-trusted-contextual-recommendations.md`](./prd-trusted-contextual-recommendations.md)
@@ -105,12 +112,20 @@ recommendations PRD will also touch — worth clearing before or alongside Phase
   time / good-pick rate / no-match rate. Blocked on Gates 5-6 plus a separate
   analytics/privacy decision if any data leaves the device.
 
+### Tonight correctness P1s (relabeled from P2 — correction, 2026-09-22)
+These were previously listed here as P2s; re-checking the actual issue labels found
+they're P1. Bucketed here rather than Next only because none of them are urgent/blocking
+the way the Now-section P0s are — revisit priority next triage pass.
+- [#97](https://github.com/tokim25/movie-app-repo/issues/97) — Tonight source-tier precedence can override the selected mood
+- [#103](https://github.com/tokim25/movie-app-repo/issues/103) — skip feedback carries the previous movie's reason into the next skipped title
+- [#104](https://github.com/tokim25/movie-app-repo/issues/104) — repeated "Watch anyway" taps create duplicate override signals
+- [#105](https://github.com/tokim25/movie-app-repo/issues/105) — changing viewers/mood/time leaves the stale recommendation card visible
+- [#108](https://github.com/tokim25/movie-app-repo/issues/108) — Tonight reports content-issue count as number of children affected
+- [#94](https://github.com/tokim25/movie-app-repo/issues/94) — green explanation always says "starter settings" even with custom limits
+
 ### Remaining P2s (not yet triaged into a phase)
-Installability/PWA polish (#119-123), Tonight source-tier/mood precedence (#97), Tonight
-content-issue count display bug (#108), watched/want-to-watch state cleanup (#117),
-duplicate override signals (#104), stale skip-reason carryover (#103), stale
-recommendation card on input change (#105). Will get bucketed into Now/Next as capacity
-opens up or a related PR touches the same code.
+Installability/PWA polish (#119-123), watched/want-to-watch state cleanup (#117). Will get
+bucketed into Now/Next as capacity opens up or a related PR touches the same code.
 
 ### Ongoing (not phase-gated)
 - **Weekly catalog intake/triage** (PM) — request-sheet processing + new-release
@@ -155,3 +170,15 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
   same day: WebSearch snippet extraction works around the block (PM verified directly),
   same pattern already used for CSM content research. Not a policy change — runtime
   backfill unblocked as its own batched follow-up, decoupled from #127's merge.
+- **2026-09-22** — PR #127 merged (Reviewer independently re-verified nearly every claim in
+  the PR description rather than trusting it — mutation-tested the state machine, JSON-diffed
+  the data change, re-ran the audit script on both branches; one non-blocking finding, fixed
+  same day). PR #128 (weekly triage fallback, 24 titles after dedupe) also merged. Full issue
+  sweep found 11 new issues since the last one (41 open, up from 30): closed
+  [#95](https://github.com/tokim25/movie-app-repo/issues/95) as fixed by PR #127 (same
+  Scoob! `ca` bug, found independently); commented on
+  [#91](https://github.com/tokim25/movie-app-repo/issues/91) (the GitHub-side twin of this
+  roadmap) linking the two and noting current progress; added
+  [#92](https://github.com/tokim25/movie-app-repo/issues/92)/[#93](https://github.com/tokim25/movie-app-repo/issues/93)
+  to Now as P0 correctness bugs with a ready answer from frozen Gate 0 policy, no new design
+  needed; corrected a mislabeling of #97/#103/#104/#105/#108 as P2 when they're actually P1.
