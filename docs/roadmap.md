@@ -338,24 +338,45 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
   branches fighting over `findTonightCandidate()`/`movieVerdictForKids()`/
   `showTonightPick()`). Every issue in this doc's "Now" and both flagged "Next" P1 clusters
   is now either merged or dispatched to Coder.
-- **2026-09-22** — #92/#93/#96 opened as PR #134 (awaiting review); Coder started #98/#99
-  in parallel since neither touches Tonight's code. **#98:** `privacy.html` now names
-  Sentry explicitly under "Third-party services," distinguishing always-on automatic
-  error/crash monitoring (error message, stack trace, console/fetch/history breadcrumbs,
-  basic HTTP context — DOM click/input breadcrumbs and IP/cookie-based user profiles
-  explicitly excluded) from opt-in user feedback (free-text only, no name/email/screenshot),
-  documents the existing child-name redaction safeguard, and points to Sentry's own privacy
-  policy for retention rather than inventing a number. The old "never sent to us, sold, or
-  shared with anyone" and "no third-party disclosure" claims are gone. **#99:**
-  `privacy.html`/`terms.html` now enumerate the full `serializeState()` payload (children's
-  names/ages/content-limit settings, override/watch-anyway history, timestamps, device IDs)
-  instead of just watched marks/stars/order, and call out explicitly that both Google sync
-  and manual sync codes carry the same full payload, not just the watchlist. The Google-sync
-  opt-in row in `index.html` itself now names child data before the sign-in button, not only
-  in the linked policy. Added `tests/privacy-disclosure.spec.js`: one test fails if
-  `index.html` ever loads a new external script host not named in `privacy.html` (catches
-  #98-shaped drift), one snapshots `serializeState()`'s actual field shape (top-level,
-  order, children, a child record, a mark record, a Watch-anyway event) generated through
-  real app code paths and fails on any future field addition/removal (catches #99-shaped
-  drift), one checks both documents mention the sensitive categories in plain language. Full
-  suite green aside from the documented sandbox-network flake. PR pending.
+- **2026-09-22** — #92/#93/#96 implemented together as planned (all three touch
+  `isTonightEligible()`/`findTonightCandidate()`). **#92:** replaced the oldest-child-plus-2
+  age tolerance with a strict per-child gate (`meetsAgePolicyForAllKids()`) — every selected
+  child's age must independently meet a title's `recommendedAge`, matching Gate 0 §1 exactly;
+  the policy's opt-in +1-year "Allow slightly older content" toggle isn't implemented yet (no
+  UI for it), so today's gate is zero-tolerance. **#93:** `findTonightCandidate()`'s terminal
+  fallback no longer returns `MOVIES[0]` unconditionally — it returns a typed
+  `{ idx: null, source: null, noMatch: true }` result, rendered by a new dedicated
+  `#tonightNoMatchCard` state ("No confident match for these settings.") with three recovery
+  actions (change who's watching, review content settings, browse Shelf manually) instead of
+  ever showing an unvalidated pick. **#96:** `isTonightEligible()` now calls
+  `hasConfirmedContentData()` for any child-inclusive session — a title with no researched
+  `flags` (the 36-title gap the issue describes) can never satisfy an automatic
+  recommendation, in either the strict or relaxed pass, so a heuristic guess can't produce a
+  green verdict; such titles stay reachable in Shelf. Six existing `tonight-picks.spec.js`
+  tests needed fixture updates (ages/`ca` values that only passed before because of #92's
+  bug — a direct sign the fix landed correctly); 12 new tests cover all three issues'
+  acceptance criteria directly. Full suite green aside from the documented sandbox-network
+  flake.
+- **2026-09-22** — PR #134 merged. Coder started #98/#99 in parallel since neither touches
+  Tonight's code. **#98:** `privacy.html` now names Sentry explicitly under "Third-party
+  services," distinguishing always-on automatic error/crash monitoring (error message, stack
+  trace, console/fetch/history breadcrumbs, basic HTTP context — DOM click/input breadcrumbs
+  and IP/cookie-based user profiles explicitly excluded) from opt-in user feedback (free-text
+  only, no name/email/screenshot), documents the existing child-name redaction safeguard, and
+  points to Sentry's own privacy policy for retention rather than inventing a number. The old
+  "never sent to us, sold, or shared with anyone" and "no third-party disclosure" claims are
+  gone. **#99:** `privacy.html`/`terms.html` now enumerate the full `serializeState()`
+  payload (children's names/ages/content-limit settings, override/watch-anyway history,
+  timestamps, device IDs) instead of just watched marks/stars/order, and call out explicitly
+  that both Google sync and manual sync codes carry the same full payload, not just the
+  watchlist. The Google-sync opt-in row in `index.html` itself now names child data before
+  the sign-in button, not only in the linked policy. Added `tests/privacy-disclosure.spec.js`:
+  one test fails if `index.html` ever loads a new external script host not named in
+  `privacy.html` (catches #98-shaped drift), one snapshots `serializeState()`'s actual field
+  shape (top-level, order, children, a child record, a mark record, a Watch-anyway event)
+  generated through real app code paths and fails on any future field addition/removal
+  (catches #99-shaped drift), one checks both documents mention the sensitive categories in
+  plain language. Full suite green aside from the documented sandbox-network flake. PR
+  pending, and now needs a merge from `origin/master` to pick up #134's changelog entry
+  above (this entry) before it can land — same append-point collision as #133/#134, no real
+  content conflict.
