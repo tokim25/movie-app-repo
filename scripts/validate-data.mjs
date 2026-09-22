@@ -1,6 +1,13 @@
 import fs from 'node:fs';
 import vm from 'node:vm';
 import { computeDataHash, currentSwDataVersion } from './data-version.mjs';
+import { getAuditCandidateNums } from './audit-content-flags.mjs';
+import {
+  CONTENT_STATUSES,
+  hasVerifiedRuntime,
+  computeContentStatus,
+  isInVerifiedForFamilyFitSubset
+} from './catalog-schema.mjs';
 
 const dataFiles = [
   'data.js',
@@ -161,6 +168,29 @@ for (const movie of movies) {
   if (hasRecheckVersion && !Number.isInteger(movie.csmRecheckVersion)) {
     errors.push(`${label}: csmRecheckVersion must be an integer`);
   }
+
+  // TRD "Versioned catalog contract > Runtime" (docs/trd-trusted-contextual-recommendations.md):
+  // runtimeMinutes/runtimeSourceId/runtimeVerifiedAt travel together, same
+  // shape as the csmRecheckedAt/csmRecheckVersion pairing above -- all three
+  // present or none, so a title can't claim a verified runtime with no
+  // record of where it came from or when.
+  const hasRuntimeMinutes = movie.runtimeMinutes !== undefined;
+  const hasRuntimeSourceId = movie.runtimeSourceId !== undefined;
+  const hasRuntimeVerifiedAt = movie.runtimeVerifiedAt !== undefined;
+  if (hasRuntimeMinutes || hasRuntimeSourceId || hasRuntimeVerifiedAt) {
+    if (!(hasRuntimeMinutes && hasRuntimeSourceId && hasRuntimeVerifiedAt)) {
+      errors.push(`${label}: runtimeMinutes, runtimeSourceId, and runtimeVerifiedAt must all be set together`);
+    }
+    if (hasRuntimeMinutes && !(Number.isInteger(movie.runtimeMinutes) && movie.runtimeMinutes > 0)) {
+      errors.push(`${label}: runtimeMinutes must be a positive integer`);
+    }
+    if (hasRuntimeSourceId && (typeof movie.runtimeSourceId !== 'string' || !movie.runtimeSourceId.trim())) {
+      errors.push(`${label}: runtimeSourceId must be a non-empty string`);
+    }
+    if (hasRuntimeVerifiedAt && !/^\d{4}-\d{2}-\d{2}$/.test(movie.runtimeVerifiedAt)) {
+      errors.push(`${label}: runtimeVerifiedAt must be YYYY-MM-DD`);
+    }
+  }
 }
 
 const posterKeys = Object.keys(context.__POSTERS__ || {});
@@ -225,6 +255,48 @@ for (const movie of movies) {
         warnings.push(`CONTENT_FLAGS: example "${example}" is reused across ${usages.length} category/level pairs: ${usages.join('; ')}`);
       }
     }
+  }
+}
+
+// Trusted Contextual Recommendations, Phase 1 (docs/roadmap.md's "Now" item):
+// coverage report for the Gate 0 §3 contentStatus state machine, plus a
+// re-verification of Gate 0 §6's initial "Verified for Family Fit" certified
+// subset. Non-blocking (report only) -- most of the catalog is legitimately
+// provisional/unknown/stale right now (e.g. zero titles have runtimeMinutes
+// yet), that's the accurate current state per Gate 0, not a validation
+// failure. Gate 0 §6 explicitly says to re-run its combined filter before
+// cutover since the count drifts as backfill work lands, so a difference
+// from the 989 recorded at Gate 0's close is expected and just gets
+// reported, not treated as an error.
+{
+  const indexSource = fs.readFileSync('index.html', 'utf8');
+  const versionMatch = indexSource.match(/const CONTENT_MODEL_VERSION = (\d+);/);
+  if (!versionMatch) {
+    warnings.push('index.html: could not locate CONTENT_MODEL_VERSION for contentStatus freshness check');
+  } else {
+    const contentModelVersion = parseInt(versionMatch[1], 10);
+    const auditCandidateNums = getAuditCandidateNums(movies);
+    const now = new Date();
+
+    const statusCounts = Object.fromEntries(CONTENT_STATUSES.map(s => [s, 0]));
+    for (const movie of movies) {
+      const status = computeContentStatus(movie, { auditCandidateNums, contentModelVersion, now });
+      statusCounts[status] += 1;
+    }
+
+    const familyFitSubset = movies.filter(m => isInVerifiedForFamilyFitSubset(m, auditCandidateNums));
+    const withRuntime = familyFitSubset.filter(hasVerifiedRuntime).length;
+
+    console.log(
+      `\ncontentStatus coverage (policyVersion 1, ${movies.length} titles): ` +
+      CONTENT_STATUSES.map(s => `${s}=${statusCounts[s]}`).join(', ')
+    );
+    console.log(
+      `Gate 0 §6 "Verified for Family Fit" candidate subset (flags complete + not an open audit ` +
+      `candidate + normalizable age): ${familyFitSubset.length} titles (${withRuntime} with verified ` +
+      `runtimeMinutes so far, recorded 989 as of Gate 0's close 2026-09-21 -- re-verify against that ` +
+      `each time this drifts materially).`
+    );
   }
 }
 

@@ -160,21 +160,44 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
   schema, and the initial certified-subset count corrected from a double-subtracted 972
   to the verified 989 titles. `policyVersion: 1` is frozen. Phase 1 (certified catalog
   foundation) is unblocked and moved into the roadmap's "Now" section.
+- **2026-09-21** — Phase 1 (certified catalog foundation) implemented, opened as a PR
+  (not merged direct-to-master, per its own scope). Normalized `recommendedAge` (new
+  `scripts/catalog-schema.mjs`, mirrored into `index.html`) resolved 17 of the PRD's 18
+  non-normalizable ages via a `ca`-then-`la` fallback, plus one genuine data-bug fix
+  (`Scoob!`, num 1036, missing `+` suffix on `la`/`ca`) for the 18th. Implemented Gate 0
+  §3's 5-state `contentStatus` machine and the `runtimeMinutes`/`runtimeSourceId`/
+  `runtimeVerifiedAt` schema fields as computed-not-stored functions (documented reasoning
+  in-file) rather than the TRD's illustrative stored-field shape, wired into
+  `scripts/validate-data.mjs` as the de facto required gate (flagged honestly in the PR:
+  this repo has no GitHub Actions CI, so "CI-enforced" means `validate-data.mjs`'s
+  existing exit-1 gate, not a literal required status check — corrected the same day the
+  PR opened once `.github/workflows/playwright.yml` turned out to exist after all). Re-
+  verified Gate 0 §6's subset against live data: 990 titles today (not the recorded 989 —
+  expected drift from the Scoob! fix, not a bug). **Blocked and flagged back to PM per
+  Gate 0 §7's own instruction:** `runtimeMinutes` backfill for the ~990-title candidate
+  pool could not be done in this session — CSM/Wikipedia/IMDb are all `EGRESS_BLOCKED`
+  here — so nothing can move from `provisional` to `certified` yet. No candidate titles
+  are marked `certified` in this PR as a result; all currently-eligible titles resolve to
+  `provisional`.
 - **2026-09-21** — Weekly triage batch (34 titles + 1 discovery title) fell back to being
   routed directly to Coder — the "Movie watchlist weekly update" session never picked up
   the original handoff (sat in PENDING with zero progress for 9+ hours, confirmed via
-  `get_session`, not just a stale-looking status this time).
-- **2026-09-22** — Phase 1: Coder opened PR #127 (schema/validator, CI green). Escalated a
-  real blocker per Gate 0 §7 (network egress blocks direct Wikipedia/IMDb fetches, so
-  `runtimeMinutes` backfill couldn't proceed — 0 titles certified as a result). Resolved
-  same day: WebSearch snippet extraction works around the block (PM verified directly),
-  same pattern already used for CSM content research. Not a policy change — runtime
-  backfill unblocked as its own batched follow-up, decoupled from #127's merge.
+  `get_session`, not just a stale-looking status this time). Coder opened PR #128
+  (24 titles survived dedupe; poster art skipped, same egress block as Phase 1).
+- **2026-09-22** — Phase 1: Coder opened PR #127 (schema/validator, CI green), and escalated
+  a real blocker per Gate 0 §7 (network egress blocks direct Wikipedia/IMDb fetches, so
+  `runtimeMinutes` backfill couldn't proceed — 0 titles certified as a result, everything
+  eligible sitting at `provisional`). Resolved same day: PM re-tested the blocker directly
+  and confirmed WebSearch snippet extraction works around it (same fallback already used
+  for CSM content research, just hadn't been applied to runtime specifically) — not a
+  `policyVersion` 2 question after all. Runtime backfill unblocked as its own batched
+  follow-up (~40-50 titles/PR against the certified-candidate pool), decoupled from #127's
+  merge, which stands on its own technical merits.
 - **2026-09-22** — PR #127 merged (Reviewer independently re-verified nearly every claim in
-  the PR description rather than trusting it — mutation-tested the state machine, JSON-diffed
-  the data change, re-ran the audit script on both branches; one non-blocking finding, fixed
-  same day). PR #128 (weekly triage fallback, 24 titles after dedupe) also merged. Full issue
-  sweep found 11 new issues since the last one (41 open, up from 30): closed
+  the PR description rather than trusting it — mutation-tested the state machine,
+  JSON-diffed the data change, re-ran the audit script on both branches; one non-blocking
+  finding on `hasVerifiedRuntime()`, fixed same day). PR #128 merged too. Full issue sweep
+  found 11 new issues since the last one (41 open, up from 30): closed
   [#95](https://github.com/tokim25/movie-app-repo/issues/95) as fixed by PR #127 (same
   Scoob! `ca` bug, found independently); commented on
   [#91](https://github.com/tokim25/movie-app-repo/issues/91) (the GitHub-side twin of this
@@ -182,3 +205,11 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
   [#92](https://github.com/tokim25/movie-app-repo/issues/92)/[#93](https://github.com/tokim25/movie-app-repo/issues/93)
   to Now as P0 correctness bugs with a ready answer from frozen Gate 0 policy, no new design
   needed; corrected a mislabeling of #97/#103/#104/#105/#108 as P2 when they're actually P1.
+- **2026-09-22** — Noted for the record: this exact section had a real merge conflict —
+  Coder's own PR-merge commits updated this change log directly on `master` with an
+  overlapping account of the same PR #127/#128 events, written independently of PM's. Both
+  were accurate, just describing the same events from different vantage points; merged
+  rather than picking one side. Worth remembering `roadmap.md` isn't PM-exclusive-write in
+  practice even though PM owns its content — anyone landing a PR that finishes work this
+  file tracks may touch it too, so re-fetch before editing this file the same as any other
+  shared file, not just the data-*.js files SKILL.md's hard rule names explicitly.
