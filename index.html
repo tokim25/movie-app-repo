@@ -2406,6 +2406,19 @@ function reportError(err){
           <button type="button" class="linkBtn" id="tonightSkipContinueBtn">Continue</button>
         </div>
       </div>
+      <!-- Issue #93: findTonightCandidate()'s terminal fallback used to return
+           MOVIES[0] unconditionally, bypassing isTonightEligible() entirely.
+           This card is the typed no-match state that replaces it -- shown
+           instead of tonightPickCard, never alongside it. -->
+      <div class="pickCard" id="tonightNoMatchCard" style="display:none;">
+        <div class="pickMeta" id="tonightNoMatchHeading">No confident match for these settings.</div>
+        <p id="tonightNoMatchReason"></p>
+        <div class="setupActions">
+          <button type="button" class="secondaryBtn" id="tonightNoMatchChangeBtn">Change who's watching</button>
+          <button type="button" class="secondaryBtn" id="tonightNoMatchFamilyBtn">Review content settings</button>
+          <button type="button" class="secondaryBtn" id="tonightNoMatchShelfBtn">Browse Shelf manually</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -4056,12 +4069,42 @@ function primaryOverrideFlagForChild(movie, child){
   return amberIssue ? amberIssue.flag.id : null;
 }
 
-function isTonightEligible(idx, kids, maxAge, includeSkipped, requireGreen){
+// Gate 0 §1 ("Recommended-age semantics -- strict"): a title's
+// recommendedAge is a hard exclude for automatic child-inclusive
+// recommendations, evaluated independently for every selected child. Issue
+// #92: this used to check only the oldest selected child (maxAge) plus an
+// unexplained +2 tolerance, so an older sibling being in the group could
+// make an otherwise-ineligible title pass for a younger one too. There's no
+// per-child tolerance margin implemented yet -- Gate 0 §1 permits a future
+// opt-in "Allow slightly older content" +1-year-per-child toggle, disclosed
+// in the eligibility explanation when it's on, but that toggle doesn't
+// exist yet, so today the check is zero-tolerance for every child.
+// An unparseable recommendedAge (null) can never clear a strict gate --
+// missing age data means no eligibility evidence either way, same
+// direction as #96's content-data gate below.
+function meetsAgePolicyForAllKids(movie, kids){
+  if(kids.length === 0) return true;
+  const age = recommendedAge(movie);
+  if(age === null) return false;
+  return kids.every(child => age <= child.age);
+}
+
+function isTonightEligible(idx, kids, includeSkipped, requireGreen){
   const movie = MOVIES[idx];
-  const age = recommendedAge(movie) || 99;
-  if(kids.length && age > maxAge + 2) return false;
+  if(!meetsAgePolicyForAllKids(movie, kids)) return false;
   if(markValue(state.checked, idx) && tonightSelection.mood !== 'favorite') return false;
   if(!includeSkipped && tonightSelection.skippedMovieNums.has(movieKey(idx))) return false;
+  // Issue #96: movieContentProfile() invents content levels from age/genre/
+  // synopsis keywords for the minority of titles with no researched flags,
+  // and those inferred values used to flow into movieFitForKids() exactly
+  // like real data -- including producing an automatic green verdict. For
+  // a child-inclusive session, only a title with confirmed (researched)
+  // content data is evidence a parent can rely on, so unconfirmed titles
+  // are excluded here unconditionally -- in both the strict requireGreen
+  // pass and the relaxed fallback pass, per the issue's "no relaxed or
+  // terminal fallback bypasses certification" criterion. They stay
+  // reachable in Shelf, just never as an automatic Tonight recommendation.
+  if(kids.length && !hasConfirmedContentData(movie)) return false;
   // Issue #49: candidate selection used to ignore content fit entirely, so
   // the first pick could legitimately be red/amber for every selected kid
   // even when a green option existed further down the list. requireGreen
@@ -4132,21 +4175,27 @@ function tonightSourceTiers(){
 
 function findTonightCandidate(){
   const kids = selectedKids();
-  const maxAge = kids.length ? Math.max(...kids.map(child => child.age)) : 99;
   const tiered = tonightSourceTiers();
 
   for(const tier of tiered){
-    const idx = tier.indices.find(candidate => isTonightEligible(candidate, kids, maxAge, false, true));
+    const idx = tier.indices.find(candidate => isTonightEligible(candidate, kids, false, true));
     if(idx !== undefined) return { idx, source: tier.source };
   }
 
   tonightSelection.skippedMovieNums.clear();
   for(const tier of tiered){
-    const idx = tier.indices.find(candidate => isTonightEligible(candidate, kids, maxAge, true, false));
+    const idx = tier.indices.find(candidate => isTonightEligible(candidate, kids, true, false));
     if(idx !== undefined) return { idx, source: tier.source };
   }
 
-  return MOVIES.length ? { idx: 0, source: 'Shelf' } : null;
+  // Issue #93: this used to fall through to MOVIES[0] unconditionally,
+  // bypassing isTonightEligible() (age, watched-state, content-fit, and any
+  // future runtime/certification gate) entirely -- an ineligible title could
+  // be recommended with no evaluation at all. A typed no-match result is the
+  // only terminal path now; every idx this function ever returns has passed
+  // the same eligibility check as any other candidate. showTonightPick()
+  // renders this as the dedicated "No confident match" state.
+  return { idx: null, source: null, noMatch: true };
 }
 
 // Issue #78: whether tonight's pick card is showing its full CSM-style
@@ -4198,6 +4247,22 @@ function showTonightPick(candidateOverride){
   setTonightEditOpen(false);
   const candidate = candidateOverride || findTonightCandidate();
   if(!candidate) return;
+  // Issue #93: the typed no-match result gets its own dedicated state --
+  // never rendered as a movie pick, never silently left as whatever was
+  // showing before.
+  if(candidate.noMatch){
+    tonightSelection.currentPickIdx = null;
+    tonightSelection.currentPickSource = null;
+    document.getElementById('tonightPickCard').style.display = 'none';
+    const noMatchCard = document.getElementById('tonightNoMatchCard');
+    noMatchCard.style.display = 'block';
+    document.getElementById('tonightNoMatchReason').textContent = MOVIES.length
+      ? "Nothing fits who's watching, watched history, and content settings right now."
+      : 'There are no movies in the catalog yet.';
+    document.getElementById('findTonightPickBtn').textContent = "Find tonight's pick";
+    return;
+  }
+  document.getElementById('tonightNoMatchCard').style.display = 'none';
   const idx = candidate.idx;
   const movie = MOVIES[idx];
   const kids = selectedKids();
@@ -5997,6 +6062,18 @@ document.getElementById('tonightShelfBtn').addEventListener('click', ()=>{
   showScreen('browse');
 });
 
+document.getElementById('tonightNoMatchChangeBtn').addEventListener('click', ()=>{
+  setTonightEditOpen(true);
+});
+
+document.getElementById('tonightNoMatchFamilyBtn').addEventListener('click', ()=>{
+  showScreen('family');
+});
+
+document.getElementById('tonightNoMatchShelfBtn').addEventListener('click', ()=>{
+  showScreen('browse');
+});
+
 document.getElementById('tonightChangeBtn').addEventListener('click', ()=>{
   const panel = document.getElementById('tonightEditPanel');
   setTonightEditOpen(panel ? panel.hidden : true);
@@ -6069,7 +6146,7 @@ document.getElementById('tonightAlternativesBtn').addEventListener('click', ()=>
   const excluded = new Set(currentIdx === null ? [] : [movieKey(currentIdx)]);
   for(let attempt = 0; attempt < 6 && candidates.length < 2; attempt++){
     const candidate = findTonightCandidate();
-    if(!candidate) break;
+    if(!candidate || candidate.noMatch) break;
     const key = movieKey(candidate.idx);
     if(excluded.has(key)) break;
     candidates.push(candidate);

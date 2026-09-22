@@ -73,7 +73,24 @@ test('initial mobile tonight surface fits without scrolling', async ({ page }) =
   expect(metrics.homeBottom).toBeLessThanOrEqual(metrics.navTop + 1);
 });
 
+// Issue #92: the sample family's real ages (Simon 6, Nora 3) now gate
+// strictly per child with no oldest-sibling tolerance, which shrinks the
+// real-catalog eligible pool to only a handful of titles -- not enough to
+// reliably exercise "skip lands on something different" on its own. These
+// two tests loosen both kids' ages and content limits first, same isolation
+// pattern already used elsewhere in this file, since neither test is
+// actually about age or content-fit policy.
+async function loosenSampleFamilyForBroadEligibility(page){
+  await page.evaluate(() => {
+    state.children.forEach(child => {
+      child.age = 12;
+      CONTENT_FLAG_IDS.forEach(flagId => setChildFlagLimit(child.id, flagId, 4));
+    });
+  });
+}
+
 test('skip advances to a different tonight pick', async ({ page }) => {
+  await loosenSampleFamilyForBroadEligibility(page);
   await page.locator('#findTonightPickBtn').click();
   const firstPick = await page.locator('#tonightPickTitle').textContent();
 
@@ -84,6 +101,7 @@ test('skip advances to a different tonight pick', async ({ page }) => {
 });
 
 test('finding another pick after a result behaves like skip', async ({ page }) => {
+  await loosenSampleFamilyForBroadEligibility(page);
   await page.locator('#findTonightPickBtn').click();
   const firstPick = await page.locator('#tonightPickTitle').textContent();
 
@@ -149,7 +167,12 @@ test('night mood changes the selected movie', async ({ page }) => {
     // this test's actual subject, mood-based sorting) the reason a Want to
     // watch pick loses out. Loosen both kids' limits so both fixtures are
     // green, isolating the mood-scoring behavior this test is really about.
+    // Issue #92: The Incredibles is ca 8+, above Nora's real age (3) -- the
+    // old oldest-child-plus-2 tolerance used to let it through regardless;
+    // the strict per-child gate correctly no longer does, so age is bumped
+    // here too for the same isolation reason as the flag limits above.
     state.children.forEach(child => {
+      child.age = 12;
       CONTENT_FLAG_IDS.forEach(flagId => setChildFlagLimit(child.id, flagId, 4));
     });
     const gentleIdx = MOVIES.findIndex(movie => movie.t === 'The Many Adventures of Winnie the Pooh');
@@ -177,7 +200,10 @@ test('tonight picks from want to watch before new and general shelf', async ({ p
     // for this sample family under starter settings, which would otherwise
     // make issue #49's green-first fix (not tier ordering, this test's real
     // subject) the reason it loses out to some other tier's green pick.
+    // Issue #92: it's also ca 8+, above Nora's real age (3) -- bump ages too
+    // so the strict per-child gate isn't what's under test here either.
     state.children.forEach(child => {
+      child.age = 12;
       CONTENT_FLAG_IDS.forEach(flagId => setChildFlagLimit(child.id, flagId, 4));
     });
     const idx = MOVIES.findIndex(movie => movie.t === 'The Greatest Showman');
@@ -233,7 +259,11 @@ test('movie experience profile exposes scoring signals for moods', async ({ page
 
 test('findTonightCandidate prefers a green pick over a red one when both are eligible (#49)', async ({ page }) => {
   const result = await page.evaluate(() => {
-    const base = { y: '2005', ca: '6+', genre: [] };
+    // Issue #92: ca must clear the strict per-child age gate for both
+    // sample-family kids (Nora is 3) -- 3+ does, 6+ no longer would, since
+    // there's no oldest-child tolerance to lean on. Age isn't this test's
+    // subject, so it's set low enough to be a non-factor for either kid.
+    const base = { y: '2005', ca: '3+', genre: [] };
     const redIdx = MOVIES.push({ ...base, t: 'AAA Regression Fixture Movie', num: 9000001, flags: { violence: 1, language: 4, romance: 1, drinking: 1 } }) - 1;
     const greenIdx = MOVIES.push({ ...base, t: 'BBB Regression Fixture Movie', num: 9000002, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
     // Strict language limit for both sample-family kids: level 4 is
@@ -313,4 +343,168 @@ test('an amber top pick is labeled Review fit, distinct from red and green (#49)
 
   expect(result.verdictText).toBe('Review fit');
   expect(result.watchAnywayDisplay).toBe('inline-block');
+});
+
+// Issues #92/#93/#96 regression coverage. All three land in the same
+// isTonightEligible()/findTonightCandidate() pass, so they're covered
+// together here rather than split across files.
+
+test.describe('strict per-child age eligibility, no oldest-sibling tolerance (#92)', () => {
+  test('an older sibling cannot make a title eligible for a younger child', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      // Issue #92's own reproduction: a 3-year-old and a 13-year-old
+      // together used to let a 14+ title through for both under the old
+      // oldest-child-plus-2 rule (13 + 2 = 15 >= 14).
+      const idx = MOVIES.push({ t: 'FFF Mixed-Age Fixture', y: '2005', ca: '14+', genre: [], num: 9000201, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
+      state.children = [
+        { id: 'kid-young', name: 'Young', age: 3, settings: {} },
+        { id: 'kid-old', name: 'Old', age: 13, settings: {} }
+      ];
+      tonightSelection.excludedChildIds = new Set();
+      const bothSelected = isTonightEligible(idx, selectedKids(), false, false);
+      tonightSelection.excludedChildIds = new Set(['kid-old']);
+      const youngAlone = isTonightEligible(idx, selectedKids(), false, false);
+      return { bothSelected, youngAlone };
+    });
+
+    expect(result.bothSelected).toBe(false);
+    expect(result.youngAlone).toBe(false);
+  });
+
+  test('the gate is exact at the boundary, no tolerance past it', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      const atBoundaryIdx = MOVIES.push({ t: 'GGG At-Boundary Fixture', y: '2005', ca: '8+', genre: [], num: 9000202, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
+      const overBoundaryIdx = MOVIES.push({ t: 'HHH Over-Boundary Fixture', y: '2005', ca: '9+', genre: [], num: 9000203, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
+      state.children = [{ id: 'kid-8', name: 'Eight', age: 8, settings: {} }];
+      tonightSelection.excludedChildIds = new Set();
+      const kids = selectedKids();
+      return {
+        atBoundary: isTonightEligible(atBoundaryIdx, kids, false, false),
+        overBoundary: isTonightEligible(overBoundaryIdx, kids, false, false)
+      };
+    });
+
+    expect(result.atBoundary).toBe(true);
+    expect(result.overBoundary).toBe(false);
+  });
+});
+
+test.describe('no automatic green verdict without confirmed content data (#96)', () => {
+  test('a title with no flags at all is never auto-recommended to a child-inclusive session', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      // No `flags` property at all -- the exact shape of the 36 real
+      // catalog titles issue #96 describes (e.g. Home Alone 2).
+      const idx = MOVIES.push({ t: 'III No-Flags Fixture', y: '2005', ca: '3+', genre: [], num: 9000204 }) - 1;
+      tonightSourceTiers = () => [{ source: 'Shelf', indices: [idx] }];
+      resetTonightSkips();
+      const candidate = findTonightCandidate();
+      return { hasConfirmed: hasConfirmedContentData(MOVIES[idx]), noMatch: !!candidate.noMatch };
+    });
+
+    expect(result.hasConfirmed).toBe(false);
+    expect(result.noMatch).toBe(true);
+  });
+
+  test('a title with confirmed content data remains eligible', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      const idx = MOVIES.push({ t: 'JJJ Confirmed Fixture', y: '2005', ca: '3+', genre: [], num: 9000205, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
+      tonightSourceTiers = () => [{ source: 'Shelf', indices: [idx] }];
+      resetTonightSkips();
+      const candidate = findTonightCandidate();
+      return { noMatch: !!candidate.noMatch, title: candidate.idx !== null ? MOVIES[candidate.idx].t : null };
+    });
+
+    expect(result.noMatch).toBe(false);
+    expect(result.title).toBe('JJJ Confirmed Fixture');
+  });
+});
+
+test.describe('typed no-match state instead of an unvalidated fallback pick (#93)', () => {
+  test('findTonightCandidate returns a typed no-match result, never an unvalidated index', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      tonightSourceTiers = () => [{ source: 'Shelf', indices: [] }];
+      resetTonightSkips();
+      return findTonightCandidate();
+    });
+
+    expect(result.noMatch).toBe(true);
+    expect(result.idx).toBeNull();
+  });
+
+  test('no-match when every candidate is watched', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      const idx = MOVIES.push({ t: 'KKK Watched Fixture', y: '2005', ca: '3+', genre: [], num: 9000206, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
+      toggleCheck(idx);
+      tonightSelection.mood = 'calm';
+      tonightSourceTiers = () => [{ source: 'Shelf', indices: [idx] }];
+      resetTonightSkips();
+      return findTonightCandidate();
+    });
+
+    expect(result.noMatch).toBe(true);
+  });
+
+  test('no-match when every candidate fails the age gate', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      const idx = MOVIES.push({ t: 'LLL Too-Old Fixture', y: '2005', ca: '14+', genre: [], num: 9000207, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
+      tonightSourceTiers = () => [{ source: 'Shelf', indices: [idx] }];
+      resetTonightSkips();
+      return findTonightCandidate();
+    });
+
+    expect(result.noMatch).toBe(true);
+  });
+
+  test('no-match when the catalog is empty', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      tonightSourceTiers = () => [{ source: 'Shelf', indices: [] }];
+      resetTonightSkips();
+      return findTonightCandidate();
+    });
+
+    expect(result.noMatch).toBe(true);
+    expect(result.idx).toBeNull();
+  });
+
+  test('the UI shows a dedicated no-match state with recovery actions, and clears once a real pick is found', async ({ page }) => {
+    await page.evaluate(() => {
+      window.__originalTonightSourceTiers = tonightSourceTiers;
+      tonightSourceTiers = () => [{ source: 'Shelf', indices: [] }];
+      resetTonightSkips();
+    });
+
+    await page.locator('#findTonightPickBtn').click();
+
+    await expect(page.locator('#tonightNoMatchCard')).toBeVisible();
+    await expect(page.locator('#tonightPickCard')).toBeHidden();
+    await expect(page.locator('#tonightNoMatchCard')).toContainText('No confident match');
+    await expect(page.locator('#tonightNoMatchChangeBtn')).toBeVisible();
+    await expect(page.locator('#tonightNoMatchFamilyBtn')).toBeVisible();
+    await expect(page.locator('#tonightNoMatchShelfBtn')).toBeVisible();
+
+    await page.evaluate(() => {
+      tonightSourceTiers = window.__originalTonightSourceTiers;
+      resetTonightSkips();
+    });
+    await page.locator('#findTonightPickBtn').click();
+
+    await expect(page.locator('#tonightNoMatchCard')).toBeHidden();
+    await expect(page.locator('#tonightPickCard')).toBeVisible();
+  });
+
+  test('no-match recovery actions open the edit panel and Browse', async ({ page }) => {
+    await page.evaluate(() => {
+      tonightSourceTiers = () => [{ source: 'Shelf', indices: [] }];
+      resetTonightSkips();
+    });
+    await page.locator('#findTonightPickBtn').click();
+    await expect(page.locator('#tonightNoMatchCard')).toBeVisible();
+
+    await page.locator('#tonightNoMatchChangeBtn').click();
+    await expect(page.locator('#tonightEditPanel')).toBeVisible();
+    await page.locator('#tonightDoneBtn').click();
+
+    await page.locator('#tonightNoMatchShelfBtn').click();
+    await expect(page.locator('#browseScreen')).toBeVisible();
+  });
 });

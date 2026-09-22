@@ -338,9 +338,28 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
   branches fighting over `findTonightCandidate()`/`movieVerdictForKids()`/
   `showTonightPick()`). Every issue in this doc's "Now" and both flagged "Next" P1 clusters
   is now either merged or dispatched to Coder.
-- **2026-09-22** — PRs #134 (#92/#93/#96) and #135 (#98/#99) both open, awaiting review.
-  Coder started the independent data-integrity P1 batch (#116+#118+#124+#125) in parallel
-  per PM's note that it doesn't touch Tonight code. **#124:** `readGoogleSyncMeta()`'s
+- **2026-09-22** — #92/#93/#96 implemented together as planned (all three touch
+  `isTonightEligible()`/`findTonightCandidate()`). **#92:** replaced the oldest-child-plus-2
+  age tolerance with a strict per-child gate (`meetsAgePolicyForAllKids()`) — every selected
+  child's age must independently meet a title's `recommendedAge`, matching Gate 0 §1 exactly;
+  the policy's opt-in +1-year "Allow slightly older content" toggle isn't implemented yet (no
+  UI for it), so today's gate is zero-tolerance. **#93:** `findTonightCandidate()`'s terminal
+  fallback no longer returns `MOVIES[0]` unconditionally — it returns a typed
+  `{ idx: null, source: null, noMatch: true }` result, rendered by a new dedicated
+  `#tonightNoMatchCard` state ("No confident match for these settings.") with three recovery
+  actions (change who's watching, review content settings, browse Shelf manually) instead of
+  ever showing an unvalidated pick. **#96:** `isTonightEligible()` now calls
+  `hasConfirmedContentData()` for any child-inclusive session — a title with no researched
+  `flags` (the 36-title gap the issue describes) can never satisfy an automatic
+  recommendation, in either the strict or relaxed pass, so a heuristic guess can't produce a
+  green verdict; such titles stay reachable in Shelf. Six existing `tonight-picks.spec.js`
+  tests needed fixture updates (ages/`ca` values that only passed before because of #92's
+  bug — a direct sign the fix landed correctly); 12 new tests cover all three issues'
+  acceptance criteria directly. Full suite green aside from the documented sandbox-network
+  flake.
+- **2026-09-22** — PR #134 merged. PR #135 (#98/#99) still open, awaiting review. Coder
+  started the independent data-integrity P1 batch (#116+#118+#124+#125) in parallel per
+  PM's note that it doesn't touch Tonight code. **#124:** `readGoogleSyncMeta()`'s
   `enabled` read used to happen before its own try block, so a `SecurityError` from a
   storage-denying privacy context went uncaught and aborted `decideInitialScreen()`/app
   startup; the read now lives entirely inside the guard. **#125:** `persistLocalState()`
