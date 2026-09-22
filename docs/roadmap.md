@@ -85,19 +85,36 @@ without it.
 backfill batch (47 titles, first ever `certified` records) landed shortly after dispatch,
 open pending review.
 
-**Superseded by [PR #130](https://github.com/tokim25/movie-app-repo/pull/130), same day.**
-tokim25 had a separate agent compile `data-runtimes.json` — a bulk reference sourced from
-the real IMDb Non-Commercial Datasets (`title.basics.tsv.gz`), covering 1,070 of 1,071
-catalog titles with documented match confidence (1,058 high, 12 medium, 1 unresolved —
-*Air Bud Returns*, correctly left `null` on a genuine IMDb year conflict rather than
-guessed). This is strictly better provenance than manual snippet research for everything
-it covers. Dispatched to Coder: verify the data (spot-check a sample), use it to finish
-the *entire* remaining backfill in as few PRs as make sense (bulk-sourced data doesn't
-need the ~40-50/PR pacing manual research does), and **supersede PR #129** — redo its 47
-titles with the stronger IMDb-derived provenance rather than leaving weaker snippet data
-merged, closing #129 unmerged once covered. Same "upgrade a fallback source when a better
-one exists" principle `SKILL.md` already established for CSM content, just applied to
-runtime.
+**[PR #130](https://github.com/tokim25/movie-app-repo/pull/130) merged same day — `data-runtimes.json`,
+a bulk reference sourced from the real IMDb Non-Commercial Datasets (`title.basics.tsv.gz`),
+covering 1,070 of 1,071 catalog titles. Initial handling of this was wrong and got
+corrected within the hour — logged honestly below rather than cleaned up after the fact.**
+
+PM's first call: told Coder to spot-check a sample and use #130 to finish the *entire*
+remaining backfill in bulk, superseding PR #129 (the in-flight WebSearch-snippet batch)
+and PR #131 (a second one Coder had already opened, 11 titles). Also cleared the dataset's
+non-commercial-use licensing note unilaterally as "not a blocker."
+
+**Tech Lead caught both of those as wrong**, independently, by actually reading the PR's
+content rather than trusting the description: 496 of 1,071 matches (46%) had multiple
+ambiguous IMDb candidates (title+year collisions — shorts, TV movies, re-release cuts)
+resolved silently to one pick with zero disambiguation trail — exactly the kind of
+unverified confidence Gate 0 exists to prevent, and something a "spot-check a handful"
+bar would never have caught. Tech Lead also correctly pushed back that the licensing
+question is tokim25's call, not PM's or Tech Lead's to wave through for a live public
+deployment.
+
+**Corrected plan, same day:** #129 and #131 stay as originally written (Tech Lead has no
+concerns with the field-on-record WebSearch pipeline itself — that's what Gate 0 actually
+committed to, and it's unaffected by any of this since it doesn't depend on IMDb's
+dataset). #130 is a QA-gated accelerator, not a bulk import: only `candidateCount: 1` +
+`confidence: "high"` matches auto-promote directly into `runtimeMinutes`/`runtimeSourceId`
+(stamped as IMDb-dataset-derived, distinct from the snippet-sourced records)/
+`runtimeVerifiedAt`; the ambiguous ~496 need the same real verification as everything
+else, not a silent import. Licensing question put to tokim25 directly rather than assumed
+— confirmed fine (non-commercial family app). Net effect: backfill keeps moving on the
+already-trusted pipeline the whole time; #130 speeds up only the unambiguous slice of it,
+once verified.
 
 ## Next
 
@@ -249,3 +266,13 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
   #92 + #93 (Tonight eligibility bugs) as the next priority after the backfill, per
   tokim25's confirmation — both have exact answers from frozen Gate 0/PRD policy now, no
   new design work needed.
+- **2026-09-22** — PM's PR #130 decision (above) was wrong on two counts, both caught by
+  Tech Lead within the hour: (1) 46% of #130's matches were ambiguous, silently resolved
+  with no verification trail — the "spot-check a sample" bar PM set wouldn't have caught
+  this; (2) PM cleared the IMDb dataset's licensing note unilaterally instead of escalating
+  a real external-compliance question for a live public deployment. Corrected: #129/#131
+  reinstated as primary (never should have been marked superseded), #130 downgraded to a
+  QA-gated accelerator (`candidateCount:1` + `confidence:"high"` only), licensing question
+  put to tokim25 directly and confirmed fine. PR #130 merged. Logged in full rather than
+  quietly overwritten, since the roadmap should reflect real decisions including reversed
+  ones, not just a clean final state.
