@@ -66,29 +66,36 @@
 <body>
 
 <h1>Privacy Policy</h1>
-<p class="updated">Family Feature — last updated August 22, 2026</p>
+<p class="updated">Family Feature — last updated September 22, 2026</p>
 
 <p>Family Feature is a family movie watchlist app. This page explains what data it collects and how it's used, in plain terms.</p>
 
 <h2>What we collect</h2>
-<p>The only data the app handles is your movie watchlist: which movies you've marked watched, starred as "want to watch," and the order you've put them in.</p>
-<p>By default, this data is stored only in your browser's local storage, on your own device. It is never sent to us, sold, or shared with anyone.</p>
+<p>The app stores your movie watchlist (which movies you've marked watched, starred as "want to watch," and the order you've put them in) together with your family setup: each child's name, age, and per-category content limits, plus a history of "Watch anyway" overrides (which content category was overridden, for which child, and when). A pseudonymous device identifier and timestamps are attached to this data so changes made on different devices can be merged correctly — these identifiers aren't tied to your real-world identity and exist only to make sync work.</p>
+<p>By default, all of this is stored only in your browser's local storage, on your own device. It is not sold, and it is not shared with anyone except as described below (optional Google sync, which you control, and the third-party error-monitoring service described in "Third-party services").</p>
 
 <h2>Optional Google sync</h2>
-<p>If you choose to sign in with Google, the app saves your watchlist as a single small file in your Google Drive app data folder, using Google's <code>drive.appdata</code> permission. That permission means the app can only see and edit its own hidden app-specific configuration data — it cannot see, read, or modify the rest of your Google Drive.</p>
+<p>If you choose to sign in with Google, the app saves your full local state as a single small file in your Google Drive app data folder, using Google's <code>drive.appdata</code> permission. That permission means the app can only see and edit its own hidden app-specific configuration data — it cannot see, read, or modify the rest of your Google Drive.</p>
+<p><strong>That file includes everything described in "What we collect" above</strong> — your watchlist and its order, and your children's names, ages, content-limit settings, and override history — not just the watchlist. Manually copying a sync code between devices (the offline alternative below) carries the same full payload; the only difference is Google sync uploads it to your Drive automatically, while a manual code stays entirely under your own control and never leaves your devices unless you copy it somewhere yourself.</p>
 <p>Signing in is entirely optional. The app works fully without it, using local storage on your device instead.</p>
 
 <h2>What we don't do</h2>
 <ul>
-  <li>We don't run ads or trackers.</li>
-  <li>We don't collect analytics.</li>
+  <li>We don't run ads or behavioral trackers, and we don't collect analytics about how you use the app.</li>
   <li>We don't have user accounts beyond the optional Google sign-in described above.</li>
-  <li>We don't share, sell, or otherwise disclose your data to third parties.</li>
+  <li>We don't sell your data or share it for advertising or marketing purposes.</li>
 </ul>
 
 <h2>Third-party services</h2>
 <p>Movie descriptions and age ratings shown in the app are sourced from Common Sense Media and other public sources, for informational purposes only — this doesn't involve any of your personal data.</p>
-<p>If you use Google sync, your watchlist file is stored in Google Drive, subject to <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's own privacy policy</a>.</p>
+<p>If you use Google sync, your state file is stored in Google Drive, subject to <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's own privacy policy</a>.</p>
+<p><strong>Sentry (error monitoring and optional feedback).</strong> The app uses <a href="https://sentry.io" target="_blank" rel="noopener">Sentry</a>, a third-party error-monitoring service, in two distinct ways:</p>
+<ul>
+  <li><strong>Automatic crash/error monitoring</strong> runs on every visit, with no separate consent step — this is essential to how we find and fix bugs. When the app hits an unexpected error, Sentry receives the error message and stack trace, plus contextual "breadcrumbs" (recent console messages, network requests, page-navigation history) leading up to it, and basic HTTP request context (URL, browser/OS type). It does not include cookies, IP-based user profiles, or DOM click/input tracking — that breadcrumb category is explicitly turned off.</li>
+  <li><strong>Optional user feedback</strong> ("Report a bug" in the app) is only sent if you choose to submit it. It carries only the free-text message you type — no name or email field is shown or required, and no screenshot is taken.</li>
+</ul>
+<p>Before either kind of report leaves your device, the app scans it and replaces any of your children's names it finds with <code>[redacted]</code> — in the error message, the breadcrumbs, and the feedback text alike. This is a best-effort safeguard, not a guarantee (a child's name mentioned in an unusual way could still slip through), so the feedback form also asks you not to include it in the first place.</p>
+<p>Sentry data is retained and eventually deleted according to <a href="https://sentry.io/privacy/" target="_blank" rel="noopener">Sentry's own privacy policy</a> — we don't control or extend that retention.</p>
 
 <h2>Revoking access</h2>
 <p>You can disconnect Google sync at any time using the "Disconnect" button in the app, or by removing Family Feature's access from your <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">Google Account permissions</a>. Disconnecting stops future syncing; it doesn't delete the file already saved in your Drive — you're welcome to delete that yourself.</p>
