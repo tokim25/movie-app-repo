@@ -48,8 +48,11 @@ double-subtracted 972 to the verified 989). Phase 1 is unblocked.
 [PR #127](https://github.com/tokim25/movie-app-repo/pull/127) — schema/validator work is
 done: `scripts/catalog-schema.mjs` implements normalized `recommendedAge` (resolved all
 18 of the PRD's non-normalizable ages, including a genuine data bug fix on `Scoob!`) and
-the `contentStatus` 5-state machine from Gate 0 §3. CI green, no reviews yet as of
-2026-09-22 (following up on whether Reviewer/Tech Lead were broadcast to per SKILL.md).
+the `contentStatus` 5-state machine from Gate 0 §3. CI green. Reviewer approved (one
+non-blocking finding on `hasVerifiedRuntime()` not checking `runtimeSourceId`/
+`runtimeVerifiedAt` alongside `runtimeMinutes`, fixed same day, cb7d2b7). Tech Lead
+subscribed but hasn't weighed in yet as of 2026-09-22 — broadcast confirmed sent at
+PR-open time, just normal async timing, not a dropped handoff.
 
 Current coverage: `certified=0, provisional=990, conflicted=21, unknown=36`. **Zero
 titles are certified yet** — `runtimeMinutes` backfill for the ~990-candidate pool
