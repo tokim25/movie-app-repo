@@ -24,17 +24,19 @@ across all of them.
 **Top priority as of 2026-09-22 (tokim25):** the Phase 1 runtime backfill below — everything
 else in this section is still real and still Now, but this is the one to unblock first.
 
-### Trust & safety P0s (independent of the recommendations initiative)
+### Trust & safety P0s (independent of the recommendations initiative) — ALL MERGED 2026-09-22
 These are live correctness/privacy defects, not roadmap-gated — they should not wait on
 the Trusted Contextual Recommendations phases below, several of which they block anyway.
+Every row below is now shipped on `master`; kept as a table for the historical record
+rather than deleted.
 
 | Issue | Problem | Notes |
 |---|---|---|
-| [#92](https://github.com/tokim25/movie-app-repo/issues/92) | Tonight age eligibility uses the oldest child, allowing titles above younger viewers' age guidance | **Dispatched to Coder 2026-09-22**, queued behind the in-flight runtime backfill. Has an exact policy answer now (Gate 0 §1: strict, per-child, no `+2`) |
-| [#93](https://github.com/tokim25/movie-app-repo/issues/93) | Tonight's terminal fallback returns `MOVIES[0]` even when no title is eligible | **Dispatched to Coder 2026-09-22** alongside #92 (same functions, one PR). tokim25 confirmed this reproduces on real production data today — a 1 or 2-year-old's age ceiling (3 or 4) is below the catalog's lowest guidance (5+), so it triggers right now, not just in a synthetic fixture |
-| [#96](https://github.com/tokim25/movie-app-repo/issues/96) | Tonight can label heuristic-only movies green without confirmed title-specific content data | **Dispatched to Coder 2026-09-22**, queued behind #92/#93. Connects directly to the `contentStatus` work from #127 — likely one combined PR with #92/#93 |
-| [#98](https://github.com/tokim25/movie-app-repo/issues/98) | Undisclosed Sentry processing contradicts "never sent" / "no third-party disclosure" claims | **Dispatched to Coder 2026-09-22**, queued behind #92/#93/#96. Combined with #99 (same fix class); doesn't touch Tonight code so can run parallel to the eligibility work if that's easier |
-| [#99](https://github.com/tokim25/movie-app-repo/issues/99) | Policy/Terms omit child profiles, content limits, override history, device metadata | **Dispatched to Coder 2026-09-22** alongside #98 — privacy.html/terms.html don't disclose what `serializeState()` actually persists/syncs (child names, ages, limits, override history, device IDs) |
+| [#92](https://github.com/tokim25/movie-app-repo/issues/92) | Tonight age eligibility uses the oldest child, allowing titles above younger viewers' age guidance | **Merged in PR #134.** Strict per-child age gate (`meetsAgePolicyForAllKids()`), matching Gate 0 §1 exactly |
+| [#93](https://github.com/tokim25/movie-app-repo/issues/93) | Tonight's terminal fallback returns `MOVIES[0]` even when no title is eligible | **Merged in PR #134.** Typed no-match result + `#tonightNoMatchCard` UI with recovery actions, no more unvalidated fallback pick |
+| [#96](https://github.com/tokim25/movie-app-repo/issues/96) | Tonight can label heuristic-only movies green without confirmed title-specific content data | **Merged in PR #134.** `isTonightEligible()` now calls `hasConfirmedContentData()`; the 36 flagless titles can never auto-recommend green |
+| [#98](https://github.com/tokim25/movie-app-repo/issues/98) | Undisclosed Sentry processing contradicts "never sent" / "no third-party disclosure" claims | **Merged in PR #135.** Sentry named explicitly, automatic monitoring vs. opt-in feedback distinguished, false "never sent" claims removed |
+| [#99](https://github.com/tokim25/movie-app-repo/issues/99) | Policy/Terms omit child profiles, content limits, override history, device metadata | **Merged in PR #135.** Full `serializeState()` payload now enumerated in both documents; Google-sync opt-in row names child data before sign-in |
 
 Also new since the last sweep, P1, not yet bucketed into a phase: [#94](https://github.com/tokim25/movie-app-repo/issues/94)
 (green explanation always says "starter settings" even with custom limits), [#95](https://github.com/tokim25/movie-app-repo/issues/95)
@@ -380,3 +382,10 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
   pending, and now needs a merge from `origin/master` to pick up #134's changelog entry
   above (this entry) before it can land — same append-point collision as #133/#134, no real
   content conflict.
+- **2026-09-22** — PR #135 merged — every P0 in the "Now" table above is now shipped on
+  `master`. PR #136 (data-integrity P1s #116/118/124/125, combined) opened, ran parallel to
+  #134 as planned since no overlap, `mergeable_state: clean`, awaiting review — 147/149
+  local suite passing (2 pre-existing unrelated flakes). tokim25 pinged the whole team to
+  keep going; nothing blocking on PM's end. Tonight-correctness P1 batch
+  (#94/97/103/104/105/108) is now unblocked to start, since #134 (the thing it was queued
+  behind) has landed.
