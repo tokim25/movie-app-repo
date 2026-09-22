@@ -2870,7 +2870,24 @@ let lastListSignature = "";
 // session-only (never saved/serialized -- see selectedKids()), so there's no
 // persisted-format migration concern with this shape.
 let tonightSelection = { excludedChildIds: new Set(), time: 90, mood: 'calm', currentPickIdx: null, currentPickSource: '', verdict: 'green', skippedMovieNums: new Set() };
-let tonightSkipReason = '';
+// Issue #103: a session-scoped log of skip events, one per skip, replacing
+// the old single session-global tonightSkipReason -- which meant a reason
+// selected for one skipped movie stayed selected (and attributed) when the
+// very next skip's feedback prompt opened for a different movie entirely.
+// Deliberately never added to state.events: skip feedback is session-only
+// and must never alter durable taste/family limits or sync to another
+// device without separate explicit consent (see issue's acceptance
+// criteria).
+let tonightSkipEvents = [];
+let currentTonightSkipEventId = null;
+
+// Issue #104: identifies "this browsing session" for watch_anyway
+// idempotency -- generated once per page load, never persisted. Paired with
+// a movie's num and a child+flag, it's the recommendation/session
+// identifier the acceptance criteria calls for, so repeated taps on Watch
+// anyway for the same displayed pick can be recognized as the same
+// decision instead of each appending a fresh signal.
+const TONIGHT_SESSION_ID = makeChildId();
 let selectedFamilyChildId = null;
 
 const GOOGLE_CLIENT_ID = "987776124251-t4skn7ia6qd1r88ftass906jinm98v1q.apps.googleusercontent.com";
@@ -4053,16 +4070,33 @@ function joinWithAnd(names){
 function movieVerdictForKids(movie, kids){
   if(kids.length === 0) return { verdict: 'green', reasons: ["No children watching—child content limits won't apply."] };
   const fit = movieFitForKids(movie, kids);
-  const red = fit.issues.filter(issue => issue.severity === 'red').map(issue => `${issue.child.name}: ${issue.flag.plain}`);
-  const amber = fit.issues.filter(issue => issue.severity === 'amber').map(issue => `${issue.child.name}: ${issue.flag.plain}`);
-  if(red.length) return { verdict: 'red', reasons: red };
-  if(amber.length) return { verdict: 'amber', reasons: amber };
+  const redIssues = fit.issues.filter(issue => issue.severity === 'red');
+  const amberIssues = fit.issues.filter(issue => issue.severity === 'amber');
+  const red = redIssues.map(issue => `${issue.child.name}: ${issue.flag.plain}`);
+  const amber = amberIssues.map(issue => `${issue.child.name}: ${issue.flag.plain}`);
+  // Issue #108: `reasons` is one entry per child x content category, not
+  // one per child -- a single child over the limit in all four categories
+  // produces four reasons. affectedChildCount is the actual number of
+  // distinct children involved, for copy that needs a child count rather
+  // than a category-issue count (showTonightPick()'s summarized red/amber
+  // text below reasons.length > 2's threshold).
+  if(red.length) return { verdict: 'red', reasons: red, affectedChildCount: new Set(redIssues.map(issue => issue.child.id)).size };
+  if(amber.length) return { verdict: 'amber', reasons: amber, affectedChildCount: new Set(amberIssues.map(issue => issue.child.id)).size };
   // Issue #59: this used to be one reason per kid, capped with .slice(0, 2)
   // -- so with 3+ kids selected, only the first one or two ever got cited as
   // why the pick is a good fit. A single summarized reason naming everyone
   // selected scales to any number of kids and keeps showTonightPick()'s
   // single-element reasons[0] read working unchanged.
-  return { verdict: 'green', reasons: [`Within ${joinWithAnd(kids.map(child => child.name))}'s starter settings.`] };
+  // Issue #94: this used to always say "starter settings," even when one
+  // or more of the evaluated limits were explicit parent overrides
+  // (settingForChildFlag()'s source: 'parent') -- a parent's own change
+  // should never be described as the age-based default. Neutral "current
+  // content limits" language is accurate regardless of provenance, so it's
+  // used unconditionally rather than summarizing a possibly-mixed
+  // starter/parent provenance across multiple kids on the card itself; the
+  // exact per-child, per-flag values (and their source) remain visible in
+  // Family's own settings panel for auditability.
+  return { verdict: 'green', reasons: [`Within ${joinWithAnd(kids.map(child => child.name))}'s current content limits.`] };
 }
 
 // Issue #70: the flag actually responsible for a single child's amber/red
@@ -4185,20 +4219,32 @@ function tonightSourceTiers(){
   ];
 }
 
+// Issue #97: tonightSourceTiers() groups candidates by source (Want to
+// watch, Recent releases, Shelf), and each tier is individually mood-sorted
+// -- but findTonightCandidate() used to exhaust one tier completely before
+// even looking at the next, so tier membership silently overrode mood
+// intent (a mediocre "Want to watch" match always beat a perfect "Shelf"
+// match). Flattening every tier into one pool and re-sorting by mood score
+// globally fixes that while leaving tonightSourceTiers() itself untouched,
+// since several existing tests stub it directly.
+function flattenTonightPool(tiered){
+  const pool = [];
+  tiered.forEach(tier => {
+    tier.indices.forEach(idx => pool.push({ idx, source: tier.source }));
+  });
+  return pool.sort((a, b) => moodScore(a.idx) - moodScore(b.idx) || compareByAge(a.idx, b.idx));
+}
+
 function findTonightCandidate(){
   const kids = selectedKids();
-  const tiered = tonightSourceTiers();
+  const pool = flattenTonightPool(tonightSourceTiers());
 
-  for(const tier of tiered){
-    const idx = tier.indices.find(candidate => isTonightEligible(candidate, kids, false, true));
-    if(idx !== undefined) return { idx, source: tier.source };
-  }
+  const strictPick = pool.find(candidate => isTonightEligible(candidate.idx, kids, false, true));
+  if(strictPick) return strictPick;
 
   tonightSelection.skippedMovieNums.clear();
-  for(const tier of tiered){
-    const idx = tier.indices.find(candidate => isTonightEligible(candidate, kids, true, false));
-    if(idx !== undefined) return { idx, source: tier.source };
-  }
+  const relaxedPick = pool.find(candidate => isTonightEligible(candidate.idx, kids, true, false));
+  if(relaxedPick) return relaxedPick;
 
   // Issue #93: this used to fall through to MOVIES[0] unconditionally,
   // bypassing isTonightEligible() (age, watched-state, content-fit, and any
@@ -4302,9 +4348,16 @@ function showTonightPick(candidateOverride){
   reasons.replaceChildren();
   const copy = [];
   if(verdict.verdict === 'red'){
-    copy.push(verdict.reasons.length > 2 ? `Above settings for ${verdict.reasons.length} of the kids watching.` : `Above ${verdict.reasons.join(' and ')}.`);
+    // Issue #108: count distinct children affected, not the reason count --
+    // one child can trigger multiple red flags, which previously overstated
+    // how many kids in the room the pick was actually a problem for.
+    copy.push(verdict.reasons.length > 2
+      ? `Above settings for ${verdict.affectedChildCount} ${verdict.affectedChildCount === 1 ? 'child' : 'of the kids'} watching.`
+      : `Above ${verdict.reasons.join(' and ')}.`);
   }else if(verdict.verdict === 'amber'){
-    copy.push(verdict.reasons.length > 2 ? `Goes over the line for ${verdict.reasons.length} of the kids watching.` : `Over ${verdict.reasons.join(' and ')}.`);
+    copy.push(verdict.reasons.length > 2
+      ? `Goes over the line for ${verdict.affectedChildCount} ${verdict.affectedChildCount === 1 ? 'child' : 'of the kids'} watching.`
+      : `Over ${verdict.reasons.join(' and ')}.`);
   }else{
     copy.push(verdict.reasons[0] || 'Within the selected child settings.');
   }
@@ -4346,6 +4399,7 @@ function showTonightPick(candidateOverride){
   // amber -- a parent choosing to proceed past a caution -- so it shows for
   // either non-green verdict, not just amber.
   document.getElementById('tonightWatchAnywayBtn').style.display = verdict.verdict !== 'green' ? 'inline-block' : 'none';
+  updateTonightWatchAnywayBtn();
   document.getElementById('tonightPickCard').style.display = 'block';
   // Issue #57: the button's static markup says "Find tonight's pick", but a
   // pick showing switches its own click handler over to skip-behavior. Keep
@@ -4366,11 +4420,59 @@ function skipCurrentTonightPick(){
   showTonightPick();
 }
 
+// Issue #103: creates one session-scoped skip event for the movie being
+// skipped, keyed to it and to the context (viewers/mood/time) at the moment
+// of the skip. currentTonightSkipEventId then points the skip-reason
+// buttons at exactly this event, so a reason chosen afterward can never be
+// misattributed to whichever movie happened to be current before.
+function recordTonightSkipEvent(idx){
+  const event = {
+    id: makeChildId(),
+    titleId: MOVIES[idx].num,
+    childIds: selectedKids().map(child => child.id),
+    mood: tonightSelection.mood,
+    time: tonightSelection.time,
+    reason: null,
+    createdAt: now()
+  };
+  tonightSkipEvents.push(event);
+  currentTonightSkipEventId = event.id;
+  return event;
+}
+
+// Issue #104: finds this session's already-active watch_anyway event, if
+// any, for a given movie+child+flag -- the idempotency key the acceptance
+// criteria calls for ("at least session + movie + child + flag").
+function findActiveWatchAnywayEvent(idx, childId, flagId){
+  return (state.events || []).find(event =>
+    event.type === 'watch_anyway' &&
+    event.sessionId === TONIGHT_SESSION_ID &&
+    event.titleId === MOVIES[idx].num &&
+    event.childId === childId &&
+    event.flag === flagId
+  );
+}
+
+// Issue #104: the button visibly acknowledges an already-recorded decision
+// instead of staying identical across taps, and updateTonightWatchBtn()'s
+// sibling call sites (showTonightPick(), skip, mark-watched) all need this
+// kept in sync with the current pick the same way.
+function updateTonightWatchAnywayBtn(){
+  const btn = document.getElementById('tonightWatchAnywayBtn');
+  if(!btn) return;
+  const idx = tonightSelection.currentPickIdx;
+  const logged = idx !== null && selectedKids().some(child => {
+    const flagId = primaryOverrideFlagForChild(MOVIES[idx], child);
+    return flagId && findActiveWatchAnywayEvent(idx, child.id, flagId);
+  });
+  btn.textContent = logged ? '✓ Logged (tap to undo)' : 'Watch anyway';
+  btn.setAttribute('aria-pressed', logged ? 'true' : 'false');
+}
+
 function logWatchAnywaySignal(){
   const idx = tonightSelection.currentPickIdx;
   if(idx === null || tonightSelection.verdict === 'green') return;
   const movie = MOVIES[idx];
-  const kids = selectedKids();
   // Issue #70: log the flag that actually produced this child's amber/red
   // verdict (movieFitForKids()'s per-child, per-flag issues), not a
   // hardcoded 'violence' -- otherwise the Family tab's cue always names
@@ -4378,22 +4480,40 @@ function logWatchAnywaySignal(){
   // A child with no personal issue on this pick (the aggregate verdict came
   // from a different selected child) gets no event -- there is no real
   // category to attribute an override to for them.
-  const events = kids
-    .map(child => {
-      const flagId = primaryOverrideFlagForChild(movie, child);
-      if(!flagId) return null;
-      return {
-        id: makeChildId(),
-        type: 'watch_anyway',
-        titleId: movie.num,
-        childId: child.id,
-        flag: flagId,
-        createdAt: now()
-      };
-    })
-    .filter(Boolean);
-  state.events = (state.events || []).concat(events);
+  const targets = selectedKids()
+    .map(child => ({ child, flagId: primaryOverrideFlagForChild(movie, child) }))
+    .filter(t => t.flagId)
+    .map(t => ({ ...t, event: findActiveWatchAnywayEvent(idx, t.child.id, t.flagId) }));
+  if(!targets.length) return;
+
+  // Issue #104: this same recommendation already has an active signal for
+  // every affected child -- a further tap is a deliberate reversal, so it
+  // removes those events rather than appending contradictory duplicates
+  // (repeated taps otherwise fabricated the "3 distinct choices" Family cue
+  // threshold off of one movie and one decision).
+  if(targets.every(t => t.event)){
+    const removeIds = new Set(targets.map(t => t.event.id));
+    state.events = (state.events || []).filter(event => !removeIds.has(event.id));
+    saveState();
+    updateTonightWatchAnywayBtn();
+    showToast('Removed from Family review signals');
+    return;
+  }
+
+  const newEvents = targets
+    .filter(t => !t.event)
+    .map(t => ({
+      id: makeChildId(),
+      type: 'watch_anyway',
+      sessionId: TONIGHT_SESSION_ID,
+      titleId: movie.num,
+      childId: t.child.id,
+      flag: t.flagId,
+      createdAt: now()
+    }));
+  state.events = (state.events || []).concat(newEvents);
   saveState();
+  updateTonightWatchAnywayBtn();
   showToast('Logged as a gentle Family review signal');
 }
 
@@ -4407,13 +4527,22 @@ function resetTonightSkips(){
   // calls, so it's the one place needed to reset it too.
   const findBtn = document.getElementById('findTonightPickBtn');
   if(findBtn) findBtn.textContent = "Find tonight's pick";
-  tonightSkipReason = '';
+  currentTonightSkipEventId = null;
   document.querySelectorAll('[data-skip-reason]').forEach(btn=>{
     btn.classList.remove('selected');
     btn.setAttribute('aria-pressed', 'false');
   });
   const skipFeedback = document.getElementById('tonightSkipFeedback');
   if(skipFeedback) skipFeedback.hidden = true;
+  // Issue #105: every caller of resetTonightSkips() is a viewer/mood/time
+  // change that invalidates the current pick -- but clearing the internal
+  // currentPickIdx alone left the old movie card, verdict, and evidence
+  // still visible on screen. Hiding both cards here means a parent can never
+  // mistake a stale title for one evaluated under the newly selected
+  // context, and since Mark watched/Watch anyway/Skip live inside
+  // tonightPickCard, hiding it also takes those actions off screen.
+  document.getElementById('tonightPickCard').style.display = 'none';
+  document.getElementById('tonightNoMatchCard').style.display = 'none';
 }
 
 function renderTonightKidChoices(){
@@ -6157,12 +6286,25 @@ document.getElementById('tonightWatchAnywayBtn').addEventListener('click', logWa
 document.getElementById('tonightDetailBtn').addEventListener('click', toggleTonightDetail);
 
 document.getElementById('tonightSkipBtn').addEventListener('click', ()=>{
-  const skippedTitle = tonightSelection.currentPickIdx === null ? 'that pick' : MOVIES[tonightSelection.currentPickIdx].t;
+  const skippedIdx = tonightSelection.currentPickIdx;
+  const skippedTitle = skippedIdx === null ? 'that pick' : MOVIES[skippedIdx].t;
+  // Issue #103: record a fresh skip event for this specific movie before
+  // skipCurrentTonightPick() moves currentPickIdx on -- the reason buttons
+  // below edit only this event, never whatever event the previous skip left
+  // behind.
+  if(skippedIdx !== null) recordTonightSkipEvent(skippedIdx);
   skipCurrentTonightPick();
   showToast('Skipped for tonight');
   document.getElementById('tonightSkipFeedback').hidden = false;
   document.getElementById('tonightSkipPrompt').textContent = `What missed about ${skippedTitle}? Optional—this won't change your family settings.`;
   document.getElementById('tonightSkipBtn').setAttribute('aria-expanded', 'true');
+  // Issue #103: each new skip's feedback prompt always begins unselected --
+  // a reason chosen for the previous skipped movie must never appear
+  // pre-selected for this one.
+  document.querySelectorAll('[data-skip-reason]').forEach(btn=>{
+    btn.classList.remove('selected');
+    btn.setAttribute('aria-pressed', 'false');
+  });
   const firstReason = document.querySelector('[data-skip-reason]');
   if(firstReason) firstReason.focus();
 });
@@ -6175,13 +6317,18 @@ document.getElementById('tonightSkipContinueBtn').addEventListener('click', ()=>
 
 document.querySelectorAll('[data-skip-reason]').forEach(btn=>{
   btn.addEventListener('click', ()=>{
-    tonightSkipReason = tonightSkipReason === btn.dataset.skipReason ? '' : btn.dataset.skipReason;
+    // Issue #103: mutate only the skip event this feedback prompt was
+    // opened for -- never a session-global reason that the next skip's
+    // prompt would inherit.
+    const event = tonightSkipEvents.find(e => e.id === currentTonightSkipEventId);
+    if(!event) return;
+    event.reason = event.reason === btn.dataset.skipReason ? null : btn.dataset.skipReason;
     document.querySelectorAll('[data-skip-reason]').forEach(reasonBtn=>{
-      const selected = reasonBtn.dataset.skipReason === tonightSkipReason;
+      const selected = reasonBtn.dataset.skipReason === event.reason;
       reasonBtn.classList.toggle('selected', selected);
       reasonBtn.setAttribute('aria-pressed', selected ? 'true' : 'false');
     });
-    showToast(tonightSkipReason ? 'Reason saved for this session' : 'Skip reason cleared');
+    showToast(event.reason ? 'Reason saved for this session' : 'Skip reason cleared');
   });
 });
 
