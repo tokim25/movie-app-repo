@@ -2651,6 +2651,19 @@ function reportError(err){
   </div>
 </div>
 
+<!-- Issue #125: persistLocalState() used to fail silently (log + return) while
+     the UI carried on as if the change had saved. This banner is the
+     persistent, actionable warning that replaces that silence -- shown
+     whenever a local save fails, cleared as soon as one succeeds again. -->
+<div id="localStorageAlert" class="syncAlert" style="display:none;" role="alert" aria-live="assertive">
+  <div class="syncAlertInner">
+    <div class="syncAlertCopy">
+      <span class="syncAlertTitle">Changes aren't saving on this device</span>
+      <span class="syncAlertMessage">Your browser is blocking local storage, so watched marks, settings, and other changes won't be kept if you reload or close this tab. Try turning off private/incognito mode, freeing up storage, or using a different browser.</span>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 <div class="srOnly" id="assertiveStatus" role="alert" aria-live="assertive" aria-atomic="true"></div>
 
@@ -3135,7 +3148,25 @@ function getDeviceId(){
 const DEVICE_ID = getDeviceId();
 
 function readGoogleSyncMeta(){
-  const fallback = { enabled: localStorage.getItem(GOOGLE_SYNC_FLAG) === '1' };
+  // Issue #124: the `enabled` read used to happen before any try block, so
+  // a SecurityError from a privacy/security context that denies storage
+  // (thrown by the read itself, not just JSON.parse) went uncaught here and
+  // aborted the caller -- decideInitialScreen() has no outer guard around
+  // this call, so that exception used to abort the rest of app startup.
+  //
+  // The flag read and the meta-JSON read are guarded independently (not one
+  // shared try) so a failure in one doesn't discard an already-successfully-
+  // read value from the other -- an earlier version of this fix put both in
+  // the same try, which meant a corrupted GOOGLE_SYNC_META_KEY value made a
+  // genuinely-enabled flag report as disabled instead of degrading
+  // gracefully to the flag's real value, same as pre-fix code did for that
+  // specific case.
+  let fallback;
+  try{
+    fallback = { enabled: localStorage.getItem(GOOGLE_SYNC_FLAG) === '1' };
+  }catch(e){
+    return { enabled: false };
+  }
   try{
     const raw = localStorage.getItem(GOOGLE_SYNC_META_KEY);
     return raw ? Object.assign(fallback, JSON.parse(raw)) : fallback;
@@ -3573,14 +3604,29 @@ function loadState(){
   }catch(e){ /* no saved state yet, or storage unavailable */ }
 }
 
+// Issue #125: returns whether the write actually succeeded rather than
+// swallowing the failure -- saveState() uses this to surface a persistent
+// warning instead of letting the UI imply the change was saved when it
+// wasn't (QuotaExceededError, a SecurityError from a storage-denying
+// privacy context, etc).
 function persistLocalState(){
   try{
     localStorage.setItem(STORAGE_KEY, JSON.stringify(serializeState()));
-  }catch(e){ console.error('save failed', e); reportError(e); }
+    return true;
+  }catch(e){
+    console.error('save failed', e);
+    reportError(e);
+    return false;
+  }
+}
+
+function setLocalStorageAlert(show){
+  const alertEl = document.getElementById('localStorageAlert');
+  if(alertEl) alertEl.style.display = show ? 'block' : 'none';
 }
 
 function saveState(){
-  persistLocalState();
+  setLocalStorageAlert(!persistLocalState());
   if(googleAccessToken){
     clearTimeout(saveState._t);
     googleSyncPending = true;
@@ -4979,6 +5025,23 @@ function mergeMarks(localMarks, remoteMarks){
   return merged;
 }
 
+// Issue #116: a plain concat here duplicates events whenever the same two
+// states get merged more than once -- previously only a Google Drive sync
+// concern in practice, now also exercised every time two tabs' storage
+// events round-trip off each other. Events already carry a stable `id`
+// (makeChildId()), so de-dupe by id rather than changing merge frequency.
+function dedupeEventsById(events){
+  const seen = new Set();
+  const out = [];
+  (events || []).forEach(event=>{
+    const id = event && event.id;
+    if(id && seen.has(id)) return;
+    if(id) seen.add(id);
+    out.push(event);
+  });
+  return out;
+}
+
 function mergeState(local, remote){
   const normalizedRemote = normalizeState(remote);
   const useRemoteOrder = (normalizedRemote.orderUpdatedAt || 0) > (local.orderUpdatedAt || 0);
@@ -4992,9 +5055,65 @@ function mergeState(local, remote){
     children: useRemoteChildren ? normalizedRemote.children : local.children,
     childrenUpdatedAt: useRemoteChildren ? normalizedRemote.childrenUpdatedAt : local.childrenUpdatedAt,
     childrenDevice: useRemoteChildren ? normalizedRemote.childrenDevice : local.childrenDevice,
-    events: (local.events || []).concat(normalizedRemote.events || [])
+    events: dedupeEventsById((local.events || []).concat(normalizedRemote.events || []))
   };
 }
+
+// Order-independent for plain objects (key order carries no meaning for
+// e.g. `checked`/`priority`'s per-num records, which can differ in
+// insertion order between two states with identical content), order-
+// dependent for arrays (movieNums/events order is meaningful). Used below
+// to detect when a cross-tab merge produced no actual change, so a plain
+// JSON.stringify (key-order-sensitive) isn't safe here.
+function deepEqual(a, b){
+  if(a === b) return true;
+  if(typeof a !== typeof b || a === null || b === null) return a === b;
+  if(Array.isArray(a) || Array.isArray(b)){
+    if(!Array.isArray(a) || !Array.isArray(b) || a.length !== b.length) return false;
+    return a.every((v, i) => deepEqual(v, b[i]));
+  }
+  if(typeof a === 'object'){
+    const aKeys = Object.keys(a), bKeys = Object.keys(b);
+    if(aKeys.length !== bKeys.length) return false;
+    return aKeys.every(key => Object.prototype.hasOwnProperty.call(b, key) && deepEqual(a[key], b[key]));
+  }
+  return a === b;
+}
+
+// Issue #116: without this, a stale tab's next save would overwrite a
+// newer tab's changes with a stale full-state snapshot -- there was no way
+// for one tab to learn another tab wrote something newer. The `storage`
+// event fires in every OTHER same-origin tab/window when localStorage
+// changes (never the tab that made the change itself), so the moment any
+// tab persists a newer STORAGE_KEY value, every other open tab merges it
+// in via the same deterministic mergeState()/newestMark() logic Google
+// Drive sync already uses (per-mark/per-child updatedAt+device, newest
+// wins) instead of silently carrying its own stale in-memory state forward
+// into its next save.
+//
+// The deepEqual guard below is load-bearing, not an optimization:
+// serializeState() stamps a fresh top-level `updatedAt` on every call, so
+// persistLocalState()'s output differs in bytes on every write even once
+// the *meaningful* merged content has fully converged between two tabs.
+// Without checking whether the merge actually changed anything, every
+// write here would itself fire a new `storage` event in every other tab,
+// which would merge (a no-op) and write again, forever -- an unbounded
+// write-and-render ping-pong between any two open tabs after a single
+// edit, confirmed empirically (write counts climbing ~30/sec with no sign
+// of slowing). Skipping the write (and the render, since nothing visible
+// changed) when the merge is a true no-op is what lets convergence
+// actually stop the loop instead of the wrapper timestamp keeping it alive.
+window.addEventListener('storage', function(event){
+  if(event.key !== STORAGE_KEY || !event.newValue) return;
+  try{
+    const remote = JSON.parse(event.newValue);
+    const merged = mergeState(state, remote);
+    if(deepEqual(merged, state)) return;
+    state = merged;
+    persistLocalState();
+    renderCurrentView();
+  }catch(e){ /* malformed write from another tab/context; ignore */ }
+});
 
 async function syncFromGoogleDrive(){
   if(googleSyncBusy){

@@ -9,7 +9,7 @@
 // was stale. Bump the version/date prefix by hand for a real code
 // change to this file; DATA_VERSION takes care of itself.
 const DATA_VERSION = '4b481d9065';
-const CACHE_VERSION = `family-feature-v21-20260920-${DATA_VERSION}`;
+const CACHE_VERSION = `family-feature-v22-20260922-${DATA_VERSION}`;
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -52,6 +52,10 @@ self.addEventListener('activate', event => {
   );
 });
 
+// Issue #118: static documents outside the SPA route that still get
+// precached and need their own offline availability, not the app shell's.
+const STATIC_DOCUMENT_PATHS = ['/privacy.html', '/terms.html'];
+
 self.addEventListener('fetch', event => {
   const request = event.request;
   if(request.method !== 'GET') return;
@@ -60,14 +64,28 @@ self.addEventListener('fetch', event => {
   if(url.origin !== self.location.origin) return;
 
   if(request.mode === 'navigate'){
+    // Issue #118: every navigation used to be treated as the app route --
+    // caching whatever page loaded (including privacy.html/terms.html)
+    // under '/index.html' unconditionally (even a same-origin 404/5xx),
+    // and always falling back to '/index.html' on failure. That let an
+    // online visit to a policy page silently overwrite the cached app
+    // shell (so a later offline launch of '/' could render Terms instead
+    // of the app), and made an offline direct visit to a policy page
+    // render the app shell instead of the page that was actually
+    // requested. Each known static document is now cached/recovered under
+    // its own path; only the actual app route uses the app-shell key, and
+    // only a successful response ever gets cached either way.
+    const cacheKey = STATIC_DOCUMENT_PATHS.includes(url.pathname) ? url.pathname : '/index.html';
     event.respondWith(
       fetch(request)
         .then(response => {
-          const copy = response.clone();
-          caches.open(CACHE_VERSION).then(cache => cache.put('/index.html', copy));
+          if(response && response.ok){
+            const copy = response.clone();
+            event.waitUntil(caches.open(CACHE_VERSION).then(cache => cache.put(cacheKey, copy)));
+          }
           return response;
         })
-        .catch(() => caches.match('/index.html'))
+        .catch(() => caches.match(cacheKey))
     );
     return;
   }
@@ -77,7 +95,7 @@ self.addEventListener('fetch', event => {
       const network = fetch(request).then(response => {
         if(response && response.ok){
           const copy = response.clone();
-          caches.open(CACHE_VERSION).then(cache => cache.put(request, copy));
+          event.waitUntil(caches.open(CACHE_VERSION).then(cache => cache.put(request, copy)));
         }
         return response;
       }).catch(() => cached);
