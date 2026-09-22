@@ -145,3 +145,63 @@ test('mergeState de-duplicates events by id across repeated merges (#116)', asyn
   expect(result.firstMergeCount).toBe(1);
   expect(result.secondMergeCount).toBe(1);
 });
+
+// Issue #116 (Reviewer-found regression): the storage listener used to call
+// persistLocalState() unconditionally on every incoming storage event, even
+// when the merge was a true no-op. Since serializeState() stamps a fresh
+// top-level updatedAt on every call, every one of those writes still
+// differed in bytes -- which fired a new storage event in every other open
+// tab, which merged (another no-op) and wrote again, forever. Empirically
+// confirmed: write counts climbed unboundedly (~30/sec) from a single edit
+// with no sign of slowing. This test watches write volume over a real time
+// window rather than just eventual data correctness, since none of the
+// tests above would have caught it.
+test('a single edit does not cause an unbounded write ping-pong between two open tabs (#116)', async ({ context, page }) => {
+  const pageB = await context.newPage();
+  await pageB.goto('/');
+
+  for (const p of [page, pageB]) {
+    await p.evaluate(() => {
+      window.__writeCount = 0;
+      const original = Storage.prototype.setItem;
+      Storage.prototype.setItem = function(...args){
+        window.__writeCount++;
+        return original.apply(this, args);
+      };
+    });
+  }
+
+  await page.evaluate(() => toggleCheck(0));
+
+  // Give any ping-pong a real window to run -- the bug's own measurement
+  // showed write counts still climbing at the same linear rate 3 seconds
+  // in, so 1.5s here is plenty to distinguish "bounded" from "unbounded."
+  await page.waitForTimeout(1500);
+
+  const [countA, countB] = await Promise.all([
+    page.evaluate(() => window.__writeCount),
+    pageB.evaluate(() => window.__writeCount)
+  ]);
+
+  // A small, bounded number of real writes (the original edit plus at most
+  // a couple of convergence hops) -- not dozens, and specifically not still
+  // growing with elapsed time the way the ping-pong bug produced.
+  expect(countA + countB).toBeLessThan(10);
+
+  await pageB.close();
+});
+
+// Issue #124 (Reviewer-found regression): an earlier version of this fix
+// put the `enabled` flag read and the meta-JSON read in the same try block,
+// so a corrupted GOOGLE_SYNC_META_KEY value discarded an already-
+// successfully-read, genuinely-`true` flag too -- reporting sync as off
+// when it was actually on. The two reads must degrade independently.
+test('readGoogleSyncMeta() falls back to the real enabled flag when only the meta blob is corrupted (#124)', async ({ page }) => {
+  const result = await page.evaluate(() => {
+    localStorage.setItem(GOOGLE_SYNC_FLAG, '1');
+    localStorage.setItem(GOOGLE_SYNC_META_KEY, '{not valid json');
+    return readGoogleSyncMeta();
+  });
+
+  expect(result.enabled).toBe(true);
+});

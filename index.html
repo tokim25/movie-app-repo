@@ -3148,18 +3148,30 @@ function getDeviceId(){
 const DEVICE_ID = getDeviceId();
 
 function readGoogleSyncMeta(){
-  // Issue #124: the `enabled` read used to happen before this try block, so
+  // Issue #124: the `enabled` read used to happen before any try block, so
   // a SecurityError from a privacy/security context that denies storage
   // (thrown by the read itself, not just JSON.parse) went uncaught here and
   // aborted the caller -- decideInitialScreen() has no outer guard around
   // this call, so that exception used to abort the rest of app startup.
-  // Every storage read now lives inside the guard.
+  //
+  // The flag read and the meta-JSON read are guarded independently (not one
+  // shared try) so a failure in one doesn't discard an already-successfully-
+  // read value from the other -- an earlier version of this fix put both in
+  // the same try, which meant a corrupted GOOGLE_SYNC_META_KEY value made a
+  // genuinely-enabled flag report as disabled instead of degrading
+  // gracefully to the flag's real value, same as pre-fix code did for that
+  // specific case.
+  let fallback;
   try{
-    const fallback = { enabled: localStorage.getItem(GOOGLE_SYNC_FLAG) === '1' };
+    fallback = { enabled: localStorage.getItem(GOOGLE_SYNC_FLAG) === '1' };
+  }catch(e){
+    return { enabled: false };
+  }
+  try{
     const raw = localStorage.getItem(GOOGLE_SYNC_META_KEY);
     return raw ? Object.assign(fallback, JSON.parse(raw)) : fallback;
   }catch(e){
-    return { enabled: false };
+    return fallback;
   }
 }
 
@@ -5047,6 +5059,27 @@ function mergeState(local, remote){
   };
 }
 
+// Order-independent for plain objects (key order carries no meaning for
+// e.g. `checked`/`priority`'s per-num records, which can differ in
+// insertion order between two states with identical content), order-
+// dependent for arrays (movieNums/events order is meaningful). Used below
+// to detect when a cross-tab merge produced no actual change, so a plain
+// JSON.stringify (key-order-sensitive) isn't safe here.
+function deepEqual(a, b){
+  if(a === b) return true;
+  if(typeof a !== typeof b || a === null || b === null) return a === b;
+  if(Array.isArray(a) || Array.isArray(b)){
+    if(!Array.isArray(a) || !Array.isArray(b) || a.length !== b.length) return false;
+    return a.every((v, i) => deepEqual(v, b[i]));
+  }
+  if(typeof a === 'object'){
+    const aKeys = Object.keys(a), bKeys = Object.keys(b);
+    if(aKeys.length !== bKeys.length) return false;
+    return aKeys.every(key => Object.prototype.hasOwnProperty.call(b, key) && deepEqual(a[key], b[key]));
+  }
+  return a === b;
+}
+
 // Issue #116: without this, a stale tab's next save would overwrite a
 // newer tab's changes with a stale full-state snapshot -- there was no way
 // for one tab to learn another tab wrote something newer. The `storage`
@@ -5057,11 +5090,26 @@ function mergeState(local, remote){
 // Drive sync already uses (per-mark/per-child updatedAt+device, newest
 // wins) instead of silently carrying its own stale in-memory state forward
 // into its next save.
+//
+// The deepEqual guard below is load-bearing, not an optimization:
+// serializeState() stamps a fresh top-level `updatedAt` on every call, so
+// persistLocalState()'s output differs in bytes on every write even once
+// the *meaningful* merged content has fully converged between two tabs.
+// Without checking whether the merge actually changed anything, every
+// write here would itself fire a new `storage` event in every other tab,
+// which would merge (a no-op) and write again, forever -- an unbounded
+// write-and-render ping-pong between any two open tabs after a single
+// edit, confirmed empirically (write counts climbing ~30/sec with no sign
+// of slowing). Skipping the write (and the render, since nothing visible
+// changed) when the merge is a true no-op is what lets convergence
+// actually stop the loop instead of the wrapper timestamp keeping it alive.
 window.addEventListener('storage', function(event){
   if(event.key !== STORAGE_KEY || !event.newValue) return;
   try{
     const remote = JSON.parse(event.newValue);
-    state = mergeState(state, remote);
+    const merged = mergeState(state, remote);
+    if(deepEqual(merged, state)) return;
+    state = merged;
     persistLocalState();
     renderCurrentView();
   }catch(e){ /* malformed write from another tab/context; ignore */ }
