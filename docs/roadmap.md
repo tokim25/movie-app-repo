@@ -338,3 +338,25 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
   branches fighting over `findTonightCandidate()`/`movieVerdictForKids()`/
   `showTonightPick()`). Every issue in this doc's "Now" and both flagged "Next" P1 clusters
   is now either merged or dispatched to Coder.
+- **2026-09-22** — PRs #134 (#92/#93/#96) and #135 (#98/#99) both open, awaiting review.
+  Coder started the independent data-integrity P1 batch (#116+#118+#124+#125) in parallel
+  per PM's note that it doesn't touch Tonight code. **#124:** `readGoogleSyncMeta()`'s
+  `enabled` read used to happen before its own try block, so a `SecurityError` from a
+  storage-denying privacy context went uncaught and aborted `decideInitialScreen()`/app
+  startup; the read now lives entirely inside the guard. **#125:** `persistLocalState()`
+  now returns whether the write actually succeeded instead of swallowing the failure, and
+  `saveState()` shows a new persistent `#localStorageAlert` banner ("Changes aren't saving
+  on this device") whenever it doesn't, clearing it on the next successful save. **#116:**
+  added a `storage` event listener that merges another tab's newer write into in-memory
+  state via the same deterministic `mergeState()`/`newestMark()` logic Google Drive sync
+  already used, instead of one tab's next save silently overwriting another tab's newer
+  marks/priority/content-limit changes with a stale full snapshot; also hardened
+  `mergeState()`'s event list to de-duplicate by id, since repeated live merges (not just a
+  one-time Drive sync) could otherwise double-count override events. **#118:** `sw.js`'s
+  navigation handler no longer treats every same-origin navigation as the app route —
+  `privacy.html`/`terms.html` are cached and recovered under their own URL instead of
+  clobbering/being clobbered-by the `/index.html` shell entry, and only a successful
+  (`response.ok`) response is ever cached. `CACHE_VERSION` bumped by hand (v21→v22) per the
+  file's own convention for a real code change. New `tests/storage-resilience.spec.js` (6
+  tests) and 2 new tests in `tests/offline-shell.spec.js`. Full suite green aside from the
+  documented sandbox-network flake. PR pending.
