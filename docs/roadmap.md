@@ -313,3 +313,11 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
   Coder's current work: **#96** (Tonight can show green on heuristic-only content with no
   real researched flags) — connects directly to the `contentStatus` work from #127, likely
   combinable with #92/#93 into one PR since all three touch the same eligibility path.
+- **2026-09-22** — Sequencing clarified: #92/#93/#96 start as soon as #131 merges, not
+  after the full ~929-title remaining runtime-backfill pool (Coder asked rather than
+  guessed, since #132's collapse removed the "finish it all in one PR" path that made
+  "queued behind runtime backfill" ambiguous). No technical dependency ties the P0s to
+  backfill completion — they're live bugs in current production eligibility logic,
+  unrelated to runtime data specifically — so holding them behind a long data-coverage
+  tail was the wrong tradeoff. Backfill resumes after, or interleaves, Coder's call on
+  mechanics.
