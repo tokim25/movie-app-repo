@@ -389,6 +389,39 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
   keep going; nothing blocking on PM's end. Tonight-correctness P1 batch
   (#94/97/103/104/105/108) is now unblocked to start, since #134 (the thing it was queued
   behind) has landed.
+- **2026-09-22** — PR #135 merged. Coder had started the independent data-integrity P1
+  batch (#116+#118+#124+#125) in parallel per PM's note that it doesn't touch Tonight code,
+  opened as PR #136. **#124:** `readGoogleSyncMeta()`'s `enabled` read used to happen
+  before its own try block, so a `SecurityError` from a storage-denying privacy context went
+  uncaught and aborted `decideInitialScreen()`/app startup; the read now lives entirely
+  inside the guard. **#125:** `persistLocalState()` now returns whether the write actually
+  succeeded instead of swallowing the failure, and `saveState()` shows a new persistent
+  `#localStorageAlert` banner ("Changes aren't saving on this device") whenever it doesn't,
+  clearing it on the next successful save. **#116:** added a `storage` event listener that
+  merges another tab's newer write into in-memory state via the same deterministic
+  `mergeState()`/`newestMark()` logic Google Drive sync already used, instead of one tab's
+  next save silently overwriting another tab's newer marks/priority/content-limit changes
+  with a stale full snapshot; also hardened `mergeState()`'s event list to de-duplicate by
+  id. **#118:** `sw.js`'s navigation handler no longer treats every same-origin navigation
+  as the app route — `privacy.html`/`terms.html` are cached and recovered under their own
+  URL instead of clobbering/being clobbered-by the `/index.html` shell entry, and only a
+  successful (`response.ok`) response is ever cached. `CACHE_VERSION` bumped by hand
+  (v21→v22). **Reviewer caught two real bugs on first pass, both fixed same day:** the
+  `storage` listener wrote unconditionally on every incoming event even when the merge was
+  a true no-op — since `serializeState()` stamps a fresh top-level `updatedAt` on every
+  call, every such write still differed in bytes, which re-triggered the listener in every
+  other open tab, which wrote again, forever (confirmed empirically: ~30 writes/sec with no
+  sign of slowing from a single edit). Fixed with a `deepEqual()` check that skips the
+  write when nothing meaningful changed. Separately, the #124 fix's first version put the
+  flag read and the meta-JSON read in one try block, so a corrupted meta value discarded an
+  already-successfully-read, genuinely-true flag too — a real (if narrow) regression from
+  pre-fix graceful degradation. Fixed by guarding the two reads independently. Two new
+  regression tests added: one watches write counts across two tabs over a real time window
+  (none of the original 4 `#116` tests would have caught the ping-pong, since they all
+  check eventual data-correctness rather than write volume), one reproduces the exact
+  corrupted-meta-with-valid-flag scenario. PR #136 merged (roadmap.md's own append-point
+  collision against this file resolved the same way as #133/#134 and #134/#135 before it —
+  keep both entries, no real content conflict).
 - **2026-09-22** — Tonight-correctness P1 batch (#94/#97/#103/#104/#105/#108) implemented,
   all six in one PR since they land in the same `findTonightCandidate()`/
   `movieVerdictForKids()`/`showTonightPick()` functions #92/#93/#96 already touched. **#94:**
@@ -424,4 +457,10 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
   or the old "starter settings" copy and were updated/narrowed rather than left to encode the
   bugs #97/#94 just fixed (see their own comments); one new #97-specific regression test
   added. Full local suite green aside from the two documented pre-existing flakes (sandbox
-  network on `catalog.spec.js`). PR opened.
+  network on `catalog.spec.js`). PR #137 opened, Reviewer approved same day after independent
+  verification (mutation-tested #97's flattening fix, re-verified the sessionId disclosure
+  update against the actual serialized shape rather than trusting the PR description) —
+  two minor non-blocking test-coverage notes vs. the issues' acceptance criteria, neither
+  needing a fix-and-repush per Reviewer. `mergeable_state` briefly went `dirty` when PR #136
+  merged (another `docs/roadmap.md` append-point collision, same shape as #133/#134 and
+  #134/#135, resolved the same way — both entries kept).
