@@ -30,8 +30,8 @@ the Trusted Contextual Recommendations phases below, several of which they block
 
 | Issue | Problem | Notes |
 |---|---|---|
-| [#92](https://github.com/tokim25/movie-app-repo/issues/92) | Tonight age eligibility uses the oldest child, allowing titles above younger viewers' age guidance | Filed 9/21, new. This is literally the oldest-child-plus-tolerance rule Gate 0 §1 already ruled out — fixable now against frozen policy, no new design needed |
-| [#93](https://github.com/tokim25/movie-app-repo/issues/93) | Tonight's terminal fallback returns `MOVIES[0]` even when no title is eligible | Filed 9/21, new. Directly contradicts the PRD's "no synthetic fallback" P0 requirement and Gate 0 — same situation as #92, ready to fix now |
+| [#92](https://github.com/tokim25/movie-app-repo/issues/92) | Tonight age eligibility uses the oldest child, allowing titles above younger viewers' age guidance | **Dispatched to Coder 2026-09-22**, queued behind the in-flight runtime backfill. Has an exact policy answer now (Gate 0 §1: strict, per-child, no `+2`) |
+| [#93](https://github.com/tokim25/movie-app-repo/issues/93) | Tonight's terminal fallback returns `MOVIES[0]` even when no title is eligible | **Dispatched to Coder 2026-09-22** alongside #92 (same functions, one PR). tokim25 confirmed this reproduces on real production data today — a 1 or 2-year-old's age ceiling (3 or 4) is below the catalog's lowest guidance (5+), so it triggers right now, not just in a synthetic fixture |
 | [#96](https://github.com/tokim25/movie-app-repo/issues/96) | Tonight can label heuristic-only movies green without confirmed title-specific content data | This *is* the PRD's core P0 problem (see below) — fixing it is Phase 0/2 work, not separate |
 | [#98](https://github.com/tokim25/movie-app-repo/issues/98) | Undisclosed Sentry processing contradicts "never sent" / "no third-party disclosure" claims | Privacy correction, blocks nothing else, should ship standalone |
 | [#99](https://github.com/tokim25/movie-app-repo/issues/99) | Policy/Terms omit child profiles, content limits, override history, device metadata | Same — standalone privacy fix, also a PRD Phase 0 dependency |
@@ -80,6 +80,24 @@ immediately**, not on the whenever-convenient timeline this was originally scope
 Coder was idle (both #127 and #128 merged) so nothing else was in the way. This is the
 critical path for every remaining phase of the initiative — no title reaches `certified`
 without it.
+
+[PR #129](https://github.com/tokim25/movie-app-repo/pull/129) — first WebSearch-snippet
+backfill batch (47 titles, first ever `certified` records) landed shortly after dispatch,
+open pending review.
+
+**Superseded by [PR #130](https://github.com/tokim25/movie-app-repo/pull/130), same day.**
+tokim25 had a separate agent compile `data-runtimes.json` — a bulk reference sourced from
+the real IMDb Non-Commercial Datasets (`title.basics.tsv.gz`), covering 1,070 of 1,071
+catalog titles with documented match confidence (1,058 high, 12 medium, 1 unresolved —
+*Air Bud Returns*, correctly left `null` on a genuine IMDb year conflict rather than
+guessed). This is strictly better provenance than manual snippet research for everything
+it covers. Dispatched to Coder: verify the data (spot-check a sample), use it to finish
+the *entire* remaining backfill in as few PRs as make sense (bulk-sourced data doesn't
+need the ~40-50/PR pacing manual research does), and **supersede PR #129** — redo its 47
+titles with the stronger IMDb-derived provenance rather than leaving weaker snippet data
+merged, closing #129 unmerged once covered. Same "upgrade a fallback source when a better
+one exists" principle `SKILL.md` already established for CSM content, just applied to
+runtime.
 
 ## Next
 
@@ -222,3 +240,12 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
   practice even though PM owns its content — anyone landing a PR that finishes work this
   file tracks may touch it too, so re-fetch before editing this file the same as any other
   shared file, not just the data-*.js files SKILL.md's hard rule names explicitly.
+- **2026-09-22** — tokim25 elevated the runtime backfill to top priority; dispatched to
+  Coder immediately. PR #129 (47-title WebSearch-snippet batch) landed shortly after, but
+  was itself superseded same day by PR #130 — a separate agent's bulk IMDb-dataset
+  reference (`data-runtimes.json`, 1,070/1,071 titles matched, documented confidence).
+  Dispatched Coder to verify and use #130 to finish the entire remaining backfill in bulk,
+  superseding #129's weaker-provenance data rather than merging it. Also dispatched P0s
+  #92 + #93 (Tonight eligibility bugs) as the next priority after the backfill, per
+  tokim25's confirmation — both have exact answers from frozen Gate 0/PRD policy now, no
+  new design work needed.
