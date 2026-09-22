@@ -130,7 +130,9 @@ recommendations PRD will also touch — worth clearing before or alongside Phase
 - [#114](https://github.com/tokim25/movie-app-repo/issues/114) — app screens not contained in a main landmark
 - [#115](https://github.com/tokim25/movie-app-repo/issues/115) — add-family-member validation leaves focus on Save, no invalid-field state
 
-### Data integrity / sync P1s
+### Data integrity / sync P1s — dispatched 2026-09-22
+Independent of the Tonight/P0 queue (different subsystem entirely), so Coder can run
+this in parallel rather than strictly after.
 - [#116](https://github.com/tokim25/movie-app-repo/issues/116) — stale tabs overwrite newer local changes instead of merging (data loss)
 - [#118](https://github.com/tokim25/movie-app-repo/issues/118) — offline navigation serves wrong document, can overwrite cached app shell
 - [#124](https://github.com/tokim25/movie-app-repo/issues/124) — blocking `localStorage` read can abort app startup
@@ -156,10 +158,10 @@ recommendations PRD will also touch — worth clearing before or alongside Phase
   time / good-pick rate / no-match rate. Blocked on Gates 5-6 plus a separate
   analytics/privacy decision if any data leaves the device.
 
-### Tonight correctness P1s (relabeled from P2 — correction, 2026-09-22)
-These were previously listed here as P2s; re-checking the actual issue labels found
-they're P1. Bucketed here rather than Next only because none of them are urgent/blocking
-the way the Now-section P0s are — revisit priority next triage pass.
+### Tonight correctness P1s — dispatched 2026-09-22
+Queued behind #92/#93/#96 specifically (not the data-integrity batch) since these touch
+the same `findTonightCandidate()`/`movieVerdictForKids()`/`showTonightPick()` functions —
+sequenced to avoid two concurrent branches fighting over the same code.
 - [#97](https://github.com/tokim25/movie-app-repo/issues/97) — Tonight source-tier precedence can override the selected mood
 - [#103](https://github.com/tokim25/movie-app-repo/issues/103) — skip feedback carries the previous movie's reason into the next skipped title
 - [#104](https://github.com/tokim25/movie-app-repo/issues/104) — repeated "Watch anyway" taps create duplicate override signals
@@ -329,3 +331,10 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
   Tonight's code at all, so Coder can run it parallel to the eligibility work if that's
   more natural. This closes out the entire "Now" P0 table — every item in it is now
   either merged or dispatched.
+- **2026-09-22** — PR #133 merged (nums 63-107 certified, 43 more titles). Dispatched the
+  two "Next" P1 batches: **data-integrity #116+#118+#124+#125** (independent subsystem,
+  runs parallel to everything else) and **Tonight correctness #94+#97+#103+#104+#105+#108**
+  (queued behind #92/#93/#96 specifically since they share the same functions — avoids two
+  branches fighting over `findTonightCandidate()`/`movieVerdictForKids()`/
+  `showTonightPick()`). Every issue in this doc's "Now" and both flagged "Next" P1 clusters
+  is now either merged or dispatched to Coder.
