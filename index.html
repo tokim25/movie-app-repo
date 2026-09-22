@@ -2889,13 +2889,26 @@ function parseAge(ca){
   return m ? parseInt(m[1], 10) : null;
 }
 
+// Gate 0 §1's normalized numeric recommendedAge, kept separate from `ca`'s
+// display copy (per the TRD: "recommendedAge must be numeric or explicitly
+// null; display strings must be stored separately"). `ca` doesn't parse for
+// 17 catalog entries that used a substitute source (ca is deliberately the
+// string "Not on CSM; substitute source used" for those) -- but `la` still
+// holds the real numeric age those entries were originally researched at,
+// so falling back to it recovers a normalized age without inventing new
+// data. Mirrored in scripts/catalog-schema.mjs -- keep both in sync.
+function recommendedAge(movie){
+  const fromCa = parseAge(movie.ca);
+  return fromCa !== null ? fromCa : parseAge(movie.la);
+}
+
 function movieYear(idx){
   const year = parseInt(MOVIES[idx].y, 10);
   return Number.isFinite(year) ? year : 9999;
 }
 
 function movieAge(idx){
-  const age = parseAge(MOVIES[idx].ca);
+  const age = recommendedAge(MOVIES[idx]);
   return age === null ? 999 : age;
 }
 
@@ -3849,7 +3862,7 @@ function reviewChildFlagSetting(childId, flagId){
 }
 
 function inferredMovieFlagLevel(movie){
-  const age = parseAge(movie.ca) || 6;
+  const age = recommendedAge(movie) || 6;
   if(age <= 5) return 1;
   if(age <= 8) return 2;
   return 3;
@@ -3871,7 +3884,7 @@ function movieContentProfile(movie){
     };
   }
   const text = `${movie.t || ''} ${movie.full || ''} ${(movie.genre || []).join(' ')}`.toLowerCase();
-  const age = parseAge(movie.ca) || 6;
+  const age = recommendedAge(movie) || 6;
   const base = inferredMovieFlagLevel(movie);
   const score = keywords => keywords.reduce((count, word) => count + (text.includes(word) ? 1 : 0), 0);
   return {
@@ -3900,7 +3913,7 @@ function movieExperienceProfile(idx){
   const movie = MOVIES[idx];
   const genres = movie.genre || [];
   const text = `${movie.t || ''} ${movie.full || ''} ${genres.join(' ')}`.toLowerCase();
-  const age = parseAge(movie.ca) || 6;
+  const age = recommendedAge(movie) || 6;
   const content = movieContentProfile(movie);
   const comedy = genres.includes('Comedy') || keywordCount(text, ['funny', 'silly', 'goofy', 'slapstick', 'pratfall']) > 0;
   const musical = genres.includes('Musical');
@@ -4011,7 +4024,7 @@ function primaryOverrideFlagForChild(movie, child){
 
 function isTonightEligible(idx, kids, maxAge, includeSkipped, requireGreen){
   const movie = MOVIES[idx];
-  const age = parseAge(movie.ca) || 99;
+  const age = recommendedAge(movie) || 99;
   if(kids.length && age > maxAge + 2) return false;
   if(markValue(state.checked, idx) && tonightSelection.mood !== 'favorite') return false;
   if(!includeSkipped && tonightSelection.skippedMovieNums.has(movieKey(idx))) return false;
@@ -5059,7 +5072,7 @@ function render(){
     if(filter === 'done' && !isChecked) return false;
     if(decadeFilter && decadeOf(m.y) !== parseInt(decadeFilter, 10)) return false;
     if(ageFilter){
-      const age = parseAge(m.ca);
+      const age = recommendedAge(m);
       if(age === null || age > parseInt(ageFilter, 10)) return false;
     }
     if(genreFilter && !(m.genre || []).includes(genreFilter)) return false;
@@ -5821,7 +5834,7 @@ function populateFilterOptions(){
     decadeSel.appendChild(opt);
   });
 
-  const ages = [...new Set(MOVIES.map(m => parseAge(m.ca)).filter(a => a !== null))].sort((a,b)=>a-b);
+  const ages = [...new Set(MOVIES.map(m => recommendedAge(m)).filter(a => a !== null))].sort((a,b)=>a-b);
   const ageSel = document.getElementById('ageFilter');
   ages.forEach(a=>{
     const opt = document.createElement('option');
