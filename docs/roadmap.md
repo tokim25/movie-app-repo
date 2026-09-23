@@ -569,3 +569,55 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
   (`JAVASCRIPT-7`/`JAVASCRIPT-8`, both Drive-sync error paths) represent a real latent bug
   worth its own ticket, since the test suite is getting real errors back from those code
   paths even though no real user has hit them — not urgent, not picked up yet.
+- **2026-09-23** — Five new P2/P3 real-user bug reports from PM's Sentry triage,
+  [#142](https://github.com/tokim25/movie-app-repo/issues/142)–[#146](https://github.com/tokim25/movie-app-repo/issues/146),
+  all confirmed real production traffic. PM left sequencing/batching to this session's
+  judgment; bundled the three with a clear, verifiable fix into one PR and left the other
+  two open rather than guess:
+  - **#142** (iOS Safari auto-zooms the page when the "Report a bug" message field is
+    focused): the app's own inputs are already 16px everywhere (checked all four
+    input/textarea font-size rules), so the actual cause is the Sentry Feedback widget's
+    own form, rendered into a separate `#sentry-feedback` shadow root this stylesheet
+    can't reach with an ordinary selector. Fixed with `#sentry-feedback{ --font-size:16px; }`
+    — the widget's own documented CSS-custom-property theming hook (custom properties
+    inherit through the shadow boundary even though selectors don't).
+  - **#143** (pagination doesn't scroll to top): `listPagePrevBtn`/`listPageNextBtn`'s
+    click handlers called `render()` but never touched scroll position. Added
+    `listEl.scrollIntoView({behavior:'smooth', block:'start'})` to both.
+  - **#144** (formatting broken showing two alternative picks): reproduced directly with
+    a Playwright screenshot at an iPhone-sized viewport (the issue's own suggested repro
+    path) rather than guessing — `.choiceChip`'s `border-radius:999px`, built for the
+    short single-line time/mood/theme labels it's used for elsewhere, clips into a movie
+    title + year long enough to wrap onto two lines. Fixed by scoping the radius down to
+    14px for `#tonightAlternatives .choiceChip` only; every other use of the shared pill
+    style is untouched. Screenshot confirmed the fix before it was added to the PR.
+
+  **#145** (foldable/dual-screen "iPhone Duo" layout) and **#146** (the feedback widget's
+  own built-in success toast is off-center) are left open, not bundled:
+  - #145's own report has no repro specifics (no screenshot, no screen/orientation) and
+    explicitly says to do a general check rather than a targeted fix unless a follow-up
+    narrows it down. Did that check — screenshotted Tonight, Shelf, and Family at a wide
+    foldable-style viewport (1114×705) — and found nothing broken. Leaving it open rather
+    than closing it outright, since a clean screenshot at one synthetic viewport doesn't
+    rule out every real foldable/orientation combination.
+  - #146 needs a CSS override against the *specific* variable the feedback widget's
+    built-in success-message toast uses for its position — not the same kind of
+    documented, confirmed hook #142's fix used. `docs.sentry.io` is network-blocked from
+    this sandbox (confirmed via a direct fetch attempt, not assumed), and the one
+    concrete public reference found (`getsentry/sentry-javascript#14539`, a feature
+    request asking for *more* CSS margin control over the feedback modal) suggests full
+    positioning control may not even be exposed yet. Given this integration's own history
+    in this repo of silent no-op failures from exactly this class of mistake (the
+    jsDelivr-vs-real-CDN URL bug and the JSON-escaping redaction bug, both documented in
+    `tests/error-tracking.spec.js`), shipping an unverified guess at a CSS variable name
+    was judged worse than leaving a cosmetic, PM-flagged-lowest-priority toast
+    off-center. Needs either a live device/browser check outside this sandbox or access
+    to the real docs page to close out with confidence.
+
+  Full local suite green aside from the pre-existing, unrelated sandbox-network flake in
+  `catalog.spec.js` (confirmed pre-existing by reproducing it against this branch's base
+  commit before any of this batch's changes were applied). Three new regression tests
+  added: one in `tests/error-tracking.spec.js` (#142's `--font-size` hook), one new
+  `tests/pagination.spec.js` (#143's scroll-reset), one in `tests/ux-treatment.spec.js`
+  (#144's chip radius, checked via computed style rather than pixel overlap since that's
+  not reliably assertable across environments).
