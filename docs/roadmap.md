@@ -19,6 +19,25 @@ across all of them.
   worked or next up for Coder; Next = queued, scoped, not yet started; Later = real but
   intentionally deferred.
 
+## Standing rules (read before touching certification or runtime data)
+
+These are settled decisions, not narrative — they live here instead of only in the
+changelog below so a fresh context window can't mistake past back-and-forth for an open
+question. Changing one needs an explicit decision from tokim25/Tech Lead recorded in this
+section, not a fresh PR re-deriving the same idea.
+
+- **`data-runtimes.json` (the IMDb Non-Commercial Dataset reference) never certifies a
+  title on its own, regardless of match-quality signals — not `candidateCount:1`, not
+  `confidence:"high"`, not any combination of the two.** This has been proposed and
+  rejected three times now (PR #130, PR #132, PR #138 — see the 2026-09-22 changelog
+  entries below for each episode's full detail). `candidateCount`/`confidence` answer
+  "was the right film matched," not "is the recorded runtime number accurate for that
+  film" — those are different questions, and real per-title errors (The Secret of Kells,
+  The Biggest Little Farm/Return, others) have turned up *inside* the "unambiguous" bucket
+  every time this was tried. `data-runtimes.json` is a research accelerant for the
+  WebSearch verification pipeline (a starting hypothesis to confirm, same method as
+  PRs #129/#131/#133), never a standalone certification path.
+
 ## Now
 
 **Top priority as of 2026-09-22 (tokim25):** the Phase 1 runtime backfill below — everything
