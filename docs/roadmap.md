@@ -487,3 +487,42 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
   (#109, #114, #117, #119-123) plus untriaged odds (#50, #63, #81) in Later; #89 (duration
   cap not enforced) tracked under Phase 1 since it resolves once runtime backfill +
   certification finish; Phases 2-4 blocked behind Phase 1 completing.
+- **2026-09-23** — Runtime backfill resumed on the Phase 1 top-priority item, picking up
+  from PR #133's `certified=101, provisional=889`. Rather than another 40-50-title
+  WebSearch batch, re-read the roadmap's own "corrected plan" note on `data-runtimes.json`
+  (the IMDb Non-Commercial Dataset reference from PR #130) — but cited the *first*,
+  superseded correction from the #130/#132 episode (`candidateCount:1`/`confidence:"high"`
+  as a safe auto-promotion bar), not the final one, and opened PR #138 on that basis:
+  wrote `runtimeMinutes`/`runtimeSourceId`/`runtimeVerifiedAt` into all 459 of the 889
+  remaining candidates fitting that filter, spot-checked 4 against known runtimes first
+  (all correct), full suite green, `certified=560, provisional=430`.
+
+  **This was wrong, and three people independently converged on why, from different
+  angles, the same day.** Reviewer's random 20-title sample (not the 4 hand-picked ones)
+  found two miniseries mismatched as movies (`#618` Anne of Green Gables 1986 and `#625`
+  Heidi 1993, both `titleType: "tvMiniSeries"` in `data-runtimes.json`, both carrying an
+  explicit `match.note` — *"Entire-series runtime; the bulk dataset lists a per-part
+  runtime"* — that the filter never checked) and one plain wrong number with zero
+  mechanical signal at all (`#171` Miracle in Lane 2: 120 min from the "unambiguous" IMDb
+  match vs. 89 min confirmed across Wikipedia/Disney Fandom/real IMDb). Tech Lead
+  independently re-confirmed the underlying pattern holds *today*, not just historically —
+  checking the 5 titles Reviewer flagged back in the #132 episode, 3 (`#33`/`#58`/`#59`)
+  still show real disagreements against `data-runtimes.json` despite carrying
+  `candidateCount:1`+`confidence:"high"` right now — and closed the question for good with
+  a new "Standing rules" section above (`data-runtimes.json` never certifies a title on
+  its own, regardless of match-quality signals, full stop — third time this exact idea has
+  been tried and rejected: PR #130, PR #132, now PR #138). tokim25/PM caught the root cause
+  of how this happened a third time: the PR's own description cited the *superseded*
+  first-draft correction from the #130/#132 episode instead of the policy's final form,
+  which is exactly the kind of context loss the new Standing Rules section exists to
+  prevent going forward.
+
+  Per PM's explicit direction, closed PR #138 **without merging** — the same precedent as
+  PR #132's own closure, not a merged revert. (Master's data files were never actually
+  touched by #138 in the first place, so nothing there needed undoing; the closed branch's
+  own history carries a revert commit showing the mistake and the correction, matching how
+  #132's branch was handled.) `certified=101, provisional=889` on `master` throughout,
+  unchanged by this whole episode. `data-runtimes.json` remains legitimately useful as a
+  starting hypothesis fed into the real WebSearch verification pipeline PRs #129/#131/#133
+  already used (faster per-title research, never a bypass of verifying each one) — that
+  continues as its own follow-up batch, same method, no shortcut.
