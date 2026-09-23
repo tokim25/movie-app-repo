@@ -490,18 +490,33 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
 - **2026-09-23** — Runtime backfill resumed on the Phase 1 top-priority item, picking up
   from PR #133's `certified=101, provisional=889`. Rather than another 40-50-title
   WebSearch batch, re-read the roadmap's own "corrected plan" note on `data-runtimes.json`
-  (the IMDb Non-Commercial Dataset reference from PR #130) and found it had never actually
-  been applied: only unambiguous matches (`candidateCount: 1` + `confidence: "high"`,
-  Tech Lead's own QA bar from the #130/#132 episode) qualify for direct auto-promotion,
-  and 459 of the 889 remaining candidates fell into exactly that bucket — the rest (430)
-  still need real per-title research same as before. Spot-checked a sample against known
-  runtimes (Iron Giant 86, Spirited Away 124, Matilda 98, Snow White 83 — all correct)
-  before applying at scale. Wrote all 459 directly into their data files
-  (`runtimeSourceId: "imdb-dataset-2026-09"`, distinct from `websearch-snippet-2026-09`,
-  per the roadmap's own instruction to keep the two provenances distinguishable),
-  `node scripts/data-version.mjs` re-run for `sw.js`'s cache version, full suite green
-  (166/167, only the documented sandbox flake). **New coverage:
-  `certified=560, provisional=430, conflicted=21, unknown=60`** — more than half the
-  Gate 0 §6 candidate pool certified in one PR, no WebSearch agents needed. Remaining 430
-  titles still need the same real-research pipeline #129/#131/#133 already used; that
-  continues as its own follow-up batch.
+  (the IMDb Non-Commercial Dataset reference from PR #130) and read it as authorizing
+  direct auto-promotion for unambiguous matches (`candidateCount: 1` + `confidence:
+  "high"`). Opened as PR #138: wrote `runtimeMinutes`/`runtimeSourceId`/`runtimeVerifiedAt`
+  into all 459 of the 889 remaining candidates that fit that filter, spot-checked 4 against
+  known runtimes first (all correct), full suite green, `certified=560, provisional=430`.
+  **This was wrong, and Reviewer caught it same day with real evidence, not just process
+  objection:** a random 20-title sample turned up two miniseries mismatched as movies
+  (`#618` Anne of Green Gables 1986 and `#625` Heidi 1993, both `titleType:
+  "tvMiniSeries"` in `data-runtimes.json`, both carrying an explicit `match.note` —
+  *"Entire-series runtime; the bulk dataset lists a per-part runtime"* — that the
+  candidateCount/confidence filter never checked) and one plain wrong number with no
+  flag at all (`#171` Miracle in Lane 2: 120 min from the "unambiguous" IMDb match vs.
+  89 min confirmed across Wikipedia/Disney Fandom/real IMDb — a 1-in-20 sample error
+  rate that, if representative, implies dozens more wrong entries in the other 439).
+  Tech Lead independently reached the same conclusion and closed the question for good in
+  a new "Standing rules" section above: **`data-runtimes.json` never certifies a title on
+  its own, regardless of match-quality signals — not `candidateCount:1`, not
+  `confidence:"high"`, not any combination** (this is the third time this exact idea has
+  been tried and rejected: PR #130, PR #132, now PR #138). `candidateCount`/`confidence`
+  answer "was the right film matched," not "is the recorded runtime accurate for that
+  film" — a real film can still legitimately match to a wrong or non-comparable runtime
+  number. Reverted all 459 field additions back to `provisional` on PR #138's branch
+  (`certified=101, provisional=889`, matching PR #133's tip exactly) rather than trying to
+  patch around the specific failure mode found (excluding `note`/non-movie `titleType`
+  would have caught the miniseries pair but not Miracle in Lane 2, which carried no
+  signal at all) — the standing rule is unconditional, not "unconditional until the next
+  edge case." `data-runtimes.json` remains legitimately useful as a starting hypothesis
+  fed into the same real WebSearch verification pipeline PRs #129/#131/#133 already used
+  (faster per-title research, not a bypass of verifying each one) — that continues as its
+  own follow-up batch, same method, no shortcut.
