@@ -99,6 +99,44 @@ test('Sentry.init is called with PII off, DOM breadcrumbs off, and a beforeSend 
   expect(breadcrumbsOpts.dom).toBe(false);
 });
 
+// Issue #139: Sentry's SDK defaults `environment` to "production" whenever it isn't
+// explicitly set, and this app's test server runs at 127.0.0.1 -- neither of these
+// tests would mean anything if the app still shipped that default. Confirms both that
+// isProductionHost() itself draws the line in the right place, and that the real
+// Sentry.init() call this app makes actually uses it for both `environment` and
+// `enabled` rather than only one of the two.
+test('isProductionHost() matches only the real production hostnames, not every *.vercel.app deploy', async ({ page }) => {
+  await page.goto('/');
+  const results = await page.evaluate(() => ({
+    customDomain: isProductionHost('movies.tonykim.io'),
+    vercelProduction: isProductionHost('family-movie-watchlist-kim-family-projects.vercel.app'),
+    vercelPreview: isProductionHost('family-movie-watchlist-git-some-branch-kim-family-projects.vercel.app'),
+    localhost: isProductionHost('127.0.0.1'),
+    unrelatedHost: isProductionHost('evil.example.com')
+  }));
+
+  expect(results.customDomain).toBe(true);
+  expect(results.vercelProduction).toBe(true);
+  // A PR preview deployment shares the '.vercel.app' suffix with production but is a
+  // distinct subdomain -- exactly the case a wildcard suffix match would wrongly catch.
+  expect(results.vercelPreview).toBe(false);
+  expect(results.localhost).toBe(false);
+  expect(results.unrelatedHost).toBe(false);
+});
+
+test('Sentry.init() reports environment:development and enabled:false when not on a production host', async ({ page }) => {
+  await page.goto('/');
+  // The test server serves the app at 127.0.0.1, which isProductionHost() correctly
+  // rejects -- so this is exercising the real non-production path, not a mock of it.
+  const config = await page.evaluate(() => ({
+    environment: window.__sentryInitConfig && window.__sentryInitConfig.environment,
+    enabled: window.__sentryInitConfig && window.__sentryInitConfig.enabled
+  }));
+
+  expect(config.environment).toBe('development');
+  expect(config.enabled).toBe(false);
+});
+
 test('no Replay or BrowserTracing integration is ever referenced', async ({ page }) => {
   await page.goto('/');
   const source = await page.content();

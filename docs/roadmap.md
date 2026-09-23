@@ -468,3 +468,30 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
   (#109, #114, #117, #119-123) plus untriaged odds (#50, #63, #81) in Later; #89 (duration
   cap not enforced) tracked under Phase 1 since it resolves once runtime backfill +
   certification finish; Phases 2-4 blocked behind Phase 1 completing.
+- **2026-09-23** — New P0 from PM's first Sentry-triage pass, filed as
+  [#139](https://github.com/tokim25/movie-app-repo/issues/139) and picked up same day:
+  `index.html`'s `Sentry.init()` never set or gated `environment`, so the SDK's own
+  "production" default meant every page load reaching that block reported as
+  production — including Playwright's own local test server and every Vercel PR preview
+  deployment. PM confirmed via Sentry's `search_events` that 100% of the last 7 days'
+  events (250/250, across all 7 open issues) came from `127.0.0.1:4319`, none real
+  production traffic. Fixed with a new `isProductionHost(hostname)` function (checking
+  the exact production hostnames — the custom domain plus the specific Vercel production
+  project URL — deliberately *not* a `.vercel.app` suffix match, which would also catch
+  every PR preview's own `<project>-git-<branch>-...vercel.app` subdomain and reintroduce
+  the same problem there), used for both `environment` (`'production'`/`'development'`)
+  and `enabled` (stops non-production events from being sent at all, not just
+  mislabeled) in the `Sentry.init()` call. Two new tests added to
+  `tests/error-tracking.spec.js`: one exercises `isProductionHost()` directly across the
+  custom domain, the real Vercel production URL, a synthetic preview subdomain, localhost,
+  and an unrelated host; one confirms `Sentry.init()`'s actual config reports
+  `environment: 'development'`/`enabled: false` when served from the test server. All 14
+  existing `error-tracking.spec.js` tests (including ones that rely on the stub SDK
+  actually capturing events) still pass unmodified — the stub doesn't implement the real
+  SDK's `enabled` gating, so `enabled: false` only changes real-SDK network behavior, not
+  this suite's assertions. Full local suite green aside from the documented sandbox-network
+  flake (168/169). PM flagged a possible follow-up once this lands: an independent look at
+  whether the two loudest "fake" issues (`JAVASCRIPT-7`/`JAVASCRIPT-8`, both Drive-sync
+  error paths) represent a real latent bug worth its own ticket, since the test suite is
+  getting real errors back from those code paths even though no real user has hit them —
+  not urgent, not picked up yet.
