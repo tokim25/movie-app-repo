@@ -526,3 +526,46 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
   starting hypothesis fed into the real WebSearch verification pipeline PRs #129/#131/#133
   already used (faster per-title research, never a bypass of verifying each one) — that
   continues as its own follow-up batch, same method, no shortcut.
+- **2026-09-23** — New P0 from PM's first Sentry-triage pass, filed as
+  [#139](https://github.com/tokim25/movie-app-repo/issues/139) and picked up same day:
+  `index.html`'s `Sentry.init()` never set or gated `environment`, so the SDK's own
+  "production" default meant every page load reaching that block reported as
+  production — including Playwright's own local test server and every Vercel PR preview
+  deployment. PM confirmed via Sentry's `search_events` that 100% of the last 7 days'
+  events (250/250, across all 7 open issues) came from `127.0.0.1:4319`, none real
+  production traffic. Fixed with a new `isProductionHost(hostname)` function (checking
+  the exact production hostnames — the custom domain plus the specific Vercel production
+  project URL — deliberately *not* a `.vercel.app` suffix match, which would also catch
+  every PR preview's own `<project>-git-<branch>-...vercel.app` subdomain and reintroduce
+  the same problem there), used for both `environment` (`'production'`/`'development'`)
+  and `enabled` (stops non-production events from being sent at all, not just
+  mislabeled) in the `Sentry.init()` call. Two new tests added to
+  `tests/error-tracking.spec.js`: one exercises `isProductionHost()` directly across the
+  custom domain, the real Vercel production URL, a synthetic preview subdomain, localhost,
+  and an unrelated host; one confirms `Sentry.init()`'s actual config reports
+  `environment: 'development'`/`enabled: false` when served from the test server. All 14
+  existing `error-tracking.spec.js` tests (including ones that rely on the stub SDK
+  actually capturing events) still pass unmodified — the stub doesn't implement the real
+  SDK's `enabled` gating, so `enabled: false` only changes real-SDK network behavior, not
+  this suite's assertions.
+
+  **Reviewer's review round caught a real, narrow gap:** `isProductionHost()` only checked
+  the custom domain and the bare Vercel production URL, but `index.html`'s own
+  `LEGACY_HOSTS_TO_REDIRECT` set (near `maybeRedirectToCanonicalHost()`, much further down
+  the same file) already documents two more hostnames — including the
+  `-git-master-kim-family-projects.vercel.app` alias — as real-user-reachable, since
+  `vercel.json`'s server-side redirect only covers the bare production URL and the
+  client-side JS redirect runs well after `Sentry.init()`. A real visitor landing on
+  either missed host before that redirect fired would have had their errors silently
+  dropped (`enabled: false`) instead of just mislabeled — the exact observability gap
+  this P0 exists to close. Fixed by adding all three `LEGACY_HOSTS_TO_REDIRECT` entries to
+  `isProductionHost()` (duplicated deliberately, not shared by reference, since that set
+  lives in a later inline `<script>` block that hasn't executed yet when `Sentry.init()`
+  runs); a new test locks the two lists together by checking `isProductionHost()` against
+  every live `LEGACY_HOSTS_TO_REDIRECT` entry directly, so future drift between them fails
+  loud instead of quietly reintroducing this gap. Full local suite green aside from the
+  documented sandbox-network flake (169/170). PM flagged a possible follow-up once this
+  lands: an independent look at whether the two loudest "fake" issues
+  (`JAVASCRIPT-7`/`JAVASCRIPT-8`, both Drive-sync error paths) represent a real latent bug
+  worth its own ticket, since the test suite is getting real errors back from those code
+  paths even though no real user has hit them — not urgent, not picked up yet.

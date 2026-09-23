@@ -99,6 +99,69 @@ test('Sentry.init is called with PII off, DOM breadcrumbs off, and a beforeSend 
   expect(breadcrumbsOpts.dom).toBe(false);
 });
 
+// Issue #139: Sentry's SDK defaults `environment` to "production" whenever it isn't
+// explicitly set, and this app's test server runs at 127.0.0.1 -- neither of these
+// tests would mean anything if the app still shipped that default. Confirms both that
+// isProductionHost() itself draws the line in the right place, and that the real
+// Sentry.init() call this app makes actually uses it for both `environment` and
+// `enabled` rather than only one of the two.
+test('isProductionHost() matches only the real production hostnames, not every *.vercel.app deploy', async ({ page }) => {
+  await page.goto('/');
+  const results = await page.evaluate(() => ({
+    customDomain: isProductionHost('movies.tonykim.io'),
+    vercelProduction: isProductionHost('family-movie-watchlist-kim-family-projects.vercel.app'),
+    vercelPreview: isProductionHost('family-movie-watchlist-git-some-branch-kim-family-projects.vercel.app'),
+    localhost: isProductionHost('127.0.0.1'),
+    unrelatedHost: isProductionHost('evil.example.com')
+  }));
+
+  expect(results.customDomain).toBe(true);
+  expect(results.vercelProduction).toBe(true);
+  // A PR preview deployment shares the '.vercel.app' suffix with production but is a
+  // distinct subdomain -- exactly the case a wildcard suffix match would wrongly catch.
+  expect(results.vercelPreview).toBe(false);
+  expect(results.localhost).toBe(false);
+  expect(results.unrelatedHost).toBe(false);
+});
+
+// Regression test for a real gap Reviewer found: isProductionHost() originally omitted
+// the `-git-master-` legacy alias that LEGACY_HOSTS_TO_REDIRECT (index.html, near
+// maybeRedirectToCanonicalHost()) already treats as real-user-reachable -- vercel.json's
+// own server-side redirect only covers the bare production URL, so a real visitor
+// landing on that alias before the client-side JS redirect fires would have had their
+// errors silently dropped (enabled:false) instead of just mislabeled. Checks against the
+// actual LEGACY_HOSTS_TO_REDIRECT set rather than hardcoding the hostnames a second time
+// here, so this fails loud if the two lists (which can't share a JS binding -- see the
+// comment on isProductionHost() for why) ever drift apart again.
+test('isProductionHost() treats every LEGACY_HOSTS_TO_REDIRECT entry as production', async ({ page }) => {
+  await page.goto('/');
+  const results = await page.evaluate(() => {
+    const legacyHosts = Array.from(LEGACY_HOSTS_TO_REDIRECT);
+    return {
+      legacyHosts,
+      matches: legacyHosts.map(host => isProductionHost(host)),
+      canonicalHostMatches: isProductionHost(CANONICAL_HOST)
+    };
+  });
+
+  expect(results.legacyHosts.length).toBeGreaterThan(0);
+  expect(results.matches.every(Boolean)).toBe(true);
+  expect(results.canonicalHostMatches).toBe(true);
+});
+
+test('Sentry.init() reports environment:development and enabled:false when not on a production host', async ({ page }) => {
+  await page.goto('/');
+  // The test server serves the app at 127.0.0.1, which isProductionHost() correctly
+  // rejects -- so this is exercising the real non-production path, not a mock of it.
+  const config = await page.evaluate(() => ({
+    environment: window.__sentryInitConfig && window.__sentryInitConfig.environment,
+    enabled: window.__sentryInitConfig && window.__sentryInitConfig.enabled
+  }));
+
+  expect(config.environment).toBe('development');
+  expect(config.enabled).toBe(false);
+});
+
 test('no Replay or BrowserTracing integration is ever referenced', async ({ page }) => {
   await page.goto('/');
   const source = await page.content();
