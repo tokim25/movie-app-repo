@@ -132,13 +132,8 @@ recommendations PRD will also touch — worth clearing before or alongside Phase
 - [#114](https://github.com/tokim25/movie-app-repo/issues/114) — app screens not contained in a main landmark
 - [#115](https://github.com/tokim25/movie-app-repo/issues/115) — add-family-member validation leaves focus on Save, no invalid-field state
 
-### Data integrity / sync P1s — dispatched 2026-09-22
-Independent of the Tonight/P0 queue (different subsystem entirely), so Coder can run
-this in parallel rather than strictly after.
-- [#116](https://github.com/tokim25/movie-app-repo/issues/116) — stale tabs overwrite newer local changes instead of merging (data loss)
-- [#118](https://github.com/tokim25/movie-app-repo/issues/118) — offline navigation serves wrong document, can overwrite cached app shell
-- [#124](https://github.com/tokim25/movie-app-repo/issues/124) — blocking `localStorage` read can abort app startup
-- [#125](https://github.com/tokim25/movie-app-repo/issues/125) — storage write failures silently discard family changes
+### Data integrity / sync P1s — MERGED (PR #136, 2026-09-22)
+#116, #118, #124, #125 all shipped. Removed from this list; see change log for detail.
 
 ### Remaining privacy P1s
 - [#100](https://github.com/tokim25/movie-app-repo/issues/100) — Google sync's 180-day refresh-token cookie/session retention undisclosed
@@ -160,16 +155,8 @@ this in parallel rather than strictly after.
   time / good-pick rate / no-match rate. Blocked on Gates 5-6 plus a separate
   analytics/privacy decision if any data leaves the device.
 
-### Tonight correctness P1s — dispatched 2026-09-22
-Queued behind #92/#93/#96 specifically (not the data-integrity batch) since these touch
-the same `findTonightCandidate()`/`movieVerdictForKids()`/`showTonightPick()` functions —
-sequenced to avoid two concurrent branches fighting over the same code.
-- [#97](https://github.com/tokim25/movie-app-repo/issues/97) — Tonight source-tier precedence can override the selected mood
-- [#103](https://github.com/tokim25/movie-app-repo/issues/103) — skip feedback carries the previous movie's reason into the next skipped title
-- [#104](https://github.com/tokim25/movie-app-repo/issues/104) — repeated "Watch anyway" taps create duplicate override signals
-- [#105](https://github.com/tokim25/movie-app-repo/issues/105) — changing viewers/mood/time leaves the stale recommendation card visible
-- [#108](https://github.com/tokim25/movie-app-repo/issues/108) — Tonight reports content-issue count as number of children affected
-- [#94](https://github.com/tokim25/movie-app-repo/issues/94) — green explanation always says "starter settings" even with custom limits
+### Tonight correctness P1s — MERGED (PR #137, 2026-09-22)
+#94, #97, #103, #104, #105, #108 all shipped. Removed from this list; see change log.
 
 ### Remaining P2s (not yet triaged into a phase)
 Installability/PWA polish (#119-123), watched/want-to-watch state cleanup (#117). Will get
@@ -468,3 +455,16 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
   `showTonightPick()`) was exercised anywhere — the existing red/amber tests both land at
   exactly 2 reasons. Traced by hand first and confirmed correct, then three tests added
   covering all three scenarios; full suite re-run clean before pushing.
+- **2026-09-23** — Full issue sweep against `master`: PR #136 (data-integrity P1s) and
+  PR #137 (Tonight-correctness P1s) are both merged, on top of #134/#135 from the day
+  before — every P0 and both flagged P1 clusters from this doc are now shipped. Closed the
+  15 corresponding GitHub issues (#92, #93, #96, #98, #99, #94, #97, #103, #104, #105,
+  #108, #116, #118, #124, #125) with comments pointing at their merging PRs, since none of
+  the four merge commits' `Closes #N` references auto-triggered (same pattern as #95
+  earlier — GitHub doesn't reliably auto-close from a PR description list). Trimmed the
+  now-empty "Next"/"Later" entries for both clusters rather than leaving stale issue links
+  in this doc. Remaining genuinely open work, by priority, is now: the privacy P1 cluster
+  (#100, #101, #102, #106, #107) and a11y P1 cluster (#110-113, #115) in Next; P2 polish
+  (#109, #114, #117, #119-123) plus untriaged odds (#50, #63, #81) in Later; #89 (duration
+  cap not enforced) tracked under Phase 1 since it resolves once runtime backfill +
+  certification finish; Phases 2-4 blocked behind Phase 1 completing.
