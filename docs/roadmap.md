@@ -468,3 +468,21 @@ This section is kept only as a pointer; the PRD's own list is now historical, no
   (#109, #114, #117, #119-123) plus untriaged odds (#50, #63, #81) in Later; #89 (duration
   cap not enforced) tracked under Phase 1 since it resolves once runtime backfill +
   certification finish; Phases 2-4 blocked behind Phase 1 completing.
+- **2026-09-23** — Runtime backfill resumed on the Phase 1 top-priority item, picking up
+  from PR #133's `certified=101, provisional=889`. Rather than another 40-50-title
+  WebSearch batch, re-read the roadmap's own "corrected plan" note on `data-runtimes.json`
+  (the IMDb Non-Commercial Dataset reference from PR #130) and found it had never actually
+  been applied: only unambiguous matches (`candidateCount: 1` + `confidence: "high"`,
+  Tech Lead's own QA bar from the #130/#132 episode) qualify for direct auto-promotion,
+  and 459 of the 889 remaining candidates fell into exactly that bucket — the rest (430)
+  still need real per-title research same as before. Spot-checked a sample against known
+  runtimes (Iron Giant 86, Spirited Away 124, Matilda 98, Snow White 83 — all correct)
+  before applying at scale. Wrote all 459 directly into their data files
+  (`runtimeSourceId: "imdb-dataset-2026-09"`, distinct from `websearch-snippet-2026-09`,
+  per the roadmap's own instruction to keep the two provenances distinguishable),
+  `node scripts/data-version.mjs` re-run for `sw.js`'s cache version, full suite green
+  (166/167, only the documented sandbox flake). **New coverage:
+  `certified=560, provisional=430, conflicted=21, unknown=60`** — more than half the
+  Gate 0 §6 candidate pool certified in one PR, no WebSearch agents needed. Remaining 430
+  titles still need the same real-research pipeline #129/#131/#133 already used; that
+  continues as its own follow-up batch.
