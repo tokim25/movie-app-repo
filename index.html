@@ -122,15 +122,23 @@
     }
   }
 })();
-// Issue #139: the real production hostnames only -- the custom domain plus the specific
-// Vercel production project URL, never a `.vercel.app` suffix match (every PR preview
-// deployment also ends in `.vercel.app`, under its own `<project>-git-<branch>-...`
-// subdomain, and is not production). A plain function (not part of the IIFE above) so
-// it's callable directly from a test with an arbitrary hostname string, without needing
-// to fake `location`.
+// Issue #139: the real production hostnames only -- the custom domain, the specific
+// Vercel production project URL, and the same legacy hostnames
+// `LEGACY_HOSTS_TO_REDIRECT` (further down, near `maybeRedirectToCanonicalHost()`) treats
+// as real-user-reachable -- never a `.vercel.app` suffix match, which every PR preview
+// deployment also matches under its own `<project>-git-<branch>-...` subdomain and is
+// not production. Can't just reference `LEGACY_HOSTS_TO_REDIRECT` itself: it's declared
+// in a later inline <script> block, so it doesn't exist yet when Sentry.init() runs here
+// -- this list is duplicated on purpose, not stale. Reviewer caught a real gap: this
+// used to omit the `-git-master-` legacy alias, meaning a real visitor landing there
+// (vercel.json's own redirect covers only the bare production URL) before the
+// client-side JS redirect fires would have their errors silently dropped instead of
+// just mislabeled. Keep both lists in sync if either ever changes.
 function isProductionHost(hostname){
   return hostname === 'movies.tonykim.io' ||
-    hostname === 'family-movie-watchlist-kim-family-projects.vercel.app';
+    hostname === 'family-movie-watchlist.vercel.app' ||
+    hostname === 'family-movie-watchlist-kim-family-projects.vercel.app' ||
+    hostname === 'family-movie-watchlist-git-master-kim-family-projects.vercel.app';
 }
 // Shared by beforeSend (error events) and the beforeSendFeedback hook (feedback events) --
 // looks up the current children fresh each call rather than once at init, since who's in

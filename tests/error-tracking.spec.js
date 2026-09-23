@@ -124,6 +124,31 @@ test('isProductionHost() matches only the real production hostnames, not every *
   expect(results.unrelatedHost).toBe(false);
 });
 
+// Regression test for a real gap Reviewer found: isProductionHost() originally omitted
+// the `-git-master-` legacy alias that LEGACY_HOSTS_TO_REDIRECT (index.html, near
+// maybeRedirectToCanonicalHost()) already treats as real-user-reachable -- vercel.json's
+// own server-side redirect only covers the bare production URL, so a real visitor
+// landing on that alias before the client-side JS redirect fires would have had their
+// errors silently dropped (enabled:false) instead of just mislabeled. Checks against the
+// actual LEGACY_HOSTS_TO_REDIRECT set rather than hardcoding the hostnames a second time
+// here, so this fails loud if the two lists (which can't share a JS binding -- see the
+// comment on isProductionHost() for why) ever drift apart again.
+test('isProductionHost() treats every LEGACY_HOSTS_TO_REDIRECT entry as production', async ({ page }) => {
+  await page.goto('/');
+  const results = await page.evaluate(() => {
+    const legacyHosts = Array.from(LEGACY_HOSTS_TO_REDIRECT);
+    return {
+      legacyHosts,
+      matches: legacyHosts.map(host => isProductionHost(host)),
+      canonicalHostMatches: isProductionHost(CANONICAL_HOST)
+    };
+  });
+
+  expect(results.legacyHosts.length).toBeGreaterThan(0);
+  expect(results.matches.every(Boolean)).toBe(true);
+  expect(results.canonicalHostMatches).toBe(true);
+});
+
 test('Sentry.init() reports environment:development and enabled:false when not on a production host', async ({ page }) => {
   await page.goto('/');
   // The test server serves the app at 127.0.0.1, which isProductionHost() correctly
