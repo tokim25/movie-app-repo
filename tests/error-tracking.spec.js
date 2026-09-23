@@ -156,6 +156,25 @@ test('the "Report a bug" button opens the Sentry feedback form, not a mailto: li
   await expect.poll(() => page.evaluate(() => window.__sentryFeedbackFormCalls)).toEqual(['appendToDom', 'open']);
 });
 
+test('the feedback widget host sets --font-size to 16px to prevent iOS Safari auto-zoom', async ({ page }) => {
+  // Regression test for issue #142: iOS Safari auto-zooms the whole page when a
+  // focused input's computed font-size is under 16px. The app's own inputs are
+  // already 16px, but the Sentry Feedback widget renders its form into a separate
+  // #sentry-feedback shadow root this stylesheet can't reach directly -- Sentry's
+  // widget reads CSS custom properties on that host element instead (they inherit
+  // through the shadow boundary), so this checks the widget's own theming hook.
+  await page.goto('/');
+  const fontSize = await page.evaluate(() => {
+    const host = document.createElement('div');
+    host.id = 'sentry-feedback';
+    document.body.appendChild(host);
+    const value = getComputedStyle(host).getPropertyValue('--font-size').trim();
+    host.remove();
+    return value;
+  });
+  expect(fontSize).toBe('16px');
+});
+
 test('no hardcoded mailto: link or email address remains in the source', async ({ page }) => {
   await page.goto('/');
   const source = await page.content();

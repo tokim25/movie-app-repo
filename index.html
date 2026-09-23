@@ -286,6 +286,17 @@ function reportError(err){
   a{
     touch-action:manipulation;
   }
+  /* Issue #142: iOS Safari auto-zooms the page when a focused input's computed
+     font-size is under 16px. The app's own inputs are already 16px (see the base
+     rule above), but the Sentry Feedback widget renders its form into a separate
+     `#sentry-feedback` shadow root that this stylesheet can't reach directly --
+     Sentry's widget instead reads CSS custom properties on that host element and
+     applies them inside its shadow DOM (custom properties inherit through shadow
+     boundaries even though normal selectors don't), so this is the widget's own
+     theming hook, not a rule targeting its internal markup. */
+  #sentry-feedback{
+    --font-size: 16px;
+  }
   :focus-visible{
     outline:2px solid var(--focus) !important;
     outline-offset:2px !important;
@@ -1361,6 +1372,16 @@ function reportError(err){
     border-color:rgba(var(--accent-rgb),0.4);
     background:rgba(var(--accent-rgb),0.1);
     color:var(--accent);
+  }
+  /* Issue #144: .choiceChip's 999px border-radius makes a clean pill for the short,
+     single-line labels it's used for elsewhere (time/mood/theme choices), but the
+     "see two alternatives" buttons reuse it for a movie title + year, which is often
+     long enough to wrap onto two lines -- the fully-rounded ends then clip into the
+     wrapped text instead of framing it. Scoped to this one grid so the shared pill
+     shape used everywhere else is untouched. */
+  #tonightAlternatives .choiceChip{
+    border-radius:14px;
+    text-align:left;
   }
   .pickCard{
     margin-top:16px;
@@ -5569,11 +5590,13 @@ if(listPagePrevBtn) listPagePrevBtn.addEventListener('click', ()=>{
   if(listPage > 1){
     listPage -= 1;
     render();
+    if(listEl) listEl.scrollIntoView({ behavior:'smooth', block:'start' });
   }
 });
 if(listPageNextBtn) listPageNextBtn.addEventListener('click', ()=>{
   listPage += 1;
   render();
+  if(listEl) listEl.scrollIntoView({ behavior:'smooth', block:'start' });
 });
 
 document.getElementById('skipToNavLink').addEventListener('click', e=>{

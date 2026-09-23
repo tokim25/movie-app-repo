@@ -69,6 +69,28 @@ test('adults-only recommendations explain limits and expose evidence', async ({ 
   await expect(reason).toHaveAttribute('aria-pressed', 'false');
 });
 
+// Regression test for issue #144: alternative-pick chips reuse .choiceChip's fully
+// rounded (border-radius:999px) pill shape, built for the short single-line labels
+// it's used for elsewhere (time/mood/theme). A movie title + year is often long
+// enough to wrap onto two lines, and the pill radius isn't scoped down for that case
+// -- confirmed visually via a real repro (a long title wrapping inside the chip).
+// This checks the scoped-down override rather than pixel overlap, which isn't
+// reliably assertable across environments.
+test('alternative-pick chips are not styled as fully-rounded single-line pills', async ({ page }) => {
+  await page.goto('/');
+  await setupSampleFamily(page);
+  await page.locator('#tonightChangeBtn').click();
+  await page.getByRole('button', { name: 'Adults only' }).click();
+  await page.locator('#tonightDoneBtn').click();
+  await page.locator('#findTonightPickBtn').click();
+  await page.locator('#tonightAlternativesBtn').click();
+
+  const alternativeButtons = page.locator('#tonightAlternatives .choiceChip');
+  await expect(alternativeButtons.first()).toBeVisible();
+  const borderRadius = await alternativeButtons.first().evaluate((el) => getComputedStyle(el).borderRadius);
+  expect(borderRadius).not.toBe('999px');
+});
+
 test('active and empty search states support recovery', async ({ page }) => {
   await page.goto('/');
   await setupSampleFamily(page);
