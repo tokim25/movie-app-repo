@@ -56,6 +56,19 @@
   if(typeof Sentry === 'undefined') return;
   Sentry.init({
     dsn: 'https://8d540029561cc485798c22e89cdde64b@o4512053601763328.ingest.us.sentry.io/4512053624307712',
+    // Issue #139: Sentry's SDK defaults `environment` to "production" whenever it
+    // isn't explicitly set -- with nothing here gating on the real hostname, every
+    // page load that reached this block reported as production, including Playwright's
+    // own local test server and every Vercel PR preview deployment. That made 100% of a
+    // week's worth of Sentry events (250/250) indistinguishable test noise on the one
+    // channel meant to carry real user bug reports. isProductionHost() (defined below,
+    // outside this IIFE, so it's independently testable) checks the exact production
+    // hostnames only -- not a `.endsWith('.vercel.app')` wildcard, which would also
+    // match every PR preview's own `<project>-git-<branch>-...vercel.app` subdomain and
+    // reintroduce the same problem for preview deploys. `enabled: false` stops
+    // non-production events from being sent to Sentry at all, not just mislabeled.
+    environment: isProductionHost(location.hostname) ? 'production' : 'development',
+    enabled: isProductionHost(location.hostname),
     sendDefaultPii: false,
     integrations: [
       Sentry.dedupeIntegration(),
@@ -109,6 +122,24 @@
     }
   }
 })();
+// Issue #139: the real production hostnames only -- the custom domain, the specific
+// Vercel production project URL, and the same legacy hostnames
+// `LEGACY_HOSTS_TO_REDIRECT` (further down, near `maybeRedirectToCanonicalHost()`) treats
+// as real-user-reachable -- never a `.vercel.app` suffix match, which every PR preview
+// deployment also matches under its own `<project>-git-<branch>-...` subdomain and is
+// not production. Can't just reference `LEGACY_HOSTS_TO_REDIRECT` itself: it's declared
+// in a later inline <script> block, so it doesn't exist yet when Sentry.init() runs here
+// -- this list is duplicated on purpose, not stale. Reviewer caught a real gap: this
+// used to omit the `-git-master-` legacy alias, meaning a real visitor landing there
+// (vercel.json's own redirect covers only the bare production URL) before the
+// client-side JS redirect fires would have their errors silently dropped instead of
+// just mislabeled. Keep both lists in sync if either ever changes.
+function isProductionHost(hostname){
+  return hostname === 'movies.tonykim.io' ||
+    hostname === 'family-movie-watchlist.vercel.app' ||
+    hostname === 'family-movie-watchlist-kim-family-projects.vercel.app' ||
+    hostname === 'family-movie-watchlist-git-master-kim-family-projects.vercel.app';
+}
 // Shared by beforeSend (error events) and the beforeSendFeedback hook (feedback events) --
 // looks up the current children fresh each call rather than once at init, since who's in
 // the Family tab can change over the life of the page.
