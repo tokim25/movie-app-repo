@@ -2376,7 +2376,7 @@ function reportError(err){
       <button type="button" class="secondaryBtn" id="setupSampleFamilyBtn">Explore with a sample family instead</button>
       <p class="setupDemoNote">Adds two example kids (Simon &amp; Nora) so you can look around before adding your own — rename, edit, or remove them anytime in Family.</p>
     </div>
-    <div class="logicNote">Starter settings are based on your child's age, not an official recommendation. They'll keep adjusting with age wherever you haven't set something yourself — your changes always come first.</div>
+    <div class="logicNote">Age-based defaults come from your child's age, not an official recommendation. They'll keep adjusting with age wherever you haven't set something yourself — your changes always come first.</div>
   </div>
 </div>
 
@@ -2534,7 +2534,7 @@ function reportError(err){
   <div class="homeSection">
     <h2 class="homeSectionLabel">Family members</h2>
     <div class="familyCard" id="childrenSettingsPanel">
-      <p>Add or update a family member. Age changes update starter guidance only where you have not set a custom limit.</p>
+      <p>Add or update a family member. Age changes update age-based defaults only where you have not set a custom limit.</p>
       <div class="familyChildren" id="familyChildrenList"><div class="childEditor" id="childEditorList"></div></div>
       <div class="familyActions" style="margin-top:14px;">
         <button class="secondaryBtn" id="addChildBtn" type="button">Add family member</button>
@@ -2557,7 +2557,7 @@ function reportError(err){
             </div>
           </div>
           <ul class="childOnboardingSteps" aria-label="Child setup flow">
-            <li>Starts with age-based starter settings the moment your child is added.</li>
+            <li>Starts with age-based default settings the moment your child is added.</li>
             <li>Flags settings worth a second look, without changing them for you.</li>
             <li>Keeps up with their age, but never overrides a setting you've already changed.</li>
           </ul>
@@ -2570,7 +2570,7 @@ function reportError(err){
     <h2 class="homeSectionLabel">Content limits</h2>
     <div class="familyCard" id="familySettingsPanel">
       <h3 id="familySettingsChildName" tabindex="-1">No children yet</h3>
-      <p>Adjust content limits for one child at a time. Starter settings come from the child's age; parent changes stay fixed until you switch them back.</p>
+      <p>Adjust content limits for one child at a time. Age-based defaults come from the child's age; parent changes stay fixed until you switch them back.</p>
       <div class="settingsChildPicker" id="familySettingsChildPicker" aria-label="Choose child for content settings"></div>
       <div id="familySettingsNotice"></div>
       <div class="settingsIntro" id="familySettingsIntro"></div>
@@ -2654,7 +2654,7 @@ function reportError(err){
         <li>Recommendations pull from Want to watch first, recent releases second, and the rest of Shelf last.</li>
         <li>The kind of night changes the order inside those pools: calm favors lower energy and lower intensity, silly favors comedy and animation, something new favors recent release years, and old favourite favors watched titles.</li>
         <li>Each movie gets an experience profile built from its age guidance, genre, release year, description, watched state, and Want to watch state.</li>
-        <li>Starter settings are age-based defaults. Parent-set limits stay fixed unless you switch them back to starter settings.</li>
+        <li>Age-based defaults are set automatically from a child's age. Parent-set limits stay fixed unless you switch them back to the age-based default.</li>
         <li>CSM means Common Sense Media. DCOM means Disney Channel Original Movie.</li>
       </ul>
       <p>Your family data stays in this browser unless you turn on sync. Google sync stores a small app-only file in your Google Drive.</p>
@@ -3946,7 +3946,7 @@ function useStarterForChildFlag(childId, flagId){
   touchChildren();
   saveState();
   renderChildren();
-  showToast(`${child.name} now uses the age starter setting`);
+  showToast(`${child.name} now uses the age-based default`);
 }
 
 function dismissSadRemovedNotice(childId){
@@ -5744,7 +5744,7 @@ function addChild(rawName, rawAge){
   renderChildren();
   document.getElementById('newChildName').value = '';
   document.getElementById('childOnboardingPanel').style.display = 'none';
-  showToast(`${child.name} added with starter settings`);
+  showToast(`${child.name} added with age-based defaults`);
 }
 
 function summarizeChildUnderstanding(child){
@@ -5752,9 +5752,9 @@ function summarizeChildUnderstanding(child){
     const setting = child.settings && child.settings[flag.id];
     return setting && setting.source === 'parent';
   });
-  if(personalized.length === 0) return 'Using age-based starter settings.';
+  if(personalized.length === 0) return 'Using age-based defaults.';
   const count = personalized.length;
-  return `${count} content limit${count === 1 ? '' : 's'} set by you; remaining limits use age ${child.age} starter settings.`;
+  return `${count} content limit${count === 1 ? '' : 's'} set by you; remaining limits use the age ${child.age} default.`;
 }
 
 function renderFamilySettings(){
@@ -5771,7 +5771,7 @@ function renderFamilySettings(){
   if(!state.children.length){
     selectedFamilyChildId = null;
     header.textContent = 'No children yet';
-    intro.textContent = 'Add a child first. Starter settings are created from age, and parent changes can happen later.';
+    intro.textContent = 'Add a child first. Age-based defaults are created from age, and parent changes can happen later.';
     return;
   }
 
@@ -5810,7 +5810,7 @@ function renderFamilySettings(){
     box.appendChild(dismiss);
     notice.appendChild(box);
   }
-  intro.textContent = `Age ${selectedChild.age} starter settings are outlined. These levels are Family Feature's guide, not official ratings.`;
+  intro.textContent = `Age ${selectedChild.age} defaults are outlined. These levels are Family Feature's guide, not official ratings.`;
 
   CONTENT_FLAGS.forEach(flag=>{
     const effective = settingForChildFlag(selectedChild, flag.id);
@@ -5826,8 +5826,8 @@ function renderFamilySettings(){
     title.textContent = flag.label;
     const summary = document.createElement('span');
     summary.textContent = effective.source === 'parent'
-      ? `Parent-set to ${effective.value}. Age ${selectedChild.age} starter is ${effective.starter}.`
-      : `Using the age ${selectedChild.age} starter setting: ${effective.starter}.`;
+      ? `Parent-set to ${effective.value}. Age ${selectedChild.age} default is ${effective.starter}.`
+      : `Using the age ${selectedChild.age} default: ${effective.starter}.`;
     copy.appendChild(title);
     copy.appendChild(summary);
 
@@ -5835,7 +5835,7 @@ function renderFamilySettings(){
     status.className = 'settingStatus';
     const badge = document.createElement('span');
     badge.className = 'settingBadge' + (effective.source === 'parent' ? ' parent' : '');
-    badge.textContent = effective.source === 'parent' ? 'Parent-set' : 'Starter';
+    badge.textContent = effective.source === 'parent' ? 'Parent-set' : 'Default';
     const starterLabel = document.createElement('label');
     starterLabel.className = 'ageDefault';
     const starterInput = document.createElement('input');
@@ -5846,7 +5846,7 @@ function renderFamilySettings(){
       else setChildFlagLimit(selectedChild.id, flag.id, effective.value);
     });
     starterLabel.appendChild(starterInput);
-    starterLabel.appendChild(document.createTextNode(' Use starter setting'));
+    starterLabel.appendChild(document.createTextNode(' Use age-based default'));
     status.appendChild(badge);
     status.appendChild(starterLabel);
     top.appendChild(copy);
@@ -5938,7 +5938,7 @@ function renderChildren(){
       const pill = document.createElement('span');
       pill.className = 'familyPill';
       const personalizedCount = childPersonalizedFlagCount(child);
-      pill.textContent = personalizedCount ? `${personalizedCount} parent-set` : 'Starter settings';
+      pill.textContent = personalizedCount ? `${personalizedCount} parent-set` : 'Default';
       const settings = document.createElement('button');
       settings.type = 'button';
       settings.className = 'familyEditBtn primary';

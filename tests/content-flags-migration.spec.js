@@ -90,7 +90,7 @@ test('a child with neither scary nor violence customized is untouched', async ({
   ], 'Dev');
 
   const violenceRow = page.locator('#familySettingsRows .familySettingRow[data-flag="violence"]');
-  await expect(violenceRow.locator('.settingBadge')).toHaveText('Starter');
+  await expect(violenceRow.locator('.settingBadge')).toHaveText('Default');
 
   const languageRow = page.locator('#familySettingsRows .familySettingRow[data-flag="language"]');
   await expect(languageRow.locator('.settingBadge')).toHaveText('Parent-set');
