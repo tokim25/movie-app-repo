@@ -132,6 +132,14 @@ test('local state saves first, and the UI shows a waiting status while offline',
   await context.setOffline(false);
 });
 
+// Known flake (flagged by Reviewer 2026-09-25, reproduced 3x across PR #140/#147 reviews):
+// #googleSyncStatus intermittently stays empty instead of getting the expected text, even
+// with --workers=1 (so it's not parallel-worker contention). Reproduces identically on a
+// commit that never touched this file or the sync code it exercises (9dfeb99, pre-PR#147),
+// so it's a pre-existing timing fragility in this spec/fixture, not a real regression --
+// re-run in isolation if it fails, same handling as the documented catalog.spec.js sandbox
+// flake. Root cause not yet identified (possibly a real-clock vs. mocked-clock race, or a
+// fixture that doesn't fully settle before the assertion runs).
 test('a 401 response disconnects sync and stops retrying', async ({ page }) => {
   const mock = await mockDrive(page, '401');
   await page.goto('/');
@@ -246,6 +254,10 @@ test('unfinished Google sign-in shows a reconnect warning and toast', async ({ p
   await expect(page.locator('#toast')).toHaveText('Google sign-in did not finish — try again');
 });
 
+// Known flake (flagged by Reviewer 2026-09-25, same pattern as the 401-response test
+// above): the sinon/Playwright fake clock's pauseAt() can throw "Cannot fast-forward to
+// the past" intermittently. Same pre-existing timing fragility, not a real regression --
+// re-run in isolation if it fails.
 test('failed writes back off instead of retrying aggressively, and a later success clears the warning', async ({ page }) => {
   const mock = await mockDrive(page, '500');
   await page.clock.install();
