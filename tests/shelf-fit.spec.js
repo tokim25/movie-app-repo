@@ -38,7 +38,7 @@ test('a child added via the Family tab after the first one is included in fit ba
   await page.locator('#newChildName').fill('Wes');
   await page.locator('#newChildAge').selectOption('6');
   await page.locator('#saveNewChildBtn').click();
-  await expect(page.locator('#toast')).toContainText('Wes added with starter settings');
+  await expect(page.locator('#toast')).toContainText('Wes added with age-based defaults');
 
   // The Tonight kid-choice chips on Home directly reflect selectedKids()
   // (derived from tonightSelection.excludedChildIds since #79) -- Wes's chip

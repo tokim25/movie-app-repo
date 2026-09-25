@@ -33,7 +33,7 @@ test('adding a child appends a new row and persists after reload', async ({ page
   await page.locator('#newChildName').fill('Wes');
   await page.locator('#newChildAge').selectOption('4');
   await page.locator('#saveNewChildBtn').click();
-  await expect(page.locator('#toast')).toContainText('Wes added with starter settings');
+  await expect(page.locator('#toast')).toContainText('Wes added with age-based defaults');
   await expect(page.locator('#childOnboardingPanel')).toBeHidden();
 
   const rows = page.locator('#childEditorList .childEditRow');
@@ -55,7 +55,7 @@ test('new child gets selectable adjustable content settings', async ({ page }) =
   await page.locator('#saveNewChildBtn').click();
 
   await expect(page.locator('#familySettingsChildName')).toHaveText("Theo's content settings");
-  await expect(page.locator('#familySettingsIntro')).toContainText('Age 4 starter settings');
+  await expect(page.locator('#familySettingsIntro')).toContainText('Age 4 defaults');
   await expect(page.locator('#familySettingsChildPicker .settingsChildChip.selected')).toHaveText('Theo');
   await expect(page.locator('#familySettingsRows .familySettingRow')).toHaveCount(4);
   // Example title for violence level 1 changed from 'Cars' to 'A Charlie Brown
@@ -67,7 +67,7 @@ test('new child gets selectable adjustable content settings', async ({ page }) =
   await expect(violenceRow.locator('.limitControl button.selected')).toHaveText('1');
   await violenceRow.locator('.scaleCard').filter({ hasText: '3. Moderate scares' }).click();
   await expect(violenceRow.locator('.settingBadge')).toHaveText('Parent-set');
-  await expect(violenceRow).toContainText('Parent-set to 3. Age 4 starter is 1.');
+  await expect(violenceRow).toContainText('Parent-set to 3. Age 4 default is 1.');
   await expect(violenceRow.locator('.limitControl button.selected')).toHaveText('3');
 
   await page.reload();
@@ -78,7 +78,7 @@ test('new child gets selectable adjustable content settings', async ({ page }) =
   await expect(reloadedViolenceRow.locator('.limitControl button.selected')).toHaveText('3');
 
   await reloadedViolenceRow.locator('.ageDefault input').check();
-  await expect(reloadedViolenceRow.locator('.settingBadge')).toHaveText('Starter');
+  await expect(reloadedViolenceRow.locator('.settingBadge')).toHaveText('Default');
   await expect(reloadedViolenceRow.locator('.limitControl button.selected')).toHaveText('1');
 });
 
@@ -126,7 +126,7 @@ test('a 10+ child can be registered and their age is not clamped down to 9', asy
   await page.locator('#newChildName').fill('Priya');
   await page.locator('#newChildAge').selectOption('12');
   await page.locator('#saveNewChildBtn').click();
-  await expect(page.locator('#toast')).toContainText('Priya added with starter settings');
+  await expect(page.locator('#toast')).toContainText('Priya added with age-based defaults');
 
   await page.reload();
   await page.locator('#tabFamily').click();
@@ -170,7 +170,7 @@ test('every age select offers options through at least age 12', async ({ page })
   expect(editOptions).toContain('12');
 });
 
-test('a 12-year-old\'s starter settings can reach the highest content tier', async ({ page }) => {
+test('a 12-year-old\'s age-based defaults can reach the highest content tier', async ({ page }) => {
   // Before issue #51's fix, starterLimitForFlagAge()'s matrix only covered
   // ages 3-9 and never reached level 4 -- an age this old couldn't even be
   // registered, so this scenario was unreachable at all.
@@ -193,7 +193,7 @@ test('a toddler under 3 can be registered and their age is not clamped up to 3',
   await page.locator('#newChildName').fill('Nova');
   await page.locator('#newChildAge').selectOption('2');
   await page.locator('#saveNewChildBtn').click();
-  await expect(page.locator('#toast')).toContainText('Nova added with starter settings');
+  await expect(page.locator('#toast')).toContainText('Nova added with age-based defaults');
 
   await page.reload();
   await page.locator('#tabFamily').click();
@@ -233,7 +233,7 @@ test('every age select offers age 1', async ({ page }) => {
   expect(editOptions).toContain('1');
 });
 
-test('a 1-year-old gets the most cautious starter settings in every category', async ({ page }) => {
+test('a 1-year-old gets the most cautious age-based defaults in every category', async ({ page }) => {
   // Before issue #61's fix, age 1-2 couldn't be registered at all -- this
   // scenario was unreachable, and starterLimitForFlagAge()'s matrix had no
   // entries below age 3.
