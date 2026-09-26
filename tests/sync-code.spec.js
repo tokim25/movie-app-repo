@@ -5,10 +5,12 @@ test('manual sync code export/import round-trips watched and priority state', as
   await page.goto('/');
   await switchToFlatView(page);
 
-  const row = firstRow(page);
-  const title = await row.locator('.title').textContent();
-  await row.locator('.check').click();
-  await row.locator('.star').click();
+  const watchedRow = firstRow(page);
+  const priorityRow = rows(page).nth(1);
+  const watchedTitle = await watchedRow.locator('.title').textContent();
+  const priorityTitle = await priorityRow.locator('.title').textContent();
+  await watchedRow.locator('.check').click();
+  await priorityRow.locator('.star').click();
   await expect(page.locator('#statChecked')).toHaveText('1');
   await expect(page.locator('#statPriority')).toHaveText('1');
 
@@ -29,10 +31,12 @@ test('manual sync code export/import round-trips watched and priority state', as
   await expect(page.locator('#statChecked')).toHaveText('1');
   await expect(page.locator('#statPriority')).toHaveText('1');
 
-  const reloadedRow = firstRow(page);
-  await expect(reloadedRow.locator('.title')).toHaveText(title);
-  await expect(reloadedRow.locator('.check')).toHaveClass(/on/);
-  await expect(reloadedRow.locator('.star')).toHaveClass(/on/);
+  const reloadedWatchedRow = rows(page).filter({ hasText: watchedTitle });
+  const reloadedPriorityRow = rows(page).filter({ hasText: priorityTitle });
+  await expect(reloadedWatchedRow.locator('.check')).toHaveClass(/on/);
+  await expect(reloadedWatchedRow.locator('.star')).not.toHaveClass(/on/);
+  await expect(reloadedPriorityRow.locator('.check')).not.toHaveClass(/on/);
+  await expect(reloadedPriorityRow.locator('.star')).toHaveClass(/on/);
 });
 
 test('an invalid sync code is rejected without clearing existing state', async ({ page }) => {
