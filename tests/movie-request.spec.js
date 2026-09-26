@@ -54,7 +54,7 @@ test('request form preserves the title after upstream failure (#107)', async ({ 
 });
 
 test('Family request form preserves the title after timeout (#107)', async ({ page }) => {
-  await page.addInitScript(() => { window.MOVIE_REQUEST_TIMEOUT_MS = 50; });
+  await page.addInitScript(() => { window.MOVIE_REQUEST_TIMEOUT_MS = 500; });
   await page.route('/api/movie-request', async () => {});
   await page.goto('/');
   await setupSampleFamily(page);
