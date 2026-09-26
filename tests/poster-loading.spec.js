@@ -23,3 +23,34 @@ test('visible poster images are requested eagerly', async ({ page }) => {
   await expect(rows(page).first().locator('.poster img')).toHaveAttribute('loading', 'eager');
   await expect.poll(() => posterRequests).toBeGreaterThan(0);
 });
+
+test('movies without mapped artwork render a generic title-year fallback', async ({ page }) => {
+  await page.goto('/');
+  await switchToFlatView(page);
+  await page.locator('#search').fill('Jett Jackson: The Movie');
+
+  const row = rows(page).filter({ hasText: 'Jett Jackson: The Movie' });
+  await expect(row.locator('.posterFallback')).toContainText('Movie');
+  await expect(row.locator('.posterFallbackYear')).toHaveText('2001');
+});
+
+test('a failed remote poster request keeps the poster slot and shows the fallback', async ({ page }) => {
+  await page.route('https://upload.wikimedia.org/**', route => route.abort('failed'));
+  await page.goto('/');
+  await switchToFlatView(page);
+
+  const first = rows(page).first();
+  await expect(first.locator('.poster')).toBeVisible();
+  await expect(first.locator('.posterFallback')).toBeVisible();
+});
+
+test('verified runtime appears in shelf metadata only when the record has it', async ({ page }) => {
+  await page.goto('/');
+  await switchToFlatView(page);
+
+  await page.locator('#search').fill('Peter Pan (Broadway Musical)');
+  await expect(rows(page).filter({ hasText: 'Peter Pan (Broadway Musical)' }).locator('.runtime')).toHaveText('1h 44m');
+
+  await page.locator('#search').fill('Toy Story');
+  await expect(rows(page).filter({ hasText: 'Toy Story (1995)' }).locator('.runtime')).toHaveCount(0);
+});

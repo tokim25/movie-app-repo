@@ -1043,4 +1043,32 @@ const MOVIE_POSTERS = Object.freeze({
   1063: {"u":"https://upload.wikimedia.org/wikipedia/en/a/ab/La_La_Land_%28film%29.png","w":260,"h":385,"p":"La La Land"},
   1064: {"u":"https://upload.wikimedia.org/wikipedia/en/c/c2/RocketMan_%281997_film%29.jpg","w":200,"h":297,"p":"RocketMan (1997 film)"},
   1065: {"u":"https://upload.wikimedia.org/wikipedia/en/2/29/Camp_Rock_3_poster.jpeg","w":283,"h":354,"p":"Camp Rock 3"}
+  ,1066: {"u":"https://upload.wikimedia.org/wikipedia/en/c/c1/Pagemasterthe.jpg","w":248,"h":367,"p":"The Pagemaster"}
+  ,1067: {"u":"https://upload.wikimedia.org/wikipedia/en/3/3a/Rookie_of_the_year.jpg","w":258,"h":384,"p":"Rookie of the Year (film)"}
+  ,1068: {"u":"https://upload.wikimedia.org/wikipedia/en/6/66/Little_giants_movie.jpg","w":248,"h":369,"p":"Little Giants"}
+  ,1069: {"u":"https://upload.wikimedia.org/wikipedia/en/b/bc/Big_green.jpg","w":264,"h":376,"p":"The Big Green"}
+  ,1070: {"u":"https://upload.wikimedia.org/wikipedia/en/8/80/Despicable_Me_3_theatrical_release_poster.jpg","w":261,"h":382,"p":"Despicable Me 3"}
+  ,1071: {"u":"https://upload.wikimedia.org/wikipedia/en/d/d1/Cloudy_with_a_chance_of_meatballs_theataposter.jpg","w":259,"h":385,"p":"Cloudy with a Chance of Meatballs (film)"}
+  ,1072: {"u":"https://upload.wikimedia.org/wikipedia/en/f/fa/Road_to_el_dorado_ver3.jpg","w":259,"h":384,"p":"The Road to El Dorado"}
+  ,1073: {"u":"https://upload.wikimedia.org/wikipedia/en/c/c3/Osmosis_Jones_poster.JPG","w":233,"h":350,"p":"Osmosis Jones"}
+  ,1074: {"u":"https://upload.wikimedia.org/wikipedia/en/7/7c/Movie_poster_looney_tunes_back_in_action.JPG","w":259,"h":383,"p":"Looney Tunes: Back in Action"}
+  ,1075: {"u":"https://upload.wikimedia.org/wikipedia/en/7/79/TheNutcrackerPrincePoster.jpg","w":258,"h":387,"p":"The Nutcracker Prince"}
+  ,1076: {"u":"https://upload.wikimedia.org/wikipedia/en/b/b3/Movie_poster_rover_dangerfield.JPG","w":259,"h":384,"p":"Rover Dangerfield"}
+  ,1077: {"u":"https://upload.wikimedia.org/wikipedia/en/8/87/Mr_beans_holiday_ver7.jpg","w":249,"h":186,"p":"Mr. Bean's Holiday"}
+  ,1078: {"u":"https://upload.wikimedia.org/wikipedia/en/c/c4/Paulie_poster.jpg","w":266,"h":374,"p":"Paulie (film)"}
+  ,1079: {"u":"https://upload.wikimedia.org/wikipedia/en/4/4d/Hotel_for_dogs.jpg","w":259,"h":383,"p":"Hotel for Dogs (film)"}
+  ,1080: {"u":"https://upload.wikimedia.org/wikipedia/en/e/ef/Racing_Stripes_poster.JPG","w":256,"h":378,"p":"Racing Stripes"}
+  ,1081: {"u":"https://upload.wikimedia.org/wikipedia/en/5/51/Kicking_Screaming_poster.jpg","w":259,"h":384,"p":"Kicking & Screaming (2005 film)"}
+  ,1082: {"u":"https://upload.wikimedia.org/wikipedia/en/7/73/Andre_%28film%29.jpg","w":248,"h":369,"p":"Andre (film)"}
+  ,1083: {"u":"https://upload.wikimedia.org/wikipedia/en/c/c9/Prancer_film.jpg","w":203,"h":315,"p":"Prancer (film)"}
+  ,1084: {"u":"https://upload.wikimedia.org/wikipedia/en/b/bc/Secretinishposter.jpg","w":258,"h":385,"p":"The Secret of Roan Inish"}
+  ,1085: {"u":"https://upload.wikimedia.org/wikipedia/en/a/aa/DakotaKurtDreamer.jpg","w":259,"h":383,"p":"Dreamer (2005 film)"}
+  ,1086: {"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/The_Court_Jester_%281955_poster%29.jpg/500px-The_Court_Jester_%281955_poster%29.jpg","w":500,"h":761,"p":"The Court Jester"}
+  ,1087: {"u":"https://upload.wikimedia.org/wikipedia/en/b/b0/Les_Vacances_de_M_Hulot.jpg","w":220,"h":299,"p":"Les Vacances de Monsieur Hulot"}
+  ,1088: {"u":"https://upload.wikimedia.org/wikipedia/en/4/47/A_Hard_Days_night_movieposter.jpg","w":329,"h":250,"p":"A Hard Day's Night (film)"}
+  ,1089: {"u":"https://upload.wikimedia.org/wikipedia/en/c/cf/Shaun_the_Sheep%2C_The_Beast_of_Mossy_Bottom_poster.jpeg","w":259,"h":384,"p":"Shaun the Sheep: The Beast of Mossy Bottom"}
+  ,1090: {"u":"https://upload.wikimedia.org/wikipedia/en/7/79/Woz-poster001sm.png","w":264,"h":376,"p":"The Muppets' Wizard of Oz"}
+  ,1091: {"u":"https://upload.wikimedia.org/wikipedia/en/d/d7/Alexander_and_the_Terrible_Horrible_No_Good_Very_Bad_Road_Trip_poster.jpg","w":255,"h":378,"p":"Alexander and the Terrible, Horrible, No Good, Very Bad Road Trip"}
+  ,1092: {"u":"https://upload.wikimedia.org/wikipedia/en/2/2a/Cheaper_by_the_Dozen_2.jpg","w":263,"h":378,"p":"Cheaper by the Dozen 2"}
+  ,1093: {"u":"https://upload.wikimedia.org/wikipedia/en/6/65/Forgotten_Island_poster.jpeg","w":250,"h":396,"p":"Forgotten Island"}
 });
