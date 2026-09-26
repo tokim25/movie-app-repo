@@ -3493,12 +3493,16 @@ function normalizeState(raw){
   const version = parsed.v === 3 ? 3 : parsed.v === 2 ? 2 : 1;
   const orderMeta = normalizeOrderMeta(parsed.order || parsed.o, version);
   const childrenMeta = normalizeChildrenMeta(parsed.children);
+  const exclusiveMarks = enforceWatchPriorityInvariant(
+    normalizeMarks(parsed.checked || parsed.c, version),
+    normalizeMarks(parsed.priority || parsed.p, version)
+  );
   return {
     order: orderMeta.order,
     orderUpdatedAt: orderMeta.orderUpdatedAt,
     orderDevice: orderMeta.orderDevice,
-    checked: normalizeMarks(parsed.checked || parsed.c, version),
-    priority: normalizeMarks(parsed.priority || parsed.p, version),
+    checked: exclusiveMarks.checked,
+    priority: exclusiveMarks.priority,
     children: childrenMeta.children,
     childrenUpdatedAt: childrenMeta.childrenUpdatedAt,
     childrenDevice: childrenMeta.childrenDevice,
@@ -3546,11 +3550,11 @@ function markCount(collection){
   return Object.values(collection).filter(record => record && record.value).length;
 }
 
-function setMark(collectionName, idx, value){
+function setMark(collectionName, idx, value, updatedAt){
   const key = movieKey(idx);
   state[collectionName][key] = {
     value: !!value,
-    updatedAt: now(),
+    updatedAt: updatedAt || now(),
     device: DEVICE_ID
   };
 }
@@ -3762,7 +3766,10 @@ function focusPreservingRerender(idx, rerender){
 
 function toggleCheck(idx){
   focusPreservingRerender(idx, () => {
-    setMark('checked', idx, !markValue(state.checked, idx));
+    const checked = !markValue(state.checked, idx);
+    const updatedAt = now();
+    setMark('checked', idx, checked, updatedAt);
+    if(checked) setMark('priority', idx, false, updatedAt);
     saveState();
     renderCurrentView();
   });
@@ -3770,7 +3777,10 @@ function toggleCheck(idx){
 
 function togglePriority(idx){
   focusPreservingRerender(idx, () => {
-    setMark('priority', idx, !markValue(state.priority, idx));
+    const priority = !markValue(state.priority, idx);
+    const updatedAt = now();
+    setMark('priority', idx, priority, updatedAt);
+    if(priority) setMark('checked', idx, false, updatedAt);
     saveState();
     renderCurrentView();
   });
@@ -5238,6 +5248,26 @@ function mergeMarks(localMarks, remoteMarks){
   return merged;
 }
 
+function enforceWatchPriorityInvariant(checkedMarks, priorityMarks){
+  const checked = { ...(checkedMarks || {}) };
+  const priority = { ...(priorityMarks || {}) };
+  const keys = new Set([...Object.keys(checked), ...Object.keys(priority)]);
+  keys.forEach(key=>{
+    const checkedRecord = checked[key];
+    const priorityRecord = priority[key];
+    if(!checkedRecord || !checkedRecord.value || !priorityRecord || !priorityRecord.value) return;
+
+    const newest = newestMark(checkedRecord, priorityRecord);
+    const priorityWins = newest === priorityRecord && newest !== checkedRecord;
+    if(priorityWins){
+      checked[key] = { value: false, updatedAt: priorityRecord.updatedAt, device: priorityRecord.device };
+    }else{
+      priority[key] = { value: false, updatedAt: checkedRecord.updatedAt, device: checkedRecord.device };
+    }
+  });
+  return { checked, priority };
+}
+
 // Issue #116: a plain concat here duplicates events whenever the same two
 // states get merged more than once -- previously only a Google Drive sync
 // concern in practice, now also exercised every time two tabs' storage
@@ -5259,12 +5289,16 @@ function mergeState(local, remote){
   const normalizedRemote = normalizeState(remote);
   const useRemoteOrder = (normalizedRemote.orderUpdatedAt || 0) > (local.orderUpdatedAt || 0);
   const useRemoteChildren = (normalizedRemote.childrenUpdatedAt || 0) > (local.childrenUpdatedAt || 0);
+  const exclusiveMarks = enforceWatchPriorityInvariant(
+    mergeMarks(local.checked, normalizedRemote.checked),
+    mergeMarks(local.priority, normalizedRemote.priority)
+  );
   return {
     order: useRemoteOrder ? normalizedRemote.order : local.order,
     orderUpdatedAt: useRemoteOrder ? normalizedRemote.orderUpdatedAt : local.orderUpdatedAt,
     orderDevice: useRemoteOrder ? normalizedRemote.orderDevice : local.orderDevice,
-    checked: mergeMarks(local.checked, normalizedRemote.checked),
-    priority: mergeMarks(local.priority, normalizedRemote.priority),
+    checked: exclusiveMarks.checked,
+    priority: exclusiveMarks.priority,
     children: useRemoteChildren ? normalizedRemote.children : local.children,
     childrenUpdatedAt: useRemoteChildren ? normalizedRemote.childrenUpdatedAt : local.childrenUpdatedAt,
     childrenDevice: useRemoteChildren ? normalizedRemote.childrenDevice : local.childrenDevice,
