@@ -121,3 +121,132 @@ test('reorder buttons and content-level buttons expose a descriptive accessible 
   const levelAriaLabel = await levelBtn.getAttribute('aria-label');
   expect(levelAriaLabel).toMatch(/^Level \d+: .+/);
 });
+
+test('sample-family setup clears stale validation and moves focus into Tonight (#110)', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('#bootSyncLoading').waitFor({ state: 'hidden' });
+
+  await page.locator('#setupSaveChildBtn').click();
+  await expect(page.locator('#setupChildName')).toHaveAttribute('aria-invalid', 'true');
+  await expect(page.locator('#assertiveStatus')).toHaveText('Enter a child name to continue.');
+
+  await page.locator('#setupSampleFamilyBtn').click();
+
+  await expect(page.locator('#homeScreenHeading')).toBeFocused();
+  await expect(page.locator('#setupChildName')).not.toHaveAttribute('aria-invalid', 'true');
+  await expect(page.locator('#setupChildNameError')).toBeHidden();
+  await expect(page.locator('#assertiveStatus')).toHaveText('Family setup complete. Tonight is ready.');
+});
+
+test('every app screen exposes exactly one visible labelled main landmark (#114)', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('#bootSyncLoading').waitFor({ state: 'hidden' });
+
+  const assertMain = async (screenId, headingId) => {
+    await expect(page.locator('main:visible')).toHaveCount(1);
+    const main = page.locator(`#${screenId}`);
+    await expect(main).toHaveAttribute('aria-labelledby', headingId);
+    await expect(page.locator(`#${headingId}`)).toBeVisible();
+  };
+
+  await assertMain('setupScreen', 'setupScreenHeading');
+  await page.locator('#setupSampleFamilyBtn').click();
+  await assertMain('homeScreen', 'homeScreenHeading');
+  await page.locator('#tabBrowse').click();
+  await assertMain('browseScreen', 'browseScreenHeading');
+  await page.locator('#tabFamily').click();
+  await assertMain('familyScreen', 'familyScreenHeading');
+});
+
+test('blank add-member submissions identify and focus the invalid field every time (#115)', async ({ page }) => {
+  await page.goto('/');
+  await setupSampleFamily(page);
+  await page.locator('#tabFamily').click();
+  await page.locator('#addChildBtn').click();
+
+  await page.evaluate(() => {
+    window.__addChildAnnouncements = [];
+    new MutationObserver(() => {
+      const text = document.getElementById('assertiveStatus').textContent;
+      if(text) window.__addChildAnnouncements.push(text);
+    }).observe(document.getElementById('assertiveStatus'), { childList: true });
+  });
+
+  const name = page.locator('#newChildName');
+  const error = page.locator('#newChildNameError');
+  await page.locator('#saveNewChildBtn').click();
+  await expect(name).toBeFocused();
+  await expect(name).toHaveAttribute('aria-invalid', 'true');
+  await expect(name).toHaveAttribute('aria-describedby', 'newChildNameError');
+  await expect(error).toBeVisible();
+
+  await page.locator('#saveNewChildBtn').click();
+  await expect.poll(() => page.evaluate(() => window.__addChildAnnouncements.length)).toBeGreaterThanOrEqual(2);
+
+  await name.fill('Wes');
+  await page.locator('#saveNewChildBtn').click();
+  await expect(page.locator('#childOnboardingPanel')).toBeHidden();
+  await expect(name).not.toHaveAttribute('aria-invalid', 'true');
+  await expect(error).toBeHidden();
+});
+
+test('Shelf row controls include their movie title and expose state changes (#113)', async ({ page }) => {
+  await switchToFlatView(page);
+
+  const rows = page.locator('#list > li.row');
+  for(let i = 0; i < 3; i++){
+    const row = rows.nth(i);
+    const displayedTitle = await row.locator('.title').textContent();
+    const movieTitle = displayedTitle.replace(/ \(\d{4}\)$/, '');
+    await expect(row.locator('.check')).toHaveAttribute('aria-label', `Mark ${movieTitle} watched`);
+    await expect(row.locator('.star')).toHaveAttribute('aria-label', `Add ${movieTitle} to Want to watch`);
+    await expect(row.locator('.detailLink')).toHaveAttribute('aria-label', `Show details for ${movieTitle}`);
+    const source = row.locator('.sourceLink');
+    if(await source.count()){
+      await expect(source).toHaveAttribute('aria-label', `View guidance source for ${movieTitle}`);
+    }
+  }
+
+  const firstTitle = (await rows.first().locator('.title').textContent()).replace(/ \(\d{4}\)$/, '');
+  await rows.first().locator('.check').click();
+  await expect(page.locator(':focus')).toHaveAttribute('aria-label', `Mark ${firstTitle} unwatched`);
+  await expect(page.locator(':focus')).toHaveAttribute('aria-pressed', 'true');
+
+  const currentRow = rows.filter({ hasText: firstTitle }).first();
+  await currentRow.locator('.star').click();
+  await expect(page.locator(':focus')).toHaveAttribute('aria-label', `Remove ${firstTitle} from Want to watch`);
+  await expect(page.locator(':focus')).toHaveAttribute('aria-pressed', 'true');
+});
+
+test('Shelf Details keeps focus and stable disclosure semantics through rerenders (#112)', async ({ page }) => {
+  await switchToFlatView(page);
+
+  const firstRow = page.locator('#list > li.row').first();
+  const title = (await firstRow.locator('.title').textContent()).replace(/ \(\d{4}\)$/, '');
+  const details = firstRow.locator('.detailLink');
+  const controlledId = await details.getAttribute('aria-controls');
+
+  await details.click();
+  await expect(page.locator(':focus')).toHaveAttribute('aria-label', `Hide details for ${title}`);
+  await expect(page.locator(':focus')).toHaveAttribute('aria-expanded', 'true');
+  await expect(page.locator(`#${controlledId}`)).toBeVisible();
+
+  await page.locator('#listPageNextBtn').click();
+  await expect(page.locator('#listPageNextBtn')).toBeFocused();
+  await page.locator('#listPagePrevBtn').click();
+  await expect(page.locator('#listPageNextBtn')).toBeFocused();
+
+  const restoredDetails = page.locator('#list > li.row').filter({ hasText: title }).first().locator('.detailLink');
+  await expect(restoredDetails).toHaveAttribute('aria-controls', controlledId);
+  await expect(restoredDetails).toHaveAttribute('aria-expanded', 'true');
+  await expect(page.locator(`#${controlledId}`)).toBeVisible();
+
+  await restoredDetails.click();
+  await expect(page.locator(':focus')).toHaveAttribute('aria-label', `Show details for ${title}`);
+  await expect(page.locator(':focus')).toHaveAttribute('aria-expanded', 'false');
+  await expect(page.locator(`#${controlledId}`)).toBeHidden();
+
+  await page.locator('#search').fill(title);
+  await expect(page.locator('#search')).toBeFocused();
+  await expect(page.locator('#list .detailLink').first()).toHaveAttribute('aria-expanded', 'false');
+});

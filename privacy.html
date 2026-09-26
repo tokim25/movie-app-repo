@@ -66,7 +66,7 @@
 <body>
 
 <h1>Privacy Policy</h1>
-<p class="updated">Family Feature — last updated September 22, 2026</p>
+<p class="updated">Family Feature — last updated September 25, 2026</p>
 
 <p>Family Feature is a family movie watchlist app. This page explains what data it collects and how it's used, in plain terms.</p>
 
@@ -78,6 +78,15 @@
 <p>If you choose to sign in with Google, the app saves your full local state as a single small file in your Google Drive app data folder, using Google's <code>drive.appdata</code> permission. That permission means the app can only see and edit its own hidden app-specific configuration data — it cannot see, read, or modify the rest of your Google Drive.</p>
 <p><strong>That file includes everything described in "What we collect" above</strong> — your watchlist and its order, and your children's names, ages, content-limit settings, and override history — not just the watchlist. Manually copying a sync code between devices (the offline alternative below) carries the same full payload; the only difference is Google sync uploads it to your Drive automatically, while a manual code stays entirely under your own control and never leaves your devices unless you copy it somewhere yourself.</p>
 <p>Signing in is entirely optional. The app works fully without it, using local storage on your device instead.</p>
+
+<h2>Google authentication &amp; session data</h2>
+<p>Separately from the state file above, staying signed in to Google sync requires a small amount of authentication data, kept distinct from your family's watchlist and settings:</p>
+<ul>
+  <li><strong>A refresh-token cookie</strong> — a first-party cookie, readable only by our own server (not by any script running in your browser), that lets the app silently reconnect to your Google account without asking you to sign in again every visit. It's marked <code>HttpOnly</code> (invisible to page JavaScript), <code>Secure</code> (sent only over HTTPS), and <code>SameSite=Lax</code> (not sent along with requests from other sites), and scoped to this app's own server routes. It lasts up to 180 days, and that period resets each time it's used to reconnect — so it persists as long as you keep using Google sync at least that often, and expires on its own if you stop.</li>
+  <li><strong>Local sync-status metadata</strong> — a small record kept in your browser's local storage (separate from your watchlist/family data) noting whether Google sync is turned on, when it last connected or disconnected, and the most recent sync error if any. It exists only to drive the app's own sync-status display and retry logic.</li>
+</ul>
+<p><strong>What "Disconnect" does:</strong> revokes the app's authorization at Google, clears the refresh-token cookie from your browser immediately, and clears the local sync-status metadata above. The cookie is cleared and the local session ended either way, even in the rare case the revoke call to Google itself fails (e.g. you're offline at that moment) — so Disconnect always successfully signs this app out on your device; if you're ever unsure whether Google's side also completed, you can double-check or revoke access directly from your <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">Google Account permissions</a> page.</p>
+<p><strong>What Disconnect does not do:</strong> it does not delete the state file already saved in your Google Drive — see "Delete synced data," below, for the separate action that does.</p>
 
 <h2>What we don't do</h2>
 <ul>
@@ -99,7 +108,8 @@
 <p>Sentry data is retained and eventually deleted according to <a href="https://sentry.io/privacy/" target="_blank" rel="noopener">Sentry's own privacy policy</a> — we don't control or extend that retention.</p>
 
 <h2>Revoking access</h2>
-<p>You can disconnect Google sync at any time using the "Disconnect" button in the app, or by removing Family Feature's access from your <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">Google Account permissions</a>. Disconnecting stops future syncing; it doesn't delete the file already saved in your Drive — you're welcome to delete that yourself.</p>
+<p>You can disconnect Google sync at any time using the "Disconnect" button in the app, or by removing Family Feature's access from your <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">Google Account permissions</a>. Disconnecting stops future syncing and ends this app's session on your device (see "Google authentication &amp; session data," above, for exactly what that clears) — it doesn't delete the file already saved in your Drive.</p>
+<p><strong>Delete synced data.</strong> To remove that file, use the "Delete synced data from Google Drive" button next to Disconnect in the app's sync settings — a separate, explicit action from Disconnect, since stopping future syncing and deleting what's already there are different things. It deletes every copy of the app's state file from your Drive's app data folder and reports success or failure; it does not sign you out or revoke access on its own; if you also want to end the connection, it offers to disconnect once the deletion has succeeded. If a deletion fails (for example, you're offline), your connection and access stay exactly as they were, so you can safely try again.</p>
 
 <h2>Terms</h2>
 <p>Family Feature's terms are available at <a href="/terms.html">/terms.html</a>.</p>

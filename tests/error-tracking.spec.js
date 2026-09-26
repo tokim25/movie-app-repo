@@ -353,3 +353,85 @@ test('beforeSend redacts a child name containing JSON-special characters (" and 
   expect(serialized).not.toContain(trickyName);
   expect(serialized).toContain('[redacted]');
 });
+
+test('beforeSend redacts case variants from nested errors, breadcrumbs, and exception strings (#101)', async ({ page }) => {
+  await page.goto('/');
+  await setupSampleFamily(page);
+
+  const result = await page.evaluate(() => window.__sentryInitConfig.beforeSend({
+    message: 'SIMON could not load',
+    exception: { values: [{ value: 'Failure while loading simon' }] },
+    breadcrumbs: [{ message: 'Selected SiMoN from the family list' }],
+    extra: { nested: { note: 'NORA was also selected' } }
+  }));
+
+  const serialized = JSON.stringify(result).toLocaleLowerCase();
+  expect(serialized).not.toContain('simon');
+  expect(serialized).not.toContain('nora');
+  expect(serialized.match(/\[redacted\]/g)?.length).toBe(4);
+});
+
+test('beforeSend normalizes Unicode names before redacting diacritic variants (#101)', async ({ page }) => {
+  await page.goto('/');
+  await setupSampleFamily(page);
+  await page.evaluate(() => addChild('Jos\u00e9', '6'));
+
+  const result = await page.evaluate(() => window.__sentryInitConfig.beforeSend({
+    message: 'JOSE\u0301 could not load'
+  }));
+
+  expect(result.message).toBe('[redacted] could not load');
+});
+
+test('one-character child names are redacted only as complete Unicode tokens (#101)', async ({ page }) => {
+  await page.goto('/');
+  await setupSampleFamily(page);
+  await page.evaluate(() => addChild('Q', '6'));
+
+  const result = await page.evaluate(() => window.__sentryInitConfig.beforeSend({
+    message: "Q's selection failed, but the queue stayed available",
+    extra: { unrelated: 'Quick queries remain unchanged' }
+  }));
+
+  expect(result.message).toBe("[redacted]'s selection failed, but the queue stayed available");
+  expect(result.extra.unrelated).toBe('Quick queries remain unchanged');
+});
+
+test('feedback redaction covers case, Unicode normalization, and one-character names (#101)', async ({ page }) => {
+  await page.goto('/');
+  await setupSampleFamily(page);
+  await page.evaluate(() => {
+    addChild('Jos\u00e9', '6');
+    addChild('Q', '7');
+  });
+
+  const result = await page.evaluate(() => {
+    const feedback = {
+      contexts: { feedback: { message: 'simon, JOSE\u0301, and Q all disappeared; Quick search still worked' } }
+    };
+    window.__sentryBeforeSendFeedback(feedback);
+    return feedback;
+  });
+
+  const message = result.contexts.feedback.message;
+  expect(message.toLocaleLowerCase()).not.toContain('simon');
+  expect(message.normalize('NFC').toLocaleLowerCase()).not.toContain('jos\u00e9');
+  expect(message).not.toMatch(/\bQ\b/);
+  expect(message).toContain('Quick search still worked');
+});
+
+test('beforeSend drops an event when redaction cannot safely inspect it (#101)', async ({ page }) => {
+  await page.goto('/');
+  await setupSampleFamily(page);
+
+  const result = await page.evaluate(() => {
+    const unsafeEvent = {};
+    Object.defineProperty(unsafeEvent, 'message', {
+      enumerable: true,
+      get(){ throw new Error('unreadable telemetry field'); }
+    });
+    return window.__sentryInitConfig.beforeSend(unsafeEvent);
+  });
+
+  expect(result).toBeNull();
+});

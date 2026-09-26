@@ -17,9 +17,8 @@
      IS part of the core bundle is explicitly turned off below rather than left on its
      default, since that's the one automatic capture path that could otherwise pick up a
      typed child name or age from the Family tab. beforeSend is a second, independent
-     layer: it redacts any current child's name out of an error event's serialized payload
-     before it's sent, so a child's name can't reach Sentry even via an error message or
-     extra data that isn't a DOM breadcrumb at all.
+     layer: it redacts current child names from error-event strings before sending. If
+     redaction itself fails, the event is dropped instead of risking disclosure.
 
      beforeSend does NOT run for User Feedback widget submissions -- confirmed against the
      SDK's own source (packages/core/src/client.ts gates beforeSend to error-type events
@@ -97,7 +96,7 @@
       try{
         return redactCurrentChildNames(event);
       }catch(e){
-        return event;
+        return null;
       }
     }
   });
@@ -117,7 +116,15 @@
           Object.keys(feedbackEvent).forEach(function(k){
             feedbackEvent[k] = redactNames(feedbackEvent[k], names);
           });
-        }catch(e){ /* never let redaction itself block feedback from sending */ }
+        }catch(e){
+          // Feedback is parent-authored free text. If normal redaction cannot finish,
+          // replace every writable top-level field instead of sending it unchanged.
+          try{
+            Object.keys(feedbackEvent || {}).forEach(function(k){
+              try{ feedbackEvent[k] = '[redacted]'; }catch(ignore){}
+            });
+          }catch(ignore){}
+        }
       });
     }
   }
@@ -145,20 +152,28 @@ function isProductionHost(hostname){
 // the Family tab can change over the life of the page.
 function currentChildNames(){
   return (typeof state !== 'undefined' && state.children ? state.children : [])
-    .map(function(c){ return c && c.name; })
-    .filter(function(n){ return n && n.length > 1; });
+    .map(function(c){ return c && typeof c.name === 'string' ? c.name.trim().normalize('NFC') : ''; })
+    .filter(function(n){ return n.length > 0; })
+    .sort(function(a, b){ return b.length - a.length; });
 }
 function redactCurrentChildNames(value){
   var names = currentChildNames();
   return names.length ? redactNames(value, names) : value;
 }
 // Redacts each name in `names` out of every string value in `value`, recursing through
-// arrays/objects. Walks the *parsed* structure and matches real characters -- not
-// JSON.stringify's escaped form (`"` -> `\"`, `\` -> `\\`), which a plain
-// stringify-then-replace would silently miss for any name containing either character.
+// arrays/objects. NFC normalization makes composed/decomposed Unicode input consistent;
+// Unicode-aware token boundaries let a one-character name such as "Q" be protected
+// without corrupting every q in unrelated text.
 function redactNames(value, names){
   if(typeof value === 'string'){
-    names.forEach(function(name){ value = value.split(name).join('[redacted]'); });
+    value = value.normalize('NFC');
+    names.forEach(function(name){
+      var normalizedName = String(name).trim().normalize('NFC');
+      if(!normalizedName) return;
+      var escapedName = normalizedName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      var matcher = new RegExp('(^|[^\\p{L}\\p{N}\\p{M}])(' + escapedName + ')(?=$|[^\\p{L}\\p{N}\\p{M}])', 'giu');
+      value = value.replace(matcher, function(match, prefix){ return prefix + '[redacted]'; });
+    });
     return value;
   }
   if(Array.isArray(value)){
@@ -1767,6 +1782,14 @@ function reportError(err){
   .childActions button.warning{
     color:var(--warning);
   }
+  .googleSyncControls button.warning{
+    color:var(--warning);
+  }
+  .syncRetentionNote{
+    font-size:13px;
+    color:var(--ink-soft);
+    margin:6px 0 0;
+  }
   .childOnboarding{
     margin-top:16px;
     padding-top:16px;
@@ -2375,9 +2398,9 @@ function reportError(err){
 
 <div id="bootSyncLoading" style="display:none;position:fixed;inset:0;align-items:center;justify-content:center;background:var(--bg);color:var(--ink);font-size:15px;z-index:9999;">Loading your family's list…</div>
 
-<div id="setupScreen" class="setupScreen" style="display:none;">
+<main id="setupScreen" class="setupScreen" style="display:none;" hidden aria-labelledby="setupScreenHeading">
   <div class="setupCard">
-    <h1>Set up your family</h1>
+    <h1 id="setupScreenHeading" tabindex="-1">Set up your family</h1>
     <p>Add a child first. We'll set starting content limits based on their age so Tonight can make a recommendation right away — change anything now or later in Family, and your changes always stick.</p>
     <div class="setupFields">
       <div class="childField">
@@ -2399,11 +2422,11 @@ function reportError(err){
     </div>
     <div class="logicNote">Age-based defaults come from your child's age, not an official recommendation. They'll keep adjusting with age wherever you haven't set something yourself — your changes always come first.</div>
   </div>
-</div>
+</main>
 
-<div id="homeScreen" class="homeScreen">
+<main id="homeScreen" class="homeScreen" aria-labelledby="homeScreenHeading">
   <header>
-    <h1>What should we <span class="titleKeepTogether">watch tonight?</span></h1>
+    <h1 id="homeScreenHeading" tabindex="-1">What should we <span class="titleKeepTogether">watch tonight?</span></h1>
     <div class="subtitle">One good pick for the people, time, and mood you have tonight.</div>
     <div class="stats">
       <div><b id="statChecked">0</b>Watched</div>
@@ -2494,12 +2517,12 @@ function reportError(err){
       </div>
     </div>
   </div>
-</div>
+</main>
 
-<div id="browseScreen" class="screenWrap" style="display:none;">
+<main id="browseScreen" class="screenWrap" style="display:none;" hidden aria-labelledby="browseScreenHeading">
   <a href="#quickBar" class="skipLink" id="skipToNavLink">Skip to navigation</a>
   <div class="screenTopBar">
-    <h1>Shelf</h1>
+    <h1 id="browseScreenHeading" tabindex="-1">Shelf</h1>
     <button type="button" class="iconBtn" id="filterSheetBtn" aria-label="Filter and sort" aria-expanded="false" aria-controls="filterSheet">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><circle cx="9" cy="7" r="2" fill="currentColor" stroke="none"/><line x1="4" y1="17" x2="20" y2="17"/><circle cx="15" cy="17" r="2" fill="currentColor" stroke="none"/></svg>
       <span class="filterBadge" id="filterBadge" style="display:none;"></span>
@@ -2541,11 +2564,11 @@ function reportError(err){
     <button type="button" id="listPageNextBtn">Next</button>
   </div>
   <div class="empty" id="emptyMsg" style="display:none;">No movies match your search.</div>
-</div>
+</main>
 
-<div id="familyScreen" class="screenWrap" style="display:none;">
+<main id="familyScreen" class="screenWrap" style="display:none;" hidden aria-labelledby="familyScreenHeading">
   <div class="screenTopBar">
-    <h1>Family</h1>
+    <h1 id="familyScreenHeading" tabindex="-1">Family</h1>
   </div>
   <div class="stats">
     <div><b id="statCheckedMore">0</b>Watched</div>
@@ -2568,7 +2591,8 @@ function reportError(err){
           <div class="childEditRow">
             <div class="childField">
               <label for="newChildName">Name</label>
-              <input id="newChildName" type="text" placeholder="Child name" autocomplete="off">
+              <input id="newChildName" type="text" placeholder="Child name" autocomplete="off" aria-describedby="newChildNameError">
+              <p class="fieldError" id="newChildNameError" hidden>Enter a child name to continue.</p>
             </div>
             <div class="childField">
               <label for="newChildAge">Age</label>
@@ -2619,10 +2643,12 @@ function reportError(err){
       <div class="syncPanel" id="syncPanel" style="display:none;">
         <div class="syncRow syncPrimaryRow" id="googleSyncRow" style="display:none;">
           <label><span class="syncRecommendedBadge">Recommended</span> Sign in with Google to keep your list backed up and merged automatically across every device, so nothing gets overwritten. Saves a small file in your Google Drive that only this app can read or edit. <strong>That file includes your children's names, ages, and content-limit settings, not just your watchlist</strong> — see our <a href="/privacy.html">Privacy Policy</a> and <a href="/terms.html">Terms</a> for the full list of what's included.</label>
+          <p class="syncRetentionNote">Signing in keeps you connected for up to 180 days without asking again (refreshed each time you use sync) — see the Privacy Policy for exactly what that involves. Disconnect below ends that at any time; it doesn't delete the file already saved in your Drive, use "Delete synced data" for that.</p>
           <div class="googleSyncControls">
             <button id="googleSignInBtn">Sign in with Google</button>
             <span id="googleSyncStatus" style="display:none;"></span>
             <button id="googleSignOutBtn" style="display:none;">Disconnect</button>
+            <button id="googleDeleteDataBtn" class="warning" style="display:none;">Delete synced data from Google Drive</button>
           </div>
         </div>
         <div class="syncManualGroup">
@@ -2684,7 +2710,7 @@ function reportError(err){
       <p>Your family data stays in this browser unless you turn on sync. Google sync stores a small app-only file in your Google Drive.</p>
     </div>
   </div>
-</div>
+</main>
 
 <div class="scrim" id="filterScrim" style="display:none;"></div>
 <div class="sheet" id="filterSheet" role="dialog" aria-labelledby="filterSheetTitle" tabindex="-1" style="display:none;">
@@ -3502,12 +3528,16 @@ function normalizeState(raw){
   const version = parsed.v === 3 ? 3 : parsed.v === 2 ? 2 : 1;
   const orderMeta = normalizeOrderMeta(parsed.order || parsed.o, version);
   const childrenMeta = normalizeChildrenMeta(parsed.children);
+  const exclusiveMarks = enforceWatchPriorityInvariant(
+    normalizeMarks(parsed.checked || parsed.c, version),
+    normalizeMarks(parsed.priority || parsed.p, version)
+  );
   return {
     order: orderMeta.order,
     orderUpdatedAt: orderMeta.orderUpdatedAt,
     orderDevice: orderMeta.orderDevice,
-    checked: normalizeMarks(parsed.checked || parsed.c, version),
-    priority: normalizeMarks(parsed.priority || parsed.p, version),
+    checked: exclusiveMarks.checked,
+    priority: exclusiveMarks.priority,
     children: childrenMeta.children,
     childrenUpdatedAt: childrenMeta.childrenUpdatedAt,
     childrenDevice: childrenMeta.childrenDevice,
@@ -3555,11 +3585,11 @@ function markCount(collection){
   return Object.values(collection).filter(record => record && record.value).length;
 }
 
-function setMark(collectionName, idx, value){
+function setMark(collectionName, idx, value, updatedAt){
   const key = movieKey(idx);
   state[collectionName][key] = {
     value: !!value,
-    updatedAt: now(),
+    updatedAt: updatedAt || now(),
     device: DEVICE_ID
   };
 }
@@ -3573,18 +3603,20 @@ function safeSourceUrl(url){
   }
 }
 
-function createStarButton(idx, isPriority){
+function createStarButton(idx, m, isPriority){
   const star = document.createElement('button');
   star.className = 'star' + (isPriority ? ' on' : '');
   star.textContent = isPriority ? '\u2605' : '\u2606';
-  star.setAttribute('aria-label', 'Want to watch');
+  star.setAttribute('aria-label', isPriority
+    ? `Remove ${m.t} from Want to watch`
+    : `Add ${m.t} to Want to watch`);
   star.setAttribute('aria-pressed', isPriority ? 'true' : 'false');
   star.dataset.idx = idx;
   star.onclick = () => togglePriority(idx);
   return star;
 }
 
-function createMeta(idx, m){
+function createMeta(idx, m, detailScope){
   const meta = document.createElement('div');
   meta.className = 'meta';
 
@@ -3598,8 +3630,14 @@ function createMeta(idx, m){
   links.className = 'metaLinks';
 
   const detailBtn = document.createElement('button');
+  const isOpen = openDetail === idx;
+  const detailId = `shelf-${detailScope}-detail-${m.num}`;
   detailBtn.className = 'detailLink';
-  detailBtn.textContent = openDetail === idx ? 'Hide' : 'Details';
+  detailBtn.textContent = isOpen ? 'Hide' : 'Details';
+  detailBtn.dataset.idx = idx;
+  detailBtn.setAttribute('aria-label', `${isOpen ? 'Hide' : 'Show'} details for ${m.t}`);
+  detailBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  detailBtn.setAttribute('aria-controls', detailId);
   detailBtn.onclick = () => toggleDetail(idx);
   links.appendChild(detailBtn);
 
@@ -3611,6 +3649,7 @@ function createMeta(idx, m){
     sourceLink.target = '_blank';
     sourceLink.rel = 'noopener';
     sourceLink.textContent = 'Source';
+    sourceLink.setAttribute('aria-label', `View guidance source for ${m.t}`);
     links.appendChild(sourceLink);
   }
 
@@ -3740,7 +3779,7 @@ function saveState(){
 // container it lived in before a rebuild, then re-focuses the equivalent
 // control for the same movie idx afterward, if one still exists post-render
 // (e.g. it wasn't filtered out).
-const FOCUS_PRESERVING_ROLES = ['check', 'star', 'moveUp', 'moveDown'];
+const FOCUS_PRESERVING_ROLES = ['check', 'star', 'detailLink', 'moveUp', 'moveDown'];
 function focusPreservingRerender(idx, rerender){
   const active = document.activeElement;
   let role = null;
@@ -3762,7 +3801,10 @@ function focusPreservingRerender(idx, rerender){
 
 function toggleCheck(idx){
   focusPreservingRerender(idx, () => {
-    setMark('checked', idx, !markValue(state.checked, idx));
+    const checked = !markValue(state.checked, idx);
+    const updatedAt = now();
+    setMark('checked', idx, checked, updatedAt);
+    if(checked) setMark('priority', idx, false, updatedAt);
     saveState();
     renderCurrentView();
   });
@@ -3770,7 +3812,10 @@ function toggleCheck(idx){
 
 function togglePriority(idx){
   focusPreservingRerender(idx, () => {
-    setMark('priority', idx, !markValue(state.priority, idx));
+    const priority = !markValue(state.priority, idx);
+    const updatedAt = now();
+    setMark('priority', idx, priority, updatedAt);
+    if(priority) setMark('checked', idx, false, updatedAt);
     saveState();
     renderCurrentView();
   });
@@ -3791,8 +3836,10 @@ function move(idx, dir){
 }
 
 function toggleDetail(idx){
-  openDetail = openDetail === idx ? null : idx;
-  renderCurrentView();
+  focusPreservingRerender(idx, () => {
+    openDetail = openDetail === idx ? null : idx;
+    renderCurrentView();
+  });
 }
 
 function resetOrder(){
@@ -3848,7 +3895,10 @@ function completeSetupWithChildren(children){
   // Fresh setup: nobody has been deselected yet, so everyone starts included.
   tonightSelection.excludedChildIds = new Set();
   showScreen('home');
+  clearSetupValidation();
   showToast('Family setup saved');
+  document.getElementById('homeScreenHeading').focus();
+  announceAssertive('Family setup complete. Tonight is ready.');
 }
 
 function selectedKids(){
@@ -4675,7 +4725,9 @@ function showScreen(target){
   currentScreen = target;
   clearToast();
   SCREENS.forEach(name => {
-    screens[name].style.display = name === target ? 'block' : 'none';
+    const isActive = name === target;
+    screens[name].hidden = !isActive;
+    screens[name].style.display = isActive ? 'block' : 'none';
     if(tabs[name]){
       tabs[name].classList.toggle('on', name === target);
       if(name === target) tabs[name].setAttribute('aria-current', 'page');
@@ -4790,12 +4842,12 @@ function renderNewSection(){
 
     const check = document.createElement('button');
     check.className = 'check' + (isChecked ? ' on' : '');
-    check.setAttribute('aria-label', 'Mark watched');
+    check.setAttribute('aria-label', isChecked ? `Mark ${m.t} unwatched` : `Mark ${m.t} watched`);
     check.setAttribute('aria-pressed', isChecked ? 'true' : 'false');
     check.dataset.idx = idx;
     check.onclick = () => toggleCheck(idx);
 
-    const star = createStarButton(idx, isPriority);
+    const star = createStarButton(idx, m, isPriority);
 
     const poster = createPoster(m, 'safeBetPoster', true);
 
@@ -4808,7 +4860,7 @@ function renderNewSection(){
     const tag = document.createElement('div');
     tag.className = 'newTag';
     tag.textContent = m.addedVia === 'request' ? 'By request' : 'New release';
-    const meta = createMeta(idx, m);
+    const meta = createMeta(idx, m, 'new');
     info.appendChild(title);
     info.appendChild(tag);
     info.appendChild(meta);
@@ -4821,12 +4873,12 @@ function renderNewSection(){
     row.appendChild(info);
     section.appendChild(row);
 
-    if(openDetail === idx){
-      const detail = document.createElement('div');
-      detail.className = 'detail open safeBetDetail' + (poster ? '' : ' noPosterDetail');
-      detail.textContent = m.full;
-      section.appendChild(detail);
-    }
+    const detail = document.createElement('div');
+    detail.id = `shelf-new-detail-${m.num}`;
+    detail.className = 'detail safeBetDetail' + (openDetail === idx ? ' open' : '') + (poster ? '' : ' noPosterDetail');
+    detail.hidden = openDetail !== idx;
+    detail.textContent = m.full;
+    section.appendChild(detail);
   });
 
   if(indices.length > NEW_TEASER_CAP){
@@ -4920,6 +4972,7 @@ function setGoogleSyncUI(connected, message, isError){
   document.getElementById('googleSignInBtn').style.display = connected ? 'none' : 'inline-block';
   setGoogleSyncStatus(connected ? (message || 'Synced with Google') : (message || ''), isError);
   document.getElementById('googleSignOutBtn').style.display = connected ? 'inline-block' : 'none';
+  document.getElementById('googleDeleteDataBtn').style.display = connected ? 'inline-block' : 'none';
   const toggleBtn = document.getElementById('familySyncBtn');
   toggleBtn.textContent = isError ? 'Sync needs reconnect' : 'Open sync settings';
   toggleBtn.classList.toggle('syncWarning', !!isError);
@@ -5109,6 +5162,54 @@ async function findDriveFile(){
   return (data.files && data.files[0]) ? data.files[0].id : null;
 }
 
+// Issue #102: findDriveFile() above only ever returns the first match, which
+// is fine for normal read/write (there's only ever meant to be one state
+// file), but "Delete synced data" needs to remove every app-owned file
+// matching our name -- Drive's appDataFolder doesn't enforce uniqueness, so
+// a race between two devices writing at once could in principle leave more
+// than one behind, and a delete flow that only knows about the currently
+// cached googleDriveFileId would silently leave the others (and a user's
+// data along with them).
+async function listAllDriveFiles(){
+  const q = encodeURIComponent(`name='${DRIVE_FILE_NAME}' and trashed=false`);
+  const res = await driveFetch(`https://www.googleapis.com/drive/v3/files?spaces=appDataFolder&q=${q}&fields=files(id,name)`);
+  const data = await driveJson(res, 'List sync files');
+  return data.files || [];
+}
+
+async function deleteDriveFile(fileId){
+  const res = await driveFetch(`https://www.googleapis.com/drive/v3/files/${fileId}`, { method: 'DELETE' });
+  if(res.status === 204 || res.status === 404) return; // 404: already gone, treat as success
+  await driveJson(res, 'Delete sync file');
+}
+
+// Deletes every app-owned Drive state file (see listAllDriveFiles() above),
+// not just the cached one, and reports which ones failed rather than
+// stopping at the first error -- so a partial failure (e.g. one of two
+// duplicate files fails to delete) is reported honestly instead of masked
+// as a full success or a full failure. Never touches the access token or
+// the refresh-token cookie itself; deciding whether to also disconnect is
+// the caller's job (see googleDeleteDataBtn's click handler), matching
+// issue #102's ordering requirement: don't revoke/clear access until
+// deletion success is known.
+async function deleteAllDriveFiles(){
+  const files = await listAllDriveFiles();
+  if(files.length === 0){
+    googleDriveFileId = null;
+    return { total: 0, deleted: 0, failed: [] };
+  }
+  const failed = [];
+  for(const file of files){
+    try{
+      await deleteDriveFile(file.id);
+    }catch(e){
+      failed.push({ id: file.id, message: e && e.message });
+    }
+  }
+  if(failed.length === 0) googleDriveFileId = null;
+  return { total: files.length, deleted: files.length - failed.length, failed };
+}
+
 async function readDriveFile(fileId){
   const res = await driveFetch(`https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`);
   return driveJson(res, 'Read sync file');
@@ -5231,6 +5332,26 @@ function mergeMarks(localMarks, remoteMarks){
   return merged;
 }
 
+function enforceWatchPriorityInvariant(checkedMarks, priorityMarks){
+  const checked = { ...(checkedMarks || {}) };
+  const priority = { ...(priorityMarks || {}) };
+  const keys = new Set([...Object.keys(checked), ...Object.keys(priority)]);
+  keys.forEach(key=>{
+    const checkedRecord = checked[key];
+    const priorityRecord = priority[key];
+    if(!checkedRecord || !checkedRecord.value || !priorityRecord || !priorityRecord.value) return;
+
+    const newest = newestMark(checkedRecord, priorityRecord);
+    const priorityWins = newest === priorityRecord && newest !== checkedRecord;
+    if(priorityWins){
+      checked[key] = { value: false, updatedAt: priorityRecord.updatedAt, device: priorityRecord.device };
+    }else{
+      priority[key] = { value: false, updatedAt: checkedRecord.updatedAt, device: checkedRecord.device };
+    }
+  });
+  return { checked, priority };
+}
+
 // Issue #116: a plain concat here duplicates events whenever the same two
 // states get merged more than once -- previously only a Google Drive sync
 // concern in practice, now also exercised every time two tabs' storage
@@ -5252,12 +5373,16 @@ function mergeState(local, remote){
   const normalizedRemote = normalizeState(remote);
   const useRemoteOrder = (normalizedRemote.orderUpdatedAt || 0) > (local.orderUpdatedAt || 0);
   const useRemoteChildren = (normalizedRemote.childrenUpdatedAt || 0) > (local.childrenUpdatedAt || 0);
+  const exclusiveMarks = enforceWatchPriorityInvariant(
+    mergeMarks(local.checked, normalizedRemote.checked),
+    mergeMarks(local.priority, normalizedRemote.priority)
+  );
   return {
     order: useRemoteOrder ? normalizedRemote.order : local.order,
     orderUpdatedAt: useRemoteOrder ? normalizedRemote.orderUpdatedAt : local.orderUpdatedAt,
     orderDevice: useRemoteOrder ? normalizedRemote.orderDevice : local.orderDevice,
-    checked: mergeMarks(local.checked, normalizedRemote.checked),
-    priority: mergeMarks(local.priority, normalizedRemote.priority),
+    checked: exclusiveMarks.checked,
+    priority: exclusiveMarks.priority,
     children: useRemoteChildren ? normalizedRemote.children : local.children,
     childrenUpdatedAt: useRemoteChildren ? normalizedRemote.childrenUpdatedAt : local.childrenUpdatedAt,
     childrenDevice: useRemoteChildren ? normalizedRemote.childrenDevice : local.childrenDevice,
@@ -5561,13 +5686,13 @@ function render(){
 
     const check = document.createElement('button');
     check.className = 'check' + (isChecked ? ' on' : '');
-    check.setAttribute('aria-label', 'Mark watched');
+    check.setAttribute('aria-label', isChecked ? `Mark ${m.t} unwatched` : `Mark ${m.t} watched`);
     check.setAttribute('aria-pressed', isChecked ? 'true' : 'false');
     check.dataset.idx = idx;
     check.onclick = () => toggleCheck(idx);
 
     const isPriority = markValue(state.priority, idx);
-    const star = createStarButton(idx, isPriority);
+    const star = createStarButton(idx, m, isPriority);
 
     const poster = createPoster(m, null, isRecent(m));
 
@@ -5577,7 +5702,7 @@ function render(){
     title.className = 'title';
     title.textContent = `${m.t} (${m.y})`;
     title.onclick = () => toggleDetail(idx);
-    const meta = createMeta(idx, m);
+    const meta = createMeta(idx, m, 'list');
     info.appendChild(title);
     info.appendChild(meta);
     const fitSignals = createFitSignals(idx);
@@ -5611,12 +5736,12 @@ function render(){
     li.appendChild(moves);
     listEl.appendChild(li);
 
-    if(openDetail === idx){
-      const detail = document.createElement('div');
-      detail.className = 'detail open' + (poster ? '' : ' noPosterDetail');
-      detail.textContent = m.full;
-      listEl.appendChild(detail);
-    }
+    const detail = document.createElement('div');
+    detail.id = `shelf-list-detail-${m.num}`;
+    detail.className = 'detail' + (openDetail === idx ? ' open' : '') + (poster ? '' : ' noPosterDetail');
+    detail.hidden = openDetail !== idx;
+    detail.textContent = m.full;
+    listEl.appendChild(detail);
   });
 
   updateStats();
@@ -5646,12 +5771,14 @@ if(listPagePrevBtn) listPagePrevBtn.addEventListener('click', ()=>{
   if(listPage > 1){
     listPage -= 1;
     render();
+    (listPagePrevBtn.disabled ? listPageNextBtn : listPagePrevBtn).focus();
     if(listEl) listEl.scrollIntoView({ behavior:'smooth', block:'start' });
   }
 });
 if(listPageNextBtn) listPageNextBtn.addEventListener('click', ()=>{
   listPage += 1;
   render();
+  (listPageNextBtn.disabled ? listPagePrevBtn : listPageNextBtn).focus();
   if(listEl) listEl.scrollIntoView({ behavior:'smooth', block:'start' });
 });
 
@@ -5758,7 +5885,11 @@ function removeChild(id){
 
 function addChild(rawName, rawAge){
   const name = rawName.trim();
-  if(!name){ showToast('Add a child name first'); return; }
+  if(!name){
+    showNewChildValidationError();
+    return;
+  }
+  clearNewChildValidation();
   const child = createChild(name, rawAge);
   state.children.push(child);
   selectedFamilyChildId = child.id;
@@ -5770,6 +5901,32 @@ function addChild(rawName, rawAge){
   document.getElementById('newChildName').value = '';
   document.getElementById('childOnboardingPanel').style.display = 'none';
   showToast(`${child.name} added with age-based defaults`);
+}
+
+function announceAssertive(message){
+  const status = document.getElementById('assertiveStatus');
+  status.textContent = '';
+  window.setTimeout(()=>{ status.textContent = message; }, 0);
+}
+
+function showNewChildValidationError(){
+  const input = document.getElementById('newChildName');
+  const error = document.getElementById('newChildNameError');
+  input.setAttribute('aria-invalid', 'true');
+  error.hidden = false;
+  announceAssertive('Enter a child name to continue.');
+  input.focus();
+}
+
+function clearNewChildValidation(){
+  document.getElementById('newChildName').removeAttribute('aria-invalid');
+  document.getElementById('newChildNameError').hidden = true;
+}
+
+function clearSetupValidation(){
+  document.getElementById('setupChildName').removeAttribute('aria-invalid');
+  document.getElementById('setupChildNameError').hidden = true;
+  document.getElementById('assertiveStatus').textContent = '';
 }
 
 function summarizeChildUnderstanding(child){
@@ -6125,6 +6282,14 @@ document.getElementById('saveNewChildBtn').addEventListener('click', ()=>{
   addChild(document.getElementById('newChildName').value, document.getElementById('newChildAge').value);
 });
 
+document.getElementById('newChildName').addEventListener('input', e=>{
+  if(!e.target.value.trim()) return;
+  clearNewChildValidation();
+  if(document.getElementById('assertiveStatus').textContent === 'Enter a child name to continue.'){
+    document.getElementById('assertiveStatus').textContent = '';
+  }
+});
+
 document.getElementById('familySyncBtn').addEventListener('click', ()=>{
   const panel = document.getElementById('syncPanel');
   const opening = panel.style.display === 'none';
@@ -6169,7 +6334,12 @@ document.getElementById('googleSyncAlertBtn').addEventListener('click', ()=>{
   }
 });
 
-document.getElementById('googleSignOutBtn').addEventListener('click', ()=>{
+// Shared by the Disconnect button and "Delete synced data"'s optional
+// follow-up (issue #102) so both paths clear the exact same local/session
+// state. Always clears the refresh-token cookie and best-effort revokes at
+// Google regardless of outcome (see api/google-logout.js) -- disconnect
+// always succeeds locally even if Google's revoke call fails.
+function disconnectGoogle(){
   if(googleAccessToken){
     google.accounts.oauth2.revoke(googleAccessToken, ()=>{});
   }
@@ -6184,7 +6354,44 @@ document.getElementById('googleSignOutBtn').addEventListener('click', ()=>{
   clearTimeout(googleSyncRetryTimer);
   clearGoogleSyncMeta();
   setGoogleSyncUI(false);
+}
+
+document.getElementById('googleSignOutBtn').addEventListener('click', ()=>{
+  disconnectGoogle();
   showToast('Disconnected from Google');
+});
+
+// Issue #102: a distinct, explicit destructive action from Disconnect --
+// Disconnect alone was never able to remove the hidden appDataFolder state
+// file (privacy.html said as much and told users to "delete that yourself"
+// with no way to actually do it from the app). Ordering matters here: this
+// never revokes/clears the connection itself, only after a successful
+// delete does it offer to also disconnect, so a failed delete never leaves
+// the user newly disconnected with their data still sitting in Drive and no
+// easy way back in to retry.
+document.getElementById('googleDeleteDataBtn').addEventListener('click', async ()=>{
+  if(!googleAccessToken) return;
+  if(!window.confirm('Delete your synced family data from Google Drive? This removes the file this app saved there — it cannot be undone.')) return;
+
+  const btn = document.getElementById('googleDeleteDataBtn');
+  btn.disabled = true;
+  try{
+    const result = await deleteAllDriveFiles();
+    if(result.failed.length === 0){
+      showToast(result.total === 0 ? 'No synced data found in Google Drive' : 'Synced data deleted from Google Drive');
+      if(result.total > 0 && window.confirm('Also disconnect Google sync now? Otherwise a future sync may save a new file.')){
+        disconnectGoogle();
+        showToast('Disconnected from Google');
+      }
+    }else{
+      const deletedPart = result.deleted > 0 ? `${result.deleted} of ${result.total} files deleted; ` : '';
+      showToast(`${deletedPart}${result.failed.length} failed to delete — try again, or remove access at myaccount.google.com/permissions`);
+    }
+  }catch(e){
+    showToast('Could not delete synced data — check your connection and try again');
+  }finally{
+    btn.disabled = false;
+  }
 });
 
 function setupMovieRequestForm(formId, inputId, statusId){
@@ -6339,19 +6546,16 @@ document.getElementById('setupSaveChildBtn').addEventListener('click', ()=>{
   if(!name){
     input.setAttribute('aria-invalid', 'true');
     error.hidden = false;
-    document.getElementById('assertiveStatus').textContent = 'Enter a child name to continue.';
+    announceAssertive('Enter a child name to continue.');
     input.focus();
     return;
   }
-  input.removeAttribute('aria-invalid');
-  error.hidden = true;
   completeSetupWithChildren([createChild(name, document.getElementById('setupChildAge').value)]);
 });
 
 document.getElementById('setupChildName').addEventListener('input', e=>{
   if(!e.target.value.trim()) return;
-  e.target.removeAttribute('aria-invalid');
-  document.getElementById('setupChildNameError').hidden = true;
+  clearSetupValidation();
 });
 
 document.getElementById('setupSampleFamilyBtn').addEventListener('click', ()=>{
