@@ -254,19 +254,15 @@ test('unfinished Google sign-in shows a reconnect warning and toast', async ({ p
   await expect(page.locator('#toast')).toHaveText('Google sign-in did not finish — try again');
 });
 
-// Known flake (flagged by Reviewer 2026-09-25, same pattern as the 401-response test
-// above): the sinon/Playwright fake clock's pauseAt() can throw "Cannot fast-forward to
-// the past" intermittently. Same pre-existing timing fragility, not a real regression --
-// re-run in isolation if it fails.
 test('failed writes back off instead of retrying aggressively, and a later success clears the warning', async ({ page }) => {
   const mock = await mockDrive(page, '500');
-  await page.clock.install();
+  const clockStart = new Date('2026-01-01T00:00:00Z');
+  await page.clock.install({ time: clockStart });
+  // Freeze before navigation so no app timer can advance between page load and
+  // pauseAt(). Using a fixed future instant avoids the intermittent
+  // "Cannot fast-forward to the past" race caused by comparing two live clocks.
+  await page.clock.pauseAt(new Date('2026-01-01T00:00:01Z'));
   await page.goto('/');
-  // Freeze page time before triggering the failed write. Installing the fake
-  // clock after page timers exist is undefined in Playwright, and allowing
-  // real time to flow here can fire the 1.6s retry while CI is still waiting
-  // on the status assertions below.
-  await page.clock.pauseAt(new Date());
 
   await page.evaluate(() => {
     googleAccessToken = 'fake-token';
