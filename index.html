@@ -17,9 +17,8 @@
      IS part of the core bundle is explicitly turned off below rather than left on its
      default, since that's the one automatic capture path that could otherwise pick up a
      typed child name or age from the Family tab. beforeSend is a second, independent
-     layer: it redacts any current child's name out of an error event's serialized payload
-     before it's sent, so a child's name can't reach Sentry even via an error message or
-     extra data that isn't a DOM breadcrumb at all.
+     layer: it redacts current child names from error-event strings before sending. If
+     redaction itself fails, the event is dropped instead of risking disclosure.
 
      beforeSend does NOT run for User Feedback widget submissions -- confirmed against the
      SDK's own source (packages/core/src/client.ts gates beforeSend to error-type events
@@ -97,7 +96,7 @@
       try{
         return redactCurrentChildNames(event);
       }catch(e){
-        return event;
+        return null;
       }
     }
   });
@@ -117,7 +116,15 @@
           Object.keys(feedbackEvent).forEach(function(k){
             feedbackEvent[k] = redactNames(feedbackEvent[k], names);
           });
-        }catch(e){ /* never let redaction itself block feedback from sending */ }
+        }catch(e){
+          // Feedback is parent-authored free text. If normal redaction cannot finish,
+          // replace every writable top-level field instead of sending it unchanged.
+          try{
+            Object.keys(feedbackEvent || {}).forEach(function(k){
+              try{ feedbackEvent[k] = '[redacted]'; }catch(ignore){}
+            });
+          }catch(ignore){}
+        }
       });
     }
   }
@@ -145,20 +152,28 @@ function isProductionHost(hostname){
 // the Family tab can change over the life of the page.
 function currentChildNames(){
   return (typeof state !== 'undefined' && state.children ? state.children : [])
-    .map(function(c){ return c && c.name; })
-    .filter(function(n){ return n && n.length > 1; });
+    .map(function(c){ return c && typeof c.name === 'string' ? c.name.trim().normalize('NFC') : ''; })
+    .filter(function(n){ return n.length > 0; })
+    .sort(function(a, b){ return b.length - a.length; });
 }
 function redactCurrentChildNames(value){
   var names = currentChildNames();
   return names.length ? redactNames(value, names) : value;
 }
 // Redacts each name in `names` out of every string value in `value`, recursing through
-// arrays/objects. Walks the *parsed* structure and matches real characters -- not
-// JSON.stringify's escaped form (`"` -> `\"`, `\` -> `\\`), which a plain
-// stringify-then-replace would silently miss for any name containing either character.
+// arrays/objects. NFC normalization makes composed/decomposed Unicode input consistent;
+// Unicode-aware token boundaries let a one-character name such as "Q" be protected
+// without corrupting every q in unrelated text.
 function redactNames(value, names){
   if(typeof value === 'string'){
-    names.forEach(function(name){ value = value.split(name).join('[redacted]'); });
+    value = value.normalize('NFC');
+    names.forEach(function(name){
+      var normalizedName = String(name).trim().normalize('NFC');
+      if(!normalizedName) return;
+      var escapedName = normalizedName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      var matcher = new RegExp('(^|[^\\p{L}\\p{N}\\p{M}])(' + escapedName + ')(?=$|[^\\p{L}\\p{N}\\p{M}])', 'giu');
+      value = value.replace(matcher, function(match, prefix){ return prefix + '[redacted]'; });
+    });
     return value;
   }
   if(Array.isArray(value)){
