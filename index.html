@@ -1761,6 +1761,14 @@ function reportError(err){
   .childActions button.warning{
     color:var(--warning);
   }
+  .googleSyncControls button.warning{
+    color:var(--warning);
+  }
+  .syncRetentionNote{
+    font-size:13px;
+    color:var(--ink-soft);
+    margin:6px 0 0;
+  }
   .childOnboarding{
     margin-top:16px;
     padding-top:16px;
@@ -2613,10 +2621,12 @@ function reportError(err){
       <div class="syncPanel" id="syncPanel" style="display:none;">
         <div class="syncRow syncPrimaryRow" id="googleSyncRow" style="display:none;">
           <label><span class="syncRecommendedBadge">Recommended</span> Sign in with Google to keep your list backed up and merged automatically across every device, so nothing gets overwritten. Saves a small file in your Google Drive that only this app can read or edit. <strong>That file includes your children's names, ages, and content-limit settings, not just your watchlist</strong> — see our <a href="/privacy.html">Privacy Policy</a> and <a href="/terms.html">Terms</a> for the full list of what's included.</label>
+          <p class="syncRetentionNote">Signing in keeps you connected for up to 180 days without asking again (refreshed each time you use sync) — see the Privacy Policy for exactly what that involves. Disconnect below ends that at any time; it doesn't delete the file already saved in your Drive, use "Delete synced data" for that.</p>
           <div class="googleSyncControls">
             <button id="googleSignInBtn">Sign in with Google</button>
             <span id="googleSyncStatus" style="display:none;"></span>
             <button id="googleSignOutBtn" style="display:none;">Disconnect</button>
+            <button id="googleDeleteDataBtn" class="warning" style="display:none;">Delete synced data from Google Drive</button>
           </div>
         </div>
         <div class="syncManualGroup">
@@ -4937,6 +4947,7 @@ function setGoogleSyncUI(connected, message, isError){
   document.getElementById('googleSignInBtn').style.display = connected ? 'none' : 'inline-block';
   setGoogleSyncStatus(connected ? (message || 'Synced with Google') : (message || ''), isError);
   document.getElementById('googleSignOutBtn').style.display = connected ? 'inline-block' : 'none';
+  document.getElementById('googleDeleteDataBtn').style.display = connected ? 'inline-block' : 'none';
   const toggleBtn = document.getElementById('familySyncBtn');
   toggleBtn.textContent = isError ? 'Sync needs reconnect' : 'Open sync settings';
   toggleBtn.classList.toggle('syncWarning', !!isError);
@@ -5124,6 +5135,54 @@ async function findDriveFile(){
   const res = await driveFetch(`https://www.googleapis.com/drive/v3/files?spaces=appDataFolder&q=${q}&fields=files(id,name)`);
   const data = await driveJson(res, 'Find sync file');
   return (data.files && data.files[0]) ? data.files[0].id : null;
+}
+
+// Issue #102: findDriveFile() above only ever returns the first match, which
+// is fine for normal read/write (there's only ever meant to be one state
+// file), but "Delete synced data" needs to remove every app-owned file
+// matching our name -- Drive's appDataFolder doesn't enforce uniqueness, so
+// a race between two devices writing at once could in principle leave more
+// than one behind, and a delete flow that only knows about the currently
+// cached googleDriveFileId would silently leave the others (and a user's
+// data along with them).
+async function listAllDriveFiles(){
+  const q = encodeURIComponent(`name='${DRIVE_FILE_NAME}' and trashed=false`);
+  const res = await driveFetch(`https://www.googleapis.com/drive/v3/files?spaces=appDataFolder&q=${q}&fields=files(id,name)`);
+  const data = await driveJson(res, 'List sync files');
+  return data.files || [];
+}
+
+async function deleteDriveFile(fileId){
+  const res = await driveFetch(`https://www.googleapis.com/drive/v3/files/${fileId}`, { method: 'DELETE' });
+  if(res.status === 204 || res.status === 404) return; // 404: already gone, treat as success
+  await driveJson(res, 'Delete sync file');
+}
+
+// Deletes every app-owned Drive state file (see listAllDriveFiles() above),
+// not just the cached one, and reports which ones failed rather than
+// stopping at the first error -- so a partial failure (e.g. one of two
+// duplicate files fails to delete) is reported honestly instead of masked
+// as a full success or a full failure. Never touches the access token or
+// the refresh-token cookie itself; deciding whether to also disconnect is
+// the caller's job (see googleDeleteDataBtn's click handler), matching
+// issue #102's ordering requirement: don't revoke/clear access until
+// deletion success is known.
+async function deleteAllDriveFiles(){
+  const files = await listAllDriveFiles();
+  if(files.length === 0){
+    googleDriveFileId = null;
+    return { total: 0, deleted: 0, failed: [] };
+  }
+  const failed = [];
+  for(const file of files){
+    try{
+      await deleteDriveFile(file.id);
+    }catch(e){
+      failed.push({ id: file.id, message: e && e.message });
+    }
+  }
+  if(failed.length === 0) googleDriveFileId = null;
+  return { total: files.length, deleted: files.length - failed.length, failed };
 }
 
 async function readDriveFile(fileId){
@@ -6250,7 +6309,12 @@ document.getElementById('googleSyncAlertBtn').addEventListener('click', ()=>{
   }
 });
 
-document.getElementById('googleSignOutBtn').addEventListener('click', ()=>{
+// Shared by the Disconnect button and "Delete synced data"'s optional
+// follow-up (issue #102) so both paths clear the exact same local/session
+// state. Always clears the refresh-token cookie and best-effort revokes at
+// Google regardless of outcome (see api/google-logout.js) -- disconnect
+// always succeeds locally even if Google's revoke call fails.
+function disconnectGoogle(){
   if(googleAccessToken){
     google.accounts.oauth2.revoke(googleAccessToken, ()=>{});
   }
@@ -6265,7 +6329,44 @@ document.getElementById('googleSignOutBtn').addEventListener('click', ()=>{
   clearTimeout(googleSyncRetryTimer);
   clearGoogleSyncMeta();
   setGoogleSyncUI(false);
+}
+
+document.getElementById('googleSignOutBtn').addEventListener('click', ()=>{
+  disconnectGoogle();
   showToast('Disconnected from Google');
+});
+
+// Issue #102: a distinct, explicit destructive action from Disconnect --
+// Disconnect alone was never able to remove the hidden appDataFolder state
+// file (privacy.html said as much and told users to "delete that yourself"
+// with no way to actually do it from the app). Ordering matters here: this
+// never revokes/clears the connection itself, only after a successful
+// delete does it offer to also disconnect, so a failed delete never leaves
+// the user newly disconnected with their data still sitting in Drive and no
+// easy way back in to retry.
+document.getElementById('googleDeleteDataBtn').addEventListener('click', async ()=>{
+  if(!googleAccessToken) return;
+  if(!window.confirm('Delete your synced family data from Google Drive? This removes the file this app saved there — it cannot be undone.')) return;
+
+  const btn = document.getElementById('googleDeleteDataBtn');
+  btn.disabled = true;
+  try{
+    const result = await deleteAllDriveFiles();
+    if(result.failed.length === 0){
+      showToast(result.total === 0 ? 'No synced data found in Google Drive' : 'Synced data deleted from Google Drive');
+      if(result.total > 0 && window.confirm('Also disconnect Google sync now? Otherwise a future sync may save a new file.')){
+        disconnectGoogle();
+        showToast('Disconnected from Google');
+      }
+    }else{
+      const deletedPart = result.deleted > 0 ? `${result.deleted} of ${result.total} files deleted; ` : '';
+      showToast(`${deletedPart}${result.failed.length} failed to delete — try again, or remove access at myaccount.google.com/permissions`);
+    }
+  }catch(e){
+    showToast('Could not delete synced data — check your connection and try again');
+  }finally{
+    btn.disabled = false;
+  }
 });
 
 document.getElementById('requestMovieForm').addEventListener('submit', ()=>{

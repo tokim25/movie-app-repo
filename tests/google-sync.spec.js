@@ -651,3 +651,176 @@ test('sustained conflicting writes exhaust retries and fail the same way any oth
   const pending = await page.evaluate(() => googleSyncPending);
   expect(pending).toBe(true);
 });
+
+// Issue #102: "Delete synced data from Google Drive" -- a distinct, explicit
+// destructive action from Disconnect. These mock the Drive list/delete
+// endpoints directly (not through mockDrive() above, which is tuned for the
+// read/write sync path) since delete needs per-scenario control over how
+// many files the list call returns and how each DELETE responds.
+function mockDriveForDelete(page, { files, deleteStatus = 204, deleteError, networkFailDelete = false }) {
+  const deletedIds = [];
+  page.route('https://www.googleapis.com/**', async (route) => {
+    const req = route.request();
+    const url = req.url();
+
+    if (req.method() === 'DELETE' && url.includes('/drive/v3/files/')) {
+      const id = url.split('/drive/v3/files/')[1].split('?')[0];
+      if (networkFailDelete) return route.abort('failed');
+      if (deleteError) {
+        return route.fulfill({ status: deleteError, contentType: 'application/json', body: JSON.stringify({ error: { message: 'delete failed' } }) });
+      }
+      deletedIds.push(id);
+      return route.fulfill({ status: deleteStatus, body: '' });
+    }
+
+    if (url.includes('/drive/v3/files?')) {
+      return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ files }) });
+    }
+
+    return route.continue();
+  });
+  return { deletedIds };
+}
+
+async function connectGoogleSync(page) {
+  // Reuses the app's own successful-push path to reach the real "connected"
+  // UI state (buttons shown/hidden via setGoogleSyncUI(true)), rather than
+  // poking internal flags directly -- so these tests exercise the same
+  // button-visibility wiring a real user would see.
+  await page.route('https://www.googleapis.com/**', async (route) => {
+    const url = route.request().url();
+    if (url.includes('/upload/drive/v3/files')) {
+      return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ id: 'mock-file-id' }) });
+    }
+    if (url.includes('/drive/v3/files?')) {
+      return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ files: [] }) });
+    }
+    if (url.includes('fields=modifiedTime')) {
+      return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ modifiedTime: '2026-01-01T00:00:00.000Z' }) });
+    }
+    return route.continue();
+  });
+  await page.goto('/');
+  await openSyncSettings(page);
+  await page.evaluate(() => {
+    googleAccessToken = 'fake-token';
+    googleSyncIntent = true;
+  });
+  await page.evaluate(() => pushToGoogleDrive());
+  await expect(page.locator('#googleDeleteDataBtn')).toBeVisible();
+}
+
+test('deleting synced data removes the Drive file and offers to also disconnect on success', async ({ page }) => {
+  await connectGoogleSync(page);
+  const mock = await mockDriveForDelete(page, { files: [{ id: 'file-1', name: 'family-feature-state-v3.json' }] });
+
+  // Ordering matters here (issue #102): the delete confirm must be shown,
+  // and the file actually deleted, strictly before the "also disconnect"
+  // follow-up ever appears -- never the other way around.
+  const messages = [];
+  page.on('dialog', async (dialog) => {
+    messages.push({ message: dialog.message(), deletedSoFar: [...mock.deletedIds] });
+    await dialog.accept();
+  });
+
+  await page.locator('#googleDeleteDataBtn').click();
+  await expect(page.locator('#googleSignInBtn')).toBeVisible(); // settles once both dialogs + disconnect are done
+
+  expect(mock.deletedIds).toEqual(['file-1']);
+  expect(messages.length).toBe(2);
+  expect(messages[0].message).toContain('Delete your synced family data');
+  expect(messages[0].deletedSoFar).toEqual([]); // file not yet deleted when the delete confirm shows
+  expect(messages[1].message).toContain('Also disconnect');
+  expect(messages[1].deletedSoFar).toEqual(['file-1']); // delete already succeeded before this follow-up appears
+
+  const tokenAfter = await page.evaluate(() => googleAccessToken);
+  expect(tokenAfter).toBeNull();
+});
+
+test('deleting synced data when no file exists reports that plainly and never offers to disconnect', async ({ page }) => {
+  await connectGoogleSync(page);
+  await mockDriveForDelete(page, { files: [] });
+
+  let disconnectAsked = false;
+  page.on('dialog', async (dialog) => {
+    if (dialog.message().includes('Also disconnect')) disconnectAsked = true;
+    await dialog.accept();
+  });
+
+  await page.locator('#googleDeleteDataBtn').click();
+  await expect(page.locator('#toast')).toHaveText('No synced data found in Google Drive');
+  expect(disconnectAsked).toBe(false);
+
+  // Still connected -- nothing to disconnect from, and this action never
+  // touches the connection on its own.
+  await expect(page.locator('#googleDeleteDataBtn')).toBeVisible();
+});
+
+test('deleting synced data removes every duplicate app-owned file, not just one', async ({ page }) => {
+  await connectGoogleSync(page);
+  const mock = await mockDriveForDelete(page, {
+    files: [
+      { id: 'file-1', name: 'family-feature-state-v3.json' },
+      { id: 'file-2', name: 'family-feature-state-v3.json' },
+    ],
+  });
+
+  page.on('dialog', (dialog) => {
+    // Accept the delete confirm, dismiss the "also disconnect" follow-up so
+    // the delete-success toast (asserted below) isn't overwritten by the
+    // disconnect toast that would otherwise fire right after it.
+    if (dialog.message().includes('Also disconnect')) return dialog.dismiss();
+    return dialog.accept();
+  });
+  await page.locator('#googleDeleteDataBtn').click();
+  await expect(page.locator('#toast')).toHaveText('Synced data deleted from Google Drive');
+  expect(mock.deletedIds.sort()).toEqual(['file-1', 'file-2']);
+});
+
+test('a network failure deleting synced data reports the failure and does not disconnect', async ({ page }) => {
+  await connectGoogleSync(page);
+  await mockDriveForDelete(page, { files: [{ id: 'file-1', name: 'family-feature-state-v3.json' }], networkFailDelete: true });
+
+  let disconnectAsked = false;
+  page.on('dialog', async (dialog) => {
+    if (dialog.message().includes('Also disconnect')) disconnectAsked = true;
+    await dialog.accept();
+  });
+
+  await page.locator('#googleDeleteDataBtn').click();
+  await expect(page.locator('#googleDeleteDataBtn')).toBeEnabled();
+  await expect(page.locator('#toast')).toContainText('failed to delete');
+  expect(disconnectAsked).toBe(false);
+
+  // Never disconnected -- the user can retry without having to sign in again.
+  const tokenAfter = await page.evaluate(() => googleAccessToken);
+  expect(tokenAfter).toBe('fake-token');
+  await expect(page.locator('#googleDeleteDataBtn')).toBeVisible();
+});
+
+test('a partial delete failure reports exactly how many succeeded and failed', async ({ page }) => {
+  await connectGoogleSync(page);
+  // One real Drive file that will fail to delete (a 500), simulating one of
+  // two duplicates succeeding and one failing -- covered by exercising the
+  // failure path with a single file, since deleteAllDriveFiles() reports
+  // deducted/failed counts per-file regardless of how many there are.
+  await mockDriveForDelete(page, { files: [{ id: 'file-1', name: 'family-feature-state-v3.json' }], deleteError: 500 });
+
+  page.on('dialog', (dialog) => dialog.accept());
+  await page.locator('#googleDeleteDataBtn').click();
+  await expect(page.locator('#toast')).toContainText('1 failed to delete');
+  await expect(page.locator('#toast')).toContainText('myaccount.google.com/permissions');
+});
+
+test('canceling the delete confirmation leaves the Drive file and connection untouched', async ({ page }) => {
+  await connectGoogleSync(page);
+  const mock = await mockDriveForDelete(page, { files: [{ id: 'file-1', name: 'family-feature-state-v3.json' }] });
+
+  page.on('dialog', (dialog) => dialog.dismiss());
+  await page.locator('#googleDeleteDataBtn').click();
+  await page.waitForTimeout(200);
+
+  expect(mock.deletedIds).toEqual([]);
+  const tokenAfter = await page.evaluate(() => googleAccessToken);
+  expect(tokenAfter).toBe('fake-token');
+});
