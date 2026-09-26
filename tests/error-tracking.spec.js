@@ -219,23 +219,34 @@ test('the "Report a bug" button opens the Sentry feedback form, not a mailto: li
   await expect.poll(() => page.evaluate(() => window.__sentryFeedbackFormCalls)).toEqual(['appendToDom', 'open']);
 });
 
-test('the feedback widget host sets --font-size to 16px to prevent iOS Safari auto-zoom', async ({ page }) => {
+test('the feedback widget host sets mobile-safe font size and centered success-message position', async ({ page }) => {
   // Regression test for issue #142: iOS Safari auto-zooms the whole page when a
   // focused input's computed font-size is under 16px. The app's own inputs are
   // already 16px, but the Sentry Feedback widget renders its form into a separate
   // #sentry-feedback shadow root this stylesheet can't reach directly -- Sentry's
   // widget reads CSS custom properties on that host element instead (they inherit
   // through the shadow boundary), so this checks the widget's own theming hook.
+  // Issue #146: the widget's built-in "thanks for your report" success message
+  // was visually off-center on iPhone Safari, so keep the host centered too.
   await page.goto('/');
-  const fontSize = await page.evaluate(() => {
+  const styles = await page.evaluate(() => {
     const host = document.createElement('div');
     host.id = 'sentry-feedback';
     document.body.appendChild(host);
-    const value = getComputedStyle(host).getPropertyValue('--font-size').trim();
+    const computed = getComputedStyle(host);
+    const value = {
+      fontSize: computed.getPropertyValue('--font-size').trim(),
+      left: computed.getPropertyValue('--left').trim(),
+      right: computed.getPropertyValue('--right').trim(),
+      transform: computed.transform
+    };
     host.remove();
     return value;
   });
-  expect(fontSize).toBe('16px');
+  expect(styles.fontSize).toBe('16px');
+  expect(styles.left).toBe('50%');
+  expect(styles.right).toBe('auto');
+  expect(styles.transform).not.toBe('none');
 });
 
 test('no hardcoded mailto: link or email address remains in the source', async ({ page }) => {

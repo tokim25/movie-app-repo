@@ -677,7 +677,7 @@ function mockDriveForDelete(page, { files, deleteStatus = 204, deleteError, netw
       return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ files }) });
     }
 
-    return route.continue();
+    return route.fallback();
   });
   return { deletedIds };
 }
@@ -687,6 +687,11 @@ async function connectGoogleSync(page) {
   // UI state (buttons shown/hidden via setGoogleSyncUI(true)), rather than
   // poking internal flags directly -- so these tests exercise the same
   // button-visibility wiring a real user would see.
+  await page.route('**/api/google-refresh', (route) => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({ access_token: 'fake-token' }),
+  }));
   await page.route('https://www.googleapis.com/**', async (route) => {
     const url = route.request().url();
     if (url.includes('/upload/drive/v3/files')) {
@@ -694,6 +699,13 @@ async function connectGoogleSync(page) {
     }
     if (url.includes('/drive/v3/files?')) {
       return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ files: [] }) });
+    }
+    if (url.includes('/drive/v3/files/') && url.includes('alt=media')) {
+      return route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ v: 3, checked: {}, priority: {}, order: [] }),
+      });
     }
     if (url.includes('fields=modifiedTime')) {
       return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ modifiedTime: '2026-01-01T00:00:00.000Z' }) });
@@ -705,6 +717,7 @@ async function connectGoogleSync(page) {
   await page.evaluate(() => {
     googleAccessToken = 'fake-token';
     googleSyncIntent = true;
+    markGoogleInitialToastShown();
   });
   await page.evaluate(() => pushToGoogleDrive());
   await expect(page.locator('#googleDeleteDataBtn')).toBeVisible();
