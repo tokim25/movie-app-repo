@@ -324,9 +324,13 @@ function reportError(err){
      Sentry's widget instead reads CSS custom properties on that host element and
      applies them inside its shadow DOM (custom properties inherit through shadow
      boundaries even though normal selectors don't), so this is the widget's own
-     theming hook, not a rule targeting its internal markup. */
+     theming hook, not a rule targeting its internal markup. Issue #146: use the
+     same hook to center the widget's post-submit success message on iPhone Safari. */
   #sentry-feedback{
     --font-size: 16px;
+    --left: 50%;
+    --right: auto;
+    transform: translateX(-50%);
   }
   :focus-visible{
     outline:2px solid var(--focus) !important;
@@ -911,7 +915,7 @@ function reportError(err){
     align-items:center;
     justify-content:center;
     gap:8px;
-    margin:32px auto 0;
+    margin:16px auto 0;
     padding:0 20px;
     max-width:420px;
   }
@@ -943,6 +947,23 @@ function reportError(err){
     flex-shrink:0;
   }
   .requestForm button:hover{ background:var(--line); }
+  .requestForm button:disabled{
+    opacity:0.55;
+    cursor:default;
+  }
+  .requestDisclosure,
+  .requestStatus{
+    max-width:420px;
+    margin:10px auto 0;
+    padding:0 20px;
+    color:var(--ink-soft);
+    font-size:12px;
+    line-height:1.45;
+    text-align:center;
+  }
+  .requestStatus[role="alert"]{
+    color:var(--error);
+  }
   .toast{
     position:fixed;
     bottom:calc(84px + env(safe-area-inset-bottom, 0px));
@@ -2506,11 +2527,12 @@ function reportError(err){
   <section class="requestPanel" id="requestMoviePanel" aria-labelledby="requestMovieTitle">
     <h2 id="requestMovieTitle">Request a movie</h2>
     <p>Ask for a title to be added to the shelf.</p>
-    <iframe name="hiddenRequestFrame" style="display:none;" title="hidden"></iframe>
-    <form id="requestMovieForm" class="requestForm" action="https://docs.google.com/forms/d/e/1FAIpQLSf6gLu-Z9LO-ZnPQ70yuOmYC8_9O1Jk7Kwsk0BF-FepiWH8tQ/formResponse" method="POST" target="hiddenRequestFrame">
-      <input type="text" name="entry.1104459577" id="requestMovieInput" placeholder="Movie title" autocomplete="off" required>
+    <p class="requestDisclosure" id="requestMovieDisclosure">Movie titles are sent to Google Forms so they can land in the request queue. Please enter only the title, not personal notes.</p>
+    <form id="requestMovieForm" class="requestForm">
+      <input type="text" name="title" id="requestMovieInput" placeholder="Movie title" autocomplete="off" required maxlength="120" aria-describedby="requestMovieDisclosure requestMovieStatus">
       <button type="submit">Send</button>
     </form>
+    <p class="requestStatus" id="requestMovieStatus" aria-live="polite"></p>
   </section>
   <ul id="list"></ul>
   <div class="listPagination" id="listPagination" style="display:none;">
@@ -2638,10 +2660,12 @@ function reportError(err){
     <section class="requestPanel" id="requestMoviePanelFamily" aria-labelledby="requestMovieTitleFamily">
       <h2 id="requestMovieTitleFamily">Request a movie</h2>
       <p>Ask for a title to be added to the shelf.</p>
-      <form id="requestMovieFormFamily" class="requestForm" action="https://docs.google.com/forms/d/e/1FAIpQLSf6gLu-Z9LO-ZnPQ70yuOmYC8_9O1Jk7Kwsk0BF-FepiWH8tQ/formResponse" method="POST" target="hiddenRequestFrame">
-        <input type="text" name="entry.1104459577" id="requestMovieInputFamily" placeholder="Movie title" autocomplete="off" required>
+      <p class="requestDisclosure" id="requestMovieDisclosureFamily">Movie titles are sent to Google Forms so they can land in the request queue. Please enter only the title, not personal notes.</p>
+      <form id="requestMovieFormFamily" class="requestForm">
+        <input type="text" name="title" id="requestMovieInputFamily" placeholder="Movie title" autocomplete="off" required maxlength="120" aria-describedby="requestMovieDisclosureFamily requestMovieStatusFamily">
         <button type="submit">Send</button>
       </form>
+      <p class="requestStatus" id="requestMovieStatusFamily" aria-live="polite"></p>
     </section>
   </div>
 
@@ -2859,6 +2883,7 @@ const CONTENT_FLAG_IDS = CONTENT_FLAGS.map(flag => flag.id);
 // already stamped every entry's csmRecheckVersion as 2 to match -- this
 // constant was the one place that never got updated to agree with them.
 const CONTENT_MODEL_VERSION = 2;
+const MOVIE_REQUEST_TIMEOUT_MS = window.MOVIE_REQUEST_TIMEOUT_MS || 10000;
 // The registerable child-age range (issue #51: capped at 9 with no way to
 // register a 10+ kid, forcing parents to misreport their child's age). 13
 // covers "at least 12, ideally higher" through early teens per the issue,
@@ -6162,17 +6187,61 @@ document.getElementById('googleSignOutBtn').addEventListener('click', ()=>{
   showToast('Disconnected from Google');
 });
 
-document.getElementById('requestMovieForm').addEventListener('submit', ()=>{
-  showToast("Thanks — we'll take a look!");
-  const input = document.getElementById('requestMovieInput');
-  setTimeout(()=>{ input.value = ''; }, 300);
-});
+function setupMovieRequestForm(formId, inputId, statusId){
+  const form = document.getElementById(formId);
+  const input = document.getElementById(inputId);
+  const status = document.getElementById(statusId);
+  const button = form.querySelector('button[type="submit"]');
 
-document.getElementById('requestMovieFormFamily').addEventListener('submit', ()=>{
-  showToast("Thanks — we'll take a look!");
-  const input = document.getElementById('requestMovieInputFamily');
-  setTimeout(()=>{ input.value = ''; }, 300);
-});
+  form.addEventListener('submit', async e=>{
+    e.preventDefault();
+    const title = input.value.replace(/\s+/g, ' ').trim().slice(0, 120);
+    if(!title){
+      input.value = '';
+      input.focus();
+      status.textContent = 'Enter a movie title first.';
+      status.setAttribute('role', 'alert');
+      return;
+    }
+
+    input.value = title;
+    status.textContent = 'Sending request...';
+    status.removeAttribute('role');
+    button.disabled = true;
+    button.textContent = 'Sending';
+
+    const controller = new AbortController();
+    const timeout = setTimeout(()=>controller.abort(), MOVIE_REQUEST_TIMEOUT_MS);
+
+    try{
+      const response = await fetch('/api/movie-request', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title }),
+        signal: controller.signal
+      });
+      if(!response.ok) throw new Error('request_failed');
+
+      input.value = '';
+      status.textContent = 'Request received.';
+      status.removeAttribute('role');
+      showToast("Thanks — we'll take a look!");
+    }catch(err){
+      status.textContent = navigator.onLine === false
+        ? 'You appear to be offline. Your title is still here — try again when connected.'
+        : 'Request could not be confirmed. Your title is still here — try again.';
+      status.setAttribute('role', 'alert');
+      input.focus();
+    }finally{
+      clearTimeout(timeout);
+      button.disabled = false;
+      button.textContent = 'Send';
+    }
+  });
+}
+
+setupMovieRequestForm('requestMovieForm', 'requestMovieInput', 'requestMovieStatus');
+setupMovieRequestForm('requestMovieFormFamily', 'requestMovieInputFamily', 'requestMovieStatusFamily');
 
 document.getElementById('syncLoadBtn').addEventListener('click', ()=>{
   const input = document.getElementById('syncCodeIn');

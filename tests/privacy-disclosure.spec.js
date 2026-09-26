@@ -136,3 +136,15 @@ test('privacy.html and terms.html both name the actual synced data categories', 
   expect(privacySrc).toContain('Sentry');
   expect(termsSrc).toContain('Sentry');
 });
+
+test('privacy.html discloses Google Forms movie request submissions (#106)', () => {
+  const indexSrc = fs.readFileSync('index.html', 'utf8');
+  const privacySrc = fs.readFileSync('privacy.html', 'utf8');
+
+  expect(indexSrc).toContain('/api/movie-request');
+  expect(indexSrc).toContain('Google Forms');
+  expect(indexSrc).toContain('maxlength="120"');
+  expect(privacySrc).toContain('Google Forms');
+  expect(privacySrc).toContain('movie title');
+  expect(privacySrc).toContain('120 characters');
+});
