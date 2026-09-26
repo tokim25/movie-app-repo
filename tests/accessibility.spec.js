@@ -158,6 +158,23 @@ test('every app screen exposes exactly one visible labelled main landmark (#114)
   await assertMain('familyScreen', 'familyScreenHeading');
 });
 
+test('new Tonight results are announced with their title and fit verdict (#111)', async ({ page }) => {
+  await page.goto('/');
+  await setupSampleFamily(page);
+
+  const status = page.locator('#tonightPickStatus');
+  await expect(status).toHaveAttribute('role', 'status');
+  await expect(status).toHaveAttribute('aria-live', 'polite');
+  await expect(status).toHaveAttribute('aria-atomic', 'true');
+  await expect(status).toBeEmpty();
+
+  await page.locator('#findTonightPickBtn').click();
+
+  const title = await page.locator('#tonightPickTitle').textContent();
+  const verdict = await page.locator('#tonightVerdict').textContent();
+  await expect(status).toContainText(`${verdict}: ${title}.`);
+});
+
 test('blank add-member submissions identify and focus the invalid field every time (#115)', async ({ page }) => {
   await page.goto('/');
   await setupSampleFamily(page);
