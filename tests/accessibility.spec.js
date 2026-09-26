@@ -189,3 +189,64 @@ test('blank add-member submissions identify and focus the invalid field every ti
   await expect(name).not.toHaveAttribute('aria-invalid', 'true');
   await expect(error).toBeHidden();
 });
+
+test('Shelf row controls include their movie title and expose state changes (#113)', async ({ page }) => {
+  await switchToFlatView(page);
+
+  const rows = page.locator('#list > li.row');
+  for(let i = 0; i < 3; i++){
+    const row = rows.nth(i);
+    const displayedTitle = await row.locator('.title').textContent();
+    const movieTitle = displayedTitle.replace(/ \(\d{4}\)$/, '');
+    await expect(row.locator('.check')).toHaveAttribute('aria-label', `Mark ${movieTitle} watched`);
+    await expect(row.locator('.star')).toHaveAttribute('aria-label', `Add ${movieTitle} to Want to watch`);
+    await expect(row.locator('.detailLink')).toHaveAttribute('aria-label', `Show details for ${movieTitle}`);
+    const source = row.locator('.sourceLink');
+    if(await source.count()){
+      await expect(source).toHaveAttribute('aria-label', `View guidance source for ${movieTitle}`);
+    }
+  }
+
+  const firstTitle = (await rows.first().locator('.title').textContent()).replace(/ \(\d{4}\)$/, '');
+  await rows.first().locator('.check').click();
+  await expect(page.locator(':focus')).toHaveAttribute('aria-label', `Mark ${firstTitle} unwatched`);
+  await expect(page.locator(':focus')).toHaveAttribute('aria-pressed', 'true');
+
+  const currentRow = rows.filter({ hasText: firstTitle }).first();
+  await currentRow.locator('.star').click();
+  await expect(page.locator(':focus')).toHaveAttribute('aria-label', `Remove ${firstTitle} from Want to watch`);
+  await expect(page.locator(':focus')).toHaveAttribute('aria-pressed', 'true');
+});
+
+test('Shelf Details keeps focus and stable disclosure semantics through rerenders (#112)', async ({ page }) => {
+  await switchToFlatView(page);
+
+  const firstRow = page.locator('#list > li.row').first();
+  const title = (await firstRow.locator('.title').textContent()).replace(/ \(\d{4}\)$/, '');
+  const details = firstRow.locator('.detailLink');
+  const controlledId = await details.getAttribute('aria-controls');
+
+  await details.click();
+  await expect(page.locator(':focus')).toHaveAttribute('aria-label', `Hide details for ${title}`);
+  await expect(page.locator(':focus')).toHaveAttribute('aria-expanded', 'true');
+  await expect(page.locator(`#${controlledId}`)).toBeVisible();
+
+  await page.locator('#listPageNextBtn').click();
+  await expect(page.locator('#listPageNextBtn')).toBeFocused();
+  await page.locator('#listPagePrevBtn').click();
+  await expect(page.locator('#listPageNextBtn')).toBeFocused();
+
+  const restoredDetails = page.locator('#list > li.row').filter({ hasText: title }).first().locator('.detailLink');
+  await expect(restoredDetails).toHaveAttribute('aria-controls', controlledId);
+  await expect(restoredDetails).toHaveAttribute('aria-expanded', 'true');
+  await expect(page.locator(`#${controlledId}`)).toBeVisible();
+
+  await restoredDetails.click();
+  await expect(page.locator(':focus')).toHaveAttribute('aria-label', `Show details for ${title}`);
+  await expect(page.locator(':focus')).toHaveAttribute('aria-expanded', 'false');
+  await expect(page.locator(`#${controlledId}`)).toBeHidden();
+
+  await page.locator('#search').fill(title);
+  await expect(page.locator('#search')).toBeFocused();
+  await expect(page.locator('#list .detailLink').first()).toHaveAttribute('aria-expanded', 'false');
+});
