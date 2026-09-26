@@ -2478,6 +2478,7 @@ function reportError(err){
         <button type="button" class="primaryBtn" id="findTonightPickBtn">Find tonight's pick</button>
         <button type="button" class="secondaryBtn" id="tonightShelfBtn">Browse Shelf instead</button>
       </div>
+      <div class="srOnly" id="tonightPickStatus" role="status" aria-live="polite" aria-atomic="true"></div>
       <div class="pickCard" id="tonightPickCard" style="display:none;">
         <div class="pickMeta" id="tonightVerdict">Tonight's pick</div>
         <div class="pickTitle" id="tonightPickTitle"></div>
@@ -4444,6 +4445,7 @@ function showTonightPick(candidateOverride){
     document.getElementById('tonightNoMatchReason').textContent = MOVIES.length
       ? "Nothing fits who's watching, watched history, and content settings right now."
       : 'There are no movies in the catalog yet.';
+    document.getElementById('tonightPickStatus').textContent = `No confident match. ${document.getElementById('tonightNoMatchReason').textContent}`;
     document.getElementById('findTonightPickBtn').textContent = "Find tonight's pick";
     return;
   }
@@ -4528,6 +4530,7 @@ function showTonightPick(candidateOverride){
   document.getElementById('tonightWatchAnywayBtn').style.display = verdict.verdict !== 'green' ? 'inline-block' : 'none';
   updateTonightWatchAnywayBtn();
   document.getElementById('tonightPickCard').style.display = 'block';
+  document.getElementById('tonightPickStatus').textContent = `${tonightVerdictLabel(verdict.verdict)}: ${movie.t} (${movie.y}). ${copy[0]}`;
   // Issue #57: the button's static markup says "Find tonight's pick", but a
   // pick showing switches its own click handler over to skip-behavior. Keep
   // the label honest about which action it now performs; resetTonightSkips()
@@ -4670,6 +4673,7 @@ function resetTonightSkips(){
   // tonightPickCard, hiding it also takes those actions off screen.
   document.getElementById('tonightPickCard').style.display = 'none';
   document.getElementById('tonightNoMatchCard').style.display = 'none';
+  document.getElementById('tonightPickStatus').textContent = '';
 }
 
 function renderTonightKidChoices(){
