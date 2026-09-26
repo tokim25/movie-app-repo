@@ -751,6 +751,26 @@ function reportError(err){
     display:block;
     object-fit:cover;
   }
+  .posterFallback{
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:3px;
+    background:var(--accent-soft);
+    color:var(--ink-soft);
+    font-size:8px;
+    font-weight:700;
+    line-height:1;
+    text-transform:uppercase;
+  }
+  .posterFallbackYear{
+    color:var(--ink-faint);
+    font-size:9px;
+    font-weight:600;
+  }
   .poster.safeBetPoster{
     width:38px;
   }
@@ -3627,6 +3647,16 @@ function createMeta(idx, m, detailScope){
   csmBadge.textContent = `${m.studio} · CSM ${m.ca}`;
   meta.appendChild(csmBadge);
 
+  if(Number.isInteger(m.runtimeMinutes) && m.runtimeMinutes > 0){
+    const runtime = document.createElement('span');
+    runtime.className = 'badge runtime';
+    const hours = Math.floor(m.runtimeMinutes / 60);
+    const minutes = m.runtimeMinutes % 60;
+    runtime.textContent = hours ? `${hours}h${minutes ? ` ${minutes}m` : ''}` : `${minutes}m`;
+    runtime.title = 'Verified runtime';
+    meta.appendChild(runtime);
+  }
+
   const links = document.createElement('div');
   links.className = 'metaLinks';
 
@@ -3700,24 +3730,42 @@ function clearToast(){
 function createPoster(m, className, isNew){
   const posters = typeof MOVIE_POSTERS !== 'undefined' ? MOVIE_POSTERS : {};
   const poster = posters[m.num];
-  if(!poster || !poster.u) return null;
-  const shouldLoadEagerly = posterEagerBudget > 0;
-  if(shouldLoadEagerly) posterEagerBudget -= 1;
 
   const wrap = document.createElement('div');
   wrap.className = 'poster' + (className ? ' ' + className : '');
 
-  const img = document.createElement('img');
-  img.alt = `Poster for ${m.t}`;
-  img.loading = shouldLoadEagerly ? 'eager' : 'lazy';
-  img.decoding = 'async';
-  img.fetchPriority = shouldLoadEagerly ? 'high' : 'low';
-  img.width = poster.w || 200;
-  img.height = poster.h || 300;
-  img.onerror = () => wrap.remove();
-  img.src = poster.u;
+  const showFallback = () => {
+    wrap.querySelector('img')?.remove();
+    if(wrap.querySelector('.posterFallback')) return;
+    const fallback = document.createElement('div');
+    fallback.className = 'posterFallback';
+    fallback.setAttribute('aria-hidden', 'true');
+    const label = document.createElement('span');
+    label.textContent = 'Movie';
+    const year = document.createElement('span');
+    year.className = 'posterFallbackYear';
+    year.textContent = m.y || '';
+    fallback.appendChild(label);
+    fallback.appendChild(year);
+    wrap.prepend(fallback);
+  };
 
-  wrap.appendChild(img);
+  if(poster && poster.u){
+    const shouldLoadEagerly = posterEagerBudget > 0;
+    if(shouldLoadEagerly) posterEagerBudget -= 1;
+    const img = document.createElement('img');
+    img.alt = `Poster for ${m.t}`;
+    img.loading = shouldLoadEagerly ? 'eager' : 'lazy';
+    img.decoding = 'async';
+    img.fetchPriority = shouldLoadEagerly ? 'high' : 'low';
+    img.width = poster.w || 200;
+    img.height = poster.h || 300;
+    img.onerror = showFallback;
+    img.src = poster.u;
+    wrap.appendChild(img);
+  }else{
+    showFallback();
+  }
 
   if(isNew){
     const ribbon = document.createElement('span');
