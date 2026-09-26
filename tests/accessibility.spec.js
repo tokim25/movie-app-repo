@@ -121,3 +121,71 @@ test('reorder buttons and content-level buttons expose a descriptive accessible 
   const levelAriaLabel = await levelBtn.getAttribute('aria-label');
   expect(levelAriaLabel).toMatch(/^Level \d+: .+/);
 });
+
+test('sample-family setup clears stale validation and moves focus into Tonight (#110)', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('#bootSyncLoading').waitFor({ state: 'hidden' });
+
+  await page.locator('#setupSaveChildBtn').click();
+  await expect(page.locator('#setupChildName')).toHaveAttribute('aria-invalid', 'true');
+  await expect(page.locator('#assertiveStatus')).toHaveText('Enter a child name to continue.');
+
+  await page.locator('#setupSampleFamilyBtn').click();
+
+  await expect(page.locator('#homeScreenHeading')).toBeFocused();
+  await expect(page.locator('#setupChildName')).not.toHaveAttribute('aria-invalid', 'true');
+  await expect(page.locator('#setupChildNameError')).toBeHidden();
+  await expect(page.locator('#assertiveStatus')).toHaveText('Family setup complete. Tonight is ready.');
+});
+
+test('every app screen exposes exactly one visible labelled main landmark (#114)', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('#bootSyncLoading').waitFor({ state: 'hidden' });
+
+  const assertMain = async (screenId, headingId) => {
+    await expect(page.locator('main:visible')).toHaveCount(1);
+    const main = page.locator(`#${screenId}`);
+    await expect(main).toHaveAttribute('aria-labelledby', headingId);
+    await expect(page.locator(`#${headingId}`)).toBeVisible();
+  };
+
+  await assertMain('setupScreen', 'setupScreenHeading');
+  await page.locator('#setupSampleFamilyBtn').click();
+  await assertMain('homeScreen', 'homeScreenHeading');
+  await page.locator('#tabBrowse').click();
+  await assertMain('browseScreen', 'browseScreenHeading');
+  await page.locator('#tabFamily').click();
+  await assertMain('familyScreen', 'familyScreenHeading');
+});
+
+test('blank add-member submissions identify and focus the invalid field every time (#115)', async ({ page }) => {
+  await page.goto('/');
+  await setupSampleFamily(page);
+  await page.locator('#tabFamily').click();
+  await page.locator('#addChildBtn').click();
+
+  await page.evaluate(() => {
+    window.__addChildAnnouncements = [];
+    new MutationObserver(() => {
+      const text = document.getElementById('assertiveStatus').textContent;
+      if(text) window.__addChildAnnouncements.push(text);
+    }).observe(document.getElementById('assertiveStatus'), { childList: true });
+  });
+
+  const name = page.locator('#newChildName');
+  const error = page.locator('#newChildNameError');
+  await page.locator('#saveNewChildBtn').click();
+  await expect(name).toBeFocused();
+  await expect(name).toHaveAttribute('aria-invalid', 'true');
+  await expect(name).toHaveAttribute('aria-describedby', 'newChildNameError');
+  await expect(error).toBeVisible();
+
+  await page.locator('#saveNewChildBtn').click();
+  await expect.poll(() => page.evaluate(() => window.__addChildAnnouncements.length)).toBeGreaterThanOrEqual(2);
+
+  await name.fill('Wes');
+  await page.locator('#saveNewChildBtn').click();
+  await expect(page.locator('#childOnboardingPanel')).toBeHidden();
+  await expect(name).not.toHaveAttribute('aria-invalid', 'true');
+  await expect(error).toBeHidden();
+});

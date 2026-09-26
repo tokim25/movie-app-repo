@@ -2369,9 +2369,9 @@ function reportError(err){
 
 <div id="bootSyncLoading" style="display:none;position:fixed;inset:0;align-items:center;justify-content:center;background:var(--bg);color:var(--ink);font-size:15px;z-index:9999;">Loading your family's list…</div>
 
-<div id="setupScreen" class="setupScreen" style="display:none;">
+<main id="setupScreen" class="setupScreen" style="display:none;" hidden aria-labelledby="setupScreenHeading">
   <div class="setupCard">
-    <h1>Set up your family</h1>
+    <h1 id="setupScreenHeading" tabindex="-1">Set up your family</h1>
     <p>Add a child first. We'll set starting content limits based on their age so Tonight can make a recommendation right away — change anything now or later in Family, and your changes always stick.</p>
     <div class="setupFields">
       <div class="childField">
@@ -2393,11 +2393,11 @@ function reportError(err){
     </div>
     <div class="logicNote">Age-based defaults come from your child's age, not an official recommendation. They'll keep adjusting with age wherever you haven't set something yourself — your changes always come first.</div>
   </div>
-</div>
+</main>
 
-<div id="homeScreen" class="homeScreen">
+<main id="homeScreen" class="homeScreen" aria-labelledby="homeScreenHeading">
   <header>
-    <h1>What should we <span class="titleKeepTogether">watch tonight?</span></h1>
+    <h1 id="homeScreenHeading" tabindex="-1">What should we <span class="titleKeepTogether">watch tonight?</span></h1>
     <div class="subtitle">One good pick for the people, time, and mood you have tonight.</div>
     <div class="stats">
       <div><b id="statChecked">0</b>Watched</div>
@@ -2488,12 +2488,12 @@ function reportError(err){
       </div>
     </div>
   </div>
-</div>
+</main>
 
-<div id="browseScreen" class="screenWrap" style="display:none;">
+<main id="browseScreen" class="screenWrap" style="display:none;" hidden aria-labelledby="browseScreenHeading">
   <a href="#quickBar" class="skipLink" id="skipToNavLink">Skip to navigation</a>
   <div class="screenTopBar">
-    <h1>Shelf</h1>
+    <h1 id="browseScreenHeading" tabindex="-1">Shelf</h1>
     <button type="button" class="iconBtn" id="filterSheetBtn" aria-label="Filter and sort" aria-expanded="false" aria-controls="filterSheet">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><circle cx="9" cy="7" r="2" fill="currentColor" stroke="none"/><line x1="4" y1="17" x2="20" y2="17"/><circle cx="15" cy="17" r="2" fill="currentColor" stroke="none"/></svg>
       <span class="filterBadge" id="filterBadge" style="display:none;"></span>
@@ -2534,11 +2534,11 @@ function reportError(err){
     <button type="button" id="listPageNextBtn">Next</button>
   </div>
   <div class="empty" id="emptyMsg" style="display:none;">No movies match your search.</div>
-</div>
+</main>
 
-<div id="familyScreen" class="screenWrap" style="display:none;">
+<main id="familyScreen" class="screenWrap" style="display:none;" hidden aria-labelledby="familyScreenHeading">
   <div class="screenTopBar">
-    <h1>Family</h1>
+    <h1 id="familyScreenHeading" tabindex="-1">Family</h1>
   </div>
   <div class="stats">
     <div><b id="statCheckedMore">0</b>Watched</div>
@@ -2561,7 +2561,8 @@ function reportError(err){
           <div class="childEditRow">
             <div class="childField">
               <label for="newChildName">Name</label>
-              <input id="newChildName" type="text" placeholder="Child name" autocomplete="off">
+              <input id="newChildName" type="text" placeholder="Child name" autocomplete="off" aria-describedby="newChildNameError">
+              <p class="fieldError" id="newChildNameError" hidden>Enter a child name to continue.</p>
             </div>
             <div class="childField">
               <label for="newChildAge">Age</label>
@@ -2675,7 +2676,7 @@ function reportError(err){
       <p>Your family data stays in this browser unless you turn on sync. Google sync stores a small app-only file in your Google Drive.</p>
     </div>
   </div>
-</div>
+</main>
 
 <div class="scrim" id="filterScrim" style="display:none;"></div>
 <div class="sheet" id="filterSheet" role="dialog" aria-labelledby="filterSheetTitle" tabindex="-1" style="display:none;">
@@ -3838,7 +3839,10 @@ function completeSetupWithChildren(children){
   // Fresh setup: nobody has been deselected yet, so everyone starts included.
   tonightSelection.excludedChildIds = new Set();
   showScreen('home');
+  clearSetupValidation();
   showToast('Family setup saved');
+  document.getElementById('homeScreenHeading').focus();
+  announceAssertive('Family setup complete. Tonight is ready.');
 }
 
 function selectedKids(){
@@ -4665,7 +4669,9 @@ function showScreen(target){
   currentScreen = target;
   clearToast();
   SCREENS.forEach(name => {
-    screens[name].style.display = name === target ? 'block' : 'none';
+    const isActive = name === target;
+    screens[name].hidden = !isActive;
+    screens[name].style.display = isActive ? 'block' : 'none';
     if(tabs[name]){
       tabs[name].classList.toggle('on', name === target);
       if(name === target) tabs[name].setAttribute('aria-current', 'page');
@@ -5748,7 +5754,11 @@ function removeChild(id){
 
 function addChild(rawName, rawAge){
   const name = rawName.trim();
-  if(!name){ showToast('Add a child name first'); return; }
+  if(!name){
+    showNewChildValidationError();
+    return;
+  }
+  clearNewChildValidation();
   const child = createChild(name, rawAge);
   state.children.push(child);
   selectedFamilyChildId = child.id;
@@ -5760,6 +5770,32 @@ function addChild(rawName, rawAge){
   document.getElementById('newChildName').value = '';
   document.getElementById('childOnboardingPanel').style.display = 'none';
   showToast(`${child.name} added with age-based defaults`);
+}
+
+function announceAssertive(message){
+  const status = document.getElementById('assertiveStatus');
+  status.textContent = '';
+  window.setTimeout(()=>{ status.textContent = message; }, 0);
+}
+
+function showNewChildValidationError(){
+  const input = document.getElementById('newChildName');
+  const error = document.getElementById('newChildNameError');
+  input.setAttribute('aria-invalid', 'true');
+  error.hidden = false;
+  announceAssertive('Enter a child name to continue.');
+  input.focus();
+}
+
+function clearNewChildValidation(){
+  document.getElementById('newChildName').removeAttribute('aria-invalid');
+  document.getElementById('newChildNameError').hidden = true;
+}
+
+function clearSetupValidation(){
+  document.getElementById('setupChildName').removeAttribute('aria-invalid');
+  document.getElementById('setupChildNameError').hidden = true;
+  document.getElementById('assertiveStatus').textContent = '';
 }
 
 function summarizeChildUnderstanding(child){
@@ -6115,6 +6151,14 @@ document.getElementById('saveNewChildBtn').addEventListener('click', ()=>{
   addChild(document.getElementById('newChildName').value, document.getElementById('newChildAge').value);
 });
 
+document.getElementById('newChildName').addEventListener('input', e=>{
+  if(!e.target.value.trim()) return;
+  clearNewChildValidation();
+  if(document.getElementById('assertiveStatus').textContent === 'Enter a child name to continue.'){
+    document.getElementById('assertiveStatus').textContent = '';
+  }
+});
+
 document.getElementById('familySyncBtn').addEventListener('click', ()=>{
   const panel = document.getElementById('syncPanel');
   const opening = panel.style.display === 'none';
@@ -6285,19 +6329,16 @@ document.getElementById('setupSaveChildBtn').addEventListener('click', ()=>{
   if(!name){
     input.setAttribute('aria-invalid', 'true');
     error.hidden = false;
-    document.getElementById('assertiveStatus').textContent = 'Enter a child name to continue.';
+    announceAssertive('Enter a child name to continue.');
     input.focus();
     return;
   }
-  input.removeAttribute('aria-invalid');
-  error.hidden = true;
   completeSetupWithChildren([createChild(name, document.getElementById('setupChildAge').value)]);
 });
 
 document.getElementById('setupChildName').addEventListener('input', e=>{
   if(!e.target.value.trim()) return;
-  e.target.removeAttribute('aria-invalid');
-  document.getElementById('setupChildNameError').hidden = true;
+  clearSetupValidation();
 });
 
 document.getElementById('setupSampleFamilyBtn').addEventListener('click', ()=>{
