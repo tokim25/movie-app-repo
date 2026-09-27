@@ -9,15 +9,14 @@ test('renders without console errors and shows the full catalog', async ({ page 
   });
 
   await page.goto('/');
-  await expect(page.locator('#setupScreen')).toBeVisible();
+  await expect(page.locator('#browseScreen')).toBeVisible();
   await setupSampleFamily(page);
-  await expect(page.locator('#homeScreen h1')).toHaveText('What should we watch tonight?');
+  await page.locator('#tabBrowse').click();
+  await expect(page.locator('#browseScreen h1')).toHaveText('Shelf');
 
   const movieCount = await page.evaluate(() => MOVIES.length);
   expect(movieCount).toBeGreaterThan(500);
   await expect(page.locator('#statLeft')).toHaveText(String(movieCount));
-
-  await page.locator('#tabBrowse').click();
 
   // Shelf owns browsing and catalog facets.
   const studioTileCount = await page.locator('#studioGrid .studioTile').count();

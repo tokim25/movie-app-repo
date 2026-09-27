@@ -49,7 +49,7 @@
      200 check the way the original bundle.min.js swap was (see above) -- please verify
      it loads in a real browser (Sentry global should be defined, no 404 in the network
      tab) before/soon after merge. -->
-<script src="https://browser.sentry-cdn.com/8.55.2/bundle.feedback.min.js" crossorigin="anonymous"></script>
+<script src="https://browser.sentry-cdn.com/8.55.2/bundle.feedback.min.js" integrity="sha384-wa2uVF08d2XPmWQI4tctBG2RPN+1/9jqwSlsJyzqvSd7G9HXOZJn7xhC1eOGaP4L" crossorigin="anonymous"></script>
 <script>
 (function(){
   if(typeof Sentry === 'undefined') return;
@@ -2146,6 +2146,60 @@ function reportError(err){
     background:rgba(var(--shadow-rgb),0.38);
     z-index:29;
   }
+  .syncNudgeScrim{
+    position:fixed;
+    inset:0;
+    z-index:39;
+    background:rgba(var(--shadow-rgb),0.48);
+  }
+  .syncNudge{
+    position:fixed;
+    z-index:40;
+    left:50%;
+    top:50%;
+    width:min(420px, calc(100vw - 32px));
+    transform:translate(-50%, -50%);
+    padding:24px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    background:var(--surface);
+    color:var(--ink);
+    box-shadow:var(--shadow-card);
+  }
+  .syncNudge h2{
+    margin:0 0 10px;
+    font-family:"Fraunces", Georgia, serif;
+    font-size:24px;
+    line-height:1.15;
+  }
+  .syncNudge p{
+    margin:0 0 14px;
+    color:var(--ink-soft);
+    font-size:14px;
+    line-height:1.5;
+  }
+  .syncNudgeActions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .firstRunShelfIntro{
+    max-width:680px;
+    margin:14px auto 0;
+    padding:14px 20px;
+    border-left:3px solid var(--accent);
+    background:var(--bg-sub);
+  }
+  .firstRunShelfIntro h2{
+    margin:0 0 4px;
+    font-size:17px;
+  }
+  .firstRunShelfIntro p{
+    margin:0 0 10px;
+    color:var(--ink-soft);
+    font-size:14px;
+    line-height:1.45;
+  }
   .sheet{
     position:fixed;
     left:0; right:0; bottom:0;
@@ -2433,7 +2487,7 @@ function reportError(err){
 <main id="setupScreen" class="setupScreen" style="display:none;" hidden aria-labelledby="setupScreenHeading">
   <div class="setupCard">
     <h1 id="setupScreenHeading" tabindex="-1">Set up your family</h1>
-    <p>Add a child first. We'll set starting content limits based on their age so Tonight can make a recommendation right away — change anything now or later in Family, and your changes always stick.</p>
+    <p>Add a child first. We'll set age-based content limits so Tonight can make a recommendation right away — change anything now or later in Family, and your changes always stick.</p>
     <div class="setupFields">
       <div class="childField">
         <label for="setupChildName">Child name</label>
@@ -2561,6 +2615,11 @@ function reportError(err){
       <span class="filterBadge" id="filterBadge" style="display:none;"></span>
     </button>
   </div>
+  <section class="firstRunShelfIntro" id="firstRunShelfIntro" aria-labelledby="firstRunShelfTitle" hidden>
+    <h2 id="firstRunShelfTitle">Start with the shelf</h2>
+    <p>Browse freely now. Add family preferences when you want recommendations tailored to who's watching.</p>
+    <button type="button" class="secondaryBtn" id="firstRunFamilySetupBtn">Set up family preferences</button>
+  </section>
   <div class="controls">
     <label class="srOnly" for="search">Search movies</label>
     <input type="text" id="search" placeholder="Search movies" autocomplete="off">
@@ -2637,7 +2696,7 @@ function reportError(err){
             </div>
           </div>
           <ul class="childOnboardingSteps" aria-label="Child setup flow">
-            <li>Starts with age-based default settings the moment your child is added.</li>
+            <li>Adds age-based content limits the moment your child is added.</li>
             <li>Flags settings worth a second look, without changing them for you.</li>
             <li>Keeps up with their age, but never overrides a setting you've already changed.</li>
           </ul>
@@ -2746,6 +2805,16 @@ function reportError(err){
     </div>
   </div>
 </main>
+
+<div class="syncNudgeScrim" id="googleSignInNudgeScrim" hidden></div>
+<section class="syncNudge" id="googleSignInNudge" role="dialog" aria-modal="true" aria-labelledby="googleSignInNudgeTitle" aria-describedby="googleSignInNudgeCopy" hidden>
+  <h2 id="googleSignInNudgeTitle" tabindex="-1">Keep your shelf with you</h2>
+  <p id="googleSignInNudgeCopy">Sign in with Google to back up watched movies, Want to watch picks, and family settings across your devices. This stores one private app-data file in your Google Drive.</p>
+  <div class="syncNudgeActions">
+    <button type="button" class="primaryBtn" id="googleSignInNudgeConfirm">Sign in with Google</button>
+    <button type="button" class="secondaryBtn" id="googleSignInNudgeDismiss">Not now</button>
+  </div>
+</section>
 
 <div class="scrim" id="filterScrim" style="display:none;"></div>
 <div class="sheet" id="filterSheet" role="dialog" aria-labelledby="filterSheetTitle" tabindex="-1" style="display:none;">
@@ -2989,7 +3058,7 @@ let ageFilter = "";
 let genreFilter = "";
 let studioFilter = "";
 let sortMode = "year";
-let currentScreen = "setup";
+let currentScreen = "browse";
 // The Shelf list can hold 1,000+ movies. Rendering it all unpaginated makes
 // every row's controls (check/star/details/source/move) into keyboard tab
 // stops, so reaching the nav bar from deep in the list can take thousands of
@@ -3034,6 +3103,7 @@ const GOOGLE_SYNC_FLAG = "family-feature-google-sync-v3-enabled";
 const GOOGLE_SYNC_META_KEY = "family-feature-google-sync-v3-meta";
 const GOOGLE_TOKEN_TIMEOUT_MS = 7000;
 const GOOGLE_INITIAL_TOAST_SESSION_KEY = "family-feature-google-initial-toast-shown";
+const GOOGLE_SIGN_IN_NUDGE_SEEN_KEY = "family-feature-google-sign-in-nudge-v1-seen";
 // How long boot waits for a returning signed-in device's first Drive sync to
 // resolve before deciding setup vs. home off local state alone -- see
 // decideInitialScreen() and settleInitialGoogleSync() below. Bounded so a
@@ -3051,6 +3121,8 @@ let googleSyncRetryTimer = null;
 let googleTokenRequestTimer = null;
 let hasShownInitialSyncToast = false;
 let deferredInstallPrompt = null;
+let googleSignInNudgeSeenThisSession = false;
+let googleSignInNudgeRestoreFocus = null;
 // Resolves once this session's first Google Drive sync attempt (success,
 // failure, or "never going to happen") has settled, so boot can wait for it
 // before deciding whether to show setup or home -- see tryInitGoogleSync(),
@@ -3880,6 +3952,7 @@ function toggleCheck(idx){
     saveState();
     renderCurrentView();
   });
+  maybeShowGoogleSignInNudge();
 }
 
 function togglePriority(idx){
@@ -3891,6 +3964,7 @@ function togglePriority(idx){
     saveState();
     renderCurrentView();
   });
+  maybeShowGoogleSignInNudge();
 }
 
 function move(idx, dir){
@@ -3966,11 +4040,11 @@ function completeSetupWithChildren(children){
   saveState();
   // Fresh setup: nobody has been deselected yet, so everyone starts included.
   tonightSelection.excludedChildIds = new Set();
-  showScreen('home');
+  showScreen('browse');
   clearSetupValidation();
   showToast('Family setup saved');
-  document.getElementById('homeScreenHeading').focus();
-  announceAssertive('Family setup complete. Tonight is ready.');
+  document.getElementById('browseScreenHeading').focus();
+  announceAssertive('Family setup complete. Your shelf is ready.');
 }
 
 function selectedKids(){
@@ -4797,9 +4871,6 @@ let screens = {};
 let tabs = {};
 
 function showScreen(target){
-  if(target !== 'setup' && (!state.children || state.children.length === 0)){
-    target = 'setup';
-  }
   const isSameScreen = target === currentScreen;
   currentScreen = target;
   clearToast();
@@ -4872,6 +4943,8 @@ function renderStudioGrid(){
 
 function renderCurrentView(){
   posterEagerBudget = 24;
+  const firstRunShelfIntro = document.getElementById('firstRunShelfIntro');
+  if(firstRunShelfIntro) firstRunShelfIntro.hidden = !!(state.children && state.children.length);
   renderNewSection();
   renderChildren();
   renderTonightKidChoices();
@@ -5048,6 +5121,7 @@ function setGoogleSyncAlert(message, isError){
 }
 
 function setGoogleSyncUI(connected, message, isError){
+  if(connected) closeGoogleSignInNudge();
   document.getElementById('googleSignInBtn').style.display = connected ? 'none' : 'inline-block';
   setGoogleSyncStatus(connected ? (message || 'Synced with Google') : (message || ''), isError);
   document.getElementById('googleSignOutBtn').style.display = connected ? 'inline-block' : 'none';
@@ -6387,7 +6461,8 @@ document.getElementById('syncCopyBtn').addEventListener('click', async ()=>{
   }
 });
 
-document.getElementById('googleSignInBtn').addEventListener('click', ()=>{
+function beginGoogleSignIn(){
+  closeGoogleSignInNudge();
   googleSyncIntent = true;
   if(googleCodeClient){
     setGoogleSyncUI(false, 'Connecting to Google…');
@@ -6396,7 +6471,53 @@ document.getElementById('googleSignInBtn').addEventListener('click', ()=>{
     setGoogleSyncError('Google sign-in unavailable');
     showToast('Google sign-in is unavailable — try again');
   }
-});
+}
+
+function hasSeenGoogleSignInNudge(){
+  if(googleSignInNudgeSeenThisSession) return true;
+  try{
+    return localStorage.getItem(GOOGLE_SIGN_IN_NUDGE_SEEN_KEY) === '1';
+  }catch(e){
+    return false;
+  }
+}
+
+function rememberGoogleSignInNudge(){
+  googleSignInNudgeSeenThisSession = true;
+  try{
+    localStorage.setItem(GOOGLE_SIGN_IN_NUDGE_SEEN_KEY, '1');
+  }catch(e){ /* session guard still prevents repeated prompts */ }
+}
+
+function maybeShowGoogleSignInNudge(){
+  if(googleAccessToken || googleSyncIntent || readGoogleSyncMeta().enabled || hasSeenGoogleSignInNudge()) return;
+  const dialog = document.getElementById('googleSignInNudge');
+  const scrim = document.getElementById('googleSignInNudgeScrim');
+  googleSignInNudgeRestoreFocus = document.activeElement;
+  rememberGoogleSignInNudge();
+  dialog.hidden = false;
+  scrim.hidden = false;
+  document.body.style.overflow = 'hidden';
+  document.getElementById('googleSignInNudgeTitle').focus();
+}
+
+function closeGoogleSignInNudge(){
+  const dialog = document.getElementById('googleSignInNudge');
+  const scrim = document.getElementById('googleSignInNudgeScrim');
+  if(!dialog || dialog.hidden) return;
+  dialog.hidden = true;
+  scrim.hidden = true;
+  document.body.style.overflow = '';
+  if(googleSignInNudgeRestoreFocus && document.contains(googleSignInNudgeRestoreFocus)){
+    googleSignInNudgeRestoreFocus.focus();
+  }
+  googleSignInNudgeRestoreFocus = null;
+}
+
+document.getElementById('googleSignInBtn').addEventListener('click', beginGoogleSignIn);
+document.getElementById('googleSignInNudgeConfirm').addEventListener('click', beginGoogleSignIn);
+document.getElementById('googleSignInNudgeDismiss').addEventListener('click', closeGoogleSignInNudge);
+document.getElementById('googleSignInNudgeScrim').addEventListener('click', closeGoogleSignInNudge);
 
 document.getElementById('googleSyncAlertBtn').addEventListener('click', ()=>{
   googleSyncIntent = true;
@@ -6610,12 +6731,18 @@ document.getElementById('priorityToggleBtn').addEventListener('click', ()=>{
 
 document.getElementById('tabHome').addEventListener('click', ()=>{
   showScreen('home');
+  maybeShowGoogleSignInNudge();
 });
 document.getElementById('tabBrowse').addEventListener('click', ()=>{
   showScreen('browse');
 });
 document.getElementById('tabFamily').addEventListener('click', ()=>{
   showScreen('family');
+  maybeShowGoogleSignInNudge();
+});
+
+document.getElementById('firstRunFamilySetupBtn').addEventListener('click', ()=>{
+  showScreen('setup');
 });
 
 document.getElementById('setupSaveChildBtn').addEventListener('click', ()=>{
@@ -6824,6 +6951,28 @@ function closeFilterSheet(options = {}){
 document.getElementById('filterScrim').addEventListener('click', closeFilterSheet);
 document.getElementById('applyFiltersBtn').addEventListener('click', closeFilterSheet);
 document.addEventListener('keydown', event=>{
+  const syncNudge = document.getElementById('googleSignInNudge');
+  if(syncNudge && !syncNudge.hidden){
+    if(event.key === 'Escape'){
+      event.preventDefault();
+      closeGoogleSignInNudge();
+      return;
+    }
+    if(event.key === 'Tab'){
+      const focusable = [...syncNudge.querySelectorAll('button:not([disabled]), [tabindex]:not([tabindex="-1"])')];
+      if(!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if(event.shiftKey && document.activeElement === first){
+        event.preventDefault();
+        last.focus();
+      }else if(!event.shiftKey && document.activeElement === last){
+        event.preventDefault();
+        first.focus();
+      }
+    }
+    return;
+  }
   const sheet = document.getElementById('filterSheet');
   const open = sheet.style.display !== 'none';
   if(event.key === 'Escape' && open){
@@ -7069,7 +7218,7 @@ async function decideInitialScreen(){
     // excluded is already included, with no bookkeeping required at any
     // children-mutating call site (see tonightSelection's declaration).
   }
-  showScreen(state.children && state.children.length ? 'home' : 'setup');
+  showScreen('browse');
 }
 
 initScreens();

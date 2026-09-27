@@ -1,10 +1,9 @@
-import { fileURLToPath } from 'node:url';
 import { expect } from '@playwright/test';
 
-// Resolved once: the path to axe-core's bundled build. addScriptTag reads
-// this file straight off disk and injects it into the page, so it doesn't
-// need to be served by static-server.mjs.
-const AXE_PATH = fileURLToPath(new URL('../node_modules/axe-core/axe.min.js', import.meta.url));
+// Load axe from this app's own origin so the production CSP remains active
+// during accessibility tests. The test server can serve node_modules, and
+// script-src 'self' permits this test-only URL without weakening the policy.
+const AXE_URL = '/node_modules/axe-core/axe.min.js';
 
 /**
  * Injects axe-core into the current page and runs it, scoped to `context`
@@ -16,7 +15,7 @@ const AXE_PATH = fileURLToPath(new URL('../node_modules/axe-core/axe.min.js', im
  * restrict `runOnly` tags or `rules`).
  */
 export async function expectNoA11yViolations(page, context, options = {}) {
-  await page.addScriptTag({ path: AXE_PATH });
+  await page.addScriptTag({ url: AXE_URL });
   const results = await page.evaluate(
     ([ctx, opts]) => window.axe.run(ctx || document, opts),
     [context ?? null, options]

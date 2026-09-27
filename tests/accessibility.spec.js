@@ -132,9 +132,10 @@ test('reorder buttons and content-level buttons expose a descriptive accessible 
   expect(levelAriaLabel).toMatch(/^Level \d+: .+/);
 });
 
-test('sample-family setup clears stale validation and moves focus into Tonight (#110)', async ({ page }) => {
+test('sample-family setup clears stale validation and returns focus to Shelf (#110)', async ({ page }) => {
   await page.goto('/');
   await page.locator('#bootSyncLoading').waitFor({ state: 'hidden' });
+  await page.locator('#firstRunFamilySetupBtn').click();
 
   await page.locator('#setupSaveChildBtn').click();
   await expect(page.locator('#setupChildName')).toHaveAttribute('aria-invalid', 'true');
@@ -142,10 +143,10 @@ test('sample-family setup clears stale validation and moves focus into Tonight (
 
   await page.locator('#setupSampleFamilyBtn').click();
 
-  await expect(page.locator('#homeScreenHeading')).toBeFocused();
+  await expect(page.locator('#browseScreenHeading')).toBeFocused();
   await expect(page.locator('#setupChildName')).not.toHaveAttribute('aria-invalid', 'true');
   await expect(page.locator('#setupChildNameError')).toBeHidden();
-  await expect(page.locator('#assertiveStatus')).toHaveText('Family setup complete. Tonight is ready.');
+  await expect(page.locator('#assertiveStatus')).toHaveText('Family setup complete. Your shelf is ready.');
 });
 
 test('every app screen exposes exactly one visible labelled main landmark (#114)', async ({ page }) => {
@@ -159,11 +160,14 @@ test('every app screen exposes exactly one visible labelled main landmark (#114)
     await expect(page.locator(`#${headingId}`)).toBeVisible();
   };
 
+  await assertMain('browseScreen', 'browseScreenHeading');
+  await page.locator('#firstRunFamilySetupBtn').click();
   await assertMain('setupScreen', 'setupScreenHeading');
   await page.locator('#setupSampleFamilyBtn').click();
-  await assertMain('homeScreen', 'homeScreenHeading');
-  await page.locator('#tabBrowse').click();
   await assertMain('browseScreen', 'browseScreenHeading');
+  await page.evaluate(() => localStorage.setItem('family-feature-google-sign-in-nudge-v1-seen', '1'));
+  await page.locator('#tabHome').click();
+  await assertMain('homeScreen', 'homeScreenHeading');
   await page.locator('#tabFamily').click();
   await assertMain('familyScreen', 'familyScreenHeading');
 });

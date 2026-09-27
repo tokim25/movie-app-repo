@@ -4,6 +4,7 @@ import { setupSampleFamily } from './helpers.js';
 test('blank onboarding name is reported inline and focused', async ({ page }) => {
   await page.goto('/');
   await page.locator('#bootSyncLoading').waitFor({ state: 'hidden' });
+  await page.locator('#firstRunFamilySetupBtn').click();
   await page.locator('#setupSaveChildBtn').click();
 
   const name = page.locator('#setupChildName');

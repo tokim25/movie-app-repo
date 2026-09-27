@@ -21,6 +21,7 @@ async function seedAndOpenFamilySettings(page, children, childName) {
   // re-runs) doesn't clobber state the test has since mutated (e.g. a
   // dismissed notice) back to the original seed.
   await page.addInitScript((state) => {
+    localStorage.setItem('family-feature-google-sign-in-nudge-v1-seen', '1');
     if (!localStorage.getItem('family-movie-watchlist-v1')) {
       localStorage.setItem('family-movie-watchlist-v1', JSON.stringify(state));
     }
