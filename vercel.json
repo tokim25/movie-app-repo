@@ -10,6 +10,28 @@
       ],
       "destination": "https://movies.tonykim.io/:path*",
       "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "family-movie-watchlist.vercel.app"
+        }
+      ],
+      "destination": "https://movies.tonykim.io/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "family-movie-watchlist-git-master-kim-family-projects.vercel.app"
+        }
+      ],
+      "destination": "https://movies.tonykim.io/:path*",
+      "permanent": true
     }
   ]
 }
