@@ -235,6 +235,12 @@ function reportError(err){
     --warning:#8A5A00;
     --warning-rgb:138,90,0;
     --warning-soft:#FFF4D6;
+    --nudge-surface:#FFF2BE;
+    --nudge-ink:#2B220D;
+    --nudge-ink-soft:#5E4A17;
+    --nudge-line:#D3A126;
+    --nudge-primary:#2B220D;
+    --nudge-on-primary:#FFF9E8;
     --error-rgb:180,35,24;
     --shadow-rgb:11,16,32;
     --focus:#5B8DEF;
@@ -267,6 +273,12 @@ function reportError(err){
       --warning:#F2C14E;
       --warning-rgb:242,193,78;
       --warning-soft:#382F18;
+      --nudge-surface:#3B2B0E;
+      --nudge-ink:#FFF3C4;
+      --nudge-ink-soft:#E7D294;
+      --nudge-line:#C99A2D;
+      --nudge-primary:#FFF3C4;
+      --nudge-on-primary:#2B220D;
       --error-rgb:255,122,112;
       --shadow-rgb:0,0,0;
       --focus:#9AB4FF;
@@ -299,6 +311,12 @@ function reportError(err){
     --warning:#F2C14E;
     --warning-rgb:242,193,78;
     --warning-soft:#382F18;
+    --nudge-surface:#3B2B0E;
+    --nudge-ink:#FFF3C4;
+    --nudge-ink-soft:#E7D294;
+    --nudge-line:#C99A2D;
+    --nudge-primary:#FFF3C4;
+    --nudge-on-primary:#2B220D;
     --error-rgb:255,122,112;
     --shadow-rgb:0,0,0;
     --focus:#9AB4FF;
@@ -2160,11 +2178,11 @@ function reportError(err){
     width:min(420px, calc(100vw - 32px));
     transform:translate(-50%, -50%);
     padding:24px;
-    border:1px solid var(--line);
+    border:1px solid var(--nudge-line);
     border-radius:8px;
-    background:var(--surface);
-    color:var(--ink);
-    box-shadow:var(--shadow-card);
+    background:var(--nudge-surface);
+    color:var(--nudge-ink);
+    box-shadow:0 24px 64px rgba(var(--shadow-rgb),0.38);
   }
   .syncNudge h2{
     margin:0 0 10px;
@@ -2174,7 +2192,7 @@ function reportError(err){
   }
   .syncNudge p{
     margin:0 0 14px;
-    color:var(--ink-soft);
+    color:var(--nudge-ink-soft);
     font-size:14px;
     line-height:1.5;
   }
@@ -2182,6 +2200,15 @@ function reportError(err){
     display:flex;
     flex-wrap:wrap;
     gap:10px;
+  }
+  .syncNudge .primaryBtn{
+    background:var(--nudge-primary);
+    color:var(--nudge-on-primary);
+  }
+  .syncNudge .secondaryBtn{
+    border-color:var(--nudge-line);
+    background:transparent;
+    color:var(--nudge-ink);
   }
   .firstRunShelfIntro{
     max-width:680px;
@@ -2527,7 +2554,7 @@ function reportError(err){
         <div class="tonightSummaryCopy">
           <div class="tonightSummaryLabel" aria-hidden="true"></div>
           <div id="tonightAskSummary">
-            <div class="tonightSummaryText" id="tonightWatchingSummary">Simon + Theo</div>
+            <div class="tonightSummaryText" id="tonightWatchingSummary">Adults only</div>
             <div class="tonightContext" id="tonightContextSummary">About 90 minutes · Calm it down</div>
           </div>
         </div>
