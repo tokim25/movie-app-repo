@@ -596,6 +596,78 @@ test('a mid-session Drive sync-merge that pulls in a remotely-added child update
   await expect(page.locator('#list .fitSignal').first()).toContainText('selected kids');
 });
 
+test('a newer untouched sample family cannot replace an older real Drive family', async ({ page }) => {
+  let uploadedBody = null;
+  let watchedMovieNum = null;
+  await page.route('https://www.googleapis.com/**', async (route) => {
+    const url = route.request().url();
+    if (url.includes('/upload/drive/v3/files')) {
+      const postData = route.request().postData() || '';
+      const parts = postData.split('--familyfeatureboundary').map((part) => {
+        const jsonStart = part.indexOf('\r\n\r\n');
+        return jsonStart === -1 ? null : part.slice(jsonStart + 4).trim();
+      }).filter(Boolean);
+      uploadedBody = parts.length > 1 ? JSON.parse(parts[1]) : null;
+      return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ id: 'mock-file-id' }) });
+    }
+    if (url.includes('/drive/v3/files/') && url.includes('fields=modifiedTime')) {
+      return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ modifiedTime: 'v1' }) });
+    }
+    if (url.includes('/drive/v3/files/') && url.includes('alt=media')) {
+      return route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          v: 3,
+          checked: { [watchedMovieNum]: { value: true, updatedAt: 50, device: 'original-device' } },
+          priority: {},
+          order: [],
+          children: {
+            list: [
+              { id: 'theo-real', name: 'Theo', age: 8, settings: { violence: { source: 'parent', value: 2 } } },
+              { id: 'simon-real', name: 'Simon', age: 6, settings: { language: { source: 'parent', value: 1 } } },
+            ],
+            // Intentionally older than setupSampleFamily()'s local timestamp:
+            // this is the exact sign-back-in failure that lost the real roster.
+            updatedAt: 1,
+            device: 'original-device',
+          },
+        }),
+      });
+    }
+    if (url.includes('/drive/v3/files?')) {
+      return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ files: [] }) });
+    }
+    return route.continue();
+  });
+
+  await page.goto('/');
+  // Catalog number 1 is the first canonical movie entry (Modern Times).
+  // Keep the mock payload in the public serialized num-key shape rather than
+  // reaching for the page's module-scoped MOVIES constant from Playwright.
+  watchedMovieNum = '1';
+  await setupSampleFamily(page);
+  await page.evaluate(() => {
+    googleAccessToken = 'fake-token';
+    googleDriveFileId = 'mock-file-id';
+  });
+
+  await page.evaluate(() => syncFromGoogleDrive());
+
+  const synced = await page.evaluate(() => ({
+    children: state.children,
+    watched: markValue(state.checked, 0),
+  }));
+  expect(synced.children.map((child) => child.name)).toEqual(['Theo', 'Simon']);
+  expect(synced.children[0].settings.violence).toEqual({ source: 'parent', value: 2 });
+  expect(synced.children[1].settings.language).toEqual({ source: 'parent', value: 1 });
+  expect(synced.watched).toBe(true);
+
+  // The conflict-safe write must also repair Drive with the preserved real
+  // roster, not merely show it in memory for this one session.
+  expect(uploadedBody.children.list.map((child) => child.name)).toEqual(['Theo', 'Simon']);
+});
+
 test('sustained conflicting writes exhaust retries and fail the same way any other push failure does', async ({ page }) => {
   // modifiedTime never stabilizes -- every check sees a fresh value, as if
   // another device were writing continuously. mergeAndWriteToDrive() must
