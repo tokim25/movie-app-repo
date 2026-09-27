@@ -54,3 +54,23 @@ test('verified runtime appears in shelf metadata across the catalog', async ({ p
   await page.locator('#search').fill('Toy Story');
   await expect(rows(page).filter({ hasText: 'Toy Story (1995)' }).locator('.runtime')).toHaveText('1h 21m');
 });
+
+test('long studio metadata keeps runtime with movie facts above the action links', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  await switchToFlatView(page);
+  await page.locator('#search').fill('Bringing Up Baby');
+
+  const row = rows(page).filter({ hasText: 'Bringing Up Baby (1938)' });
+  const positions = await row.evaluate(element => {
+    const facts = element.querySelector('.movieFacts').getBoundingClientRect();
+    const runtime = element.querySelector('.runtime').getBoundingClientRect();
+    const links = element.querySelector('.metaLinks').getBoundingClientRect();
+    return {
+      runtimeInsideFacts: runtime.top >= facts.top && runtime.bottom <= facts.bottom + 1,
+      linksBelowFacts: links.top >= facts.bottom - 1
+    };
+  });
+
+  expect(positions).toEqual({ runtimeInsideFacts: true, linksBelowFacts: true });
+});
