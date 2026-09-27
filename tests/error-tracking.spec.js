@@ -1,4 +1,9 @@
 import { test, expect } from '@playwright/test';
+
+// These integration-unit tests inject a fake inline Sentry SDK before page
+// scripts execute. Production CSP correctly rejects that injected script;
+// the dedicated security-headers suite exercises the real enforced policy.
+test.use({ bypassCSP: true });
 import { setupSampleFamily } from './helpers.js';
 
 // This sandbox's network policy blocks the real Sentry CDN and ingest endpoint (same
@@ -56,6 +61,11 @@ window.Sentry = (function(){
 const SENTRY_SDK_URL = 'https://browser.sentry-cdn.com/8.55.2/bundle.feedback.min.js';
 
 test.beforeEach(async ({ page }) => {
+  // The production tag now has SRI. A route-fulfilled stub intentionally
+  // cannot satisfy that hash, so inject the fake global before document
+  // scripts run; the real tagged request remains pinned and independently
+  // covered by security-headers.spec.js.
+  await page.addInitScript({ content: SENTRY_STUB });
   await page.route(SENTRY_SDK_URL, (route) => {
     return route.fulfill({ status: 200, contentType: 'application/javascript', body: SENTRY_STUB });
   });

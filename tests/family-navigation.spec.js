@@ -1,17 +1,22 @@
 import { test, expect } from '@playwright/test';
 import { setupSampleFamily } from './helpers.js';
 
-test('first-run setup leads to Tonight, Shelf, and Family', async ({ page }) => {
+test('first run starts on Shelf and family setup keeps all three tabs available', async ({ page }) => {
   await page.goto('/');
 
-  await expect(page.locator('#setupScreen')).toBeVisible();
-  await expect(page.locator('#quickBar')).toBeHidden();
-  await setupSampleFamily(page);
-  await expect(page.locator('#homeScreen')).toBeVisible();
+  await expect(page.locator('#browseScreen')).toBeVisible();
+  await expect(page.locator('#firstRunShelfIntro')).toBeVisible();
+  await expect(page.locator('#quickBar')).toBeVisible();
+  await expect(page.locator('#tabBrowse')).toHaveClass(/on/);
+  await page.locator('#firstRunFamilySetupBtn').click();
+  await page.locator('#setupSampleFamilyBtn').click();
+  await expect(page.locator('#browseScreen')).toBeVisible();
   await expect(page.locator('#familyScreen')).toBeHidden();
-  await expect(page.locator('#tabHome')).toHaveClass(/on/);
+  await expect(page.locator('#tabBrowse')).toHaveClass(/on/);
+  await expect(page.locator('#firstRunShelfIntro')).toBeHidden();
   await expect(page.locator('#tabHome')).toContainText('Tonight');
   await expect(page.locator('#tabBrowse')).toContainText('Shelf');
+  await page.evaluate(() => localStorage.setItem('family-feature-google-sign-in-nudge-v1-seen', '1'));
 
   await page.locator('#tabFamily').click();
   await expect(page.locator('#familyScreen')).toBeVisible();
@@ -29,7 +34,7 @@ test('first-run setup leads to Tonight, Shelf, and Family', async ({ page }) => 
   await page.locator('#addChildBtn').click();
   await expect(page.locator('#childOnboardingPanel')).toBeVisible();
   await expect(page.locator('#newChildName')).toBeFocused();
-  await expect(page.locator('#childOnboardingPanel')).toContainText('Starts with age-based default settings');
+  await expect(page.locator('#childOnboardingPanel')).toContainText('Adds age-based content limits');
   await expect(page.locator('#familySettingsPanel')).toContainText('Adjust content limits');
   await expect(page.locator('#familySettingsPanel .limitControl')).toHaveCount(4);
   await expect(page.locator('#familyScreen')).not.toContainText('Clear all watched marks');
@@ -88,12 +93,13 @@ test('mobile tab bar stays horizontal after setup', async ({ page }) => {
 
 test('first-run setup copy is parent-facing, and the sample-family option is clearly a shortcut (#50)', async ({ page }) => {
   await page.goto('/');
+  await page.locator('#firstRunFamilySetupBtn').click();
 
   const setupText = await page.locator('#setupScreen').textContent();
   expect(setupText).not.toContain('product-owned');
   expect(setupText).not.toContain('required system state');
 
-  await expect(page.locator('#setupScreen')).toContainText("We'll set starting content limits based on their age");
+  await expect(page.locator('#setupScreen')).toContainText("We'll set age-based content limits");
   await expect(page.locator('#setupScreen')).toContainText("your changes always come first");
 
   // The sample-family button used to sit directly under Continue with no

@@ -12,7 +12,7 @@ test('app shell reloads offline once the service worker is installed', async ({ 
   await context.setOffline(true);
   try {
     await page.reload();
-    await expect(page.locator('#homeScreen h1')).toHaveText('What should we watch tonight?');
+    await expect(page.locator('#browseScreen h1')).toHaveText('Shelf');
     expect(await page.evaluate(() => MOVIES.length)).toBeGreaterThan(500);
   } finally {
     await context.setOffline(false);
@@ -55,7 +55,7 @@ test('an online visit to a policy page does not overwrite the cached app shell (
   await context.setOffline(true);
   try {
     await page.goto('/');
-    await expect(page.locator('#homeScreen h1')).toHaveText('What should we watch tonight?');
+    await expect(page.locator('#browseScreen h1')).toHaveText('Shelf');
   } finally {
     await context.setOffline(false);
   }

@@ -8,8 +8,24 @@ export async function setupSampleFamily(page) {
   // loading overlay first is a no-op for every other test and makes this
   // helper race-free for that one.
   await page.locator('#bootSyncLoading').waitFor({ state: 'hidden' });
+  if (await page.locator('#browseScreen').isVisible() && await page.locator('#firstRunShelfIntro').isVisible()) {
+    await page.locator('#firstRunFamilySetupBtn').click();
+  }
   if (await page.locator('#setupScreen').isVisible()) {
     await page.locator('#setupSampleFamilyBtn').click();
+    await page.locator('#browseScreen').waitFor({ state: 'visible' });
+  }
+  // Most suites exercise established-user behavior, not the one-time nudge.
+  // Keep that prompt scoped to first-run-onboarding.spec.js so it cannot
+  // intercept unrelated controls after this helper creates its sample family.
+  await page.evaluate(() => {
+    localStorage.setItem('family-feature-google-sign-in-nudge-v1-seen', '1');
+  });
+  // Preserve this long-standing helper's established-user semantics for
+  // suites that exercise Tonight. First-run landing behavior is tested
+  // directly, without this helper, in first-run-onboarding.spec.js.
+  if (await page.locator('#browseScreen').isVisible()) {
+    await page.locator('#tabHome').click();
     await page.locator('#homeScreen').waitFor({ state: 'visible' });
   }
 }

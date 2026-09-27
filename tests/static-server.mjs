@@ -5,6 +5,11 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PORT = Number(process.argv[2]) || 4319;
+const VERCEL_CONFIG = JSON.parse(fs.readFileSync(path.join(ROOT, 'vercel.json'), 'utf8'));
+const SECURITY_HEADERS = Object.fromEntries(
+  (VERCEL_CONFIG.headers?.find(rule => rule.source === '/(.*)')?.headers || [])
+    .map(({ key, value }) => [key, value])
+);
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -23,19 +28,22 @@ const server = http.createServer((req, res) => {
   const filePath = path.normalize(path.join(ROOT, urlPath));
 
   if (!filePath.startsWith(ROOT)) {
-    res.writeHead(403);
+    res.writeHead(403, SECURITY_HEADERS);
     res.end('Forbidden');
     return;
   }
 
   fs.readFile(filePath, (err, data) => {
     if (err) {
-      res.writeHead(404, { 'Content-Type': 'text/plain' });
+      res.writeHead(404, { 'Content-Type': 'text/plain', ...SECURITY_HEADERS });
       res.end('Not found');
       return;
     }
     const ext = path.extname(filePath);
-    res.writeHead(200, { 'Content-Type': MIME[ext] || 'application/octet-stream' });
+    res.writeHead(200, {
+      'Content-Type': MIME[ext] || 'application/octet-stream',
+      ...SECURITY_HEADERS,
+    });
     res.end(data);
   });
 });
