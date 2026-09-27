@@ -10,6 +10,14 @@ test('a new visitor lands on Shelf without being forced through family setup', a
   await expect(page.locator('#firstRunShelfIntro')).toContainText('Start with the shelf');
 });
 
+test('the initial Tonight markup never exposes example or user-like child names', async ({ request }) => {
+  const response = await request.get('/');
+  const source = await response.text();
+  const initialSummary = source.match(/id="tonightWatchingSummary">([^<]+)</);
+
+  expect(initialSummary && initialSummary[1]).toBe('Adults only');
+});
+
 test('the first watched or Want to watch action offers Google backup once', async ({ page }) => {
   await page.goto('/');
 
@@ -17,6 +25,11 @@ test('the first watched or Want to watch action offers Google backup once', asyn
   await expect(page.locator('#googleSignInNudge')).toBeVisible();
   await expect(page.locator('#googleSignInNudge')).toContainText('Keep your shelf with you');
   await expect(page.locator('#googleSignInNudgeConfirm')).toHaveText('Sign in with Google');
+  const colors = await page.locator('#googleSignInNudge').evaluate((nudge) => ({
+    nudge: getComputedStyle(nudge).backgroundColor,
+    page: getComputedStyle(document.body).backgroundColor,
+  }));
+  expect(colors.nudge).not.toBe(colors.page);
   await page.locator('#googleSignInNudgeDismiss').click();
   await expect(page.locator('#googleSignInNudge')).toBeHidden();
 
