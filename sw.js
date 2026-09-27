@@ -9,7 +9,7 @@
 // was stale. Bump the version/date prefix by hand for a real code
 // change to this file; DATA_VERSION takes care of itself.
 const DATA_VERSION = '543d03131d';
-const CACHE_VERSION = `family-feature-v22-20260922-${DATA_VERSION}`;
+const CACHE_VERSION = `family-feature-v23-20260927-${DATA_VERSION}`;
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -21,6 +21,8 @@ const APP_SHELL = [
   '/assets/icons/apple-touch-icon.png',
   '/assets/icons/icon-192.png',
   '/assets/icons/icon-512.png',
+  '/assets/icons/icon-192-maskable.png',
+  '/assets/icons/icon-512-maskable.png',
   '/assets/icons/movie-night-icon.svg',
   '/data.js',
   '/data-rt.js',

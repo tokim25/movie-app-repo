@@ -217,7 +217,7 @@ function reportError(err){
     --ink:#172033;
     --on-ink:#FFFFFF;
     --ink-soft:#566176;
-    --ink-faint:#626D83;
+    --ink-faint:#5F6A7F;
     --line:#CFD7E6;
     --accent:#2F5FEA;
     --accent-rgb:47,95,234;
@@ -952,13 +952,19 @@ function reportError(err){
     max-width:680px;
   }
   .requestForm{
-    display:flex;
+    display:grid;
+    grid-template-columns:minmax(0, 1fr) auto;
     align-items:center;
-    justify-content:center;
     gap:8px;
     margin:16px auto 0;
     padding:0 20px;
     max-width:420px;
+  }
+  .requestLabel{
+    grid-column:1 / -1;
+    color:var(--ink-soft);
+    font-size:13px;
+    font-weight:600;
   }
   .requestForm input[type="text"]{
     flex:1;
@@ -978,7 +984,7 @@ function reportError(err){
   .requestForm button{
     background:var(--bg-sub);
     border:none;
-    color:var(--accent);
+    color:var(--accent-text);
     padding:9px 16px;
     border-radius:10px;
     font-family:inherit;
@@ -1464,7 +1470,7 @@ function reportError(err){
   .choiceChip.selected{
     border-color:rgba(var(--accent-rgb),0.4);
     background:rgba(var(--accent-rgb),0.1);
-    color:var(--accent);
+    color:var(--accent-text);
   }
   /* Issue #144: .choiceChip's 999px border-radius makes a clean pill for the short,
      single-line labels it's used for elsewhere (time/mood/theme choices), but the
@@ -1624,7 +1630,7 @@ function reportError(err){
     border:1px solid var(--line);
     border-radius:10px;
     background:var(--surface);
-    color:var(--accent);
+    color:var(--accent-text);
     font-family:inherit;
     font-size:13px;
     font-weight:600;
@@ -1798,7 +1804,7 @@ function reportError(err){
     border:0;
     border-radius:10px;
     background:var(--surface);
-    color:var(--accent);
+    color:var(--accent-text);
     font-family:inherit;
     font-size:13px;
     font-weight:600;
@@ -1991,7 +1997,7 @@ function reportError(err){
     border-radius:999px;
     padding:4px 8px;
     background:rgba(var(--accent-rgb),0.09);
-    color:var(--accent);
+    color:var(--accent-text);
     font-size:12px;
     font-weight:650;
   }
@@ -2579,6 +2585,7 @@ function reportError(err){
     <p>Ask for a title to be added to the shelf.</p>
     <p class="requestDisclosure" id="requestMovieDisclosure">Movie titles are sent to Google Forms so they can land in the request queue. Please enter only the title, not personal notes.</p>
     <form id="requestMovieForm" class="requestForm">
+      <label class="requestLabel" for="requestMovieInput">Movie title</label>
       <input type="text" name="title" id="requestMovieInput" placeholder="Movie title" autocomplete="off" required maxlength="120" aria-describedby="requestMovieDisclosure requestMovieStatus">
       <button type="submit">Send</button>
     </form>
@@ -2703,7 +2710,7 @@ function reportError(err){
     <h3 class="homeSectionLabel">App</h3>
     <div class="moreCard">
       <button id="installAppBtn" class="moreRow">Install app on this device</button>
-      <p id="iosInstallHint" class="iosInstallHint" style="display:none;">To add this app to your Home Screen: tap the Share icon, then "Add to Home Screen".</p>
+      <p id="iosInstallHint" class="iosInstallHint" style="display:none;"></p>
       <button id="resortBtn" class="moreRow">Reset custom order</button>
       <button id="reportBugBtn" class="moreRow">Report a bug</button>
     </div>
@@ -2715,6 +2722,7 @@ function reportError(err){
       <p>Ask for a title to be added to the shelf.</p>
       <p class="requestDisclosure" id="requestMovieDisclosureFamily">Movie titles are sent to Google Forms so they can land in the request queue. Please enter only the title, not personal notes.</p>
       <form id="requestMovieFormFamily" class="requestForm">
+        <label class="requestLabel" for="requestMovieInputFamily">Movie title</label>
         <input type="text" name="title" id="requestMovieInputFamily" placeholder="Movie title" autocomplete="off" required maxlength="120" aria-describedby="requestMovieDisclosureFamily requestMovieStatusFamily">
         <button type="submit">Send</button>
       </form>
@@ -6913,9 +6921,21 @@ function isIOSDevice(){
   return navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
 }
 
-function showIOSInstallHint(){
+function isMacSafari(){
+  const ua = navigator.userAgent || '';
+  return /Macintosh/.test(ua) && /Safari\//.test(ua) && !/(?:Chrome|Chromium|CriOS|Edg|OPR|Firefox)\//.test(ua);
+}
+
+function isAndroidDevice(){
+  return /Android/.test(navigator.userAgent || '');
+}
+
+function showInstallHint(copy){
   const hint = document.getElementById('iosInstallHint');
-  if(hint) hint.style.display = 'block';
+  if(hint){
+    hint.textContent = copy;
+    hint.style.display = 'block';
+  }
 }
 
 function hideIOSInstallHint(){
@@ -6925,21 +6945,25 @@ function hideIOSInstallHint(){
 
 const INSTALL_FALLBACK_DELAY_MS = 2500;
 
-// Called once at startup. iOS gets the static instructions immediately
-// (beforeinstallprompt will just never come). Any other touch-capable
-// browser (e.g. Firefox for Android) gets the same fallback copy, but only
-// after a short grace period with no beforeinstallprompt, so a Chromium
-// browser that's just slightly slow to fire it isn't shown a redundant hint
-// alongside its own native button.
+// Called once at startup. Safari gets its platform-specific static path
+// immediately because it never fires beforeinstallprompt. Other touch
+// browsers wait briefly for that event, then get honest browser-menu copy.
 function maybeShowInstallFallback(){
   if(isStandaloneDisplay()) return;
   if(isIOSDevice()){
-    showIOSInstallHint();
+    showInstallHint('To add this app to your Home Screen: tap the Share icon, then "Add to Home Screen".');
+    return;
+  }
+  if(isMacSafari()){
+    showInstallHint('In Safari, choose File, then Add to Dock.');
     return;
   }
   if(navigator.maxTouchPoints > 0){
     setTimeout(()=>{
-      if(!deferredInstallPrompt && !isStandaloneDisplay()) showIOSInstallHint();
+      if(deferredInstallPrompt || isStandaloneDisplay()) return;
+      showInstallHint(isAndroidDevice()
+        ? 'Open your browser menu, then choose Install app or Add to Home screen.'
+        : 'Open your browser menu and look for Install app or Add to Home Screen.');
     }, INSTALL_FALLBACK_DELAY_MS);
   }
 }

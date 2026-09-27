@@ -23,6 +23,16 @@ test('web app manifest is valid and points at expected icons/start_url/scope', a
   const sizes = manifest.icons.map((icon) => icon.sizes);
   expect(sizes).toContain('192x192');
   expect(sizes).toContain('512x512');
+
+  const ordinary = manifest.icons.filter((icon) => icon.purpose === 'any');
+  const maskable = manifest.icons.filter((icon) => icon.purpose === 'maskable');
+  expect(ordinary).toHaveLength(2);
+  expect(maskable).toHaveLength(2);
+  expect(maskable.map((icon) => icon.src)).not.toEqual(ordinary.map((icon) => icon.src));
+
+  for (const icon of maskable) {
+    expect(icon.src).toContain('-maskable.png');
+  }
 });
 
 test('favicon and apple-touch-icon links resolve to real files', async ({ page, request }) => {
