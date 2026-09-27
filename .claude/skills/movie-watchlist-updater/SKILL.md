@@ -231,6 +231,13 @@ tripped session limits before), or inline if it's a small batch:
    if you truly can't find one, omit the field rather than guessing a URL.
 3. Classify `genre` (1-3 tags from the fixed closed list below, always including
    `Animation` or `Live-Action`) and `studio`.
+4. Research the theatrical or streaming release runtime in whole minutes. Prefer
+   the distributor or streaming service, a film-classification board, or the
+   film's sourced Wikipedia infobox; use Wikidata when its exact title/year match
+   is unambiguous. Record the source identifier and today's verification date.
+   Do not infer a runtime from trailers, episode lengths, or similarly titled
+   works. For multi-part or alternate-cut pages, select the value matching the
+   exact catalog title and release.
 
 Closed genre vocabulary (case-sensitive, don't invent others): Animation,
 Live-Action, Comedy, Adventure, Fantasy, Musical, Drama, Sci-Fi, Action, Horror,
@@ -304,7 +311,9 @@ backfill above and this run's own new titles:
 
 Every entry needs: `num`, `t`, `y` (4-digit string), `la`, `ca`, `full`, `genre`
 (non-empty array, valid tags only, includes Animation or Live-Action), `studio`,
-`source`. `srcUrl` should be present for anything added from this point forward.
+`source`, `runtimeMinutes` (positive whole minutes), `runtimeSourceId` (for
+example `wikidata:Q12345` or `wikipedia:Film title`), and `runtimeVerifiedAt`
+(`YYYY-MM-DD`). `srcUrl` should be present for anything added from this point forward.
 Check for accidental duplicate `num` values and duplicate titles within the new
 batch itself, not just against the existing catalog.
 

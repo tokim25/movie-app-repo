@@ -86,6 +86,7 @@ async function loosenSampleFamilyForBroadEligibility(page){
       child.age = 12;
       CONTENT_FLAG_IDS.forEach(flagId => setChildFlagLimit(child.id, flagId, 4));
     });
+    tonightSelection.time = 999;
   });
 }
 
@@ -161,6 +162,7 @@ test('tonight detail collapses again once a new pick shows (#78)', async ({ page
 
 test('night mood changes the selected movie', async ({ page }) => {
   await page.evaluate(() => {
+    tonightSelection.time = 999;
     // Issue #49 makes findTonightCandidate() prefer a green pick globally,
     // ahead of tier order -- both of these are amber for Nora (age 3) under
     // her strict starter settings, which would otherwise make the fix (not
@@ -217,6 +219,7 @@ test('a Want to watch pick renders the Want to watch source label', async ({ pag
     const idx = MOVIES.findIndex(movie => movie.t === 'The Greatest Showman');
     if(idx < 0) throw new Error('Test movie missing');
     togglePriority(idx);
+    tonightSelection.time = 120;
     resetTonightSkips();
     tonightSourceTiers = () => [{ source: 'Want to watch', indices: [idx] }];
     return `${MOVIES[idx].t} (${MOVIES[idx].y})`;
@@ -234,7 +237,7 @@ test('mood ranking crosses tier boundaries instead of exhausting Want to watch f
       child.age = 12;
       CONTENT_FLAG_IDS.forEach(flagId => setChildFlagLimit(child.id, flagId, 4));
     });
-    const base = { y: '2005', ca: '3+', genre: [] };
+    const base = { y: '2005', ca: '3+', genre: [], runtimeMinutes: 90, runtimeSourceId: 'fixture', runtimeVerifiedAt: '2026-09-26' };
     // Want to watch fixture engineered to score badly under calm mood (high
     // violence -> high intensity -> high calm score); Shelf fixture
     // engineered to score well (low violence). Before #97, tier order alone
@@ -301,7 +304,7 @@ test('findTonightCandidate prefers a green pick over a red one when both are eli
     // sample-family kids (Nora is 3) -- 3+ does, 6+ no longer would, since
     // there's no oldest-child tolerance to lean on. Age isn't this test's
     // subject, so it's set low enough to be a non-factor for either kid.
-    const base = { y: '2005', ca: '3+', genre: [] };
+    const base = { y: '2005', ca: '3+', genre: [], runtimeMinutes: 90, runtimeSourceId: 'fixture', runtimeVerifiedAt: '2026-09-26' };
     const redIdx = MOVIES.push({ ...base, t: 'AAA Regression Fixture Movie', num: 9000001, flags: { violence: 1, language: 4, romance: 1, drinking: 1 } }) - 1;
     const greenIdx = MOVIES.push({ ...base, t: 'BBB Regression Fixture Movie', num: 9000002, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
     // Strict language limit for both sample-family kids: level 4 is
@@ -326,7 +329,7 @@ test('findTonightCandidate prefers a green pick over a red one when both are eli
 
 test('a green top pick with multiple kids selected cites every kid in its reason (#59)', async ({ page }) => {
   const result = await page.evaluate(() => {
-    const greenIdx = MOVIES.push({ t: 'CCC Regression Green Fixture', y: '2005', ca: '6+', genre: [], num: 9000101, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
+    const greenIdx = MOVIES.push({ t: 'CCC Regression Green Fixture', y: '2005', ca: '6+', genre: [], runtimeMinutes: 90, runtimeSourceId: 'fixture', runtimeVerifiedAt: '2026-09-26', num: 9000101, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
     findTonightCandidate = () => ({ idx: greenIdx, source: 'Shelf' });
     showTonightPick();
     return {
@@ -346,7 +349,7 @@ test('a green top pick with multiple kids selected cites every kid in its reason
 
 test('a red top pick is labeled Above settings and Watch anyway works for it (#49)', async ({ page }) => {
   const result = await page.evaluate(() => {
-    const redIdx = MOVIES.push({ t: 'DDD Regression Red Fixture', y: '2005', ca: '6+', genre: [], num: 9000102, flags: { violence: 1, language: 4, romance: 1, drinking: 1 } }) - 1;
+    const redIdx = MOVIES.push({ t: 'DDD Regression Red Fixture', y: '2005', ca: '6+', genre: [], runtimeMinutes: 90, runtimeSourceId: 'fixture', runtimeVerifiedAt: '2026-09-26', num: 9000102, flags: { violence: 1, language: 4, romance: 1, drinking: 1 } }) - 1;
     state.children.forEach(child => setChildFlagLimit(child.id, 'language', 1));
     findTonightCandidate = () => ({ idx: redIdx, source: 'Shelf' });
     showTonightPick();
@@ -371,7 +374,7 @@ test('a red top pick is labeled Above settings and Watch anyway works for it (#4
 
 test('an amber top pick is labeled Review fit, distinct from red and green (#49)', async ({ page }) => {
   const result = await page.evaluate(() => {
-    const amberIdx = MOVIES.push({ t: 'EEE Regression Amber Fixture', y: '2005', ca: '6+', genre: [], num: 9000103, flags: { violence: 1, language: 3, romance: 1, drinking: 1 } }) - 1;
+    const amberIdx = MOVIES.push({ t: 'EEE Regression Amber Fixture', y: '2005', ca: '6+', genre: [], runtimeMinutes: 90, runtimeSourceId: 'fixture', runtimeVerifiedAt: '2026-09-26', num: 9000103, flags: { violence: 1, language: 3, romance: 1, drinking: 1 } }) - 1;
     state.children.forEach(child => setChildFlagLimit(child.id, 'language', 2));
     findTonightCandidate = () => ({ idx: amberIdx, source: 'Shelf' });
     showTonightPick();
@@ -396,7 +399,7 @@ test('an amber top pick is labeled Review fit, distinct from red and green (#49)
 test.describe('summarized red copy counts distinct children, not category-issues (#108)', () => {
   test('one child over multiple categories reports a single child', async ({ page }) => {
     const result = await page.evaluate(() => {
-      const idx = MOVIES.push({ t: 'SSS OneChild ThreeCategory Fixture', y: '2005', ca: '3+', genre: [], num: 9000214, flags: { violence: 4, language: 4, romance: 4, drinking: 1 } }) - 1;
+      const idx = MOVIES.push({ t: 'SSS OneChild ThreeCategory Fixture', y: '2005', ca: '3+', genre: [], runtimeMinutes: 90, runtimeSourceId: 'fixture', runtimeVerifiedAt: '2026-09-26', num: 9000214, flags: { violence: 4, language: 4, romance: 4, drinking: 1 } }) - 1;
       state.children = [{ id: 'kid-solo', name: 'Solo', age: 12, settings: {} }];
       tonightSelection.excludedChildIds = new Set();
       ['violence', 'language', 'romance'].forEach(flagId => setChildFlagLimit('kid-solo', flagId, 1));
@@ -414,7 +417,7 @@ test.describe('summarized red copy counts distinct children, not category-issues
 
   test('three children with one category each report all three', async ({ page }) => {
     const result = await page.evaluate(() => {
-      const idx = MOVIES.push({ t: 'TTT ThreeChild OneCategory Fixture', y: '2005', ca: '3+', genre: [], num: 9000215, flags: { violence: 1, language: 4, romance: 1, drinking: 1 } }) - 1;
+      const idx = MOVIES.push({ t: 'TTT ThreeChild OneCategory Fixture', y: '2005', ca: '3+', genre: [], runtimeMinutes: 90, runtimeSourceId: 'fixture', runtimeVerifiedAt: '2026-09-26', num: 9000215, flags: { violence: 1, language: 4, romance: 1, drinking: 1 } }) - 1;
       state.children = [
         { id: 'kid-a', name: 'Ava', age: 12, settings: {} },
         { id: 'kid-b', name: 'Ben', age: 12, settings: {} },
@@ -436,7 +439,7 @@ test.describe('summarized red copy counts distinct children, not category-issues
 
   test('mixed categories-per-child counts distinct children, not the category tally', async ({ page }) => {
     const result = await page.evaluate(() => {
-      const idx = MOVIES.push({ t: 'UUU Mixed Fixture', y: '2005', ca: '3+', genre: [], num: 9000216, flags: { violence: 4, language: 4, romance: 1, drinking: 1 } }) - 1;
+      const idx = MOVIES.push({ t: 'UUU Mixed Fixture', y: '2005', ca: '3+', genre: [], runtimeMinutes: 90, runtimeSourceId: 'fixture', runtimeVerifiedAt: '2026-09-26', num: 9000216, flags: { violence: 4, language: 4, romance: 1, drinking: 1 } }) - 1;
       state.children = [
         { id: 'kid-x', name: 'Xena', age: 12, settings: {} },
         { id: 'kid-y', name: 'Yara', age: 12, settings: {} }
@@ -471,7 +474,7 @@ test.describe('strict per-child age eligibility, no oldest-sibling tolerance (#9
       // Issue #92's own reproduction: a 3-year-old and a 13-year-old
       // together used to let a 14+ title through for both under the old
       // oldest-child-plus-2 rule (13 + 2 = 15 >= 14).
-      const idx = MOVIES.push({ t: 'FFF Mixed-Age Fixture', y: '2005', ca: '14+', genre: [], num: 9000201, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
+      const idx = MOVIES.push({ t: 'FFF Mixed-Age Fixture', y: '2005', ca: '14+', genre: [], runtimeMinutes: 90, runtimeSourceId: 'fixture', runtimeVerifiedAt: '2026-09-26', num: 9000201, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
       state.children = [
         { id: 'kid-young', name: 'Young', age: 3, settings: {} },
         { id: 'kid-old', name: 'Old', age: 13, settings: {} }
@@ -489,8 +492,8 @@ test.describe('strict per-child age eligibility, no oldest-sibling tolerance (#9
 
   test('the gate is exact at the boundary, no tolerance past it', async ({ page }) => {
     const result = await page.evaluate(() => {
-      const atBoundaryIdx = MOVIES.push({ t: 'GGG At-Boundary Fixture', y: '2005', ca: '8+', genre: [], num: 9000202, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
-      const overBoundaryIdx = MOVIES.push({ t: 'HHH Over-Boundary Fixture', y: '2005', ca: '9+', genre: [], num: 9000203, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
+      const atBoundaryIdx = MOVIES.push({ t: 'GGG At-Boundary Fixture', y: '2005', ca: '8+', genre: [], runtimeMinutes: 90, runtimeSourceId: 'fixture', runtimeVerifiedAt: '2026-09-26', num: 9000202, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
+      const overBoundaryIdx = MOVIES.push({ t: 'HHH Over-Boundary Fixture', y: '2005', ca: '9+', genre: [], runtimeMinutes: 90, runtimeSourceId: 'fixture', runtimeVerifiedAt: '2026-09-26', num: 9000203, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
       state.children = [{ id: 'kid-8', name: 'Eight', age: 8, settings: {} }];
       tonightSelection.excludedChildIds = new Set();
       const kids = selectedKids();
@@ -505,12 +508,60 @@ test.describe('strict per-child age eligibility, no oldest-sibling tolerance (#9
   });
 });
 
+test.describe('Tonight runtime limits (#89)', () => {
+  test('90- and 120-minute choices are hard maximums while Any length is unrestricted', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      const movie = { t: 'Runtime Boundary Fixture', y: '2005', ca: '3+', genre: [], num: 9000301, flags: { violence: 1, language: 1, romance: 1, drinking: 1 }, runtimeSourceId: 'fixture', runtimeVerifiedAt: '2026-09-26' };
+      const idx = MOVIES.push(movie) - 1;
+      const kids = selectedKids();
+      const eligibleAt = (time, runtimeMinutes) => {
+        tonightSelection.time = time;
+        movie.runtimeMinutes = runtimeMinutes;
+        return isTonightEligible(idx, kids, false, false);
+      };
+      return {
+        at90: eligibleAt(90, 90),
+        over90: eligibleAt(90, 91),
+        at120: eligibleAt(120, 120),
+        over120: eligibleAt(120, 121),
+        anyLength: eligibleAt(999, 240)
+      };
+    });
+
+    expect(result).toEqual({ at90: true, over90: false, at120: true, over120: false, anyLength: true });
+  });
+
+  test('missing runtime is excluded from constrained picks and cannot produce a fit claim', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      const idx = MOVIES.push({ t: 'Missing Runtime Fixture', y: '2005', ca: '3+', genre: [], num: 9000302, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
+      tonightSelection.time = 90;
+      tonightSourceTiers = () => [{ source: 'Shelf', indices: [idx] }];
+      resetTonightSkips();
+      const candidate = findTonightCandidate();
+      return { eligible: isTonightEligible(idx, selectedKids(), false, false), noMatch: !!candidate.noMatch };
+    });
+
+    expect(result).toEqual({ eligible: false, noMatch: true });
+    await expect(page.locator('#tonightPickReasons')).not.toContainText('Fits your');
+  });
+
+  test('the recommendation explains the selected film runtime and window fit', async ({ page }) => {
+    await page.evaluate(() => {
+      const idx = MOVIES.push({ t: 'Runtime Copy Fixture', y: '2005', ca: '3+', genre: [], num: 9000303, flags: { violence: 1, language: 1, romance: 1, drinking: 1 }, runtimeMinutes: 88, runtimeSourceId: 'fixture', runtimeVerifiedAt: '2026-09-26' }) - 1;
+      tonightSelection.time = 90;
+      showTonightPick({ idx, source: 'Shelf' });
+    });
+
+    await expect(page.locator('#tonightPickReasons')).toContainText('1h 28m · Fits your 90-minute window.');
+  });
+});
+
 test.describe('no automatic green verdict without confirmed content data (#96)', () => {
   test('a title with no flags at all is never auto-recommended to a child-inclusive session', async ({ page }) => {
     const result = await page.evaluate(() => {
       // No `flags` property at all -- the exact shape of the 36 real
       // catalog titles issue #96 describes (e.g. Home Alone 2).
-      const idx = MOVIES.push({ t: 'III No-Flags Fixture', y: '2005', ca: '3+', genre: [], num: 9000204 }) - 1;
+      const idx = MOVIES.push({ t: 'III No-Flags Fixture', y: '2005', ca: '3+', genre: [], runtimeMinutes: 90, runtimeSourceId: 'fixture', runtimeVerifiedAt: '2026-09-26', num: 9000204 }) - 1;
       tonightSourceTiers = () => [{ source: 'Shelf', indices: [idx] }];
       resetTonightSkips();
       const candidate = findTonightCandidate();
@@ -523,7 +574,7 @@ test.describe('no automatic green verdict without confirmed content data (#96)',
 
   test('a title with confirmed content data remains eligible', async ({ page }) => {
     const result = await page.evaluate(() => {
-      const idx = MOVIES.push({ t: 'JJJ Confirmed Fixture', y: '2005', ca: '3+', genre: [], num: 9000205, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
+      const idx = MOVIES.push({ t: 'JJJ Confirmed Fixture', y: '2005', ca: '3+', genre: [], runtimeMinutes: 90, runtimeSourceId: 'fixture', runtimeVerifiedAt: '2026-09-26', num: 9000205, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
       tonightSourceTiers = () => [{ source: 'Shelf', indices: [idx] }];
       resetTonightSkips();
       const candidate = findTonightCandidate();
@@ -549,7 +600,7 @@ test.describe('typed no-match state instead of an unvalidated fallback pick (#93
 
   test('no-match when every candidate is watched', async ({ page }) => {
     const result = await page.evaluate(() => {
-      const idx = MOVIES.push({ t: 'KKK Watched Fixture', y: '2005', ca: '3+', genre: [], num: 9000206, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
+      const idx = MOVIES.push({ t: 'KKK Watched Fixture', y: '2005', ca: '3+', genre: [], runtimeMinutes: 90, runtimeSourceId: 'fixture', runtimeVerifiedAt: '2026-09-26', num: 9000206, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
       toggleCheck(idx);
       tonightSelection.mood = 'calm';
       tonightSourceTiers = () => [{ source: 'Shelf', indices: [idx] }];
@@ -562,7 +613,7 @@ test.describe('typed no-match state instead of an unvalidated fallback pick (#93
 
   test('no-match when every candidate fails the age gate', async ({ page }) => {
     const result = await page.evaluate(() => {
-      const idx = MOVIES.push({ t: 'LLL Too-Old Fixture', y: '2005', ca: '14+', genre: [], num: 9000207, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
+      const idx = MOVIES.push({ t: 'LLL Too-Old Fixture', y: '2005', ca: '14+', genre: [], runtimeMinutes: 90, runtimeSourceId: 'fixture', runtimeVerifiedAt: '2026-09-26', num: 9000207, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
       tonightSourceTiers = () => [{ source: 'Shelf', indices: [idx] }];
       resetTonightSkips();
       return findTonightCandidate();
@@ -628,8 +679,8 @@ test.describe('typed no-match state instead of an unvalidated fallback pick (#93
 test.describe('per-skip session-scoped feedback, not a single global reason (#103)', () => {
   test('two consecutive skips record distinct events and never inherit the previous reason', async ({ page }) => {
     const firstTitle = await page.evaluate(() => {
-      const idxA = MOVIES.push({ t: 'MMM Skip Fixture A', y: '2005', ca: '3+', genre: [], num: 9000208, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
-      const idxB = MOVIES.push({ t: 'NNN Skip Fixture B', y: '2005', ca: '3+', genre: [], num: 9000209, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
+      const idxA = MOVIES.push({ t: 'MMM Skip Fixture A', y: '2005', ca: '3+', genre: [], runtimeMinutes: 90, runtimeSourceId: 'fixture', runtimeVerifiedAt: '2026-09-26', num: 9000208, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
+      const idxB = MOVIES.push({ t: 'NNN Skip Fixture B', y: '2005', ca: '3+', genre: [], runtimeMinutes: 90, runtimeSourceId: 'fixture', runtimeVerifiedAt: '2026-09-26', num: 9000209, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
       tonightSourceTiers = () => [{ source: 'Shelf', indices: [idxA, idxB] }];
       resetTonightSkips();
       showTonightPick();
@@ -660,7 +711,7 @@ test.describe('per-skip session-scoped feedback, not a single global reason (#10
 
   test('an unanswered skip still records a session-scoped event with no reason', async ({ page }) => {
     await page.evaluate(() => {
-      const idx = MOVIES.push({ t: 'OOO Unanswered Skip Fixture', y: '2005', ca: '3+', genre: [], num: 9000210, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
+      const idx = MOVIES.push({ t: 'OOO Unanswered Skip Fixture', y: '2005', ca: '3+', genre: [], runtimeMinutes: 90, runtimeSourceId: 'fixture', runtimeVerifiedAt: '2026-09-26', num: 9000210, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } }) - 1;
       tonightSourceTiers = () => [{ source: 'Shelf', indices: [idx] }];
       resetTonightSkips();
       showTonightPick();
@@ -677,7 +728,7 @@ test.describe('per-skip session-scoped feedback, not a single global reason (#10
 test.describe('Watch anyway is idempotent per recommendation, not per tap (#104)', () => {
   test('repeated taps on the same pick log once, then reverse -- never appending duplicates', async ({ page }) => {
     await page.evaluate(() => {
-      const idx = MOVIES.push({ t: 'PPP WatchAnyway Fixture', y: '2005', ca: '3+', genre: [], num: 9000211, flags: { violence: 1, language: 4, romance: 1, drinking: 1 } }) - 1;
+      const idx = MOVIES.push({ t: 'PPP WatchAnyway Fixture', y: '2005', ca: '3+', genre: [], runtimeMinutes: 90, runtimeSourceId: 'fixture', runtimeVerifiedAt: '2026-09-26', num: 9000211, flags: { violence: 1, language: 4, romance: 1, drinking: 1 } }) - 1;
       state.children.forEach(child => setChildFlagLimit(child.id, 'language', 1));
       tonightSourceTiers = () => [{ source: 'Shelf', indices: [idx] }];
       resetTonightSkips();
@@ -697,7 +748,7 @@ test.describe('Watch anyway is idempotent per recommendation, not per tap (#104)
 
   test('the button visibly acknowledges a saved decision', async ({ page }) => {
     await page.evaluate(() => {
-      const idx = MOVIES.push({ t: 'QQQ WatchAnyway Ack Fixture', y: '2005', ca: '3+', genre: [], num: 9000212, flags: { violence: 1, language: 4, romance: 1, drinking: 1 } }) - 1;
+      const idx = MOVIES.push({ t: 'QQQ WatchAnyway Ack Fixture', y: '2005', ca: '3+', genre: [], runtimeMinutes: 90, runtimeSourceId: 'fixture', runtimeVerifiedAt: '2026-09-26', num: 9000212, flags: { violence: 1, language: 4, romance: 1, drinking: 1 } }) - 1;
       state.children.forEach(child => setChildFlagLimit(child.id, 'language', 1));
       tonightSourceTiers = () => [{ source: 'Shelf', indices: [idx] }];
       resetTonightSkips();
@@ -711,7 +762,7 @@ test.describe('Watch anyway is idempotent per recommendation, not per tap (#104)
 
   test('one decision cannot satisfy the three-distinct-choice Family cue threshold', async ({ page }) => {
     const count = await page.evaluate(() => {
-      const idx = MOVIES.push({ t: 'RRR ThreeTap Fixture', y: '2005', ca: '3+', genre: [], num: 9000213, flags: { violence: 1, language: 4, romance: 1, drinking: 1 } }) - 1;
+      const idx = MOVIES.push({ t: 'RRR ThreeTap Fixture', y: '2005', ca: '3+', genre: [], runtimeMinutes: 90, runtimeSourceId: 'fixture', runtimeVerifiedAt: '2026-09-26', num: 9000213, flags: { violence: 1, language: 4, romance: 1, drinking: 1 } }) - 1;
       state.children.forEach(child => setChildFlagLimit(child.id, 'language', 1));
       tonightSourceTiers = () => [{ source: 'Shelf', indices: [idx] }];
       resetTonightSkips();

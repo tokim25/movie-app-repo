@@ -170,17 +170,15 @@ for (const movie of movies) {
   }
 
   // TRD "Versioned catalog contract > Runtime" (docs/trd-trusted-contextual-recommendations.md):
-  // runtimeMinutes/runtimeSourceId/runtimeVerifiedAt travel together, same
-  // shape as the csmRecheckedAt/csmRecheckVersion pairing above -- all three
-  // present or none, so a title can't claim a verified runtime with no
-  // record of where it came from or when.
+  // runtimeMinutes/runtimeSourceId/runtimeVerifiedAt travel together and are
+  // required for every title, so Tonight can enforce duration without making
+  // unsupported fit claims.
   const hasRuntimeMinutes = movie.runtimeMinutes !== undefined;
   const hasRuntimeSourceId = movie.runtimeSourceId !== undefined;
   const hasRuntimeVerifiedAt = movie.runtimeVerifiedAt !== undefined;
-  if (hasRuntimeMinutes || hasRuntimeSourceId || hasRuntimeVerifiedAt) {
-    if (!(hasRuntimeMinutes && hasRuntimeSourceId && hasRuntimeVerifiedAt)) {
-      errors.push(`${label}: runtimeMinutes, runtimeSourceId, and runtimeVerifiedAt must all be set together`);
-    }
+  if (!(hasRuntimeMinutes && hasRuntimeSourceId && hasRuntimeVerifiedAt)) {
+    errors.push(`${label}: runtimeMinutes, runtimeSourceId, and runtimeVerifiedAt are required`);
+  } else {
     if (hasRuntimeMinutes && !(Number.isInteger(movie.runtimeMinutes) && movie.runtimeMinutes > 0)) {
       errors.push(`${label}: runtimeMinutes must be a positive integer`);
     }
