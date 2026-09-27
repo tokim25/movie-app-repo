@@ -52,6 +52,16 @@ test('the active Want to watch filter meets AA contrast in dark mode', async ({ 
   );
 });
 
+test('Shelf and Family have no automated WCAG AA violations in light mode (#81)', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'light' });
+  await switchToFlatView(page);
+  await expectNoA11yViolations(page, '#browseScreen');
+
+  await page.locator('#tabFamily').click();
+  await page.locator('#familyScreen').waitFor({ state: 'visible' });
+  await expectNoA11yViolations(page, '#familyScreen');
+});
+
 // Issue #74 part 1: toggleCheck()/togglePriority() call renderCurrentView(),
 // which rebuilds the whole list's DOM. Without restoring focus to the
 // equivalent control afterward, the activated button is destroyed and

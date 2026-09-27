@@ -13,6 +13,8 @@ const IPHONE_UA =
   'Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Mobile/15E148 Safari/604.1';
 const ANDROID_TOUCH_UA =
   'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36';
+const MAC_SAFARI_UA =
+  'Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Safari/605.1.15';
 
 // #installAppBtn and #iosInstallHint both live in the "App" section of the
 // Family tab (#familyScreen), not the home tab -- get there via the same
@@ -40,7 +42,7 @@ test('iOS Safari (no beforeinstallprompt ever fires) gets the static Add to Home
   }
 });
 
-test('a non-iOS touch browser that never fires beforeinstallprompt falls back to the same static instructions after a grace period', async ({ browser }) => {
+test('an Android touch browser gets browser-menu installation guidance after a grace period', async ({ browser }) => {
   const context = await browser.newContext({ userAgent: ANDROID_TOUCH_UA, hasTouch: true });
   const page = await context.newPage();
   try {
@@ -55,6 +57,22 @@ test('a non-iOS touch browser that never fires beforeinstallprompt falls back to
     // Once INSTALL_FALLBACK_DELAY_MS has passed with no beforeinstallprompt
     // (this test environment never fires it), the fallback copy appears.
     await expect(page.locator('#iosInstallHint')).toBeVisible({ timeout: 5000 });
+    await expect(page.locator('#iosInstallHint')).toContainText('browser menu');
+    await expect(page.locator('#iosInstallHint')).not.toContainText('Share icon');
+  } finally {
+    await context.close();
+  }
+});
+
+test('macOS Safari gets Add to Dock guidance', async ({ browser }) => {
+  const context = await browser.newContext({ userAgent: MAC_SAFARI_UA });
+  const page = await context.newPage();
+  try {
+    await page.goto('/');
+    await goToFamilyScreen(page);
+    await expect(page.locator('#iosInstallHint')).toBeVisible();
+    await expect(page.locator('#iosInstallHint')).toContainText('File, then Add to Dock');
+    await expect(page.locator('#installAppBtn')).toBeHidden();
   } finally {
     await context.close();
   }
