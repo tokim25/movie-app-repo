@@ -5522,10 +5522,41 @@ function dedupeEventsById(events){
   return out;
 }
 
+// The sample family is disposable onboarding data, not a real roster edit.
+// In particular, a user can explore with Simon/Nora on a fresh browser and
+// then sign back into Drive, where their actual family is older only because
+// it was saved earlier. A plain roster-level last-write-wins comparison would
+// let the newer sample timestamp replace that real family wholesale while
+// per-movie marks continued to merge, which looks exactly like selective data
+// loss. Keep this deliberately strict: once either sample child is renamed,
+// re-aged, or personalized, the roster is ordinary user data again.
+function isUntouchedSampleFamily(children){
+  if(!Array.isArray(children) || children.length !== 2) return false;
+  const expected = {
+    simon: { name: 'Simon', age: 6 },
+    nora: { name: 'Nora', age: 3 }
+  };
+  return children.every(child=>{
+    const sample = child && expected[child.id];
+    if(!sample || child.name !== sample.name || child.age !== sample.age) return false;
+    if(child.settings && Object.keys(child.settings).length) return false;
+    if(child.sadRemovedNoticePending) return false;
+    return !child.watchCueDismissedAt || Object.keys(child.watchCueDismissedAt).length === 0;
+  });
+}
+
 function mergeState(local, remote){
   const normalizedRemote = normalizeState(remote);
   const useRemoteOrder = (normalizedRemote.orderUpdatedAt || 0) > (local.orderUpdatedAt || 0);
-  const useRemoteChildren = (normalizedRemote.childrenUpdatedAt || 0) > (local.childrenUpdatedAt || 0);
+  const localIsSample = isUntouchedSampleFamily(local.children);
+  const remoteIsSample = isUntouchedSampleFamily(normalizedRemote.children);
+  const remoteHasRealFamily = normalizedRemote.children.length > 0 && !remoteIsSample;
+  const localHasRealFamily = local.children.length > 0 && !localIsSample;
+  const useRemoteChildren = localIsSample && remoteHasRealFamily
+    ? true
+    : remoteIsSample && localHasRealFamily
+      ? false
+      : (normalizedRemote.childrenUpdatedAt || 0) > (local.childrenUpdatedAt || 0);
   const exclusiveMarks = enforceWatchPriorityInvariant(
     mergeMarks(local.checked, normalizedRemote.checked),
     mergeMarks(local.priority, normalizedRemote.priority)
