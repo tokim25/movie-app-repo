@@ -843,15 +843,21 @@ function reportError(err){
     color:var(--ink-faint);
     margin-top:4px;
     display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    align-items:center;
+    flex-direction:column;
+    align-items:flex-start;
     text-wrap:pretty;
+  }
+  .movieFacts{
+    line-height:1.45;
   }
   .badge{
     color:var(--ink-soft);
   }
   .badge.csm{ color:var(--ink); font-weight:500; }
+  .badge.runtime{
+    margin-left:10px;
+    white-space:nowrap;
+  }
   .metaLinks{
     display:flex;
     gap:10px;
@@ -3641,19 +3647,24 @@ function createMeta(idx, m, detailScope){
   const meta = document.createElement('div');
   meta.className = 'meta';
 
+  const facts = document.createElement('div');
+  facts.className = 'movieFacts';
+
   const csmBadge = document.createElement('span');
   csmBadge.className = 'badge csm';
   csmBadge.title = 'Common Sense Media';
   csmBadge.textContent = `${m.studio} · CSM ${m.ca}`;
-  meta.appendChild(csmBadge);
+  facts.appendChild(csmBadge);
 
   if(Number.isInteger(m.runtimeMinutes) && m.runtimeMinutes > 0){
     const runtime = document.createElement('span');
     runtime.className = 'badge runtime';
     runtime.textContent = formatRuntime(m.runtimeMinutes);
     runtime.title = 'Verified runtime';
-    meta.appendChild(runtime);
+    facts.appendChild(runtime);
   }
+
+  meta.appendChild(facts);
 
   const links = document.createElement('div');
   links.className = 'metaLinks';
