@@ -80,7 +80,7 @@
 
 `Use the `movie-watchlist-updater` Claude skill (`.claude/skills/movie-watchlist-updater/`) for the full research → write-up → deploy pipeline, including poster art and a `srcUrl` link back to whatever page the content came from. In short: each new curated source list gets its own `data-<source>.js` file (never edit the existing ones), referenced with an additional `<script>` tag in `index.html`, and merged client-side into the single `MOVIES` array. One-off single-title requests (as opposed to a whole new curated list) go in `data-extra.js` instead of spawning a new file each time. Requested titles waiting to be added live in the "Movie Night Requests (Responses)" Google Sheet (fed by the in-app request form); `PENDING_REQUESTS.md` is now a processed-log the skill writes to, not a queue.`
 
-`Run `node scripts/validate-data.mjs` after catalog edits. It checks duplicate movie numbers, duplicate normalized title/year pairs, required fields, HTTPS source URLs, allowed genres, and orphan poster keys.`
+`Run `node scripts/validate-data.mjs` after catalog edits. It checks duplicate movie numbers, duplicate normalized title/year pairs, required fields, HTTPS source URLs, allowed genres, orphan poster keys, and the required runtime trio: `runtimeMinutes`, `runtimeSourceId`, and `runtimeVerifiedAt`.`
 
 ### `Testing`
 

@@ -3650,9 +3650,7 @@ function createMeta(idx, m, detailScope){
   if(Number.isInteger(m.runtimeMinutes) && m.runtimeMinutes > 0){
     const runtime = document.createElement('span');
     runtime.className = 'badge runtime';
-    const hours = Math.floor(m.runtimeMinutes / 60);
-    const minutes = m.runtimeMinutes % 60;
-    runtime.textContent = hours ? `${hours}h${minutes ? ` ${minutes}m` : ''}` : `${minutes}m`;
+    runtime.textContent = formatRuntime(m.runtimeMinutes);
     runtime.title = 'Verified runtime';
     meta.appendChild(runtime);
   }
@@ -3687,6 +3685,12 @@ function createMeta(idx, m, detailScope){
   meta.appendChild(links);
 
   return meta;
+}
+
+function formatRuntime(runtimeMinutes){
+  const hours = Math.floor(runtimeMinutes / 60);
+  const minutes = runtimeMinutes % 60;
+  return hours ? `${hours}h${minutes ? ` ${minutes}m` : ''}` : `${minutes}m`;
 }
 
 function createFitSignals(idx){
@@ -4314,6 +4318,8 @@ function meetsAgePolicyForAllKids(movie, kids){
 function isTonightEligible(idx, kids, includeSkipped, requireGreen){
   const movie = MOVIES[idx];
   if(!meetsAgePolicyForAllKids(movie, kids)) return false;
+  if(tonightSelection.time !== 999 &&
+      (!Number.isInteger(movie.runtimeMinutes) || movie.runtimeMinutes > tonightSelection.time)) return false;
   if(markValue(state.checked, idx) && tonightSelection.mood !== 'favorite') return false;
   if(!includeSkipped && tonightSelection.skippedMovieNums.has(movieKey(idx))) return false;
   // Issue #96: movieContentProfile() invents content levels from age/genre/
@@ -4538,7 +4544,9 @@ function showTonightPick(candidateOverride){
   }else{
     copy.push(verdict.reasons[0] || 'Within the selected child settings.');
   }
-  copy.push(`Fits a ${tonightSelection.time === 999 ? 'flexible' : tonightSelection.time + ' minute'} window.`);
+  copy.push(tonightSelection.time === 999
+    ? `${formatRuntime(movie.runtimeMinutes)} runtime.`
+    : `${formatRuntime(movie.runtimeMinutes)} · Fits your ${tonightSelection.time}-minute window.`);
   copy.push(candidate.source === 'Want to watch' ? 'Pulled from Want to watch.' : candidate.source === 'Recent releases' ? 'Pulled from recent releases.' : 'Pulled from the rest of Shelf.');
   copy.slice(0, 3).forEach(text=>{
     const li = document.createElement('li');

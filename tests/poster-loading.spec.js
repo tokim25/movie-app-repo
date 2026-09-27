@@ -44,7 +44,7 @@ test('a failed remote poster request keeps the poster slot and shows the fallbac
   await expect(first.locator('.posterFallback')).toBeVisible();
 });
 
-test('verified runtime appears in shelf metadata only when the record has it', async ({ page }) => {
+test('verified runtime appears in shelf metadata across the catalog', async ({ page }) => {
   await page.goto('/');
   await switchToFlatView(page);
 
@@ -52,5 +52,5 @@ test('verified runtime appears in shelf metadata only when the record has it', a
   await expect(rows(page).filter({ hasText: 'Peter Pan (Broadway Musical)' }).locator('.runtime')).toHaveText('1h 44m');
 
   await page.locator('#search').fill('Toy Story');
-  await expect(rows(page).filter({ hasText: 'Toy Story (1995)' }).locator('.runtime')).toHaveCount(0);
+  await expect(rows(page).filter({ hasText: 'Toy Story (1995)' }).locator('.runtime')).toHaveText('1h 21m');
 });

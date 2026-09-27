@@ -96,12 +96,13 @@ export function computeContentStatus(movie, { auditCandidateNums, contentModelVe
  * structured flags (all four dimensions) AND not an open audit candidate AND
  * a normalizable age. This is the filter to certify once runtimeMinutes is
  * backfilled for the titles it selects -- it does NOT itself require runtime
- * (that's applied separately, since runtime coverage is currently zero and
- * tracked independently; see computeContentStatus's `certified` vs
+ * (that's applied separately and tracked independently; see
+ * computeContentStatus's `certified` vs
  * `provisional` split for the runtime-gated version of this same idea).
  * Gate 0 explicitly says to re-run this exact check before cutover since the
- * underlying data keeps changing as backfill work lands -- don't treat its
- * recorded count (989 as of 2026-09-21) as a fixed target.
+ * underlying data keeps changing -- don't treat its recorded count (989 as
+ * of 2026-09-21) as a fixed target. Runtime coverage reached the full catalog
+ * on 2026-09-26; this helper remains intentionally scoped to content-fit data.
  */
 export function isInVerifiedForFamilyFitSubset(movie, auditCandidateNums) {
   return hasCompleteFlags(movie) && !auditCandidateNums.has(movie.num) && recommendedAge(movie) !== null;
