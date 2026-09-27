@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { setupSampleFamily } from './helpers.js';
+import { setupSampleFamily, switchToFlatView } from './helpers.js';
 
 test('app shell reloads offline once the service worker is installed', async ({ page, context }) => {
   await page.goto('/');
@@ -14,6 +14,26 @@ test('app shell reloads offline once the service worker is installed', async ({ 
     await page.reload();
     await expect(page.locator('#homeScreen h1')).toHaveText('What should we watch tonight?');
     expect(await page.evaluate(() => MOVIES.length)).toBeGreaterThan(500);
+  } finally {
+    await context.setOffline(false);
+  }
+});
+
+test('an uncached remote poster keeps its stable title-year fallback offline (#119)', async ({ page, context }) => {
+  await page.goto('/');
+  await setupSampleFamily(page);
+  await page.waitForFunction(() => navigator.serviceWorker.controller !== null, null, { timeout: 15000 });
+
+  await context.setOffline(true);
+  try {
+    await page.reload();
+    await switchToFlatView(page);
+    await page.locator('#search').fill('Toy Story');
+
+    const row = page.locator('#list > li.row').filter({ hasText: 'Toy Story (1995)' });
+    await expect(row.locator('.poster')).toBeVisible();
+    await expect(row.locator('.posterFallback')).toContainText('Movie');
+    await expect(row.locator('.posterFallbackYear')).toHaveText('1995');
   } finally {
     await context.setOffline(false);
   }
