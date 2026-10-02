@@ -1,3 +1,27 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+
+// The real catalog's most recent `addedAt` across every data-*.js file (plus
+// the base data.js), as an ISO "YYYY-MM-DD" string. Used to pin a test clock
+// inside the app's NEW_WINDOW_DAYS window instead of depending on real
+// wall-clock time vs. whenever titles were last added -- see
+// shelf-fit.spec.js's "New this week" test for the failure this guards.
+export function latestCatalogAddedAt() {
+  const dataFiles = fs.readdirSync(ROOT).filter(f => /^data.*\.js$/.test(f));
+  let latest = null;
+  for (const file of dataFiles) {
+    const text = fs.readFileSync(path.join(ROOT, file), 'utf8');
+    for (const match of text.matchAll(/"addedAt":"(\d{4}-\d{2}-\d{2})"/g)) {
+      if (!latest || match[1] > latest) latest = match[1];
+    }
+  }
+  if (!latest) throw new Error('latestCatalogAddedAt(): no addedAt found in any data-*.js file');
+  return latest;
+}
+
 export async function setupSampleFamily(page) {
   // On a device with prior Google sync history, boot's decideInitialScreen()
   // waits for the initial Drive sync to settle (or a bounded timeout) before
