@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { setupSampleFamily } from './helpers.js';
+import { setupSampleFamily, latestCatalogAddedAt } from './helpers.js';
 
 test('shelf rows show fit against selected child content settings', async ({ page }) => {
   await page.goto('/');
@@ -61,6 +61,18 @@ test('searching Shelf hides the New this week teaser', async ({ page }) => {
   // search query entirely, so "New this week" kept showing unrelated (and
   // potentially unsuitable) titles above the actual search results while a
   // parent was mid-search.
+  //
+  // The clock is pinned just after the catalog's real most-recent `addedAt`
+  // (NEW_WINDOW_DAYS is 7 in index.html) instead of relying on real
+  // wall-clock time: this test started failing in CI on 2026-10-02, on runs
+  // that never touched this code, once the real most-recent addedAt
+  // (2026-09-25) aged past the 7-day window mid-run -- a ticking time bomb,
+  // not a flake. Freezing before navigation avoids any app timer advancing
+  // before the freeze takes effect, same pattern as google-sync.spec.js's
+  // pre-navigation clock use.
+  const pinnedNow = new Date(`${latestCatalogAddedAt()}T12:00:00Z`);
+  await page.clock.install({ time: pinnedNow });
+  await page.clock.pauseAt(pinnedNow);
   await page.goto('/');
   await setupSampleFamily(page);
 
