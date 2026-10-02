@@ -3857,7 +3857,8 @@ function createPoster(m, className, isNew){
   wrap.className = 'poster' + (className ? ' ' + className : '');
 
   const showFallback = () => {
-    wrap.querySelector('img')?.remove();
+    const existingImg = wrap.querySelector('img');
+    if(existingImg) existingImg.remove();
     if(wrap.querySelector('.posterFallback')) return;
     const fallback = document.createElement('div');
     fallback.className = 'posterFallback';

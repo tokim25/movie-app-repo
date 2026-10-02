@@ -6,9 +6,28 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PORT = Number(process.argv[2]) || 4319;
 const VERCEL_CONFIG = JSON.parse(fs.readFileSync(path.join(ROOT, 'vercel.json'), 'utf8'));
+
+// CSP violations during a local test run (axe-core's internal fetches, test fixtures'
+// inline scripts) would otherwise report-uri straight to the real production Sentry
+// ingest endpoint copied out of vercel.json, filing real-looking issues from test noise
+// (confirmed cause of Sentry JAVASCRIPT-E/F). Point report-uri at this server instead;
+// it 404s harmlessly, and the directive still contains '/csp-report/' for
+// tests/security-headers.spec.js's existing assertion.
+function localizeReportUri(value) {
+  // Target only the report-uri directive: the same ingest host also appears in
+  // connect-src, which must stay untouched.
+  return value.replace(
+    /report-uri https:\/\/o\d+\.ingest\.us\.sentry\.io/,
+    `report-uri http://127.0.0.1:${PORT}`
+  );
+}
+
 const SECURITY_HEADERS = Object.fromEntries(
   (VERCEL_CONFIG.headers?.find(rule => rule.source === '/(.*)')?.headers || [])
-    .map(({ key, value }) => [key, value])
+    .map(({ key, value }) => [
+      key,
+      key.startsWith('Content-Security-Policy') ? localizeReportUri(value) : value,
+    ])
 );
 
 const MIME = {
