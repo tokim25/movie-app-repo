@@ -37,6 +37,9 @@ test('CSP blocks unapproved scripts and includes required least-privilege direct
   expect(policy).toContain('https://upload.wikimedia.org');
   expect(policy).toContain('/csp-report/');
 
+  const reportUriDirective = policy.split(';').find(part => part.trim().startsWith('report-uri'));
+  expect(reportUriDirective).not.toContain('ingest.us.sentry.io');
+
   const scriptDirective = policy.split(';').find(part => part.trim().startsWith('script-src'));
   expect(scriptDirective).not.toContain("'unsafe-inline'");
   expect(scriptDirective).not.toContain('*');
