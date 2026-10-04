@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import vm from 'node:vm';
-import { computeDataHash, currentSwDataVersion } from './data-version.mjs';
+import { dataFiles, computeDataHash, currentSwDataVersion } from './data-version.mjs';
+import { computeBundleContent } from './bundle-data.mjs';
 import { getAuditCandidateNums } from './audit-content-flags.mjs';
 import {
   CONTENT_STATUSES,
@@ -8,21 +9,6 @@ import {
   computeContentStatus,
   isInVerifiedForFamilyFitSubset
 } from './catalog-schema.mjs';
-
-const dataFiles = [
-  'data.js',
-  'data-rt.js',
-  'data-dcom.js',
-  'data-disney.js',
-  'data-pixar.js',
-  'data-dreamworks.js',
-  'data-nickelodeon.js',
-  'data-extra.js',
-  'data-csm.js',
-  'data-mcudc.js',
-  'data-ghibli.js',
-  'data-posters.js'
-];
 
 const movieArrays = [
   'MOVIES_BASE',
@@ -220,6 +206,18 @@ for (const movie of movies) {
   const currentHash = currentSwDataVersion(swSource);
   if (currentHash !== expectedHash) {
     errors.push(`sw.js's DATA_VERSION (${currentHash}) is stale, data files hash to ${expectedHash}. Run \`node scripts/data-version.mjs\` and commit the result.`);
+  }
+}
+
+// index.html loads the catalog as one data-bundle.js instead of 12 separate
+// <script> tags (load-time fix) -- the bundle is generated from the
+// individual data-*.js source files, so it goes stale the same way
+// sw.js's DATA_VERSION does above if a batch forgets to re-run the bundler.
+{
+  const expectedBundle = computeBundleContent();
+  const currentBundle = fs.existsSync('data-bundle.js') ? fs.readFileSync('data-bundle.js', 'utf8') : null;
+  if (currentBundle !== expectedBundle) {
+    errors.push(`data-bundle.js is stale. Run \`node scripts/bundle-data.mjs\` and commit the result.`);
   }
 }
 

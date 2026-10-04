@@ -2921,18 +2921,13 @@ function reportError(err){
   </button>
 </nav>
 
-<script src="data.js"></script>
-<script src="data-rt.js"></script>
-<script src="data-dcom.js"></script>
-<script src="data-disney.js"></script>
-<script src="data-pixar.js"></script>
-<script src="data-dreamworks.js"></script>
-<script src="data-nickelodeon.js"></script>
-<script src="data-extra.js"></script>
-<script src="data-csm.js"></script>
-<script src="data-mcudc.js"></script>
-<script src="data-ghibli.js"></script>
-<script src="data-posters.js"></script>
+<!-- Load-time fix: this used to be 12 separate <script src="data-*.js">
+     tags, each a blocking round trip before the app could build MOVIES or
+     render anything. data-bundle.js is generated from those same 12 source
+     files by `node scripts/bundle-data.mjs` -- edit the individual
+     data-*.js files (still the real source of truth), never this one
+     directly, then re-run the bundler. -->
+<script src="data-bundle.js"></script>
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <script>
 const CANONICAL_HOST = "movies.tonykim.io";

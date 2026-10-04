@@ -24,7 +24,7 @@
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 
-const dataFiles = [
+export const dataFiles = [
   'data.js',
   'data-rt.js',
   'data-dcom.js',

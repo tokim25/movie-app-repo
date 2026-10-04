@@ -9,7 +9,7 @@
 // was stale. Bump the version/date prefix by hand for a real code
 // change to this file; DATA_VERSION takes care of itself.
 const DATA_VERSION = '3c21610b9b';
-const CACHE_VERSION = `family-feature-v23-20260927-${DATA_VERSION}`;
+const CACHE_VERSION = `family-feature-v24-20261004-${DATA_VERSION}`;
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -24,18 +24,7 @@ const APP_SHELL = [
   '/assets/icons/icon-192-maskable.png',
   '/assets/icons/icon-512-maskable.png',
   '/assets/icons/movie-night-icon.svg',
-  '/data.js',
-  '/data-rt.js',
-  '/data-dcom.js',
-  '/data-disney.js',
-  '/data-pixar.js',
-  '/data-dreamworks.js',
-  '/data-nickelodeon.js',
-  '/data-extra.js',
-  '/data-csm.js',
-  '/data-mcudc.js',
-  '/data-ghibli.js',
-  '/data-posters.js'
+  '/data-bundle.js'
 ];
 
 self.addEventListener('install', event => {

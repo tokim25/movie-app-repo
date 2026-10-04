@@ -61,6 +61,7 @@
 * index.html` — the entire UI (HTML/CSS/JS in one file, Apple-inspired design system)`
 * api/` — three Vercel serverless functions brokering the Google OAuth refresh token for sync (`google-exchange.js`, `google-refresh.js`, `google-logout.js`), plus a shared `_google.js` helper (the leading underscore keeps Vercel from routing it)`
 * sw.js` — PWA service worker for offline app-shell/data caching`
+* data-bundle.js` — auto-generated concatenation of every data-*.js file below (via `node scripts/bundle-data.mjs`), the single file `index.html` actually loads; never edit it directly`
 * data.js` — the original 100 movies (Big Life Journal's "100 Best Family Movies")`
 * data-rt.js` — 36 additional movies from Rotten Tomatoes' "50 Essential Movies For Kids"`
 * data-dcom.js` — 116 movies: all 115 official Disney Channel Original Movies (1997-2022) plus The Magic Faraway Tree (2026)`
@@ -78,9 +79,9 @@
 
 ### `Adding more movies`
 
-`Use the `movie-watchlist-updater` Claude skill (`.claude/skills/movie-watchlist-updater/`) for the full research → write-up → deploy pipeline, including poster art and a `srcUrl` link back to whatever page the content came from. In short: each new curated source list gets its own `data-<source>.js` file (never edit the existing ones), referenced with an additional `<script>` tag in `index.html`, and merged client-side into the single `MOVIES` array. One-off single-title requests (as opposed to a whole new curated list) go in `data-extra.js` instead of spawning a new file each time. Requested titles waiting to be added live in the "Movie Night Requests (Responses)" Google Sheet (fed by the in-app request form); `PENDING_REQUESTS.md` is now a processed-log the skill writes to, not a queue.`
+`Use the `movie-watchlist-updater` Claude skill (`.claude/skills/movie-watchlist-updater/`) for the full research → write-up → deploy pipeline, including poster art and a `srcUrl` link back to whatever page the content came from. In short: each new curated source list gets its own `data-<source>.js` file (never edit the existing ones). One-off single-title requests (as opposed to a whole new curated list) go in `data-extra.js` instead of spawning a new file each time. Requested titles waiting to be added live in the "Movie Night Requests (Responses)" Google Sheet (fed by the in-app request form); `PENDING_REQUESTS.md` is now a processed-log the skill writes to, not a queue.`
 
-`Run `node scripts/validate-data.mjs` after catalog edits. It checks duplicate movie numbers, duplicate normalized title/year pairs, required fields, HTTPS source URLs, allowed genres, orphan poster keys, and the required runtime trio: `runtimeMinutes`, `runtimeSourceId`, and `runtimeVerifiedAt`.`
+`Run `node scripts/validate-data.mjs` after catalog edits. It checks duplicate movie numbers, duplicate normalized title/year pairs, required fields, HTTPS source URLs, allowed genres, orphan poster keys, the required runtime trio (`runtimeMinutes`, `runtimeSourceId`, `runtimeVerifiedAt`), and that `sw.js`'s `DATA_VERSION` and `data-bundle.js` are both in sync with the source files. If either is stale, run `node scripts/data-version.mjs` and `node scripts/bundle-data.mjs` and commit the results — a new `data-<source>.js` file also needs a new `<script>` tag added to the `dataFiles` list in `scripts/data-version.mjs` (both other scripts import that same list), not to `index.html` directly, since `index.html` only loads the generated `data-bundle.js`.`
 
 ### `Testing`
 

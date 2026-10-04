@@ -343,6 +343,22 @@ running it directly is simpler than puzzling out `validate-data.mjs`'s
 error message. Stage the resulting one-line `sw.js` diff along with
 everything else in this run's commit.
 
+**Also run `node scripts/bundle-data.mjs` after any data-file change, before
+committing (added 2026-10-04, load-time fix).** `index.html` no longer loads
+the 12 `data-*.js` files individually -- each one used to be a separate
+blocking `<script src>` round trip before the app could build `MOVIES` or
+render anything, a real contributor to slow first visits. It loads a single
+generated `data-bundle.js` instead (concatenation of the same 12 source
+files, in the same order, via the `dataFiles` list in
+`scripts/data-version.mjs` -- the one list every one of these scripts now
+imports, so a new `data-<source>.js` file needs adding there, not to
+`index.html`). The individual `data-*.js` files are still the real files to
+edit; never hand-edit `data-bundle.js`. `validate-data.mjs` already fails
+loudly if the bundle goes stale (same pattern as the `DATA_VERSION` check
+above), so this is again a belt-and-suspenders reminder, not the only place
+this gets caught. Stage the resulting `data-bundle.js` diff along with
+everything else in this run's commit.
+
 **Also set going forward (added 2026-09-07, corrected 2026-09-11 -- tracks
 content-model coverage for the backfill job):** `csmRecheckedAt`, today's
 date as `"YYYY-MM-DD"`, and `csmRecheckVersion`, the current value of
@@ -383,9 +399,12 @@ of them, the max isn't always in the most recently added file). Small batches
 (under ~15 titles, including one-off "Request a movie" adds) go into
 `data-extra.js`, appended to the existing array. Larger curated batches (a whole
 franchise, a whole studio, a themed list) get their own new `data-<source>.js`
-file, matching the existing convention -- if you add a new file, wire it into
-`index.html`: a new `<script src="data-<source>.js"></script>` tag (plain relative
-path, not jsDelivr) and a new `.concat(...)` in the `MOVIES` array. `source` itself
+file, matching the existing convention -- if you add a new file, wire it in:
+add it to the `dataFiles` list in `scripts/data-version.mjs` (the one list
+`validate-data.mjs` and `bundle-data.mjs` both import -- see the bundling
+note in Step 6 below), re-run `node scripts/bundle-data.mjs` so it's
+actually included in what `index.html` loads, and add a new `.concat(...)`
+in `index.html`'s `MOVIES` array. `source` itself
 (the value every entry gets, matching which data file it lives in -- `"EXTRA"`,
 `"DCOM"`, etc.) is still part of the schema and Step 4 still expects it, but it's
 pure data provenance now with no UI display -- `renderGroupedView()` and the
