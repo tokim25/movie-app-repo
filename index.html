@@ -7294,16 +7294,19 @@ function initTheme(){
 }
 
 async function decideInitialScreen(){
-  // A returning signed-in device's local storage can be empty or stale (a
-  // cleared browser, a new device, this device just never having synced
-  // yet) while Drive still holds the real family data. Deciding setup vs.
-  // home off local state alone in that window is what let a boot race turn
-  // into data loss: showScreen() picks "setup", the user (re-)enters
-  // children, and that save pushes over the real remote data. So when this
-  // device has sync history, wait for the initial syncFromGoogleDrive()
-  // attempt to settle -- bounded by BOOT_SYNC_WAIT_TIMEOUT_MS so an
-  // unreachable network can't hang the app -- before deciding.
-  if(readGoogleSyncMeta().enabled){
+  // A returning signed-in device's local storage can be empty (a cleared
+  // browser, a new device, this device just never having synced yet) while
+  // Drive still holds the real family data. The race this guards against
+  // only exists in that empty-local case: with no children loaded,
+  // firstRunShelfIntro's "Set up family" invite is showing, and a user who
+  // clicks it before the real roster arrives from Drive creates a fresh
+  // local family with a newer timestamp than Drive's -- which then wins
+  // the next merge and overwrites the real remote data. When this device
+  // already has a local family cached (the common returning-device case),
+  // that invite never shows, so there's nothing to race: wait only when
+  // local has no children, bounded by BOOT_SYNC_WAIT_TIMEOUT_MS so an
+  // unreachable network can't hang the app either way.
+  if(readGoogleSyncMeta().enabled && !state.children.length){
     const loadingEl = document.getElementById('bootSyncLoading');
     if(loadingEl) loadingEl.style.display = 'flex';
     await Promise.race([
