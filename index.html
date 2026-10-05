@@ -207,7 +207,22 @@ function reportError(err){
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap" rel="stylesheet">
+<!-- Load-time fix: a plain <link rel="stylesheet"> here blocks first paint on
+     fonts.googleapis.com responding, even though display=swap already means
+     the page doesn't need to wait for the font FILE -- it's the CSS fetch
+     itself that was blocking. Standard async-stylesheet pattern: media="print"
+     means the browser doesn't treat it as render-blocking for screen (it still
+     downloads in parallel, just doesn't hold up first paint), then a few
+     lines near the top of the main inline script below flip it to screen
+     media once the DOM is ready. No inline onload="" attribute here on
+     purpose -- this CSP has no 'unsafe-inline' for scripts, so an inline
+     event-handler attribute would be silently blocked, same as any other
+     inline script content not covered by a pinned hash. The <noscript>
+     fallback keeps it blocking (as before) for the rare case JS is
+     unavailable, since nothing below can flip it then. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap">
+<link id="googleFontStylesheet" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap" media="print">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap"></noscript>
 <style>
   :root{
     color-scheme:light dark;
@@ -2930,6 +2945,14 @@ function reportError(err){
 <script src="data-bundle.js"></script>
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <script>
+// Load-time fix: flip the Google Fonts stylesheet from print to screen media
+// now that the DOM (including the link itself) has been parsed -- see the
+// media="print" note on that <link> in <head>. It's been downloading in
+// parallel the whole time regardless of media; this just lets its rules
+// apply, without ever having blocked first paint on it arriving.
+var googleFontLink = document.getElementById('googleFontStylesheet');
+if(googleFontLink) googleFontLink.media = 'all';
+
 const CANONICAL_HOST = "movies.tonykim.io";
 // Only redirect the specific legacy hostnames someone might actually have
 // bookmarked from before the custom domain existed -- NOT every *.vercel.app
@@ -5240,8 +5263,23 @@ function tryInitGoogleSync(attempts){
   document.getElementById('googleSyncRow').style.display = 'block';
   if(attempts === 0){
     googleSyncIntent = !!readGoogleSyncMeta().enabled;
-    if(googleSyncIntent) setGoogleSyncUI(false, 'Connecting to Google…');
-    else settleInitialGoogleSync();
+    if(googleSyncIntent){
+      setGoogleSyncUI(false, 'Connecting to Google…');
+      // Load-time fix: trySilentReconnect() only needs this app's own
+      // /api/google-refresh endpoint (see refreshAccessToken()), not the
+      // Google Identity Services SDK polled for below -- that SDK is only
+      // needed for initCodeClient(), used by the manual "Reconnect" button,
+      // never by an automatic returning-device sync. Starting the silent
+      // reconnect here, as soon as intent is known, instead of waiting for
+      // GSI to finish loading (previously the only trigger, gated behind up
+      // to 20 x 250ms polling attempts -- up to 5s on a slow connection)
+      // lets the actual Drive round trip, the thing decideInitialScreen()
+      // is really waiting on, start immediately in parallel with GSI
+      // loading instead of serialized after it.
+      trySilentReconnect();
+    } else {
+      settleInitialGoogleSync();
+    }
   }
   if(window.google && window.google.accounts && window.google.accounts.oauth2){
     initGoogleSync();
@@ -5268,9 +5306,12 @@ function initGoogleSync(){
     callback: onGoogleCode
   });
   googleSyncIntent = !!readGoogleSyncMeta().enabled;
-  if(googleSyncIntent){
-    trySilentReconnect();
-  }else{
+  // Load-time fix: the returning-device silent reconnect is kicked off from
+  // tryInitGoogleSync() at attempts===0, as soon as intent is known, not
+  // here -- this function may now run well after that sync has already
+  // started or finished, so calling trySilentReconnect() again here would
+  // be a redundant, possibly-conflicting second attempt.
+  if(!googleSyncIntent){
     setGoogleSyncUI(false);
   }
 }
