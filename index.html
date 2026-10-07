@@ -821,6 +821,18 @@ function reportError(err){
     border-radius:4px;
     line-height:1.2;
   }
+  /* Issue #145: the ribbon is meant to sit in the corner of a real poster
+     image, but a movie with no poster art yet shows the "Movie"/year
+     fallback text centered in that same small box instead -- at the
+     narrower poster sizes used on phones (and a folded foldable's
+     cover-screen width), that centered text collides with the ribbon
+     and the two render as illegible overlapping text. Anchoring the
+     fallback text to the bottom when a ribbon is present leaves the
+     ribbon's corner clear without needing to touch its own sizing. */
+  .poster:has(.ribbon) .posterFallback{
+    justify-content:flex-end;
+    padding-bottom:6px;
+  }
 
   .num{
     font-size:15px;
@@ -2497,6 +2509,23 @@ function reportError(err){
 
 
   @media (max-width:430px){
+    /* Issue #145: the filter segmented control ("All / To watch / Watched /
+       Want to watch") never had narrow-width handling -- flex-shrink alone
+       squeezed each button below its label's natural width, wrapping the
+       text onto 2-3 uneven lines instead of shrinking to fit. Confirmed via
+       direct measurement this wasn't foldable-specific: it already wrapped
+       at every common phone width from 320-390px (nearly every current
+       Android phone and non-Plus/Max iPhone), not just a folded foldable's
+       narrower screen -- this is the general-case fix, which also covers a
+       folded Galaxy Z Fold/iPhone Fold's ~344px cover-screen width. */
+    .seg button{
+      padding:9px 6px;
+      font-size:12px;
+      white-space:nowrap;
+    }
+    .seg button.active{
+      padding:7px 4px;
+    }
     .row{
       gap:10px;
     }
