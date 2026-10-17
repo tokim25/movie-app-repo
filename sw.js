@@ -9,7 +9,7 @@
 // was stale. Bump the version/date prefix by hand for a real code
 // change to this file; DATA_VERSION takes care of itself.
 const DATA_VERSION = '52b57888ce';
-const CACHE_VERSION = `family-feature-v24-20261004-${DATA_VERSION}`;
+const CACHE_VERSION = `family-feature-v25-20261017-${DATA_VERSION}`;
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -91,6 +91,32 @@ self.addEventListener('fetch', event => {
         return response;
       }).catch(() => cached);
       return cached || network;
+    })
+  );
+});
+
+self.addEventListener('push', event => {
+  let data = {};
+  try{ data = event.data ? event.data.json() : {}; }catch(e){}
+  const title = data.title || 'New movie added';
+  const options = {
+    body: data.body || '',
+    icon: '/assets/icons/icon-192.png',
+    badge: '/assets/icons/icon-192.png',
+    data: { url: data.url || '/' }
+  };
+  event.waitUntil(self.registration.showNotification(title, options));
+});
+
+self.addEventListener('notificationclick', event => {
+  event.notification.close();
+  const targetUrl = (event.notification.data && event.notification.data.url) || '/';
+  event.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(clients => {
+      for(const client of clients){
+        if(client.url.includes(self.location.origin) && 'focus' in client) return client.focus();
+      }
+      if(self.clients.openWindow) return self.clients.openWindow(targetUrl);
     })
   );
 });
