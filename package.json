@@ -10,5 +10,9 @@
   "devDependencies": {
     "@playwright/test": "^1.62.1",
     "axe-core": "^4.13.0"
+  },
+  "dependencies": {
+    "@vercel/blob": "^2.8.2",
+    "web-push": "^3.6.7"
   }
 }
