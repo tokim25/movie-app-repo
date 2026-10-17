@@ -3018,6 +3018,22 @@ const MOVIES = MOVIES_BASE
 const STORAGE_KEY = "family-movie-watchlist-v1";
 const DEVICE_ID_KEY = "family-feature-device-id";
 const THEME_KEY = "family-feature-theme-v1";
+const RECENT_TONIGHT_PICKS_KEY = "family-feature-recent-tonight-picks-v1";
+// How many of the most recently shown Tonight picks to avoid repeating.
+// Deliberately a plain device-local list, not part of the synced `state`
+// object (serializeState()/normalizeState()/mergeState()): it's a "don't
+// repeat yourself" convenience, not family data worth the cross-device
+// merge-conflict machinery real state fields need.
+const RECENT_TONIGHT_PICKS_MAX = 10;
+let recentTonightPicks = [];
+const NOT_INTERESTED_KEY = "family-feature-not-interested-v1";
+// How long a "Not interested" skip reason keeps a title out of Tonight's
+// pick, in milliseconds. Same device-local, non-synced reasoning as
+// recentTonightPicks above -- this is a time-decaying "don't suggest this
+// again soon" signal, not a durable family preference like watched/Want to
+// watch, so it doesn't need serializeState()/mergeState() support.
+const NOT_INTERESTED_SUPPRESS_MS = 7 * 24 * 60 * 60 * 1000;
+let notInterestedUntil = {};
 const STATE_SCHEMA = 3;
 const MOVIE_NUMS = new Set(MOVIES.map(movie => String(movie.num)));
 const MOVIE_INDEX_BY_NUM = new Map(MOVIES.map((movie, idx) => [String(movie.num), idx]));
@@ -3961,6 +3977,72 @@ function loadState(){
   }catch(e){ /* no saved state yet, or storage unavailable */ }
 }
 
+function loadRecentTonightPicks(){
+  try{
+    const raw = localStorage.getItem(RECENT_TONIGHT_PICKS_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    recentTonightPicks = Array.isArray(parsed) ? parsed.map(String) : [];
+  }catch(e){ recentTonightPicks = []; }
+}
+
+// Called whenever a real (non-no-match) movie is actually shown as Tonight's
+// pick -- including every Skip, since showTonightPick() is what Skip calls
+// internally -- so "recently shown" means what a parent actually saw, not
+// just the first candidate before any skipping.
+function recordRecentTonightPick(idx){
+  const key = movieKey(idx);
+  recentTonightPicks = recentTonightPicks.filter(k => k !== key);
+  recentTonightPicks.push(key);
+  if(recentTonightPicks.length > RECENT_TONIGHT_PICKS_MAX){
+    recentTonightPicks = recentTonightPicks.slice(-RECENT_TONIGHT_PICKS_MAX);
+  }
+  try{
+    localStorage.setItem(RECENT_TONIGHT_PICKS_KEY, JSON.stringify(recentTonightPicks));
+  }catch(e){ /* best-effort; a missed write just means one pick isn't remembered */ }
+}
+
+function loadNotInterested(){
+  try{
+    const raw = localStorage.getItem(NOT_INTERESTED_KEY);
+    const parsed = raw ? JSON.parse(raw) : {};
+    const cleaned = {};
+    if(parsed && typeof parsed === 'object'){
+      const nowTs = now();
+      // Drop anything already expired on load, so this object never grows
+      // without bound across weeks of use.
+      Object.keys(parsed).forEach(key => {
+        if(typeof parsed[key] === 'number' && parsed[key] > nowTs) cleaned[key] = parsed[key];
+      });
+    }
+    notInterestedUntil = cleaned;
+  }catch(e){ notInterestedUntil = {}; }
+}
+
+function persistNotInterested(){
+  try{
+    localStorage.setItem(NOT_INTERESTED_KEY, JSON.stringify(notInterestedUntil));
+  }catch(e){ /* best-effort; a missed write just means this title isn't suppressed */ }
+}
+
+// Marks a movie "not interested" for NOT_INTERESTED_SUPPRESS_MS from now --
+// called when a parent picks "Not interested" as a Tonight skip reason.
+function markNotInterested(idx){
+  notInterestedUntil[movieKey(idx)] = now() + NOT_INTERESTED_SUPPRESS_MS;
+  persistNotInterested();
+}
+
+// Undoes the above -- called if a parent deselects "Not interested" right
+// after choosing it, same as any other skip-reason toggle-off.
+function clearNotInterested(idx){
+  delete notInterestedUntil[movieKey(idx)];
+  persistNotInterested();
+}
+
+function isNotInterestedSuppressed(idx){
+  const until = notInterestedUntil[movieKey(idx)];
+  return typeof until === 'number' && until > now();
+}
+
 // Issue #125: returns whether the write actually succeeded rather than
 // swallowing the failure -- saveState() uses this to surface a persistent
 // warning instead of letting the UI imply the change was saved when it
@@ -4495,6 +4577,18 @@ function isTonightEligible(idx, kids, includeSkipped, requireGreen){
       (!Number.isInteger(movie.runtimeMinutes) || movie.runtimeMinutes > tonightSelection.time)) return false;
   if(markValue(state.checked, idx) && tonightSelection.mood !== 'favorite') return false;
   if(!includeSkipped && tonightSelection.skippedMovieNums.has(movieKey(idx))) return false;
+  // Remembers recent picks across sessions (not just this sitting's skips)
+  // so reopening the app, or re-running the same mood/kids/time, doesn't
+  // keep surfacing the same movie -- see recordRecentTonightPick(). Same
+  // strict-only/relaxed-fallback treatment as skippedMovieNums above: it
+  // steers away from repeats without ever being able to cause a "no match".
+  if(!includeSkipped && recentTonightPicks.includes(movieKey(idx))) return false;
+  // A parent picking "Not interested" as a skip reason is a stronger, more
+  // deliberate signal than an ordinary skip or recent-pick repeat -- see
+  // markNotInterested() -- but gets the same strict/relaxed-fresh exclusion
+  // and last-resort bypass as the two checks above, so it still can never
+  // cause a "no match" by itself.
+  if(!includeSkipped && isNotInterestedSuppressed(idx)) return false;
   // Issue #96: movieContentProfile() invents content levels from age/genre/
   // synopsis keywords for the minority of titles with no researched flags,
   // and those inferred values used to flow into movieFitForKids() exactly
@@ -4597,6 +4691,21 @@ function findTonightCandidate(){
   const strictPick = pool.find(candidate => isTonightEligible(candidate.idx, kids, false, true));
   if(strictPick) return strictPick;
 
+  // A green-certified match often doesn't exist at all for a given mood/
+  // kids/time combo, which used to send every call straight to the final
+  // ignore-everything fallback below -- including skippedMovieNums and
+  // recentTonightPicks, so Skip (and reopening the app) kept recycling the
+  // same single movie even though other eligible-but-not-green titles
+  // existed. Trying the relaxed verdict first, while still honoring both
+  // exclusion lists, is what actually gives Skip and recent-pick memory
+  // something to do in that common case.
+  const relaxedButFreshPick = pool.find(candidate => isTonightEligible(candidate.idx, kids, false, false));
+  if(relaxedButFreshPick) return relaxedButFreshPick;
+
+  // True last resort: nothing is eligible without also reusing something
+  // just skipped or recently shown. Clear the skip list and ignore both
+  // exclusions rather than produce "no match" when a valid, if repeated,
+  // pick still exists.
   tonightSelection.skippedMovieNums.clear();
   const relaxedPick = pool.find(candidate => isTonightEligible(candidate.idx, kids, true, false));
   if(relaxedPick) return relaxedPick;
@@ -4683,6 +4792,7 @@ function showTonightPick(candidateOverride){
   const verdict = movieVerdictForKids(movie, kids);
   tonightSelection.currentPickIdx = idx;
   tonightSelection.currentPickSource = candidate.source;
+  recordRecentTonightPick(idx);
   // Issue #49B: red is reachable here too (findTonightCandidate()'s green
   // preference is a preference, not a guarantee -- its relaxed fallback pass
   // can still surface a red pick when nothing green is available at all), so
@@ -6984,13 +7094,25 @@ document.querySelectorAll('[data-skip-reason]').forEach(btn=>{
     // prompt would inherit.
     const event = tonightSkipEvents.find(e => e.id === currentTonightSkipEventId);
     if(!event) return;
+    const previousReason = event.reason;
     event.reason = event.reason === btn.dataset.skipReason ? null : btn.dataset.skipReason;
     document.querySelectorAll('[data-skip-reason]').forEach(reasonBtn=>{
       const selected = reasonBtn.dataset.skipReason === event.reason;
       reasonBtn.classList.toggle('selected', selected);
       reasonBtn.setAttribute('aria-pressed', selected ? 'true' : 'false');
     });
-    showToast(event.reason ? 'Reason saved for this session' : 'Skip reason cleared');
+    // "Not interested" is the one skip reason with a real, lasting effect:
+    // it keeps this title out of Tonight's pick for a week (see
+    // markNotInterested()), not just for this session like the other
+    // reasons. Toggling it back off (or picking a different reason right
+    // after) undoes that suppression immediately.
+    const titleIdx = MOVIE_INDEX_BY_NUM.get(String(event.titleId));
+    if(titleIdx !== undefined){
+      if(event.reason === 'Not interested') markNotInterested(titleIdx);
+      else if(previousReason === 'Not interested') clearNotInterested(titleIdx);
+    }
+    showToast(event.reason === 'Not interested' ? "Won't suggest this again for a week"
+      : event.reason ? 'Reason saved for this session' : 'Skip reason cleared');
   });
 });
 
@@ -7356,6 +7478,8 @@ async function decideInitialScreen(){
 initScreens();
 initTheme();
 loadState();
+loadRecentTonightPicks();
+loadNotInterested();
 tryInitGoogleSync();
 renderStudioGrid();
 // No tonightSelection seeding needed here: excludedChildIds starts empty
