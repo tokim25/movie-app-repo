@@ -30,7 +30,7 @@ test("sw.js's DATA_VERSION matches the data files it's meant to cache-bust (#63)
     ...[
       'data.js', 'data-rt.js', 'data-dcom.js', 'data-disney.js', 'data-pixar.js',
       'data-dreamworks.js', 'data-nickelodeon.js', 'data-extra.js', 'data-csm.js',
-      'data-mcudc.js', 'data-ghibli.js', 'data-posters.js'
+      'data-mcudc.js', 'data-ghibli.js', 'data-posters.js', 'data-guidance.js'
     ].map(file => request.get(`/${file}`).then(res => res.body()))
   ]);
 

@@ -8,8 +8,10 @@
     "test:unit": "node --test tests-unit/*.test.mjs"
   },
   "devDependencies": {
+    "@openuidev/lang-core": "1.0.1",
     "@playwright/test": "^1.62.1",
-    "axe-core": "^4.13.0"
+    "axe-core": "^4.13.0",
+    "zod": "4.6.5"
   },
   "dependencies": {
     "@vercel/blob": "^2.8.2",

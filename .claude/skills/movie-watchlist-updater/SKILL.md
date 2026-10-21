@@ -359,6 +359,43 @@ above), so this is again a belt-and-suspenders reminder, not the only place
 this gets caught. Stage the resulting `data-bundle.js` diff along with
 everything else in this run's commit.
 
+**Also add a guidance entry for every new movie (added 2026-10-21).**
+`data-guidance.js` holds `MOVIE_GUIDANCE`, keyed by `num` as a string, and
+`validate-data.mjs` fails if any movie is missing one. Write it yourself from
+the movie's own `full` text and `flags` only. Never add anything the notes
+don't say. Each entry is:
+
+```js
+"1103": {"concerns":{
+  "parentInDanger":{"level":"no","quote":""},
+  "scaryVillain":{"level":"mild","quote":"<copied word for word from full>"},
+  "sadOrLoss":{"level":"no","quote":""},
+  "rudeHumor":{"level":"no","quote":""},
+  "animalPeril":{"level":"no","quote":""}},
+ "preShow":"root = Card([hdr, tags, after])\nhdr = CardHeader(\"<Title> · <year>\", \"<studio> · <runtimeMinutes> min · CSM <ca>\")\ntags = TagBlock([...], \"sm\")\nafter = TextContent(\"Ask after: <question>\", \"small\")"}
+```
+
+- `level` is `yes`, `mild` or `no`. "no" means the notes don't mention it,
+  with an empty quote. `yes`/`mild` need a quote that is an exact substring
+  of `full` (the validator checks this character for character).
+- `preShow` is OpenUI Lang 1.0 for the built-in `openuiChatLibrary` of
+  `@openuidev/browser-bundle@0.2.1`. Header: title · year, then studio
+  (leave out "Other") · runtime · `CSM <ca>` (or "No CSM age" when `ca` is the
+  substitute-source placeholder). Tags: up to 3, the violence tag plus the two
+  highest of language/romance/drinking, using the wording already in the file
+  (e.g. "Mild peril", "Almost no language", "Little romance"). Add
+  `watch = Callout("warning", "<short title>", "<1-2 sentences condensed from full>")`
+  only when the notes describe a real moment to prep for. No timestamps, no
+  invented detail, no character names that aren't in `full`. The "Ask after"
+  question comes from the notes' positive themes and is plain `TextContent`,
+  not `FollowUpBlock` (follow-ups aren't clickable in the app).
+- Gentle films (all flags 2 or lower, nothing notable in the notes) get just
+  `root = Card([note])\nnote = TextContent("Gentle. Nothing to prep for.", "small")`.
+- Copy the shape of an existing entry with similar content rather than
+  starting from scratch. Then run `node scripts/validate-guidance.mjs`, plus the
+  bundle and data-version re-stamps below (data-guidance.js is one of the
+  bundled data files).
+
 **Also set going forward (added 2026-09-07, corrected 2026-09-11 -- tracks
 content-model coverage for the backfill job):** `csmRecheckedAt`, today's
 date as `"YYYY-MM-DD"`, and `csmRecheckVersion`, the current value of
