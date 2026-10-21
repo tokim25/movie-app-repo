@@ -405,12 +405,12 @@ draws a review screen you write, and Tony's choices come back to you as text.
    `PENDING_REQUESTS.md`, the request sheet rows, and the research you just
    did. Don't guess values you didn't look up; leave them out or write
    "not found". The page uses the stock component library from
-   `@openuidev/browser-bundle@0.1.4` (no custom components), so stick to the
+   `@openuidev/browser-bundle@0.2.1` (OpenUI Lang 1.0, no custom components), so stick to the
    shapes in the existing example file: `root = Card([...])`, `CardHeader`,
    `Table`/`Col` for title rows (CSM age, flags, runtime, status), `Callout`
    for warnings, and one `Form("desk", btns, [...])` holding any
    `FormControl(..., OptionCards(...))` choices plus the `Buttons`. Every
-   button gets an explicit `Action([@ToAssistant("...")])` whose text says
+   button gets an explicit `@ToAssistant("...")` action whose text says
    exactly what you'd do (e.g. `"Approve: Rogue One (2016)"`,
    `"Re-research: The Phantom Menace (1999)"`). The checked-in example file
    is illustrative; replace it, and don't commit a real batch unless Tony

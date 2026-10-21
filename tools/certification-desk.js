@@ -55,7 +55,7 @@
 
   if(!window.__OpenUI){
     status.classList.add('error');
-    status.textContent = "The OpenUI bundle didn't load (expected at assets/openui-0.1.4/).";
+    status.textContent = "The OpenUI bundle didn't load (expected at assets/openui-0.2.1/).";
     return;
   }
   const { React, createRoot, Renderer, openuiChatLibrary } = window.__OpenUI;

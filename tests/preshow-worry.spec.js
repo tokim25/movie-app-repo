@@ -39,7 +39,7 @@ async function showPick(page, title){
 
 test('Pre-show loads the self-hosted renderer only once a pick with a Pre-show opens', async ({ page }) => {
   const bundleRequests = [];
-  page.on('request', req => { if(req.url().includes('/assets/openui-0.1.4/')) bundleRequests.push(req.url()); });
+  page.on('request', req => { if(req.url().includes('/assets/openui-0.2.1/')) bundleRequests.push(req.url()); });
   await prepare(page);
   expect(await page.evaluate(() => typeof window.__OpenUI)).toBe('undefined');
   expect(bundleRequests).toEqual([]);
@@ -51,8 +51,6 @@ test('Pre-show loads the self-hosted renderer only once a pick with a Pre-show o
   await expect(band).toContainText('Be ready early on');
   await expect(band).toContainText("Nemo's mother and siblings-to-be killed by a predator");
   await expect(band).toContainText('why was Marlin so scared');
-  // The chat-only FollowUpItem button is taken out of the tab order.
-  await expect(band.locator('button.openui-follow-up-item')).toHaveAttribute('tabindex', '-1');
   expect(bundleRequests.some(u => u.endsWith('openui-bundle.min.js'))).toBe(true);
   expect(bundleRequests.some(u => u.endsWith('openui-styles.css'))).toBe(true);
   await expectNoA11yViolations(page, '#tonightPreShow');
@@ -65,9 +63,32 @@ test('Pre-show loads the self-hosted renderer only once a pick with a Pre-show o
   await expect(band).toContainText('Gentle. Nothing to prep for.');
 });
 
+test("Pre-show follows the app's theme setting, not the OS", async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'light' });
+  await prepare(page);
+  await showPick(page, 'Finding Nemo');
+  await expect(page.locator('#tonightPreShow')).toContainText('Be ready early on');
+  const openuiTheme = () => page.evaluate(() => document.documentElement.getAttribute('data-openui-theme'));
+  await expect.poll(openuiTheme).toBe('light');
+
+  await page.evaluate(() => applyTheme('dark'));
+  await expect.poll(openuiTheme).toBe('dark');
+  // The renderer's own tokens switch with it (its dark background is near-black).
+  await expect.poll(() => page.evaluate(() =>
+    getComputedStyle(document.documentElement).getPropertyValue('--openui-background').trim())).toContain('0.145');
+
+  await page.evaluate(() => applyTheme('light'));
+  await expect.poll(openuiTheme).toBe('light');
+
+  // "Match device" hands the choice back to the OS.
+  await page.evaluate(() => applyTheme('system'));
+  await page.emulateMedia({ colorScheme: 'dark' });
+  await expect.poll(openuiTheme).toBe('dark');
+});
+
 test('Pre-show stays hidden, and nothing loads, when there is no guidance data', async ({ page }) => {
   const bundleRequests = [];
-  page.on('request', req => { if(req.url().includes('/assets/openui-0.1.4/')) bundleRequests.push(req.url()); });
+  page.on('request', req => { if(req.url().includes('/assets/openui-0.2.1/')) bundleRequests.push(req.url()); });
   await prepare(page, null);
   await showPick(page, 'Finding Nemo');
   await expect(page.locator('#tonightPreShow')).toBeHidden();
@@ -87,7 +108,7 @@ test.describe('without the service worker', () => {
   test('Pre-show hides silently when the renderer fails to load', async ({ page }) => {
     const errors = [];
     page.on('pageerror', err => errors.push(err.message));
-    await page.route('**/assets/openui-0.1.4/openui-bundle.min.js', route => route.abort());
+    await page.route('**/assets/openui-0.2.1/openui-bundle.min.js', route => route.abort());
     await prepare(page);
     await showPick(page, 'Finding Nemo');
     await page.waitForTimeout(500);
@@ -111,9 +132,9 @@ test('Pre-show renderer is cached by the service worker and works offline', asyn
   await showPick(page, 'Finding Nemo');
   await expect(page.locator('#tonightPreShow')).toContainText('Be ready early on');
   await expect.poll(() => page.evaluate(async () => {
-    const cache = await caches.open('openui-browser-bundle-0.1.4');
+    const cache = await caches.open('openui-browser-bundle-0.2.1');
     return (await cache.keys()).map(r => new URL(r.url).pathname).sort();
-  })).toEqual(['/assets/openui-0.1.4/openui-bundle.min.js', '/assets/openui-0.1.4/openui-styles.css']);
+  })).toEqual(['/assets/openui-0.2.1/openui-bundle.min.js', '/assets/openui-0.2.1/openui-styles.css']);
 
   await context.setOffline(true);
   try{

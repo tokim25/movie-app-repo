@@ -27,14 +27,14 @@ const APP_SHELL = [
   '/data-bundle.js'
 ];
 
-// Pre-show's OpenUI renderer (~3.6 MB, self-hosted under a versioned path)
+// Pre-show's OpenUI renderer (~3.2 MB, self-hosted under a versioned path)
 // is lazy-loaded the first time a pick with a Pre-show opens, so it isn't
 // in APP_SHELL. It gets its own cache, named for the pinned version, so a
 // catalog-driven CACHE_VERSION change doesn't throw it away (which would
 // mean a re-download, and no Pre-show offline until then). Files under a
 // versioned path never change, so it's served cache-first.
-const OPENUI_CACHE = 'openui-browser-bundle-0.1.4';
-const OPENUI_PATH_PREFIX = '/assets/openui-0.1.4/';
+const OPENUI_CACHE = 'openui-browser-bundle-0.2.1';
+const OPENUI_PATH_PREFIX = '/assets/openui-0.2.1/';
 
 self.addEventListener('install', event => {
   event.waitUntil(

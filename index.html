@@ -2556,6 +2556,14 @@ function reportError(err){
   #tonightPreShowBody .openui-callout-description,
   #tonightPreShowBody .openui-markdown-renderer{ color:var(--ink-soft); }
   #tonightPreShowBody .openui-markdown-renderer p{ margin:0; }
+  /* The "ask after" line: a closing TextContent after other content. A
+     one-line gentle Pre-show (its only child) stays plain. */
+  #tonightPreShowBody .openui-card > :last-child:not(:first-child) > .openui-text-content,
+  #tonightPreShowBody .openui-card > :last-child:not(:first-child) > .openui-text-content .openui-markdown-renderer,
+  #tonightPreShowBody .openui-card > :last-child:not(:first-child) > .openui-text-content p{
+    color:var(--ink);
+    font:italic 500 16px/1.4 "Newsreader", Georgia, serif;
+  }
   /* FollowUpItem is a chat "send this as a message" button; there's no chat
      here, so it's shown as the after-the-movie question it really is. */
   #tonightPreShowBody .openui-follow-up-block__header{ display:none; }
@@ -3334,7 +3342,7 @@ let currentTonightSkipEventId = null;
 // checkTonightWorry()). Declared up here with the rest of Tonight's state so
 // they exist before any pick runs. tonightWorryExclude is the worry chosen
 // via "Show me picks without this"; cleared by resetTonightSkips().
-const OPENUI_BASE = '/assets/openui-0.1.4/';
+const OPENUI_BASE = '/assets/openui-0.2.1/';
 let openuiLoading = null;
 let preShowRoot = null;
 let preShowToken = 0;
@@ -5064,14 +5072,39 @@ function movieGuidanceFor(num){
 
 // ---- Pre-show. The OpenUI renderer is self-hosted (CSP only allows
 // same-origin scripts, and sw.js only caches same-origin) and pinned to
-// one exact version. It's ~3.6 MB, so it loads only when a pick that has
+// one exact version. It's ~3.2 MB, so it loads only when a pick that has
 // a Pre-show opens; sw.js keeps it in its own cache for offline. Any
 // failure (offline before first load, bad program, render error) just
 // hides the band.
 
+// OpenUI 0.2+ picks light/dark itself from the OS unless
+// <html data-openui-theme> says otherwise. The app has its own Light / Dark /
+// Match device setting (data-theme on <html>), so mirror the app's effective
+// theme onto that attribute and keep it in sync when either one changes.
+function syncOpenUITheme(){
+  const root = document.documentElement;
+  const appTheme = root.getAttribute('data-theme');
+  const effective = appTheme === 'light' || appTheme === 'dark'
+    ? appTheme
+    : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  if(root.getAttribute('data-openui-theme') !== effective) root.setAttribute('data-openui-theme', effective);
+}
+
+function watchOpenUITheme(){
+  if(watchOpenUITheme.started) return;
+  watchOpenUITheme.started = true;
+  syncOpenUITheme();
+  new MutationObserver(syncOpenUITheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  if(window.matchMedia){
+    const media = window.matchMedia('(prefers-color-scheme: dark)');
+    if(media.addEventListener) media.addEventListener('change', syncOpenUITheme);
+  }
+}
+
 function loadOpenUI(){
   if(window.__OpenUI) return Promise.resolve(window.__OpenUI);
   if(!openuiLoading){
+    watchOpenUITheme();
     openuiLoading = new Promise((resolve, reject)=>{
       const css = document.createElement('link');
       css.rel = 'stylesheet';

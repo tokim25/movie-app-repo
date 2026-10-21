@@ -8,5 +8,5 @@ pick = FormControl("Which \"Jurassic Park: The Lost World\"?", OptionCards("lost
 lw1 = OptionCard("1997", "The Lost World: Jurassic Park", "1997, Spielberg")
 lwskip = OptionCard("skip", "Not this one", "Leave the request open")
 btns = Buttons([approve, requeue])
-approve = Button("Approve 2 certified", Action([@ToAssistant("Approve: Return of the Jedi (1983), Rogue One (2016)")]), "primary")
-requeue = Button("Send 1 to re-research", Action([@ToAssistant("Re-research: The Phantom Menace (1999)")]), "secondary")
+approve = Button("Approve 2 certified", @ToAssistant("Approve: Return of the Jedi (1983), Rogue One (2016)"), "primary")
+requeue = Button("Send 1 to re-research", @ToAssistant("Re-research: The Phantom Menace (1999)"), "secondary")

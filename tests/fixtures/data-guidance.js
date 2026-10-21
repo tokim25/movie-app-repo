@@ -26,7 +26,7 @@ const MOVIE_GUIDANCE = {
     "quote": ""
    }
   },
-  "preShow": "root = Card([hdr, watch, after])\nhdr = CardHeader(\"My Neighbor Totoro\", \"Studio Ghibli, CSM 5+\")\nwatch = Callout(\"warning\", \"A real worry\", \"The girls' mother is ill and hospitalized, and the younger sister goes missing for a tense stretch.\")\nafter = FollowUpBlock([FollowUpItem(\"Ask after: what helped Satsuki stay brave?\")])"
+  "preShow": "root = Card([hdr, watch, after])\nhdr = CardHeader(\"My Neighbor Totoro\", \"Studio Ghibli, CSM 5+\")\nwatch = Callout(\"warning\", \"A real worry\", \"The girls' mother is ill and hospitalized, and the younger sister goes missing for a tense stretch.\")\nafter = TextContent(\"Ask after: what helped Satsuki stay brave?\", \"small\")"
  },
  "2": {
   "concerns": {
@@ -51,7 +51,7 @@ const MOVIE_GUIDANCE = {
     "quote": "Marlin faces sharks, jellyfish, and an anglerfish in genuinely scary scenes"
    }
   },
-  "preShow": "root = Card([hdr, tags, watch, after])\nhdr = CardHeader(\"Finding Nemo\", \"Pixar, CSM 6+\")\ntags = TagBlock([\"Scary moments\", \"Almost no language\"], \"sm\")\nwatch = Callout(\"warning\", \"Be ready early on\", \"The opening shows Nemo's mother and siblings-to-be killed by a predator. Quick, not graphic, but a gut-punch for sensitive kids.\")\nafter = FollowUpBlock([FollowUpItem(\"Ask after: why was Marlin so scared to let Nemo go?\")])"
+  "preShow": "root = Card([hdr, tags, watch, after])\nhdr = CardHeader(\"Finding Nemo\", \"Pixar, CSM 6+\")\ntags = TagBlock([\"Scary moments\", \"Almost no language\"], \"sm\")\nwatch = Callout(\"warning\", \"Be ready early on\", \"The opening shows Nemo's mother and siblings-to-be killed by a predator. Quick, not graphic, but a gut-punch for sensitive kids.\")\nafter = TextContent(\"Ask after: why was Marlin so scared to let Nemo go?\", \"small\")"
  },
  "5": {
   "concerns": {
