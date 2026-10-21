@@ -9,6 +9,7 @@ import {
   computeContentStatus,
   isInVerifiedForFamilyFitSubset
 } from './catalog-schema.mjs';
+import { validateGuidance } from './validate-guidance.mjs';
 
 const movieArrays = [
   'MOVIES_BASE',
@@ -76,6 +77,7 @@ vm.runInContext(`
     ${movieArrays.map(name => `...(typeof ${name} !== 'undefined' ? ${name} : [])`).join(',\n    ')}
   ];
   this.__POSTERS__ = typeof MOVIE_POSTERS !== 'undefined' ? MOVIE_POSTERS : {};
+  this.__GUIDANCE__ = typeof MOVIE_GUIDANCE !== 'undefined' ? MOVIE_GUIDANCE : undefined;
 `, context);
 
 const movies = context.__MOVIES__;
@@ -192,6 +194,15 @@ for (const movie of movies) {
       errors.push(`${movie.num} ${movie.t}: invalid poster URL`);
     }
   }
+}
+
+// data-guidance.js (MOVIE_GUIDANCE): every movie needs an entry with the 5
+// concern keys, verbatim quotes from its own `full` text, and a preShow that
+// parses as OpenUI Lang. See scripts/validate-guidance.mjs for the details.
+{
+  const guidanceResult = validateGuidance(movies, context.__GUIDANCE__);
+  errors.push(...guidanceResult.errors);
+  console.log(`guidance coverage: ${guidanceResult.covered} of ${guidanceResult.total} movies have an entry.`);
 }
 
 // Issue #63: sw.js's DATA_VERSION must match the data files' current

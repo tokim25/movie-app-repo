@@ -36,7 +36,8 @@ export const dataFiles = [
   'data-csm.js',
   'data-mcudc.js',
   'data-ghibli.js',
-  'data-posters.js'
+  'data-posters.js',
+  'data-guidance.js'
 ];
 
 const DATA_VERSION_PATTERN = /const DATA_VERSION = '([0-9a-f]*)';/;
