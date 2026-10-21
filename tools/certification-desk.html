@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" data-openui-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Certification Desk</title>
+<!-- Curator-only page for the movie-watchlist-updater skill. Not linked from
+     the app, skipped by sw.js, and kept out of deploys by .vercelignore.
+     Open it through a local server (see the skill's "Certification Desk"
+     section); file:// can't fetch desk-batch.oui. -->
+<link rel="stylesheet" href="../assets/openui-0.2.1/openui-styles.css">
+<link rel="stylesheet" href="certification-desk.css">
+</head>
+<body>
+<header class="bar">
+  <h1>Certification Desk</h1>
+  <span>local only · reads tools/desk-batch.oui</span>
+</header>
+<main>
+  <section class="batch" aria-labelledby="batchHeading">
+    <h2 class="srOnly" id="batchHeading">Batch</h2>
+    <p id="deskStatus" role="status">Loading batch…</p>
+    <div id="deskBatch"></div>
+  </section>
+  <section class="choices" aria-labelledby="choicesHeading">
+    <h2 id="choicesHeading">Your choices</h2>
+    <p>Nothing is applied from this page. Press the batch's buttons, then copy this summary and paste it back to Claude.</p>
+    <ol id="deskChoices"></ol>
+    <label for="deskSummary">Summary to paste back to Claude</label>
+    <textarea id="deskSummary" readonly rows="8"></textarea>
+    <div class="row">
+      <button type="button" id="deskCopy">Copy summary</button>
+      <button type="button" id="deskClear" class="quiet">Clear choices</button>
+    </div>
+  </section>
+</main>
+<script src="../assets/openui-0.2.1/openui-bundle.min.js"></script>
+<script src="certification-desk.js"></script>
+</body>
+</html>
