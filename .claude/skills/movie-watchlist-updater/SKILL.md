@@ -392,6 +392,46 @@ that `csmRecheckVersion` is an integer -- it does not (yet) enforce the
 `flags`-implies-recheck-fields direction of this rule, so this is currently
 a discipline convention, not something the validator catches for you.
 
+## Optional: Certification Desk review (added 2026-10-21)
+
+Use this when Tony asks for "the desk", or when a batch has decisions he
+should make himself (a name that matches more than one film, a title above a
+band, a row you'd send back for more research). Skip it for routine one-off
+adds. It needs no API key and nothing is deployed: it's a local page that
+draws a review screen you write, and Tony's choices come back to you as text.
+
+1. **Write the batch.** After Steps 1-4, overwrite `tools/desk-batch.oui`
+   with an OpenUI Lang program for this batch, built only from
+   `PENDING_REQUESTS.md`, the request sheet rows, and the research you just
+   did. Don't guess values you didn't look up; leave them out or write
+   "not found". The page uses the stock component library from
+   `@openuidev/browser-bundle@0.1.4` (no custom components), so stick to the
+   shapes in the existing example file: `root = Card([...])`, `CardHeader`,
+   `Table`/`Col` for title rows (CSM age, flags, runtime, status), `Callout`
+   for warnings, and one `Form("desk", btns, [...])` holding any
+   `FormControl(..., OptionCards(...))` choices plus the `Buttons`. Every
+   button gets an explicit `Action([@ToAssistant("...")])` whose text says
+   exactly what you'd do (e.g. `"Approve: Rogue One (2016)"`,
+   `"Re-research: The Phantom Menace (1999)"`). The checked-in example file
+   is illustrative; replace it, and don't commit a real batch unless Tony
+   asks (it holds request-sheet titles).
+2. **Open the desk.** From the repo root run
+   `node tests/static-server.mjs 4319` and open
+   `http://127.0.0.1:4319/tools/certification-desk.html` (file:// can't read
+   the batch file). If the page shows a parse error, fix the batch and
+   reload. The page isn't linked from the app, `sw.js` skips `/tools/`, and
+   `.vercelignore` keeps `tools/` out of deploys.
+3. **Apply Tony's choices.** Tony presses the buttons, then pastes the
+   "Summary to paste back to Claude" text into the conversation. Each line is
+   one button press plus any form values at the time
+   (`[lostworld = 1997]`). Treat that text as Tony's decision for this batch
+   only: approved titles continue to Step 5; "re-research" titles go back to
+   Step 2; anything not mentioned stays unprocessed. Then log rows in
+   `PENDING_REQUESTS.md` as usual. Nothing on the page writes files or
+   commits; you do that, as in Step 6.
+
+*Built by Tony Kim with Claude Code.*
+
 ## Step 5 — Assign nums and write the files
 
 Continue the `num` sequence from the current max across all data files (check all

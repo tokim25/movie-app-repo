@@ -2497,6 +2497,128 @@ function reportError(err){
   .skipFeedback[hidden]{ display:none; }
   .skipFeedback p{ margin:0 0 8px; font-size:14px; color:var(--ink-soft); }
   .skipFeedback .choiceChip{ margin:0 5px 6px 0; }
+  /* Pre-show: a short parent heads-up drawn by the self-hosted OpenUI
+     renderer from MOVIE_GUIDANCE[num].preShow. The renderer ships its own
+     stylesheet (all rules scoped to .openui-*); these ID-scoped overrides
+     pull it onto the app's own tokens so it follows light/dark theme too. */
+  #tonightPreShow{
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px solid var(--line);
+  }
+  #tonightPreShow[hidden]{ display:none; }
+  #tonightPreShow .preShowLabel{
+    margin:0 0 8px;
+    color:var(--accent-text);
+    font-size:12px;
+    font-weight:650;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+  }
+  #tonightPreShowBody{
+    --openui-text-neutral-primary:var(--ink);
+    --openui-text-neutral-secondary:var(--ink-soft);
+    --openui-foreground:var(--surface);
+    --openui-border-default:var(--line);
+    color:var(--ink);
+    font-size:14px;
+    line-height:1.45;
+  }
+  #tonightPreShowBody .openui-card{
+    background:transparent;
+    border:0;
+    box-shadow:none;
+    padding:0;
+    gap:10px !important;
+  }
+  #tonightPreShowBody .openui-header{ padding:0; }
+  #tonightPreShowBody .openui-header-top-left{
+    color:var(--ink);
+    font-family:"Newsreader", Georgia, serif;
+    font-size:17px;
+    font-weight:600;
+  }
+  #tonightPreShowBody .openui-header-bottom{ color:var(--ink-soft); font-size:13px; }
+  #tonightPreShowBody .openui-tag{
+    background:var(--surface);
+    color:var(--ink);
+    border:1px solid var(--line);
+    border-radius:999px;
+  }
+  #tonightPreShowBody .openui-callout{
+    background:var(--surface);
+    color:var(--ink);
+    border:1px solid var(--line);
+    border-radius:8px;
+  }
+  #tonightPreShowBody .openui-callout-warning{ border-left:3px solid var(--star); }
+  #tonightPreShowBody .openui-callout-title{ color:var(--ink); font-weight:650; }
+  #tonightPreShowBody .openui-callout-description,
+  #tonightPreShowBody .openui-markdown-renderer{ color:var(--ink-soft); }
+  #tonightPreShowBody .openui-markdown-renderer p{ margin:0; }
+  /* FollowUpItem is a chat "send this as a message" button; there's no chat
+     here, so it's shown as the after-the-movie question it really is. */
+  #tonightPreShowBody .openui-follow-up-block__header{ display:none; }
+  #tonightPreShowBody .openui-follow-up-item{
+    background:none;
+    border:0;
+    padding:0;
+    color:var(--ink);
+    font-family:"Newsreader", Georgia, serif;
+    font-size:16px;
+    font-style:italic;
+    text-align:left;
+    cursor:default;
+    pointer-events:none;
+  }
+  .worryCheck{ margin:6px 0 8px; }
+  .worryCheck[hidden], #tonightWorryResult[hidden]{ display:none; }
+  .worryTableWrap{ overflow-x:auto; margin-top:4px; }
+  .worryTable{
+    width:100%;
+    border-collapse:collapse;
+    color:var(--ink);
+    font-size:14px;
+  }
+  .worryTable caption{
+    padding-bottom:6px;
+    color:var(--ink);
+    font-weight:650;
+    text-align:left;
+  }
+  .worryTable th,
+  .worryTable td{
+    padding:8px;
+    border-bottom:1px solid var(--line);
+    text-align:left;
+    vertical-align:top;
+  }
+  .worryTable thead th{
+    color:var(--ink-soft);
+    font-size:12px;
+    font-weight:650;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+  }
+  .worryTable q{ color:var(--ink-soft); font-style:italic; }
+  .worryTag{
+    display:inline-block;
+    padding:3px 8px;
+    border-radius:999px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    font-size:12px;
+    font-weight:650;
+  }
+  .worryTag.yes{ border-color:var(--star); border-left-width:3px; }
+  .worryTag.mild{ border-color:var(--star); border-style:dashed; }
+  .skipFeedback p.worryNote{
+    margin:10px 0;
+    padding:9px 12px;
+    border-radius:8px;
+    background:var(--surface);
+    font-size:13px;
+  }
   .filterField{ flex:1 1 130px; }
   .filterField label{
     display:block;
@@ -2644,6 +2766,10 @@ function reportError(err){
       <div class="pickCard" id="tonightPickCard" style="display:none;">
         <div class="pickMeta" id="tonightVerdict">Tonight's pick</div>
         <div class="pickTitle" id="tonightPickTitle"></div>
+        <section class="preShow" id="tonightPreShow" aria-labelledby="tonightPreShowLabel" hidden>
+          <h2 class="preShowLabel" id="tonightPreShowLabel">Pre-show</h2>
+          <div id="tonightPreShowBody"></div>
+        </section>
         <ul class="pickReasons" id="tonightPickReasons"></ul>
         <div class="recommendationEvidence" id="tonightEvidence"></div>
         <button type="button" class="detailLink" id="tonightDetailBtn" aria-expanded="false" aria-controls="tonightDetailBody">Details</button>
@@ -2662,6 +2788,27 @@ function reportError(err){
           <button type="button" class="choiceChip" data-skip-reason="Already seen" aria-pressed="false">Already seen</button>
           <button type="button" class="choiceChip" data-skip-reason="Not available to us" aria-pressed="false">Not available to us</button>
           <button type="button" class="choiceChip" data-skip-reason="Content concern" aria-pressed="false">Content concern</button>
+          <div class="worryCheck" id="tonightWorryCheck" hidden>
+            <p id="tonightWorryPrompt">What's the worry? We'll check the Common Sense Media notes for tonight's options.</p>
+            <div class="choiceGrid" id="tonightWorryChips" role="group" aria-labelledby="tonightWorryPrompt">
+              <button type="button" class="choiceChip" data-worry="parentInDanger" aria-pressed="false">Parent in danger</button>
+              <button type="button" class="choiceChip" data-worry="scaryVillain" aria-pressed="false">Scary villain</button>
+              <button type="button" class="choiceChip" data-worry="sadOrLoss" aria-pressed="false">Sad ending or loss</button>
+              <button type="button" class="choiceChip" data-worry="rudeHumor" aria-pressed="false">Rude humor</button>
+              <button type="button" class="choiceChip" data-worry="animalPeril" aria-pressed="false">Animals in danger</button>
+            </div>
+            <div id="tonightWorryResult" hidden>
+              <div class="worryTableWrap">
+                <table class="worryTable">
+                  <caption id="tonightWorryCaption"></caption>
+                  <thead><tr><th scope="col">Movie</th><th scope="col">Mentioned?</th><th scope="col">From the notes</th></tr></thead>
+                  <tbody id="tonightWorryRows"></tbody>
+                </table>
+              </div>
+              <p class="worryNote"><strong>Not a guarantee.</strong> This only reads the Common Sense Media notes. "Not mentioned" doesn't mean it isn't in the film.</p>
+              <button type="button" class="secondaryBtn" id="tonightWorryExcludeBtn">Show me picks without this</button>
+            </div>
+          </div>
           <button type="button" class="linkBtn" id="tonightSkipContinueBtn">Continue</button>
         </div>
       </div>
@@ -3183,6 +3330,23 @@ let tonightSelection = { excludedChildIds: new Set(), time: 90, mood: 'calm', cu
 // criteria).
 let tonightSkipEvents = [];
 let currentTonightSkipEventId = null;
+// Pre-show (see renderTonightPreShow()) and Check a worry (see
+// checkTonightWorry()). Declared up here with the rest of Tonight's state so
+// they exist before any pick runs. tonightWorryExclude is the worry chosen
+// via "Show me picks without this"; cleared by resetTonightSkips().
+const OPENUI_BASE = '/assets/openui-0.1.4/';
+let openuiLoading = null;
+let preShowRoot = null;
+let preShowToken = 0;
+const WORRY_LABELS = {
+  parentInDanger: 'Parent in danger',
+  scaryVillain: 'Scary villain',
+  sadOrLoss: 'Sad ending or loss',
+  rudeHumor: 'Rude humor',
+  animalPeril: 'Animals in danger'
+};
+let tonightWorryCurrent = null;
+let tonightWorryExclude = null;
 
 // Issue #104: identifies "this browsing session" for watch_anyway
 // idempotency -- generated once per page load, never persisted. Paired with
@@ -4590,6 +4754,10 @@ function isTonightEligible(idx, kids, includeSkipped, requireGreen){
   // and last-resort bypass as the two checks above, so it still can never
   // cause a "no match" by itself.
   if(!includeSkipped && isNotInterestedSuppressed(idx)) return false;
+  // Check a worry's "Show me picks without this": applies in every pass,
+  // like a content setting, so the last-resort fallback can't bring back a
+  // title whose notes mention the worry (or that was never checked for it).
+  if(tonightWorryExclude && worryLevel(movie, tonightWorryExclude) !== 'no') return false;
   // Issue #96: movieContentProfile() invents content levels from age/genre/
   // synopsis keywords for the minority of titles with no researched flags,
   // and those inferred values used to flow into movieFitForKids() exactly
@@ -4805,6 +4973,7 @@ function showTonightPick(candidateOverride){
   updateTonightWatchBtn();
   verdictEl.textContent = tonightVerdictLabel(verdict.verdict);
   document.getElementById('tonightPickTitle').textContent = `${movie.t} (${movie.y})`;
+  renderTonightPreShow(movie);
   // Issue #78: a new pick showing (including via Skip) always starts with its
   // details collapsed, same as Shelf's detail never carries over between
   // different movies.
@@ -4832,7 +5001,9 @@ function showTonightPick(candidateOverride){
     ? `${formatRuntime(movie.runtimeMinutes)} runtime.`
     : `${formatRuntime(movie.runtimeMinutes)} · Fits your ${tonightSelection.time}-minute window.`);
   copy.push(candidate.source === 'Want to watch' ? 'Pulled from Want to watch.' : candidate.source === 'Recent releases' ? 'Pulled from recent releases.' : 'Pulled from the rest of Shelf.');
-  copy.slice(0, 3).forEach(text=>{
+  const reasonLines = copy.slice(0, 3);
+  if(tonightWorryExclude) reasonLines.push(`Leaving out titles whose notes mention ${WORRY_LABELS[tonightWorryExclude].toLowerCase()}, or that haven't been checked for it.`);
+  reasonLines.forEach(text=>{
     const li = document.createElement('li');
     li.textContent = text;
     reasons.appendChild(li);
@@ -4881,6 +5052,154 @@ function showTonightPick(candidateOverride){
   document.getElementById('tonightAlternativesBtn').setAttribute('aria-expanded', 'false');
   document.getElementById('tonightSkipFeedback').hidden = true;
   document.getElementById('tonightSkipBtn').setAttribute('aria-expanded', 'false');
+}
+
+// ---- Guidance data (MOVIE_GUIDANCE, from data-guidance.js via
+// data-bundle.js). Keyed by movie num. Optional: any movie, or the whole
+// catalog, may have no entry, and both features below just stay hidden.
+function movieGuidanceFor(num){
+  if(typeof MOVIE_GUIDANCE === 'undefined' || !MOVIE_GUIDANCE) return null;
+  return MOVIE_GUIDANCE[String(num)] || null;
+}
+
+// ---- Pre-show. The OpenUI renderer is self-hosted (CSP only allows
+// same-origin scripts, and sw.js only caches same-origin) and pinned to
+// one exact version. It's ~3.6 MB, so it loads only when a pick that has
+// a Pre-show opens; sw.js keeps it in its own cache for offline. Any
+// failure (offline before first load, bad program, render error) just
+// hides the band.
+
+function loadOpenUI(){
+  if(window.__OpenUI) return Promise.resolve(window.__OpenUI);
+  if(!openuiLoading){
+    openuiLoading = new Promise((resolve, reject)=>{
+      const css = document.createElement('link');
+      css.rel = 'stylesheet';
+      css.href = OPENUI_BASE + 'openui-styles.css';
+      document.head.appendChild(css);
+      const script = document.createElement('script');
+      script.src = OPENUI_BASE + 'openui-bundle.min.js';
+      script.onload = () => window.__OpenUI ? resolve(window.__OpenUI) : reject(new Error('OpenUI missing'));
+      script.onerror = () => { script.remove(); css.remove(); reject(new Error('OpenUI failed to load')); };
+      document.head.appendChild(script);
+    }).catch(err => { openuiLoading = null; throw err; });
+  }
+  return openuiLoading;
+}
+
+function renderTonightPreShow(movie){
+  const band = document.getElementById('tonightPreShow');
+  const guidance = movieGuidanceFor(movie.num);
+  const code = guidance && typeof guidance.preShow === 'string' ? guidance.preShow.trim() : '';
+  const token = ++preShowToken;
+  band.hidden = true;
+  if(!code) return;
+  const hide = () => { if(token === preShowToken) band.hidden = true; };
+  loadOpenUI().then(openui=>{
+    if(token !== preShowToken) return;
+    const { React, createRoot, Renderer, openuiChatLibrary } = openui;
+    if(!preShowRoot){
+      preShowRoot = createRoot(document.getElementById('tonightPreShowBody'), {
+        onUncaughtError: () => { band.hidden = true; }
+      });
+    }
+    // FollowUpItem renders as a chat button that would do nothing here, so
+    // once it's on the page take it out of the tab order.
+    function PreShow(){
+      const ref = React.useRef(null);
+      React.useEffect(()=>{
+        ref.current.querySelectorAll('button.openui-follow-up-item').forEach(btn=>{
+          btn.tabIndex = -1;
+          btn.setAttribute('aria-disabled', 'true');
+        });
+      });
+      return React.createElement('div', { ref }, React.createElement(Renderer, {
+        response: code,
+        library: openuiChatLibrary,
+        onError: errors => { if((errors || []).some(e => e.severity !== 'warning')) hide(); }
+      }));
+    }
+    preShowRoot.render(React.createElement(PreShow, { key: token }));
+    band.hidden = false;
+  }).catch(hide);
+}
+
+// ---- Check a worry. Deterministic lookup in MOVIE_GUIDANCE[num].concerns,
+// no OpenUI and no network. Opened from Skip -> "Content concern".
+
+// 'yes' | 'mild' | 'no', or null when this movie was never checked for it.
+function worryLevel(movie, worry){
+  const guidance = movieGuidanceFor(movie.num);
+  const concern = guidance && guidance.concerns && guidance.concerns[worry];
+  return concern && ['yes', 'mild', 'no'].includes(concern.level) ? concern.level : null;
+}
+
+function tonightWorryMovies(){
+  const list = [];
+  if(tonightSelection.currentPickIdx !== null) list.push(tonightSelection.currentPickIdx);
+  findTonightAlternatives().forEach(candidate => list.push(candidate.idx));
+  return list;
+}
+
+function resetWorryCheck(){
+  tonightWorryCurrent = null;
+  document.getElementById('tonightWorryCheck').hidden = true;
+  document.getElementById('tonightWorryResult').hidden = true;
+  document.querySelectorAll('[data-worry]').forEach(btn=>{
+    btn.classList.remove('selected');
+    btn.setAttribute('aria-pressed', 'false');
+  });
+}
+
+function openWorryCheck(){
+  resetWorryCheck();
+  // Hidden entirely when none of tonight's options has guidance data.
+  if(!tonightWorryMovies().some(idx => movieGuidanceFor(MOVIES[idx].num))) return;
+  document.getElementById('tonightWorryCheck').hidden = false;
+}
+
+function checkTonightWorry(worry){
+  tonightWorryCurrent = worry;
+  document.querySelectorAll('[data-worry]').forEach(btn=>{
+    const selected = btn.dataset.worry === worry;
+    btn.classList.toggle('selected', selected);
+    btn.setAttribute('aria-pressed', selected ? 'true' : 'false');
+  });
+  const label = WORRY_LABELS[worry];
+  const indices = tonightWorryMovies();
+  const rows = document.getElementById('tonightWorryRows');
+  rows.replaceChildren();
+  let mentioned = 0;
+  indices.forEach(idx=>{
+    const movie = MOVIES[idx];
+    const level = worryLevel(movie, worry);
+    if(level === 'yes' || level === 'mild') mentioned++;
+    const guidance = movieGuidanceFor(movie.num);
+    const quote = level && level !== 'no' ? String(guidance.concerns[worry].quote || '') : '';
+    const tr = document.createElement('tr');
+    const titleCell = document.createElement('th');
+    titleCell.scope = 'row';
+    titleCell.textContent = `${movie.t} (${movie.y})`;
+    const tagCell = document.createElement('td');
+    const tag = document.createElement('span');
+    tag.className = `worryTag ${level || 'unknown'}`;
+    tag.textContent = level === 'yes' ? 'Yes' : level === 'mild' ? 'Yes, mild' : level === 'no' ? 'Not mentioned' : 'Not checked';
+    tagCell.appendChild(tag);
+    const quoteCell = document.createElement('td');
+    if(quote){
+      const q = document.createElement('q');
+      q.textContent = quote;
+      quoteCell.appendChild(q);
+    }else{
+      quoteCell.textContent = 'None';
+    }
+    tr.append(titleCell, tagCell, quoteCell);
+    rows.appendChild(tr);
+  });
+  document.getElementById('tonightWorryCaption').textContent = `${label}: checked against Common Sense Media notes`;
+  document.getElementById('tonightWorryResult').hidden = false;
+  document.getElementById('tonightPickStatus').textContent =
+    `Checked ${indices.length} ${indices.length === 1 ? 'movie' : 'movies'} for ${label.toLowerCase()}: ${mentioned} ${mentioned === 1 ? 'mentions' : 'mention'} it.`;
 }
 
 function skipCurrentTonightPick(){
@@ -4998,6 +5317,8 @@ function resetTonightSkips(){
   const findBtn = document.getElementById('findTonightPickBtn');
   if(findBtn) findBtn.textContent = "Find tonight's pick";
   currentTonightSkipEventId = null;
+  tonightWorryExclude = null;
+  resetWorryCheck();
   document.querySelectorAll('[data-skip-reason]').forEach(btn=>{
     btn.classList.remove('selected');
     btn.setAttribute('aria-pressed', 'false');
@@ -7078,6 +7399,7 @@ document.getElementById('tonightSkipBtn').addEventListener('click', ()=>{
     btn.classList.remove('selected');
     btn.setAttribute('aria-pressed', 'false');
   });
+  resetWorryCheck();
   const firstReason = document.querySelector('[data-skip-reason]');
   if(firstReason) firstReason.focus();
 });
@@ -7114,11 +7436,29 @@ document.querySelectorAll('[data-skip-reason]').forEach(btn=>{
     }
     showToast(event.reason === 'Not interested' ? "Won't suggest this again for a week"
       : event.reason ? 'Reason saved for this session' : 'Skip reason cleared');
+    if(event.reason === 'Content concern') openWorryCheck();
+    else resetWorryCheck();
   });
 });
 
-document.getElementById('tonightAlternativesBtn').addEventListener('click', ()=>{
-  const alternatives = document.getElementById('tonightAlternatives');
+document.querySelectorAll('[data-worry]').forEach(btn=>{
+  btn.addEventListener('click', () => checkTonightWorry(btn.dataset.worry));
+});
+
+document.getElementById('tonightWorryExcludeBtn').addEventListener('click', ()=>{
+  if(!tonightWorryCurrent) return;
+  tonightWorryExclude = tonightWorryCurrent;
+  showTonightPick();
+  const status = document.getElementById('tonightPickStatus');
+  status.textContent = `Showing picks without ${WORRY_LABELS[tonightWorryExclude].toLowerCase()}. ${status.textContent}`;
+  const card = document.getElementById('tonightPickCard');
+  if(card.style.display !== 'none') document.getElementById('tonightSkipBtn').focus();
+});
+
+// The two alternatives to the current pick, without changing what's
+// showing. Shared by "See two alternatives" and Check a worry, so the worry
+// table always covers the same two titles that button would offer.
+function findTonightAlternatives(){
   const originalSkipped = new Set(tonightSelection.skippedMovieNums);
   const currentIdx = tonightSelection.currentPickIdx;
   if(currentIdx !== null) tonightSelection.skippedMovieNums.add(movieKey(currentIdx));
@@ -7134,6 +7474,12 @@ document.getElementById('tonightAlternativesBtn').addEventListener('click', ()=>
     tonightSelection.skippedMovieNums.add(key);
   }
   tonightSelection.skippedMovieNums = originalSkipped;
+  return candidates;
+}
+
+document.getElementById('tonightAlternativesBtn').addEventListener('click', ()=>{
+  const alternatives = document.getElementById('tonightAlternatives');
+  const candidates = findTonightAlternatives();
   alternatives.replaceChildren();
   candidates.forEach(candidate=>{
     const btn = document.createElement('button');

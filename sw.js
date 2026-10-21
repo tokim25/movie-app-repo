@@ -9,7 +9,7 @@
 // was stale. Bump the version/date prefix by hand for a real code
 // change to this file; DATA_VERSION takes care of itself.
 const DATA_VERSION = '52b57888ce';
-const CACHE_VERSION = `family-feature-v25-20261017-${DATA_VERSION}`;
+const CACHE_VERSION = `family-feature-v26-20261021-${DATA_VERSION}`;
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -27,6 +27,15 @@ const APP_SHELL = [
   '/data-bundle.js'
 ];
 
+// Pre-show's OpenUI renderer (~3.6 MB, self-hosted under a versioned path)
+// is lazy-loaded the first time a pick with a Pre-show opens, so it isn't
+// in APP_SHELL. It gets its own cache, named for the pinned version, so a
+// catalog-driven CACHE_VERSION change doesn't throw it away (which would
+// mean a re-download, and no Pre-show offline until then). Files under a
+// versioned path never change, so it's served cache-first.
+const OPENUI_CACHE = 'openui-browser-bundle-0.1.4';
+const OPENUI_PATH_PREFIX = '/assets/openui-0.1.4/';
+
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_VERSION)
@@ -38,7 +47,7 @@ self.addEventListener('install', event => {
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys()
-      .then(keys => Promise.all(keys.filter(key => key !== CACHE_VERSION).map(key => caches.delete(key))))
+      .then(keys => Promise.all(keys.filter(key => key !== CACHE_VERSION && key !== OPENUI_CACHE).map(key => caches.delete(key))))
       .then(() => self.clients.claim())
   );
 });
@@ -53,6 +62,22 @@ self.addEventListener('fetch', event => {
 
   const url = new URL(request.url);
   if(url.origin !== self.location.origin) return;
+  // tools/ holds the curator-only Certification Desk page. It's never part
+  // of the app: don't cache it, and never let a visit to it be stored as
+  // the app shell by the navigate branch below.
+  if(url.pathname.startsWith('/tools/')) return;
+
+  if(url.pathname.startsWith(OPENUI_PATH_PREFIX)){
+    event.respondWith(
+      caches.open(OPENUI_CACHE).then(cache =>
+        cache.match(request).then(cached => cached || fetch(request).then(response => {
+          if(response && response.ok) event.waitUntil(cache.put(request, response.clone()));
+          return response;
+        }))
+      )
+    );
+    return;
+  }
 
   if(request.mode === 'navigate'){
     // Issue #118: every navigation used to be treated as the app route --
