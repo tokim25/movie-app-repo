@@ -195,7 +195,7 @@ function reportError(err){
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#F4F6FA" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0B1020" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#0E0F14" media="(prefers-color-scheme: dark)">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Family Feature">
@@ -281,24 +281,29 @@ function reportError(err){
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --bg:#0B1020;
-      --bg-sub:#1C2540;
-      --surface:#131A2C;
-      --ink:#F7F9FC;
-      --on-ink:#0B1020;
-      --ink-soft:#B6C0D2;
-      --ink-faint:#929DB2;
-      --line:#2B3654;
+      /* Dark used to be a single blue hue top to bottom -- #0B1020 ground,
+         #131A2C cards, and an --ink that was itself blue-tinted white. It
+         read as a night-ops console rather than a room you'd pick a film in.
+         The neutrals carry that feeling far more than any accent does, so
+         the blue cast comes out of them while the values stay put. */
+      --bg:#0E0F14;
+      --bg-sub:#1F212A;
+      --surface:#16171E;
+      --ink:#F6F6F8;
+      --on-ink:#0E0F14;
+      --ink-soft:#BCBDC4;
+      --ink-faint:#9A9BA4;
+      --line:#2E3038;
       --accent:#7FA2FF;
       --accent-rgb:127,162,255;
       --accent-text:#9AB4FF;
-      --on-accent:#0B1020;
+      --on-accent:#0E0F14;
       --select-rgb:127,162,255;
       --error-bg:#3B2024;
-      --check:#F7F9FC;
+      --check:#F6F6F8;
       --favorite:#F2C14E;
       --favorite-fill:#F2C14E;
-      --on-favorite:#0B1020;
+      --on-favorite:#0E0F14;
       --flag-violence:oklch(0.72 0.08 285);
       --flag-language:oklch(0.72 0.08 190);
       --flag-romance:oklch(0.72 0.08 345);
@@ -307,7 +312,7 @@ function reportError(err){
       --new-bg:#202D50;
       --success:#4CC38A;
       --error:#FF7A70;
-      --on-error:#0B1020;
+      --on-error:#0E0F14;
       --warning:#F2C14E;
       --warning-rgb:242,193,78;
       --warning-soft:#382F18;
@@ -325,24 +330,24 @@ function reportError(err){
     }
   }
   :root[data-theme="dark"]{
-    --bg:#0B1020;
-    --bg-sub:#1C2540;
-    --surface:#131A2C;
-    --ink:#F7F9FC;
-    --on-ink:#0B1020;
-    --ink-soft:#B6C0D2;
-    --ink-faint:#929DB2;
-    --line:#2B3654;
+    --bg:#0E0F14;
+    --bg-sub:#1F212A;
+    --surface:#16171E;
+    --ink:#F6F6F8;
+    --on-ink:#0E0F14;
+    --ink-soft:#BCBDC4;
+    --ink-faint:#9A9BA4;
+    --line:#2E3038;
     --accent:#7FA2FF;
     --accent-rgb:127,162,255;
     --accent-text:#9AB4FF;
-    --on-accent:#0B1020;
+    --on-accent:#0E0F14;
     --select-rgb:127,162,255;
     --error-bg:#3B2024;
-    --check:#F7F9FC;
+    --check:#F6F6F8;
     --favorite:#F2C14E;
     --favorite-fill:#F2C14E;
-    --on-favorite:#0B1020;
+    --on-favorite:#0E0F14;
     --flag-violence:oklch(0.72 0.08 285);
     --flag-language:oklch(0.72 0.08 190);
     --flag-romance:oklch(0.72 0.08 345);
@@ -351,7 +356,7 @@ function reportError(err){
     --new-bg:#202D50;
     --success:#4CC38A;
     --error:#FF7A70;
-    --on-error:#0B1020;
+    --on-error:#0E0F14;
     --warning:#F2C14E;
     --warning-rgb:242,193,78;
     --warning-soft:#382F18;
@@ -1614,6 +1619,13 @@ function reportError(err){
     line-height:1.15;
     text-wrap:balance;
   }
+  /* Light text on a dark ground optically thins the stroke, so the serif at
+     display size reads lighter in dark than its light-mode twin. Newsreader
+     already ships 700; this buys the weight back rather than a new file. */
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .pickTitle{ font-weight:700; }
+  }
+  :root[data-theme="dark"] .pickTitle{ font-weight:700; }
   .pickStage{
     display:flex;
     justify-content:center;
@@ -1621,7 +1633,7 @@ function reportError(err){
   }
   .pickStage:empty{ display:none; }
   .poster.pickPoster{
-    width:152px;
+    width:132px;
     border-radius:10px;
     box-shadow:var(--shadow-card);
   }
@@ -5221,10 +5233,15 @@ function showTonightPick(candidateOverride){
   updateTonightWatchBtn();
   verdictEl.textContent = tonightVerdictLabel(verdict.verdict);
   document.getElementById('tonightPickTitle').textContent = `${movie.t} (${movie.y})`;
+  // Only stage real art. createPoster() falls back to a bordered "Movie/year"
+  // box, which reads fine at Shelf's 42px but becomes a large empty rectangle
+  // at hero size -- worse than no poster at all for the ~14 catalogue titles
+  // that have none. .pickStage:empty collapses the gap.
   const stage = document.getElementById('tonightPickStage');
   if(stage){
     stage.textContent = '';
-    stage.appendChild(createPoster(movie, 'pickPoster', false));
+    const art = typeof MOVIE_POSTERS !== 'undefined' && MOVIE_POSTERS[movie.num];
+    if(art && art.u) stage.appendChild(createPoster(movie, 'pickPoster', false));
   }
   renderTonightPreShow(movie);
   // Issue #78: a new pick showing (including via Skip) always starts with its
@@ -8129,7 +8146,7 @@ function updateThemeColorMeta(pref){
     meta.setAttribute('name', 'theme-color');
     document.head.appendChild(meta);
   }
-  meta.setAttribute('content', effectiveDark ? '#0B1020' : '#F4F6FA');
+  meta.setAttribute('content', effectiveDark ? '#0E0F14' : '#F4F6FA');
 }
 
 function applyTheme(pref){
