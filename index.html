@@ -1614,6 +1614,55 @@ function reportError(err){
     line-height:1.15;
     text-wrap:balance;
   }
+  .pickStage{
+    display:flex;
+    justify-content:center;
+    margin-bottom:14px;
+  }
+  .pickStage:empty{ display:none; }
+  .poster.pickPoster{
+    width:152px;
+    border-radius:10px;
+    box-shadow:var(--shadow-card);
+  }
+  /* The reveal. The title text is already correct in the DOM before any of
+     this runs -- the shuffle is a decorative overlay sitting on top of it, so
+     anything reading the card (a screen reader, a test, a viewer who arrives
+     mid-animation) sees the real pick immediately and only the surface
+     animates. */
+  .pickShuffle{
+    position:absolute;
+    left:0;
+    right:0;
+    color:var(--ink-faint);
+    font-family:"Newsreader", Georgia, "Times New Roman", serif;
+    font-size:30px;
+    font-weight:600;
+    line-height:1.15;
+    pointer-events:none;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+  }
+  .pickCard{ position:relative; }
+  .pickCard.revealing .pickTitle{ visibility:hidden; }
+  .pickCard.revealing .pickStage{ opacity:0.35; }
+  .pickCard.revealed .pickStage,
+  .pickCard.revealed .pickTitle{
+    animation:pickSettle 380ms cubic-bezier(0.2, 0.7, 0.3, 1) both;
+  }
+  @keyframes pickSettle{
+    from{ opacity:0; transform:translateY(6px) scale(0.985); }
+    to{ opacity:1; transform:none; }
+  }
+  /* A reveal is motion for its own sake, so it is the first thing that should
+     go when someone has asked the OS for less of it. The JS skips the shuffle
+     outright; this covers the settle. */
+  @media (prefers-reduced-motion: reduce){
+    .pickCard.revealed .pickStage,
+    .pickCard.revealed .pickTitle{ animation:none; }
+    .pickCard.revealing .pickStage{ opacity:1; }
+  }
   .pickReasons{
     margin:10px 0 0;
     padding-left:18px;
@@ -2849,6 +2898,7 @@ function reportError(err){
       </div>
       <div class="srOnly" id="tonightPickStatus" role="status" aria-live="polite" aria-atomic="true"></div>
       <div class="pickCard" id="tonightPickCard" style="display:none;">
+        <div class="pickStage" id="tonightPickStage"></div>
         <div class="pickMeta" id="tonightVerdict">Tonight's pick</div>
         <div class="pickTitle" id="tonightPickTitle"></div>
         <section class="preShow" id="tonightPreShow" aria-labelledby="tonightPreShowLabel" hidden>
@@ -5055,6 +5105,73 @@ function tonightVerdictLabel(verdict){
 // so the loudest control on screen invited rejecting the result before the
 // result had been read. Label and emphasis move together here so the three
 // call sites can't drift apart the way the label alone once did.
+// The pick is the one moment this app exists to deliver, and it used to
+// resolve like a form field: the whole result present in frame one, no beat
+// of anticipation. This sifts a few candidate titles and settles.
+//
+// It deliberately never touches #tonightPickTitle, which already holds the
+// real pick before this runs. The shuffle is a separate overlay, so the DOM
+// is truthful from the first frame -- screen readers announce the actual
+// pick, and anything reading the card mid-reveal gets the real title rather
+// than a decorative frame.
+const PICK_REVEAL_MS = 550;
+const PICK_REVEAL_TICK = 70;
+
+function prefersReducedMotion(){
+  return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+}
+
+function stopPickReveal(card){
+  clearInterval(stopPickReveal._tick);
+  clearTimeout(stopPickReveal._end);
+  clearTimeout(stopPickReveal._settle);
+  if(!card) return;
+  const stale = card.querySelector('.pickShuffle');
+  if(stale) stale.remove();
+  card.classList.remove('revealing', 'revealed');
+}
+
+function runPickReveal(card, currentLabel){
+  stopPickReveal(card);
+  if(!card || prefersReducedMotion()) return;
+
+  // Sift real catalog titles, so it reads as the app looking rather than as
+  // an ornament spinning.
+  // Top-level `const MOVIES` is script-scoped, so it is not a window
+  // property -- reach it lexically, the way createPoster() does.
+  const pool = [];
+  if(typeof MOVIES !== 'undefined' && Array.isArray(MOVIES) && MOVIES.length){
+    for(let i = 0; i < 6; i++){
+      const m = MOVIES[Math.floor(Math.random() * MOVIES.length)];
+      if(m && m.t) pool.push(`${m.t} (${m.y})`);
+    }
+  }
+  if(!pool.length) return;
+
+  const titleEl = document.getElementById('tonightPickTitle');
+  if(!titleEl) return;
+  const shuffle = document.createElement('div');
+  shuffle.className = 'pickShuffle';
+  shuffle.setAttribute('aria-hidden', 'true');
+  shuffle.textContent = pool[0];
+  titleEl.insertAdjacentElement('afterend', shuffle);
+  card.classList.add('revealing');
+
+  let i = 0;
+  stopPickReveal._tick = setInterval(()=>{
+    i += 1;
+    shuffle.textContent = pool[i % pool.length];
+  }, PICK_REVEAL_TICK);
+
+  stopPickReveal._end = setTimeout(()=>{
+    clearInterval(stopPickReveal._tick);
+    shuffle.remove();
+    card.classList.remove('revealing');
+    card.classList.add('revealed');
+    stopPickReveal._settle = setTimeout(()=>card.classList.remove('revealed'), 420);
+  }, PICK_REVEAL_MS);
+}
+
 function setFindPickMode(mode){
   const btn = document.getElementById('findTonightPickBtn');
   if(!btn) return;
@@ -5074,6 +5191,7 @@ function showTonightPick(candidateOverride){
   if(candidate.noMatch){
     tonightSelection.currentPickIdx = null;
     tonightSelection.currentPickSource = null;
+    stopPickReveal(document.getElementById('tonightPickCard'));
     document.getElementById('tonightPickCard').style.display = 'none';
     const noMatchCard = document.getElementById('tonightNoMatchCard');
     noMatchCard.style.display = 'block';
@@ -5103,6 +5221,11 @@ function showTonightPick(candidateOverride){
   updateTonightWatchBtn();
   verdictEl.textContent = tonightVerdictLabel(verdict.verdict);
   document.getElementById('tonightPickTitle').textContent = `${movie.t} (${movie.y})`;
+  const stage = document.getElementById('tonightPickStage');
+  if(stage){
+    stage.textContent = '';
+    stage.appendChild(createPoster(movie, 'pickPoster', false));
+  }
   renderTonightPreShow(movie);
   // Issue #78: a new pick showing (including via Skip) always starts with its
   // details collapsed, same as Shelf's detail never carries over between
@@ -5171,6 +5294,7 @@ function showTonightPick(candidateOverride){
   document.getElementById('tonightWatchAnywayBtn').style.display = verdict.verdict !== 'green' ? 'inline-block' : 'none';
   updateTonightWatchAnywayBtn();
   document.getElementById('tonightPickCard').style.display = 'block';
+  runPickReveal(document.getElementById('tonightPickCard'), `${movie.t} (${movie.y})`);
   document.getElementById('tonightPickStatus').textContent = `${tonightVerdictLabel(verdict.verdict)}: ${movie.t} (${movie.y}). ${copy[0]}`;
   // Issue #57: the button's static markup says "Find tonight's pick", but a
   // pick showing switches its own click handler over to skip-behavior. Keep
@@ -5486,6 +5610,7 @@ function resetTonightSkips(){
   // mistake a stale title for one evaluated under the newly selected
   // context, and since Mark watched/Watch anyway/Skip live inside
   // tonightPickCard, hiding it also takes those actions off screen.
+  stopPickReveal(document.getElementById('tonightPickCard'));
   document.getElementById('tonightPickCard').style.display = 'none';
   document.getElementById('tonightNoMatchCard').style.display = 'none';
   document.getElementById('tonightPickStatus').textContent = '';
