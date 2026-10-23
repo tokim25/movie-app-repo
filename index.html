@@ -616,6 +616,21 @@ function reportError(err){
   .sortbar button.syncWarning{
     color:var(--error);
   }
+  .familyBtn{
+    display:block;
+    width:100%;
+    text-align:left;
+    background:none;
+    border:none;
+    border-radius:10px;
+    font-family:inherit;
+    font-size:15px;
+    font-weight:600;
+    color:var(--accent);
+    min-height:44px;
+    padding:11px 12px;
+    cursor:pointer;
+  }
   .familyBtn.syncWarning{
     color:var(--error);
     background:var(--warning-soft);
@@ -4942,6 +4957,20 @@ function tonightVerdictLabel(verdict){
   return 'Tonight\'s pick';
 }
 
+// Issue #57 kept this button's label honest, but not its emphasis: while it
+// means "skip", it was still a solid primaryBtn sitting above the pick card,
+// so the loudest control on screen invited rejecting the result before the
+// result had been read. Label and emphasis move together here so the three
+// call sites can't drift apart the way the label alone once did.
+function setFindPickMode(mode){
+  const btn = document.getElementById('findTonightPickBtn');
+  if(!btn) return;
+  const skipping = mode === 'skip';
+  btn.textContent = skipping ? 'Skip to next pick' : "Find tonight's pick";
+  btn.classList.toggle('primaryBtn', !skipping);
+  btn.classList.toggle('secondaryBtn', skipping);
+}
+
 function showTonightPick(candidateOverride){
   setTonightEditOpen(false);
   const candidate = candidateOverride || findTonightCandidate();
@@ -4959,7 +4988,7 @@ function showTonightPick(candidateOverride){
       ? "Nothing fits who's watching, watched history, and content settings right now."
       : 'There are no movies in the catalog yet.';
     document.getElementById('tonightPickStatus').textContent = `No confident match. ${document.getElementById('tonightNoMatchReason').textContent}`;
-    document.getElementById('findTonightPickBtn').textContent = "Find tonight's pick";
+    setFindPickMode('find');
     return;
   }
   document.getElementById('tonightNoMatchCard').style.display = 'none';
@@ -5055,7 +5084,7 @@ function showTonightPick(candidateOverride){
   // the label honest about which action it now performs; resetTonightSkips()
   // (the one function every Change-panel handler already calls to invalidate
   // the current pick) is the matching place that reverts it.
-  document.getElementById('findTonightPickBtn').textContent = 'Skip to next pick';
+  setFindPickMode('skip');
   document.getElementById('tonightAlternatives').hidden = true;
   document.getElementById('tonightAlternativesBtn').setAttribute('aria-expanded', 'false');
   document.getElementById('tonightSkipFeedback').hidden = true;
@@ -5347,8 +5376,7 @@ function resetTonightSkips(){
   // 'Skip to next pick' -- this is the single function every handler that
   // invalidates the current pick (kid/mood/time chips, Adults only) already
   // calls, so it's the one place needed to reset it too.
-  const findBtn = document.getElementById('findTonightPickBtn');
-  if(findBtn) findBtn.textContent = "Find tonight's pick";
+  setFindPickMode('find');
   currentTonightSkipEventId = null;
   tonightWorryExclude = null;
   resetWorryCheck();
