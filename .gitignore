@@ -7,3 +7,8 @@ playwright-report/
 playwright/.cache/
 .csm-rate-state.json
 .csm-rate-state.json.lock
+
+# Throwaway browser-automation/exploration scripts written at the repo root
+# during agent runs. Never part of the project.
+.scratch-*
+__scratch_*
