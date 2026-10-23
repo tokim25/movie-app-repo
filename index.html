@@ -1626,6 +1626,23 @@ function reportError(err){
     :root:not([data-theme="light"]) .pickTitle{ font-weight:700; }
   }
   :root[data-theme="dark"] .pickTitle{ font-weight:700; }
+  /* Once a pick is on screen the preamble has done its job, and on a real
+     phone (667px of usable height, not the 844 a desktop emulator shows) it
+     was costing 431px before the pick card even began -- enough that the
+     poster ran under the bottom nav and the title sat off-screen entirely.
+     The orientation copy, the Shelf counts and the secondary Shelf escape
+     hatch all collapse; the heading only shrinks, because #homeScreen is
+     aria-labelledby it and it carries the focus target. */
+  .homeScreen.hasPick .subtitle,
+  .homeScreen.hasPick .stats,
+  .homeScreen.hasPick #tonightShelfBtn{
+    display:none;
+  }
+  .homeScreen.hasPick h1{
+    font-size:17px;
+    line-height:1.25;
+    margin-bottom:2px;
+  }
   .pickStage{
     display:flex;
     justify-content:center;
@@ -5204,6 +5221,7 @@ function showTonightPick(candidateOverride){
     tonightSelection.currentPickIdx = null;
     tonightSelection.currentPickSource = null;
     stopPickReveal(document.getElementById('tonightPickCard'));
+    document.getElementById('homeScreen').classList.remove('hasPick');
     document.getElementById('tonightPickCard').style.display = 'none';
     const noMatchCard = document.getElementById('tonightNoMatchCard');
     noMatchCard.style.display = 'block';
@@ -5311,6 +5329,7 @@ function showTonightPick(candidateOverride){
   document.getElementById('tonightWatchAnywayBtn').style.display = verdict.verdict !== 'green' ? 'inline-block' : 'none';
   updateTonightWatchAnywayBtn();
   document.getElementById('tonightPickCard').style.display = 'block';
+  document.getElementById('homeScreen').classList.add('hasPick');
   runPickReveal(document.getElementById('tonightPickCard'), `${movie.t} (${movie.y})`);
   document.getElementById('tonightPickStatus').textContent = `${tonightVerdictLabel(verdict.verdict)}: ${movie.t} (${movie.y}). ${copy[0]}`;
   // Issue #57: the button's static markup says "Find tonight's pick", but a
@@ -5628,6 +5647,7 @@ function resetTonightSkips(){
   // context, and since Mark watched/Watch anyway/Skip live inside
   // tonightPickCard, hiding it also takes those actions off screen.
   stopPickReveal(document.getElementById('tonightPickCard'));
+  document.getElementById('homeScreen').classList.remove('hasPick');
   document.getElementById('tonightPickCard').style.display = 'none';
   document.getElementById('tonightNoMatchCard').style.display = 'none';
   document.getElementById('tonightPickStatus').textContent = '';
