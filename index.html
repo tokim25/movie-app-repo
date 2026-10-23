@@ -248,6 +248,17 @@ function reportError(err){
     --favorite:#9A6B08;
     --favorite-fill:#D59B16;
     --on-favorite:#172033;
+    /* Category hues identify a topic; they must never rate it. Held at one
+       lightness and one chroma so no category can read as more urgent than
+       another -- a parent must not infer that Violence is "redder" and so
+       scarier than Drinking. Hues also dodge every taken meaning: no red
+       (--error), green (--success), gold (--favorite/--warning) or blue
+       (--accent/--new). Stated in oklch so the equal-L, equal-C constraint
+       is enforced by the notation rather than asserted in a comment. */
+    --flag-violence:oklch(0.55 0.09 285);
+    --flag-language:oklch(0.55 0.09 190);
+    --flag-romance:oklch(0.55 0.09 345);
+    --flag-drinking:oklch(0.55 0.09 250);
     --new:#2354B8;
     --new-bg:#E7EEFF;
     --success:#18794E;
@@ -288,6 +299,10 @@ function reportError(err){
       --favorite:#F2C14E;
       --favorite-fill:#F2C14E;
       --on-favorite:#0B1020;
+      --flag-violence:oklch(0.72 0.08 285);
+      --flag-language:oklch(0.72 0.08 190);
+      --flag-romance:oklch(0.72 0.08 345);
+      --flag-drinking:oklch(0.72 0.08 250);
       --new:#AAC0FF;
       --new-bg:#202D50;
       --success:#4CC38A;
@@ -328,6 +343,10 @@ function reportError(err){
     --favorite:#F2C14E;
     --favorite-fill:#F2C14E;
     --on-favorite:#0B1020;
+    --flag-violence:oklch(0.72 0.08 285);
+    --flag-language:oklch(0.72 0.08 190);
+    --flag-romance:oklch(0.72 0.08 345);
+    --flag-drinking:oklch(0.72 0.08 250);
     --new:#AAC0FF;
     --new-bg:#202D50;
     --success:#4CC38A;
@@ -411,9 +430,11 @@ function reportError(err){
     max-width:680px;
     margin:0 auto;
   }
+  /* Tab names are navigation, not voice, and at clamp(34-48px) the question
+     out-sized its own answer roughly 2:1. Sans and smaller, so the pick
+     title below it reads as the loudest thing on the screen. */
   h1{
-    font-family:"Newsreader", Georgia, "Times New Roman", serif;
-    font-size:clamp(34px,7vw,48px);
+    font-size:clamp(22px,4.5vw,26px);
     font-weight:600;
     letter-spacing:0;
     margin:0 0 8px;
@@ -976,20 +997,22 @@ function reportError(err){
   .moves button:hover:not(:disabled){ color:var(--accent); }
   .moves button:disabled{ opacity:0.2; cursor:default; }
 
+  /* This is the most-read prose in the app -- the synthesized review a parent
+     reads to decide on a title tonight -- and it was set smaller than body
+     text, in --ink-soft, indented 114px to clear the poster column above it.
+     That left roughly 38 characters per line on a phone, well under the
+     45-75 a reading column wants. It spans the card now. */
   .detail{
     max-width:680px;
     margin:0 auto;
-    padding:0 20px 16px 114px;
-    font-size:14.5px;
-    color:var(--ink-soft);
-    line-height:1.6;
+    padding:0 20px 16px;
+    font-size:16px;
+    color:var(--ink);
+    line-height:1.65;
     display:none;
     border-bottom:1px solid var(--line);
   }
   .detail.open{ display:block; }
-  .noPosterDetail{
-    padding-left:58px;
-  }
 
   .empty{
     text-align:center;
@@ -1277,8 +1300,8 @@ function reportError(err){
     margin-bottom:16px;
   }
   .screenTopBar h1{
-    font-size:32px;
-    line-height:1.125;
+    font-size:24px;
+    line-height:1.2;
     margin:0;
   }
   .iconBtn{
@@ -1372,7 +1395,7 @@ function reportError(err){
     color:var(--ink);
     font-size:30px;
     line-height:1.08;
-    font-weight:650;
+    font-weight:600;
   }
   .setupCard p{
     margin:0;
@@ -1401,7 +1424,7 @@ function reportError(err){
     color:var(--on-ink);
     font-family:inherit;
     font-size:14px;
-    font-weight:650;
+    font-weight:600;
     padding:10px 16px;
     cursor:pointer;
   }
@@ -1468,7 +1491,7 @@ function reportError(err){
     color:var(--ink);
     font-size:28px;
     line-height:1.08;
-    font-weight:760;
+    font-weight:700;
     text-wrap:balance;
   }
   .tonightContext{
@@ -1476,7 +1499,7 @@ function reportError(err){
     color:var(--ink-soft);
     font-size:17px;
     line-height:1.3;
-    font-weight:540;
+    font-weight:500;
     text-wrap:pretty;
   }
   .tonightChangeButton{
@@ -1486,7 +1509,7 @@ function reportError(err){
     padding:2px 0 2px 12px;
     color:var(--accent);
     font-size:14px;
-    font-weight:650;
+    font-weight:600;
     white-space:nowrap;
   }
   .tonightEditPanel{
@@ -1513,7 +1536,7 @@ function reportError(err){
     min-height:58px;
     border-radius:16px;
     font-size:17px;
-    font-weight:720;
+    font-weight:700;
     padding-inline:20px;
   }
   .tonightActions .secondaryBtn{
@@ -1521,7 +1544,7 @@ function reportError(err){
     min-height:54px;
     border-radius:16px;
     font-size:16px;
-    font-weight:670;
+    font-weight:700;
   }
   .choiceGrid{
     display:flex;
@@ -1573,16 +1596,23 @@ function reportError(err){
   .pickMeta{
     color:var(--ink-faint);
     font-size:12px;
-    font-weight:650;
+    font-weight:600;
     text-transform:uppercase;
     letter-spacing:0.04em;
   }
+  /* The serif was dressing the chrome ("Shelf", "Family") while the movie
+     title -- the one noun this screen exists to deliver -- was set in small
+     UI sans. Moving Newsreader onto the content gives the reveal a marquee
+     register, and makes the serif the content face rather than a second
+     competing voice inside the same card. */
   .pickTitle{
     margin-top:5px;
     color:var(--ink);
-    font-size:21px;
-    font-weight:650;
-    line-height:1.2;
+    font-family:"Newsreader", Georgia, "Times New Roman", serif;
+    font-size:30px;
+    font-weight:600;
+    line-height:1.15;
+    text-wrap:balance;
   }
   .pickReasons{
     margin:10px 0 0;
@@ -1595,13 +1625,12 @@ function reportError(err){
     display:inline-block;
     margin-top:10px;
   }
-  /* Issue #78: Shelf's .detail carries left padding sized for its list rows'
-     number/poster gutter (see the base .detail rule and its media-query
-     variants above) -- inside the pick card there's no such gutter, so this
+  /* Issue #78: the base .detail rule carries side padding sized for Shelf's
+     list rows -- inside the pick card there's no such gutter, so this
      override keeps the same look-and-feel (color, size, line-height, the
      collapsed-by-default .open toggle) without inheriting padding that would
      misalign the text. Specificity (two classes) beats the plain .detail
-     rules regardless of the media query's source order. */
+     rule. */
   .pickCard .detail{
     max-width:none;
     margin:10px 0 0;
@@ -1808,7 +1837,7 @@ function reportError(err){
     color:var(--ink-soft);
     font-family:inherit;
     font-size:13px;
-    font-weight:650;
+    font-weight:600;
     padding:8px 12px;
     cursor:pointer;
   }
@@ -1978,7 +2007,7 @@ function reportError(err){
     background:var(--bg-sub);
     color:var(--ink-soft);
     font-size:12px;
-    font-weight:650;
+    font-weight:600;
     white-space:nowrap;
   }
   .settingBadge.parent{
@@ -1989,6 +2018,36 @@ function reportError(err){
     display:grid;
     gap:8px;
   }
+  .settingHead{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  /* The hue is allowed here and nowhere else in the row: a soft wash behind
+     the glyph and the glyph itself. Not the heading, not the border, and
+     above all not the 1-4 picker -- that stays --ink for every category so
+     "which of these did I change from the default?" remains one scan. */
+  /* Scoped to the row so it outranks `.familySettingRow span`, which would
+     otherwise repaint the glyph --ink-soft and flatten all four to grey. */
+  .familySettingRow .settingIcon{
+    flex:0 0 auto;
+    width:28px;
+    height:28px;
+    border-radius:8px;
+    display:grid;
+    place-items:center;
+    background:color-mix(in oklab, var(--flag-hue) 12%, transparent);
+    color:var(--flag-hue);
+  }
+  .settingIcon svg{
+    width:16px;
+    height:16px;
+    display:block;
+  }
+  .familySettingRow[data-flag="violence"]{ --flag-hue:var(--flag-violence); }
+  .familySettingRow[data-flag="language"]{ --flag-hue:var(--flag-language); }
+  .familySettingRow[data-flag="romance"]{ --flag-hue:var(--flag-romance); }
+  .familySettingRow[data-flag="drinking"]{ --flag-hue:var(--flag-drinking); }
   .settingScaleHelp{
     display:grid;
     grid-template-columns:repeat(4, minmax(0, 1fr));
@@ -2048,7 +2107,7 @@ function reportError(err){
     color:var(--ink-soft);
     font-family:inherit;
     font-size:15px;
-    font-weight:750;
+    font-weight:700;
     cursor:pointer;
   }
   .limitControl button.selected{
@@ -2074,7 +2133,7 @@ function reportError(err){
     background:rgba(var(--accent-rgb),0.09);
     color:var(--accent-text);
     font-size:12px;
-    font-weight:650;
+    font-weight:600;
   }
   .fitSignal.amber{
     background:var(--warning-soft);
@@ -2100,9 +2159,9 @@ function reportError(err){
       text-align:left;
     }
     h1{
-      font-size:32px;
-      line-height:1.125;
-      font-weight:650;
+      font-size:24px;
+      line-height:1.2;
+      font-weight:600;
       margin-bottom:6px;
     }
     .subtitle{
@@ -2536,7 +2595,7 @@ function reportError(err){
     margin:0 0 8px;
     color:var(--accent-text);
     font-size:12px;
-    font-weight:650;
+    font-weight:600;
     letter-spacing:0.08em;
     text-transform:uppercase;
   }
@@ -2557,12 +2616,11 @@ function reportError(err){
     gap:10px !important;
   }
   #tonightPreShowBody .openui-header{ padding:0; }
-  #tonightPreShowBody .openui-header-top-left{
-    color:var(--ink);
-    font-family:"Newsreader", Georgia, serif;
-    font-size:17px;
-    font-weight:600;
-  }
+  /* Every preShow program opens with CardHeader("<title> · <year>", ...), so
+     the pick card named the same film twice, four lines apart, in two
+     different typefaces -- the outer .pickTitle and this one. The outer card
+     already states it; keep only the metadata line underneath. */
+  #tonightPreShowBody .openui-header-top-left{ display:none; }
   #tonightPreShowBody .openui-header-bottom{ color:var(--ink-soft); font-size:13px; }
   #tonightPreShowBody .openui-tag{
     background:var(--surface);
@@ -2577,7 +2635,7 @@ function reportError(err){
     border-radius:8px;
   }
   #tonightPreShowBody .openui-callout-warning{ border-left:3px solid var(--warning); }
-  #tonightPreShowBody .openui-callout-title{ color:var(--ink); font-weight:650; }
+  #tonightPreShowBody .openui-callout-title{ color:var(--ink); font-weight:600; }
   #tonightPreShowBody .openui-callout-description,
   #tonightPreShowBody .openui-markdown-renderer{ color:var(--ink-soft); }
   #tonightPreShowBody .openui-markdown-renderer p{ margin:0; }
@@ -2616,7 +2674,7 @@ function reportError(err){
   .worryTable caption{
     padding-bottom:6px;
     color:var(--ink);
-    font-weight:650;
+    font-weight:600;
     text-align:left;
   }
   .worryTable th,
@@ -2629,7 +2687,7 @@ function reportError(err){
   .worryTable thead th{
     color:var(--ink-soft);
     font-size:12px;
-    font-weight:650;
+    font-weight:600;
     letter-spacing:0.05em;
     text-transform:uppercase;
   }
@@ -2641,7 +2699,7 @@ function reportError(err){
     background:var(--surface);
     border:1px solid var(--line);
     font-size:12px;
-    font-weight:650;
+    font-weight:600;
   }
   .worryTag.yes{ border-color:var(--warning); border-left-width:3px; }
   .worryTag.mild{ border-color:var(--warning); border-style:dashed; }
@@ -2696,12 +2754,6 @@ function reportError(err){
       font-size:13px;
     }
     .moves button{ width:44px; }
-    .detail{
-      padding-left:92px;
-    }
-    .noPosterDetail{
-      padding-left:58px;
-    }
     .safeBetDetail{
       padding-left:104px;
     }
@@ -3280,6 +3332,37 @@ const CONTENT_FLAGS = [
   }
 ];
 const CONTENT_FLAG_IDS = CONTENT_FLAGS.map(flag => flag.id);
+
+// Plain line glyphs, not characters: these sit on a screen where a parent is
+// deciding what their kid is allowed to see, and a toy-looking icon set would
+// spend the trust the rest of this screen's writing earns. No emoji -- those
+// render as someone else's artwork and change shape per platform.
+const CONTENT_FLAG_ICONS = {
+  violence: 'M12 3l7 3v5c0 4.4-2.9 8.3-7 9.5C7.9 19.3 5 15.4 5 11V6l7-3z',
+  language: 'M21 11.5a7.5 7.5 0 0 1-7.5 7.5H8l-4 3v-5.6A7.5 7.5 0 0 1 10.5 4h3A7.5 7.5 0 0 1 21 11.5z',
+  romance: 'M12 20s-7-4.4-7-9.3A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7 3.1C19 15.6 12 20 12 20z',
+  drinking: 'M6 4h12l-1.4 8.2a4.6 4.6 0 0 1-9.2 0L6 4zM12 17v3M8.5 20h7'
+};
+
+function makeFlagIcon(flagId){
+  const wrap = document.createElement('span');
+  wrap.className = 'settingIcon';
+  wrap.setAttribute('aria-hidden', 'true');
+  const path = CONTENT_FLAG_ICONS[flagId];
+  if(!path) return wrap;
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('fill', 'none');
+  svg.setAttribute('stroke', 'currentColor');
+  svg.setAttribute('stroke-width', '1.6');
+  svg.setAttribute('stroke-linecap', 'round');
+  svg.setAttribute('stroke-linejoin', 'round');
+  const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  p.setAttribute('d', path);
+  svg.appendChild(p);
+  wrap.appendChild(svg);
+  return wrap;
+}
 // Bump whenever CONTENT_FLAGS' categories or scoring change in a way that
 // invalidates previously-researched `ca` content ratings (e.g. merging or
 // dropping a flag) -- stamped into movie entries as `csmRecheckVersion` so a
@@ -6791,11 +6874,15 @@ function renderFamilySettings(){
     copy.className = 'settingCopy';
     const title = document.createElement('strong');
     title.textContent = flag.label;
+    const head = document.createElement('div');
+    head.className = 'settingHead';
+    head.appendChild(makeFlagIcon(flag.id));
+    head.appendChild(title);
     const summary = document.createElement('span');
     summary.textContent = effective.source === 'parent'
       ? `Parent-set to ${effective.value}. Age ${selectedChild.age} default is ${effective.starter}.`
       : `Using the age ${selectedChild.age} default: ${effective.starter}.`;
-    copy.appendChild(title);
+    copy.appendChild(head);
     copy.appendChild(summary);
 
     const status = document.createElement('div');
