@@ -241,12 +241,18 @@ function reportError(err){
     --select-rgb:47,95,234;
     --error-bg:#FDECEA;
     --check:var(--ink);
-    --star:#D59B16;
-    --on-star:#172033;
+    /* --favorite is the want-to-watch glyph colour and must clear 3:1 against
+       --bg/--surface as a state-bearing graphic (WCAG 1.4.11); --favorite-fill
+       is the brighter tint used behind --on-favorite text, where the pairing
+       (not the swatch) carries the contrast. One token cannot do both jobs. */
+    --favorite:#9A6B08;
+    --favorite-fill:#D59B16;
+    --on-favorite:#172033;
     --new:#2354B8;
     --new-bg:#E7EEFF;
     --success:#18794E;
     --error:#B42318;
+    --on-error:#FFFFFF;
     --warning:#8A5A00;
     --warning-rgb:138,90,0;
     --warning-soft:#FFF4D6;
@@ -279,12 +285,14 @@ function reportError(err){
       --select-rgb:127,162,255;
       --error-bg:#3B2024;
       --check:#F7F9FC;
-      --star:#F2C14E;
-      --on-star:#0B1020;
+      --favorite:#F2C14E;
+      --favorite-fill:#F2C14E;
+      --on-favorite:#0B1020;
       --new:#AAC0FF;
       --new-bg:#202D50;
       --success:#4CC38A;
       --error:#FF7A70;
+      --on-error:#0B1020;
       --warning:#F2C14E;
       --warning-rgb:242,193,78;
       --warning-soft:#382F18;
@@ -317,12 +325,14 @@ function reportError(err){
     --select-rgb:127,162,255;
     --error-bg:#3B2024;
     --check:#F7F9FC;
-    --star:#F2C14E;
-    --on-star:#0B1020;
+    --favorite:#F2C14E;
+    --favorite-fill:#F2C14E;
+    --on-favorite:#0B1020;
     --new:#AAC0FF;
     --new-bg:#202D50;
     --success:#4CC38A;
     --error:#FF7A70;
+    --on-error:#0B1020;
     --warning:#F2C14E;
     --warning-rgb:242,193,78;
     --warning-soft:#382F18;
@@ -580,8 +590,8 @@ function reportError(err){
     color:var(--ink-soft);
   }
   .filterRow button.priorityToggle.on{
-    background:var(--star);
-    color:var(--on-star);
+    background:var(--favorite-fill);
+    color:var(--on-favorite);
   }
   .filterRow button.newToggle.on{
     background:var(--new-bg);
@@ -889,7 +899,7 @@ function reportError(err){
     line-height:1;
     color:var(--ink-faint);
   }
-  .star.on{ color:var(--star); }
+  .star.on{ color:var(--favorite); }
   .info{ flex:1; min-width:0; }
   .title{
     font-weight:600;
@@ -1295,7 +1305,7 @@ function reportError(err){
     padding:0 4px;
     border-radius:999px;
     background:var(--error);
-    color:#fff;
+    color:var(--on-error);
     font-size:11px;
     font-weight:700;
     line-height:1;
@@ -2566,7 +2576,7 @@ function reportError(err){
     border:1px solid var(--line);
     border-radius:8px;
   }
-  #tonightPreShowBody .openui-callout-warning{ border-left:3px solid var(--star); }
+  #tonightPreShowBody .openui-callout-warning{ border-left:3px solid var(--warning); }
   #tonightPreShowBody .openui-callout-title{ color:var(--ink); font-weight:650; }
   #tonightPreShowBody .openui-callout-description,
   #tonightPreShowBody .openui-markdown-renderer{ color:var(--ink-soft); }
@@ -2633,8 +2643,8 @@ function reportError(err){
     font-size:12px;
     font-weight:650;
   }
-  .worryTag.yes{ border-color:var(--star); border-left-width:3px; }
-  .worryTag.mild{ border-color:var(--star); border-style:dashed; }
+  .worryTag.yes{ border-color:var(--warning); border-left-width:3px; }
+  .worryTag.mild{ border-color:var(--warning); border-style:dashed; }
   .skipFeedback p.worryNote{
     margin:10px 0;
     padding:9px 12px;
