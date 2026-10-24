@@ -3284,14 +3284,15 @@ function reportError(err){
      data-*.js files (still the real source of truth), never this one
      directly, then re-run the bundler. -->
 <script src="data-bundle.js"></script>
-<!-- Vercel Web Analytics. Served from our own origin (/_vercel/insights/*),
-     so it needs no CSP source beyond 'self' for either the script or its
-     beacons -- but it does send aggregate page views off-device, which is a
-     disclosure obligation, not just a config change. Both the "What we
-     don't do" list and "Third-party services" in privacy.html were updated
-     with it; keep them in step if this ever changes. Cookieless, with no
-     cross-site profile. -->
-<script defer src="/_vercel/insights/script.js"></script>
+<!-- Vercel Web Analytics loads from our own origin
+     (/_vercel/insights/script.js) and so needs no CSP source beyond 'self',
+     but it is deliberately NOT loaded yet. Vercel only serves that route
+     once the dashboard toggle is on; shipping the tag first made it 404 on
+     every page load for every visitor and broke catalog.spec.js's
+     no-console-errors check. Enable analytics first, then restore the tag
+     together with the matching wording in privacy.html and terms.html --
+     privacy-disclosure.spec.js enforces that pairing in both directions. -->
+
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <script>
 // Load-time fix: flip the Google Fonts stylesheet from print to screen media
