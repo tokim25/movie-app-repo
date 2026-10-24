@@ -3284,6 +3284,14 @@ function reportError(err){
      data-*.js files (still the real source of truth), never this one
      directly, then re-run the bundler. -->
 <script src="data-bundle.js"></script>
+<!-- Vercel Web Analytics. Served from our own origin (/_vercel/insights/*),
+     so it needs no CSP source beyond 'self' for either the script or its
+     beacons -- but it does send aggregate page views off-device, which is a
+     disclosure obligation, not just a config change. Both the "What we
+     don't do" list and "Third-party services" in privacy.html were updated
+     with it; keep them in step if this ever changes. Cookieless, with no
+     cross-site profile. -->
+<script defer src="/_vercel/insights/script.js"></script>
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <script>
 // Load-time fix: flip the Google Fonts stylesheet from print to screen media

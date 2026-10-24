@@ -50,6 +50,38 @@ test('every external script host index.html loads is named in privacy.html (#98)
   }
 });
 
+// The check above only sees absolute external URLs. A provider that serves
+// its collector from our own origin -- Vercel Web Analytics at
+// /_vercel/insights/* -- still ships data off-device, but looks first-party
+// to that regex and would have shipped undisclosed and green. Enumerate
+// those here so adding one forces the same conscious disclosure step.
+const FIRST_PARTY_PROXIED_SERVICES = {
+  '/_vercel/insights': 'Vercel'
+};
+
+test('analytics served from our own origin is disclosed like any third party', () => {
+  const indexSrc = fs.readFileSync('index.html', 'utf8');
+  const privacySrc = fs.readFileSync('privacy.html', 'utf8');
+
+  for (const [pathPrefix, serviceName] of Object.entries(FIRST_PARTY_PROXIED_SERVICES)) {
+    if (!indexSrc.includes(pathPrefix)) continue;
+    expect(
+      privacySrc,
+      `index.html loads "${pathPrefix}" but privacy.html never mentions ` +
+      `"${serviceName}" -- disclose it in "Third-party services".`
+    ).toContain(serviceName);
+    // The policy used to promise the opposite outright. Loading an analytics
+    // collector while that sentence is still in the document is the specific
+    // contradiction that shipped once; fail on it rather than trusting a
+    // future reader to notice.
+    expect(
+      privacySrc,
+      `privacy.html still claims it does not collect analytics while ` +
+      `index.html loads "${pathPrefix}". Reconcile the two.`
+    ).not.toMatch(/don't collect analytics|do not collect analytics/i);
+  }
+});
+
 // Issue #99: the exact shape serializeState() produces today (and therefore
 // what's included in every Google sync and manual sync-code payload).
 // Generated via the real app code paths, not hand-built, so a future code
