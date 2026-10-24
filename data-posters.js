@@ -1071,4 +1071,9 @@ const MOVIE_POSTERS = Object.freeze({
   ,1091: {"u":"https://upload.wikimedia.org/wikipedia/en/d/d7/Alexander_and_the_Terrible_Horrible_No_Good_Very_Bad_Road_Trip_poster.jpg","w":255,"h":378,"p":"Alexander and the Terrible, Horrible, No Good, Very Bad Road Trip"}
   ,1092: {"u":"https://upload.wikimedia.org/wikipedia/en/2/2a/Cheaper_by_the_Dozen_2.jpg","w":263,"h":378,"p":"Cheaper by the Dozen 2"}
   ,1093: {"u":"https://upload.wikimedia.org/wikipedia/en/6/65/Forgotten_Island_poster.jpeg","w":250,"h":396,"p":"Forgotten Island"}
+  ,1099: {"u":"https://upload.wikimedia.org/wikipedia/en/3/32/Bride_of_Boogedy_FilmPoster.jpeg","w":175,"h":280,"p":"Bride of Boogedy"}
+  ,1100: {"u":"https://upload.wikimedia.org/wikipedia/en/e/e8/Tower_of_Terror_VideoCover.png","w":250,"h":358,"p":"Tower of Terror (1997 film)"}
+  ,1094: {"u":"https://upload.wikimedia.org/wikipedia/en/e/ea/Halloween_tree_cover.jpg","w":238,"h":417,"p":"The Halloween Tree (film)"}
+  ,1097: {"u":"https://upload.wikimedia.org/wikipedia/en/6/65/Double_Trouble_%282026_film%29_poster.jpg","w":250,"h":334,"p":"Double Trouble (2026 film)"}
+  ,1101: {"u":"https://upload.wikimedia.org/wikipedia/en/a/ac/Chickenhare_and_the_secret_of_the_groundhog.jpg","w":250,"h":313,"p":"Chickenhare and the Secret of the Groundhog"}
 });
