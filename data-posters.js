@@ -1070,5 +1070,32 @@ const MOVIE_POSTERS = Object.freeze({
   ,1090: {"u":"https://upload.wikimedia.org/wikipedia/en/7/79/Woz-poster001sm.png","w":264,"h":376,"p":"The Muppets' Wizard of Oz"}
   ,1091: {"u":"https://upload.wikimedia.org/wikipedia/en/d/d7/Alexander_and_the_Terrible_Horrible_No_Good_Very_Bad_Road_Trip_poster.jpg","w":255,"h":378,"p":"Alexander and the Terrible, Horrible, No Good, Very Bad Road Trip"}
   ,1092: {"u":"https://upload.wikimedia.org/wikipedia/en/2/2a/Cheaper_by_the_Dozen_2.jpg","w":263,"h":378,"p":"Cheaper by the Dozen 2"}
-  ,1093: {"u":"https://upload.wikimedia.org/wikipedia/en/6/65/Forgotten_Island_poster.jpeg","w":250,"h":396,"p":"Forgotten Island"}
+  ,1093: {"u":"https://upload.wikimedia.org/wikipedia/en/6/65/Forgotten_Island_poster.jpeg","w":250,"h":396,"p":"Forgotten Island"},
+  1103: {"u":"https://upload.wikimedia.org/wikipedia/en/f/f5/HotelTransylvania.jpg","w":259,"h":384,"p":"Hotel Transylvania (film)"},
+  1104: {"u":"https://upload.wikimedia.org/wikipedia/en/5/5d/Hotel_Transylvania_2_poster.jpg","w":250,"h":370,"p":"Hotel Transylvania 2"},
+  1105: {"u":"https://upload.wikimedia.org/wikipedia/en/9/9e/Hotel_Transylvania_3_%282018%29_Poster.jpg","w":259,"h":384,"p":"Hotel Transylvania 3: Summer Vacation"},
+  1106: {"u":"https://upload.wikimedia.org/wikipedia/en/8/8b/Hotel_Transylvania_Transformania.jpg","w":220,"h":326,"p":"Hotel Transylvania: Transformania"},
+  1107: {"u":"https://upload.wikimedia.org/wikipedia/en/7/77/Cloudy_with_a_Chance_of_Meatballs_2.jpg","w":258,"h":387,"p":"Cloudy with a Chance of Meatballs 2"},
+  1108: {"u":"https://upload.wikimedia.org/wikipedia/en/6/63/The_Emoji_Movie_film_poster.jpg","w":220,"h":326,"p":"The Emoji Movie"},
+  1109: {"u":"https://upload.wikimedia.org/wikipedia/en/2/2e/Goosebumps_%28film%29_poster.jpg","w":252,"h":378,"p":"Goosebumps (film)"},
+  1110: {"u":"https://upload.wikimedia.org/wikipedia/en/5/59/Goosebumps_2_Haunted_Halloween_%282018%29_poster.jpg","w":259,"h":383,"p":"Goosebumps 2: Haunted Halloween"},
+  1111: {"u":"https://upload.wikimedia.org/wikipedia/en/9/9e/Open_Season.jpg","w":259,"h":385,"p":"Open Season (2006 film)"},
+  1112: {"u":"https://upload.wikimedia.org/wikipedia/en/4/4e/Open_Season_2_poster.jpg","w":259,"h":383,"p":"Open Season 2"},
+  1113: {"u":"https://upload.wikimedia.org/wikipedia/en/0/0d/Open_Season_3_promotional_poster.jpg","w":260,"h":368,"p":"Open Season 3"},
+  1114: {"u":"https://upload.wikimedia.org/wikipedia/en/8/8e/Open_Season_Scared_Silly_%282016%29_DVD_Cover.jpg","w":258,"h":387,"p":"Open Season: Scared Silly"},
+  1115: {"u":"https://upload.wikimedia.org/wikipedia/en/1/11/TheSmurfs2011Poster.jpg","w":250,"h":370,"p":"The Smurfs (film)"},
+  1116: {"u":"https://upload.wikimedia.org/wikipedia/en/1/19/The_Smurfs_2_poster.jpg","w":259,"h":383,"p":"The Smurfs 2"},
+  1117: {"u":"https://upload.wikimedia.org/wikipedia/en/0/07/Smurfs_The_Lost_Village_poster.jpg","w":259,"h":384,"p":"Smurfs: The Lost Village"},
+  1118: {"u":"https://upload.wikimedia.org/wikipedia/en/5/55/The_Star_%282017_film%29_poster.jpg","w":220,"h":330,"p":"The Star (2017 film)"},
+  1119: {"u":"https://upload.wikimedia.org/wikipedia/en/6/6a/Surfs_upmp.jpg","w":220,"h":327,"p":"Surf's Up (film)"},
+  1120: {"u":"https://upload.wikimedia.org/wikipedia/en/4/47/Surf%27s_Up_2_WaveMania_cover.jpg","w":250,"h":359,"p":"Surf's Up 2: WaveMania"},
+  1121: {"u":"https://upload.wikimedia.org/wikipedia/en/e/ec/The_Pirates%21_In_an_Adventure_with_Scientists%21_poster.jpg","w":363,"h":274,"p":"The Pirates! In an Adventure with Scientists!"},
+  1122: {"u":"https://upload.wikimedia.org/wikipedia/en/3/3d/Peter-rabbit-teaser.jpg","w":220,"h":326,"p":"Peter Rabbit (film)"},
+  1123: {"u":"https://upload.wikimedia.org/wikipedia/en/e/ee/Peter_Rabbit_2_-_RT_poster.png","w":259,"h":384,"p":"Peter Rabbit 2: The Runaway"},
+  1124: {"u":"https://upload.wikimedia.org/wikipedia/en/6/63/Toy_Story_of_Terror.jpg","w":273,"h":364,"p":"Toy Story of Terror!"},
+  1125: {"u":"https://upload.wikimedia.org/wikipedia/en/e/e1/Toy_Story_That_Time_Forgot.jpg","w":259,"h":383,"p":"Toy Story That Time Forgot"},
+  1126: {"u":"https://upload.wikimedia.org/wikipedia/en/6/63/Hawaiian_Vacation_poster.jpg","w":258,"h":387,"p":"Hawaiian Vacation"},
+  1127: {"u":"https://upload.wikimedia.org/wikipedia/en/3/39/Small_Fry_poster.jpg","w":258,"h":387,"p":"Small Fry (film)"},
+  1128: {"u":"https://upload.wikimedia.org/wikipedia/en/c/cd/Partysaurus_Rex_poster.jpg","w":262,"h":381,"p":"Partysaurus Rex"},
+  1129: {"u":"https://upload.wikimedia.org/wikipedia/en/c/c9/Grow_%28film%29.jpg","w":259,"h":384,"p":"Grow (film)"}
 });

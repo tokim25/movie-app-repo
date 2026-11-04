@@ -214,4 +214,15 @@ const MOVIE_PREREQUISITES = Object.freeze({
   1091: 1034, // Alexander and the Terrible, Horrible, No Good, Very Bad Road Trip (2025) <- Alexander and the Terrible, Horrible, No Good, Very Bad Day (2014)
   1092: 1032, // Cheaper by the Dozen 2 (2005) <- Cheaper by the Dozen (2003)
   1099: 1098, // Bride of Boogedy (1987) <- Mr. Boogedy (1986)
+  1104: 1103,
+  1105: 1104,
+  1106: 1105,
+  1107: 1071,
+  1110: 1109,
+  1112: 1111,
+  1113: 1112,
+  1114: 1113,
+  1116: 1115,
+  1120: 1119,
+  1123: 1122,
 });
