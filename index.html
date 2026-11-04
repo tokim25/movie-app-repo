@@ -3356,11 +3356,11 @@ const NOT_INTERESTED_KEY = "family-feature-not-interested-v1";
 const NOT_INTERESTED_SUPPRESS_MS = 7 * 24 * 60 * 60 * 1000;
 let notInterestedUntil = {};
 const SKIPPED_KEY = "family-feature-skipped-v1";
-// How long a plain Skip keeps a title out of Tonight's pick. Shorter than
+// How long a plain Skip keeps a title out of Tonight's pick (a month, per the family). Shorter than
 // "Not interested" (a deliberate "no") because a bare Skip usually means
 // "not tonight", not "never". Device-local and non-synced for the same
 // reason as notInterestedUntil above.
-const SKIP_SUPPRESS_DAYS = 3;
+const SKIP_SUPPRESS_DAYS = 30;
 const SKIP_SUPPRESS_MS = SKIP_SUPPRESS_DAYS * 24 * 60 * 60 * 1000;
 let skippedUntil = {};
 const STATE_SCHEMA = 3;
