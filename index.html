@@ -3355,6 +3355,14 @@ const NOT_INTERESTED_KEY = "family-feature-not-interested-v1";
 // watch, so it doesn't need serializeState()/mergeState() support.
 const NOT_INTERESTED_SUPPRESS_MS = 7 * 24 * 60 * 60 * 1000;
 let notInterestedUntil = {};
+const SKIPPED_KEY = "family-feature-skipped-v1";
+// How long a plain Skip keeps a title out of Tonight's pick. Shorter than
+// "Not interested" (a deliberate "no") because a bare Skip usually means
+// "not tonight", not "never". Device-local and non-synced for the same
+// reason as notInterestedUntil above.
+const SKIP_SUPPRESS_DAYS = 3;
+const SKIP_SUPPRESS_MS = SKIP_SUPPRESS_DAYS * 24 * 60 * 60 * 1000;
+let skippedUntil = {};
 const STATE_SCHEMA = 3;
 const MOVIE_NUMS = new Set(MOVIES.map(movie => String(movie.num)));
 const MOVIE_INDEX_BY_NUM = new Map(MOVIES.map((movie, idx) => [String(movie.num), idx]));
@@ -4407,6 +4415,39 @@ function clearNotInterested(idx){
   persistNotInterested();
 }
 
+function loadSkipped(){
+  try{
+    const raw = localStorage.getItem(SKIPPED_KEY);
+    const parsed = raw ? JSON.parse(raw) : {};
+    const cleaned = {};
+    if(parsed && typeof parsed === 'object'){
+      const nowTs = now();
+      Object.keys(parsed).forEach(key => {
+        if(typeof parsed[key] === 'number' && parsed[key] > nowTs) cleaned[key] = parsed[key];
+      });
+    }
+    skippedUntil = cleaned;
+  }catch(e){ skippedUntil = {}; }
+}
+
+function persistSkipped(){
+  try{
+    localStorage.setItem(SKIPPED_KEY, JSON.stringify(skippedUntil));
+  }catch(e){ /* best-effort; a missed write just means this skip isn't remembered */ }
+}
+
+// Remembers a plain Skip across sessions -- called from
+// skipCurrentTonightPick(), the one place both Skip controls go through.
+function markSkipped(idx){
+  skippedUntil[movieKey(idx)] = now() + SKIP_SUPPRESS_MS;
+  persistSkipped();
+}
+
+function isSkipSuppressed(idx){
+  const until = skippedUntil[movieKey(idx)];
+  return typeof until === 'number' && until > now();
+}
+
 function isNotInterestedSuppressed(idx){
   const until = notInterestedUntil[movieKey(idx)];
   return typeof until === 'number' && until > now();
@@ -4939,6 +4980,17 @@ function meetsAgePolicyForAllKids(movie, kids){
   return kids.every(child => age <= child.age);
 }
 
+// True when the movie has no prerequisite, the prerequisite isn't in this
+// catalog, or the prerequisite is marked watched.
+function prerequisiteWatched(idx){
+  if(typeof MOVIE_PREREQUISITES === 'undefined') return true;
+  const prereqNum = MOVIE_PREREQUISITES[MOVIES[idx].num];
+  if(prereqNum === undefined) return true;
+  const prereqIdx = MOVIE_INDEX_BY_NUM.get(String(prereqNum));
+  if(prereqIdx === undefined) return true;
+  return !!markValue(state.checked, prereqIdx);
+}
+
 function isTonightEligible(idx, kids, includeSkipped, requireGreen){
   const movie = MOVIES[idx];
   if(!meetsAgePolicyForAllKids(movie, kids)) return false;
@@ -4958,6 +5010,16 @@ function isTonightEligible(idx, kids, includeSkipped, requireGreen){
   // and last-resort bypass as the two checks above, so it still can never
   // cause a "no match" by itself.
   if(!includeSkipped && isNotInterestedSuppressed(idx)) return false;
+  // A title the family skipped earlier (this session or a previous one, see
+  // markSkipped()) -- same strict/relaxed-fresh exclusion and last-resort
+  // bypass as the checks above.
+  if(!includeSkipped && isSkipSuppressed(idx)) return false;
+  // Sequel gate: a sequel isn't recommended until its immediate predecessor
+  // (MOVIE_PREREQUISITES, data-series.js) is marked watched. A hard gate in
+  // every pass, like the age gate, so the last-resort fallback can't hand
+  // back a sequel the family hasn't earned yet. Already-watched titles are
+  // exempt (Favorites mood replays them).
+  if(!markValue(state.checked, idx) && !prerequisiteWatched(idx)) return false;
   // Check a worry's "Show me picks without this": applies in every pass,
   // like a content setting, so the last-resort fallback can't bring back a
   // title whose notes mention the worry (or that was never checked for it).
@@ -5529,6 +5591,7 @@ function checkTonightWorry(worry){
 function skipCurrentTonightPick(){
   if(tonightSelection.currentPickIdx !== null){
     tonightSelection.skippedMovieNums.add(movieKey(tonightSelection.currentPickIdx));
+    markSkipped(tonightSelection.currentPickIdx);
   }
   showTonightPick();
 }
@@ -7717,7 +7780,7 @@ document.getElementById('tonightSkipBtn').addEventListener('click', ()=>{
   // behind.
   if(skippedIdx !== null) recordTonightSkipEvent(skippedIdx);
   skipCurrentTonightPick();
-  showToast('Skipped for tonight');
+  showToast(`Skipped. We'll hold it back for ${SKIP_SUPPRESS_DAYS} days`);
   document.getElementById('tonightSkipFeedback').hidden = false;
   document.getElementById('tonightSkipPrompt').textContent = `What missed about ${skippedTitle}? Optional—this won't change your family settings.`;
   document.getElementById('tonightSkipBtn').setAttribute('aria-expanded', 'true');
@@ -8240,6 +8303,7 @@ initTheme();
 loadState();
 loadRecentTonightPicks();
 loadNotInterested();
+loadSkipped();
 tryInitGoogleSync();
 renderStudioGrid();
 // No tonightSelection seeding needed here: excludedChildIds starts empty

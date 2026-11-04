@@ -78,6 +78,7 @@ vm.runInContext(`
   ];
   this.__POSTERS__ = typeof MOVIE_POSTERS !== 'undefined' ? MOVIE_POSTERS : {};
   this.__GUIDANCE__ = typeof MOVIE_GUIDANCE !== 'undefined' ? MOVIE_GUIDANCE : undefined;
+  this.__PREREQS__ = typeof MOVIE_PREREQUISITES !== 'undefined' ? MOVIE_PREREQUISITES : {};
 `, context);
 
 const movies = context.__MOVIES__;
@@ -192,6 +193,21 @@ for (const movie of movies) {
       if (url.protocol !== 'https:') errors.push(`${movie.num} ${movie.t}: poster URL must use https`);
     } catch {
       errors.push(`${movie.num} ${movie.t}: invalid poster URL`);
+    }
+  }
+}
+
+// data-series.js (MOVIE_PREREQUISITES): every key and value must be a real
+// catalog num, a movie can't be its own prerequisite, and the chains can't
+// loop (a loop would gate every title in it forever).
+{
+  for (const [sequel, prereq] of Object.entries(context.__PREREQS__)) {
+    if (!seenNums.has(Number(sequel))) errors.push(`MOVIE_PREREQUISITES: unknown sequel num ${sequel}`);
+    if (!seenNums.has(prereq)) errors.push(`MOVIE_PREREQUISITES: ${sequel} points at unknown num ${prereq}`);
+    const seen = new Set([Number(sequel)]);
+    for (let cur = prereq; cur !== undefined; cur = context.__PREREQS__[cur]) {
+      if (seen.has(cur)) { errors.push(`MOVIE_PREREQUISITES: ${sequel} is part of a loop`); break; }
+      seen.add(cur);
     }
   }
 }

@@ -98,7 +98,7 @@ test('skip advances to a different tonight pick', async ({ page }) => {
   await page.locator('#tonightSkipBtn').click();
 
   await expect(page.locator('#tonightPickTitle')).not.toHaveText(firstPick);
-  await expect(page.locator('#toast')).toContainText('Skipped for tonight');
+  await expect(page.locator('#toast')).toContainText('Skipped.');
 });
 
 test('finding another pick after a result behaves like skip', async ({ page }) => {
