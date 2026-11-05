@@ -1,0 +1,331 @@
+{
+ "1103": {
+  "csm": {
+   "v": 3,
+   "s": 2,
+   "l": 2,
+   "d": 1,
+   "age": 6,
+   "src": "page",
+   "on": "2026-11-04"
+  },
+  "rule": 1
+ },
+ "1104": {
+  "csm": {
+   "v": 2,
+   "s": 1,
+   "l": 1,
+   "d": 0,
+   "age": 7,
+   "src": "page",
+   "on": "2026-11-04"
+  },
+  "rule": 1
+ },
+ "1105": {
+  "csm": {
+   "v": 3,
+   "s": 2,
+   "l": 1,
+   "d": 1,
+   "age": 7,
+   "src": "page",
+   "on": "2026-11-04"
+  },
+  "rule": 1
+ },
+ "1106": {
+  "csm": {
+   "v": 3,
+   "s": 2,
+   "l": 1,
+   "d": 1,
+   "age": 7,
+   "src": "page",
+   "on": "2026-11-04"
+  },
+  "rule": 1
+ },
+ "1107": {
+  "csm": {
+   "v": 3,
+   "s": 1,
+   "l": 2,
+   "d": 1,
+   "age": 6,
+   "src": "page",
+   "on": "2026-11-04"
+  },
+  "rule": 1
+ },
+ "1108": {
+  "csm": {
+   "v": 2,
+   "s": 1,
+   "l": 2,
+   "d": 1,
+   "age": 6,
+   "src": "page",
+   "on": "2026-11-04"
+  },
+  "rule": 1
+ },
+ "1109": {
+  "csm": {
+   "v": 3,
+   "s": 1,
+   "l": 2,
+   "d": 1,
+   "age": 8,
+   "src": "page",
+   "on": "2026-11-04"
+  },
+  "rule": 1,
+  "adj": {
+   "violence": {
+    "kind": "depicted",
+    "quote": "A lot of different monsters appear, and some may frighten younger or more sensitive kids",
+    "why": "Horror-genre film with many monsters; the app's violence level 4 describes horror flavor, and CSM's own text warns it may frighten younger or sensitive kids."
+   }
+  }
+ },
+ "1110": {
+  "csm": {
+   "v": 3,
+   "s": 2,
+   "l": 3,
+   "d": 0,
+   "age": 8,
+   "src": "page",
+   "on": "2026-11-04"
+  },
+  "rule": 1
+ },
+ "1111": {
+  "csm": {
+   "v": 3,
+   "s": 1,
+   "l": 2,
+   "d": 3,
+   "age": 6,
+   "src": "page",
+   "on": "2026-11-04"
+  },
+  "rule": 1
+ },
+ "1112": {
+  "csm": {
+   "v": 1,
+   "s": 2,
+   "l": 2,
+   "d": 0,
+   "age": 5,
+   "src": "page",
+   "on": "2026-11-04"
+  },
+  "rule": 1
+ },
+ "1113": {
+  "csm": {
+   "v": 2,
+   "s": 1,
+   "l": 1,
+   "d": 0,
+   "age": 5,
+   "src": "page",
+   "on": "2026-11-04"
+  },
+  "rule": 1
+ },
+ "1114": {
+  "csm": {
+   "v": 2,
+   "s": 1,
+   "l": 2,
+   "d": 0,
+   "age": 6,
+   "src": "page",
+   "on": "2026-11-04"
+  },
+  "rule": 1
+ },
+ "1115": {
+  "csm": {
+   "v": 2,
+   "s": 1,
+   "l": 2,
+   "d": 0,
+   "age": 6,
+   "src": "page",
+   "on": "2026-11-04"
+  },
+  "rule": 1
+ },
+ "1116": {
+  "csm": {
+   "v": 2,
+   "s": 1,
+   "l": 2,
+   "d": 0,
+   "age": 6,
+   "src": "page",
+   "on": "2026-11-04"
+  },
+  "rule": 1
+ },
+ "1117": {
+  "csm": {
+   "v": 3,
+   "s": 1,
+   "l": 0,
+   "d": 0,
+   "age": 6,
+   "src": "page",
+   "on": "2026-11-04"
+  },
+  "rule": 1
+ },
+ "1118": {
+  "csm": {
+   "v": 3,
+   "s": 0,
+   "l": 0,
+   "d": 0,
+   "age": 6,
+   "src": "page",
+   "on": "2026-11-04"
+  },
+  "rule": 1
+ },
+ "1119": {
+  "csm": {
+   "v": 0,
+   "s": 0,
+   "l": 0,
+   "d": 0,
+   "age": 5,
+   "src": "page",
+   "on": "2026-11-04"
+  },
+  "rule": 1,
+  "adj": {
+   "violence": {
+    "kind": "depicted",
+    "quote": "only a few mildly perilous moments during the surfing competition",
+    "why": "CSM scores violence 0, but its text describes perilous moments and a father eaten by a shark; level 1 (no real menace) understates it, so one level up."
+   }
+  }
+ },
+ "1120": {
+  "csm": {
+   "v": 2,
+   "s": 0,
+   "l": 1,
+   "d": 0,
+   "age": 7,
+   "src": "page",
+   "on": "2026-11-04"
+  },
+  "rule": 1
+ },
+ "1121": {
+  "csm": {
+   "v": 2,
+   "s": 2,
+   "l": 2,
+   "d": 3,
+   "age": 6,
+   "src": "page",
+   "on": "2026-11-04"
+  },
+  "rule": 1,
+  "adj": {
+   "violence": {
+    "kind": "depicted",
+    "quote": "The pirates use guns and swords and have hand-to-hand fights",
+    "why": "Weapons and a climactic battle are level 3 in the app's violence rubric, while CSM scores violence only 2."
+   }
+  }
+ },
+ "1122": {
+  "csm": {
+   "v": 3,
+   "s": 2,
+   "l": 1,
+   "d": 2,
+   "age": 6,
+   "src": "page",
+   "on": "2026-11-04"
+  },
+  "rule": 1
+ },
+ "1123": {
+  "csm": {
+   "v": 3,
+   "s": 2,
+   "l": 1,
+   "d": 2,
+   "age": 7,
+   "src": "page",
+   "on": "2026-11-04"
+  },
+  "rule": 1
+ },
+ "1124": {
+  "csm": {
+   "v": 3,
+   "s": 0,
+   "l": 0,
+   "d": 0,
+   "age": 6,
+   "src": "page",
+   "on": "2026-11-04"
+  },
+  "rule": 1,
+  "adj": {
+   "violence": {
+    "kind": "depicted",
+    "quote": "which deliberately plays like a horror movie",
+    "why": "The special is intentionally styled as a horror film with jump scares; the app's violence level 4 describes horror flavor."
+   }
+  }
+ },
+ "1125": {
+  "csm": {
+   "v": 3,
+   "s": 0,
+   "l": 0,
+   "d": 0,
+   "age": 4,
+   "src": "page",
+   "on": "2026-11-04"
+  },
+  "rule": 1
+ },
+ "1129": {
+  "csm": {
+   "v": 3,
+   "s": 1,
+   "l": 2,
+   "d": 1,
+   "age": 6,
+   "src": "page",
+   "on": "2026-11-04"
+  },
+  "rule": 1
+ },
+ "1130": {
+  "csm": {
+   "v": 4,
+   "s": 2,
+   "l": 3,
+   "d": 2,
+   "age": 11,
+   "src": "page",
+   "on": "2026-11-05"
+  },
+  "rule": 1,
+  "held": true
+ }
+}
