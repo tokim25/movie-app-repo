@@ -5,7 +5,8 @@
 // predecessor that is not in the catalog is simply left out.
 // Rules for adding entries: direct sequels and release-order continuations
 // only. Remakes, reboots and prequels/midquels with an ambiguous watch order
-// are left out on purpose. When you add a sequel to the catalog, add its
+// are left out on purpose. Star Wars is deliberately not gated (tokim25, 2026-11-05):
+// families watch it in different orders. When you add a sequel to the catalog, add its
 // entry here too (see the movie-watchlist-updater skill).
 const MOVIE_PREREQUISITES = Object.freeze({
   17: 16, // March of the Penguins 2: The Next Step (2017) <- March of the Penguins (2005)
@@ -145,12 +146,6 @@ const MOVIE_PREREQUISITES = Object.freeze({
   811: 809, // Justice League: Crisis on Infinite Earths Part Two (2024) <- Justice League: Crisis on Infinite Earths Part One (2024)
   813: 790, // Venom: The Last Dance (2024) <- Venom: Let There Be Carnage (2021)
   814: 753, // Captain America: Brave New World (2025) <- Captain America: Civil War (2016)
-  840: 123, // Star Wars Episode V: The Empire Strikes Back (1980) <- Star Wars: Episode IV – A New Hope (1977)
-  841: 840, // Star Wars Episode VI: Return of the Jedi (1983) <- Star Wars Episode V: The Empire Strikes Back (1980)
-  843: 842, // Star Wars Episode II: Attack of the Clones (2002) <- Star Wars Episode I: The Phantom Menace (1999)
-  844: 843, // Star Wars Episode III: Revenge of the Sith (2005) <- Star Wars Episode II: Attack of the Clones (2002)
-  846: 845, // Star Wars Episode VIII: The Last Jedi (2017) <- Star Wars Episode VII: The Force Awakens (2015)
-  847: 846, // Star Wars Episode IX: The Rise of Skywalker (2019) <- Star Wars Episode VIII: The Last Jedi (2017)
   851: 596, // D2: The Mighty Ducks (1994) <- The Mighty Ducks (1992)
   852: 851, // D3: The Mighty Ducks (1996) <- D2: The Mighty Ducks (1994)
   854: 39, // Harry Potter and the Chamber of Secrets (2002) <- Harry Potter and the Sorcerer's Stone (2001)
