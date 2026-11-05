@@ -503,6 +503,8 @@ to match a new total would be actively wrong, not merely unnecessary. There is
 no static subtitle or "curated lists" count anywhere in the current UI at all --
 if a future redesign adds one back, update this paragraph to say where.
 
+**Where files live (added 2026-11-05).** Every curated batch of 15 or more titles gets its own `data-<source>.js` (example: `data-sonyanim.js`, `MOVIES_SONYANIM`, `source: "SONYANIM"`), wired in four places: `dataFiles` in `scripts/data-version.mjs`, `movieArrays` in `scripts/validate-data.mjs`, the explicit lists in `scripts/validate-guidance.mjs` and `scripts/audit-content-flags.mjs`, and the `MOVIES` concat in `index.html` (an inline-script change, so re-stamp the CSP hash in `vercel.json`) plus the file list in `tests/service-worker.spec.js`. Smaller batches and one-off adds stay in `data-extra.js`. Per-movie lookups (`data-posters.js`, `data-guidance.js`, `data-series.js`) stay single files keyed by `num`.
+
 ## Sequels: add a prerequisite entry (added 2026-11-04)
 
 "Find a movie" (Tonight) does not recommend a sequel until its predecessor is marked watched. The link lives in `data-series.js` (`MOVIE_PREREQUISITES`, a map of sequel `num` to the `num` of its immediate predecessor). When you add a direct sequel whose predecessor is in the catalog, add one line there. Leave out remakes, reboots, and prequels or midquels with an ambiguous watch order. A title with no entry is never gated. `scripts/validate-data.mjs` fails on unknown nums and on loops. `data-series.js` is in `dataFiles`, so the bundle and DATA_VERSION re-stamps cover it.

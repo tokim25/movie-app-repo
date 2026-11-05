@@ -36,6 +36,7 @@ export const dataFiles = [
   'data-csm.js',
   'data-mcudc.js',
   'data-ghibli.js',
+  'data-sonyanim.js',
   'data-posters.js',
   'data-guidance.js',
   'data-series.js'

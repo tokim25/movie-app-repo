@@ -22,7 +22,8 @@ const movieArrays = [
   'MOVIES_EXTRA',
   'MOVIES_CSM',
   'MOVIES_MCUDC',
-  'MOVIES_GHIBLI'
+  'MOVIES_GHIBLI',
+  'MOVIES_SONYANIM'
 ];
 
 const contentFlagIds = ['violence', 'language', 'romance', 'drinking'];

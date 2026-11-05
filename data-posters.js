@@ -1097,5 +1097,6 @@ const MOVIE_POSTERS = Object.freeze({
   1126: {"u":"https://upload.wikimedia.org/wikipedia/en/6/63/Hawaiian_Vacation_poster.jpg","w":258,"h":387,"p":"Hawaiian Vacation"},
   1127: {"u":"https://upload.wikimedia.org/wikipedia/en/3/39/Small_Fry_poster.jpg","w":258,"h":387,"p":"Small Fry (film)"},
   1128: {"u":"https://upload.wikimedia.org/wikipedia/en/c/cd/Partysaurus_Rex_poster.jpg","w":262,"h":381,"p":"Partysaurus Rex"},
-  1129: {"u":"https://upload.wikimedia.org/wikipedia/en/c/c9/Grow_%28film%29.jpg","w":259,"h":384,"p":"Grow (film)"}
+  1129: {"u":"https://upload.wikimedia.org/wikipedia/en/c/c9/Grow_%28film%29.jpg","w":259,"h":384,"p":"Grow (film)"},
+  1130: {"u":"https://upload.wikimedia.org/wikipedia/en/a/aa/Wildwood_2026_poster.jpg","w":260,"h":385,"p":"Wildwood (film)"}
 });

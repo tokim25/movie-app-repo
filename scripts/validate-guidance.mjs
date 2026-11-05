@@ -129,7 +129,7 @@ export function loadCatalogAndGuidance(files) {
     this.__MOVIES__ = [
       ...MOVIES_BASE, ...MOVIES_RT, ...MOVIES_DCOM, ...MOVIES_DISNEY, ...MOVIES_PIXAR,
       ...MOVIES_DREAMWORKS, ...MOVIES_NICK, ...MOVIES_EXTRA, ...MOVIES_CSM,
-      ...MOVIES_MCUDC, ...MOVIES_GHIBLI
+      ...MOVIES_MCUDC, ...MOVIES_GHIBLI, ...MOVIES_SONYANIM
     ];
     this.__GUIDANCE__ = typeof MOVIE_GUIDANCE !== 'undefined' ? MOVIE_GUIDANCE : undefined;
   `, context);
