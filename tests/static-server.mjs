@@ -46,6 +46,15 @@ const MIME = {
 const server = http.createServer((req, res) => {
   let urlPath = decodeURIComponent(req.url.split('?')[0]);
   if (urlPath === '/') urlPath = '/index.html';
+  // Production (Vercel) serves /_vercel/insights/script.js once Web Analytics
+  // is enabled for the project. Mirror that here with an empty script so the
+  // page's analytics tag doesn't 404 in tests, which the no-console-errors
+  // check would report as an error (it broke CI once; see commit f007538).
+  if (urlPath === '/_vercel/insights/script.js') {
+    res.writeHead(200, { 'Content-Type': 'application/javascript; charset=utf-8', ...SECURITY_HEADERS });
+    res.end('/* analytics stub for local tests */');
+    return;
+  }
   const filePath = path.normalize(path.join(ROOT, urlPath));
 
   if (!filePath.startsWith(ROOT)) {

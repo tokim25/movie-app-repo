@@ -64,12 +64,7 @@ test('analytics served from our own origin is disclosed like any third party', (
   const privacySrc = fs.readFileSync('privacy.html', 'utf8');
 
   for (const [pathPrefix, serviceName] of Object.entries(FIRST_PARTY_PROXIED_SERVICES)) {
-    // Match a real <script src>, not any mention of the path -- a comment
-    // explaining why the tag is currently absent must not trip this.
-    const loaded = new RegExp(
-      `<script[^>]+src=["']${pathPrefix.replace(/[/\-\\^$*+?.()|[\]{}]/g, '\\$&')}`
-    ).test(indexSrc);
-    if (!loaded) continue;
+    if (!indexSrc.includes(pathPrefix)) continue;
     expect(
       privacySrc,
       `index.html loads "${pathPrefix}" but privacy.html never mentions ` +
