@@ -1376,6 +1376,11 @@ function reportError(err){
     border-radius:12px;
     overflow:hidden;
   }
+  .hiddenEmpty{ color:var(--ink-soft); margin:10px 0 0; }
+  .hiddenList{ list-style:none; margin:10px 0 0; padding:0; }
+  .hiddenList li{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 0; border-top:1px solid var(--line); }
+  .hiddenList .hiddenTitle{ font-weight:600; }
+  .hiddenList .hiddenWhy{ display:block; font-size:13px; color:var(--ink-soft); }
   .familyCard{
     background:var(--surface);
     border:1px solid var(--line);
@@ -3117,6 +3122,15 @@ function reportError(err){
   </div>
 
   <div class="homeSection">
+    <h2 class="homeSectionLabel">Hidden from Tonight</h2>
+    <div class="familyCard" id="hiddenTitlesCard">
+      <p>Titles you skip, or mark as not interested, stay out of Tonight's picks for a while. Bring any back here.</p>
+      <p id="hiddenTitlesEmpty" class="hiddenEmpty">Nothing is hidden right now.</p>
+      <ul id="hiddenTitlesList" class="hiddenList" aria-label="Titles hidden from Tonight"></ul>
+    </div>
+  </div>
+
+  <div class="homeSection">
     <h3 class="homeSectionLabel">Account and sync</h3>
     <div class="familyCard">
       <button id="familySyncBtn" class="familyBtn" type="button">Open sync settings</button>
@@ -4446,6 +4460,60 @@ function markSkipped(idx){
 function isSkipSuppressed(idx){
   const until = skippedUntil[movieKey(idx)];
   return typeof until === 'number' && until > now();
+}
+
+// "Hidden from Tonight" list on the Family screen: every title currently held
+// out by a plain Skip or by Not interested, with a way to bring it back.
+function hiddenTitleRows(){
+  const nowTs = now();
+  const rows = [];
+  const add = (map, reason) => Object.keys(map).forEach(key => {
+    if(!(map[key] > nowTs)) return;
+    const idx = MOVIES.findIndex((m, i) => movieKey(i) === key);
+    if(idx < 0) return;
+    const days = Math.max(1, Math.ceil((map[key] - nowTs) / (24 * 60 * 60 * 1000)));
+    rows.push({ key, idx, reason, days });
+  });
+  add(skippedUntil, 'Skipped');
+  add(notInterestedUntil, 'Not interested');
+  return rows.sort((a, b) => MOVIES[a.idx].t.localeCompare(MOVIES[b.idx].t));
+}
+
+function bringBackHiddenTitle(key){
+  delete skippedUntil[key];
+  delete notInterestedUntil[key];
+  tonightSelection.skippedMovieNums.delete(key);
+  persistSkipped();
+  persistNotInterested();
+  renderHiddenTitles();
+}
+
+function renderHiddenTitles(){
+  const list = document.getElementById('hiddenTitlesList');
+  const empty = document.getElementById('hiddenTitlesEmpty');
+  if(!list || !empty) return;
+  list.replaceChildren();
+  const rows = hiddenTitleRows();
+  empty.hidden = rows.length > 0;
+  rows.forEach(row => {
+    const li = document.createElement('li');
+    const text = document.createElement('span');
+    const title = document.createElement('span');
+    title.className = 'hiddenTitle';
+    title.textContent = MOVIES[row.idx].t;
+    const why = document.createElement('span');
+    why.className = 'hiddenWhy';
+    why.textContent = `${row.reason}, back in ${row.days} ${row.days === 1 ? 'day' : 'days'}`;
+    text.append(title, why);
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'secondaryBtn';
+    btn.textContent = 'Bring back';
+    btn.setAttribute('aria-label', `Bring back ${MOVIES[row.idx].t}`);
+    btn.addEventListener('click', () => bringBackHiddenTitle(row.key));
+    li.append(text, btn);
+    list.appendChild(li);
+  });
 }
 
 function isNotInterestedSuppressed(idx){
@@ -7376,6 +7444,7 @@ function renderChildren(){
     landing.prepend(quiet);
   }
   renderFamilySettings();
+  renderHiddenTitles();
 }
 
 document.getElementById('addChildBtn').addEventListener('click', ()=>{

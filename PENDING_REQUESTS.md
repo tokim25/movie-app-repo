@@ -338,3 +338,6 @@ Co-authored with Claude.
 11/5/2026 (sequel rules) — tokim25 asked to exclude Star Wars from the sequel gate. Removed the six Star Wars pairs from data-series.js (a comment there records why). Bundle and DATA_VERSION re-stamped; validate-data clean; sequel-gate, Tonight and service-worker tests pass.
 
 Co-authored with Claude.
+11/5/2026 (hidden titles) — tokim25 agreed to a way to undo skips. Added a "Hidden from Tonight" card on the Family screen listing every title held out by a Skip (30 days) or Not interested (7 days), with days left and a "Bring back" button per title; Bring back clears the stored skip, the session skip, and the Not-interested mark. index.html inline script changed, so the CSP hash in vercel.json was re-stamped. New tests in tests/hidden-titles.spec.js; full Playwright suite 237 passed, with only the known sandbox-only catalog.spec.js poster-load failure.
+
+Co-authored with Claude.
