@@ -429,6 +429,20 @@ that `csmRecheckVersion` is an integer -- it does not (yet) enforce the
 `flags`-implies-recheck-fields direction of this rule, so this is currently
 a discipline convention, not something the validator catches for you.
 
+## Content flags from CSM scores (added 2026-11-05)
+
+Until 2026-11-05 new titles were added without `flags` because nothing said how to turn CSM's 0-5 scores into the app's 1-4 levels, and an unflagged title can never be an automatic Tonight pick. `scripts/flag-rule.mjs` now holds the rule; `scripts/derive-flags.mjs` applies it; `data-flag-basis.json` (not bundled, not deployed) is the audit record; `scripts/validate-data.mjs` enforces it. It was calibrated on 108 already-flagged titles (96% exact agreement, every miss exactly one level higher, none lower) and reviewed by a mathematician, a data architect and a dissenting safety reviewer.
+
+The rule:
+1. Base map for all four categories: CSM 0 gives 1, 1 gives 2, 2 gives 2, 3 gives 3, 4 or 5 gives 4. CSM "sex" feeds romance, CSM "drugs" feeds drinking.
+2. Never below the base map. One level above it (cap 4) only when CSM's text shows the content depicted on screen, with a verbatim quote of 20+ characters from the entry's `full` and a reason. Read the text, not just the numbers, for violence 2, drinking 3, and language or romance 0 where the text mentions any; that is where bumps cluster.
+3. Hold-outs: any CSM score of 4 or higher, or a CSM age of 10 or higher, means derive nothing. The title stays unflagged until a human decides (tokim25, 2026-11-05).
+4. A title with no CSM review, or a snippet-only read, is never derived.
+
+Workflow: read the real CSM page (Step 2), write `full`, then put the numbers in a batch file and run `node scripts/derive-flags.mjs batch.json` (dry run), then `--apply`. It writes the flags, `csmRecheckedAt` (the date the page was read) and `csmRecheckVersion` (CONTENT_MODEL_VERSION) and the basis entry together. Never hand-edit flags for a title that has a basis entry; the validator fails any flag that differs from the rule. Legacy flags (no basis entry) are never re-derived. Change `FLAG_RULE_VERSION` only when the base map or hold-outs change, and re-run the calibration test in `tests-unit/flag-rule.test.mjs`.
+
+Where it ships (tokim25, 2026-11-05): the title entries themselves go straight to master as before; the flags for them go in a separate branch and pull request for tokim25 to review, never straight to master.
+
 ## Optional: Certification Desk review (added 2026-10-21)
 
 Use this when Tony asks for "the desk", or when a batch has decisions he

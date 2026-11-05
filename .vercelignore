@@ -1,2 +1,4 @@
 # Curator-only Certification Desk (movie-watchlist-updater skill). Local use only.
 tools/
+# Audit record for derived content flags (scripts/flag-rule.mjs); not served.
+data-flag-basis.json

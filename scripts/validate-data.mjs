@@ -3,6 +3,7 @@ import vm from 'node:vm';
 import { dataFiles, computeDataHash, currentSwDataVersion } from './data-version.mjs';
 import { computeBundleContent } from './bundle-data.mjs';
 import { getAuditCandidateNums } from './audit-content-flags.mjs';
+import { FLAG_RULE_VERSION, CATEGORY_SOURCES, deriveFlags, holdReason } from './flag-rule.mjs';
 import {
   CONTENT_STATUSES,
   hasVerifiedRuntime,
@@ -211,6 +212,73 @@ for (const movie of movies) {
       seen.add(cur);
     }
   }
+}
+
+// data-flag-basis.json (scripts/flag-rule.mjs): the audit record for flags
+// derived from CSM scores. Enforces the rule instead of trusting whoever wrote
+// the flags: flags must equal the rule's output (never below it, at most one
+// level above it, and only with a verbatim quote from `full` and a reason),
+// the record must match the entry's stamps, and a held title carries no flags.
+// Legacy flags (no record here) are deliberately not re-derived.
+{
+  const basisPath = 'data-flag-basis.json';
+  let basis = {};
+  if (fs.existsSync(basisPath)) {
+    try { basis = JSON.parse(fs.readFileSync(basisPath, 'utf8')); }
+    catch (error) { errors.push(`${basisPath}: ${error.message}`); }
+  }
+  const byNum = new Map(movies.map(m => [String(m.num), m]));
+  const isDate = value => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value);
+  let derived = 0, held = 0, bumped = 0, staleRule = 0;
+  for (const [num, entry] of Object.entries(basis)) {
+    const movie = byNum.get(num);
+    const label = `${basisPath} ${num}`;
+    if (!movie) { errors.push(`${label}: no such movie`); continue; }
+    const csm = entry.csm;
+    if (!csm || ['v', 's', 'l', 'd'].some(k => !Number.isInteger(csm[k]) || csm[k] < 0 || csm[k] > 5) ||
+        !Number.isInteger(csm.age) || csm.age < 0 || csm.src !== 'page' || !isDate(csm.on)) {
+      errors.push(`${label}: csm needs integer v/s/l/d 0-5, an integer age, src "page" and an "on" date`);
+      continue;
+    }
+    if (!Number.isInteger(entry.rule) || entry.rule < 1) { errors.push(`${label}: rule must be a positive integer`); continue; }
+    if (entry.rule > FLAG_RULE_VERSION) errors.push(`${label}: rule ${entry.rule} is newer than FLAG_RULE_VERSION ${FLAG_RULE_VERSION}`);
+    if (entry.rule < FLAG_RULE_VERSION) staleRule++;
+    if (entry.held) {
+      held++;
+      if (movie.flags !== undefined) errors.push(`${label}: a held title must not carry flags`);
+      if (!holdReason(csm)) errors.push(`${label}: marked held but the rule would derive it`);
+      continue;
+    }
+    if (holdReason(csm)) errors.push(`${label}: the rule holds this title (${holdReason(csm)}), so it must not be flagged`);
+    const adj = entry.adj || {};
+    for (const [cat, a] of Object.entries(adj)) {
+      if (!(cat in CATEGORY_SOURCES)) { errors.push(`${label}: adj has unknown category ${cat}`); continue; }
+      if (!a || a.kind !== 'depicted') errors.push(`${label}: adj.${cat}.kind must be "depicted"`);
+      if (!a || typeof a.why !== 'string' || a.why.trim().length < 10) errors.push(`${label}: adj.${cat} needs a why`);
+      if (!a || typeof a.quote !== 'string' || a.quote.length < 20 || !String(movie.full || '').includes(a.quote)) {
+        errors.push(`${label}: adj.${cat}.quote must be 20+ characters copied verbatim from the entry's full text`);
+      }
+      bumped++;
+    }
+    if (!movie.flags) { errors.push(`${label}: not held but the movie has no flags`); continue; }
+    const expected = deriveFlags(csm, adj);
+    for (const id of contentFlagIds) {
+      if (movie.flags[id] !== expected[id]) {
+        errors.push(`${label}: flags.${id} is ${movie.flags[id]} but the rule gives ${expected[id]}${adj[id] ? ' (with its recorded bump)' : ''}`);
+      }
+    }
+    if (movie.csmRecheckedAt !== csm.on) errors.push(`${label}: csmRecheckedAt (${movie.csmRecheckedAt}) must equal csm.on (${csm.on})`);
+    derived++;
+  }
+  for (const movie of movies) {
+    if (movie.flags !== undefined && movie.csmRecheckedAt === undefined) {
+      errors.push(`${movie.num} ${movie.t}: flags without csmRecheckedAt/csmRecheckVersion`);
+    }
+    if (movie.csmRecheckedAt >= '2026-11-05' && !basis[String(movie.num)]) {
+      errors.push(`${movie.num} ${movie.t}: stamped on or after 2026-11-05 but has no ${basisPath} entry`);
+    }
+  }
+  console.log(`flag basis: ${derived} derived (${bumped} text bumps), ${held} held, ${staleRule} on an older rule version.`);
 }
 
 // data-guidance.js (MOVIE_GUIDANCE): every movie needs an entry with the 5
