@@ -12,3 +12,6 @@ playwright/.cache/
 # during agent runs. Never part of the project.
 .scratch-*
 __scratch_*
+
+# Personal Claude Code permission overrides
+.claude/settings.local.json
