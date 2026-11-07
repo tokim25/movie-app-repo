@@ -1,0 +1,8 @@
+{
+  "built": false,
+  "lists_done": [],
+  "candidates": [],
+  "done": [],
+  "skipped": [],
+  "notes": "Nothing collected yet. The 11/6 and 11/7 list crawls were lost (see PENDING_REQUESTS.md). Use tools/csm-list-crawl.mjs in 30-list batches and commit state after each batch."
+}

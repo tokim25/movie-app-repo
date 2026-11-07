@@ -345,3 +345,15 @@ Co-authored with Claude.
 The flags for the new titles (data-sonyanim.js, data-flag-basis.json, bundle, sw.js) are in a pull request for tokim25 to review, per the decision above; the scripts, validator, tests and docs went to master. Full Playwright suite on the PR branch: 236 passed; failures were the known sandbox-only catalog.spec.js poster errors and install-fallback.spec.js's timing-sensitive Android test, which passes alone and on the prior commit.
 
 Co-authored with Claude.
+
+11/6–11/7/2026 — Nightly catalog batch (scheduled). No titles were added on either night, and the candidate queue was lost both times. Nothing is broken in the app or the data.
+
+What happened. On 11/6 a sandbox spent the night's CSM budget reading list pages for the sweep queue. It finished, but the sandbox expired before I copied the result out, so the queue never reached the repo. On 11/7 I rebuilt it in a new sandbox and used 198 of the 220 requests. The reader looked for links in the page markup, but CSM list pages carry titles as structured data instead, so only 79 titles came back from 198 pages. I found the mistake after the budget was gone, fixed the reader, and read 18 lists correctly with the last 18 requests (298 titles, 244 not yet in the catalog, 24 on two or more lists). I then lost those results too, because the sandbox stopped before I finished copying them out. My session had restarted in between and the check-in came back hours late.
+
+CSM requests used: about 218 on 11/7, none after the cap. No block or rate-limit response was seen.
+
+Fixes. `tools/csm-list-crawl.mjs` now holds the working list reader, paced and budget-capped. `tools/csm-sweep-queue.json` is committed empty. From the next run: check the first list page returns about 20 titles before spending more, work in batches of about 30 lists, and read each batch's results into the repo as plain text before starting the next, so a lost sandbox costs one batch and not a night. Whole-night builds in one sandbox are retired.
+
+Queue status: not built (0 of 216 lists collected). Flags PR: none tonight, since no titles were added.
+
+Co-authored with Claude.
