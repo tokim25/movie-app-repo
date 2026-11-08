@@ -60,13 +60,208 @@
   "/lists/movie-moms",
   "/lists/basketball-movies",
   "/lists/misfits-in-the-movies",
-  "/lists/best-family-comedy-movies"
+  "/lists/best-family-comedy-movies",
+  "/lists/dog-movies-for-kids",
+  "/lists/best-action-movies",
+  "/lists/best-movies-with-mexican-and-mexican-american-characters",
+  "/lists/dance-movies",
+  "/lists/best-epic-movies",
+  "/lists/best-international-films-for-kids",
+  "/lists/best-irish-movies",
+  "/lists/best-prom-movies-for-teens",
+  "/lists/biopic-movies",
+  "/lists/best-football-movies",
+  "/lists/best-holiday-movies-for-kids",
+  "/lists/best-winter-break-movies-for-kids",
+  "/lists/best-classic-comedy-films",
+  "/lists/best-high-school-movies",
+  "/lists/kid-safe-browsers-and-search-sites",
+  "/lists/martial-arts-movies-for-kids",
+  "/lists/spy-movies-for-kids",
+  "/lists/sites-that-help-kids-do-good",
+  "/lists/barbie-movies",
+  "/lists/movie-monsters",
+  "/lists/coming-of-age-movies",
+  "/lists/space-movies",
+  "/lists/movies-about-friends",
+  "/lists/travel-movies",
+  "/lists/family-sci-fi-movies",
+  "/lists/best-fantasy-movies",
+  "/lists/best-of-the-sims",
+  "/lists/time-travel-movies",
+  "/lists/emotional-stories-for-kids",
+  "/lists/movies-about-female-athletes",
+  "/lists/best-alien-movies",
+  "/lists/movie-battles",
+  "/lists/best-family-drama-movies",
+  "/lists/indie-films",
+  "/lists/offbeat-animated-movies",
+  "/lists/best-halloween-movies-for-kids",
+  "/lists/best-movies-for-family-movie-night",
+  "/lists/2016-oscar-nominated-films",
+  "/lists/romance-movies",
+  "/lists/great-movies-with-black-characters",
+  "/lists/best-sitcoms-for-your-next-family-binge-watch",
+  "/lists/best-mmogs",
+  "/lists/princess-movies",
+  "/lists/best-disney-movies",
+  "/lists/new-kids-movies",
+  "/lists/harry-potter-movies",
+  "/lists/fairy-tales-for-kids-and-teens",
+  "/lists/best-cartoons-for-kids",
+  "/lists/best-tween-movies",
+  "/lists/nonviolent-family-movies",
+  "/lists/first-movies-for-kids",
+  "/lists/new-years-eve-movies",
+  "/lists/horse-movies-for-kids",
+  "/lists/the-best-summer-camp-movies-for-kids",
+  "/lists/best-news-sources-for-kids",
+  "/lists/movies-that-inspire-kids-to-change-the-world",
+  "/lists/mermaid-movies",
+  "/lists/best-ghost-stories-for-kids-and-teens",
+  "/lists/movies-with-strong-female-characters",
+  "/lists/best-biblical-movies",
+  "/lists/movies-with-positive-role-models-for-boys",
+  "/lists/50-movies-all-kids-should-watch-before-theyre-12",
+  "/lists/movies-with-inspiring-teachers",
+  "/lists/best-80s-movies",
+  "/lists/dragon-movies",
+  "/lists/classic-cartoons-parents-love-to-share-with-kids",
+  "/lists/top-movies-for-geeky-families",
+  "/lists/movies-about-cooking-and-food",
+  "/lists/tools-to-turn-your-kid-into-a-math-and-science-pro",
+  "/lists/james-bond-movies",
+  "/lists/best-health-and-wellness-sites-for-kids-and-teens",
+  "/lists/unconventional-holiday-movies",
+  "/lists/best-teen-movies",
+  "/lists/mother-daughter-movie-night",
+  "/lists/best-disney-channel-original-movies",
+  "/lists/movies-that-feature-characters-living-with-mental-illness",
+  "/lists/movies-with-characters-who-have-physical-disabilities",
+  "/lists/movies-with-characters-who-have-learning-and-attention-issues-and-developmental-disabilities",
+  "/lists/movies-with-inspiring-black-girls-and-women",
+  "/lists/olympics-movies",
+  "/lists/2017-oscar-nominated-films",
+  "/lists/movies-that-teach-kids-about-climate-change",
+  "/lists/movies-and-more-to-celebrate-memorial-day",
+  "/lists/movies-that-defy-gender-stereotypes",
+  "/lists/best-space-documentaries",
+  "/lists/best-animal-documentaries",
+  "/lists/best-history-documentaries",
+  "/lists/picks-for-k-5-school-movie-night",
+  "/lists/2018-oscar-nominated-films",
+  "/lists/cool-online-museums-for-curious-kids",
+  "/lists/movies-to-help-kids-understand-divorce",
+  "/lists/magical-reads-for-kids-who-love-harry-potter",
+  "/lists/movies-to-help-kids-deal-with-grief",
+  "/lists/movies-with-asian-asian-american-native-hawaiian-and-pacific-islander-characters",
+  "/lists/best-memoirs-for-kids-and-teens",
+  "/lists/goofy-comedy-movies-to-watch-with-tweens-and-teens",
+  "/lists/best-kids-digital-libraries",
+  "/lists/2019-oscar-nominated-films",
+  "/lists/50-movies-to-help-you-raise-a-kind-kid",
+  "/lists/the-best-of-sesame-street",
+  "/lists/best-90s-movies",
+  "/lists/the-best-kids-movies-of-the-decade-2010-2019",
+  "/lists/2020-oscar-nominated-films",
+  "/lists/feel-good-family-movies",
+  "/lists/bollywood-movies",
+  "/lists/vampire-movies",
+  "/lists/best-sports-documentaries",
+  "/lists/2021-naacp-image-award-nominated-films",
+  "/lists/best-war-dramas",
+  "/lists/best-2000s-kids-movies",
+  "/lists/2021-oscar-nominated-films",
+  "/lists/family-film-favourites-for-uk-audiences",
+  "/lists/best-movies-with-cuban-and-cuban-american-characters-and-leads",
+  "/lists/cozy-fall-movies-for-the-family",
+  "/lists/best-movies-of-the-year-2021",
+  "/lists/2022-naacp-image-award-nominated-films",
+  "/lists/2022-oscar-nominated-films",
+  "/lists/great-movies-to-watch-for-easter",
+  "/lists/best-latino-movies-to-watch-as-a-family",
+  "/lists/movies-that-illustrate-and-celebrate-the-jewish-experience",
+  "/lists/halloween-essentials-by-guillermo-del-toro",
+  "/lists/5-family-movies-to-celebrate-the-day-of-the-dead",
+  "/lists/best-movies-of-the-year-2022",
+  "/lists/best-uk-films-of-the-year-2022",
+  "/lists/50-modern-movies-all-kids-should-watch-before-theyre-12",
+  "/lists/best-mystery-movies-for-kids",
+  "/lists/2023-naacp-image-award-nominated-films",
+  "/lists/2023-oscar-nominated-films",
+  "/lists/kids-choice-awards-all-time-stars",
+  "/lists/concert-movies",
+  "/lists/movies-with-afro-latino-stars",
+  "/lists/great-movies-with-latino-stars",
+  "/lists/5-scary-movies-inspired-by-latin-american-legends",
+  "/lists/best-movies-of-the-year-2023",
+  "/lists/best-uk-and-international-films-of-the-year-2023",
+  "/lists/2024-oscar-nominated-films",
+  "/lists/movies-about-the-holocaust",
+  "/lists/movies-based-on-true-stories",
+  "/lists/best-movies-of-the-year-2024",
+  "/lists/best-uk-and-international-films-of-the-year-2024",
+  "/lists/2025-oscar-nominated-films",
+  "/lists/movies-about-beyonce",
+  "/lists/movies-that-inspire-resilience",
+  "/lists/best-father-son-movies",
+  "/lists/best-heist-movies",
+  "/lists/best-movies-of-the-year-2025",
+  "/lists/best-uk-and-international-films-of-the-year-2025",
+  "/lists/2026-oscar-nominated-films",
+  "/lists/films-with-big-plot-twists",
+  "/lists/black-romance-movies"
  ],
  "candidates": [
+  {
+   "slug": "puffin-rock-and-the-new-friends",
+   "title": "puffin rock and the new friends",
+   "score": 9
+  },
   {
    "slug": "blippis-big-dino-adventure",
    "title": "blippis big dino adventure",
    "score": 7
+  },
+  {
+   "slug": "billy-molly-an-otter-love-story",
+   "title": "billy molly an otter love story",
+   "score": 6
+  },
+  {
+   "slug": "curious-george-swings-into-spring",
+   "title": "curious george swings into spring",
+   "score": 6
+  },
+  {
+   "slug": "dr-seuss-horton-hears-a-who-0",
+   "title": "dr seuss horton hears a who 0",
+   "score": 6
+  },
+  {
+   "slug": "frozen-2",
+   "title": "frozen 2",
+   "score": 6
+  },
+  {
+   "slug": "hola-frida",
+   "title": "hola frida",
+   "score": 6
+  },
+  {
+   "slug": "the-peanuts-movie",
+   "title": "the peanuts movie",
+   "score": 6
+  },
+  {
+   "slug": "zog",
+   "title": "zog",
+   "score": 6
+  },
+  {
+   "slug": "all-i-want-for-christmas-is-you",
+   "title": "all i want for christmas is you",
+   "score": 5
   },
   {
    "slug": "bob-the-builder-the-legend-of-the-golden-hammer",
@@ -74,18 +269,138 @@
    "score": 5
   },
   {
-   "slug": "curious-george-swings-into-spring",
-   "title": "curious george swings into spring",
+   "slug": "star-wars-episode-vi-the-return-of-the-jedi",
+   "title": "star wars episode vi the return of the jedi",
    "score": 5
   },
   {
-   "slug": "puffin-rock-and-the-new-friends",
-   "title": "puffin rock and the new friends",
+   "slug": "super-monsters-vidas-first-halloween",
+   "title": "super monsters vidas first halloween",
    "score": 5
   },
   {
-   "slug": "dr-seuss-horton-hears-a-who-0",
-   "title": "dr seuss horton hears a who 0",
+   "slug": "tabby-mctat",
+   "title": "tabby mctat",
+   "score": 5
+  },
+  {
+   "slug": "the-book-of-life",
+   "title": "the book of life",
+   "score": 5
+  },
+  {
+   "slug": "10-things-i-hate-about-you",
+   "title": "10 things i hate about you",
+   "score": 4
+  },
+  {
+   "slug": "a-ballerinas-tale",
+   "title": "a ballerinas tale",
+   "score": 4
+  },
+  {
+   "slug": "a-go-go-cory-carson-halloween",
+   "title": "a go go cory carson halloween",
+   "score": 4
+  },
+  {
+   "slug": "a-million-miles-away",
+   "title": "a million miles away",
+   "score": 4
+  },
+  {
+   "slug": "arctic-tale",
+   "title": "arctic tale",
+   "score": 4
+  },
+  {
+   "slug": "barbie-princess-adventure",
+   "title": "barbie princess adventure",
+   "score": 4
+  },
+  {
+   "slug": "becoming",
+   "title": "becoming",
+   "score": 4
+  },
+  {
+   "slug": "chang-can-dunk",
+   "title": "chang can dunk",
+   "score": 4
+  },
+  {
+   "slug": "chupa",
+   "title": "chupa",
+   "score": 4
+  },
+  {
+   "slug": "crouching-tiger-hidden-dragon",
+   "title": "crouching tiger hidden dragon",
+   "score": 4
+  },
+  {
+   "slug": "dancing-in-the-light-the-janet-collins-story",
+   "title": "dancing in the light the janet collins story",
+   "score": 4
+  },
+  {
+   "slug": "daniel-tigers-neighborhood-tiger-family-trip",
+   "title": "daniel tigers neighborhood tiger family trip",
+   "score": 4
+  },
+  {
+   "slug": "dino-dana-the-movie",
+   "title": "dino dana the movie",
+   "score": 4
+  },
+  {
+   "slug": "dinosaur-train-whats-at-the-center-of-the-earth",
+   "title": "dinosaur train whats at the center of the earth",
+   "score": 4
+  },
+  {
+   "slug": "dr-seuss-how-the-grinch-stole-christmas",
+   "title": "dr seuss how the grinch stole christmas",
+   "score": 4
+  },
+  {
+   "slug": "frosty-the-snowman",
+   "title": "frosty the snowman",
+   "score": 4
+  },
+  {
+   "slug": "galaxy-quest",
+   "title": "galaxy quest",
+   "score": 4
+  },
+  {
+   "slug": "good-night-oppy",
+   "title": "good night oppy",
+   "score": 4
+  },
+  {
+   "slug": "its-the-great-pumpkin-charlie-brown",
+   "title": "its the great pumpkin charlie brown",
+   "score": 4
+  },
+  {
+   "slug": "koshien-japans-field-of-dreams",
+   "title": "koshien japans field of dreams",
+   "score": 4
+  },
+  {
+   "slug": "naked-mole-rat-gets-dressed-the-underground-rock-experience",
+   "title": "naked mole rat gets dressed the underground rock experience",
+   "score": 4
+  },
+  {
+   "slug": "october-sky",
+   "title": "october sky",
+   "score": 4
+  },
+  {
+   "slug": "paw-patrol-jet-to-the-rescue",
+   "title": "paw patrol jet to the rescue",
    "score": 4
   },
   {
@@ -99,8 +414,73 @@
    "score": 4
   },
   {
+   "slug": "red-army",
+   "title": "red army",
+   "score": 4
+  },
+  {
+   "slug": "room-on-the-broom",
+   "title": "room on the broom",
+   "score": 4
+  },
+  {
+   "slug": "rudolph-the-red-nosed-reindeer",
+   "title": "rudolph the red nosed reindeer",
+   "score": 4
+  },
+  {
+   "slug": "spookley-the-square-pumpkin",
+   "title": "spookley the square pumpkin",
+   "score": 4
+  },
+  {
+   "slug": "the-daniel-tiger-movie-wont-you-be-our-neighbor",
+   "title": "the daniel tiger movie wont you be our neighbor",
+   "score": 4
+  },
+  {
+   "slug": "the-game-plan",
+   "title": "the game plan",
+   "score": 4
+  },
+  {
+   "slug": "the-snail-and-the-whale",
+   "title": "the snail and the whale",
+   "score": 4
+  },
+  {
+   "slug": "the-ten-commandments",
+   "title": "the ten commandments",
+   "score": 4
+  },
+  {
+   "slug": "thomas-and-friends-the-christmas-engines",
+   "title": "thomas and friends the christmas engines",
+   "score": 4
+  },
+  {
    "slug": "thomas-friends-race-for-the-sodor-cup",
    "title": "thomas friends race for the sodor cup",
+   "score": 4
+  },
+  {
+   "slug": "woman-in-motion",
+   "title": "woman in motion",
+   "score": 4
+  },
+  {
+   "slug": "xicos-journey",
+   "title": "xicos journey",
+   "score": 4
+  },
+  {
+   "slug": "zog-and-the-flying-doctors",
+   "title": "zog and the flying doctors",
+   "score": 4
+  },
+  {
+   "slug": "zootopia-2",
+   "title": "zootopia 2",
    "score": 4
   },
   {
@@ -109,13 +489,78 @@
    "score": 3
   },
   {
-   "slug": "a-go-go-cory-carson-halloween",
-   "title": "a go go cory carson halloween",
+   "slug": "a-cinderella-story",
+   "title": "a cinderella story",
    "score": 3
   },
   {
-   "slug": "barbie-princess-adventure",
-   "title": "barbie princess adventure",
+   "slug": "a-monster-in-paris",
+   "title": "a monster in paris",
+   "score": 3
+  },
+  {
+   "slug": "a-muppets-christmas-letters-to-santa",
+   "title": "a muppets christmas letters to santa",
+   "score": 3
+  },
+  {
+   "slug": "a-tooth-fairy-tale",
+   "title": "a tooth fairy tale",
+   "score": 3
+  },
+  {
+   "slug": "alex-me",
+   "title": "alex me",
+   "score": 3
+  },
+  {
+   "slug": "all-in-the-fight-for-democracy",
+   "title": "all in the fight for democracy",
+   "score": 3
+  },
+  {
+   "slug": "amazing-grace-0",
+   "title": "amazing grace 0",
+   "score": 3
+  },
+  {
+   "slug": "angelas-christmas-wish",
+   "title": "angelas christmas wish",
+   "score": 3
+  },
+  {
+   "slug": "apollo-13",
+   "title": "apollo 13",
+   "score": 3
+  },
+  {
+   "slug": "arco",
+   "title": "arco",
+   "score": 3
+  },
+  {
+   "slug": "arrival",
+   "title": "arrival",
+   "score": 3
+  },
+  {
+   "slug": "backyard-wilderness",
+   "title": "backyard wilderness",
+   "score": 3
+  },
+  {
+   "slug": "barbie-dolphin-magic",
+   "title": "barbie dolphin magic",
+   "score": 3
+  },
+  {
+   "slug": "batkid-begins",
+   "title": "batkid begins",
+   "score": 3
+  },
+  {
+   "slug": "be-my-valentine-charlie-brown",
+   "title": "be my valentine charlie brown",
    "score": 3
   },
   {
@@ -124,8 +569,33 @@
    "score": 3
   },
   {
+   "slug": "boy-and-the-world",
+   "title": "boy and the world",
+   "score": 3
+  },
+  {
+   "slug": "chak-de-india",
+   "title": "chak de india",
+   "score": 3
+  },
+  {
    "slug": "charlie-browns-all-stars",
    "title": "charlie browns all stars",
+   "score": 3
+  },
+  {
+   "slug": "close-encounters-of-the-third-kind",
+   "title": "close encounters of the third kind",
+   "score": 3
+  },
+  {
+   "slug": "coda-0",
+   "title": "coda 0",
+   "score": 3
+  },
+  {
+   "slug": "conclave",
+   "title": "conclave",
    "score": 3
   },
   {
@@ -134,13 +604,28 @@
    "score": 3
   },
   {
-   "slug": "daniel-tigers-neighborhood-tiger-family-trip",
-   "title": "daniel tigers neighborhood tiger family trip",
+   "slug": "dance-dreams-hot-chocolate-nutcracker",
+   "title": "dance dreams hot chocolate nutcracker",
    "score": 3
   },
   {
-   "slug": "dinosaur-train-whats-at-the-center-of-the-earth",
-   "title": "dinosaur train whats at the center of the earth",
+   "slug": "dead-poets-society",
+   "title": "dead poets society",
+   "score": 3
+  },
+  {
+   "slug": "dear-dracula",
+   "title": "dear dracula",
+   "score": 3
+  },
+  {
+   "slug": "dear-zindagi",
+   "title": "dear zindagi",
+   "score": 3
+  },
+  {
+   "slug": "dora-and-the-search-for-sol-dorado",
+   "title": "dora and the search for sol dorado",
    "score": 3
   },
   {
@@ -149,13 +634,88 @@
    "score": 3
   },
   {
-   "slug": "dr-seuss-how-the-grinch-stole-christmas",
-   "title": "dr seuss how the grinch stole christmas",
+   "slug": "dr-seuss-the-lorax",
+   "title": "dr seuss the lorax",
    "score": 3
   },
   {
-   "slug": "frosty-the-snowman",
-   "title": "frosty the snowman",
+   "slug": "elephant-0",
+   "title": "elephant 0",
+   "score": 3
+  },
+  {
+   "slug": "everybody-dance",
+   "title": "everybody dance",
+   "score": 3
+  },
+  {
+   "slug": "freakier-friday",
+   "title": "freakier friday",
+   "score": 3
+  },
+  {
+   "slug": "gandhi",
+   "title": "gandhi",
+   "score": 3
+  },
+  {
+   "slug": "glass-onion-a-knives-out-mystery",
+   "title": "glass onion a knives out mystery",
+   "score": 3
+  },
+  {
+   "slug": "go-go-cory-carson-summer-camp",
+   "title": "go go cory carson summer camp",
+   "score": 3
+  },
+  {
+   "slug": "hamnet",
+   "title": "hamnet",
+   "score": 3
+  },
+  {
+   "slug": "ice-age-the-meltdown",
+   "title": "ice age the meltdown",
+   "score": 3
+  },
+  {
+   "slug": "in-the-heights",
+   "title": "in the heights",
+   "score": 3
+  },
+  {
+   "slug": "indiana-jones-and-the-raiders-of-the-lost-ark",
+   "title": "indiana jones and the raiders of the lost ark",
+   "score": 3
+  },
+  {
+   "slug": "inside-the-mind-of-a-dog",
+   "title": "inside the mind of a dog",
+   "score": 3
+  },
+  {
+   "slug": "island-of-lemurs-madagascar",
+   "title": "island of lemurs madagascar",
+   "score": 3
+  },
+  {
+   "slug": "its-a-wonderful-life",
+   "title": "its a wonderful life",
+   "score": 3
+  },
+  {
+   "slug": "jingle-jangle-a-christmas-journey",
+   "title": "jingle jangle a christmas journey",
+   "score": 3
+  },
+  {
+   "slug": "john-lewis-good-trouble",
+   "title": "john lewis good trouble",
+   "score": 3
+  },
+  {
+   "slug": "kensukes-kingdom",
+   "title": "kensukes kingdom",
    "score": 3
   },
   {
@@ -164,8 +724,33 @@
    "score": 3
   },
   {
+   "slug": "knight-rusty",
+   "title": "knight rusty",
+   "score": 3
+  },
+  {
+   "slug": "knives-out",
+   "title": "knives out",
+   "score": 3
+  },
+  {
+   "slug": "lindsey-vonn-in-the-moment",
+   "title": "lindsey vonn in the moment",
+   "score": 3
+  },
+  {
    "slug": "lucky-duck",
    "title": "lucky duck",
+   "score": 3
+  },
+  {
+   "slug": "mad-hot-ballroom",
+   "title": "mad hot ballroom",
+   "score": 3
+  },
+  {
+   "slug": "maika-the-girl-from-another-galaxy",
+   "title": "maika the girl from another galaxy",
    "score": 3
   },
   {
@@ -174,33 +759,113 @@
    "score": 3
   },
   {
-   "slug": "naked-mole-rat-gets-dressed-the-underground-rock-experience",
-   "title": "naked mole rat gets dressed the underground rock experience",
+   "slug": "meet-the-small-potatoes",
+   "title": "meet the small potatoes",
    "score": 3
   },
   {
-   "slug": "paw-patrol-jet-to-the-rescue",
-   "title": "paw patrol jet to the rescue",
+   "slug": "mercury-13",
+   "title": "mercury 13",
    "score": 3
   },
   {
-   "slug": "rudolph-the-red-nosed-reindeer",
-   "title": "rudolph the red nosed reindeer",
+   "slug": "mr-hollands-opus",
+   "title": "mr hollands opus",
    "score": 3
   },
   {
-   "slug": "spookley-the-square-pumpkin",
-   "title": "spookley the square pumpkin",
+   "slug": "national-velvet",
+   "title": "national velvet",
    "score": 3
   },
   {
-   "slug": "tabby-mctat",
-   "title": "tabby mctat",
+   "slug": "nimona",
+   "title": "nimona",
    "score": 3
   },
   {
-   "slug": "the-daniel-tiger-movie-wont-you-be-our-neighbor",
-   "title": "the daniel tiger movie wont you be our neighbor",
+   "slug": "pangolin-kulus-journey",
+   "title": "pangolin kulus journey",
+   "score": 3
+  },
+  {
+   "slug": "pixie-hollow-games",
+   "title": "pixie hollow games",
+   "score": 3
+  },
+  {
+   "slug": "roxy-hunter-and-the-myth-of-the-mermaid",
+   "title": "roxy hunter and the myth of the mermaid",
+   "score": 3
+  },
+  {
+   "slug": "scooby-doo-batman-the-brave-and-the-bold",
+   "title": "scooby doo batman the brave and the bold",
+   "score": 3
+  },
+  {
+   "slug": "selena",
+   "title": "selena",
+   "score": 3
+  },
+  {
+   "slug": "sherlock-holmes-and-the-great-escape",
+   "title": "sherlock holmes and the great escape",
+   "score": 3
+  },
+  {
+   "slug": "sherlock-jr",
+   "title": "sherlock jr",
+   "score": 3
+  },
+  {
+   "slug": "simon-birch",
+   "title": "simon birch",
+   "score": 3
+  },
+  {
+   "slug": "sing-street",
+   "title": "sing street",
+   "score": 3
+  },
+  {
+   "slug": "snoopy-presents-for-auld-lang-syne",
+   "title": "snoopy presents for auld lang syne",
+   "score": 3
+  },
+  {
+   "slug": "soul-surfer",
+   "title": "soul surfer",
+   "score": 3
+  },
+  {
+   "slug": "star-trek",
+   "title": "star trek",
+   "score": 3
+  },
+  {
+   "slug": "stellaluna",
+   "title": "stellaluna",
+   "score": 3
+  },
+  {
+   "slug": "super-monsters-dia-de-los-monsters",
+   "title": "super monsters dia de los monsters",
+   "score": 3
+  },
+  {
+   "slug": "super-monsters-save-halloween",
+   "title": "super monsters save halloween",
+   "score": 3
+  },
+  {
+   "slug": "thabo-and-the-rhino-case",
+   "title": "thabo and the rhino case",
+   "score": 3
+  },
+  {
+   "slug": "the-bride-of-frankenstein",
+   "title": "the bride of frankenstein",
    "score": 3
   },
   {
@@ -209,18 +874,58 @@
    "score": 3
   },
   {
-   "slug": "the-game-plan",
-   "title": "the game plan",
+   "slug": "the-great-escape",
+   "title": "the great escape",
    "score": 3
   },
   {
-   "slug": "the-snail-and-the-whale",
-   "title": "the snail and the whale",
+   "slug": "the-great-race",
+   "title": "the great race",
    "score": 3
   },
   {
-   "slug": "thomas-and-friends-the-christmas-engines",
-   "title": "thomas and friends the christmas engines",
+   "slug": "the-gruffalo",
+   "title": "the gruffalo",
+   "score": 3
+  },
+  {
+   "slug": "the-league",
+   "title": "the league",
+   "score": 3
+  },
+  {
+   "slug": "the-lord-of-the-rings-the-fellowship-of-the-ring",
+   "title": "the lord of the rings the fellowship of the ring",
+   "score": 3
+  },
+  {
+   "slug": "the-magical-wand-chase-a-sesame-street-special",
+   "title": "the magical wand chase a sesame street special",
+   "score": 3
+  },
+  {
+   "slug": "the-short-game",
+   "title": "the short game",
+   "score": 3
+  },
+  {
+   "slug": "the-snowy-day",
+   "title": "the snowy day",
+   "score": 3
+  },
+  {
+   "slug": "the-speed-cubers",
+   "title": "the speed cubers",
+   "score": 3
+  },
+  {
+   "slug": "the-tigger-movie",
+   "title": "the tigger movie",
+   "score": 3
+  },
+  {
+   "slug": "the-year-of-the-yao",
+   "title": "the year of the yao",
    "score": 3
   },
   {
@@ -229,18 +934,73 @@
    "score": 3
   },
   {
-   "slug": "zog",
-   "title": "zog",
+   "slug": "unleashing-hope-the-power-of-service-dogs-for-autism",
+   "title": "unleashing hope the power of service dogs for autism",
    "score": 3
   },
   {
-   "slug": "zog-and-the-flying-doctors",
-   "title": "zog and the flying doctors",
+   "slug": "wallace-gromit-vengeance-most-fowl",
+   "title": "wallace gromit vengeance most fowl",
    "score": 3
+  },
+  {
+   "slug": "we-are-the-dream-the-kids-of-the-oakland-mlk-oratorical-fest",
+   "title": "we are the dream the kids of the oakland mlk oratorical fest",
+   "score": 3
+  },
+  {
+   "slug": "we-are-the-radical-monarchs",
+   "title": "we are the radical monarchs",
+   "score": 3
+  },
+  {
+   "slug": "what-rhymes-with-reason",
+   "title": "what rhymes with reason",
+   "score": 3
+  },
+  {
+   "slug": "winnie-the-pooh-a-very-merry-pooh-year",
+   "title": "winnie the pooh a very merry pooh year",
+   "score": 3
+  },
+  {
+   "slug": "10-lives",
+   "title": "10 lives",
+   "score": 2
   },
   {
    "slug": "100-meters",
    "title": "100 meters",
+   "score": 2
+  },
+  {
+   "slug": "13-going-on-30",
+   "title": "13 going on 30",
+   "score": 2
+  },
+  {
+   "slug": "23-blast",
+   "title": "23 blast",
+   "score": 2
+  },
+  {
+   "slug": "a-boy-named-charlie-brown",
+   "title": "a boy named charlie brown",
+   "score": 2
+  },
+  {
+   "slug": "a-call-to-spy",
+   "title": "a call to spy",
+   "score": 2
+  },
+  {
+   "slug": "a-cats-life",
+   "title": "a cats life",
+   "score": 2
+  },
+  {
+   "slug": "a-charlie-brown-thanksgiving",
+   "title": "a charlie brown thanksgiving",
    "score": 2
   },
   {
@@ -254,23 +1014,78 @@
    "score": 2
   },
   {
-   "slug": "a-muppets-christmas-letters-to-santa",
-   "title": "a muppets christmas letters to santa",
+   "slug": "a-league-of-their-own",
+   "title": "a league of their own",
    "score": 2
   },
   {
-   "slug": "alex-me",
-   "title": "alex me",
+   "slug": "a-love-song-for-latasha",
+   "title": "a love song for latasha",
    "score": 2
   },
   {
-   "slug": "all-i-want-for-christmas-is-you",
-   "title": "all i want for christmas is you",
+   "slug": "a-mile-in-his-shoes",
+   "title": "a mile in his shoes",
    "score": 2
   },
   {
-   "slug": "backyard-wilderness",
-   "title": "backyard wilderness",
+   "slug": "a-place-at-the-table",
+   "title": "a place at the table",
+   "score": 2
+  },
+  {
+   "slug": "a-quiet-place",
+   "title": "a quiet place",
+   "score": 2
+  },
+  {
+   "slug": "a-ripple-of-hope",
+   "title": "a ripple of hope",
+   "score": 2
+  },
+  {
+   "slug": "a-shine-of-rainbows",
+   "title": "a shine of rainbows",
+   "score": 2
+  },
+  {
+   "slug": "african-cats",
+   "title": "african cats",
+   "score": 2
+  },
+  {
+   "slug": "aftersun",
+   "title": "aftersun",
+   "score": 2
+  },
+  {
+   "slug": "alien-xmas",
+   "title": "alien xmas",
+   "score": 2
+  },
+  {
+   "slug": "an-american-girl-mckenna-shoots-for-the-stars",
+   "title": "an american girl mckenna shoots for the stars",
+   "score": 2
+  },
+  {
+   "slug": "anatomy-of-a-fall",
+   "title": "anatomy of a fall",
+   "score": 2
+  },
+  {
+   "slug": "apollo-13-survival",
+   "title": "apollo 13 survival",
+   "score": 2
+  },
+  {
+   "slug": "back-from-the-brink-saved-from-extinction",
+   "title": "back from the brink saved from extinction",
+   "score": 2
+  },
+  {
+   "slug": "ballerina",
+   "title": "ballerina",
    "score": 2
   },
   {
@@ -279,13 +1094,93 @@
    "score": 2
   },
   {
-   "slug": "be-my-valentine-charlie-brown",
-   "title": "be my valentine charlie brown",
+   "slug": "barbara-lee-speaking-truth-to-power",
+   "title": "barbara lee speaking truth to power",
    "score": 2
   },
   {
-   "slug": "billy-molly-an-otter-love-story",
-   "title": "billy molly an otter love story",
+   "slug": "barbie-and-the-secret-door",
+   "title": "barbie and the secret door",
+   "score": 2
+  },
+  {
+   "slug": "barbie-chelsea-the-lost-birthday",
+   "title": "barbie chelsea the lost birthday",
+   "score": 2
+  },
+  {
+   "slug": "barbie-fairytopia-mermaidia",
+   "title": "barbie fairytopia mermaidia",
+   "score": 2
+  },
+  {
+   "slug": "barbie-her-sisters-in-a-puppy-chase",
+   "title": "barbie her sisters in a puppy chase",
+   "score": 2
+  },
+  {
+   "slug": "barbie-in-a-mermaid-tale",
+   "title": "barbie in a mermaid tale",
+   "score": 2
+  },
+  {
+   "slug": "barbie-in-a-mermaid-tale-2",
+   "title": "barbie in a mermaid tale 2",
+   "score": 2
+  },
+  {
+   "slug": "believe-in-me",
+   "title": "believe in me",
+   "score": 2
+  },
+  {
+   "slug": "belle-and-sebastian",
+   "title": "belle and sebastian",
+   "score": 2
+  },
+  {
+   "slug": "benny-and-joon",
+   "title": "benny and joon",
+   "score": 2
+  },
+  {
+   "slug": "better-man",
+   "title": "better man",
+   "score": 2
+  },
+  {
+   "slug": "betty-coretta",
+   "title": "betty coretta",
+   "score": 2
+  },
+  {
+   "slug": "beyonce-bowl",
+   "title": "beyonce bowl",
+   "score": 2
+  },
+  {
+   "slug": "beyond-the-lights",
+   "title": "beyond the lights",
+   "score": 2
+  },
+  {
+   "slug": "bill-ted-face-the-music",
+   "title": "bill ted face the music",
+   "score": 2
+  },
+  {
+   "slug": "bill-teds-excellent-adventure",
+   "title": "bill teds excellent adventure",
+   "score": 2
+  },
+  {
+   "slug": "blackpink-the-movie",
+   "title": "blackpink the movie",
+   "score": 2
+  },
+  {
+   "slug": "blink",
+   "title": "blink",
    "score": 2
   },
   {
@@ -294,13 +1189,88 @@
    "score": 2
   },
   {
+   "slug": "boathouse-detectives",
+   "title": "boathouse detectives",
+   "score": 2
+  },
+  {
+   "slug": "bohemian-rhapsody",
+   "title": "bohemian rhapsody",
+   "score": 2
+  },
+  {
+   "slug": "breaking",
+   "title": "breaking",
+   "score": 2
+  },
+  {
+   "slug": "breakthrough",
+   "title": "breakthrough",
+   "score": 2
+  },
+  {
+   "slug": "brians-song",
+   "title": "brians song",
+   "score": 2
+  },
+  {
+   "slug": "bridge-of-spies",
+   "title": "bridge of spies",
+   "score": 2
+  },
+  {
+   "slug": "bring-it-on",
+   "title": "bring it on",
+   "score": 2
+  },
+  {
+   "slug": "brooklyn",
+   "title": "brooklyn",
+   "score": 2
+  },
+  {
+   "slug": "buena-vista-social-club",
+   "title": "buena vista social club",
+   "score": 2
+  },
+  {
+   "slug": "butch-cassidy-and-the-sundance-kid",
+   "title": "butch cassidy and the sundance kid",
+   "score": 2
+  },
+  {
+   "slug": "bye-bye-barry",
+   "title": "bye bye barry",
+   "score": 2
+  },
+  {
+   "slug": "camp-cool-kids",
+   "title": "camp cool kids",
+   "score": 2
+  },
+  {
+   "slug": "casablanca",
+   "title": "casablanca",
+   "score": 2
+  },
+  {
+   "slug": "catherine-called-birdy",
+   "title": "catherine called birdy",
+   "score": 2
+  },
+  {
    "slug": "cats-dogs-3-paws-unite",
    "title": "cats dogs 3 paws unite",
    "score": 2
   },
   {
-   "slug": "chang-can-dunk",
-   "title": "chang can dunk",
+   "slug": "chariots-of-fire",
+   "title": "chariots of fire",
+   "score": 2
+  },
+  {
+   "slug": "chicken-for-linda",
+   "title": "chicken for linda",
    "score": 2
   },
   {
@@ -314,8 +1284,33 @@
    "score": 2
   },
   {
+   "slug": "clueless",
+   "title": "clueless",
+   "score": 2
+  },
+  {
+   "slug": "coded-bias",
+   "title": "coded bias",
+   "score": 2
+  },
+  {
+   "slug": "coming-2-america",
+   "title": "coming 2 america",
+   "score": 2
+  },
+  {
+   "slug": "confetti",
+   "title": "confetti",
+   "score": 2
+  },
+  {
    "slug": "curious-george-3-back-to-the-jungle",
    "title": "curious george 3 back to the jungle",
+   "score": 2
+  },
+  {
+   "slug": "curious-george-a-halloween-boo-fest",
+   "title": "curious george a halloween boo fest",
    "score": 2
   },
   {
@@ -329,13 +1324,48 @@
    "score": 2
   },
   {
-   "slug": "dino-dana-the-movie",
-   "title": "dino dana the movie",
+   "slug": "dancing-in-jaffa",
+   "title": "dancing in jaffa",
    "score": 2
   },
   {
-   "slug": "dr-seuss-the-lorax",
-   "title": "dr seuss the lorax",
+   "slug": "deep-sky",
+   "title": "deep sky",
+   "score": 2
+  },
+  {
+   "slug": "devotion",
+   "title": "devotion",
+   "score": 2
+  },
+  {
+   "slug": "dolores",
+   "title": "dolores",
+   "score": 2
+  },
+  {
+   "slug": "dr-dolittle-3",
+   "title": "dr dolittle 3",
+   "score": 2
+  },
+  {
+   "slug": "dracula",
+   "title": "dracula",
+   "score": 2
+  },
+  {
+   "slug": "drumline",
+   "title": "drumline",
+   "score": 2
+  },
+  {
+   "slug": "duck-soup",
+   "title": "duck soup",
+   "score": 2
+  },
+  {
+   "slug": "dune",
+   "title": "dune",
    "score": 2
   },
   {
@@ -344,8 +1374,28 @@
    "score": 2
   },
   {
+   "slug": "earth",
+   "title": "earth",
+   "score": 2
+  },
+  {
+   "slug": "elli-and-her-monster-team",
+   "title": "elli and her monster team",
+   "score": 2
+  },
+  {
+   "slug": "elvis",
+   "title": "elvis",
+   "score": 2
+  },
+  {
    "slug": "elvis-the-pig",
    "title": "elvis the pig",
+   "score": 2
+  },
+  {
+   "slug": "emma-0",
+   "title": "emma 0",
    "score": 2
   },
   {
@@ -354,8 +1404,33 @@
    "score": 2
   },
   {
+   "slug": "ernest-and-celestine-a-trip-to-gibberitia",
+   "title": "ernest and celestine a trip to gibberitia",
+   "score": 2
+  },
+  {
+   "slug": "ever-after",
+   "title": "ever after",
+   "score": 2
+  },
+  {
    "slug": "everyones-hero",
    "title": "everyones hero",
+   "score": 2
+  },
+  {
+   "slug": "exodus",
+   "title": "exodus",
+   "score": 2
+  },
+  {
+   "slug": "faith-of-angels",
+   "title": "faith of angels",
+   "score": 2
+  },
+  {
+   "slug": "family-camp",
+   "title": "family camp",
    "score": 2
   },
   {
@@ -364,18 +1439,148 @@
    "score": 2
   },
   {
-   "slug": "go-go-cory-carson-summer-camp",
-   "title": "go go cory carson summer camp",
+   "slug": "father-of-the-bride-1950",
+   "title": "father of the bride 1950",
    "score": 2
   },
   {
-   "slug": "good-night-oppy",
-   "title": "good night oppy",
+   "slug": "fiddler-on-the-roof",
+   "title": "fiddler on the roof",
+   "score": 2
+  },
+  {
+   "slug": "field-of-dreams",
+   "title": "field of dreams",
+   "score": 2
+  },
+  {
+   "slug": "fight-for-space",
+   "title": "fight for space",
+   "score": 2
+  },
+  {
+   "slug": "fire-of-love",
+   "title": "fire of love",
+   "score": 2
+  },
+  {
+   "slug": "fireheart",
+   "title": "fireheart",
+   "score": 2
+  },
+  {
+   "slug": "first-man",
+   "title": "first man",
+   "score": 2
+  },
+  {
+   "slug": "flamin-hot",
+   "title": "flamin hot",
+   "score": 2
+  },
+  {
+   "slug": "florence-foster-jenkins",
+   "title": "florence foster jenkins",
+   "score": 2
+  },
+  {
+   "slug": "free-solo",
+   "title": "free solo",
+   "score": 2
+  },
+  {
+   "slug": "girls-state",
+   "title": "girls state",
+   "score": 2
+  },
+  {
+   "slug": "golda",
+   "title": "golda",
+   "score": 2
+  },
+  {
+   "slug": "goldfinger",
+   "title": "goldfinger",
+   "score": 2
+  },
+  {
+   "slug": "greyhound",
+   "title": "greyhound",
+   "score": 2
+  },
+  {
+   "slug": "growing-up-wild",
+   "title": "growing up wild",
+   "score": 2
+  },
+  {
+   "slug": "guillermo-del-toros-pinocchio",
+   "title": "guillermo del toros pinocchio",
+   "score": 2
+  },
+  {
+   "slug": "gus",
+   "title": "gus",
+   "score": 2
+  },
+  {
+   "slug": "hamilton",
+   "title": "hamilton",
+   "score": 2
+  },
+  {
+   "slug": "hell-of-a-cruise",
+   "title": "hell of a cruise",
    "score": 2
   },
   {
    "slug": "hes-a-bully-charlie-brown",
    "title": "hes a bully charlie brown",
+   "score": 2
+  },
+  {
+   "slug": "hichki",
+   "title": "hichki",
+   "score": 2
+  },
+  {
+   "slug": "hitch",
+   "title": "hitch",
+   "score": 2
+  },
+  {
+   "slug": "home-court",
+   "title": "home court",
+   "score": 2
+  },
+  {
+   "slug": "hoosiers",
+   "title": "hoosiers",
+   "score": 2
+  },
+  {
+   "slug": "hop",
+   "title": "hop",
+   "score": 2
+  },
+  {
+   "slug": "horsegirls",
+   "title": "horsegirls",
+   "score": 2
+  },
+  {
+   "slug": "hubble-3d",
+   "title": "hubble 3d",
+   "score": 2
+  },
+  {
+   "slug": "i-am-bolt",
+   "title": "i am bolt",
+   "score": 2
+  },
+  {
+   "slug": "i-am-greta",
+   "title": "i am greta",
    "score": 2
   },
   {
@@ -389,8 +1594,43 @@
    "score": 2
   },
   {
-   "slug": "its-the-great-pumpkin-charlie-brown",
-   "title": "its the great pumpkin charlie brown",
+   "slug": "ice-age-the-great-egg-scapade",
+   "title": "ice age the great egg scapade",
+   "score": 2
+  },
+  {
+   "slug": "ice-princess",
+   "title": "ice princess",
+   "score": 2
+  },
+  {
+   "slug": "if-you-give-a-mouse-a-christmas-cookie",
+   "title": "if you give a mouse a christmas cookie",
+   "score": 2
+  },
+  {
+   "slug": "im-still-here-0",
+   "title": "im still here 0",
+   "score": 2
+  },
+  {
+   "slug": "imagine-dragons-live-in-vegas",
+   "title": "imagine dragons live in vegas",
+   "score": 2
+  },
+  {
+   "slug": "in-the-shadow-of-the-moon",
+   "title": "in the shadow of the moon",
+   "score": 2
+  },
+  {
+   "slug": "inventors",
+   "title": "inventors",
+   "score": 2
+  },
+  {
+   "slug": "its-the-easter-beagle-charlie-brown",
+   "title": "its the easter beagle charlie brown",
    "score": 2
   },
   {
@@ -399,13 +1639,73 @@
    "score": 2
   },
   {
+   "slug": "jimmy-carter-rock-roll-president",
+   "title": "jimmy carter rock roll president",
+   "score": 2
+  },
+  {
+   "slug": "jodhaa-akbar",
+   "title": "jodhaa akbar",
+   "score": 2
+  },
+  {
+   "slug": "jojo-siwa-dream-the-concert-experience",
+   "title": "jojo siwa dream the concert experience",
+   "score": 2
+  },
+  {
+   "slug": "jonah-a-veggietales-movie",
+   "title": "jonah a veggietales movie",
+   "score": 2
+  },
+  {
+   "slug": "journey-to-bethlehem",
+   "title": "journey to bethlehem",
+   "score": 2
+  },
+  {
+   "slug": "jump-shot-the-kenny-sailors-story",
+   "title": "jump shot the kenny sailors story",
+   "score": 2
+  },
+  {
+   "slug": "jumping-from-high-places",
+   "title": "jumping from high places",
+   "score": 2
+  },
+  {
+   "slug": "kangaroo-valley",
+   "title": "kangaroo valley",
+   "score": 2
+  },
+  {
+   "slug": "king-richard",
+   "title": "king richard",
+   "score": 2
+  },
+  {
+   "slug": "klaus",
+   "title": "klaus",
+   "score": 2
+  },
+  {
    "slug": "koala-brothers-outback-christmas",
    "title": "koala brothers outback christmas",
    "score": 2
   },
   {
-   "slug": "koshien-japans-field-of-dreams",
-   "title": "koshien japans field of dreams",
+   "slug": "life-animated",
+   "title": "life animated",
+   "score": 2
+  },
+  {
+   "slug": "lift",
+   "title": "lift",
+   "score": 2
+  },
+  {
+   "slug": "light-of-the-world",
+   "title": "light of the world",
    "score": 2
   },
   {
@@ -414,13 +1714,158 @@
    "score": 2
   },
   {
+   "slug": "limmensita",
+   "title": "limmensita",
+   "score": 2
+  },
+  {
+   "slug": "living",
+   "title": "living",
+   "score": 2
+  },
+  {
+   "slug": "loving",
+   "title": "loving",
+   "score": 2
+  },
+  {
+   "slug": "loving-vincent",
+   "title": "loving vincent",
+   "score": 2
+  },
+  {
+   "slug": "lucas",
+   "title": "lucas",
+   "score": 2
+  },
+  {
+   "slug": "makaylas-voice-a-letter-to-the-world",
+   "title": "makaylas voice a letter to the world",
+   "score": 2
+  },
+  {
+   "slug": "mary-and-the-witchs-flower",
+   "title": "mary and the witchs flower",
+   "score": 2
+  },
+  {
    "slug": "maya-the-bee-3-the-golden-orb",
    "title": "maya the bee 3 the golden orb",
    "score": 2
   },
   {
-   "slug": "meet-the-small-potatoes",
-   "title": "meet the small potatoes",
+   "slug": "mean-girls",
+   "title": "mean girls",
+   "score": 2
+  },
+  {
+   "slug": "memoir-of-a-snail",
+   "title": "memoir of a snail",
+   "score": 2
+  },
+  {
+   "slug": "minari",
+   "title": "minari",
+   "score": 2
+  },
+  {
+   "slug": "miracle-the-boys-of-80",
+   "title": "miracle the boys of 80",
+   "score": 2
+  },
+  {
+   "slug": "missing-link",
+   "title": "missing link",
+   "score": 2
+  },
+  {
+   "slug": "mission-control-the-unsung-heroes-of-apollo",
+   "title": "mission control the unsung heroes of apollo",
+   "score": 2
+  },
+  {
+   "slug": "mission-impossible-dead-reckoning-part-one",
+   "title": "mission impossible dead reckoning part one",
+   "score": 2
+  },
+  {
+   "slug": "moomins-and-the-winter-wonderland",
+   "title": "moomins and the winter wonderland",
+   "score": 2
+  },
+  {
+   "slug": "mr-blake-at-your-service",
+   "title": "mr blake at your service",
+   "score": 2
+  },
+  {
+   "slug": "mrs-harris-goes-to-paris",
+   "title": "mrs harris goes to paris",
+   "score": 2
+  },
+  {
+   "slug": "muppet-treasure-island",
+   "title": "muppet treasure island",
+   "score": 2
+  },
+  {
+   "slug": "my-life-as-a-zucchini",
+   "title": "my life as a zucchini",
+   "score": 2
+  },
+  {
+   "slug": "never-been-kissed",
+   "title": "never been kissed",
+   "score": 2
+  },
+  {
+   "slug": "no-time-to-die",
+   "title": "no time to die",
+   "score": 2
+  },
+  {
+   "slug": "nosferatu-a-symphony-of-horror",
+   "title": "nosferatu a symphony of horror",
+   "score": 2
+  },
+  {
+   "slug": "ocean-with-david-attenborough",
+   "title": "ocean with david attenborough",
+   "score": 2
+  },
+  {
+   "slug": "odd-squad-the-movie",
+   "title": "odd squad the movie",
+   "score": 2
+  },
+  {
+   "slug": "once",
+   "title": "once",
+   "score": 2
+  },
+  {
+   "slug": "once-upon-a-sesame-street-christmas",
+   "title": "once upon a sesame street christmas",
+   "score": 2
+  },
+  {
+   "slug": "one-life",
+   "title": "one life",
+   "score": 2
+  },
+  {
+   "slug": "operation-mincemeat",
+   "title": "operation mincemeat",
+   "score": 2
+  },
+  {
+   "slug": "out-of-my-mind",
+   "title": "out of my mind",
+   "score": 2
+  },
+  {
+   "slug": "peggy-sue-got-married",
+   "title": "peggy sue got married",
    "score": 2
   },
   {
@@ -429,18 +1874,73 @@
    "score": 2
   },
   {
+   "slug": "peppas-cinema-party",
+   "title": "peppas cinema party",
+   "score": 2
+  },
+  {
+   "slug": "perfect-days",
+   "title": "perfect days",
+   "score": 2
+  },
+  {
+   "slug": "piece-by-piece",
+   "title": "piece by piece",
+   "score": 2
+  },
+  {
    "slug": "pixar-short-films-collection-volume-2",
    "title": "pixar short films collection volume 2",
    "score": 2
   },
   {
-   "slug": "pixie-hollow-games",
-   "title": "pixie hollow games",
+   "slug": "police-patrol",
+   "title": "police patrol",
    "score": 2
   },
   {
-   "slug": "room-on-the-broom",
-   "title": "room on the broom",
+   "slug": "puff-wonders-of-the-reef",
+   "title": "puff wonders of the reef",
+   "score": 2
+  },
+  {
+   "slug": "radical",
+   "title": "radical",
+   "score": 2
+  },
+  {
+   "slug": "rear-window",
+   "title": "rear window",
+   "score": 2
+  },
+  {
+   "slug": "rebel-without-a-cause",
+   "title": "rebel without a cause",
+   "score": 2
+  },
+  {
+   "slug": "rescued-by-ruby",
+   "title": "rescued by ruby",
+   "score": 2
+  },
+  {
+   "slug": "resort-to-love",
+   "title": "resort to love",
+   "score": 2
+  },
+  {
+   "slug": "river-city-drumbeat",
+   "title": "river city drumbeat",
+   "score": 2
+  },
+  {
+   "slug": "roman-holiday",
+   "title": "roman holiday",
+   "score": 2
+  },
+  {
+   "slug": "roxy-hunter-and-the-secret-of-the-shaman",
+   "title": "roxy hunter and the secret of the shaman",
    "score": 2
   },
   {
@@ -459,8 +1959,23 @@
    "score": 2
   },
   {
+   "slug": "runner",
+   "title": "runner",
+   "score": 2
+  },
+  {
    "slug": "running-the-bases",
    "title": "running the bases",
+   "score": 2
+  },
+  {
+   "slug": "sally",
+   "title": "sally",
+   "score": 2
+  },
+  {
+   "slug": "samson-and-delilah",
+   "title": "samson and delilah",
    "score": 2
   },
   {
@@ -469,8 +1984,58 @@
    "score": 2
   },
   {
+   "slug": "school-ties",
+   "title": "school ties",
+   "score": 2
+  },
+  {
    "slug": "schoolhouse-rock-the-election-collection",
    "title": "schoolhouse rock the election collection",
+   "score": 2
+  },
+  {
+   "slug": "searching-for-bobby-fischer",
+   "title": "searching for bobby fischer",
+   "score": 2
+  },
+  {
+   "slug": "secret-lives-of-orangutans",
+   "title": "secret lives of orangutans",
+   "score": 2
+  },
+  {
+   "slug": "sentimental-value",
+   "title": "sentimental value",
+   "score": 2
+  },
+  {
+   "slug": "sesame-street-abby-in-wonderland",
+   "title": "sesame street abby in wonderland",
+   "score": 2
+  },
+  {
+   "slug": "sleepless-in-seattle",
+   "title": "sleepless in seattle",
+   "score": 2
+  },
+  {
+   "slug": "small-things-like-these",
+   "title": "small things like these",
+   "score": 2
+  },
+  {
+   "slug": "spectre",
+   "title": "spectre",
+   "score": 2
+  },
+  {
+   "slug": "spellbound",
+   "title": "spellbound",
+   "score": 2
+  },
+  {
+   "slug": "spookiz-the-movie",
+   "title": "spookiz the movie",
    "score": 2
   },
   {
@@ -479,8 +2044,28 @@
    "score": 2
   },
   {
-   "slug": "stellaluna",
-   "title": "stellaluna",
+   "slug": "star-trek-beyond",
+   "title": "star trek beyond",
+   "score": 2
+  },
+  {
+   "slug": "star-trek-ii-the-wrath-of-khan",
+   "title": "star trek ii the wrath of khan",
+   "score": 2
+  },
+  {
+   "slug": "star-trek-iii-the-search-for-spock",
+   "title": "star trek iii the search for spock",
+   "score": 2
+  },
+  {
+   "slug": "steel-magnolias",
+   "title": "steel magnolias",
+   "score": 2
+  },
+  {
+   "slug": "stick-man",
+   "title": "stick man",
    "score": 2
   },
   {
@@ -489,8 +2074,18 @@
    "score": 2
   },
   {
-   "slug": "super-monsters-save-halloween",
-   "title": "super monsters save halloween",
+   "slug": "summer-of-soul-or-when-the-revolution-could-not-be-televised",
+   "title": "summer of soul or when the revolution could not be televised",
+   "score": 2
+  },
+  {
+   "slug": "super-charlie",
+   "title": "super charlie",
+   "score": 2
+  },
+  {
+   "slug": "super-monsters-the-new-class",
+   "title": "super monsters the new class",
    "score": 2
   },
   {
@@ -499,13 +2094,33 @@
    "score": 2
   },
   {
+   "slug": "swim-team",
+   "title": "swim team",
+   "score": 2
+  },
+  {
+   "slug": "ta-ra-rum-pum",
+   "title": "ta ra rum pum",
+   "score": 2
+  },
+  {
    "slug": "the-barkers-mind-the-cats",
    "title": "the barkers mind the cats",
    "score": 2
   },
   {
-   "slug": "the-bride-of-frankenstein",
-   "title": "the bride of frankenstein",
+   "slug": "the-bridge-on-the-river-kwai",
+   "title": "the bridge on the river kwai",
+   "score": 2
+  },
+  {
+   "slug": "the-casagrandes-movie",
+   "title": "the casagrandes movie",
+   "score": 2
+  },
+  {
+   "slug": "the-cat-in-the-hat-knows-a-lot-about-christmas",
+   "title": "the cat in the hat knows a lot about christmas",
    "score": 2
   },
   {
@@ -519,13 +2134,48 @@
    "score": 2
   },
   {
+   "slug": "the-day-the-earth-stood-still",
+   "title": "the day the earth stood still",
+   "score": 2
+  },
+  {
+   "slug": "the-first-easter-rabbit",
+   "title": "the first easter rabbit",
+   "score": 2
+  },
+  {
+   "slug": "the-first-slam-dunk",
+   "title": "the first slam dunk",
+   "score": 2
+  },
+  {
+   "slug": "the-inseparables",
+   "title": "the inseparables",
+   "score": 2
+  },
+  {
    "slug": "the-jackie-robinson-story",
    "title": "the jackie robinson story",
    "score": 2
   },
   {
+   "slug": "the-king-of-kings",
+   "title": "the king of kings",
+   "score": 2
+  },
+  {
    "slug": "the-land-of-sometimes",
    "title": "the land of sometimes",
+   "score": 2
+  },
+  {
+   "slug": "the-lavender-hill-mob",
+   "title": "the lavender hill mob",
+   "score": 2
+  },
+  {
+   "slug": "the-life-ahead",
+   "title": "the life ahead",
    "score": 2
   },
   {
@@ -539,13 +2189,43 @@
    "score": 2
   },
   {
-   "slug": "the-magical-wand-chase-a-sesame-street-special",
-   "title": "the magical wand chase a sesame street special",
+   "slug": "the-long-game",
+   "title": "the long game",
    "score": 2
   },
   {
-   "slug": "the-peanuts-movie",
-   "title": "the peanuts movie",
+   "slug": "the-lord-of-the-rings-the-return-of-the-king",
+   "title": "the lord of the rings the return of the king",
+   "score": 2
+  },
+  {
+   "slug": "the-martian",
+   "title": "the martian",
+   "score": 2
+  },
+  {
+   "slug": "the-mighty-macs",
+   "title": "the mighty macs",
+   "score": 2
+  },
+  {
+   "slug": "the-miracle-worker",
+   "title": "the miracle worker",
+   "score": 2
+  },
+  {
+   "slug": "the-mummy-1932",
+   "title": "the mummy 1932",
+   "score": 2
+  },
+  {
+   "slug": "the-only-girl-in-the-orchestra",
+   "title": "the only girl in the orchestra",
+   "score": 2
+  },
+  {
+   "slug": "the-powerpuff-girls-movie",
+   "title": "the powerpuff girls movie",
    "score": 2
   },
   {
@@ -554,8 +2234,8 @@
    "score": 2
   },
   {
-   "slug": "the-short-game",
-   "title": "the short game",
+   "slug": "the-sisterhood-of-the-traveling-pants",
+   "title": "the sisterhood of the traveling pants",
    "score": 2
   },
   {
@@ -564,28 +2244,143 @@
    "score": 2
   },
   {
-   "slug": "the-snowy-day",
-   "title": "the snowy day",
+   "slug": "the-snowman",
+   "title": "the snowman",
    "score": 2
   },
   {
-   "slug": "the-tigger-movie",
-   "title": "the tigger movie",
+   "slug": "the-snowman-and-the-snowdog",
+   "title": "the snowman and the snowdog",
    "score": 2
   },
   {
-   "slug": "the-year-of-the-yao",
-   "title": "the year of the yao",
+   "slug": "the-swan-princess-a-royal-wedding",
+   "title": "the swan princess a royal wedding",
    "score": 2
   },
   {
-   "slug": "unleashing-hope-the-power-of-service-dogs-for-autism",
-   "title": "unleashing hope the power of service dogs for autism",
+   "slug": "the-young-lions",
+   "title": "the young lions",
+   "score": 2
+  },
+  {
+   "slug": "thirteen-lives",
+   "title": "thirteen lives",
+   "score": 2
+  },
+  {
+   "slug": "thomas-friends-blue-mountain-mystery-the-movie",
+   "title": "thomas friends blue mountain mystery the movie",
+   "score": 2
+  },
+  {
+   "slug": "three-minutes-a-lengthening",
+   "title": "three minutes a lengthening",
+   "score": 2
+  },
+  {
+   "slug": "three-of-us",
+   "title": "three of us",
+   "score": 2
+  },
+  {
+   "slug": "thunderpants",
+   "title": "thunderpants",
+   "score": 2
+  },
+  {
+   "slug": "tick-tickboom",
+   "title": "tick tickboom",
+   "score": 2
+  },
+  {
+   "slug": "till",
+   "title": "till",
+   "score": 2
+  },
+  {
+   "slug": "tinker-bell-and-the-secret-of-the-wings",
+   "title": "tinker bell and the secret of the wings",
+   "score": 2
+  },
+  {
+   "slug": "to-the-arctic",
+   "title": "to the arctic",
+   "score": 2
+  },
+  {
+   "slug": "true-spirit",
+   "title": "true spirit",
+   "score": 2
+  },
+  {
+   "slug": "twilight",
+   "title": "twilight",
+   "score": 2
+  },
+  {
+   "slug": "un-disfraz-para-nicolas-a-costume-for-nicolas",
+   "title": "un disfraz para nicolas a costume for nicolas",
+   "score": 2
+  },
+  {
+   "slug": "underwater-dreams",
+   "title": "underwater dreams",
+   "score": 2
+  },
+  {
+   "slug": "veggietales-lyle-the-kindly-viking",
+   "title": "veggietales lyle the kindly viking",
+   "score": 2
+  },
+  {
+   "slug": "veggietales-the-penniless-princess",
+   "title": "veggietales the penniless princess",
+   "score": 2
+  },
+  {
+   "slug": "wadjda",
+   "title": "wadjda",
+   "score": 2
+  },
+  {
+   "slug": "wake-up-sid",
+   "title": "wake up sid",
    "score": 2
   },
   {
    "slug": "walt-disney-animation-studios-short-films-collection",
    "title": "walt disney animation studios short films collection",
+   "score": 2
+  },
+  {
+   "slug": "wendell-wild",
+   "title": "wendell wild",
+   "score": 2
+  },
+  {
+   "slug": "what-we-leave-behind",
+   "title": "what we leave behind",
+   "score": 2
+  },
+  {
+   "slug": "whats-on-your-plate",
+   "title": "whats on your plate",
+   "score": 2
+  },
+  {
+   "slug": "white-bird",
+   "title": "white bird",
+   "score": 2
+  },
+  {
+   "slug": "winnie-the-pooh-seasons-of-giving",
+   "title": "winnie the pooh seasons of giving",
+   "score": 2
+  },
+  {
+   "slug": "young-mr-lincoln",
+   "title": "young mr lincoln",
    "score": 2
   },
   {
@@ -602,16 +2397,6 @@
    "slug": "zoboomafoo-play-day-at-animal-junction",
    "title": "zoboomafoo play day at animal junction",
    "score": 2
-  },
-  {
-   "slug": "10-lives",
-   "title": "10 lives",
-   "score": 1
-  },
-  {
-   "slug": "10-things-i-hate-about-you",
-   "title": "10 things i hate about you",
-   "score": 1
   },
   {
    "slug": "100-nights-of-hero",
@@ -644,6 +2429,11 @@
    "score": 1
   },
   {
+   "slug": "2001-a-space-odyssey",
+   "title": "2001 a space odyssey",
+   "score": 1
+  },
+  {
    "slug": "2040",
    "title": "2040",
    "score": 1
@@ -654,8 +2444,23 @@
    "score": 1
   },
   {
+   "slug": "3-idiots",
+   "title": "3 idiots",
+   "score": 1
+  },
+  {
+   "slug": "3-ninjas-knuckle-up",
+   "title": "3 ninjas knuckle up",
+   "score": 1
+  },
+  {
    "slug": "310-to-yuma",
    "title": "310 to yuma",
+   "score": 1
+  },
+  {
+   "slug": "45-years",
+   "title": "45 years",
    "score": 1
   },
   {
@@ -674,8 +2479,23 @@
    "score": 1
   },
   {
+   "slug": "587-the-great-train-robbery",
+   "title": "587 the great train robbery",
+   "score": 1
+  },
+  {
+   "slug": "7-prisoners",
+   "title": "7 prisoners",
+   "score": 1
+  },
+  {
    "slug": "7-women-and-a-murder",
    "title": "7 women and a murder",
+   "score": 1
+  },
+  {
+   "slug": "8-bit-christmas",
+   "title": "8 bit christmas",
    "score": 1
   },
   {
@@ -689,13 +2509,23 @@
    "score": 1
   },
   {
+   "slug": "a-beautiful-day-in-the-neighborhood",
+   "title": "a beautiful day in the neighborhood",
+   "score": 1
+  },
+  {
+   "slug": "a-beautiful-mind",
+   "title": "a beautiful mind",
+   "score": 1
+  },
+  {
    "slug": "a-boy-called-christmas",
    "title": "a boy called christmas",
    "score": 1
   },
   {
-   "slug": "a-boy-named-charlie-brown",
-   "title": "a boy named charlie brown",
+   "slug": "a-brilliant-young-mind",
+   "title": "a brilliant young mind",
    "score": 1
   },
   {
@@ -709,18 +2539,8 @@
    "score": 1
   },
   {
-   "slug": "a-call-to-spy",
-   "title": "a call to spy",
-   "score": 1
-  },
-  {
-   "slug": "a-cats-life",
-   "title": "a cats life",
-   "score": 1
-  },
-  {
-   "slug": "a-charlie-brown-thanksgiving",
-   "title": "a charlie brown thanksgiving",
+   "slug": "a-cat-in-paris",
+   "title": "a cat in paris",
    "score": 1
   },
   {
@@ -759,13 +2579,23 @@
    "score": 1
   },
   {
-   "slug": "a-cinderella-story",
-   "title": "a cinderella story",
+   "slug": "a-complete-unknown",
+   "title": "a complete unknown",
    "score": 1
   },
   {
    "slug": "a-cowboy-christmas-romance",
    "title": "a cowboy christmas romance",
+   "score": 1
+  },
+  {
+   "slug": "a-dogs-perfect-christmas",
+   "title": "a dogs perfect christmas",
+   "score": 1
+  },
+  {
+   "slug": "a-fish-tale-help-im-a-fish",
+   "title": "a fish tale help im a fish",
    "score": 1
   },
   {
@@ -779,18 +2609,23 @@
    "score": 1
   },
   {
+   "slug": "a-girl-like-her",
+   "title": "a girl like her",
+   "score": 1
+  },
+  {
+   "slug": "a-journal-for-jordan",
+   "title": "a journal for jordan",
+   "score": 1
+  },
+  {
    "slug": "a-journey",
    "title": "a journey",
    "score": 1
   },
   {
-   "slug": "a-league-of-their-own",
-   "title": "a league of their own",
-   "score": 1
-  },
-  {
-   "slug": "a-love-song-for-latasha",
-   "title": "a love song for latasha",
+   "slug": "a-letter-to-momo",
+   "title": "a letter to momo",
    "score": 1
   },
   {
@@ -814,23 +2649,23 @@
    "score": 1
   },
   {
-   "slug": "a-mile-in-his-shoes",
-   "title": "a mile in his shoes",
-   "score": 1
-  },
-  {
-   "slug": "a-million-miles-away",
-   "title": "a million miles away",
-   "score": 1
-  },
-  {
    "slug": "a-monster-calls",
    "title": "a monster calls",
    "score": 1
   },
   {
-   "slug": "a-monster-in-paris",
-   "title": "a monster in paris",
+   "slug": "a-most-beautiful-thing",
+   "title": "a most beautiful thing",
+   "score": 1
+  },
+  {
+   "slug": "a-night-at-the-opera",
+   "title": "a night at the opera",
+   "score": 1
+  },
+  {
+   "slug": "a-princess-for-christmas",
+   "title": "a princess for christmas",
    "score": 1
   },
   {
@@ -839,8 +2674,8 @@
    "score": 1
   },
   {
-   "slug": "a-quiet-place",
-   "title": "a quiet place",
+   "slug": "a-quiet-passion",
+   "title": "a quiet passion",
    "score": 1
   },
   {
@@ -859,8 +2694,8 @@
    "score": 1
   },
   {
-   "slug": "a-ripple-of-hope",
-   "title": "a ripple of hope",
+   "slug": "a-room-with-a-view",
+   "title": "a room with a view",
    "score": 1
   },
   {
@@ -869,8 +2704,18 @@
    "score": 1
   },
   {
+   "slug": "a-separation",
+   "title": "a separation",
+   "score": 1
+  },
+  {
    "slug": "a-soweto-love-story",
    "title": "a soweto love story",
+   "score": 1
+  },
+  {
+   "slug": "a-space-in-time",
+   "title": "a space in time",
    "score": 1
   },
   {
@@ -879,8 +2724,8 @@
    "score": 1
   },
   {
-   "slug": "a-tooth-fairy-tale",
-   "title": "a tooth fairy tale",
+   "slug": "a-tale-of-love-and-darkness",
+   "title": "a tale of love and darkness",
    "score": 1
   },
   {
@@ -899,8 +2744,93 @@
    "score": 1
   },
   {
-   "slug": "african-cats",
-   "title": "african cats",
+   "slug": "a-view-to-a-kill",
+   "title": "a view to a kill",
+   "score": 1
+  },
+  {
+   "slug": "a-walk-with-grace",
+   "title": "a walk with grace",
+   "score": 1
+  },
+  {
+   "slug": "a-week-away",
+   "title": "a week away",
+   "score": 1
+  },
+  {
+   "slug": "aaja-nachle",
+   "title": "aaja nachle",
+   "score": 1
+  },
+  {
+   "slug": "abacus-small-enough-to-jail",
+   "title": "abacus small enough to jail",
+   "score": 1
+  },
+  {
+   "slug": "abbott-and-costello-meet-frankenstein",
+   "title": "abbott and costello meet frankenstein",
+   "score": 1
+  },
+  {
+   "slug": "abe",
+   "title": "abe",
+   "score": 1
+  },
+  {
+   "slug": "about-a-boy",
+   "title": "about a boy",
+   "score": 1
+  },
+  {
+   "slug": "about-fate",
+   "title": "about fate",
+   "score": 1
+  },
+  {
+   "slug": "about-time",
+   "title": "about time",
+   "score": 1
+  },
+  {
+   "slug": "above-and-beyond",
+   "title": "above and beyond",
+   "score": 1
+  },
+  {
+   "slug": "acod",
+   "title": "acod",
+   "score": 1
+  },
+  {
+   "slug": "ad-astra",
+   "title": "ad astra",
+   "score": 1
+  },
+  {
+   "slug": "adam",
+   "title": "adam",
+   "score": 1
+  },
+  {
+   "slug": "adam-the-first",
+   "title": "adam the first",
+   "score": 1
+  },
+  {
+   "slug": "adventure-planet",
+   "title": "adventure planet",
+   "score": 1
+  },
+  {
+   "slug": "afghan-dreamers",
+   "title": "afghan dreamers",
+   "score": 1
+  },
+  {
+   "slug": "after-earth",
+   "title": "after earth",
    "score": 1
   },
   {
@@ -914,8 +2844,38 @@
    "score": 1
   },
   {
+   "slug": "agent-cody-banks",
+   "title": "agent cody banks",
+   "score": 1
+  },
+  {
+   "slug": "aisha",
+   "title": "aisha",
+   "score": 1
+  },
+  {
+   "slug": "aisha-0",
+   "title": "aisha 0",
+   "score": 1
+  },
+  {
    "slug": "alakazam-the-great",
    "title": "alakazam the great",
+   "score": 1
+  },
+  {
+   "slug": "alex-rider-operation-stormbreaker",
+   "title": "alex rider operation stormbreaker",
+   "score": 1
+  },
+  {
+   "slug": "alex-strangelove",
+   "title": "alex strangelove",
+   "score": 1
+  },
+  {
+   "slug": "ali-ava",
+   "title": "ali ava",
    "score": 1
   },
   {
@@ -924,13 +2884,23 @@
    "score": 1
   },
   {
-   "slug": "alien-xmas",
-   "title": "alien xmas",
+   "slug": "alice",
+   "title": "alice",
    "score": 1
   },
   {
-   "slug": "all-in-the-fight-for-democracy",
-   "title": "all in the fight for democracy",
+   "slug": "alien-romulus",
+   "title": "alien romulus",
+   "score": 1
+  },
+  {
+   "slug": "all-in-miracle-at-st-bernards",
+   "title": "all in miracle at st bernards",
+   "score": 1
+  },
+  {
+   "slug": "all-that-breathes",
+   "title": "all that breathes",
    "score": 1
   },
   {
@@ -974,8 +2944,18 @@
    "score": 1
   },
   {
+   "slug": "alvin-and-the-chipmunks-meet-frankenstein",
+   "title": "alvin and the chipmunks meet frankenstein",
+   "score": 1
+  },
+  {
    "slug": "always-be-my-maybe",
    "title": "always be my maybe",
+   "score": 1
+  },
+  {
+   "slug": "amazing-antoine",
+   "title": "amazing antoine",
    "score": 1
   },
   {
@@ -984,13 +2964,88 @@
    "score": 1
   },
   {
+   "slug": "american-factory",
+   "title": "american factory",
+   "score": 1
+  },
+  {
+   "slug": "american-graffiti",
+   "title": "american graffiti",
+   "score": 1
+  },
+  {
+   "slug": "american-symphony",
+   "title": "american symphony",
+   "score": 1
+  },
+  {
+   "slug": "an-affair-to-remember",
+   "title": "an affair to remember",
+   "score": 1
+  },
+  {
    "slug": "an-alpine-holiday",
    "title": "an alpine holiday",
    "score": 1
   },
   {
-   "slug": "angelas-christmas-wish",
-   "title": "angelas christmas wish",
+   "slug": "an-american-girl-isabelle-dances-into-the-spotlight",
+   "title": "an american girl isabelle dances into the spotlight",
+   "score": 1
+  },
+  {
+   "slug": "an-american-girl-saige-paints-the-sky",
+   "title": "an american girl saige paints the sky",
+   "score": 1
+  },
+  {
+   "slug": "an-american-girl-story-melody-1963-love-has-to-win",
+   "title": "an american girl story melody 1963 love has to win",
+   "score": 1
+  },
+  {
+   "slug": "an-angel-for-may",
+   "title": "an angel for may",
+   "score": 1
+  },
+  {
+   "slug": "an-inconvenient-sequel-truth-to-power",
+   "title": "an inconvenient sequel truth to power",
+   "score": 1
+  },
+  {
+   "slug": "an-inconvenient-truth",
+   "title": "an inconvenient truth",
+   "score": 1
+  },
+  {
+   "slug": "and-mrs",
+   "title": "and mrs",
+   "score": 1
+  },
+  {
+   "slug": "and-the-children-shall-lead",
+   "title": "and the children shall lead",
+   "score": 1
+  },
+  {
+   "slug": "angelas-christmas",
+   "title": "angelas christmas",
+   "score": 1
+  },
+  {
+   "slug": "angelina-ballerina-ballerina-princess",
+   "title": "angelina ballerina ballerina princess",
+   "score": 1
+  },
+  {
+   "slug": "angelina-ballerina-dancing-on-ice",
+   "title": "angelina ballerina dancing on ice",
+   "score": 1
+  },
+  {
+   "slug": "angelina-ballerina-dreams-do-come-true",
+   "title": "angelina ballerina dreams do come true",
    "score": 1
   },
   {
@@ -999,18 +3054,113 @@
    "score": 1
   },
   {
+   "slug": "anne-frank-remembered",
+   "title": "anne frank remembered",
+   "score": 1
+  },
+  {
+   "slug": "anne-of-green-gables-the-good-stars",
+   "title": "anne of green gables the good stars",
+   "score": 1
+  },
+  {
+   "slug": "annefrank-parallel-stories",
+   "title": "annefrank parallel stories",
+   "score": 1
+  },
+  {
+   "slug": "another-cinderella-story",
+   "title": "another cinderella story",
+   "score": 1
+  },
+  {
+   "slug": "antarctica-a-year-on-ice",
+   "title": "antarctica a year on ice",
+   "score": 1
+  },
+  {
+   "slug": "anuja",
+   "title": "anuja",
+   "score": 1
+  },
+  {
+   "slug": "ape-star",
+   "title": "ape star",
+   "score": 1
+  },
+  {
+   "slug": "apollo-11",
+   "title": "apollo 11",
+   "score": 1
+  },
+  {
    "slug": "appaloosa",
    "title": "appaloosa",
    "score": 1
   },
   {
-   "slug": "arctic-tale",
-   "title": "arctic tale",
+   "slug": "april-and-the-extraordinary-world",
+   "title": "april and the extraordinary world",
+   "score": 1
+  },
+  {
+   "slug": "aquamarine",
+   "title": "aquamarine",
+   "score": 1
+  },
+  {
+   "slug": "archies-weird-mysteries-archie-and-the-riverdale-vampires",
+   "title": "archies weird mysteries archie and the riverdale vampires",
+   "score": 1
+  },
+  {
+   "slug": "are-you-there-god-its-me-margaret",
+   "title": "are you there god its me margaret",
+   "score": 1
+  },
+  {
+   "slug": "argentina-1985",
+   "title": "argentina 1985",
+   "score": 1
+  },
+  {
+   "slug": "argylle",
+   "title": "argylle",
+   "score": 1
+  },
+  {
+   "slug": "aristotle-and-dante-discover-the-secrets-of-the-universe",
+   "title": "aristotle and dante discover the secrets of the universe",
    "score": 1
   },
   {
    "slug": "armageddon",
    "title": "armageddon",
+   "score": 1
+  },
+  {
+   "slug": "armstrong",
+   "title": "armstrong",
+   "score": 1
+  },
+  {
+   "slug": "at-eternitys-gate",
+   "title": "at eternitys gate",
+   "score": 1
+  },
+  {
+   "slug": "athlete-a",
+   "title": "athlete a",
+   "score": 1
+  },
+  {
+   "slug": "audible",
+   "title": "audible",
+   "score": 1
+  },
+  {
+   "slug": "austin-powers-the-spy-who-shagged-me",
+   "title": "austin powers the spy who shagged me",
    "score": 1
   },
   {
@@ -1024,8 +3174,43 @@
    "score": 1
   },
   {
-   "slug": "back-from-the-brink-saved-from-extinction",
-   "title": "back from the brink saved from extinction",
+   "slug": "avatar-aang-the-last-airbender",
+   "title": "avatar aang the last airbender",
+   "score": 1
+  },
+  {
+   "slug": "avatar-fire-and-ash",
+   "title": "avatar fire and ash",
+   "score": 1
+  },
+  {
+   "slug": "avatar-the-way-of-water",
+   "title": "avatar the way of water",
+   "score": 1
+  },
+  {
+   "slug": "babettes-feast",
+   "title": "babettes feast",
+   "score": 1
+  },
+  {
+   "slug": "back-of-the-net",
+   "title": "back of the net",
+   "score": 1
+  },
+  {
+   "slug": "back-to-the-future-part-ii",
+   "title": "back to the future part ii",
+   "score": 1
+  },
+  {
+   "slug": "back-to-the-future-part-iii",
+   "title": "back to the future part iii",
+   "score": 1
+  },
+  {
+   "slug": "bad-counselors",
+   "title": "bad counselors",
    "score": 1
   },
   {
@@ -1039,38 +3224,93 @@
    "score": 1
   },
   {
+   "slug": "badhaai-do",
+   "title": "badhaai do",
+   "score": 1
+  },
+  {
+   "slug": "ballad-of-a-small-player",
+   "title": "ballad of a small player",
+   "score": 1
+  },
+  {
+   "slug": "ballet-422",
+   "title": "ballet 422",
+   "score": 1
+  },
+  {
    "slug": "bank-of-dave-2-the-loan-ranger",
    "title": "bank of dave 2 the loan ranger",
    "score": 1
   },
   {
-   "slug": "barbara-lee-speaking-truth-to-power",
-   "title": "barbara lee speaking truth to power",
+   "slug": "barbie-and-the-diamond-castle",
+   "title": "barbie and the diamond castle",
    "score": 1
   },
   {
-   "slug": "barbie-and-the-secret-door",
-   "title": "barbie and the secret door",
+   "slug": "barbie-and-the-three-musketeers",
+   "title": "barbie and the three musketeers",
    "score": 1
   },
   {
-   "slug": "barbie-chelsea-the-lost-birthday",
-   "title": "barbie chelsea the lost birthday",
+   "slug": "barbie-as-rapunzel",
+   "title": "barbie as rapunzel",
    "score": 1
   },
   {
-   "slug": "barbie-dolphin-magic",
-   "title": "barbie dolphin magic",
+   "slug": "barbie-as-the-island-princess",
+   "title": "barbie as the island princess",
    "score": 1
   },
   {
-   "slug": "barbie-her-sisters-in-a-puppy-chase",
-   "title": "barbie her sisters in a puppy chase",
+   "slug": "barbie-as-the-princess-and-the-pauper",
+   "title": "barbie as the princess and the pauper",
+   "score": 1
+  },
+  {
+   "slug": "barbie-fairytopia-magic-of-the-rainbow",
+   "title": "barbie fairytopia magic of the rainbow",
+   "score": 1
+  },
+  {
+   "slug": "barbie-her-sisters-in-a-pony-tale",
+   "title": "barbie her sisters in a pony tale",
+   "score": 1
+  },
+  {
+   "slug": "barbie-her-sisters-in-the-great-puppy-adventure",
+   "title": "barbie her sisters in the great puppy adventure",
+   "score": 1
+  },
+  {
+   "slug": "barbie-in-rock-n-royals",
+   "title": "barbie in rock n royals",
+   "score": 1
+  },
+  {
+   "slug": "barbie-in-the-pink-shoes",
+   "title": "barbie in the pink shoes",
+   "score": 1
+  },
+  {
+   "slug": "barbie-mariposa-the-fairy-princess",
+   "title": "barbie mariposa the fairy princess",
+   "score": 1
+  },
+  {
+   "slug": "barbie-spy-squad",
+   "title": "barbie spy squad",
    "score": 1
   },
   {
    "slug": "barbie-star-light-adventure",
    "title": "barbie star light adventure",
+   "score": 1
+  },
+  {
+   "slug": "bardo-false-chronicle-of-a-handful-of-truths",
+   "title": "bardo false chronicle of a handful of truths",
    "score": 1
   },
   {
@@ -1084,23 +3324,18 @@
    "score": 1
   },
   {
+   "slug": "barry-lyndon",
+   "title": "barry lyndon",
+   "score": 1
+  },
+  {
    "slug": "baseball-and-the-ballerina",
    "title": "baseball and the ballerina",
    "score": 1
   },
   {
-   "slug": "batkid-begins",
-   "title": "batkid begins",
-   "score": 1
-  },
-  {
    "slug": "batman-vs-two-face",
    "title": "batman vs two face",
-   "score": 1
-  },
-  {
-   "slug": "becoming",
-   "title": "becoming",
    "score": 1
   },
   {
@@ -1119,8 +3354,18 @@
    "score": 1
   },
   {
-   "slug": "believe-in-me",
-   "title": "believe in me",
+   "slug": "beethovens-christmas-adventure",
+   "title": "beethovens christmas adventure",
+   "score": 1
+  },
+  {
+   "slug": "before-the-flood",
+   "title": "before the flood",
+   "score": 1
+  },
+  {
+   "slug": "belfast",
+   "title": "belfast",
    "score": 1
   },
   {
@@ -1134,13 +3379,28 @@
    "score": 1
   },
   {
-   "slug": "benny-and-joon",
-   "title": "benny and joon",
+   "slug": "bethany-hamilton-unstoppable",
+   "title": "bethany hamilton unstoppable",
+   "score": 1
+  },
+  {
+   "slug": "better-nate-than-ever",
+   "title": "better nate than ever",
+   "score": 1
+  },
+  {
+   "slug": "beverly-hills-chihuahua",
+   "title": "beverly hills chihuahua",
    "score": 1
   },
   {
    "slug": "beverly-hills-chihuahua-3-viva-la-fiesta",
    "title": "beverly hills chihuahua 3 viva la fiesta",
+   "score": 1
+  },
+  {
+   "slug": "beyonce-life-is-but-a-dream",
+   "title": "beyonce life is but a dream",
    "score": 1
   },
   {
@@ -1154,13 +3414,58 @@
    "score": 1
   },
   {
+   "slug": "bite-size",
+   "title": "bite size",
+   "score": 1
+  },
+  {
+   "slug": "black-as-night",
+   "title": "black as night",
+   "score": 1
+  },
+  {
    "slug": "black-boys",
    "title": "black boys",
    "score": 1
   },
   {
-   "slug": "blackpink-the-movie",
-   "title": "blackpink the movie",
+   "slug": "black-hawk-down",
+   "title": "black hawk down",
+   "score": 1
+  },
+  {
+   "slug": "blackfish",
+   "title": "blackfish",
+   "score": 1
+  },
+  {
+   "slug": "blackkklansman",
+   "title": "blackkklansman",
+   "score": 1
+  },
+  {
+   "slug": "blade-runner-2049",
+   "title": "blade runner 2049",
+   "score": 1
+  },
+  {
+   "slug": "blinded-by-the-light",
+   "title": "blinded by the light",
+   "score": 1
+  },
+  {
+   "slug": "blue-jean",
+   "title": "blue jean",
+   "score": 1
+  },
+  {
+   "slug": "blue-moon",
+   "title": "blue moon",
+   "score": 1
+  },
+  {
+   "slug": "blues-big-musical-movie",
+   "title": "blues big musical movie",
    "score": 1
   },
   {
@@ -1174,13 +3479,13 @@
    "score": 1
   },
   {
-   "slug": "bohemian-rhapsody",
-   "title": "bohemian rhapsody",
+   "slug": "bon-voyage-charlie-brown-and-dont-come-back",
+   "title": "bon voyage charlie brown and dont come back",
    "score": 1
   },
   {
-   "slug": "bon-voyage-charlie-brown-and-dont-come-back",
-   "title": "bon voyage charlie brown and dont come back",
+   "slug": "bonus-track",
+   "title": "bonus track",
    "score": 1
   },
   {
@@ -1199,8 +3504,18 @@
    "score": 1
   },
   {
+   "slug": "born-to-be-wild",
+   "title": "born to be wild",
+   "score": 1
+  },
+  {
    "slug": "boruto-naruto-the-movie",
    "title": "boruto naruto the movie",
+   "score": 1
+  },
+  {
+   "slug": "boyhood",
+   "title": "boyhood",
    "score": 1
   },
   {
@@ -1209,18 +3524,68 @@
    "score": 1
   },
   {
+   "slug": "bram-stokers-dracula",
+   "title": "bram stokers dracula",
+   "score": 1
+  },
+  {
    "slug": "brats",
    "title": "brats",
    "score": 1
   },
   {
-   "slug": "breaking",
-   "title": "breaking",
+   "slug": "brave-the-dark",
+   "title": "brave the dark",
    "score": 1
   },
   {
-   "slug": "bridge-of-spies",
-   "title": "bridge of spies",
+   "slug": "braveheart",
+   "title": "braveheart",
+   "score": 1
+  },
+  {
+   "slug": "breathe-0",
+   "title": "breathe 0",
+   "score": 1
+  },
+  {
+   "slug": "brian-and-charles",
+   "title": "brian and charles",
+   "score": 1
+  },
+  {
+   "slug": "bridget-jones-mad-about-the-boy",
+   "title": "bridget jones mad about the boy",
+   "score": 1
+  },
+  {
+   "slug": "bridget-joness-diary",
+   "title": "bridget joness diary",
+   "score": 1
+  },
+  {
+   "slug": "bring-the-soul-the-movie",
+   "title": "bring the soul the movie",
+   "score": 1
+  },
+  {
+   "slug": "broker",
+   "title": "broker",
+   "score": 1
+  },
+  {
+   "slug": "brown-sugar",
+   "title": "brown sugar",
+   "score": 1
+  },
+  {
+   "slug": "bts-permission-to-dance-on-stage-la",
+   "title": "bts permission to dance on stage la",
+   "score": 1
+  },
+  {
+   "slug": "buena-vista-social-club-adios",
+   "title": "buena vista social club adios",
    "score": 1
   },
   {
@@ -1229,8 +3594,28 @@
    "score": 1
   },
   {
-   "slug": "butch-cassidy-and-the-sundance-kid",
-   "title": "butch cassidy and the sundance kid",
+   "slug": "buffy-the-vampire-slayer",
+   "title": "buffy the vampire slayer",
+   "score": 1
+  },
+  {
+   "slug": "bugonia",
+   "title": "bugonia",
+   "score": 1
+  },
+  {
+   "slug": "bugs-bunnys-easter-funnies",
+   "title": "bugs bunnys easter funnies",
+   "score": 1
+  },
+  {
+   "slug": "bugs-bunnys-halloween-hijinx",
+   "title": "bugs bunnys halloween hijinx",
+   "score": 1
+  },
+  {
+   "slug": "butterfly-in-the-sky",
+   "title": "butterfly in the sky",
    "score": 1
   },
   {
@@ -1239,13 +3624,63 @@
    "score": 1
   },
   {
-   "slug": "camp-cool-kids",
-   "title": "camp cool kids",
+   "slug": "camp-courage",
+   "title": "camp courage",
+   "score": 1
+  },
+  {
+   "slug": "camp-cucamonga",
+   "title": "camp cucamonga",
+   "score": 1
+  },
+  {
+   "slug": "camp-hideout",
+   "title": "camp hideout",
+   "score": 1
+  },
+  {
+   "slug": "can-you-ever-forgive-me",
+   "title": "can you ever forgive me",
+   "score": 1
+  },
+  {
+   "slug": "candy-jar",
+   "title": "candy jar",
+   "score": 1
+  },
+  {
+   "slug": "cantinflas",
+   "title": "cantinflas",
+   "score": 1
+  },
+  {
+   "slug": "canvas",
+   "title": "canvas",
+   "score": 1
+  },
+  {
+   "slug": "capture-the-flag",
+   "title": "capture the flag",
    "score": 1
   },
   {
    "slug": "care-bears-journey-to-joke-a-lot",
    "title": "care bears journey to joke a lot",
+   "score": 1
+  },
+  {
+   "slug": "carmilla",
+   "title": "carmilla",
+   "score": 1
+  },
+  {
+   "slug": "carol",
+   "title": "carol",
+   "score": 1
+  },
+  {
+   "slug": "carrie",
+   "title": "carrie",
    "score": 1
   },
   {
@@ -1259,8 +3694,33 @@
    "score": 1
   },
   {
-   "slug": "chak-de-india",
-   "title": "chak de india",
+   "slug": "casino-royale-2006",
+   "title": "casino royale 2006",
+   "score": 1
+  },
+  {
+   "slug": "casper-meets-wendy",
+   "title": "casper meets wendy",
+   "score": 1
+  },
+  {
+   "slug": "cats",
+   "title": "cats",
+   "score": 1
+  },
+  {
+   "slug": "causeway",
+   "title": "causeway",
+   "score": 1
+  },
+  {
+   "slug": "cave-of-forgotten-dreams",
+   "title": "cave of forgotten dreams",
+   "score": 1
+  },
+  {
+   "slug": "celeste-and-jesse-forever",
+   "title": "celeste and jesse forever",
    "score": 1
   },
   {
@@ -1279,8 +3739,18 @@
    "score": 1
   },
   {
-   "slug": "chicken-for-linda",
-   "title": "chicken for linda",
+   "slug": "chef",
+   "title": "chef",
+   "score": 1
+  },
+  {
+   "slug": "chef-flynn",
+   "title": "chef flynn",
+   "score": 1
+  },
+  {
+   "slug": "children-of-heaven",
+   "title": "children of heaven",
    "score": 1
   },
   {
@@ -1299,13 +3769,18 @@
    "score": 1
   },
   {
-   "slug": "chupa",
-   "title": "chupa",
+   "slug": "ciao-alberto",
+   "title": "ciao alberto",
    "score": 1
   },
   {
-   "slug": "ciao-alberto",
-   "title": "ciao alberto",
+   "slug": "circle-of-friends",
+   "title": "circle of friends",
+   "score": 1
+  },
+  {
+   "slug": "citizen-ashe",
+   "title": "citizen ashe",
    "score": 1
   },
   {
@@ -1314,18 +3789,38 @@
    "score": 1
   },
   {
+   "slug": "city-lights",
+   "title": "city lights",
+   "score": 1
+  },
+  {
+   "slug": "classic-caballeros-collection-saludos-amigos-and-the-three-caballeros",
+   "title": "classic caballeros collection saludos amigos and the three caballeros",
+   "score": 1
+  },
+  {
+   "slug": "claudine",
+   "title": "claudine",
+   "score": 1
+  },
+  {
    "slug": "clifford-the-big-red-dog",
    "title": "clifford the big red dog",
    "score": 1
   },
   {
-   "slug": "conclave",
-   "title": "conclave",
+   "slug": "coach-carter",
+   "title": "coach carter",
    "score": 1
   },
   {
-   "slug": "confetti",
-   "title": "confetti",
+   "slug": "come-see-me-in-the-good-light",
+   "title": "come see me in the good light",
+   "score": 1
+  },
+  {
+   "slug": "common-ground",
+   "title": "common ground",
    "score": 1
   },
   {
@@ -1334,8 +3829,28 @@
    "score": 1
   },
   {
+   "slug": "contact",
+   "title": "contact",
+   "score": 1
+  },
+  {
+   "slug": "cottontail",
+   "title": "cottontail",
+   "score": 1
+  },
+  {
    "slug": "coup-de-chance",
    "title": "coup de chance",
+   "score": 1
+  },
+  {
+   "slug": "creed",
+   "title": "creed",
+   "score": 1
+  },
+  {
+   "slug": "crossfire",
+   "title": "crossfire",
    "score": 1
   },
   {
@@ -1344,13 +3859,18 @@
    "score": 1
   },
   {
+   "slug": "cuba-and-the-cameraman",
+   "title": "cuba and the cameraman",
+   "score": 1
+  },
+  {
    "slug": "curious-george-2-follow-that-monkey",
    "title": "curious george 2 follow that monkey",
    "score": 1
   },
   {
-   "slug": "curious-george-a-halloween-boo-fest",
-   "title": "curious george a halloween boo fest",
+   "slug": "cyrano",
+   "title": "cyrano",
    "score": 1
   },
   {
@@ -1364,8 +3884,13 @@
    "score": 1
   },
   {
-   "slug": "dance-dreams-hot-chocolate-nutcracker",
-   "title": "dance dreams hot chocolate nutcracker",
+   "slug": "dance-first",
+   "title": "dance first",
+   "score": 1
+  },
+  {
+   "slug": "dance-with-me",
+   "title": "dance with me",
    "score": 1
   },
   {
@@ -1374,18 +3899,58 @@
    "score": 1
   },
   {
+   "slug": "dangal",
+   "title": "dangal",
+   "score": 1
+  },
+  {
+   "slug": "danny",
+   "title": "danny",
+   "score": 1
+  },
+  {
+   "slug": "darby-ogill-and-the-little-people",
+   "title": "darby ogill and the little people",
+   "score": 1
+  },
+  {
+   "slug": "dark-shadows",
+   "title": "dark shadows",
+   "score": 1
+  },
+  {
+   "slug": "darkest-hour",
+   "title": "darkest hour",
+   "score": 1
+  },
+  {
+   "slug": "daughters",
+   "title": "daughters",
+   "score": 1
+  },
+  {
    "slug": "dave",
    "title": "dave",
    "score": 1
   },
   {
-   "slug": "dear-santa-0",
-   "title": "dear santa 0",
+   "slug": "david-attenborough-a-life-on-our-planet",
+   "title": "david attenborough a life on our planet",
    "score": 1
   },
   {
-   "slug": "dear-zindagi",
-   "title": "dear zindagi",
+   "slug": "david-holmes-the-boy-who-lived",
+   "title": "david holmes the boy who lived",
+   "score": 1
+  },
+  {
+   "slug": "dear-dumb-diary",
+   "title": "dear dumb diary",
+   "score": 1
+  },
+  {
+   "slug": "dear-santa-0",
+   "title": "dear santa 0",
    "score": 1
   },
   {
@@ -1399,13 +3964,38 @@
    "score": 1
   },
   {
-   "slug": "deep-sky",
-   "title": "deep sky",
+   "slug": "deepsea-challenge-3d",
+   "title": "deepsea challenge 3d",
    "score": 1
   },
   {
-   "slug": "deepsea-challenge-3d",
-   "title": "deepsea challenge 3d",
+   "slug": "deepwater-horizon",
+   "title": "deepwater horizon",
+   "score": 1
+  },
+  {
+   "slug": "defiance",
+   "title": "defiance",
+   "score": 1
+  },
+  {
+   "slug": "denial",
+   "title": "denial",
+   "score": 1
+  },
+  {
+   "slug": "diamonds-are-forever",
+   "title": "diamonds are forever",
+   "score": 1
+  },
+  {
+   "slug": "didi",
+   "title": "didi",
+   "score": 1
+  },
+  {
+   "slug": "dilwale-dulhania-le-jayenge",
+   "title": "dilwale dulhania le jayenge",
    "score": 1
   },
   {
@@ -1424,13 +4014,13 @@
    "score": 1
   },
   {
-   "slug": "dogtanian-and-the-three-muskehounds",
-   "title": "dogtanian and the three muskehounds",
+   "slug": "dog-gone-2023",
+   "title": "dog gone 2023",
    "score": 1
   },
   {
-   "slug": "dolores",
-   "title": "dolores",
+   "slug": "dogtanian-and-the-three-muskehounds",
+   "title": "dogtanian and the three muskehounds",
    "score": 1
   },
   {
@@ -1439,13 +4029,13 @@
    "score": 1
   },
   {
-   "slug": "dr-seusss-the-cat-in-the-hat",
-   "title": "dr seusss the cat in the hat",
+   "slug": "dr-no",
+   "title": "dr no",
    "score": 1
   },
   {
-   "slug": "dracula",
-   "title": "dracula",
+   "slug": "dr-seusss-the-cat-in-the-hat",
+   "title": "dr seusss the cat in the hat",
    "score": 1
   },
   {
@@ -1459,8 +4049,73 @@
    "score": 1
   },
   {
-   "slug": "earth",
-   "title": "earth",
+   "slug": "dragon-the-bruce-lee-story",
+   "title": "dragon the bruce lee story",
+   "score": 1
+  },
+  {
+   "slug": "dragonkeeper",
+   "title": "dragonkeeper",
+   "score": 1
+  },
+  {
+   "slug": "dragons-dawn-of-the-dragon-racers",
+   "title": "dragons dawn of the dragon racers",
+   "score": 1
+  },
+  {
+   "slug": "dragons-rescue-riders-secrets-of-the-songwing",
+   "title": "dragons rescue riders secrets of the songwing",
+   "score": 1
+  },
+  {
+   "slug": "dreamer-inspired-by-a-true-story",
+   "title": "dreamer inspired by a true story",
+   "score": 1
+  },
+  {
+   "slug": "dreamworks-dragons-gift-of-the-night-fury",
+   "title": "dreamworks dragons gift of the night fury",
+   "score": 1
+  },
+  {
+   "slug": "drummer-boy",
+   "title": "drummer boy",
+   "score": 1
+  },
+  {
+   "slug": "dumplin",
+   "title": "dumplin",
+   "score": 1
+  },
+  {
+   "slug": "dune-part-two",
+   "title": "dune part two",
+   "score": 1
+  },
+  {
+   "slug": "dungeons-dragons-honor-among-thieves",
+   "title": "dungeons dragons honor among thieves",
+   "score": 1
+  },
+  {
+   "slug": "dunkirk",
+   "title": "dunkirk",
+   "score": 1
+  },
+  {
+   "slug": "easter-parade",
+   "title": "easter parade",
+   "score": 1
+  },
+  {
+   "slug": "eat-drink-man-woman",
+   "title": "eat drink man woman",
+   "score": 1
+  },
+  {
+   "slug": "eddie-the-eagle",
+   "title": "eddie the eagle",
    "score": 1
   },
   {
@@ -1479,13 +4134,23 @@
    "score": 1
   },
   {
-   "slug": "elephant-0",
-   "title": "elephant 0",
+   "slug": "elf-pets-a-fox-cubs-tale",
+   "title": "elf pets a fox cubs tale",
    "score": 1
   },
   {
-   "slug": "elf-pets-a-fox-cubs-tale",
-   "title": "elf pets a fox cubs tale",
+   "slug": "elizabeth-blue",
+   "title": "elizabeth blue",
+   "score": 1
+  },
+  {
+   "slug": "eloises-rawther-unusual-halloween",
+   "title": "eloises rawther unusual halloween",
+   "score": 1
+  },
+  {
+   "slug": "elton-john-never-too-late",
+   "title": "elton john never too late",
    "score": 1
   },
   {
@@ -1494,8 +4159,48 @@
    "score": 1
   },
   {
+   "slug": "emma",
+   "title": "emma",
+   "score": 1
+  },
+  {
+   "slug": "emperor-0",
+   "title": "emperor 0",
+   "score": 1
+  },
+  {
+   "slug": "empire-waist",
+   "title": "empire waist",
+   "score": 1
+  },
+  {
+   "slug": "enders-game",
+   "title": "enders game",
+   "score": 1
+  },
+  {
+   "slug": "enola-holmes",
+   "title": "enola holmes",
+   "score": 1
+  },
+  {
    "slug": "enys-men",
    "title": "enys men",
+   "score": 1
+  },
+  {
+   "slug": "epic-elvis-presley-in-concert",
+   "title": "epic elvis presley in concert",
+   "score": 1
+  },
+  {
+   "slug": "europa-europa",
+   "title": "europa europa",
+   "score": 1
+  },
+  {
+   "slug": "eurovision-song-contest-the-story-of-fire-saga",
+   "title": "eurovision song contest the story of fire saga",
    "score": 1
   },
   {
@@ -1504,8 +4209,8 @@
    "score": 1
   },
   {
-   "slug": "everybody-dance",
-   "title": "everybody dance",
+   "slug": "everybodys-talking-about-jamie",
+   "title": "everybodys talking about jamie",
    "score": 1
   },
   {
@@ -1514,13 +4219,23 @@
    "score": 1
   },
   {
+   "slug": "explorer",
+   "title": "explorer",
+   "score": 1
+  },
+  {
+   "slug": "f1-the-movie",
+   "title": "f1 the movie",
+   "score": 1
+  },
+  {
    "slug": "fair-play",
    "title": "fair play",
    "score": 1
   },
   {
-   "slug": "faith-of-angels",
-   "title": "faith of angels",
+   "slug": "fairy-tale-a-true-story",
+   "title": "fairy tale a true story",
    "score": 1
   },
   {
@@ -1529,13 +4244,28 @@
    "score": 1
   },
   {
-   "slug": "family-camp",
-   "title": "family camp",
+   "slug": "family-pack",
+   "title": "family pack",
    "score": 1
   },
   {
-   "slug": "father-of-the-bride-1950",
-   "title": "father of the bride 1950",
+   "slug": "fantastic-beasts-the-secrets-of-dumbledore",
+   "title": "fantastic beasts the secrets of dumbledore",
+   "score": 1
+  },
+  {
+   "slug": "far-from-the-tree",
+   "title": "far from the tree",
+   "score": 1
+  },
+  {
+   "slug": "fateless",
+   "title": "fateless",
+   "score": 1
+  },
+  {
+   "slug": "father-of-the-bride-0",
+   "title": "father of the bride 0",
    "score": 1
   },
   {
@@ -1544,23 +4274,53 @@
    "score": 1
   },
   {
-   "slug": "fiddler-on-the-roof",
-   "title": "fiddler on the roof",
+   "slug": "fed-up",
+   "title": "fed up",
    "score": 1
   },
   {
-   "slug": "field-of-dreams",
-   "title": "field of dreams",
+   "slug": "feel-the-beat",
+   "title": "feel the beat",
    "score": 1
   },
   {
-   "slug": "fire-of-love",
-   "title": "fire of love",
+   "slug": "ferris-buellers-day-off",
+   "title": "ferris buellers day off",
    "score": 1
   },
   {
-   "slug": "fireheart",
-   "title": "fireheart",
+   "slug": "finding-you",
+   "title": "finding you",
+   "score": 1
+  },
+  {
+   "slug": "fireball-visitors-from-darker-worlds",
+   "title": "fireball visitors from darker worlds",
+   "score": 1
+  },
+  {
+   "slug": "firedrake-the-silver-dragon",
+   "title": "firedrake the silver dragon",
+   "score": 1
+  },
+  {
+   "slug": "first-position",
+   "title": "first position",
+   "score": 1
+  },
+  {
+   "slug": "five-feet-apart",
+   "title": "five feet apart",
+   "score": 1
+  },
+  {
+   "slug": "flag-football",
+   "title": "flag football",
+   "score": 1
+  },
+  {
+   "slug": "flicka-2",
+   "title": "flicka 2",
    "score": 1
   },
   {
@@ -1574,8 +4334,53 @@
    "score": 1
   },
   {
+   "slug": "food-chains",
+   "title": "food chains",
+   "score": 1
+  },
+  {
+   "slug": "food-evolution",
+   "title": "food evolution",
+   "score": 1
+  },
+  {
+   "slug": "food-inc",
+   "title": "food inc",
+   "score": 1
+  },
+  {
+   "slug": "footloose-1984",
+   "title": "footloose 1984",
+   "score": 1
+  },
+  {
+   "slug": "for-your-eyes-only",
+   "title": "for your eyes only",
+   "score": 1
+  },
+  {
+   "slug": "forbidden-planet",
+   "title": "forbidden planet",
+   "score": 1
+  },
+  {
+   "slug": "ford-v-ferrari",
+   "title": "ford v ferrari",
+   "score": 1
+  },
+  {
+   "slug": "forever-strong",
+   "title": "forever strong",
+   "score": 1
+  },
+  {
    "slug": "forgiveness-girl",
    "title": "forgiveness girl",
+   "score": 1
+  },
+  {
+   "slug": "forks-over-knives",
+   "title": "forks over knives",
    "score": 1
   },
   {
@@ -1584,18 +4389,43 @@
    "score": 1
   },
   {
+   "slug": "four-letters-of-love",
+   "title": "four letters of love",
+   "score": 1
+  },
+  {
    "slug": "frankenstein",
    "title": "frankenstein",
    "score": 1
   },
   {
-   "slug": "freakier-friday",
-   "title": "freakier friday",
+   "slug": "frankenstein-0",
+   "title": "frankenstein 0",
    "score": 1
   },
   {
-   "slug": "free-solo",
-   "title": "free solo",
+   "slug": "fred-3-camp-fred",
+   "title": "fred 3 camp fred",
+   "score": 1
+  },
+  {
+   "slug": "free-guy",
+   "title": "free guy",
+   "score": 1
+  },
+  {
+   "slug": "freedom-writers",
+   "title": "freedom writers",
+   "score": 1
+  },
+  {
+   "slug": "from-mao-to-mozart-isaac-stern-in-china",
+   "title": "from mao to mozart isaac stern in china",
+   "score": 1
+  },
+  {
+   "slug": "from-russia-with-love",
+   "title": "from russia with love",
    "score": 1
   },
   {
@@ -1604,13 +4434,23 @@
    "score": 1
   },
   {
+   "slug": "frybread-face-and-me",
+   "title": "frybread face and me",
+   "score": 1
+  },
+  {
    "slug": "full-out",
    "title": "full out",
    "score": 1
   },
   {
-   "slug": "gandhi",
-   "title": "gandhi",
+   "slug": "funny-girl",
+   "title": "funny girl",
+   "score": 1
+  },
+  {
+   "slug": "garretts-gift",
+   "title": "garretts gift",
    "score": 1
   },
   {
@@ -1624,8 +4464,38 @@
    "score": 1
   },
   {
+   "slug": "gentlemans-agreement",
+   "title": "gentlemans agreement",
+   "score": 1
+  },
+  {
+   "slug": "get-smart",
+   "title": "get smart",
+   "score": 1
+  },
+  {
+   "slug": "getting-to-the-nutcracker",
+   "title": "getting to the nutcracker",
+   "score": 1
+  },
+  {
    "slug": "ghost-elephants",
    "title": "ghost elephants",
+   "score": 1
+  },
+  {
+   "slug": "ghost-of-the-mountains",
+   "title": "ghost of the mountains",
+   "score": 1
+  },
+  {
+   "slug": "ghostbusters-afterlife",
+   "title": "ghostbusters afterlife",
+   "score": 1
+  },
+  {
+   "slug": "ghosted",
+   "title": "ghosted",
    "score": 1
   },
   {
@@ -1634,13 +4504,23 @@
    "score": 1
   },
   {
-   "slug": "girls-state",
-   "title": "girls state",
+   "slug": "girl-in-progress",
+   "title": "girl in progress",
    "score": 1
   },
   {
-   "slug": "glass-onion-a-knives-out-mystery",
-   "title": "glass onion a knives out mystery",
+   "slug": "girls-rock",
+   "title": "girls rock",
+   "score": 1
+  },
+  {
+   "slug": "gladiator",
+   "title": "gladiator",
+   "score": 1
+  },
+  {
+   "slug": "glee-the-3d-concert-movie",
+   "title": "glee the 3d concert movie",
    "score": 1
   },
   {
@@ -1649,8 +4529,38 @@
    "score": 1
   },
   {
+   "slug": "godzilla-minus-one",
+   "title": "godzilla minus one",
+   "score": 1
+  },
+  {
+   "slug": "going-in-style",
+   "title": "going in style",
+   "score": 1
+  },
+  {
+   "slug": "goldeneye",
+   "title": "goldeneye",
+   "score": 1
+  },
+  {
+   "slug": "goldfish",
+   "title": "goldfish",
+   "score": 1
+  },
+  {
    "slug": "good-boy-0",
    "title": "good boy 0",
+   "score": 1
+  },
+  {
+   "slug": "good-will-hunting",
+   "title": "good will hunting",
+   "score": 1
+  },
+  {
+   "slug": "goodbye-christopher-robin",
+   "title": "goodbye christopher robin",
    "score": 1
   },
   {
@@ -1664,13 +4574,73 @@
    "score": 1
   },
   {
+   "slug": "grand-theft-hamlet",
+   "title": "grand theft hamlet",
+   "score": 1
+  },
+  {
+   "slug": "grease",
+   "title": "grease",
+   "score": 1
+  },
+  {
    "slug": "great-bear-rainforest-land-of-the-spirit-bear",
    "title": "great bear rainforest land of the spirit bear",
    "score": 1
   },
   {
-   "slug": "growing-up-wild",
-   "title": "growing up wild",
+   "slug": "greater",
+   "title": "greater",
+   "score": 1
+  },
+  {
+   "slug": "green-book",
+   "title": "green book",
+   "score": 1
+  },
+  {
+   "slug": "ground-control",
+   "title": "ground control",
+   "score": 1
+  },
+  {
+   "slug": "groundhog-day",
+   "title": "groundhog day",
+   "score": 1
+  },
+  {
+   "slug": "guardians-of-the-galapagos",
+   "title": "guardians of the galapagos",
+   "score": 1
+  },
+  {
+   "slug": "guess-whos-coming-to-dinner",
+   "title": "guess whos coming to dinner",
+   "score": 1
+  },
+  {
+   "slug": "gunda",
+   "title": "gunda",
+   "score": 1
+  },
+  {
+   "slug": "h-is-for-happiness",
+   "title": "h is for happiness",
+   "score": 1
+  },
+  {
+   "slug": "hachi-a-dogs-tale",
+   "title": "hachi a dogs tale",
+   "score": 1
+  },
+  {
+   "slug": "haikyu-the-dumpster-battle",
+   "title": "haikyu the dumpster battle",
+   "score": 1
+  },
+  {
+   "slug": "hail-caesar",
+   "title": "hail caesar",
    "score": 1
   },
   {
@@ -1684,13 +4654,18 @@
    "score": 1
   },
   {
-   "slug": "hamilton",
-   "title": "hamilton",
+   "slug": "hallow-road",
+   "title": "hallow road",
    "score": 1
   },
   {
-   "slug": "hamnet",
-   "title": "hamnet",
+   "slug": "handy-manny-motorcycle-adventure",
+   "title": "handy manny motorcycle adventure",
+   "score": 1
+  },
+  {
+   "slug": "hannah-montana-and-miley-cyrus-best-of-both-worlds-concert",
+   "title": "hannah montana and miley cyrus best of both worlds concert",
    "score": 1
   },
   {
@@ -1699,8 +4674,33 @@
    "score": 1
   },
   {
+   "slug": "hard-lessons-the-george-mckenna-story",
+   "title": "hard lessons the george mckenna story",
+   "score": 1
+  },
+  {
+   "slug": "hard-truths",
+   "title": "hard truths",
+   "score": 1
+  },
+  {
    "slug": "harold-and-maude",
    "title": "harold and maude",
+   "score": 1
+  },
+  {
+   "slug": "harriet",
+   "title": "harriet",
+   "score": 1
+  },
+  {
+   "slug": "harry-styles-one-night-in-manchester",
+   "title": "harry styles one night in manchester",
+   "score": 1
+  },
+  {
+   "slug": "harvey",
+   "title": "harvey",
    "score": 1
   },
   {
@@ -1709,13 +4709,33 @@
    "score": 1
   },
   {
-   "slug": "hell-of-a-cruise",
-   "title": "hell of a cruise",
+   "slug": "hellboy-ii-the-golden-army",
+   "title": "hellboy ii the golden army",
    "score": 1
   },
   {
    "slug": "henry-me",
    "title": "henry me",
+   "score": 1
+  },
+  {
+   "slug": "her-best-move",
+   "title": "her best move",
+   "score": 1
+  },
+  {
+   "slug": "here-comes-peter-cottontail",
+   "title": "here comes peter cottontail",
+   "score": 1
+  },
+  {
+   "slug": "hester-street",
+   "title": "hester street",
+   "score": 1
+  },
+  {
+   "slug": "high-anxiety",
+   "title": "high anxiety",
    "score": 1
   },
   {
@@ -1729,13 +4749,13 @@
    "score": 1
   },
   {
-   "slug": "hola-frida",
-   "title": "hola frida",
+   "slug": "hold-your-breath-the-ice-dive",
+   "title": "hold your breath the ice dive",
    "score": 1
   },
   {
-   "slug": "hold-your-breath-the-ice-dive",
-   "title": "hold your breath the ice dive",
+   "slug": "holidate",
+   "title": "holidate",
    "score": 1
   },
   {
@@ -1754,23 +4774,43 @@
    "score": 1
   },
   {
-   "slug": "home-court",
-   "title": "home court",
-   "score": 1
-  },
-  {
    "slug": "home-run-showdown",
    "title": "home run showdown",
    "score": 1
   },
   {
-   "slug": "hoosiers",
-   "title": "hoosiers",
+   "slug": "homecoming-a-film-by-beyonce",
+   "title": "homecoming a film by beyonce",
    "score": 1
   },
   {
-   "slug": "hop",
-   "title": "hop",
+   "slug": "honk-for-jesus-save-your-soul",
+   "title": "honk for jesus save your soul",
+   "score": 1
+  },
+  {
+   "slug": "honor-flight",
+   "title": "honor flight",
+   "score": 1
+  },
+  {
+   "slug": "hoop-dreams",
+   "title": "hoop dreams",
+   "score": 1
+  },
+  {
+   "slug": "hoopsyoyo-ruin-christmas",
+   "title": "hoopsyoyo ruin christmas",
+   "score": 1
+  },
+  {
+   "slug": "hoppers",
+   "title": "hoppers",
+   "score": 1
+  },
+  {
+   "slug": "horse-crazy",
+   "title": "horse crazy",
    "score": 1
   },
   {
@@ -1779,8 +4819,33 @@
    "score": 1
   },
   {
+   "slug": "how-to-be-a-latin-lover",
+   "title": "how to be a latin lover",
+   "score": 1
+  },
+  {
+   "slug": "how-to-dance-in-ohio",
+   "title": "how to dance in ohio",
+   "score": 1
+  },
+  {
+   "slug": "how-to-steal-a-million",
+   "title": "how to steal a million",
+   "score": 1
+  },
+  {
+   "slug": "how-to-train-your-dragon-homecoming",
+   "title": "how to train your dragon homecoming",
+   "score": 1
+  },
+  {
    "slug": "hud",
    "title": "hud",
+   "score": 1
+  },
+  {
+   "slug": "hunt-for-the-wilderpeople",
+   "title": "hunt for the wilderpeople",
    "score": 1
   },
   {
@@ -1789,8 +4854,8 @@
    "score": 1
   },
   {
-   "slug": "i-am-greta",
-   "title": "i am greta",
+   "slug": "i-am-not-your-negro",
+   "title": "i am not your negro",
    "score": 1
   },
   {
@@ -1809,28 +4874,33 @@
    "score": 1
   },
   {
-   "slug": "ice-age-the-great-egg-scapade",
-   "title": "ice age the great egg scapade",
+   "slug": "ice-castles",
+   "title": "ice castles",
    "score": 1
   },
   {
-   "slug": "ice-age-the-meltdown",
-   "title": "ice age the meltdown",
+   "slug": "if-anything-happens-i-love-you",
+   "title": "if anything happens i love you",
    "score": 1
   },
   {
-   "slug": "if-you-give-a-mouse-a-christmas-cookie",
-   "title": "if you give a mouse a christmas cookie",
+   "slug": "if-i-had-legs-id-kick-you",
+   "title": "if i had legs id kick you",
    "score": 1
   },
   {
-   "slug": "imagine-dragons-live-in-vegas",
-   "title": "imagine dragons live in vegas",
+   "slug": "ikiru",
+   "title": "ikiru",
    "score": 1
   },
   {
    "slug": "imagine-that",
    "title": "imagine that",
+   "score": 1
+  },
+  {
+   "slug": "imba-means-sing",
+   "title": "imba means sing",
    "score": 1
   },
   {
@@ -1844,8 +4914,23 @@
    "score": 1
   },
   {
-   "slug": "in-the-heights",
-   "title": "in the heights",
+   "slug": "in-search-of-greatness",
+   "title": "in search of greatness",
+   "score": 1
+  },
+  {
+   "slug": "in-the-company-of-wolves-an-american-journey",
+   "title": "in the company of wolves an american journey",
+   "score": 1
+  },
+  {
+   "slug": "in-your-dreams",
+   "title": "in your dreams",
+   "score": 1
+  },
+  {
+   "slug": "independence-day",
+   "title": "independence day",
    "score": 1
   },
   {
@@ -1854,18 +4939,28 @@
    "score": 1
   },
   {
-   "slug": "inside-the-mind-of-a-dog",
-   "title": "inside the mind of a dog",
+   "slug": "instructions-not-included",
+   "title": "instructions not included",
    "score": 1
   },
   {
-   "slug": "island-of-lemurs-madagascar",
-   "title": "island of lemurs madagascar",
+   "slug": "interstellar",
+   "title": "interstellar",
    "score": 1
   },
   {
-   "slug": "its-a-wonderful-life",
-   "title": "its a wonderful life",
+   "slug": "ip-man",
+   "title": "ip man",
+   "score": 1
+  },
+  {
+   "slug": "it-could-happen-to-you",
+   "title": "it could happen to you",
+   "score": 1
+  },
+  {
+   "slug": "its-a-mad-mad-mad-mad-world",
+   "title": "its a mad mad mad mad world",
    "score": 1
   },
   {
@@ -1874,8 +4969,8 @@
    "score": 1
   },
   {
-   "slug": "its-the-easter-beagle-charlie-brown",
-   "title": "its the easter beagle charlie brown",
+   "slug": "ivy-bean",
+   "title": "ivy bean",
    "score": 1
   },
   {
@@ -1889,6 +4984,16 @@
    "score": 1
   },
   {
+   "slug": "jason-nash-is-married",
+   "title": "jason nash is married",
+   "score": 1
+  },
+  {
+   "slug": "jasper-journey-to-the-end-of-the-world",
+   "title": "jasper journey to the end of the world",
+   "score": 1
+  },
+  {
    "slug": "jaws",
    "title": "jaws",
    "score": 1
@@ -1899,38 +5004,73 @@
    "score": 1
   },
   {
-   "slug": "jimmy-carter-rock-roll-president",
-   "title": "jimmy carter rock roll president",
+   "slug": "jingle-and-bells-christmas-star",
+   "title": "jingle and bells christmas star",
    "score": 1
   },
   {
-   "slug": "john-lewis-good-trouble",
-   "title": "john lewis good trouble",
+   "slug": "jingle-bell-heist",
+   "title": "jingle bell heist",
    "score": 1
   },
   {
-   "slug": "jojo-siwa-dream-the-concert-experience",
-   "title": "jojo siwa dream the concert experience",
+   "slug": "jiro-dreams-of-sushi",
+   "title": "jiro dreams of sushi",
    "score": 1
   },
   {
-   "slug": "jonah-a-veggietales-movie",
-   "title": "jonah a veggietales movie",
+   "slug": "jojo-rabbit",
+   "title": "jojo rabbit",
    "score": 1
   },
   {
-   "slug": "journey-to-bethlehem",
-   "title": "journey to bethlehem",
+   "slug": "jonas-brothers-the-3d-concert-experience",
+   "title": "jonas brothers the 3d concert experience",
    "score": 1
   },
   {
-   "slug": "jump-shot-the-kenny-sailors-story",
-   "title": "jump shot the kenny sailors story",
+   "slug": "journey-to-space",
+   "title": "journey to space",
    "score": 1
   },
   {
-   "slug": "jumping-from-high-places",
-   "title": "jumping from high places",
+   "slug": "journey-to-the-christmas-star",
+   "title": "journey to the christmas star",
+   "score": 1
+  },
+  {
+   "slug": "joy",
+   "title": "joy",
+   "score": 1
+  },
+  {
+   "slug": "joy-0",
+   "title": "joy 0",
+   "score": 1
+  },
+  {
+   "slug": "joyeux-noel",
+   "title": "joyeux noel",
+   "score": 1
+  },
+  {
+   "slug": "judas-and-the-black-messiah",
+   "title": "judas and the black messiah",
+   "score": 1
+  },
+  {
+   "slug": "judgment-at-nuremberg",
+   "title": "judgment at nuremberg",
+   "score": 1
+  },
+  {
+   "slug": "judy",
+   "title": "judy",
+   "score": 1
+  },
+  {
+   "slug": "jumping-the-broom",
+   "title": "jumping the broom",
    "score": 1
   },
   {
@@ -1944,13 +5084,38 @@
    "score": 1
   },
   {
+   "slug": "justin-bieber-our-world",
+   "title": "justin bieber our world",
+   "score": 1
+  },
+  {
+   "slug": "justin-biebers-believe",
+   "title": "justin biebers believe",
+   "score": 1
+  },
+  {
+   "slug": "justin-morgan-had-a-horse",
+   "title": "justin morgan had a horse",
+   "score": 1
+  },
+  {
+   "slug": "k-pops",
+   "title": "k pops",
+   "score": 1
+  },
+  {
    "slug": "kaathal-the-core",
    "title": "kaathal the core",
    "score": 1
   },
   {
-   "slug": "kangaroo-valley",
-   "title": "kangaroo valley",
+   "slug": "kabhi-khushi-kabhie-gham",
+   "title": "kabhi khushi kabhie gham",
+   "score": 1
+  },
+  {
+   "slug": "karate-kid-legends",
+   "title": "karate kid legends",
    "score": 1
   },
   {
@@ -1959,13 +5124,38 @@
    "score": 1
   },
   {
+   "slug": "katy-perry-part-of-me",
+   "title": "katy perry part of me",
+   "score": 1
+  },
+  {
+   "slug": "kill",
+   "title": "kill",
+   "score": 1
+  },
+  {
    "slug": "kill-bury-print",
    "title": "kill bury print",
    "score": 1
   },
   {
-   "slug": "knight-rusty",
-   "title": "knight rusty",
+   "slug": "kindling",
+   "title": "kindling",
+   "score": 1
+  },
+  {
+   "slug": "kindness-is-contagious",
+   "title": "kindness is contagious",
+   "score": 1
+  },
+  {
+   "slug": "king-man-of-peace-in-a-time-of-war",
+   "title": "king man of peace in a time of war",
+   "score": 1
+  },
+  {
+   "slug": "kingdom-of-the-planet-of-the-apes",
+   "title": "kingdom of the planet of the apes",
    "score": 1
   },
   {
@@ -1974,8 +5164,58 @@
    "score": 1
   },
   {
+   "slug": "kong-skull-island",
+   "title": "kong skull island",
+   "score": 1
+  },
+  {
+   "slug": "kramer-vs-kramer",
+   "title": "kramer vs kramer",
+   "score": 1
+  },
+  {
+   "slug": "kuch-kuch-hota-hai",
+   "title": "kuch kuch hota hai",
+   "score": 1
+  },
+  {
+   "slug": "la-leyenda-de-la-llorona",
+   "title": "la leyenda de la llorona",
+   "score": 1
+  },
+  {
+   "slug": "la-leyenda-del-chupacabras",
+   "title": "la leyenda del chupacabras",
+   "score": 1
+  },
+  {
+   "slug": "ladies-first",
+   "title": "ladies first",
+   "score": 1
+  },
+  {
+   "slug": "lagaan-once-upon-a-time-in-india",
+   "title": "lagaan once upon a time in india",
+   "score": 1
+  },
+  {
    "slug": "last-train-to-fortune",
    "title": "last train to fortune",
+   "score": 1
+  },
+  {
+   "slug": "lawrence-of-arabia",
+   "title": "lawrence of arabia",
+   "score": 1
+  },
+  {
+   "slug": "lead-me-home",
+   "title": "lead me home",
+   "score": 1
+  },
+  {
+   "slug": "leap",
+   "title": "leap",
    "score": 1
   },
   {
@@ -1984,8 +5224,13 @@
    "score": 1
   },
   {
-   "slug": "light-of-the-world",
-   "title": "light of the world",
+   "slug": "licence-to-kill",
+   "title": "licence to kill",
+   "score": 1
+  },
+  {
+   "slug": "lights",
+   "title": "lights",
    "score": 1
   },
   {
@@ -2014,13 +5259,8 @@
    "score": 1
   },
   {
-   "slug": "limmensita",
-   "title": "limmensita",
-   "score": 1
-  },
-  {
-   "slug": "lindsey-vonn-in-the-moment",
-   "title": "lindsey vonn in the moment",
+   "slug": "lilo-stitch-2025",
+   "title": "lilo stitch 2025",
    "score": 1
   },
   {
@@ -2029,8 +5269,28 @@
    "score": 1
   },
   {
+   "slug": "little-amelie-or-the-character-of-rain",
+   "title": "little amelie or the character of rain",
+   "score": 1
+  },
+  {
    "slug": "little-darlings-the-movie",
    "title": "little darlings the movie",
+   "score": 1
+  },
+  {
+   "slug": "live-and-let-die",
+   "title": "live and let die",
+   "score": 1
+  },
+  {
+   "slug": "logan-lucky",
+   "title": "logan lucky",
+   "score": 1
+  },
+  {
+   "slug": "long-way-north",
+   "title": "long way north",
    "score": 1
   },
   {
@@ -2044,13 +5304,53 @@
    "score": 1
   },
   {
+   "slug": "los-tigres-del-norte-at-folsom-prison",
+   "title": "los tigres del norte at folsom prison",
+   "score": 1
+  },
+  {
+   "slug": "lost-and-found",
+   "title": "lost and found",
+   "score": 1
+  },
+  {
+   "slug": "lost-in-starlight",
+   "title": "lost in starlight",
+   "score": 1
+  },
+  {
+   "slug": "lost-on-a-mountain-in-maine",
+   "title": "lost on a mountain in maine",
+   "score": 1
+  },
+  {
    "slug": "lotte-from-gadgetville",
    "title": "lotte from gadgetville",
    "score": 1
   },
   {
-   "slug": "lucas",
-   "title": "lucas",
+   "slug": "love-and-basketball",
+   "title": "love and basketball",
+   "score": 1
+  },
+  {
+   "slug": "love-and-monsters",
+   "title": "love and monsters",
+   "score": 1
+  },
+  {
+   "slug": "love-brooklyn",
+   "title": "love brooklyn",
+   "score": 1
+  },
+  {
+   "slug": "love-simon",
+   "title": "love simon",
+   "score": 1
+  },
+  {
+   "slug": "lovewar",
+   "title": "lovewar",
    "score": 1
   },
   {
@@ -2059,13 +5359,18 @@
    "score": 1
   },
   {
-   "slug": "mad-hot-ballroom",
-   "title": "mad hot ballroom",
+   "slug": "mad-max-fury-road",
+   "title": "mad max fury road",
    "score": 1
   },
   {
    "slug": "madly-madagascar",
    "title": "madly madagascar",
+   "score": 1
+  },
+  {
+   "slug": "magic-camp",
+   "title": "magic camp",
    "score": 1
   },
   {
@@ -2079,13 +5384,58 @@
    "score": 1
   },
   {
-   "slug": "makaylas-voice-a-letter-to-the-world",
-   "title": "makaylas voice a letter to the world",
+   "slug": "maidentrip",
+   "title": "maidentrip",
    "score": 1
   },
   {
-   "slug": "mary-and-the-witchs-flower",
-   "title": "mary and the witchs flower",
+   "slug": "maleficent-mistress-of-evil",
+   "title": "maleficent mistress of evil",
+   "score": 1
+  },
+  {
+   "slug": "mamma-mia-here-we-go-again",
+   "title": "mamma mia here we go again",
+   "score": 1
+  },
+  {
+   "slug": "march-on-the-day-my-brother-martin-changed-the-world",
+   "title": "march on the day my brother martin changed the world",
+   "score": 1
+  },
+  {
+   "slug": "maria-0",
+   "title": "maria 0",
+   "score": 1
+  },
+  {
+   "slug": "marriage-story",
+   "title": "marriage story",
+   "score": 1
+  },
+  {
+   "slug": "marshall",
+   "title": "marshall",
+   "score": 1
+  },
+  {
+   "slug": "marty-supreme",
+   "title": "marty supreme",
+   "score": 1
+  },
+  {
+   "slug": "master-and-commander-the-far-side-of-the-world",
+   "title": "master and commander the far side of the world",
+   "score": 1
+  },
+  {
+   "slug": "masterminds",
+   "title": "masterminds",
+   "score": 1
+  },
+  {
+   "slug": "max",
+   "title": "max",
    "score": 1
   },
   {
@@ -2109,6 +5459,36 @@
    "score": 1
   },
   {
+   "slug": "megan-leavey",
+   "title": "megan leavey",
+   "score": 1
+  },
+  {
+   "slug": "memoria",
+   "title": "memoria",
+   "score": 1
+  },
+  {
+   "slug": "men-in-black",
+   "title": "men in black",
+   "score": 1
+  },
+  {
+   "slug": "men-in-black-international",
+   "title": "men in black international",
+   "score": 1
+  },
+  {
+   "slug": "menashe",
+   "title": "menashe",
+   "score": 1
+  },
+  {
+   "slug": "mermaids",
+   "title": "mermaids",
+   "score": 1
+  },
+  {
    "slug": "merry-madagascar",
    "title": "merry madagascar",
    "score": 1
@@ -2119,8 +5499,38 @@
    "score": 1
   },
   {
+   "slug": "michael-jacksons-this-is-it",
+   "title": "michael jacksons this is it",
+   "score": 1
+  },
+  {
+   "slug": "mickey-mouse-clubhouse-mickeys-monster-musical",
+   "title": "mickey mouse clubhouse mickeys monster musical",
+   "score": 1
+  },
+  {
+   "slug": "mickey-mouse-clubhouse-road-rally",
+   "title": "mickey mouse clubhouse road rally",
+   "score": 1
+  },
+  {
+   "slug": "mickeys-house-of-villains",
+   "title": "mickeys house of villains",
+   "score": 1
+  },
+  {
    "slug": "mickeys-once-upon-a-christmas",
    "title": "mickeys once upon a christmas",
+   "score": 1
+  },
+  {
+   "slug": "microcosmos",
+   "title": "microcosmos",
+   "score": 1
+  },
+  {
+   "slug": "miffy-the-movie",
+   "title": "miffy the movie",
    "score": 1
   },
   {
@@ -2129,13 +5539,98 @@
    "score": 1
   },
   {
+   "slug": "mike-the-knight-journey-to-dragon-mountain",
+   "title": "mike the knight journey to dragon mountain",
+   "score": 1
+  },
+  {
    "slug": "miley-cyrus-something-beautiful",
    "title": "miley cyrus something beautiful",
    "score": 1
   },
   {
-   "slug": "moomins-and-the-winter-wonderland",
-   "title": "moomins and the winter wonderland",
+   "slug": "mirai",
+   "title": "mirai",
+   "score": 1
+  },
+  {
+   "slug": "miss-juneteenth",
+   "title": "miss juneteenth",
+   "score": 1
+  },
+  {
+   "slug": "mission-impossible",
+   "title": "mission impossible",
+   "score": 1
+  },
+  {
+   "slug": "mission-impossible-2",
+   "title": "mission impossible 2",
+   "score": 1
+  },
+  {
+   "slug": "mission-impossible-fallout",
+   "title": "mission impossible fallout",
+   "score": 1
+  },
+  {
+   "slug": "mission-impossible-ghost-protocol",
+   "title": "mission impossible ghost protocol",
+   "score": 1
+  },
+  {
+   "slug": "mission-impossible-rogue-nation",
+   "title": "mission impossible rogue nation",
+   "score": 1
+  },
+  {
+   "slug": "mister-roberts",
+   "title": "mister roberts",
+   "score": 1
+  },
+  {
+   "slug": "misty",
+   "title": "misty",
+   "score": 1
+  },
+  {
+   "slug": "molly-an-american-girl-on-the-home-front",
+   "title": "molly an american girl on the home front",
+   "score": 1
+  },
+  {
+   "slug": "moneyball",
+   "title": "moneyball",
+   "score": 1
+  },
+  {
+   "slug": "monster-high-new-ghoul-at-school",
+   "title": "monster high new ghoul at school",
+   "score": 1
+  },
+  {
+   "slug": "monster-hunt",
+   "title": "monster hunt",
+   "score": 1
+  },
+  {
+   "slug": "monte-carlo",
+   "title": "monte carlo",
+   "score": 1
+  },
+  {
+   "slug": "monty-python-and-the-holy-grail",
+   "title": "monty python and the holy grail",
+   "score": 1
+  },
+  {
+   "slug": "moondance-alexander",
+   "title": "moondance alexander",
+   "score": 1
+  },
+  {
+   "slug": "moonraker",
+   "title": "moonraker",
    "score": 1
   },
   {
@@ -2144,8 +5639,13 @@
    "score": 1
   },
   {
-   "slug": "mr-hollands-opus",
-   "title": "mr hollands opus",
+   "slug": "moses",
+   "title": "moses",
+   "score": 1
+  },
+  {
+   "slug": "mr-malcolms-list",
+   "title": "mr malcolms list",
    "score": 1
   },
   {
@@ -2154,8 +5654,23 @@
    "score": 1
   },
   {
+   "slug": "mr-nobody-against-putin",
+   "title": "mr nobody against putin",
+   "score": 1
+  },
+  {
    "slug": "mr-smith-goes-to-washington",
    "title": "mr smith goes to washington",
+   "score": 1
+  },
+  {
+   "slug": "mr-troop-mom",
+   "title": "mr troop mom",
+   "score": 1
+  },
+  {
+   "slug": "mrs-miniver",
+   "title": "mrs miniver",
    "score": 1
   },
   {
@@ -2164,18 +5679,38 @@
    "score": 1
   },
   {
+   "slug": "mulan-princess-warrior",
+   "title": "mulan princess warrior",
+   "score": 1
+  },
+  {
    "slug": "mumfies-quest-the-movie",
    "title": "mumfies quest the movie",
    "score": 1
   },
   {
-   "slug": "muppet-treasure-island",
-   "title": "muppet treasure island",
+   "slug": "murder-on-the-orient-express",
+   "title": "murder on the orient express",
    "score": 1
   },
   {
-   "slug": "murder-on-the-orient-express",
-   "title": "murder on the orient express",
+   "slug": "music-of-the-heart",
+   "title": "music of the heart",
+   "score": 1
+  },
+  {
+   "slug": "my-dog-skip",
+   "title": "my dog skip",
+   "score": 1
+  },
+  {
+   "slug": "my-hero-academia-youre-next",
+   "title": "my hero academia youre next",
+   "score": 1
+  },
+  {
+   "slug": "my-life-as-a-dog",
+   "title": "my life as a dog",
    "score": 1
   },
   {
@@ -2204,18 +5739,83 @@
    "score": 1
   },
   {
+   "slug": "my-name-is-pauli-murray",
+   "title": "my name is pauli murray",
+   "score": 1
+  },
+  {
+   "slug": "my-penguin-friend",
+   "title": "my penguin friend",
+   "score": 1
+  },
+  {
+   "slug": "my-spy",
+   "title": "my spy",
+   "score": 1
+  },
+  {
+   "slug": "name-me-lawand",
+   "title": "name me lawand",
+   "score": 1
+  },
+  {
    "slug": "nancy-drew",
    "title": "nancy drew",
    "score": 1
   },
   {
-   "slug": "nimona",
-   "title": "nimona",
+   "slug": "nancy-drew-and-the-hidden-staircase",
+   "title": "nancy drew and the hidden staircase",
    "score": 1
   },
   {
-   "slug": "nosferatu-a-symphony-of-horror",
-   "title": "nosferatu a symphony of horror",
+   "slug": "nandor-fodor-and-the-talking-mongoose",
+   "title": "nandor fodor and the talking mongoose",
+   "score": 1
+  },
+  {
+   "slug": "national-treasure",
+   "title": "national treasure",
+   "score": 1
+  },
+  {
+   "slug": "never-say-never-again",
+   "title": "never say never again",
+   "score": 1
+  },
+  {
+   "slug": "news-of-the-world",
+   "title": "news of the world",
+   "score": 1
+  },
+  {
+   "slug": "nickel-boys",
+   "title": "nickel boys",
+   "score": 1
+  },
+  {
+   "slug": "no-ordinary-hero-the-superdeafy-movie",
+   "title": "no ordinary hero the superdeafy movie",
+   "score": 1
+  },
+  {
+   "slug": "no-reservations",
+   "title": "no reservations",
+   "score": 1
+  },
+  {
+   "slug": "nonnas",
+   "title": "nonnas",
+   "score": 1
+  },
+  {
+   "slug": "north-by-northwest",
+   "title": "north by northwest",
+   "score": 1
+  },
+  {
+   "slug": "not-my-dog",
+   "title": "not my dog",
    "score": 1
   },
   {
@@ -2229,18 +5829,28 @@
    "score": 1
   },
   {
-   "slug": "ocean-with-david-attenborough",
-   "title": "ocean with david attenborough",
+   "slug": "nyad",
+   "title": "nyad",
    "score": 1
   },
   {
-   "slug": "odd-squad-the-movie",
-   "title": "odd squad the movie",
+   "slug": "oceans-eleven",
+   "title": "oceans eleven",
+   "score": 1
+  },
+  {
+   "slug": "octopussy",
+   "title": "octopussy",
    "score": 1
   },
   {
    "slug": "okkos-inn",
    "title": "okkos inn",
+   "score": 1
+  },
+  {
+   "slug": "olafs-frozen-adventure",
+   "title": "olafs frozen adventure",
    "score": 1
   },
   {
@@ -2259,6 +5869,16 @@
    "score": 1
   },
   {
+   "slug": "on-her-majestys-secret-service",
+   "title": "on her majestys secret service",
+   "score": 1
+  },
+  {
+   "slug": "on-the-come-up",
+   "title": "on the come up",
+   "score": 1
+  },
+  {
    "slug": "once-upon-a-time-in-the-west",
    "title": "once upon a time in the west",
    "score": 1
@@ -2274,13 +5894,48 @@
    "score": 1
   },
   {
+   "slug": "one-direction-this-is-us",
+   "title": "one direction this is us",
+   "score": 1
+  },
+  {
+   "slug": "one-night-in-miami",
+   "title": "one night in miami",
+   "score": 1
+  },
+  {
+   "slug": "one-night-with-the-king",
+   "title": "one night with the king",
+   "score": 1
+  },
+  {
+   "slug": "one-survivor-remembers",
+   "title": "one survivor remembers",
+   "score": 1
+  },
+  {
    "slug": "operation-christmas-drop",
    "title": "operation christmas drop",
    "score": 1
   },
   {
+   "slug": "our-friend-martin",
+   "title": "our friend martin",
+   "score": 1
+  },
+  {
    "slug": "outlaw-johnny-black",
    "title": "outlaw johnny black",
+   "score": 1
+  },
+  {
+   "slug": "overcomer",
+   "title": "overcomer",
+   "score": 1
+  },
+  {
+   "slug": "pagglait",
+   "title": "pagglait",
    "score": 1
   },
   {
@@ -2294,8 +5949,13 @@
    "score": 1
   },
   {
-   "slug": "pangolin-kulus-journey",
-   "title": "pangolin kulus journey",
+   "slug": "pans-labyrinth",
+   "title": "pans labyrinth",
+   "score": 1
+  },
+  {
+   "slug": "paper-clips",
+   "title": "paper clips",
    "score": 1
   },
   {
@@ -2304,8 +5964,48 @@
    "score": 1
   },
   {
+   "slug": "passages",
+   "title": "passages",
+   "score": 1
+  },
+  {
+   "slug": "passing",
+   "title": "passing",
+   "score": 1
+  },
+  {
+   "slug": "past-lives",
+   "title": "past lives",
+   "score": 1
+  },
+  {
+   "slug": "paths-of-glory",
+   "title": "paths of glory",
+   "score": 1
+  },
+  {
+   "slug": "pawn-sacrifice",
+   "title": "pawn sacrifice",
+   "score": 1
+  },
+  {
    "slug": "peanuts-emmy-honored-collection",
    "title": "peanuts emmy honored collection",
+   "score": 1
+  },
+  {
+   "slug": "pearl-jam-twenty",
+   "title": "pearl jam twenty",
+   "score": 1
+  },
+  {
+   "slug": "pee-wees-playhouse-christmas-special",
+   "title": "pee wees playhouse christmas special",
+   "score": 1
+  },
+  {
+   "slug": "pegasus-pony-with-a-broken-wing",
+   "title": "pegasus pony with a broken wing",
    "score": 1
   },
   {
@@ -2314,8 +6014,43 @@
    "score": 1
   },
   {
+   "slug": "perpetual-planet-heroes-of-the-ocean",
+   "title": "perpetual planet heroes of the ocean",
+   "score": 1
+  },
+  {
+   "slug": "pet-investigators",
+   "title": "pet investigators",
+   "score": 1
+  },
+  {
    "slug": "peter-and-the-wolf",
    "title": "peter and the wolf",
+   "score": 1
+  },
+  {
+   "slug": "peters-friends",
+   "title": "peters friends",
+   "score": 1
+  },
+  {
+   "slug": "petite-maman",
+   "title": "petite maman",
+   "score": 1
+  },
+  {
+   "slug": "pets-0",
+   "title": "pets 0",
+   "score": 1
+  },
+  {
+   "slug": "phantom-boy",
+   "title": "phantom boy",
+   "score": 1
+  },
+  {
+   "slug": "phineas-and-ferb-across-the-2nd-dimension",
+   "title": "phineas and ferb across the 2nd dimension",
    "score": 1
   },
   {
@@ -2329,8 +6064,33 @@
    "score": 1
   },
   {
+   "slug": "pick-of-the-litter",
+   "title": "pick of the litter",
+   "score": 1
+  },
+  {
+   "slug": "pitch-perfect",
+   "title": "pitch perfect",
+   "score": 1
+  },
+  {
    "slug": "pixar-short-films-collection-volume-1",
    "title": "pixar short films collection volume 1",
+   "score": 1
+  },
+  {
+   "slug": "planet-of-the-apes-1968",
+   "title": "planet of the apes 1968",
+   "score": 1
+  },
+  {
+   "slug": "pocoyo-pocoyo-fiesta",
+   "title": "pocoyo pocoyo fiesta",
+   "score": 1
+  },
+  {
+   "slug": "polite-society",
+   "title": "polite society",
    "score": 1
   },
   {
@@ -2344,8 +6104,58 @@
    "score": 1
   },
   {
+   "slug": "poohs-heffalump-halloween-movie",
+   "title": "poohs heffalump halloween movie",
+   "score": 1
+  },
+  {
+   "slug": "portrait-of-an-artist-stephen-curry",
+   "title": "portrait of an artist stephen curry",
+   "score": 1
+  },
+  {
    "slug": "poupelle-of-chimney-town",
    "title": "poupelle of chimney town",
+   "score": 1
+  },
+  {
+   "slug": "powder-pup",
+   "title": "powder pup",
+   "score": 1
+  },
+  {
+   "slug": "prefontaine",
+   "title": "prefontaine",
+   "score": 1
+  },
+  {
+   "slug": "pressure-cooker",
+   "title": "pressure cooker",
+   "score": 1
+  },
+  {
+   "slug": "pretty-in-pink",
+   "title": "pretty in pink",
+   "score": 1
+  },
+  {
+   "slug": "pride-prejudice",
+   "title": "pride prejudice",
+   "score": 1
+  },
+  {
+   "slug": "primer",
+   "title": "primer",
+   "score": 1
+  },
+  {
+   "slug": "project-hail-mary",
+   "title": "project hail mary",
+   "score": 1
+  },
+  {
+   "slug": "prom-night-in-mississippi",
+   "title": "prom night in mississippi",
    "score": 1
   },
   {
@@ -2354,13 +6164,33 @@
    "score": 1
   },
   {
-   "slug": "puff-wonders-of-the-reef",
-   "title": "puff wonders of the reef",
+   "slug": "puppy-party",
+   "title": "puppy party",
    "score": 1
   },
   {
-   "slug": "puppy-party",
-   "title": "puppy party",
+   "slug": "raazi",
+   "title": "raazi",
+   "score": 1
+  },
+  {
+   "slug": "rab-ne-bana-di-jodi",
+   "title": "rab ne bana di jodi",
+   "score": 1
+  },
+  {
+   "slug": "rabbit-school-guardians-of-the-golden-egg",
+   "title": "rabbit school guardians of the golden egg",
+   "score": 1
+  },
+  {
+   "slug": "race",
+   "title": "race",
+   "score": 1
+  },
+  {
+   "slug": "radio-days",
+   "title": "radio days",
    "score": 1
   },
   {
@@ -2369,8 +6199,28 @@
    "score": 1
   },
   {
-   "slug": "rear-window",
-   "title": "rear window",
+   "slug": "raiders-the-story-of-the-greatest-fan-film-ever-made",
+   "title": "raiders the story of the greatest fan film ever made",
+   "score": 1
+  },
+  {
+   "slug": "raising-the-bar-the-alma-richards-story",
+   "title": "raising the bar the alma richards story",
+   "score": 1
+  },
+  {
+   "slug": "rally-caps",
+   "title": "rally caps",
+   "score": 1
+  },
+  {
+   "slug": "rbg",
+   "title": "rbg",
+   "score": 1
+  },
+  {
+   "slug": "ready-player-one",
+   "title": "ready player one",
    "score": 1
   },
   {
@@ -2379,8 +6229,38 @@
    "score": 1
   },
   {
-   "slug": "red-army",
-   "title": "red army",
+   "slug": "red-dog",
+   "title": "red dog",
+   "score": 1
+  },
+  {
+   "slug": "red-heaven",
+   "title": "red heaven",
+   "score": 1
+  },
+  {
+   "slug": "red-shoes-and-the-seven-dwarfs",
+   "title": "red shoes and the seven dwarfs",
+   "score": 1
+  },
+  {
+   "slug": "relationship-goals",
+   "title": "relationship goals",
+   "score": 1
+  },
+  {
+   "slug": "renaissance-a-film-by-beyonce",
+   "title": "renaissance a film by beyonce",
+   "score": 1
+  },
+  {
+   "slug": "rent",
+   "title": "rent",
+   "score": 1
+  },
+  {
+   "slug": "respect",
+   "title": "respect",
    "score": 1
   },
   {
@@ -2389,8 +6269,28 @@
    "score": 1
   },
   {
+   "slug": "rise-again-tulsa-and-the-red-summer",
+   "title": "rise again tulsa and the red summer",
+   "score": 1
+  },
+  {
    "slug": "rita-moreno-just-a-girl-who-decided-to-go-for-it",
    "title": "rita moreno just a girl who decided to go for it",
+   "score": 1
+  },
+  {
+   "slug": "riverdance-the-animated-adventure",
+   "title": "riverdance the animated adventure",
+   "score": 1
+  },
+  {
+   "slug": "robin-roberts-presents-mahalia",
+   "title": "robin roberts presents mahalia",
+   "score": 1
+  },
+  {
+   "slug": "robot-dreams",
+   "title": "robot dreams",
    "score": 1
   },
   {
@@ -2404,8 +6304,38 @@
    "score": 1
   },
   {
+   "slug": "roman-j-israel-esq",
+   "title": "roman j israel esq",
+   "score": 1
+  },
+  {
+   "slug": "room",
+   "title": "room",
+   "score": 1
+  },
+  {
+   "slug": "rosemarys-baby",
+   "title": "rosemarys baby",
+   "score": 1
+  },
+  {
+   "slug": "roving-mars",
+   "title": "roving mars",
+   "score": 1
+  },
+  {
+   "slug": "ruby-bridges",
+   "title": "ruby bridges",
+   "score": 1
+  },
+  {
    "slug": "rubys-studio-the-siblings-show",
    "title": "rubys studio the siblings show",
+   "score": 1
+  },
+  {
+   "slug": "rudolphs-shiny-new-year",
+   "title": "rudolphs shiny new year",
    "score": 1
   },
   {
@@ -2414,13 +6344,38 @@
    "score": 1
   },
   {
+   "slug": "run-the-race",
+   "title": "run the race",
+   "score": 1
+  },
+  {
+   "slug": "run-tiger-run",
+   "title": "run tiger run",
+   "score": 1
+  },
+  {
+   "slug": "rustin",
+   "title": "rustin",
+   "score": 1
+  },
+  {
+   "slug": "rye-lane",
+   "title": "rye lane",
+   "score": 1
+  },
+  {
    "slug": "sacred-soil-the-piney-woods-school-story",
    "title": "sacred soil the piney woods school story",
    "score": 1
   },
   {
-   "slug": "sally",
-   "title": "sally",
+   "slug": "saint-judy",
+   "title": "saint judy",
+   "score": 1
+  },
+  {
+   "slug": "salvable",
+   "title": "salvable",
    "score": 1
   },
   {
@@ -2439,8 +6394,18 @@
    "score": 1
   },
   {
+   "slug": "sarahs-key",
+   "title": "sarahs key",
+   "score": 1
+  },
+  {
    "slug": "saturday-church",
    "title": "saturday church",
+   "score": 1
+  },
+  {
+   "slug": "saved",
+   "title": "saved",
    "score": 1
   },
   {
@@ -2449,8 +6414,23 @@
    "score": 1
   },
   {
+   "slug": "saving-private-ryan",
+   "title": "saving private ryan",
+   "score": 1
+  },
+  {
+   "slug": "schindlers-list",
+   "title": "schindlers list",
+   "score": 1
+  },
+  {
    "slug": "scholastic-video-collection-danny-and-the-dinosaur",
    "title": "scholastic video collection danny and the dinosaur",
+   "score": 1
+  },
+  {
+   "slug": "school-of-magical-animals",
+   "title": "school of magical animals",
    "score": 1
   },
   {
@@ -2459,8 +6439,28 @@
    "score": 1
   },
   {
-   "slug": "scooby-doo-batman-the-brave-and-the-bold",
-   "title": "scooby doo batman the brave and the bold",
+   "slug": "scooby-doo-camp-scare",
+   "title": "scooby doo camp scare",
+   "score": 1
+  },
+  {
+   "slug": "scooby-doo-music-of-the-vampire",
+   "title": "scooby doo music of the vampire",
+   "score": 1
+  },
+  {
+   "slug": "scoop-0",
+   "title": "scoop 0",
+   "score": 1
+  },
+  {
+   "slug": "scrapper",
+   "title": "scrapper",
+   "score": 1
+  },
+  {
+   "slug": "sea-lions-of-the-galapagos",
+   "title": "sea lions of the galapagos",
    "score": 1
   },
   {
@@ -2469,13 +6469,23 @@
    "score": 1
   },
   {
-   "slug": "secret-lives-of-orangutans",
-   "title": "secret lives of orangutans",
+   "slug": "second-chances",
+   "title": "second chances",
    "score": 1
   },
   {
-   "slug": "selena",
-   "title": "selena",
+   "slug": "secrets-of-the-neanderthals",
+   "title": "secrets of the neanderthals",
+   "score": 1
+  },
+  {
+   "slug": "selena-y-los-dinos",
+   "title": "selena y los dinos",
+   "score": 1
+  },
+  {
+   "slug": "sense-and-sensibility",
+   "title": "sense and sensibility",
    "score": 1
   },
   {
@@ -2484,8 +6494,38 @@
    "score": 1
   },
   {
-   "slug": "sesame-street-abby-in-wonderland",
-   "title": "sesame street abby in wonderland",
+   "slug": "september-5",
+   "title": "september 5",
+   "score": 1
+  },
+  {
+   "slug": "serenity",
+   "title": "serenity",
+   "score": 1
+  },
+  {
+   "slug": "sesame-street-be-a-good-sport",
+   "title": "sesame street be a good sport",
+   "score": 1
+  },
+  {
+   "slug": "sesame-street-elmos-playdate",
+   "title": "sesame street elmos playdate",
+   "score": 1
+  },
+  {
+   "slug": "sesame-street-kids-guide-to-life-big-bird-gets-lost",
+   "title": "sesame street kids guide to life big bird gets lost",
+   "score": 1
+  },
+  {
+   "slug": "sesame-street-p-is-for-princess",
+   "title": "sesame street p is for princess",
+   "score": 1
+  },
+  {
+   "slug": "sesame-street-presents-follow-that-bird",
+   "title": "sesame street presents follow that bird",
    "score": 1
   },
   {
@@ -2494,8 +6534,33 @@
    "score": 1
   },
   {
+   "slug": "seven-samurai",
+   "title": "seven samurai",
+   "score": 1
+  },
+  {
+   "slug": "sex-and-the-city-the-movie",
+   "title": "sex and the city the movie",
+   "score": 1
+  },
+  {
    "slug": "shane",
    "title": "shane",
+   "score": 1
+  },
+  {
+   "slug": "shaolin-soccer",
+   "title": "shaolin soccer",
+   "score": 1
+  },
+  {
+   "slug": "she-rises-up",
+   "title": "she rises up",
+   "score": 1
+  },
+  {
+   "slug": "shes-the-man",
+   "title": "shes the man",
    "score": 1
   },
   {
@@ -2504,8 +6569,13 @@
    "score": 1
   },
   {
-   "slug": "simon-birch",
-   "title": "simon birch",
+   "slug": "shorts",
+   "title": "shorts",
+   "score": 1
+  },
+  {
+   "slug": "sierra-burgess-is-a-loser",
+   "title": "sierra burgess is a loser",
    "score": 1
   },
   {
@@ -2514,8 +6584,23 @@
    "score": 1
   },
   {
-   "slug": "sing-street",
-   "title": "sing street",
+   "slug": "sing-sing",
+   "title": "sing sing",
+   "score": 1
+  },
+  {
+   "slug": "sing-thriller",
+   "title": "sing thriller",
+   "score": 1
+  },
+  {
+   "slug": "sirocco-and-the-kingdom-of-winds",
+   "title": "sirocco and the kingdom of winds",
+   "score": 1
+  },
+  {
+   "slug": "sister-midnight",
+   "title": "sister midnight",
    "score": 1
   },
   {
@@ -2524,8 +6609,23 @@
    "score": 1
   },
   {
-   "slug": "sleepless-in-seattle",
-   "title": "sleepless in seattle",
+   "slug": "sky-captain-and-the-world-of-tomorrow",
+   "title": "sky captain and the world of tomorrow",
+   "score": 1
+  },
+  {
+   "slug": "skyfall",
+   "title": "skyfall",
+   "score": 1
+  },
+  {
+   "slug": "sneakerella",
+   "title": "sneakerella",
+   "score": 1
+  },
+  {
+   "slug": "snoopy-presents-its-the-small-things-charlie-brown",
+   "title": "snoopy presents its the small things charlie brown",
    "score": 1
   },
   {
@@ -2539,8 +6639,38 @@
    "score": 1
   },
   {
+   "slug": "snow-buddies",
+   "title": "snow buddies",
+   "score": 1
+  },
+  {
    "slug": "sofia-the-first-once-upon-a-princess",
    "title": "sofia the first once upon a princess",
+   "score": 1
+  },
+  {
+   "slug": "sofia-the-first-the-curse-of-princess-ivy",
+   "title": "sofia the first the curse of princess ivy",
+   "score": 1
+  },
+  {
+   "slug": "something-new",
+   "title": "something new",
+   "score": 1
+  },
+  {
+   "slug": "something-to-stand-for-with-mike-rowe",
+   "title": "something to stand for with mike rowe",
+   "score": 1
+  },
+  {
+   "slug": "somewhere-in-time",
+   "title": "somewhere in time",
+   "score": 1
+  },
+  {
+   "slug": "song-sung-blue",
+   "title": "song sung blue",
    "score": 1
   },
   {
@@ -2549,8 +6679,23 @@
    "score": 1
   },
   {
-   "slug": "spookiz-the-movie",
-   "title": "spookiz the movie",
+   "slug": "southside-with-you",
+   "title": "southside with you",
+   "score": 1
+  },
+  {
+   "slug": "speed-of-life",
+   "title": "speed of life",
+   "score": 1
+  },
+  {
+   "slug": "spelling-the-dream",
+   "title": "spelling the dream",
+   "score": 1
+  },
+  {
+   "slug": "spotlight",
+   "title": "spotlight",
    "score": 1
   },
   {
@@ -2564,8 +6709,33 @@
    "score": 1
   },
   {
-   "slug": "star-wars-episode-vi-the-return-of-the-jedi",
-   "title": "star wars episode vi the return of the jedi",
+   "slug": "stan-ollie",
+   "title": "stan ollie",
+   "score": 1
+  },
+  {
+   "slug": "stand-and-deliver",
+   "title": "stand and deliver",
+   "score": 1
+  },
+  {
+   "slug": "standout-the-ben-kjar-story",
+   "title": "standout the ben kjar story",
+   "score": 1
+  },
+  {
+   "slug": "star-trek-into-darkness",
+   "title": "star trek into darkness",
+   "score": 1
+  },
+  {
+   "slug": "star-trek-iv-the-voyage-home",
+   "title": "star trek iv the voyage home",
+   "score": 1
+  },
+  {
+   "slug": "star-trek-the-motion-picture",
+   "title": "star trek the motion picture",
    "score": 1
   },
   {
@@ -2579,8 +6749,23 @@
    "score": 1
   },
   {
-   "slug": "stick-man",
-   "title": "stick man",
+   "slug": "stargirl",
+   "title": "stargirl",
+   "score": 1
+  },
+  {
+   "slug": "stepmom",
+   "title": "stepmom",
+   "score": 1
+  },
+  {
+   "slug": "steve",
+   "title": "steve",
+   "score": 1
+  },
+  {
+   "slug": "steve-jobs",
+   "title": "steve jobs",
    "score": 1
   },
   {
@@ -2604,13 +6789,33 @@
    "score": 1
   },
   {
+   "slug": "strong-island",
+   "title": "strong island",
+   "score": 1
+  },
+  {
+   "slug": "sully",
+   "title": "sully",
+   "score": 1
+  },
+  {
+   "slug": "summer-of-the-colt",
+   "title": "summer of the colt",
+   "score": 1
+  },
+  {
    "slug": "summerland",
    "title": "summerland",
    "score": 1
   },
   {
-   "slug": "super-charlie",
-   "title": "super charlie",
+   "slug": "sunset-boulevard",
+   "title": "sunset boulevard",
+   "score": 1
+  },
+  {
+   "slug": "super-buddies",
+   "title": "super buddies",
    "score": 1
   },
   {
@@ -2619,23 +6824,53 @@
    "score": 1
   },
   {
-   "slug": "super-monsters-dia-de-los-monsters",
-   "title": "super monsters dia de los monsters",
-   "score": 1
-  },
-  {
-   "slug": "super-monsters-the-new-class",
-   "title": "super monsters the new class",
-   "score": 1
-  },
-  {
-   "slug": "super-monsters-vidas-first-halloween",
-   "title": "super monsters vidas first halloween",
+   "slug": "superboys-of-malegaon",
+   "title": "superboys of malegaon",
    "score": 1
   },
   {
    "slug": "superman-last-son-of-krypton",
    "title": "superman last son of krypton",
+   "score": 1
+  },
+  {
+   "slug": "superman-the-christopher-reeve-story",
+   "title": "superman the christopher reeve story",
+   "score": 1
+  },
+  {
+   "slug": "superman-the-movie",
+   "title": "superman the movie",
+   "score": 1
+  },
+  {
+   "slug": "surviving-paradise-a-family-tale",
+   "title": "surviving paradise a family tale",
+   "score": 1
+  },
+  {
+   "slug": "swades",
+   "title": "swades",
+   "score": 1
+  },
+  {
+   "slug": "sylvies-love",
+   "title": "sylvies love",
+   "score": 1
+  },
+  {
+   "slug": "take-the-money-and-run",
+   "title": "take the money and run",
+   "score": 1
+  },
+  {
+   "slug": "tale-of-the-forest-unicorn",
+   "title": "tale of the forest unicorn",
+   "score": 1
+  },
+  {
+   "slug": "tall-girl",
+   "title": "tall girl",
    "score": 1
   },
   {
@@ -2649,6 +6884,16 @@
    "score": 1
   },
   {
+   "slug": "taylor-swift-reputation-stadium-tour",
+   "title": "taylor swift reputation stadium tour",
+   "score": 1
+  },
+  {
+   "slug": "taylor-swift-the-1989-world-tour-live",
+   "title": "taylor swift the 1989 world tour live",
+   "score": 1
+  },
+  {
    "slug": "teachers-pet",
    "title": "teachers pet",
    "score": 1
@@ -2659,8 +6904,53 @@
    "score": 1
   },
   {
+   "slug": "teen-spirit",
+   "title": "teen spirit",
+   "score": 1
+  },
+  {
    "slug": "teen-titans-go-vs-teen-titans",
    "title": "teen titans go vs teen titans",
+   "score": 1
+  },
+  {
+   "slug": "teen-wolf-1985",
+   "title": "teen wolf 1985",
+   "score": 1
+  },
+  {
+   "slug": "tekken-the-motion-picture",
+   "title": "tekken the motion picture",
+   "score": 1
+  },
+  {
+   "slug": "terry-mcmillan-presents-forever",
+   "title": "terry mcmillan presents forever",
+   "score": 1
+  },
+  {
+   "slug": "terry-mcmillan-presents-tempted-by-love",
+   "title": "terry mcmillan presents tempted by love",
+   "score": 1
+  },
+  {
+   "slug": "that-sugar-film",
+   "title": "that sugar film",
+   "score": 1
+  },
+  {
+   "slug": "the-11th-hour",
+   "title": "the 11th hour",
+   "score": 1
+  },
+  {
+   "slug": "the-39-steps",
+   "title": "the 39 steps",
+   "score": 1
+  },
+  {
+   "slug": "the-5th-quarter",
+   "title": "the 5th quarter",
    "score": 1
   },
   {
@@ -2679,8 +6969,28 @@
    "score": 1
   },
   {
+   "slug": "the-amazing-adventures-of-mary-kate-and-ashley",
+   "title": "the amazing adventures of mary kate and ashley",
+   "score": 1
+  },
+  {
    "slug": "the-amazing-digital-circus-the-last-act",
    "title": "the amazing digital circus the last act",
+   "score": 1
+  },
+  {
+   "slug": "the-archies",
+   "title": "the archies",
+   "score": 1
+  },
+  {
+   "slug": "the-baby-sitters-club",
+   "title": "the baby sitters club",
+   "score": 1
+  },
+  {
+   "slug": "the-bad-guys-a-very-bad-holiday",
+   "title": "the bad guys a very bad holiday",
    "score": 1
   },
   {
@@ -2689,8 +6999,33 @@
    "score": 1
   },
   {
+   "slug": "the-ballad-of-wallis-island",
+   "title": "the ballad of wallis island",
+   "score": 1
+  },
+  {
+   "slug": "the-banker",
+   "title": "the banker",
+   "score": 1
+  },
+  {
+   "slug": "the-banshees-of-inisherin",
+   "title": "the banshees of inisherin",
+   "score": 1
+  },
+  {
    "slug": "the-basket",
    "title": "the basket",
+   "score": 1
+  },
+  {
+   "slug": "the-beast-0",
+   "title": "the beast 0",
+   "score": 1
+  },
+  {
+   "slug": "the-big-wish",
+   "title": "the big wish",
    "score": 1
   },
   {
@@ -2699,8 +7034,23 @@
    "score": 1
   },
   {
-   "slug": "the-book-of-life",
-   "title": "the book of life",
+   "slug": "the-black-stallion",
+   "title": "the black stallion",
+   "score": 1
+  },
+  {
+   "slug": "the-black-stallion-returns",
+   "title": "the black stallion returns",
+   "score": 1
+  },
+  {
+   "slug": "the-bloody-hundredth",
+   "title": "the bloody hundredth",
+   "score": 1
+  },
+  {
+   "slug": "the-bobs-burgers-movie",
+   "title": "the bobs burgers movie",
    "score": 1
   },
   {
@@ -2709,8 +7059,28 @@
    "score": 1
   },
   {
+   "slug": "the-boy-who-could-fly",
+   "title": "the boy who could fly",
+   "score": 1
+  },
+  {
+   "slug": "the-boys-in-the-boat",
+   "title": "the boys in the boat",
+   "score": 1
+  },
+  {
    "slug": "the-brave-little-toaster-goes-to-mars",
    "title": "the brave little toaster goes to mars",
+   "score": 1
+  },
+  {
+   "slug": "the-breadwinner",
+   "title": "the breadwinner",
+   "score": 1
+  },
+  {
+   "slug": "the-caine-mutiny",
+   "title": "the caine mutiny",
    "score": 1
   },
   {
@@ -2719,13 +7089,28 @@
    "score": 1
   },
   {
-   "slug": "the-casagrandes-movie",
-   "title": "the casagrandes movie",
+   "slug": "the-carpenter",
+   "title": "the carpenter",
    "score": 1
   },
   {
-   "slug": "the-cat-in-the-hat-knows-a-lot-about-christmas",
-   "title": "the cat in the hat knows a lot about christmas",
+   "slug": "the-cat-in-the-hat",
+   "title": "the cat in the hat",
+   "score": 1
+  },
+  {
+   "slug": "the-chosen",
+   "title": "the chosen",
+   "score": 1
+  },
+  {
+   "slug": "the-christmas-project",
+   "title": "the christmas project",
+   "score": 1
+  },
+  {
+   "slug": "the-christmas-toy",
+   "title": "the christmas toy",
    "score": 1
   },
   {
@@ -2739,8 +7124,28 @@
    "score": 1
   },
   {
+   "slug": "the-creator",
+   "title": "the creator",
+   "score": 1
+  },
+  {
    "slug": "the-crimson-pirate",
    "title": "the crimson pirate",
+   "score": 1
+  },
+  {
+   "slug": "the-cuban",
+   "title": "the cuban",
+   "score": 1
+  },
+  {
+   "slug": "the-curse-of-la-llorona",
+   "title": "the curse of la llorona",
+   "score": 1
+  },
+  {
+   "slug": "the-dam-busters",
+   "title": "the dam busters",
    "score": 1
   },
   {
@@ -2749,8 +7154,33 @@
    "score": 1
   },
   {
+   "slug": "the-diary-of-anne-frank",
+   "title": "the diary of anne frank",
+   "score": 1
+  },
+  {
+   "slug": "the-diary-of-anne-frank-2009",
+   "title": "the diary of anne frank 2009",
+   "score": 1
+  },
+  {
    "slug": "the-dog-who-saved-christmas",
    "title": "the dog who saved christmas",
+   "score": 1
+  },
+  {
+   "slug": "the-dog-who-saved-easter",
+   "title": "the dog who saved easter",
+   "score": 1
+  },
+  {
+   "slug": "the-dresser",
+   "title": "the dresser",
+   "score": 1
+  },
+  {
+   "slug": "the-duellists",
+   "title": "the duellists",
    "score": 1
   },
   {
@@ -2759,18 +7189,63 @@
    "score": 1
   },
   {
+   "slug": "the-endless-summer",
+   "title": "the endless summer",
+   "score": 1
+  },
+  {
+   "slug": "the-express",
+   "title": "the express",
+   "score": 1
+  },
+  {
+   "slug": "the-eyes-of-tammy-faye",
+   "title": "the eyes of tammy faye",
+   "score": 1
+  },
+  {
+   "slug": "the-fabelmans",
+   "title": "the fabelmans",
+   "score": 1
+  },
+  {
    "slug": "the-farmer-and-the-belle-saving-santaland",
    "title": "the farmer and the belle saving santaland",
    "score": 1
   },
   {
-   "slug": "the-first-easter-rabbit",
-   "title": "the first easter rabbit",
+   "slug": "the-farthest-voyager-in-space",
+   "title": "the farthest voyager in space",
    "score": 1
   },
   {
-   "slug": "the-first-slam-dunk",
-   "title": "the first slam dunk",
+   "slug": "the-fire-inside",
+   "title": "the fire inside",
+   "score": 1
+  },
+  {
+   "slug": "the-flight-of-dragons",
+   "title": "the flight of dragons",
+   "score": 1
+  },
+  {
+   "slug": "the-gabby-douglas-story",
+   "title": "the gabby douglas story",
+   "score": 1
+  },
+  {
+   "slug": "the-general-1927",
+   "title": "the general 1927",
+   "score": 1
+  },
+  {
+   "slug": "the-girl-on-the-train",
+   "title": "the girl on the train",
+   "score": 1
+  },
+  {
+   "slug": "the-gold-rush",
+   "title": "the gold rush",
    "score": 1
   },
   {
@@ -2779,8 +7254,18 @@
    "score": 1
   },
   {
-   "slug": "the-great-race",
-   "title": "the great race",
+   "slug": "the-gray-man",
+   "title": "the gray man",
+   "score": 1
+  },
+  {
+   "slug": "the-great-debaters",
+   "title": "the great debaters",
+   "score": 1
+  },
+  {
+   "slug": "the-great-dictator",
+   "title": "the great dictator",
    "score": 1
   },
   {
@@ -2789,13 +7274,73 @@
    "score": 1
   },
   {
-   "slug": "the-inseparables",
-   "title": "the inseparables",
+   "slug": "the-half-of-it",
+   "title": "the half of it",
    "score": 1
   },
   {
-   "slug": "the-king-of-kings",
-   "title": "the king of kings",
+   "slug": "the-hate-u-give",
+   "title": "the hate u give",
+   "score": 1
+  },
+  {
+   "slug": "the-high-note",
+   "title": "the high note",
+   "score": 1
+  },
+  {
+   "slug": "the-history-of-future-folk",
+   "title": "the history of future folk",
+   "score": 1
+  },
+  {
+   "slug": "the-holiday",
+   "title": "the holiday",
+   "score": 1
+  },
+  {
+   "slug": "the-hound-of-the-baskervilles-1939",
+   "title": "the hound of the baskervilles 1939",
+   "score": 1
+  },
+  {
+   "slug": "the-hundred-foot-journey",
+   "title": "the hundred foot journey",
+   "score": 1
+  },
+  {
+   "slug": "the-hunting-ground",
+   "title": "the hunting ground",
+   "score": 1
+  },
+  {
+   "slug": "the-journey-of-henry-box-brown",
+   "title": "the journey of henry box brown",
+   "score": 1
+  },
+  {
+   "slug": "the-juggler",
+   "title": "the juggler",
+   "score": 1
+  },
+  {
+   "slug": "the-killing-of-kenneth-chamberlain",
+   "title": "the killing of kenneth chamberlain",
+   "score": 1
+  },
+  {
+   "slug": "the-killing-of-two-lovers",
+   "title": "the killing of two lovers",
+   "score": 1
+  },
+  {
+   "slug": "the-kings-daughter",
+   "title": "the kings daughter",
+   "score": 1
+  },
+  {
+   "slug": "the-kissing-booth",
+   "title": "the kissing booth",
    "score": 1
   },
   {
@@ -2809,8 +7354,38 @@
    "score": 1
   },
   {
-   "slug": "the-league",
-   "title": "the league",
+   "slug": "the-last-days",
+   "title": "the last days",
+   "score": 1
+  },
+  {
+   "slug": "the-last-man-on-the-moon",
+   "title": "the last man on the moon",
+   "score": 1
+  },
+  {
+   "slug": "the-last-of-the-sea-women",
+   "title": "the last of the sea women",
+   "score": 1
+  },
+  {
+   "slug": "the-last-samurai",
+   "title": "the last samurai",
+   "score": 1
+  },
+  {
+   "slug": "the-last-starfighter",
+   "title": "the last starfighter",
+   "score": 1
+  },
+  {
+   "slug": "the-lesson",
+   "title": "the lesson",
+   "score": 1
+  },
+  {
+   "slug": "the-life-and-death-of-colonel-blimp",
+   "title": "the life and death of colonel blimp",
    "score": 1
   },
   {
@@ -2824,8 +7399,63 @@
    "score": 1
   },
   {
-   "slug": "the-long-game",
-   "title": "the long game",
+   "slug": "the-little-vampire",
+   "title": "the little vampire",
+   "score": 1
+  },
+  {
+   "slug": "the-living-daylights",
+   "title": "the living daylights",
+   "score": 1
+  },
+  {
+   "slug": "the-long-way-home",
+   "title": "the long way home",
+   "score": 1
+  },
+  {
+   "slug": "the-longest-day",
+   "title": "the longest day",
+   "score": 1
+  },
+  {
+   "slug": "the-longshots",
+   "title": "the longshots",
+   "score": 1
+  },
+  {
+   "slug": "the-lord-of-the-rings-the-two-towers",
+   "title": "the lord of the rings the two towers",
+   "score": 1
+  },
+  {
+   "slug": "the-lost-bus",
+   "title": "the lost bus",
+   "score": 1
+  },
+  {
+   "slug": "the-lost-king",
+   "title": "the lost king",
+   "score": 1
+  },
+  {
+   "slug": "the-lunchbox",
+   "title": "the lunchbox",
+   "score": 1
+  },
+  {
+   "slug": "the-madness-of-king-george",
+   "title": "the madness of king george",
+   "score": 1
+  },
+  {
+   "slug": "the-magic-snowflake",
+   "title": "the magic snowflake",
+   "score": 1
+  },
+  {
+   "slug": "the-magicians-elephant",
+   "title": "the magicians elephant",
    "score": 1
   },
   {
@@ -2834,8 +7464,48 @@
    "score": 1
   },
   {
-   "slug": "the-mighty-macs",
-   "title": "the mighty macs",
+   "slug": "the-man-in-the-white-suit",
+   "title": "the man in the white suit",
+   "score": 1
+  },
+  {
+   "slug": "the-man-who-invented-christmas",
+   "title": "the man who invented christmas",
+   "score": 1
+  },
+  {
+   "slug": "the-man-with-the-golden-gun",
+   "title": "the man with the golden gun",
+   "score": 1
+  },
+  {
+   "slug": "the-map-of-tiny-perfect-things",
+   "title": "the map of tiny perfect things",
+   "score": 1
+  },
+  {
+   "slug": "the-mars-generation",
+   "title": "the mars generation",
+   "score": 1
+  },
+  {
+   "slug": "the-martha-mitchell-effect",
+   "title": "the martha mitchell effect",
+   "score": 1
+  },
+  {
+   "slug": "the-midnight-sky",
+   "title": "the midnight sky",
+   "score": 1
+  },
+  {
+   "slug": "the-miracle-club",
+   "title": "the miracle club",
+   "score": 1
+  },
+  {
+   "slug": "the-miracle-maker-the-story-of-jesus",
+   "title": "the miracle maker the story of jesus",
    "score": 1
   },
   {
@@ -2844,18 +7514,43 @@
    "score": 1
   },
   {
-   "slug": "the-mummy-1932",
-   "title": "the mummy 1932",
+   "slug": "the-nativity-story",
+   "title": "the nativity story",
    "score": 1
   },
   {
-   "slug": "the-only-girl-in-the-orchestra",
-   "title": "the only girl in the orchestra",
+   "slug": "the-nutty-professor-1963",
+   "title": "the nutty professor 1963",
+   "score": 1
+  },
+  {
+   "slug": "the-odyssey",
+   "title": "the odyssey",
    "score": 1
   },
   {
    "slug": "the-oogieloves-in-the-big-balloon-adventure",
    "title": "the oogieloves in the big balloon adventure",
+   "score": 1
+  },
+  {
+   "slug": "the-optimist",
+   "title": "the optimist",
+   "score": 1
+  },
+  {
+   "slug": "the-painting",
+   "title": "the painting",
+   "score": 1
+  },
+  {
+   "slug": "the-passion-live",
+   "title": "the passion live",
+   "score": 1
+  },
+  {
+   "slug": "the-penguin-lessons",
+   "title": "the penguin lessons",
    "score": 1
   },
   {
@@ -2869,13 +7564,38 @@
    "score": 1
   },
   {
+   "slug": "the-perfect-neighbor",
+   "title": "the perfect neighbor",
+   "score": 1
+  },
+  {
+   "slug": "the-phantom-of-the-open",
+   "title": "the phantom of the open",
+   "score": 1
+  },
+  {
+   "slug": "the-photograph",
+   "title": "the photograph",
+   "score": 1
+  },
+  {
+   "slug": "the-pianist",
+   "title": "the pianist",
+   "score": 1
+  },
+  {
+   "slug": "the-pink-panther",
+   "title": "the pink panther",
+   "score": 1
+  },
+  {
    "slug": "the-pistol-the-birth-of-a-legend",
    "title": "the pistol the birth of a legend",
    "score": 1
   },
   {
-   "slug": "the-powerpuff-girls-movie",
-   "title": "the powerpuff girls movie",
+   "slug": "the-post",
+   "title": "the post",
    "score": 1
   },
   {
@@ -2894,8 +7614,63 @@
    "score": 1
   },
   {
+   "slug": "the-pursuit-of-happyness",
+   "title": "the pursuit of happyness",
+   "score": 1
+  },
+  {
+   "slug": "the-quiet-girl",
+   "title": "the quiet girl",
+   "score": 1
+  },
+  {
+   "slug": "the-quiet-man",
+   "title": "the quiet man",
+   "score": 1
+  },
+  {
+   "slug": "the-race-to-save-the-world",
+   "title": "the race to save the world",
+   "score": 1
+  },
+  {
+   "slug": "the-real-right-stuff",
+   "title": "the real right stuff",
+   "score": 1
+  },
+  {
+   "slug": "the-reason-i-jump",
+   "title": "the reason i jump",
+   "score": 1
+  },
+  {
    "slug": "the-rebellious-life-of-mrs-rosa-parks",
    "title": "the rebellious life of mrs rosa parks",
+   "score": 1
+  },
+  {
+   "slug": "the-reluctant-dragon",
+   "title": "the reluctant dragon",
+   "score": 1
+  },
+  {
+   "slug": "the-remains-of-the-day",
+   "title": "the remains of the day",
+   "score": 1
+  },
+  {
+   "slug": "the-road-dance",
+   "title": "the road dance",
+   "score": 1
+  },
+  {
+   "slug": "the-roughnecks",
+   "title": "the roughnecks",
+   "score": 1
+  },
+  {
+   "slug": "the-royal-hotel",
+   "title": "the royal hotel",
    "score": 1
   },
   {
@@ -2909,13 +7684,33 @@
    "score": 1
   },
   {
+   "slug": "the-shape-of-water",
+   "title": "the shape of water",
+   "score": 1
+  },
+  {
+   "slug": "the-simone-biles-story-courage-to-soar",
+   "title": "the simone biles story courage to soar",
+   "score": 1
+  },
+  {
+   "slug": "the-six-triple-eight",
+   "title": "the six triple eight",
+   "score": 1
+  },
+  {
    "slug": "the-smashing-machine",
    "title": "the smashing machine",
    "score": 1
   },
   {
-   "slug": "the-snowman-and-the-snowdog",
-   "title": "the snowman and the snowdog",
+   "slug": "the-social-network",
+   "title": "the social network",
+   "score": 1
+  },
+  {
+   "slug": "the-soloist",
+   "title": "the soloist",
    "score": 1
   },
   {
@@ -2929,18 +7724,13 @@
    "score": 1
   },
   {
-   "slug": "the-speed-cubers",
-   "title": "the speed cubers",
-   "score": 1
-  },
-  {
    "slug": "the-spiderwick-chronicles",
    "title": "the spiderwick chronicles",
    "score": 1
   },
   {
-   "slug": "the-swan-princess-a-royal-wedding",
-   "title": "the swan princess a royal wedding",
+   "slug": "the-spy-who-loved-me",
+   "title": "the spy who loved me",
    "score": 1
   },
   {
@@ -2949,8 +7739,58 @@
    "score": 1
   },
   {
+   "slug": "the-swimmers",
+   "title": "the swimmers",
+   "score": 1
+  },
+  {
    "slug": "the-tale-of-silyan",
    "title": "the tale of silyan",
+   "score": 1
+  },
+  {
+   "slug": "the-ten-commandments-2007",
+   "title": "the ten commandments 2007",
+   "score": 1
+  },
+  {
+   "slug": "the-thursday-murder-club",
+   "title": "the thursday murder club",
+   "score": 1
+  },
+  {
+   "slug": "the-tigers-apprentice",
+   "title": "the tigers apprentice",
+   "score": 1
+  },
+  {
+   "slug": "the-truman-show",
+   "title": "the truman show",
+   "score": 1
+  },
+  {
+   "slug": "the-twilight-saga-breaking-dawn-part-1",
+   "title": "the twilight saga breaking dawn part 1",
+   "score": 1
+  },
+  {
+   "slug": "the-twilight-saga-breaking-dawn-part-2",
+   "title": "the twilight saga breaking dawn part 2",
+   "score": 1
+  },
+  {
+   "slug": "the-twilight-saga-eclipse",
+   "title": "the twilight saga eclipse",
+   "score": 1
+  },
+  {
+   "slug": "the-twilight-saga-new-moon",
+   "title": "the twilight saga new moon",
+   "score": 1
+  },
+  {
+   "slug": "the-two-popes",
+   "title": "the two popes",
    "score": 1
   },
   {
@@ -2979,8 +7819,43 @@
    "score": 1
   },
   {
+   "slug": "the-wiz-live",
+   "title": "the wiz live",
+   "score": 1
+  },
+  {
+   "slug": "the-woman-king",
+   "title": "the woman king",
+   "score": 1
+  },
+  {
+   "slug": "the-wonderful-story-of-henry-sugar",
+   "title": "the wonderful story of henry sugar",
+   "score": 1
+  },
+  {
+   "slug": "the-yearling",
+   "title": "the yearling",
+   "score": 1
+  },
+  {
+   "slug": "the-young-black-stallion",
+   "title": "the young black stallion",
+   "score": 1
+  },
+  {
    "slug": "the-youth-governor",
    "title": "the youth governor",
+   "score": 1
+  },
+  {
+   "slug": "the-zone-of-interest",
+   "title": "the zone of interest",
+   "score": 1
+  },
+  {
+   "slug": "thelma-and-louise",
+   "title": "thelma and louise",
    "score": 1
   },
   {
@@ -2994,13 +7869,28 @@
    "score": 1
   },
   {
-   "slug": "thomas-friends-blue-mountain-mystery-the-movie",
-   "title": "thomas friends blue mountain mystery the movie",
+   "slug": "thomas-friends-tale-of-the-brave",
+   "title": "thomas friends tale of the brave",
    "score": 1
   },
   {
-   "slug": "thomas-friends-tale-of-the-brave",
-   "title": "thomas friends tale of the brave",
+   "slug": "those-magnificent-men-in-their-flying-machines",
+   "title": "those magnificent men in their flying machines",
+   "score": 1
+  },
+  {
+   "slug": "thunder-and-the-house-of-magic",
+   "title": "thunder and the house of magic",
+   "score": 1
+  },
+  {
+   "slug": "thunder-soul",
+   "title": "thunder soul",
+   "score": 1
+  },
+  {
+   "slug": "tiger",
+   "title": "tiger",
    "score": 1
   },
   {
@@ -3009,13 +7899,28 @@
    "score": 1
   },
   {
+   "slug": "time",
+   "title": "time",
+   "score": 1
+  },
+  {
    "slug": "time-for-ilhan",
    "title": "time for ilhan",
    "score": 1
   },
   {
-   "slug": "tinker-bell-and-the-secret-of-the-wings",
-   "title": "tinker bell and the secret of the wings",
+   "slug": "time-hoppers-the-silk-road",
+   "title": "time hoppers the silk road",
+   "score": 1
+  },
+  {
+   "slug": "time-to-choose",
+   "title": "time to choose",
+   "score": 1
+  },
+  {
+   "slug": "tinsel-town",
+   "title": "tinsel town",
    "score": 1
   },
   {
@@ -3024,8 +7929,23 @@
    "score": 1
   },
   {
+   "slug": "to-all-the-boys-ive-loved-before",
+   "title": "to all the boys ive loved before",
+   "score": 1
+  },
+  {
+   "slug": "to-all-the-boys-ps-i-still-love-you",
+   "title": "to all the boys ps i still love you",
+   "score": 1
+  },
+  {
    "slug": "to-catch-a-thief",
    "title": "to catch a thief",
+   "score": 1
+  },
+  {
+   "slug": "to-sir-with-love",
+   "title": "to sir with love",
    "score": 1
   },
   {
@@ -3036,6 +7956,11 @@
   {
    "slug": "tom-and-jerry-back-to-oz",
    "title": "tom and jerry back to oz",
+   "score": 1
+  },
+  {
+   "slug": "tom-and-jerry-the-lost-dragon",
+   "title": "tom and jerry the lost dragon",
    "score": 1
   },
   {
@@ -3059,6 +7984,41 @@
    "score": 1
   },
   {
+   "slug": "tomorrow",
+   "title": "tomorrow",
+   "score": 1
+  },
+  {
+   "slug": "top-gun-maverick",
+   "title": "top gun maverick",
+   "score": 1
+  },
+  {
+   "slug": "top-secret",
+   "title": "top secret",
+   "score": 1
+  },
+  {
+   "slug": "top-spin",
+   "title": "top spin",
+   "score": 1
+  },
+  {
+   "slug": "touch-the-wall",
+   "title": "touch the wall",
+   "score": 1
+  },
+  {
+   "slug": "touchback",
+   "title": "touchback",
+   "score": 1
+  },
+  {
+   "slug": "train-dreams",
+   "title": "train dreams",
+   "score": 1
+  },
+  {
    "slug": "transformers-rise-of-the-beasts",
    "title": "transformers rise of the beasts",
    "score": 1
@@ -3069,18 +8029,38 @@
    "score": 1
   },
   {
+   "slug": "trolls-holiday",
+   "title": "trolls holiday",
+   "score": 1
+  },
+  {
+   "slug": "turtles-all-the-way-down",
+   "title": "turtles all the way down",
+   "score": 1
+  },
+  {
    "slug": "twelve-0",
    "title": "twelve 0",
    "score": 1
   },
   {
-   "slug": "un-disfraz-para-nicolas-a-costume-for-nicolas",
-   "title": "un disfraz para nicolas a costume for nicolas",
+   "slug": "unbroken-2023",
+   "title": "unbroken 2023",
    "score": 1
   },
   {
-   "slug": "underwater-dreams",
-   "title": "underwater dreams",
+   "slug": "undefeated",
+   "title": "undefeated",
+   "score": 1
+  },
+  {
+   "slug": "uproar",
+   "title": "uproar",
+   "score": 1
+  },
+  {
+   "slug": "usa-94-brazils-return-to-glory",
+   "title": "usa 94 brazils return to glory",
    "score": 1
   },
   {
@@ -3094,13 +8074,23 @@
    "score": 1
   },
   {
-   "slug": "veggietales-dave-and-the-giant-pickle",
-   "title": "veggietales dave and the giant pickle",
+   "slug": "van-helsing",
+   "title": "van helsing",
    "score": 1
   },
   {
-   "slug": "veggietales-lyle-the-kindly-viking",
-   "title": "veggietales lyle the kindly viking",
+   "slug": "veer-zaara",
+   "title": "veer zaara",
+   "score": 1
+  },
+  {
+   "slug": "veggietales-celery-night-fever",
+   "title": "veggietales celery night fever",
+   "score": 1
+  },
+  {
+   "slug": "veggietales-dave-and-the-giant-pickle",
+   "title": "veggietales dave and the giant pickle",
    "score": 1
   },
   {
@@ -3109,8 +8099,18 @@
    "score": 1
   },
   {
-   "slug": "veggietales-the-penniless-princess",
-   "title": "veggietales the penniless princess",
+   "slug": "veggietales-sumo-of-the-opera",
+   "title": "veggietales sumo of the opera",
+   "score": 1
+  },
+  {
+   "slug": "veggietales-twas-the-night-before-easter",
+   "title": "veggietales twas the night before easter",
+   "score": 1
+  },
+  {
+   "slug": "venus-and-serena",
+   "title": "venus and serena",
    "score": 1
   },
   {
@@ -3119,8 +8119,53 @@
    "score": 1
   },
   {
+   "slug": "victoria-and-abdul",
+   "title": "victoria and abdul",
+   "score": 1
+  },
+  {
+   "slug": "waking-ned-devine",
+   "title": "waking ned devine",
+   "score": 1
+  },
+  {
+   "slug": "wallace-gromit",
+   "title": "wallace gromit",
+   "score": 1
+  },
+  {
+   "slug": "wallace-gromit-the-curse-of-the-were-rabbit",
+   "title": "wallace gromit the curse of the were rabbit",
+   "score": 1
+  },
+  {
+   "slug": "war-for-the-planet-of-the-apes",
+   "title": "war for the planet of the apes",
+   "score": 1
+  },
+  {
    "slug": "we-dare-to-dream",
    "title": "we dare to dream",
+   "score": 1
+  },
+  {
+   "slug": "we-grown-now",
+   "title": "we grown now",
+   "score": 1
+  },
+  {
+   "slug": "western-stars",
+   "title": "western stars",
+   "score": 1
+  },
+  {
+   "slug": "whale-rider",
+   "title": "whale rider",
+   "score": 1
+  },
+  {
+   "slug": "wham",
+   "title": "wham",
    "score": 1
   },
   {
@@ -3134,13 +8179,8 @@
    "score": 1
   },
   {
-   "slug": "what-rhymes-with-reason",
-   "title": "what rhymes with reason",
-   "score": 1
-  },
-  {
-   "slug": "what-we-leave-behind",
-   "title": "what we leave behind",
+   "slug": "what-maisie-knew",
+   "title": "what maisie knew",
    "score": 1
   },
   {
@@ -3149,8 +8189,48 @@
    "score": 1
   },
   {
+   "slug": "where-hope-grows",
+   "title": "where hope grows",
+   "score": 1
+  },
+  {
+   "slug": "where-is-anne-frank",
+   "title": "where is anne frank",
+   "score": 1
+  },
+  {
+   "slug": "while-you-were-sleeping",
+   "title": "while you were sleeping",
+   "score": 1
+  },
+  {
+   "slug": "white-lion",
+   "title": "white lion",
+   "score": 1
+  },
+  {
+   "slug": "white-mane",
+   "title": "white mane",
+   "score": 1
+  },
+  {
+   "slug": "who-will-write-our-history",
+   "title": "who will write our history",
+   "score": 1
+  },
+  {
+   "slug": "wilderness-love",
+   "title": "wilderness love",
+   "score": 1
+  },
+  {
    "slug": "will-penny",
    "title": "will penny",
+   "score": 1
+  },
+  {
+   "slug": "willie",
+   "title": "willie",
    "score": 1
   },
   {
@@ -3159,18 +8239,43 @@
    "score": 1
   },
   {
-   "slug": "winnie-the-pooh-a-very-merry-pooh-year",
-   "title": "winnie the pooh a very merry pooh year",
+   "slug": "winnie-the-pooh-springtime-with-roo",
+   "title": "winnie the pooh springtime with roo",
    "score": 1
   },
   {
-   "slug": "winnie-the-pooh-seasons-of-giving",
-   "title": "winnie the pooh seasons of giving",
+   "slug": "witness-for-the-prosecution",
+   "title": "witness for the prosecution",
    "score": 1
   },
   {
-   "slug": "xicos-journey",
-   "title": "xicos journey",
+   "slug": "wolfgang",
+   "title": "wolfgang",
+   "score": 1
+  },
+  {
+   "slug": "woman-in-gold",
+   "title": "woman in gold",
+   "score": 1
+  },
+  {
+   "slug": "woodlawn",
+   "title": "woodlawn",
+   "score": 1
+  },
+  {
+   "slug": "words-on-bathroom-walls",
+   "title": "words on bathroom walls",
+   "score": 1
+  },
+  {
+   "slug": "worlds-best",
+   "title": "worlds best",
+   "score": 1
+  },
+  {
+   "slug": "writing-with-fire",
+   "title": "writing with fire",
    "score": 1
   },
   {
@@ -3179,17 +8284,32 @@
    "score": 1
   },
   {
-   "slug": "young-mr-lincoln",
-   "title": "young mr lincoln",
+   "slug": "young-abraham",
+   "title": "young abraham",
+   "score": 1
+  },
+  {
+   "slug": "young-woman-and-the-sea",
+   "title": "young woman and the sea",
    "score": 1
   },
   {
    "slug": "youre-not-elected-charlie-brown",
    "title": "youre not elected charlie brown",
    "score": 1
+  },
+  {
+   "slug": "yusuf-hawkins-storm-over-brooklyn",
+   "title": "yusuf hawkins storm over brooklyn",
+   "score": 1
+  },
+  {
+   "slug": "zulu",
+   "title": "zulu",
+   "score": 1
   }
  ],
  "done": [],
  "skipped": [],
- "notes": "Crawl in progress. lists_done = 60 of 216 (the full list set is re-read from the sitemap each night, one request). Scores count how many of the lists done so far include the title. Titles are slug-derived placeholders; the real title comes from the CSM page when a title is processed. Candidates already in the catalog at crawl time were left out."
+ "notes": "210 of 216 lists read (the remaining 6 are re-found from the sitemap next time, one request). Score = how many of the lists read so far include the title. Titles are slug-derived placeholders; the real title comes from the CSM page. The catalog filter at crawl time matched on title text only, so already-catalogued films with different spellings (for example Frozen 2 vs Frozen II) can still appear here; re-check each against every data-*.js file before reading its CSM page. Many entries are adult films, documentaries or concerts; they are filtered out at the CSM age check, not here."
 }
