@@ -383,7 +383,7 @@ Skipped and why: How the Grinch Stole Christmas (1966) is already in the catalog
 
 CSM requests used: 26 on 11/9 (25 review pages plus one test page), on top of last night's 212 on 11/8. No block or rate-limit response. Wikipedia reads were spaced 5 seconds apart after one rate-limit reply at 1.7 seconds; I slowed down and nothing else was affected.
 
-Queue: 210 of 216 lists read; the other 6 are for a later night. Flags: new entries have no flags yet; they go in a separate pull request for review, per the 11/5 decision.
+Queue: 210 of 216 lists read; the other 6 are for a later night. Flags: the new entries went to master without flags; the flags are in pull request #176 (branch flags/2026-11-09-nightly) for review, per the 11/5 decision. No text bumps and no hold-outs in this batch. Not merged.
 
 Unusual: my session restarted several times during the night and the sandbox clock ran short, so I kept the batch to 9 instead of 15 and saved the CSM text locally before building entries.
 
