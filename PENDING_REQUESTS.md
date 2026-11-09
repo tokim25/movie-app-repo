@@ -367,3 +367,24 @@ Queue caveats. Titles are slug-derived placeholders. The catalog filter matches 
 Queue status: built false (6 lists to go). Flags PR: none, since no titles were added.
 
 Co-authored with Claude.
+
+11/9/2026 — Nightly catalog batch (scheduled). Added 9 titles, nums 1131–1139, to data-extra.js, all with a real CSM review (CSM ages 3 to 8; none held back for age or rating):
+- 1131 The Peanuts Movie (2015), CSM 4+, 88 min
+- 1132 Horton Hears a Who! (2008), CSM 4+, 86 min
+- 1133 The Book of Life (2014), CSM 7+, 95 min
+- 1134 Zootopia 2 (2025), CSM 8+, 108 min, linked to Zootopia (#13) in data-series.js
+- 1135 The Snail and the Whale (2019), CSM 3+, 30 min
+- 1136 Room on the Broom (2012), CSM 3+, 30 min, no poster (Wikipedia has none in its infobox)
+- 1137 Rudolph the Red-Nosed Reindeer (1964), CSM 3+, 52 min, no poster (the infobox image is a copyright notice, not a poster)
+- 1138 Frosty the Snowman (1969), CSM 3+, 25 min, poster is the title card
+- 1139 It's the Great Pumpkin, Charlie Brown (1966), CSM 4+, 25 min, poster is the title card
+
+Skipped and why: How the Grinch Stole Christmas (1966) is already in the catalog as #864, and my duplicate check missed it because the CSM title starts with "Dr. Seuss'". Zog and Zog and the Flying Doctors have no film page of their own on Wikipedia, so there is no runtime source; they can be retried if one turns up. Sixteen more titles had their CSM pages read and qualify (all age 9 or under); they are listed under "read" in tools/csm-sweep-queue.json for a later night.
+
+CSM requests used: 26 on 11/9 (25 review pages plus one test page), on top of last night's 212 on 11/8. No block or rate-limit response. Wikipedia reads were spaced 5 seconds apart after one rate-limit reply at 1.7 seconds; I slowed down and nothing else was affected.
+
+Queue: 210 of 216 lists read; the other 6 are for a later night. Flags: new entries have no flags yet; they go in a separate pull request for review, per the 11/5 decision.
+
+Unusual: my session restarted several times during the night and the sandbox clock ran short, so I kept the batch to 9 instead of 15 and saved the CSM text locally before building entries.
+
+Co-authored with Claude.

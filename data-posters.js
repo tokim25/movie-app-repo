@@ -1098,5 +1098,12 @@ const MOVIE_POSTERS = Object.freeze({
   1127: {"u":"https://upload.wikimedia.org/wikipedia/en/3/39/Small_Fry_poster.jpg","w":258,"h":387,"p":"Small Fry (film)"},
   1128: {"u":"https://upload.wikimedia.org/wikipedia/en/c/cd/Partysaurus_Rex_poster.jpg","w":262,"h":381,"p":"Partysaurus Rex"},
   1129: {"u":"https://upload.wikimedia.org/wikipedia/en/c/c9/Grow_%28film%29.jpg","w":259,"h":384,"p":"Grow (film)"},
-  1130: {"u":"https://upload.wikimedia.org/wikipedia/en/a/aa/Wildwood_2026_poster.jpg","w":260,"h":385,"p":"Wildwood (film)"}
+  1130: {"u":"https://upload.wikimedia.org/wikipedia/en/a/aa/Wildwood_2026_poster.jpg","w":260,"h":385,"p":"Wildwood (film)"},
+  1131: {"u":"https://upload.wikimedia.org/wikipedia/en/7/77/Peanuts_2015.jpg","w":260,"h":385,"p":"The Peanuts Movie"},
+  1132: {"u":"https://upload.wikimedia.org/wikipedia/en/8/8b/Horton_Hears_a_Who%21.jpg","w":261,"h":382,"p":"Horton Hears a Who! (film)"},
+  1133: {"u":"https://upload.wikimedia.org/wikipedia/en/6/61/The_Book_of_Life_%282014_film%29_poster.jpg","w":250,"h":328,"p":"The Book of Life (2014 film)"},
+  1134: {"u":"https://upload.wikimedia.org/wikipedia/en/6/6a/Zootopia_2_%282025_film%29.jpg","w":259,"h":384,"p":"Zootopia 2"},
+  1135: {"u":"https://upload.wikimedia.org/wikipedia/en/0/0f/The_Snail_and_the_Whale_%28film%29.jpg","w":273,"h":365,"p":"The Snail and the Whale (film)"},
+  1138: {"u":"https://upload.wikimedia.org/wikipedia/en/c/cc/FrostyTC69.png","w":362,"h":276,"p":"Frosty the Snowman (TV special)"},
+  1139: {"u":"https://upload.wikimedia.org/wikipedia/en/d/d0/GPCBtitlecard66.jpeg","w":365,"h":273,"p":"It's the Great Pumpkin, Charlie Brown"}
 });

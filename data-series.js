@@ -220,4 +220,5 @@ const MOVIE_PREREQUISITES = Object.freeze({
   1116: 1115,
   1120: 1119,
   1123: 1122,
+  1134: 13, // Zootopia 2 (2025) <- Zootopia (2016)
 });
