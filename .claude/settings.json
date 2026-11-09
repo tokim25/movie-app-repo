@@ -71,7 +71,10 @@
       "mcp__github__list_issues",
       "mcp__github__list_pull_requests",
       "mcp__github__pull_request_read",
-      "mcp__github__update_pull_request"
+      "mcp__github__update_pull_request",
+      "mcp__github__merge_pull_request",
+      "mcp__Claude_Code_Remote__delete_trigger",
+      "mcp__Vercel__create_project_env"
     ]
   }
 }
