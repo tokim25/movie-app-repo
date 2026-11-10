@@ -388,3 +388,26 @@ Queue: 210 of 216 lists read; the other 6 are for a later night. Flags: the new 
 Unusual: my session restarted several times during the night and the sandbox clock ran short, so I kept the batch to 9 instead of 15 and saved the CSM text locally before building entries.
 
 Co-authored with Claude.
+
+11/10/2026 — Nightly catalog batch (scheduled). Added 9 titles, nums 1140–1148, to data-extra.js, all with a real CSM review (CSM ages 4 to 8; none held back for age or rating):
+- 1140 The Cat in the Hat (2026), CSM 6+, 107 min, Warner Bros. Animation. This is the new release from 11/6 that the nightly run missed; CSM published its review on 11/1. addedVia: discovery.
+- 1141 Epic (2013), CSM 6+, 102 min
+- 1142 Klaus (2019), CSM 6+, 97 min
+- 1143 The Game Plan (2007), CSM 6+, 110 min
+- 1144 The Lorax (1972 TV special), CSM 5+, 24 min, no poster (Wikipedia's infobox has none). Not the 2012 film, which is still not in the catalog.
+- 1145 Missing Link (2019), CSM 8+, 94 min
+- 1146 Spookley the Square Pumpkin (2004), CSM 4+, 47 min
+- 1147 Xico's Journey (2020), CSM 8+, 86 min, Wikipedia page is "El camino de Xico"
+- 1148 Barbie: Princess Adventure (2020), CSM 5+, 72 min
+
+Skipped and why: The Cat in the Hat Knows a Lot About Christmas and About Halloween, Puffin Rock and the New Friends, The Daniel Tiger Movie, Curious George Swings into Spring and Dino Dana: The Movie all have real CSM reviews at age 3 to 5, but Wikipedia only has their series pages, so there is no runtime source for the film or special. All I Want for Christmas Is You matched the song page. Nimona is CSM 11+ with violence 4, so its flags would be held out; I left it for a human call. Details are under "skipped" in tools/csm-sweep-queue.json.
+
+CSM requests used: 18 review pages on 11/10, none blocked. Wikipedia: one rate-limit reply at 5-second spacing, then I backed off to 8 seconds.
+
+Queue: 210 of 216 lists read; the other 6 are still for a later night. About 7 more titles are under "read" and ready.
+
+Unusual: the nightly job has no new-release step, which is why The Cat in the Hat was missed; tokim25 asked on 11/10 why. I added The Cat in the Hat first tonight, but a standing new-release step is not in the nightly prompt yet.
+
+Flags: the new entries went to master without flags; the flags PR follows on branch flags/2026-11-10-nightly.
+
+Co-authored with Claude.

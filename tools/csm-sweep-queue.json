@@ -8318,7 +8318,16 @@
   "room-on-the-broom",
   "rudolph-the-red-nosed-reindeer",
   "frosty-the-snowman",
-  "its-the-great-pumpkin-charlie-brown"
+  "its-the-great-pumpkin-charlie-brown",
+  "the-cat-in-the-hat",
+  "epic",
+  "klaus",
+  "the-game-plan",
+  "dr-seuss-the-lorax",
+  "missing-link",
+  "spookley-the-square-pumpkin",
+  "xicos-journey",
+  "barbie-princess-adventure"
  ],
  "skipped": [
   {
@@ -8332,14 +8341,46 @@
   {
    "slug": "zog-and-the-flying-doctors",
    "reason": "no separate Wikipedia film page, so no runtime source; retry if a source turns up"
+  },
+  {
+   "slug": "the-cat-in-the-hat-knows-a-lot-about-christmas",
+   "reason": "CSM age 3, real special, but Wikipedia only has the series page, so no runtime source"
+  },
+  {
+   "slug": "the-cat-in-the-hat-knows-a-lot-about-halloween",
+   "reason": "CSM age 3, real special, but Wikipedia only has the series page, so no runtime source"
+  },
+  {
+   "slug": "dr-seusss-the-cat-in-the-hat",
+   "reason": "CSM age 3, 2012 item; not read closely and unclear if it is a film or special"
+  },
+  {
+   "slug": "puffin-rock-and-the-new-friends",
+   "reason": "CSM age 3; Wikipedia search returned only the series page, so no film runtime"
+  },
+  {
+   "slug": "the-daniel-tiger-movie-wont-you-be-our-neighbor",
+   "reason": "CSM age 3; Wikipedia search returned only the series page, so no film runtime"
+  },
+  {
+   "slug": "curious-george-swings-into-spring",
+   "reason": "CSM age 3; Wikipedia search returned only the series page, so no film runtime"
+  },
+  {
+   "slug": "dino-dana-the-movie",
+   "reason": "CSM age 5; Wikipedia search returned only the series page, so no film runtime"
+  },
+  {
+   "slug": "all-i-want-for-christmas-is-you",
+   "reason": "CSM age 4; Wikipedia search matched the song page, not the film"
+  },
+  {
+   "slug": "nimona",
+   "reason": "CSM age 11, violence 4, so its flags would be held out; not added yet"
   }
  ],
  "notes": "210 of 216 lists read (the remaining 6 are re-found from the sitemap next time, one request). Score = how many lists read so far include the title. Titles are slug-derived placeholders. The catalog filter at crawl time matched on title text only, so already-catalogued films under different spellings can still appear; check each against every data-*.js file (match on key words, not just the full title) before reading its CSM page. Many entries are adult films, documentaries or concerts; they drop out at the CSM age check. \"read\" lists titles whose CSM page was read on 11/9 and qualify; they still need Wikipedia facts, an entry and flags.",
  "read": [
-  {
-   "slug": "puffin-rock-and-the-new-friends",
-   "csmAge": 3
-  },
   {
    "slug": "blippis-big-dino-adventure",
    "csmAge": 4
@@ -8347,14 +8388,6 @@
   {
    "slug": "billy-molly-an-otter-love-story",
    "csmAge": 6
-  },
-  {
-   "slug": "curious-george-swings-into-spring",
-   "csmAge": 3
-  },
-  {
-   "slug": "all-i-want-for-christmas-is-you",
-   "csmAge": 4
   },
   {
    "slug": "bob-the-builder-the-legend-of-the-golden-hammer",
@@ -8369,36 +8402,12 @@
    "csmAge": 4
   },
   {
-   "slug": "barbie-princess-adventure",
-   "csmAge": 5
-  },
-  {
-   "slug": "dino-dana-the-movie",
-   "csmAge": 5
-  },
-  {
    "slug": "paw-patrol-mighty-pups",
    "csmAge": 3
   },
   {
-   "slug": "spookley-the-square-pumpkin",
-   "csmAge": 4
-  },
-  {
-   "slug": "the-daniel-tiger-movie-wont-you-be-our-neighbor",
-   "csmAge": 3
-  },
-  {
-   "slug": "xicos-journey",
-   "csmAge": 8
-  },
-  {
    "slug": "chupa",
    "csmAge": 9
-  },
-  {
-   "slug": "the-game-plan",
-   "csmAge": 6
   }
  ]
 }

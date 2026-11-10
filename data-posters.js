@@ -1105,5 +1105,13 @@ const MOVIE_POSTERS = Object.freeze({
   1134: {"u":"https://upload.wikimedia.org/wikipedia/en/6/6a/Zootopia_2_%282025_film%29.jpg","w":259,"h":384,"p":"Zootopia 2"},
   1135: {"u":"https://upload.wikimedia.org/wikipedia/en/0/0f/The_Snail_and_the_Whale_%28film%29.jpg","w":273,"h":365,"p":"The Snail and the Whale (film)"},
   1138: {"u":"https://upload.wikimedia.org/wikipedia/en/c/cc/FrostyTC69.png","w":362,"h":276,"p":"Frosty the Snowman (TV special)"},
-  1139: {"u":"https://upload.wikimedia.org/wikipedia/en/d/d0/GPCBtitlecard66.jpeg","w":365,"h":273,"p":"It's the Great Pumpkin, Charlie Brown"}
+  1139: {"u":"https://upload.wikimedia.org/wikipedia/en/d/d0/GPCBtitlecard66.jpeg","w":365,"h":273,"p":"It's the Great Pumpkin, Charlie Brown"},
+  1140: {"u":"https://upload.wikimedia.org/wikipedia/en/e/e4/The_Cat_in_the_Hat_%282026_film_poster%29.png","w":260,"h":385,"p":"The Cat in the Hat (2026 film)"},
+  1141: {"u":"https://upload.wikimedia.org/wikipedia/en/b/be/Epic_%282013_film%29_poster.jpg","w":259,"h":383,"p":"Epic (2013 film)"},
+  1142: {"u":"https://upload.wikimedia.org/wikipedia/en/2/26/Klaus_poster.jpeg","w":259,"h":383,"p":"Klaus (film)"},
+  1143: {"u":"https://upload.wikimedia.org/wikipedia/en/a/a6/TheGamePlanposter.jpg","w":260,"h":384,"p":"The Game Plan (film)"},
+  1145: {"u":"https://upload.wikimedia.org/wikipedia/en/4/4b/Missing_Link_2019_poster.png","w":259,"h":384,"p":"Missing Link (2019 film)"},
+  1146: {"u":"https://upload.wikimedia.org/wikipedia/en/4/40/Poster_of_the_movie_Spookley_the_Square_Pumpkin.jpg","w":263,"h":379,"p":"Spookley the Square Pumpkin"},
+  1147: {"u":"https://upload.wikimedia.org/wikipedia/en/0/0b/El_Camino_de_Xico_poster.jpg","w":264,"h":377,"p":"El camino de Xico"},
+  1148: {"u":"https://upload.wikimedia.org/wikipedia/en/f/f5/Barbie_Princess_Adventure_Film.jpg","w":316,"h":316,"p":"Barbie: Princess Adventure"}
 });
