@@ -74,7 +74,27 @@
       "mcp__github__update_pull_request",
       "mcp__github__merge_pull_request",
       "mcp__Claude_Code_Remote__delete_trigger",
-      "mcp__Vercel__create_project_env"
+      "mcp__Vercel__create_project_env",
+      "mcp__Vercel__create_sandboxes_sessions_by_session_id_snapshot_v2",
+      "mcp__Vercel__create_sandboxes_sessions_by_session_id_snapshot_v3",
+      "mcp__Vercel__list_deployment_files",
+      "mcp__Vercel__get_deployment_file_contents",
+      "mcp__Vercel__list_deployment_events",
+      "mcp__Vercel__list_project_domains",
+      "mcp__Vercel__get_project_domain",
+      "mcp__Vercel__get_project_env",
+      "mcp__Vercel__list_project_custom_environments",
+      "mcp__Vercel__get_custom_environment",
+      "mcp__Vercel__list_flags",
+      "mcp__Vercel__list_flags_v2",
+      "mcp__Vercel__get_flag",
+      "mcp__Vercel__get_firewall_config",
+      "mcp__Vercel__status",
+      "mcp__Vercel__get_deployment_feature_flags",
+      "mcp__Vercel__edit_project_env",
+      "mcp__Vercel__update_project",
+      "mcp__Vercel__create_flag",
+      "mcp__Vercel__update_flag"
     ]
   }
 }
