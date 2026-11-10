@@ -435,5 +435,134 @@
    "on": "2026-11-09"
   },
   "rule": 1
+ },
+ "1140": {
+  "csm": {
+   "v": 3,
+   "s": 1,
+   "l": 2,
+   "d": 0,
+   "age": 6,
+   "src": "page",
+   "on": "2026-11-10"
+  },
+  "rule": 1
+ },
+ "1141": {
+  "csm": {
+   "v": 3,
+   "s": 1,
+   "l": 1,
+   "d": 0,
+   "age": 6,
+   "src": "page",
+   "on": "2026-11-10"
+  },
+  "rule": 1
+ },
+ "1142": {
+  "csm": {
+   "v": 3,
+   "s": 1,
+   "l": 2,
+   "d": 1,
+   "age": 6,
+   "src": "page",
+   "on": "2026-11-10"
+  },
+  "rule": 1
+ },
+ "1143": {
+  "csm": {
+   "v": 3,
+   "s": 0,
+   "l": 0,
+   "d": 3,
+   "age": 6,
+   "src": "page",
+   "on": "2026-11-10"
+  },
+  "rule": 1
+ },
+ "1144": {
+  "csm": {
+   "v": 1,
+   "s": 0,
+   "l": 0,
+   "d": 1,
+   "age": 5,
+   "src": "page",
+   "on": "2026-11-10"
+  },
+  "rule": 1,
+  "adj": {
+   "violence": {
+    "kind": "depicted",
+    "quote": "fast-spinning hatchets that come very close to decapitating the Lorax",
+    "why": "Shown on screen: a Seussian hatchet machine comes close to decapitating the Lorax, more intense than the raw CSM violence score alone conveys."
+   }
+  }
+ },
+ "1145": {
+  "csm": {
+   "v": 3,
+   "s": 2,
+   "l": 1,
+   "d": 2,
+   "age": 8,
+   "src": "page",
+   "on": "2026-11-10"
+  },
+  "rule": 1,
+  "adj": {
+   "violence": {
+    "kind": "depicted",
+    "quote": "a villain's threat to a grandmother and her infant grandchild is terrifying",
+    "why": "On-screen gun violence and a pub brawl culminate in a villain's threat to an infant and grandmother that the review itself calls terrifying."
+   }
+  }
+ },
+ "1146": {
+  "csm": {
+   "v": 1,
+   "s": 0,
+   "l": 0,
+   "d": 0,
+   "age": 4,
+   "src": "page",
+   "on": "2026-11-10"
+  },
+  "rule": 1
+ },
+ "1147": {
+  "csm": {
+   "v": 3,
+   "s": 0,
+   "l": 1,
+   "d": 0,
+   "age": 8,
+   "src": "page",
+   "on": "2026-11-10"
+  },
+  "rule": 1,
+  "adj": {
+   "violence": {
+    "kind": "depicted",
+    "quote": "an evil scorpion monster pierces a little girl with its tail",
+    "why": "On-screen depiction of a monster impaling a child, plus explicit scary sounds and dark visuals, beyond what the base score alone conveys."
+   }
+  }
+ },
+ "1148": {
+  "csm": {
+   "v": 1,
+   "s": 1,
+   "l": 0,
+   "d": 0,
+   "age": 5,
+   "src": "page",
+   "on": "2026-11-10"
+  },
+  "rule": 1
  }
 }
