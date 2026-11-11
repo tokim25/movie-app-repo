@@ -1067,6 +1067,17 @@ function reportError(err){
     border-bottom:1px solid var(--line);
   }
   .detail.open{ display:block; }
+  .detailGuide{
+    margin-top:12px;
+    padding:12px 14px;
+    border-radius:10px;
+    background:var(--bg-sub);
+    font-size:15px;
+    line-height:1.55;
+  }
+  .newSection .detailGuide{ background:var(--surface); }
+  .detailGuide p{ margin:0; }
+  .detailGuide p + p{ margin-top:8px; }
 
   .empty{
     text-align:center;
@@ -5548,6 +5559,53 @@ function movieGuidanceFor(num){
   return MOVIE_GUIDANCE[String(num)] || null;
 }
 
+// Reads the before/after notes out of a movie's Pre-Show program as plain
+// text, so Shelf can show them without loading the OpenUI renderer. The
+// programs follow the fixed template in the movie-watchlist-updater skill:
+// an optional Callout("warning", title, text) for something to prep for, a
+// "Gentle. Nothing to prep for." note, and an "Ask after: ..." TextContent.
+function preShowNotes(movie){
+  const guidance = movieGuidanceFor(movie.num);
+  const code = guidance && typeof guidance.preShow === 'string' ? guidance.preShow : '';
+  const notes = { before: null, gentle: false, askAfter: null };
+  if(!code) return notes;
+  const str = '"(?:[^"\\\\]|\\\\.)*"';
+  try{
+    const callout = new RegExp(`Callout\\("warning", (${str}), (${str})\\)`).exec(code);
+    if(callout) notes.before = { title: JSON.parse(callout[1]), text: JSON.parse(callout[2]) };
+    for(const match of code.matchAll(new RegExp(`TextContent\\((${str})`, 'g'))){
+      const text = JSON.parse(match[1]);
+      if(text.startsWith('Ask after:')) notes.askAfter = text.slice('Ask after:'.length).trim();
+      else if(text.startsWith('Gentle.')) notes.gentle = true;
+    }
+  }catch(err){
+    return { before: null, gentle: false, askAfter: null };
+  }
+  return notes;
+}
+
+function fillMovieDetail(detail, m, isOpen){
+  detail.textContent = m.full;
+  if(!isOpen) return;
+  const notes = preShowNotes(m);
+  if(!notes.before && !notes.gentle && !notes.askAfter) return;
+
+  const guide = document.createElement('div');
+  guide.className = 'detailGuide';
+  const addLine = (label, text) => {
+    const line = document.createElement('p');
+    const strong = document.createElement('strong');
+    strong.textContent = `${label} `;
+    line.appendChild(strong);
+    line.appendChild(document.createTextNode(text));
+    guide.appendChild(line);
+  };
+  if(notes.before) addLine('Before you watch:', `${notes.before.title.replace(/[.!?]$/, '')}. ${notes.before.text}`);
+  else if(notes.gentle) addLine('Before you watch:', 'Gentle. Nothing to prep for.');
+  if(notes.askAfter) addLine('Ask after:', notes.askAfter);
+  detail.appendChild(guide);
+}
+
 // ---- Pre-show. The OpenUI renderer is self-hosted (CSP only allows
 // same-origin scripts, and sw.js only caches same-origin) and pinned to
 // one exact version. It's ~3.2 MB, so it loads only when a pick that has
@@ -6063,7 +6121,7 @@ function appendNewRow(container, idx, detailScope){
   detail.id = `shelf-${detailScope}-detail-${m.num}`;
   detail.className = 'detail safeBetDetail' + (openDetail === idx ? ' open' : '') + (poster ? '' : ' noPosterDetail');
   detail.hidden = openDetail !== idx;
-  detail.textContent = m.full;
+  fillMovieDetail(detail, m, openDetail === idx);
   container.appendChild(detail);
 }
 
@@ -7011,7 +7069,7 @@ function render(){
     detail.id = `shelf-list-detail-${m.num}`;
     detail.className = 'detail' + (openDetail === idx ? ' open' : '') + (poster ? '' : ' noPosterDetail');
     detail.hidden = openDetail !== idx;
-    detail.textContent = m.full;
+    fillMovieDetail(detail, m, openDetail === idx);
     listEl.appendChild(detail);
   });
 
