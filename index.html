@@ -439,17 +439,20 @@ function reportError(err){
     margin:0 auto;
   }
   /* Tab names are navigation, not voice, and at clamp(34-48px) the question
-     out-sized its own answer roughly 2:1. Sans and smaller, so the pick
-     title below it reads as the loudest thing on the screen. */
+     out-sized its own answer roughly 2:1. They share the pick title's serif
+     so every screen speaks in one voice, but stay smaller than it, so the
+     pick still reads as the loudest thing on the screen. */
   h1{
-    font-size:clamp(22px,4.5vw,26px);
+    font-family:"Newsreader", Georgia, "Times New Roman", serif;
+    font-size:clamp(23px,4.8vw,27px);
     font-weight:600;
     letter-spacing:0;
     margin:0 0 8px;
     color:var(--ink);
     text-wrap:balance;
   }
-  .titleKeepTogether{
+  .titleKeepTogether,
+  .nowrap{
     white-space:nowrap;
   }
   .subtitle{
@@ -542,6 +545,8 @@ function reportError(err){
     gap:10px;
     flex-wrap:wrap;
   }
+  #browseScreen .controls{ padding:0; }
+  #browseScreen .searchStatusRow{ margin-left:0; margin-right:0; }
   .controls input[type="text"]{
     flex:1 1 180px;
     background:var(--bg-sub);
@@ -823,7 +828,7 @@ function reportError(err){
 
   .poster{
     position:relative;
-    width:42px;
+    width:52px;
     aspect-ratio:2 / 3;
     border-radius:6px;
     overflow:hidden;
@@ -859,7 +864,7 @@ function reportError(err){
     font-weight:600;
   }
   .poster.safeBetPoster{
-    width:38px;
+    width:48px;
   }
   .posterZoom{
     display:block;
@@ -981,10 +986,11 @@ function reportError(err){
   .star.on{ color:var(--favorite); }
   .info{ flex:1; min-width:0; }
   .title{
+    font-family:"Newsreader", Georgia, "Times New Roman", serif;
     font-weight:600;
-    font-size:17px;
-    line-height:1.35;
-    letter-spacing:-0.01em;
+    font-size:19px;
+    line-height:1.25;
+    letter-spacing:-0.005em;
     cursor:pointer;
   }
   .meta{
@@ -1670,11 +1676,9 @@ function reportError(err){
     text-align:left;
   }
   .pickCard{
-    margin-top:16px;
-    padding:16px;
-    border-radius:15px;
-    background:var(--bg-sub);
-    border:1px solid var(--line);
+    margin-top:18px;
+    padding:18px 0 0;
+    border-top:1px solid var(--line);
   }
   .pickCard.watched{
     opacity:0.62;
@@ -1866,9 +1870,7 @@ function reportError(err){
     cursor:pointer;
   }
   .familyEditBtn.primary{
-    background:var(--accent);
     border-color:var(--accent);
-    color:var(--on-accent);
   }
   .familySummary{
     margin-top:11px;
@@ -2677,11 +2679,9 @@ function reportError(err){
     cursor:pointer;
   }
   .recommendationEvidence{
-    margin-top:12px;
-    padding:12px;
-    border-radius:12px;
-    background:var(--surface);
-    border:1px solid var(--line);
+    margin-top:14px;
+    padding:14px 0 0;
+    border-top:1px solid var(--line);
     color:var(--ink-soft);
     font-size:14px;
     line-height:1.45;
@@ -2864,11 +2864,11 @@ function reportError(err){
       gap:10px;
     }
     .poster{
-      width:36px;
-      border-radius:4px;
+      width:46px;
+      border-radius:5px;
     }
     .poster.safeBetPoster{
-      width:34px;
+      width:44px;
     }
     .num{
       width:20px;
@@ -4310,7 +4310,11 @@ function createMeta(idx, m, detailScope){
   const csmBadge = document.createElement('span');
   csmBadge.className = 'badge csm';
   csmBadge.title = 'Common Sense Media';
-  csmBadge.textContent = `${m.studio} · CSM ${m.ca}`;
+  csmBadge.textContent = `${m.studio} · `;
+  const csmAge = document.createElement('span');
+  csmAge.className = 'nowrap';
+  csmAge.textContent = `CSM ${m.ca}`;
+  csmBadge.appendChild(csmAge);
   facts.appendChild(csmBadge);
 
   if(Number.isInteger(m.runtimeMinutes) && m.runtimeMinutes > 0){
@@ -4401,6 +4405,12 @@ function clearToast(){
   toastEl.textContent = '';
 }
 
+// "Title (year)", unless the title already carries its year, as with
+// "The Lorax (1972 TV special)".
+function displayTitle(m){
+  return m.y && !String(m.t).includes(String(m.y)) ? `${m.t} (${m.y})` : m.t;
+}
+
 function createPoster(m, className, isNew){
   const posters = typeof MOVIE_POSTERS !== 'undefined' ? MOVIE_POSTERS : {};
   const poster = posters[m.num];
@@ -4463,7 +4473,7 @@ function openPosterViewer(m, url){
   const img = document.getElementById('posterViewerImg');
   img.src = url;
   img.alt = `Poster for ${m.t}`;
-  document.getElementById('posterViewerTitle').textContent = `${m.t} (${m.y})`;
+  document.getElementById('posterViewerTitle').textContent = `${displayTitle(m)}`;
   viewer.showModal();
 }
 
@@ -5437,7 +5447,7 @@ function showTonightPick(candidateOverride){
   document.getElementById('tonightPickCard').classList.toggle('watched', markValue(state.checked, idx));
   updateTonightWatchBtn();
   verdictEl.textContent = tonightVerdictLabel(verdict.verdict);
-  document.getElementById('tonightPickTitle').textContent = `${movie.t} (${movie.y})`;
+  document.getElementById('tonightPickTitle').textContent = `${displayTitle(movie)}`;
   // Only stage real art. createPoster() falls back to a bordered "Movie/year"
   // box, which reads fine at Shelf's 42px but becomes a large empty rectangle
   // at hero size -- worse than no poster at all for the ~14 catalogue titles
@@ -5517,7 +5527,7 @@ function showTonightPick(candidateOverride){
   updateTonightWatchAnywayBtn();
   document.getElementById('tonightPickCard').style.display = 'block';
   document.getElementById('homeScreen').classList.add('hasPick');
-  document.getElementById('tonightPickStatus').textContent = `${tonightVerdictLabel(verdict.verdict)}: ${movie.t} (${movie.y}). ${copy[0]}`;
+  document.getElementById('tonightPickStatus').textContent = `${tonightVerdictLabel(verdict.verdict)}: ${displayTitle(movie)}. ${copy[0]}`;
   // resetTonightSkips() (which every Change-panel handler calls to
   // invalidate the current pick) is the matching place that brings it back.
   setFindPickMode('skip');
@@ -5724,7 +5734,7 @@ function checkTonightWorry(worry){
     const tr = document.createElement('tr');
     const titleCell = document.createElement('th');
     titleCell.scope = 'row';
-    titleCell.textContent = `${movie.t} (${movie.y})`;
+    titleCell.textContent = `${displayTitle(movie)}`;
     const tagCell = document.createElement('td');
     const tag = document.createElement('span');
     tag.className = `worryTag ${level || 'unknown'}`;
@@ -6044,7 +6054,7 @@ function appendNewRow(container, idx, detailScope){
   info.className = 'info';
   const title = document.createElement('div');
   title.className = 'title';
-  title.textContent = `${m.t} (${m.y})`;
+  title.textContent = `${displayTitle(m)}`;
   title.onclick = event => toggleDetail(idx, event.currentTarget);
   const tag = document.createElement('div');
   tag.className = 'newTag';
@@ -6977,7 +6987,7 @@ function render(){
     info.className = 'info';
     const title = document.createElement('div');
     title.className = 'title';
-    title.textContent = `${m.t} (${m.y})`;
+    title.textContent = `${displayTitle(m)}`;
     title.onclick = event => toggleDetail(idx, event.currentTarget);
     const meta = createMeta(idx, m, 'list');
     info.appendChild(title);
