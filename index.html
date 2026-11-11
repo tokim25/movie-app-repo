@@ -383,9 +383,13 @@ function reportError(err){
     white-space:nowrap !important;
     border:0 !important;
   }
+  /* touch-action on the root reaches every element, so a quick double tap
+     anywhere (a title, the gap beside an icon, a row that re-renders between
+     the two taps) never triggers iOS double-tap zoom. Pinch zoom still works. */
   html{
     -webkit-text-size-adjust:100%;
     text-size-adjust:100%;
+    touch-action:manipulation;
   }
   html,body{margin:0;padding:0;}
   input,
