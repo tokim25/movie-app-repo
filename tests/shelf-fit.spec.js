@@ -63,7 +63,7 @@ test('searching Shelf hides the New this week teaser', async ({ page }) => {
   // parent was mid-search.
   //
   // The clock is pinned just after the catalog's real most-recent `addedAt`
-  // (NEW_WINDOW_DAYS is 7 in index.html) instead of relying on real
+  // (new means added this calendar week or last) instead of relying on real
   // wall-clock time: this test started failing in CI on 2026-10-02, on runs
   // that never touched this code, once the real most-recent addedAt
   // (2026-09-25) aged past the 7-day window mid-run -- a ticking time bomb,

@@ -317,13 +317,14 @@ example `wikidata:Q12345` or `wikipedia:Film title`), and `runtimeVerifiedAt`
 Check for accidental duplicate `num` values and duplicate titles within the new
 batch itself, not just against the existing catalog.
 
-**Also set going forward (added 2026-08-24, powers the "New this week" section
-in the app):** `addedAt`, today's date as `"YYYY-MM-DD"`, and `addedVia`, either
+**Also set going forward (added 2026-08-24, powers the Shelf's "What's new"
+teaser and the What's new screen, which group titles by the calendar week
+they were added, this week and last week):** `addedAt`, today's date as `"YYYY-MM-DD"`, and `addedVia`, either
 `"request"` (came from the movie-request Google Sheet) or `"discovery"` (came
 from the weekly new-release scan). Field order convention: place both right
 after `srcUrl` and before `source`. Older entries don't have these fields —
 don't backfill them; a missing `addedAt` just means the movie never shows in
-the "New this week" section, which is the correct behavior for anything not
+What's new, which is the correct behavior for anything not
 actually added recently. Run `node scripts/validate-data.mjs` after writing —
 it checks `addedAt` is a real date and `addedVia` is one of the two allowed
 values, among everything else it already checks.

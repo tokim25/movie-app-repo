@@ -2496,6 +2496,24 @@ function reportError(err){
     color:var(--ink-soft);
     margin-top:2px;
   }
+  #whatsNewScreen .screenTopBar{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:8px;
+  }
+  .whatsNewBack{
+    color:var(--accent-text);
+    font-size:15px;
+    min-height:44px;
+  }
+  .whatsNewIntro{
+    color:var(--ink-soft);
+    font-size:14px;
+    margin:0 0 4px;
+  }
+  .whatsNewWeek h2.newHeader{
+    font-size:12px;
+  }
   .newSeeAll{
     display:block;
     width:100%;
@@ -3051,6 +3069,15 @@ function reportError(err){
   <div class="empty" id="emptyMsg" style="display:none;">No movies match your search.</div>
 </main>
 
+<main id="whatsNewScreen" class="screenWrap" style="display:none;" hidden aria-labelledby="whatsNewScreenHeading">
+  <div class="screenTopBar">
+    <button type="button" class="linkBtn whatsNewBack" id="whatsNewBackBtn">← Shelf</button>
+    <h1 id="whatsNewScreenHeading" tabindex="-1">What's new</h1>
+  </div>
+  <p class="whatsNewIntro">Movies added to the shelf this week and last week, newest first.</p>
+  <div id="whatsNewList"></div>
+</main>
+
 <main id="familyScreen" class="screenWrap" style="display:none;" hidden aria-labelledby="familyScreenHeading">
   <div class="screenTopBar">
     <h1 id="familyScreenHeading" tabindex="-1">Family</h1>
@@ -3234,7 +3261,7 @@ function reportError(err){
     <div class="filterField"><label for="studioFilter">Studio</label><select id="studioFilter"><option value="">Any studio</option></select></div>
   </div>
   <div class="filterRow">
-    <button id="newToggleBtn" class="priorityToggle newToggle" aria-pressed="false">New this week</button>
+    <button id="newToggleBtn" class="priorityToggle newToggle" aria-pressed="false">New (last 2 weeks)</button>
     <button id="priorityToggleBtn" class="priorityToggle" aria-pressed="false">&#9733; Want to watch</button>
   </div>
   <div class="filterRow">
@@ -3794,23 +3821,57 @@ function decadeOf(y){
   return Math.floor(n / 10) * 10;
 }
 
-const NEW_WINDOW_DAYS = 7;
 const NEW_TEASER_CAP = 5;
 const RECENT_RELEASE_YEAR_WINDOW = 3;
 
+function localDateKey(date){
+  const pad = n => String(n).padStart(2, '0');
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+}
+
+// Calendar weeks start on Monday, in the viewer's local time. "New" means
+// added this week or last week, so the Shelf teaser, the filter toggle and
+// the What's new screen always agree on the same set.
+function newWeekRanges(){
+  const today = new Date(Date.now());
+  const monday = new Date(today.getFullYear(), today.getMonth(), today.getDate() - ((today.getDay() + 6) % 7));
+  const lastMonday = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate() - 7);
+  const lastSunday = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate() - 1);
+  const sunday = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate() + 6);
+  return [
+    { label: 'This week', start: monday, end: sunday, from: localDateKey(monday), to: localDateKey(today) },
+    { label: 'Last week', start: lastMonday, end: lastSunday, from: localDateKey(lastMonday), to: localDateKey(lastSunday) }
+  ];
+}
+
 function isRecent(m){
   if(!m.addedAt) return false;
-  const added = new Date(m.addedAt + 'T00:00:00');
-  if(isNaN(added.getTime())) return false;
-  const diffDays = (Date.now() - added.getTime()) / 86400000;
-  return diffDays >= 0 && diffDays <= NEW_WINDOW_DAYS;
+  const [thisWeek, lastWeek] = newWeekRanges();
+  return m.addedAt >= lastWeek.from && m.addedAt <= thisWeek.to;
+}
+
+function compareByAddedAtDesc(a, b){
+  return (MOVIES[b].addedAt || '').localeCompare(MOVIES[a].addedAt || '');
 }
 
 function getNewIndices(){
   return MOVIES
     .map((m, i) => i)
     .filter(i => isRecent(MOVIES[i]))
-    .sort((a, b) => (MOVIES[b].addedAt || '').localeCompare(MOVIES[a].addedAt || ''));
+    .sort(compareByAddedAtDesc);
+}
+
+function getNewIndicesByWeek(){
+  return newWeekRanges().map(week => ({
+    ...week,
+    indices: MOVIES
+      .map((m, i) => i)
+      .filter(i => {
+        const added = MOVIES[i].addedAt;
+        return added && added >= week.from && added <= week.to;
+      })
+      .sort(compareByAddedAtDesc)
+  }));
 }
 
 function latestCatalogReleaseYear(){
@@ -4572,7 +4633,7 @@ function focusPreservingRerender(idx, rerender){
   }
   const activeIdx = role && active.dataset.idx !== undefined ? Number(active.dataset.idx) : null;
   const container = role
-    ? (active.closest('.newRow') ? '#newSection' : active.closest('li.row') ? '#list' : null)
+    ? (active.closest('#whatsNewList') ? '#whatsNewList' : active.closest('.newRow') ? '#newSection' : active.closest('li.row') ? '#list' : null)
     : null;
 
   rerender();
@@ -4654,19 +4715,9 @@ function browseStudio(studio){
 }
 
 function browseNew(){
-  decadeFilter = ''; ageFilter = ''; genreFilter = ''; studioFilter = ''; priorityOnly = false; hideAboveSettings = false; query = '';
-  document.getElementById('decadeFilter').value = '';
-  document.getElementById('ageFilter').value = '';
-  document.getElementById('genreFilter').value = '';
-  document.getElementById('studioFilter').value = '';
-  document.getElementById('search').value = '';
-  document.getElementById('priorityToggleBtn').classList.remove('on');
-  document.getElementById('hideAboveSettingsBtn').classList.remove('on');
-  sortMode = 'year';
-  document.getElementById('sortMode').value = sortMode;
-  newOnly = true;
-  document.getElementById('newToggleBtn').classList.add('on');
-  showScreen('browse');
+  showScreen('whatsNew');
+  window.scrollTo(0, 0);
+  document.getElementById('whatsNewScreenHeading').focus();
 }
 
 function createChild(name, rawAge, id){
@@ -5834,7 +5885,7 @@ function renderTonightKidChoices(){
 // hand-written functions, showHomeScreen()/showLegacyScreen(), where the
 // second only ever removed Home's "on" class and never gave Browse/More
 // their own, and both tabs fell back to the same single legacy view).
-const SCREENS = ['setup', 'home', 'browse', 'family'];
+const SCREENS = ['setup', 'home', 'browse', 'whatsNew', 'family'];
 let screens = {};
 let tabs = {};
 
@@ -5916,6 +5967,7 @@ function renderCurrentView(){
   renderNewSection();
   renderChildren();
   renderTonightKidChoices();
+  if(currentScreen === 'whatsNew') renderWhatsNew();
   if(currentScreen === 'browse') render();
   else updateStats();
 }
@@ -5946,68 +5998,100 @@ function renderNewSection(){
 
   const header = document.createElement('p');
   header.className = 'newHeader';
-  header.textContent = indices.length > NEW_TEASER_CAP
-    ? `New this week (${indices.length})`
-    : 'New this week';
+  header.textContent = `What's new (${indices.length})`;
   section.appendChild(header);
 
-  const teaserIndices = indices.slice(0, NEW_TEASER_CAP);
-  teaserIndices.forEach(idx=>{
-    const m = MOVIES[idx];
-    const isChecked = markValue(state.checked, idx);
-    const isPriority = markValue(state.priority, idx);
+  indices.slice(0, NEW_TEASER_CAP).forEach(idx => appendNewRow(section, idx, 'new'));
 
-    const row = document.createElement('div');
-    row.className = 'newRow';
+  const seeAll = document.createElement('button');
+  seeAll.type = 'button';
+  seeAll.className = 'newSeeAll';
+  seeAll.textContent = `See all ${indices.length} by week →`;
+  seeAll.onclick = () => browseNew();
+  section.appendChild(seeAll);
+}
 
-    const check = document.createElement('button');
-    check.className = 'check' + (isChecked ? ' on' : '');
-    check.setAttribute('aria-label', isChecked ? `Mark ${m.t} unwatched` : `Mark ${m.t} watched`);
-    check.setAttribute('aria-pressed', isChecked ? 'true' : 'false');
-    check.dataset.idx = idx;
-    check.onclick = () => toggleCheck(idx);
+function appendNewRow(container, idx, detailScope){
+  const m = MOVIES[idx];
+  const isChecked = markValue(state.checked, idx);
+  const isPriority = markValue(state.priority, idx);
 
-    const star = createStarButton(idx, m, isPriority);
+  const row = document.createElement('div');
+  row.className = 'newRow';
 
-    const poster = createPoster(m, 'safeBetPoster', true);
+  const check = document.createElement('button');
+  check.className = 'check' + (isChecked ? ' on' : '');
+  check.setAttribute('aria-label', isChecked ? `Mark ${m.t} unwatched` : `Mark ${m.t} watched`);
+  check.setAttribute('aria-pressed', isChecked ? 'true' : 'false');
+  check.dataset.idx = idx;
+  check.onclick = () => toggleCheck(idx);
 
-    const info = document.createElement('div');
-    info.className = 'info';
-    const title = document.createElement('div');
-    title.className = 'title';
-    title.textContent = `${m.t} (${m.y})`;
-    title.onclick = () => toggleDetail(idx);
-    const tag = document.createElement('div');
-    tag.className = 'newTag';
-    tag.textContent = m.addedVia === 'request' ? 'By request' : 'New release';
-    const meta = createMeta(idx, m, 'new');
-    info.appendChild(title);
-    info.appendChild(tag);
-    info.appendChild(meta);
-    const fitSignals = createFitSignals(idx);
-    if(fitSignals) info.appendChild(fitSignals);
+  const star = createStarButton(idx, m, isPriority);
 
-    row.appendChild(check);
-    row.appendChild(star);
-    if(poster) row.appendChild(poster);
-    row.appendChild(info);
-    section.appendChild(row);
+  const poster = createPoster(m, 'safeBetPoster', true);
 
-    const detail = document.createElement('div');
-    detail.id = `shelf-new-detail-${m.num}`;
-    detail.className = 'detail safeBetDetail' + (openDetail === idx ? ' open' : '') + (poster ? '' : ' noPosterDetail');
-    detail.hidden = openDetail !== idx;
-    detail.textContent = m.full;
-    section.appendChild(detail);
+  const info = document.createElement('div');
+  info.className = 'info';
+  const title = document.createElement('div');
+  title.className = 'title';
+  title.textContent = `${m.t} (${m.y})`;
+  title.onclick = () => toggleDetail(idx);
+  const tag = document.createElement('div');
+  tag.className = 'newTag';
+  tag.textContent = m.addedVia === 'request' ? 'By request' : 'New release';
+  const meta = createMeta(idx, m, detailScope);
+  info.appendChild(title);
+  info.appendChild(tag);
+  info.appendChild(meta);
+  const fitSignals = createFitSignals(idx);
+  if(fitSignals) info.appendChild(fitSignals);
+
+  row.appendChild(check);
+  row.appendChild(star);
+  if(poster) row.appendChild(poster);
+  row.appendChild(info);
+  container.appendChild(row);
+
+  const detail = document.createElement('div');
+  detail.id = `shelf-${detailScope}-detail-${m.num}`;
+  detail.className = 'detail safeBetDetail' + (openDetail === idx ? ' open' : '') + (poster ? '' : ' noPosterDetail');
+  detail.hidden = openDetail !== idx;
+  detail.textContent = m.full;
+  container.appendChild(detail);
+}
+
+function formatWeekRange(start, end){
+  const sameMonth = start.getMonth() === end.getMonth();
+  const startText = start.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+  const endText = end.toLocaleDateString(undefined, sameMonth ? { day: 'numeric' } : { month: 'short', day: 'numeric' });
+  return `${startText}–${endText}`;
+}
+
+function renderWhatsNew(){
+  const list = document.getElementById('whatsNewList');
+  list.replaceChildren();
+  getNewIndicesByWeek().forEach((week, i) => {
+    const group = document.createElement('section');
+    group.className = 'newSection whatsNewWeek';
+    const headingId = `whatsNewWeek${i}`;
+    group.setAttribute('aria-labelledby', headingId);
+
+    const heading = document.createElement('h2');
+    heading.className = 'newHeader';
+    heading.id = headingId;
+    heading.textContent = `${week.label} · ${formatWeekRange(week.start, week.end)} (${week.indices.length})`;
+    group.appendChild(heading);
+
+    if(week.indices.length === 0){
+      const empty = document.createElement('p');
+      empty.className = 'newTag';
+      empty.textContent = 'Nothing added yet.';
+      group.appendChild(empty);
+    } else {
+      week.indices.forEach(idx => appendNewRow(group, idx, 'whatsnew'));
+    }
+    list.appendChild(group);
   });
-
-  if(indices.length > NEW_TEASER_CAP){
-    const seeAll = document.createElement('button');
-    seeAll.className = 'newSeeAll';
-    seeAll.textContent = `See all ${indices.length} new →`;
-    seeAll.onclick = () => browseNew();
-    section.appendChild(seeAll);
-  }
 }
 
 function updateStats(){
@@ -7757,6 +7841,10 @@ document.getElementById('tabHome').addEventListener('click', ()=>{
 });
 document.getElementById('tabBrowse').addEventListener('click', ()=>{
   showScreen('browse');
+});
+document.getElementById('whatsNewBackBtn').addEventListener('click', ()=>{
+  showScreen('browse');
+  document.getElementById('browseScreenHeading').focus();
 });
 document.getElementById('tabFamily').addEventListener('click', ()=>{
   showScreen('family');
