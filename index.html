@@ -194,7 +194,7 @@ function reportError(err){
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#F4F6FA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#F7F5F0" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#262624" media="(prefers-color-scheme: dark)">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -226,20 +226,20 @@ function reportError(err){
 <style>
   :root{
     color-scheme:light dark;
-    --bg:#F4F6FA;
-    --bg-sub:#E9EEF7;
+    --bg:#F7F5F0;
+    --bg-sub:#EFEBE3;
     --surface:#FFFFFF;
-    --ink:#172033;
+    --ink:#1F1E1B;
     --on-ink:#FFFFFF;
-    --ink-soft:#566176;
-    --ink-faint:#5F6A7F;
-    --line:#CFD7E6;
-    --accent:#2F5FEA;
-    --accent-rgb:47,95,234;
-    --accent-text:#2348B7;
+    --ink-soft:#57534B;
+    --ink-faint:#625D54;
+    --line:#DDD7CB;
+    --accent:#AE4E2C;
+    --accent-rgb:174,78,44;
+    --accent-text:#9A3F1F;
     --on-accent:#FFFFFF;
-    --select-rgb:47,95,234;
-    --error-bg:#FDECEA;
+    --select-rgb:174,78,44;
+    --error-bg:#FBE7EC;
     --check:var(--ink);
     /* --favorite is the want-to-watch glyph colour and must clear 3:1 against
        --bg/--surface as a state-bearing graphic (WCAG 1.4.11); --favorite-fill
@@ -252,37 +252,37 @@ function reportError(err){
        lightness and one chroma so no category can read as more urgent than
        another -- a parent must not infer that Violence is "redder" and so
        scarier than Drinking. Hues also dodge every taken meaning: no red
-       (--error), green (--success), gold (--favorite/--warning) or blue
+       (--error), green (--success), gold (--favorite/--warning) or clay
        (--accent/--new). Stated in oklch so the equal-L, equal-C constraint
        is enforced by the notation rather than asserted in a comment. */
     --flag-violence:oklch(0.55 0.09 285);
     --flag-language:oklch(0.55 0.09 190);
     --flag-romance:oklch(0.55 0.09 345);
     --flag-drinking:oklch(0.55 0.09 250);
-    --new:#2354B8;
-    --new-bg:#E7EEFF;
-    --success:#18794E;
-    --error:#B42318;
+    --new:#9A3F1F;
+    --new-bg:#F6E4DB;
+    --success:#136A43;
+    --error:#B3123F;
     --on-error:#FFFFFF;
     --warning:#8A5A00;
     --warning-rgb:138,90,0;
     --warning-soft:#FFF4D6;
-    --nudge-surface:#FFF2BE;
-    --nudge-ink:#2B220D;
-    --nudge-ink-soft:#5E4A17;
-    --nudge-line:#D3A126;
-    --nudge-primary:#2B220D;
-    --nudge-on-primary:#FFF9E8;
-    --error-rgb:180,35,24;
-    --shadow-rgb:11,16,32;
-    --focus:#5B8DEF;
-    --shadow-soft:0 10px 28px rgba(23,32,51,0.06);
-    --shadow-card:0 14px 36px rgba(23,32,51,0.08);
+    --nudge-surface:var(--surface);
+    --nudge-ink:var(--ink);
+    --nudge-ink-soft:var(--ink-soft);
+    --nudge-line:var(--accent);
+    --nudge-primary:var(--ink);
+    --nudge-on-primary:var(--on-ink);
+    --error-rgb:179,18,63;
+    --shadow-rgb:31,30,27;
+    --focus:#9A3F1F;
+    --shadow-soft:0 10px 28px rgba(31,30,27,0.06);
+    --shadow-card:0 14px 36px rgba(31,30,27,0.08);
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
       /* Warm charcoal neutrals and a clay accent, modelled on Claude's dark
-         mode. Light mode keeps its blue accent. Every text token clears 4.5:1
+         mode, matching light mode's warm paper and deeper clay. Every text token clears 4.5:1
          against --bg, --surface and --bg-sub; --accent clears 3:1 as a UI
          graphic, with --on-accent text on it at 5.3:1. */
       --bg:#262624;
@@ -293,12 +293,12 @@ function reportError(err){
       --ink-soft:#C9C6BC;
       --ink-faint:#A8A59B;
       --line:#4A4843;
-      --accent:#D97757;
-      --accent-rgb:217,119,87;
+      --accent:#E0896B;
+      --accent-rgb:224,137,107;
       --accent-text:#EB9878;
       --on-accent:#1F1E1D;
-      --select-rgb:217,119,87;
-      --error-bg:#3B2024;
+      --select-rgb:224,137,107;
+      --error-bg:#3D2229;
       --check:#FAF9F5;
       --favorite:#F2C14E;
       --favorite-fill:#F2C14E;
@@ -310,18 +310,18 @@ function reportError(err){
       --new:#EFAB90;
       --new-bg:#4A2C22;
       --success:#4CC38A;
-      --error:#FF7A70;
+      --error:#FF94A8;
       --on-error:#262624;
       --warning:#F2C14E;
       --warning-rgb:242,193,78;
       --warning-soft:#382F18;
-      --nudge-surface:#3B2B0E;
-      --nudge-ink:#FFF3C4;
-      --nudge-ink-soft:#E7D294;
-      --nudge-line:#C99A2D;
-      --nudge-primary:#FFF3C4;
-      --nudge-on-primary:#2B220D;
-      --error-rgb:255,122,112;
+      --nudge-surface:var(--surface);
+      --nudge-ink:var(--ink);
+      --nudge-ink-soft:var(--ink-soft);
+      --nudge-line:var(--accent);
+      --nudge-primary:var(--ink);
+      --nudge-on-primary:var(--on-ink);
+      --error-rgb:255,148,168;
       --shadow-rgb:0,0,0;
       --focus:#EB9878;
       --shadow-soft:0 10px 28px rgba(0,0,0,0.2);
@@ -337,12 +337,12 @@ function reportError(err){
     --ink-soft:#C9C6BC;
     --ink-faint:#A8A59B;
     --line:#4A4843;
-    --accent:#D97757;
-    --accent-rgb:217,119,87;
+    --accent:#E0896B;
+    --accent-rgb:224,137,107;
     --accent-text:#EB9878;
     --on-accent:#1F1E1D;
-    --select-rgb:217,119,87;
-    --error-bg:#3B2024;
+    --select-rgb:224,137,107;
+    --error-bg:#3D2229;
     --check:#FAF9F5;
     --favorite:#F2C14E;
     --favorite-fill:#F2C14E;
@@ -354,18 +354,18 @@ function reportError(err){
     --new:#EFAB90;
     --new-bg:#4A2C22;
     --success:#4CC38A;
-    --error:#FF7A70;
+    --error:#FF94A8;
     --on-error:#262624;
     --warning:#F2C14E;
     --warning-rgb:242,193,78;
     --warning-soft:#382F18;
-    --nudge-surface:#3B2B0E;
-    --nudge-ink:#FFF3C4;
-    --nudge-ink-soft:#E7D294;
-    --nudge-line:#C99A2D;
-    --nudge-primary:#FFF3C4;
-    --nudge-on-primary:#2B220D;
-    --error-rgb:255,122,112;
+    --nudge-surface:var(--surface);
+    --nudge-ink:var(--ink);
+    --nudge-ink-soft:var(--ink-soft);
+    --nudge-line:var(--accent);
+    --nudge-primary:var(--ink);
+    --nudge-on-primary:var(--on-ink);
+    --error-rgb:255,148,168;
     --shadow-rgb:0,0,0;
     --focus:#EB9878;
     --shadow-soft:0 10px 28px rgba(0,0,0,0.2);
@@ -439,17 +439,20 @@ function reportError(err){
     margin:0 auto;
   }
   /* Tab names are navigation, not voice, and at clamp(34-48px) the question
-     out-sized its own answer roughly 2:1. Sans and smaller, so the pick
-     title below it reads as the loudest thing on the screen. */
+     out-sized its own answer roughly 2:1. They share the pick title's serif
+     so every screen speaks in one voice, but stay smaller than it, so the
+     pick still reads as the loudest thing on the screen. */
   h1{
-    font-size:clamp(22px,4.5vw,26px);
+    font-family:"Newsreader", Georgia, "Times New Roman", serif;
+    font-size:clamp(23px,4.8vw,27px);
     font-weight:600;
     letter-spacing:0;
     margin:0 0 8px;
     color:var(--ink);
     text-wrap:balance;
   }
-  .titleKeepTogether{
+  .titleKeepTogether,
+  .nowrap{
     white-space:nowrap;
   }
   .subtitle{
@@ -475,6 +478,16 @@ function reportError(err){
     font-size:22px;
     font-weight:600;
     letter-spacing:-0.01em;
+  }
+  .memories{
+    margin:18px 0 0;
+    font-size:14px;
+    color:var(--ink-soft);
+  }
+  .memories b{
+    color:var(--ink);
+    font-weight:600;
+    font-variant-numeric:tabular-nums;
   }
   .syncAlert{
     position:fixed;
@@ -542,6 +555,8 @@ function reportError(err){
     gap:10px;
     flex-wrap:wrap;
   }
+  #browseScreen .controls{ padding:0; }
+  #browseScreen .searchStatusRow{ margin-left:0; margin-right:0; }
   .controls input[type="text"]{
     flex:1 1 180px;
     background:var(--bg-sub);
@@ -823,7 +838,7 @@ function reportError(err){
 
   .poster{
     position:relative;
-    width:42px;
+    width:52px;
     aspect-ratio:2 / 3;
     border-radius:6px;
     overflow:hidden;
@@ -859,7 +874,7 @@ function reportError(err){
     font-weight:600;
   }
   .poster.safeBetPoster{
-    width:38px;
+    width:48px;
   }
   .posterZoom{
     display:block;
@@ -981,10 +996,11 @@ function reportError(err){
   .star.on{ color:var(--favorite); }
   .info{ flex:1; min-width:0; }
   .title{
+    font-family:"Newsreader", Georgia, "Times New Roman", serif;
     font-weight:600;
-    font-size:17px;
-    line-height:1.35;
-    letter-spacing:-0.01em;
+    font-size:19px;
+    line-height:1.25;
+    letter-spacing:-0.005em;
     cursor:pointer;
   }
   .meta{
@@ -1670,17 +1686,47 @@ function reportError(err){
     text-align:left;
   }
   .pickCard{
-    margin-top:16px;
-    padding:16px;
-    border-radius:15px;
-    background:var(--bg-sub);
-    border:1px solid var(--line);
+    margin-top:18px;
+    padding:18px 0 0;
+    border-top:1px solid var(--line);
   }
-  .pickCard.watched{
-    opacity:0.62;
+  /* Watched is a memory, not a cancelled item: a ticket stub stamps onto the
+     card instead of striking the title through. */
+  .pickCard{ position:relative; }
+  .pickCard.watched::after{
+    content:attr(data-admit);
+    position:absolute;
+    top:30px;
+    right:10px;
+    padding:6px 12px;
+    border:1.5px dashed var(--accent-text);
+    border-radius:4px;
+    background:var(--surface);
+    color:var(--accent-text);
+    font-size:10.5px;
+    font-weight:700;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    white-space:nowrap;
+    transform:rotate(-4deg);
+    -webkit-mask:radial-gradient(circle at 0 50%, transparent 5px, #000 5.5px) left / 51% 100% no-repeat,
+                 radial-gradient(circle at 100% 50%, transparent 5px, #000 5.5px) right / 51% 100% no-repeat;
+            mask:radial-gradient(circle at 0 50%, transparent 5px, #000 5.5px) left / 51% 100% no-repeat,
+                 radial-gradient(circle at 100% 50%, transparent 5px, #000 5.5px) right / 51% 100% no-repeat;
+    animation:stubStamp 180ms ease-out;
   }
-  .pickCard.watched .pickTitle{
-    text-decoration:line-through;
+  @keyframes stubStamp{
+    from{ opacity:0; transform:rotate(-4deg) scale(1.3); }
+    to{ opacity:1; transform:rotate(-4deg) scale(1); }
+  }
+  .star.pop{ animation:starPop 160ms ease-out; }
+  @keyframes starPop{
+    from{ transform:scale(1.3); }
+    to{ transform:scale(1); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .pickCard.watched::after,
+    .star.pop{ animation:none; }
   }
   .pickMeta{
     color:var(--ink-faint);
@@ -1816,12 +1862,13 @@ function reportError(err){
   .familyAvatar{
     width:42px;
     height:42px;
-    border-radius:13px;
+    border-radius:50%;
     display:grid;
     place-items:center;
     background:rgba(var(--accent-rgb),0.12);
-    color:var(--ink);
-    font-size:15px;
+    color:var(--accent-text);
+    font-family:"Newsreader", Georgia, "Times New Roman", serif;
+    font-size:21px;
     font-weight:600;
     flex:0 0 auto;
   }
@@ -1866,9 +1913,7 @@ function reportError(err){
     cursor:pointer;
   }
   .familyEditBtn.primary{
-    background:var(--accent);
     border-color:var(--accent);
-    color:var(--on-accent);
   }
   .familySummary{
     margin-top:11px;
@@ -2254,8 +2299,8 @@ function reportError(err){
     min-height:24px;
     border-radius:999px;
     padding:4px 8px;
-    background:rgba(var(--accent-rgb),0.09);
-    color:var(--accent-text);
+    background:color-mix(in srgb, var(--success) 9%, transparent);
+    color:var(--success);
     font-size:12px;
     font-weight:600;
   }
@@ -2263,9 +2308,12 @@ function reportError(err){
     background:var(--warning-soft);
     color:var(--warning);
   }
+  /* The border is a shape cue no accent-coloured element uses, so "above
+     settings" never reads as decoration next to clay links or ribbons. */
   .fitSignal.red{
     background:rgba(var(--error-rgb),0.1);
     color:var(--error);
+    box-shadow:inset 0 0 0 1px var(--error);
   }
   .ageDefault{
     margin-top:10px;
@@ -2311,10 +2359,12 @@ function reportError(err){
     }
     .familyTopline{
       align-items:flex-start;
+      flex-wrap:wrap;
     }
     .familyMetaActions{
-      flex-direction:column;
-      align-items:flex-end;
+      width:100%;
+      padding-left:54px;
+      flex-wrap:wrap;
     }
     .childEditRow{
       grid-template-columns:1fr;
@@ -2674,11 +2724,9 @@ function reportError(err){
     cursor:pointer;
   }
   .recommendationEvidence{
-    margin-top:12px;
-    padding:12px;
-    border-radius:12px;
-    background:var(--surface);
-    border:1px solid var(--line);
+    margin-top:14px;
+    padding:14px 0 0;
+    border-top:1px solid var(--line);
     color:var(--ink-soft);
     font-size:14px;
     line-height:1.45;
@@ -2861,11 +2909,11 @@ function reportError(err){
       gap:10px;
     }
     .poster{
-      width:36px;
-      border-radius:4px;
+      width:46px;
+      border-radius:5px;
     }
     .poster.safeBetPoster{
-      width:34px;
+      width:44px;
     }
     .num{
       width:20px;
@@ -2914,12 +2962,11 @@ function reportError(err){
 <main id="homeScreen" class="homeScreen" aria-labelledby="homeScreenHeading">
   <header>
     <h1 id="homeScreenHeading" tabindex="-1">What should we <span class="titleKeepTogether">watch tonight?</span></h1>
-    <div class="subtitle">One good pick for the people, time, and mood you have tonight.</div>
-    <div class="stats">
-      <div><b id="statChecked">0</b>Watched</div>
-      <div><b id="statLeft">1038</b>To watch</div>
-      <div><b id="statPriority">0</b>Want to watch</div>
-    </div>
+    <div class="subtitle" id="tonightSubtitle">One good pick for the people, time, and mood you have tonight.</div>
+    <p class="memories">
+      <span id="tonightMemoriesCounts" hidden><b id="statChecked">0</b> watched together · <b id="statPriority">0</b> starred for later</span>
+      <span id="tonightMemoriesFirst">Your first movie night is one tap away.</span>
+    </p>
   </header>
 
   <div class="homeSection tight">
@@ -2970,11 +3017,11 @@ function reportError(err){
         <div class="pickStage" id="tonightPickStage"></div>
         <div class="pickMeta" id="tonightVerdict">Tonight's pick</div>
         <div class="pickTitle" id="tonightPickTitle"></div>
+        <ul class="pickReasons" id="tonightPickReasons"></ul>
         <section class="preShow" id="tonightPreShow" aria-labelledby="tonightPreShowLabel" hidden>
           <h2 class="preShowLabel" id="tonightPreShowLabel">Pre-show</h2>
           <div id="tonightPreShowBody"></div>
         </section>
-        <ul class="pickReasons" id="tonightPickReasons"></ul>
         <div class="recommendationEvidence" id="tonightEvidence"></div>
         <button type="button" class="detailLink" id="tonightDetailBtn" aria-expanded="false" aria-controls="tonightDetailBody">Details</button>
         <div class="detail" id="tonightDetailBody"></div>
@@ -3065,6 +3112,13 @@ function reportError(err){
     <span class="homeSectionLabel">Browse by</span>
     <div class="studioGrid" id="studioGrid"></div>
   </div>
+  <ul id="list"></ul>
+  <div class="listPagination" id="listPagination" style="display:none;">
+    <button type="button" id="listPagePrevBtn">Previous</button>
+    <span id="listPageStatus" aria-live="polite"></span>
+    <button type="button" id="listPageNextBtn">Next</button>
+  </div>
+  <div class="empty" id="emptyMsg" style="display:none;">No movies match your search.</div>
   <section class="requestPanel" id="requestMoviePanel" aria-labelledby="requestMovieTitle">
     <h2 id="requestMovieTitle">Request a movie</h2>
     <p>Ask for a title to be added to the shelf.</p>
@@ -3076,13 +3130,6 @@ function reportError(err){
     </form>
     <p class="requestStatus" id="requestMovieStatus" aria-live="polite"></p>
   </section>
-  <ul id="list"></ul>
-  <div class="listPagination" id="listPagination" style="display:none;">
-    <button type="button" id="listPagePrevBtn">Previous</button>
-    <span id="listPageStatus" aria-live="polite"></span>
-    <button type="button" id="listPageNextBtn">Next</button>
-  </div>
-  <div class="empty" id="emptyMsg" style="display:none;">No movies match your search.</div>
 </main>
 
 <main id="whatsNewScreen" class="screenWrap" style="display:none;" hidden aria-labelledby="whatsNewScreenHeading">
@@ -4307,7 +4354,11 @@ function createMeta(idx, m, detailScope){
   const csmBadge = document.createElement('span');
   csmBadge.className = 'badge csm';
   csmBadge.title = 'Common Sense Media';
-  csmBadge.textContent = `${m.studio} · CSM ${m.ca}`;
+  csmBadge.textContent = `${m.studio} `;
+  const csmAge = document.createElement('span');
+  csmAge.className = 'nowrap';
+  csmAge.textContent = `· CSM ${m.ca}`;
+  csmBadge.appendChild(csmAge);
   facts.appendChild(csmBadge);
 
   if(Number.isInteger(m.runtimeMinutes) && m.runtimeMinutes > 0){
@@ -4367,33 +4418,42 @@ function createFitSignals(idx){
   const signal = document.createElement('span');
   signal.className = 'fitSignal' + (fit.verdict === 'green' ? '' : ` ${fit.verdict}`);
   const names = kids.length === state.children.length ? 'selected kids' : kids.map(child => child.name).join(' + ');
-  signal.textContent = fit.verdict === 'green'
+  const verdictText = fit.verdict === 'green'
     ? `Fits ${names}`
     : fit.verdict === 'amber'
       ? `Review for ${names}`
       : `Above settings for ${names}`;
-  wrap.appendChild(signal);
-  if(fit.issues.length){
-    const issue = fit.issues[0];
-    const detail = document.createElement('span');
-    detail.className = 'fitSignal amber';
-    detail.textContent = `${issue.child.name}: ${issue.flag.label}`;
-    wrap.appendChild(detail);
+  // One chip per row: the verdict, then the reason that drives it (the worst
+  // issue first), so the reason never reads as a separate, milder warning.
+  const driving = fit.issues.filter(issue => issue.severity === fit.verdict);
+  if(driving.length){
+    const more = driving.length - 1;
+    const verdictWord = fit.verdict === 'red' ? 'Above limits' : 'Review';
+    signal.textContent = `${verdictWord}: ${driving[0].child.name} · ${driving[0].flag.label}${more ? ` +${more}` : ''}`;
+  }else{
+    signal.textContent = verdictText;
   }
+  wrap.appendChild(signal);
   return wrap;
 }
 
-function showToast(msg){
+function showToast(msg, duration = 1400){
   toastEl.textContent = msg;
   toastEl.classList.add('show');
   clearTimeout(showToast._t);
-  showToast._t = setTimeout(()=>toastEl.classList.remove('show'), 1400);
+  showToast._t = setTimeout(()=>toastEl.classList.remove('show'), duration);
 }
 
 function clearToast(){
   clearTimeout(showToast._t);
   toastEl.classList.remove('show');
   toastEl.textContent = '';
+}
+
+// "Title (year)", unless the title already carries its year, as with
+// "The Lorax (1972 TV special)".
+function displayTitle(m){
+  return m.y && !String(m.t).includes(String(m.y)) ? `${m.t} (${m.y})` : m.t;
 }
 
 function createPoster(m, className, isNew){
@@ -4458,7 +4518,7 @@ function openPosterViewer(m, url){
   const img = document.getElementById('posterViewerImg');
   img.src = url;
   img.alt = `Poster for ${m.t}`;
-  document.getElementById('posterViewerTitle').textContent = `${m.t} (${m.y})`;
+  document.getElementById('posterViewerTitle').textContent = `${displayTitle(m)}`;
   viewer.showModal();
 }
 
@@ -4695,7 +4755,7 @@ function toggleCheck(idx){
     saveState();
     renderCurrentView();
   });
-  maybeShowGoogleSignInNudge();
+  maybeShowGoogleSignInNudgeAfterMarks();
 }
 
 function togglePriority(idx){
@@ -4707,7 +4767,10 @@ function togglePriority(idx){
     saveState();
     renderCurrentView();
   });
-  maybeShowGoogleSignInNudge();
+  if(markValue(state.priority, idx)){
+    document.querySelectorAll(`.star[data-idx="${idx}"]`).forEach(star => star.classList.add('pop'));
+  }
+  maybeShowGoogleSignInNudgeAfterMarks();
 }
 
 function move(idx, dir){
@@ -4942,7 +5005,7 @@ function dismissWatchAnywayCue(childId, flagId){
 function reviewChildFlagSetting(childId, flagId){
   setSelectedFamilyChild(childId);
   const panel = document.getElementById('familySettingsPanel');
-  if(panel) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if(panel) panel.scrollIntoView({ behavior: scrollBehavior(), block: 'start' });
   const row = document.querySelector(`#familySettingsRows [data-flag="${flagId}"]`);
   if(row){
     row.setAttribute('tabindex', '-1');
@@ -5384,13 +5447,13 @@ function tonightVerdictLabel(verdict){
 // so the loudest control on screen invited rejecting the result before the
 // result had been read. Label and emphasis move together here so the three
 // call sites can't drift apart the way the label alone once did.
+// While a pick shows, the card's own Skip (which also asks why) is the one
+// way to move on, so this top button steps aside instead of becoming a
+// second, silent "Skip to next pick".
 function setFindPickMode(mode){
   const btn = document.getElementById('findTonightPickBtn');
   if(!btn) return;
-  const skipping = mode === 'skip';
-  btn.textContent = skipping ? 'Skip to next pick' : "Find tonight's pick";
-  btn.classList.toggle('primaryBtn', !skipping);
-  btn.classList.toggle('secondaryBtn', skipping);
+  btn.hidden = mode === 'skip';
 }
 
 function showTonightPick(candidateOverride){
@@ -5408,7 +5471,7 @@ function showTonightPick(candidateOverride){
     const noMatchCard = document.getElementById('tonightNoMatchCard');
     noMatchCard.style.display = 'block';
     document.getElementById('tonightNoMatchReason').textContent = MOVIES.length
-      ? "Nothing fits who's watching, watched history, and content settings right now."
+      ? "Nothing on the shelf fits tonight's crew and your content limits right now. That's the filter doing its job, not a glitch."
       : 'There are no movies in the catalog yet.';
     document.getElementById('tonightPickStatus').textContent = `No confident match. ${document.getElementById('tonightNoMatchReason').textContent}`;
     setFindPickMode('find');
@@ -5429,10 +5492,11 @@ function showTonightPick(candidateOverride){
   tonightSelection.verdict = verdict.verdict;
 
   const verdictEl = document.getElementById('tonightVerdict');
+  document.getElementById('tonightPickCard').dataset.admit = 'Admit one';
   document.getElementById('tonightPickCard').classList.toggle('watched', markValue(state.checked, idx));
   updateTonightWatchBtn();
   verdictEl.textContent = tonightVerdictLabel(verdict.verdict);
-  document.getElementById('tonightPickTitle').textContent = `${movie.t} (${movie.y})`;
+  document.getElementById('tonightPickTitle').textContent = `${displayTitle(movie)}`;
   // Only stage real art. createPoster() falls back to a bordered "Movie/year"
   // box, which reads fine at Shelf's 42px but becomes a large empty rectangle
   // at hero size -- worse than no poster at all for the ~14 catalogue titles
@@ -5470,7 +5534,7 @@ function showTonightPick(candidateOverride){
   copy.push(tonightSelection.time === 999
     ? `${formatRuntime(movie.runtimeMinutes)} runtime.`
     : `${formatRuntime(movie.runtimeMinutes)} · Fits your ${tonightSelection.time}-minute window.`);
-  copy.push(candidate.source === 'Want to watch' ? 'Pulled from Want to watch.' : candidate.source === 'Recent releases' ? 'Pulled from recent releases.' : 'Pulled from the rest of Shelf.');
+  copy.push(candidate.source === 'Want to watch' ? 'Someone in your family starred this one.' : candidate.source === 'Recent releases' ? 'Pulled from recent releases.' : 'Pulled from the rest of Shelf.');
   const reasonLines = copy.slice(0, 3);
   if(tonightWorryExclude) reasonLines.push(`Leaving out titles whose notes mention ${WORRY_LABELS[tonightWorryExclude].toLowerCase()}, or that haven't been checked for it.`);
   reasonLines.forEach(text=>{
@@ -5512,12 +5576,9 @@ function showTonightPick(candidateOverride){
   updateTonightWatchAnywayBtn();
   document.getElementById('tonightPickCard').style.display = 'block';
   document.getElementById('homeScreen').classList.add('hasPick');
-  document.getElementById('tonightPickStatus').textContent = `${tonightVerdictLabel(verdict.verdict)}: ${movie.t} (${movie.y}). ${copy[0]}`;
-  // Issue #57: the button's static markup says "Find tonight's pick", but a
-  // pick showing switches its own click handler over to skip-behavior. Keep
-  // the label honest about which action it now performs; resetTonightSkips()
-  // (the one function every Change-panel handler already calls to invalidate
-  // the current pick) is the matching place that reverts it.
+  document.getElementById('tonightPickStatus').textContent = `${tonightVerdictLabel(verdict.verdict)}: ${displayTitle(movie)}. ${copy[0]}`;
+  // resetTonightSkips() (which every Change-panel handler calls to
+  // invalidate the current pick) is the matching place that brings it back.
   setFindPickMode('skip');
   document.getElementById('tonightAlternatives').hidden = true;
   document.getElementById('tonightAlternativesBtn').setAttribute('aria-expanded', 'false');
@@ -5722,7 +5783,7 @@ function checkTonightWorry(worry){
     const tr = document.createElement('tr');
     const titleCell = document.createElement('th');
     titleCell.scope = 'row';
-    titleCell.textContent = `${movie.t} (${movie.y})`;
+    titleCell.textContent = `${displayTitle(movie)}`;
     const tagCell = document.createElement('td');
     const tag = document.createElement('span');
     tag.className = `worryTag ${level || 'unknown'}`;
@@ -5926,6 +5987,10 @@ const SCREENS = ['setup', 'home', 'browse', 'whatsNew', 'family'];
 let screens = {};
 let tabs = {};
 
+function scrollBehavior(){
+  return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+}
+
 function showScreen(target){
   const isSameScreen = target === currentScreen;
   currentScreen = target;
@@ -5944,7 +6009,7 @@ function showScreen(target){
   if(quickBar) quickBar.style.display = target === 'setup' ? 'none' : 'flex';
   renderCurrentView();
   if(isSameScreen){
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    window.scrollTo({top: 0, behavior: scrollBehavior()});
   }
 }
 
@@ -5998,8 +6063,21 @@ function renderStudioGrid(){
   grid.appendChild(more);
 }
 
+const TONIGHT_SUBTITLE_DEFAULT = 'One good pick for the people, time, and mood you have tonight.';
+function tonightSubtitleFor(date){
+  const hour = date.getHours();
+  const day = date.getDay();
+  const month = date.getMonth();
+  if(hour >= 20 || hour < 4) return 'Late start? Set a shorter time under Change.';
+  if(day === 5) return 'Friday night. Big-screen energy.';
+  if(day === 6) return 'Saturday night at the movies.';
+  if((month === 10 && date.getDate() >= 20) || month === 11) return 'Cozy season. Blankets optional, popcorn encouraged.';
+  return TONIGHT_SUBTITLE_DEFAULT;
+}
+
 function renderCurrentView(){
   posterEagerBudget = 24;
+  document.getElementById('tonightSubtitle').textContent = tonightSubtitleFor(new Date(Date.now()));
   const firstRunShelfIntro = document.getElementById('firstRunShelfIntro');
   if(firstRunShelfIntro) firstRunShelfIntro.hidden = !!(state.children && state.children.length);
   updateWhatsNewTabCount();
@@ -6038,7 +6116,7 @@ function appendNewRow(container, idx, detailScope){
   info.className = 'info';
   const title = document.createElement('div');
   title.className = 'title';
-  title.textContent = `${m.t} (${m.y})`;
+  title.textContent = `${displayTitle(m)}`;
   title.onclick = event => toggleDetail(idx, event.currentTarget);
   const tag = document.createElement('div');
   tag.className = 'newTag';
@@ -6113,8 +6191,10 @@ function updateStats(){
   const leftCount = MOVIES.length - checkedCount;
   const priorityCount = markCount(state.priority);
   document.getElementById('statChecked').textContent = checkedCount;
-  document.getElementById('statLeft').textContent = leftCount;
   document.getElementById('statPriority').textContent = priorityCount;
+  const hasMemories = checkedCount > 0 || priorityCount > 0;
+  document.getElementById('tonightMemoriesCounts').hidden = !hasMemories;
+  document.getElementById('tonightMemoriesFirst').hidden = hasMemories;
   document.getElementById('statCheckedMore').textContent = checkedCount;
   document.getElementById('statLeftMore').textContent = leftCount;
   document.getElementById('statPriorityMore').textContent = priorityCount;
@@ -6838,6 +6918,9 @@ function syncFilterToggleState(){
 
 function render(){
   posterEagerBudget = 24;
+  // Search renders after a short typing pause, so this records which query
+  // the list currently reflects.
+  listEl.dataset.renderedQuery = query;
   const q = query.trim().toLowerCase();
   const orderPosition = new Map(state.order.map((idx, pos) => [idx, pos]));
   let visibleOrder = state.order.filter(idx=>{
@@ -6951,6 +7034,7 @@ function render(){
     const num = document.createElement('div');
     num.className = 'num';
     num.textContent = (sortMode === 'custom' ? globalPos : visiblePos) + 1;
+    num.hidden = sortMode !== 'custom';
 
     const check = document.createElement('button');
     check.className = 'check' + (isChecked ? ' on' : '');
@@ -6968,7 +7052,7 @@ function render(){
     info.className = 'info';
     const title = document.createElement('div');
     title.className = 'title';
-    title.textContent = `${m.t} (${m.y})`;
+    title.textContent = `${displayTitle(m)}`;
     title.onclick = event => toggleDetail(idx, event.currentTarget);
     const meta = createMeta(idx, m, 'list');
     info.appendChild(title);
@@ -7040,14 +7124,14 @@ if(listPagePrevBtn) listPagePrevBtn.addEventListener('click', ()=>{
     listPage -= 1;
     render();
     (listPagePrevBtn.disabled ? listPageNextBtn : listPagePrevBtn).focus();
-    if(listEl) listEl.scrollIntoView({ behavior:'smooth', block:'start' });
+    if(listEl) listEl.scrollIntoView({ behavior: scrollBehavior(), block:'start' });
   }
 });
 if(listPageNextBtn) listPageNextBtn.addEventListener('click', ()=>{
   listPage += 1;
   render();
   (listPageNextBtn.disabled ? listPagePrevBtn : listPageNextBtn).focus();
-  if(listEl) listEl.scrollIntoView({ behavior:'smooth', block:'start' });
+  if(listEl) listEl.scrollIntoView({ behavior: scrollBehavior(), block:'start' });
 });
 
 document.getElementById('skipToNavLink').addEventListener('click', e=>{
@@ -7056,9 +7140,13 @@ document.getElementById('skipToNavLink').addEventListener('click', e=>{
   if(quickBar) quickBar.focus();
 });
 
+// Search only affects the Shelf list, so it re-renders just that list, and
+// waits for a short pause in typing instead of rebuilding on every keystroke.
+let searchRenderTimer = null;
 document.getElementById('search').addEventListener('input', e=>{
   query = e.target.value;
-  renderCurrentView();
+  clearTimeout(searchRenderTimer);
+  searchRenderTimer = setTimeout(render, 120);
 });
 
 document.getElementById('clearSearchBtn').addEventListener('click', ()=>{
@@ -7099,7 +7187,7 @@ document.querySelectorAll('[data-edit-child]').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     const target = document.getElementById(btn.dataset.editChild);
     const panel = document.getElementById('childrenSettingsPanel');
-    if(panel) panel.scrollIntoView({ behavior:'smooth', block:'start' });
+    if(panel) panel.scrollIntoView({ behavior: scrollBehavior(), block:'start' });
     if(target){
       setTimeout(()=>target.focus(), 260);
     }
@@ -7400,7 +7488,7 @@ function renderChildren(){
       settings.addEventListener('click', ()=>{
         setSelectedFamilyChild(child.id);
         const panel = document.getElementById('familySettingsPanel');
-        if(panel) panel.scrollIntoView({ behavior:'smooth', block:'start' });
+        if(panel) panel.scrollIntoView({ behavior: scrollBehavior(), block:'start' });
         const heading = document.getElementById('familySettingsChildName');
         if(heading) setTimeout(()=>heading.focus(), 260);
       });
@@ -7607,6 +7695,16 @@ function rememberGoogleSignInNudge(){
   try{
     localStorage.setItem(GOOGLE_SIGN_IN_NUDGE_SEEN_KEY, '1');
   }catch(e){ /* session guard still prevents repeated prompts */ }
+}
+
+// The backup offer used to open on the very first watched/star tap, covering
+// the list mid-task. It now waits until a family has marked a few titles,
+// when keeping their shelf is worth something to them.
+const GOOGLE_SIGN_IN_NUDGE_AFTER_MARKS = 3;
+let marksThisSession = 0;
+function maybeShowGoogleSignInNudgeAfterMarks(){
+  marksThisSession += 1;
+  if(marksThisSession >= GOOGLE_SIGN_IN_NUDGE_AFTER_MARKS) maybeShowGoogleSignInNudge();
 }
 
 function maybeShowGoogleSignInNudge(){
@@ -7922,24 +8020,36 @@ document.getElementById('tonightDoneBtn').addEventListener('click', ()=>{
 });
 
 document.getElementById('findTonightPickBtn').addEventListener('click', ()=>{
-  if(tonightSelection.currentPickIdx !== null && document.getElementById('tonightPickCard').style.display !== 'none'){
-    skipCurrentTonightPick();
-    return;
-  }
   showTonightPick();
 });
+
+const WATCH_MILESTONES = {
+  1: 'Your first movie night, logged.',
+  10: "That's 10 movies watched together.",
+  25: '25 movie nights. Popcorn veterans.',
+  50: '50 movies watched together. Quite a shelf.',
+  100: '100 movie nights. Take a bow.'
+};
 
 document.getElementById('tonightWatchBtn').addEventListener('click', ()=>{
   const idx = tonightSelection.currentPickIdx;
   if(idx === null) return;
   toggleCheck(idx);
   const isWatched = markValue(state.checked, idx);
-  document.getElementById('tonightPickCard').classList.toggle('watched', isWatched);
+  const card = document.getElementById('tonightPickCard');
+  if(isWatched) card.dataset.admit = `Admit one · ${new Date(Date.now()).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' })}`;
+  card.classList.toggle('watched', isWatched);
   document.getElementById('tonightVerdict').textContent = isWatched
     ? 'Watched'
     : tonightVerdictLabel(tonightSelection.verdict);
   updateTonightWatchBtn();
-  showToast(isWatched ? 'Marked watched' : 'Removed from watched');
+  if(isWatched){
+    const milestone = WATCH_MILESTONES[markCount(state.checked)];
+    if(milestone) showToast(milestone, 2600);
+    else showToast("Added to your family's movie log.");
+  }else{
+    showToast('Removed from watched');
+  }
 });
 
 document.getElementById('tonightWatchAnywayBtn').addEventListener('click', logWatchAnywaySignal);
@@ -8413,7 +8523,7 @@ function updateThemeColorMeta(pref){
     meta.setAttribute('name', 'theme-color');
     document.head.appendChild(meta);
   }
-  meta.setAttribute('content', effectiveDark ? '#262624' : '#F4F6FA');
+  meta.setAttribute('content', effectiveDark ? '#262624' : '#F7F5F0');
 }
 
 function applyTheme(pref){

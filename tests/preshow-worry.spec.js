@@ -204,7 +204,7 @@ test('Check a worry shows a captioned table for the pick and its two alternative
     await expect(page.locator('#tonightPickReasons')).toContainText('Leaving out titles whose notes mention parent in danger');
     await expect(page.locator('#tonightPickStatus')).toContainText('Showing picks without parent in danger.');
     for(let i = 0; i < 4; i++){
-      await page.locator('#findTonightPickBtn').click();
+      await page.locator('#tonightSkipBtn').click();
       await expect(page.locator('#tonightPickTitle')).toHaveText(/^(Paddington|Kiki's Delivery Service) \(/);
     }
   }finally{

@@ -8,8 +8,8 @@
   "categories": ["entertainment", "lifestyle"],
   "display": "standalone",
   "display_override": ["standalone", "minimal-ui", "browser"],
-  "background_color": "#F4F6FA",
-  "theme_color": "#2F5FEA",
+  "background_color": "#F7F5F0",
+  "theme_color": "#AE4E2C",
   "icons": [
     {
       "src": "/assets/icons/icon-192.png",

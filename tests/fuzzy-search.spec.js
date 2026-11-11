@@ -3,8 +3,10 @@ import { switchToFlatView, rows } from './helpers.js';
 
 async function titlesFor(page, query) {
   await page.locator('#search').fill(query);
+  // Search re-renders after a short typing pause; wait for the list to
+  // reflect this query before reading it.
   await expect
-    .poll(() => page.locator('#search').inputValue())
+    .poll(() => page.locator('#list').getAttribute('data-rendered-query'))
     .toBe(query);
   return page.evaluate(() => Array.from(document.querySelectorAll('#list .title')).map((el) => el.textContent));
 }
