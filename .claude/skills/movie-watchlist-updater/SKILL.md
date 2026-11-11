@@ -390,6 +390,10 @@ don't say. Each entry is:
   invented detail, no character names that aren't in `full`. The "Ask after"
   question comes from the notes' positive themes and is plain `TextContent`,
   not `FollowUpBlock` (follow-ups aren't clickable in the app).
+- Shelf's movie details read the `Callout("warning", ...)`, the "Ask after: ..."
+  `TextContent` and the "Gentle. ..." note straight out of this program as
+  plain text (`preShowNotes()` in `index.html`), so keep those exact shapes and
+  wordings; `tests/shelf-guidance.spec.js` fails if a program stops parsing.
 - Gentle films (all flags 2 or lower, nothing notable in the notes) get just
   `root = Card([note])\nnote = TextContent("Gentle. Nothing to prep for.", "small")`.
 - Copy the shape of an existing entry with similar content rather than

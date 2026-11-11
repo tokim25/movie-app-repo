@@ -195,7 +195,7 @@ function reportError(err){
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#F4F6FA" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0E0F14" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#262624" media="(prefers-color-scheme: dark)">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Family Feature">
@@ -281,38 +281,37 @@ function reportError(err){
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      /* Dark used to be a single blue hue top to bottom -- #0B1020 ground,
-         #131A2C cards, and an --ink that was itself blue-tinted white. It
-         read as a night-ops console rather than a room you'd pick a film in.
-         The neutrals carry that feeling far more than any accent does, so
-         the blue cast comes out of them while the values stay put. */
-      --bg:#0E0F14;
-      --bg-sub:#1F212A;
-      --surface:#16171E;
-      --ink:#F6F6F8;
-      --on-ink:#0E0F14;
-      --ink-soft:#BCBDC4;
-      --ink-faint:#9A9BA4;
-      --line:#2E3038;
-      --accent:#7FA2FF;
-      --accent-rgb:127,162,255;
-      --accent-text:#9AB4FF;
-      --on-accent:#0E0F14;
-      --select-rgb:127,162,255;
+      /* Warm charcoal neutrals and a clay accent, modelled on Claude's dark
+         mode. Light mode keeps its blue accent. Every text token clears 4.5:1
+         against --bg, --surface and --bg-sub; --accent clears 3:1 as a UI
+         graphic, with --on-accent text on it at 5.3:1. */
+      --bg:#262624;
+      --bg-sub:#383733;
+      --surface:#30302E;
+      --ink:#FAF9F5;
+      --on-ink:#262624;
+      --ink-soft:#C9C6BC;
+      --ink-faint:#A8A59B;
+      --line:#4A4843;
+      --accent:#D97757;
+      --accent-rgb:217,119,87;
+      --accent-text:#EB9878;
+      --on-accent:#1F1E1D;
+      --select-rgb:217,119,87;
       --error-bg:#3B2024;
-      --check:#F6F6F8;
+      --check:#FAF9F5;
       --favorite:#F2C14E;
       --favorite-fill:#F2C14E;
-      --on-favorite:#0E0F14;
+      --on-favorite:#262624;
       --flag-violence:oklch(0.72 0.08 285);
       --flag-language:oklch(0.72 0.08 190);
       --flag-romance:oklch(0.72 0.08 345);
       --flag-drinking:oklch(0.72 0.08 250);
-      --new:#AAC0FF;
-      --new-bg:#202D50;
+      --new:#EFAB90;
+      --new-bg:#4A2C22;
       --success:#4CC38A;
       --error:#FF7A70;
-      --on-error:#0E0F14;
+      --on-error:#262624;
       --warning:#F2C14E;
       --warning-rgb:242,193,78;
       --warning-soft:#382F18;
@@ -324,39 +323,39 @@ function reportError(err){
       --nudge-on-primary:#2B220D;
       --error-rgb:255,122,112;
       --shadow-rgb:0,0,0;
-      --focus:#9AB4FF;
+      --focus:#EB9878;
       --shadow-soft:0 10px 28px rgba(0,0,0,0.2);
       --shadow-card:0 18px 44px rgba(0,0,0,0.28);
     }
   }
   :root[data-theme="dark"]{
-    --bg:#0E0F14;
-    --bg-sub:#1F212A;
-    --surface:#16171E;
-    --ink:#F6F6F8;
-    --on-ink:#0E0F14;
-    --ink-soft:#BCBDC4;
-    --ink-faint:#9A9BA4;
-    --line:#2E3038;
-    --accent:#7FA2FF;
-    --accent-rgb:127,162,255;
-    --accent-text:#9AB4FF;
-    --on-accent:#0E0F14;
-    --select-rgb:127,162,255;
+    --bg:#262624;
+    --bg-sub:#383733;
+    --surface:#30302E;
+    --ink:#FAF9F5;
+    --on-ink:#262624;
+    --ink-soft:#C9C6BC;
+    --ink-faint:#A8A59B;
+    --line:#4A4843;
+    --accent:#D97757;
+    --accent-rgb:217,119,87;
+    --accent-text:#EB9878;
+    --on-accent:#1F1E1D;
+    --select-rgb:217,119,87;
     --error-bg:#3B2024;
-    --check:#F6F6F8;
+    --check:#FAF9F5;
     --favorite:#F2C14E;
     --favorite-fill:#F2C14E;
-    --on-favorite:#0E0F14;
+    --on-favorite:#262624;
     --flag-violence:oklch(0.72 0.08 285);
     --flag-language:oklch(0.72 0.08 190);
     --flag-romance:oklch(0.72 0.08 345);
     --flag-drinking:oklch(0.72 0.08 250);
-    --new:#AAC0FF;
-    --new-bg:#202D50;
+    --new:#EFAB90;
+    --new-bg:#4A2C22;
     --success:#4CC38A;
     --error:#FF7A70;
-    --on-error:#0E0F14;
+    --on-error:#262624;
     --warning:#F2C14E;
     --warning-rgb:242,193,78;
     --warning-soft:#382F18;
@@ -368,7 +367,7 @@ function reportError(err){
     --nudge-on-primary:#2B220D;
     --error-rgb:255,122,112;
     --shadow-rgb:0,0,0;
-    --focus:#9AB4FF;
+    --focus:#EB9878;
     --shadow-soft:0 10px 28px rgba(0,0,0,0.2);
     --shadow-card:0 18px 44px rgba(0,0,0,0.28);
   }
@@ -1068,6 +1067,17 @@ function reportError(err){
     border-bottom:1px solid var(--line);
   }
   .detail.open{ display:block; }
+  .detailGuide{
+    margin-top:12px;
+    padding:12px 14px;
+    border-radius:10px;
+    background:var(--bg-sub);
+    font-size:15px;
+    line-height:1.55;
+  }
+  .newSection .detailGuide{ background:var(--surface); }
+  .detailGuide p{ margin:0; }
+  .detailGuide p + p{ margin-top:8px; }
 
   .empty{
     text-align:center;
@@ -1268,6 +1278,21 @@ function reportError(err){
   .qbBtn span{ font-size:11px; font-weight:500; letter-spacing:-0.01em; }
   .qbBtn:active{ background:var(--bg-sub); }
   .qbBtn.on{ color:var(--accent-text); }
+  .qbBtn{ position:relative; }
+  .qbBtn .qbCount{
+    position:absolute;
+    top:3px;
+    left:calc(50% + 6px);
+    min-width:18px;
+    padding:1px 5px;
+    border-radius:9px;
+    background:var(--accent);
+    color:var(--on-accent);
+    font-size:10px;
+    font-weight:700;
+    line-height:16px;
+    text-align:center;
+  }
   .toast.show{ opacity:1; }
 
   .homeScreen{
@@ -2508,16 +2533,6 @@ function reportError(err){
     color:var(--ink-soft);
     margin-top:2px;
   }
-  #whatsNewScreen .screenTopBar{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:8px;
-  }
-  .whatsNewBack{
-    color:var(--accent-text);
-    font-size:15px;
-    min-height:44px;
-  }
   .whatsNewIntro{
     color:var(--ink-soft);
     font-size:14px;
@@ -2628,6 +2643,7 @@ function reportError(err){
       padding:10px 12px;
     }
     .qbBtn span{ font-size:15px; }
+    .qbBtn .qbCount{ position:static; margin-left:auto; font-size:11px; }
     .qbBtn.on{ background:rgba(var(--accent-rgb),0.1); }
     .sheet{
       left:auto;
@@ -3083,7 +3099,6 @@ function reportError(err){
 
 <main id="whatsNewScreen" class="screenWrap" style="display:none;" hidden aria-labelledby="whatsNewScreenHeading">
   <div class="screenTopBar">
-    <button type="button" class="linkBtn whatsNewBack" id="whatsNewBackBtn">← Shelf</button>
     <h1 id="whatsNewScreenHeading" tabindex="-1">What's new</h1>
   </div>
   <p class="whatsNewIntro">Movies added to the shelf this week and last week, newest first.</p>
@@ -3328,6 +3343,11 @@ function reportError(err){
   <button type="button" class="qbBtn" id="tabBrowse">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>
     <span>Shelf</span>
+  </button>
+  <button type="button" class="qbBtn" id="tabWhatsNew">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3l1.9 5.1L18 10l-5.1 1.9L11 17l-1.9-5.1L4 10l5.1-1.9z"/><path d="M18.5 15l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></svg>
+    <span>What's new</span>
+    <span class="qbCount" id="whatsNewTabCount" hidden></span>
   </button>
   <button type="button" class="qbBtn" id="tabFamily">
     <span class="qbDot" aria-hidden="true"></span>
@@ -4332,7 +4352,7 @@ function createMeta(idx, m, detailScope){
   detailBtn.setAttribute('aria-label', `${isOpen ? 'Hide' : 'Show'} details for ${m.t}`);
   detailBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   detailBtn.setAttribute('aria-controls', detailId);
-  detailBtn.onclick = () => toggleDetail(idx);
+  detailBtn.onclick = event => toggleDetail(idx, event.currentTarget);
   links.appendChild(detailBtn);
 
   const sourceUrl = m.srcUrl ? safeSourceUrl(m.srcUrl) : '';
@@ -4724,11 +4744,24 @@ function move(idx, dir){
   });
 }
 
-function toggleDetail(idx){
+// Opening one movie's details closes any other open one. When the closed one
+// sat above, everything below shifted up and the tapped row slid off screen,
+// so this re-pins the tapped row to where it was before the re-render.
+function toggleDetail(idx, anchor){
+  const row = anchor && anchor.closest('li.row, .newRow');
+  const link = row && row.querySelector('.detailLink[aria-controls]');
+  const detailId = link && link.getAttribute('aria-controls');
+  const topBefore = row ? row.getBoundingClientRect().top : null;
+
   focusPreservingRerender(idx, () => {
     openDetail = openDetail === idx ? null : idx;
     renderCurrentView();
   });
+
+  if(!detailId || topBefore === null) return;
+  const newLink = document.querySelector(`.detailLink[aria-controls="${detailId}"]`);
+  const newRow = newLink && newLink.closest('li.row, .newRow');
+  if(newRow) window.scrollBy(0, newRow.getBoundingClientRect().top - topBefore);
 }
 
 function resetOrder(){
@@ -5526,6 +5559,53 @@ function movieGuidanceFor(num){
   return MOVIE_GUIDANCE[String(num)] || null;
 }
 
+// Reads the before/after notes out of a movie's Pre-Show program as plain
+// text, so Shelf can show them without loading the OpenUI renderer. The
+// programs follow the fixed template in the movie-watchlist-updater skill:
+// an optional Callout("warning", title, text) for something to prep for, a
+// "Gentle. Nothing to prep for." note, and an "Ask after: ..." TextContent.
+function preShowNotes(movie){
+  const guidance = movieGuidanceFor(movie.num);
+  const code = guidance && typeof guidance.preShow === 'string' ? guidance.preShow : '';
+  const notes = { before: null, gentle: false, askAfter: null };
+  if(!code) return notes;
+  const str = '"(?:[^"\\\\]|\\\\.)*"';
+  try{
+    const callout = new RegExp(`Callout\\("warning", (${str}), (${str})\\)`).exec(code);
+    if(callout) notes.before = { title: JSON.parse(callout[1]), text: JSON.parse(callout[2]) };
+    for(const match of code.matchAll(new RegExp(`TextContent\\((${str})`, 'g'))){
+      const text = JSON.parse(match[1]);
+      if(text.startsWith('Ask after:')) notes.askAfter = text.slice('Ask after:'.length).trim();
+      else if(text.startsWith('Gentle.')) notes.gentle = true;
+    }
+  }catch(err){
+    return { before: null, gentle: false, askAfter: null };
+  }
+  return notes;
+}
+
+function fillMovieDetail(detail, m, isOpen){
+  detail.textContent = m.full;
+  if(!isOpen) return;
+  const notes = preShowNotes(m);
+  if(!notes.before && !notes.gentle && !notes.askAfter) return;
+
+  const guide = document.createElement('div');
+  guide.className = 'detailGuide';
+  const addLine = (label, text) => {
+    const line = document.createElement('p');
+    const strong = document.createElement('strong');
+    strong.textContent = `${label} `;
+    line.appendChild(strong);
+    line.appendChild(document.createTextNode(text));
+    guide.appendChild(line);
+  };
+  if(notes.before) addLine('Before you watch:', `${notes.before.title.replace(/[.!?]$/, '')}. ${notes.before.text}`);
+  else if(notes.gentle) addLine('Before you watch:', 'Gentle. Nothing to prep for.');
+  if(notes.askAfter) addLine('Ask after:', notes.askAfter);
+  detail.appendChild(guide);
+}
+
 // ---- Pre-show. The OpenUI renderer is self-hosted (CSP only allows
 // same-origin scripts, and sw.js only caches same-origin) and pinned to
 // one exact version. It's ~3.2 MB, so it loads only when a pick that has
@@ -5900,6 +5980,7 @@ function initScreens(){
   });
   tabs.home = document.getElementById('tabHome');
   tabs.browse = document.getElementById('tabBrowse');
+  tabs.whatsNew = document.getElementById('tabWhatsNew');
   tabs.family = document.getElementById('tabFamily');
   tabs.setup = null;
 
@@ -5948,6 +6029,7 @@ function renderCurrentView(){
   const firstRunShelfIntro = document.getElementById('firstRunShelfIntro');
   if(firstRunShelfIntro) firstRunShelfIntro.hidden = !!(state.children && state.children.length);
   renderNewSection();
+  updateWhatsNewTabCount();
   renderChildren();
   renderTonightKidChoices();
   if(currentScreen === 'whatsNew') renderWhatsNew();
@@ -6018,7 +6100,7 @@ function appendNewRow(container, idx, detailScope){
   const title = document.createElement('div');
   title.className = 'title';
   title.textContent = `${m.t} (${m.y})`;
-  title.onclick = () => toggleDetail(idx);
+  title.onclick = event => toggleDetail(idx, event.currentTarget);
   const tag = document.createElement('div');
   tag.className = 'newTag';
   tag.textContent = m.addedVia === 'request' ? 'By request' : 'New release';
@@ -6039,8 +6121,18 @@ function appendNewRow(container, idx, detailScope){
   detail.id = `shelf-${detailScope}-detail-${m.num}`;
   detail.className = 'detail safeBetDetail' + (openDetail === idx ? ' open' : '') + (poster ? '' : ' noPosterDetail');
   detail.hidden = openDetail !== idx;
-  detail.textContent = m.full;
+  fillMovieDetail(detail, m, openDetail === idx);
   container.appendChild(detail);
+}
+
+function updateWhatsNewTabCount(){
+  const count = getNewIndicesByWeek()[0].indices.length;
+  const badge = document.getElementById('whatsNewTabCount');
+  badge.hidden = count === 0;
+  badge.textContent = count === 0 ? '' : String(count);
+  const tab = document.getElementById('tabWhatsNew');
+  if(count === 0) tab.removeAttribute('aria-label');
+  else tab.setAttribute('aria-label', `What's new, ${count} added this week`);
 }
 
 function formatWeekRange(start, end){
@@ -6938,7 +7030,7 @@ function render(){
     const title = document.createElement('div');
     title.className = 'title';
     title.textContent = `${m.t} (${m.y})`;
-    title.onclick = () => toggleDetail(idx);
+    title.onclick = event => toggleDetail(idx, event.currentTarget);
     const meta = createMeta(idx, m, 'list');
     info.appendChild(title);
     info.appendChild(meta);
@@ -6977,7 +7069,7 @@ function render(){
     detail.id = `shelf-list-detail-${m.num}`;
     detail.className = 'detail' + (openDetail === idx ? ' open' : '') + (poster ? '' : ' noPosterDetail');
     detail.hidden = openDetail !== idx;
-    detail.textContent = m.full;
+    fillMovieDetail(detail, m, openDetail === idx);
     listEl.appendChild(detail);
   });
 
@@ -7830,9 +7922,8 @@ document.getElementById('tabBrowse').addEventListener('click', ()=>{
 document.getElementById('posterViewer').addEventListener('click', event => {
   if(event.target.id !== 'posterViewerTitle') document.getElementById('posterViewer').close();
 });
-document.getElementById('whatsNewBackBtn').addEventListener('click', ()=>{
-  showScreen('browse');
-  document.getElementById('browseScreenHeading').focus();
+document.getElementById('tabWhatsNew').addEventListener('click', ()=>{
+  showScreen('whatsNew');
 });
 document.getElementById('tabFamily').addEventListener('click', ()=>{
   showScreen('family');
@@ -8383,7 +8474,7 @@ function updateThemeColorMeta(pref){
     meta.setAttribute('name', 'theme-color');
     document.head.appendChild(meta);
   }
-  meta.setAttribute('content', effectiveDark ? '#0E0F14' : '#F4F6FA');
+  meta.setAttribute('content', effectiveDark ? '#262624' : '#F4F6FA');
 }
 
 function applyTheme(pref){

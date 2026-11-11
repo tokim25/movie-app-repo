@@ -60,7 +60,25 @@ test('What\'s new lists this week and last week, opened from the Shelf teaser', 
   await expect(page.locator('#whatsNewScreen')).toBeVisible();
   await expect(weeks.nth(0).locator('.newRow .check').first()).toHaveAttribute('aria-pressed', 'true');
 
-  await page.locator('#whatsNewBackBtn').click();
+  await page.locator('#tabBrowse').click();
   await expect(page.locator('#browseScreen')).toBeVisible();
   await expect(page.locator('#whatsNewScreen')).toBeHidden();
+});
+
+test('What\'s new is its own nav tab with a count of this week\'s additions', async ({ page }) => {
+  const pinnedNow = new Date(`${latestCatalogAddedAt()}T12:00:00Z`);
+  const [thisWeek] = expectedWeekCounts(pinnedNow);
+  await page.clock.install({ time: pinnedNow });
+  await page.clock.pauseAt(pinnedNow);
+  await page.goto('/');
+  await setupSampleFamily(page);
+
+  const tab = page.locator('#tabWhatsNew');
+  await expect(page.locator('#whatsNewTabCount')).toHaveText(String(thisWeek));
+  await expect(tab).toHaveAttribute('aria-label', `What's new, ${thisWeek} added this week`);
+
+  await tab.click();
+  await expect(page.locator('#whatsNewScreen')).toBeVisible();
+  await expect(tab).toHaveAttribute('aria-current', 'page');
+  await expect(page.locator('#whatsNewList .whatsNewWeek')).toHaveCount(2);
 });
