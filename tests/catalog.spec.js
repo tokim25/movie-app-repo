@@ -16,7 +16,7 @@ test('renders without console errors and shows the full catalog', async ({ page 
 
   const movieCount = await page.evaluate(() => MOVIES.length);
   expect(movieCount).toBeGreaterThan(500);
-  await expect(page.locator('#statLeft')).toHaveText(String(movieCount));
+  await expect(page.locator('#statLeftMore')).toHaveText(String(movieCount));
 
   // Shelf owns browsing and catalog facets.
   const studioTileCount = await page.locator('#studioGrid .studioTile').count();

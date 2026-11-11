@@ -593,7 +593,8 @@ test('a mid-session Drive sync-merge that pulls in a remotely-added child update
   // two-child subset.
   await page.locator('#tabBrowse').click();
   await page.locator('#browseScreen').waitFor({ state: 'visible' });
-  await expect(page.locator('#list .fitSignal').first()).toContainText('selected kids');
+  // Warning chips name the one child behind them; a Fits chip names the group.
+  await expect(page.locator('#list .fitSignal:not(.amber):not(.red)').first()).toContainText('selected kids');
 });
 
 test('a newer untouched sample family cannot replace an older real Drive family', async ({ page }) => {

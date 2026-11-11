@@ -230,7 +230,7 @@ test('a Want to watch pick renders the Want to watch source label', async ({ pag
   await page.locator('#findTonightPickBtn').click();
 
   await expect(page.locator('#tonightPickTitle')).toHaveText(title);
-  await expect(page.locator('#tonightPickReasons')).toContainText('Pulled from Want to watch.');
+  await expect(page.locator('#tonightPickReasons')).toContainText('Someone in your family starred this one.');
 });
 
 test('mood ranking crosses tier boundaries instead of exhausting Want to watch first (#97)', async ({ page }) => {

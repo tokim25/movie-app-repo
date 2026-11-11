@@ -261,7 +261,7 @@ function reportError(err){
     --flag-drinking:oklch(0.55 0.09 250);
     --new:#9A3F1F;
     --new-bg:#F6E4DB;
-    --success:#18794E;
+    --success:#136A43;
     --error:#B3123F;
     --on-error:#FFFFFF;
     --warning:#8A5A00;
@@ -478,6 +478,16 @@ function reportError(err){
     font-size:22px;
     font-weight:600;
     letter-spacing:-0.01em;
+  }
+  .memories{
+    margin:18px 0 0;
+    font-size:14px;
+    color:var(--ink-soft);
+  }
+  .memories b{
+    color:var(--ink);
+    font-weight:600;
+    font-variant-numeric:tabular-nums;
   }
   .syncAlert{
     position:fixed;
@@ -1680,11 +1690,43 @@ function reportError(err){
     padding:18px 0 0;
     border-top:1px solid var(--line);
   }
-  .pickCard.watched{
-    opacity:0.62;
+  /* Watched is a memory, not a cancelled item: a ticket stub stamps onto the
+     card instead of striking the title through. */
+  .pickCard{ position:relative; }
+  .pickCard.watched::after{
+    content:attr(data-admit);
+    position:absolute;
+    top:30px;
+    right:10px;
+    padding:6px 12px;
+    border:1.5px dashed var(--accent-text);
+    border-radius:4px;
+    background:var(--surface);
+    color:var(--accent-text);
+    font-size:10.5px;
+    font-weight:700;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    white-space:nowrap;
+    transform:rotate(-4deg);
+    -webkit-mask:radial-gradient(circle at 0 50%, transparent 5px, #000 5.5px) left / 51% 100% no-repeat,
+                 radial-gradient(circle at 100% 50%, transparent 5px, #000 5.5px) right / 51% 100% no-repeat;
+            mask:radial-gradient(circle at 0 50%, transparent 5px, #000 5.5px) left / 51% 100% no-repeat,
+                 radial-gradient(circle at 100% 50%, transparent 5px, #000 5.5px) right / 51% 100% no-repeat;
+    animation:stubStamp 180ms ease-out;
   }
-  .pickCard.watched .pickTitle{
-    text-decoration:line-through;
+  @keyframes stubStamp{
+    from{ opacity:0; transform:rotate(-4deg) scale(1.3); }
+    to{ opacity:1; transform:rotate(-4deg) scale(1); }
+  }
+  .star.pop{ animation:starPop 160ms ease-out; }
+  @keyframes starPop{
+    from{ transform:scale(1.3); }
+    to{ transform:scale(1); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .pickCard.watched::after,
+    .star.pop{ animation:none; }
   }
   .pickMeta{
     color:var(--ink-faint);
@@ -1820,12 +1862,13 @@ function reportError(err){
   .familyAvatar{
     width:42px;
     height:42px;
-    border-radius:13px;
+    border-radius:50%;
     display:grid;
     place-items:center;
     background:rgba(var(--accent-rgb),0.12);
-    color:var(--ink);
-    font-size:15px;
+    color:var(--accent-text);
+    font-family:"Newsreader", Georgia, "Times New Roman", serif;
+    font-size:21px;
     font-weight:600;
     flex:0 0 auto;
   }
@@ -2256,8 +2299,8 @@ function reportError(err){
     min-height:24px;
     border-radius:999px;
     padding:4px 8px;
-    background:rgba(var(--accent-rgb),0.09);
-    color:var(--accent-text);
+    background:color-mix(in srgb, var(--success) 9%, transparent);
+    color:var(--success);
     font-size:12px;
     font-weight:600;
   }
@@ -2316,10 +2359,12 @@ function reportError(err){
     }
     .familyTopline{
       align-items:flex-start;
+      flex-wrap:wrap;
     }
     .familyMetaActions{
-      flex-direction:column;
-      align-items:flex-end;
+      width:100%;
+      padding-left:54px;
+      flex-wrap:wrap;
     }
     .childEditRow{
       grid-template-columns:1fr;
@@ -2917,12 +2962,11 @@ function reportError(err){
 <main id="homeScreen" class="homeScreen" aria-labelledby="homeScreenHeading">
   <header>
     <h1 id="homeScreenHeading" tabindex="-1">What should we <span class="titleKeepTogether">watch tonight?</span></h1>
-    <div class="subtitle">One good pick for the people, time, and mood you have tonight.</div>
-    <div class="stats">
-      <div><b id="statChecked">0</b>Watched</div>
-      <div><b id="statLeft">1038</b>To watch</div>
-      <div><b id="statPriority">0</b>Want to watch</div>
-    </div>
+    <div class="subtitle" id="tonightSubtitle">One good pick for the people, time, and mood you have tonight.</div>
+    <p class="memories">
+      <span id="tonightMemoriesCounts" hidden><b id="statChecked">0</b> watched together · <b id="statPriority">0</b> starred for later</span>
+      <span id="tonightMemoriesFirst">Your first movie night is one tap away.</span>
+    </p>
   </header>
 
   <div class="homeSection tight">
@@ -4310,10 +4354,10 @@ function createMeta(idx, m, detailScope){
   const csmBadge = document.createElement('span');
   csmBadge.className = 'badge csm';
   csmBadge.title = 'Common Sense Media';
-  csmBadge.textContent = `${m.studio} · `;
+  csmBadge.textContent = `${m.studio} `;
   const csmAge = document.createElement('span');
   csmAge.className = 'nowrap';
-  csmAge.textContent = `CSM ${m.ca}`;
+  csmAge.textContent = `· CSM ${m.ca}`;
   csmBadge.appendChild(csmAge);
   facts.appendChild(csmBadge);
 
@@ -4384,7 +4428,8 @@ function createFitSignals(idx){
   const driving = fit.issues.filter(issue => issue.severity === fit.verdict);
   if(driving.length){
     const more = driving.length - 1;
-    signal.textContent = `${verdictText} · ${driving[0].child.name}: ${driving[0].flag.label}${more ? ` (+${more} more)` : ''}`;
+    const verdictWord = fit.verdict === 'red' ? 'Above limits' : 'Review';
+    signal.textContent = `${verdictWord}: ${driving[0].child.name} · ${driving[0].flag.label}${more ? ` +${more}` : ''}`;
   }else{
     signal.textContent = verdictText;
   }
@@ -4392,11 +4437,11 @@ function createFitSignals(idx){
   return wrap;
 }
 
-function showToast(msg){
+function showToast(msg, duration = 1400){
   toastEl.textContent = msg;
   toastEl.classList.add('show');
   clearTimeout(showToast._t);
-  showToast._t = setTimeout(()=>toastEl.classList.remove('show'), 1400);
+  showToast._t = setTimeout(()=>toastEl.classList.remove('show'), duration);
 }
 
 function clearToast(){
@@ -4722,6 +4767,9 @@ function togglePriority(idx){
     saveState();
     renderCurrentView();
   });
+  if(markValue(state.priority, idx)){
+    document.querySelectorAll(`.star[data-idx="${idx}"]`).forEach(star => star.classList.add('pop'));
+  }
   maybeShowGoogleSignInNudgeAfterMarks();
 }
 
@@ -5423,7 +5471,7 @@ function showTonightPick(candidateOverride){
     const noMatchCard = document.getElementById('tonightNoMatchCard');
     noMatchCard.style.display = 'block';
     document.getElementById('tonightNoMatchReason').textContent = MOVIES.length
-      ? "Nothing fits who's watching, watched history, and content settings right now."
+      ? "Nothing on the shelf fits tonight's crew and your content limits right now. That's the filter doing its job, not a glitch."
       : 'There are no movies in the catalog yet.';
     document.getElementById('tonightPickStatus').textContent = `No confident match. ${document.getElementById('tonightNoMatchReason').textContent}`;
     setFindPickMode('find');
@@ -5444,6 +5492,7 @@ function showTonightPick(candidateOverride){
   tonightSelection.verdict = verdict.verdict;
 
   const verdictEl = document.getElementById('tonightVerdict');
+  document.getElementById('tonightPickCard').dataset.admit = 'Admit one';
   document.getElementById('tonightPickCard').classList.toggle('watched', markValue(state.checked, idx));
   updateTonightWatchBtn();
   verdictEl.textContent = tonightVerdictLabel(verdict.verdict);
@@ -5485,7 +5534,7 @@ function showTonightPick(candidateOverride){
   copy.push(tonightSelection.time === 999
     ? `${formatRuntime(movie.runtimeMinutes)} runtime.`
     : `${formatRuntime(movie.runtimeMinutes)} · Fits your ${tonightSelection.time}-minute window.`);
-  copy.push(candidate.source === 'Want to watch' ? 'Pulled from Want to watch.' : candidate.source === 'Recent releases' ? 'Pulled from recent releases.' : 'Pulled from the rest of Shelf.');
+  copy.push(candidate.source === 'Want to watch' ? 'Someone in your family starred this one.' : candidate.source === 'Recent releases' ? 'Pulled from recent releases.' : 'Pulled from the rest of Shelf.');
   const reasonLines = copy.slice(0, 3);
   if(tonightWorryExclude) reasonLines.push(`Leaving out titles whose notes mention ${WORRY_LABELS[tonightWorryExclude].toLowerCase()}, or that haven't been checked for it.`);
   reasonLines.forEach(text=>{
@@ -6014,8 +6063,21 @@ function renderStudioGrid(){
   grid.appendChild(more);
 }
 
+const TONIGHT_SUBTITLE_DEFAULT = 'One good pick for the people, time, and mood you have tonight.';
+function tonightSubtitleFor(date){
+  const hour = date.getHours();
+  const day = date.getDay();
+  const month = date.getMonth();
+  if(hour >= 20 || hour < 4) return 'Late start? Set a shorter time under Change.';
+  if(day === 5) return 'Friday night. Big-screen energy.';
+  if(day === 6) return 'Saturday night at the movies.';
+  if((month === 10 && date.getDate() >= 20) || month === 11) return 'Cozy season. Blankets optional, popcorn encouraged.';
+  return TONIGHT_SUBTITLE_DEFAULT;
+}
+
 function renderCurrentView(){
   posterEagerBudget = 24;
+  document.getElementById('tonightSubtitle').textContent = tonightSubtitleFor(new Date(Date.now()));
   const firstRunShelfIntro = document.getElementById('firstRunShelfIntro');
   if(firstRunShelfIntro) firstRunShelfIntro.hidden = !!(state.children && state.children.length);
   updateWhatsNewTabCount();
@@ -6129,8 +6191,10 @@ function updateStats(){
   const leftCount = MOVIES.length - checkedCount;
   const priorityCount = markCount(state.priority);
   document.getElementById('statChecked').textContent = checkedCount;
-  document.getElementById('statLeft').textContent = leftCount;
   document.getElementById('statPriority').textContent = priorityCount;
+  const hasMemories = checkedCount > 0 || priorityCount > 0;
+  document.getElementById('tonightMemoriesCounts').hidden = !hasMemories;
+  document.getElementById('tonightMemoriesFirst').hidden = hasMemories;
   document.getElementById('statCheckedMore').textContent = checkedCount;
   document.getElementById('statLeftMore').textContent = leftCount;
   document.getElementById('statPriorityMore').textContent = priorityCount;
@@ -6970,6 +7034,7 @@ function render(){
     const num = document.createElement('div');
     num.className = 'num';
     num.textContent = (sortMode === 'custom' ? globalPos : visiblePos) + 1;
+    num.hidden = sortMode !== 'custom';
 
     const check = document.createElement('button');
     check.className = 'check' + (isChecked ? ' on' : '');
@@ -7958,17 +8023,33 @@ document.getElementById('findTonightPickBtn').addEventListener('click', ()=>{
   showTonightPick();
 });
 
+const WATCH_MILESTONES = {
+  1: 'Your first movie night, logged.',
+  10: "That's 10 movies watched together.",
+  25: '25 movie nights. Popcorn veterans.',
+  50: '50 movies watched together. Quite a shelf.',
+  100: '100 movie nights. Take a bow.'
+};
+
 document.getElementById('tonightWatchBtn').addEventListener('click', ()=>{
   const idx = tonightSelection.currentPickIdx;
   if(idx === null) return;
   toggleCheck(idx);
   const isWatched = markValue(state.checked, idx);
-  document.getElementById('tonightPickCard').classList.toggle('watched', isWatched);
+  const card = document.getElementById('tonightPickCard');
+  if(isWatched) card.dataset.admit = `Admit one · ${new Date(Date.now()).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' })}`;
+  card.classList.toggle('watched', isWatched);
   document.getElementById('tonightVerdict').textContent = isWatched
     ? 'Watched'
     : tonightVerdictLabel(tonightSelection.verdict);
   updateTonightWatchBtn();
-  showToast(isWatched ? 'Marked watched' : 'Removed from watched');
+  if(isWatched){
+    const milestone = WATCH_MILESTONES[markCount(state.checked)];
+    if(milestone) showToast(milestone, 2600);
+    else showToast("Added to your family's movie log.");
+  }else{
+    showToast('Removed from watched');
+  }
 });
 
 document.getElementById('tonightWatchAnywayBtn').addEventListener('click', logWatchAnywaySignal);

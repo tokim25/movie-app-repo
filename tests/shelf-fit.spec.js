@@ -53,7 +53,8 @@ test('a child added via the Family tab after the first one is included in fit ba
   // list only a subset of names.
   await page.locator('#tabBrowse').click();
   await page.locator('#browseScreen').waitFor({ state: 'visible' });
-  await expect(page.locator('#list .fitSignal').first()).toContainText('selected kids');
+  // Warning chips name the one child behind them; a Fits chip names the group.
+  await expect(page.locator('#list .fitSignal:not(.amber):not(.red)').first()).toContainText('selected kids');
 });
 
 test('Shelf has no What\'s new block now that What\'s new is its own tab', async ({ page }) => {
