@@ -858,7 +858,57 @@ function reportError(err){
   .poster.safeBetPoster{
     width:38px;
   }
+  .posterZoom{
+    display:block;
+    width:100%;
+    height:100%;
+    padding:0;
+    border:0;
+    background:none;
+    cursor:zoom-in;
+  }
+  .posterViewer{
+    border:0;
+    padding:0;
+    background:transparent;
+    max-width:none;
+    max-height:none;
+    overflow:visible;
+  }
+  .posterViewer::backdrop{
+    background:rgba(0,0,0,0.85);
+  }
+  .posterViewer img{
+    display:block;
+    width:min(88vw, 420px);
+    max-height:78vh;
+    object-fit:contain;
+    border-radius:10px;
+    cursor:zoom-out;
+  }
+  .posterViewerTitle{
+    color:#fff;
+    text-align:center;
+    font-size:15px;
+    font-weight:600;
+    margin:12px 0 0;
+  }
+  .posterViewerClose{
+    position:absolute;
+    top:-52px;
+    right:0;
+    width:44px;
+    height:44px;
+    border:0;
+    border-radius:22px;
+    background:rgba(255,255,255,0.15);
+    color:#fff;
+    font-size:28px;
+    line-height:1;
+    cursor:pointer;
+  }
   .poster .ribbon{
+    pointer-events:none;
     position:absolute;
     top:4px;
     left:4px;
@@ -1658,44 +1708,6 @@ function reportError(err){
     width:132px;
     border-radius:10px;
     box-shadow:var(--shadow-card);
-  }
-  /* The reveal. The title text is already correct in the DOM before any of
-     this runs -- the shuffle is a decorative overlay sitting on top of it, so
-     anything reading the card (a screen reader, a test, a viewer who arrives
-     mid-animation) sees the real pick immediately and only the surface
-     animates. */
-  .pickShuffle{
-    position:absolute;
-    left:0;
-    right:0;
-    color:var(--ink-faint);
-    font-family:"Newsreader", Georgia, "Times New Roman", serif;
-    font-size:30px;
-    font-weight:600;
-    line-height:1.15;
-    pointer-events:none;
-    overflow:hidden;
-    white-space:nowrap;
-    text-overflow:ellipsis;
-  }
-  .pickCard{ position:relative; }
-  .pickCard.revealing .pickTitle{ visibility:hidden; }
-  .pickCard.revealing .pickStage{ opacity:0.35; }
-  .pickCard.revealed .pickStage,
-  .pickCard.revealed .pickTitle{
-    animation:pickSettle 380ms cubic-bezier(0.2, 0.7, 0.3, 1) both;
-  }
-  @keyframes pickSettle{
-    from{ opacity:0; transform:translateY(6px) scale(0.985); }
-    to{ opacity:1; transform:none; }
-  }
-  /* A reveal is motion for its own sake, so it is the first thing that should
-     go when someone has asked the OS for less of it. The JS skips the shuffle
-     outright; this covers the settle. */
-  @media (prefers-reduced-motion: reduce){
-    .pickCard.revealed .pickStage,
-    .pickCard.revealed .pickTitle{ animation:none; }
-    .pickCard.revealing .pickStage{ opacity:1; }
   }
   .pickReasons{
     margin:10px 0 0;
@@ -3276,6 +3288,12 @@ function reportError(err){
   <button type="button" id="applyFiltersBtn" class="applyBtn">Show movies</button>
 </div>
 
+<dialog id="posterViewer" class="posterViewer" aria-labelledby="posterViewerTitle">
+  <button type="button" class="posterViewerClose" id="posterViewerClose" aria-label="Close poster">&times;</button>
+  <img id="posterViewerImg" alt="">
+  <p id="posterViewerTitle" class="posterViewerTitle"></p>
+</dialog>
+
 <div id="googleSyncAlert" class="syncAlert" style="display:none;" role="status" aria-live="polite">
   <div class="syncAlertInner">
     <div class="syncAlertCopy">
@@ -3874,8 +3892,17 @@ function getNewIndicesByWeek(){
   }));
 }
 
+// Called once per movie while building Tonight's tiers, so it is cached
+// rather than re-scanning the whole catalog each time.
+let latestCatalogReleaseYearCache = { length: -1, year: 0 };
 function latestCatalogReleaseYear(){
-  return Math.max(...MOVIES.map((_, idx) => movieYear(idx)).filter(year => year < 9999));
+  if(latestCatalogReleaseYearCache.length !== MOVIES.length){
+    latestCatalogReleaseYearCache = {
+      length: MOVIES.length,
+      year: Math.max(...MOVIES.map((_, idx) => movieYear(idx)).filter(year => year < 9999))
+    };
+  }
+  return latestCatalogReleaseYearCache.year;
 }
 
 function isRecentRelease(movie){
@@ -4377,8 +4404,8 @@ function createPoster(m, className, isNew){
   wrap.className = 'poster' + (className ? ' ' + className : '');
 
   const showFallback = () => {
-    const existingImg = wrap.querySelector('img');
-    if(existingImg) existingImg.remove();
+    const existingZoom = wrap.querySelector('.posterZoom');
+    if(existingZoom) existingZoom.remove();
     if(wrap.querySelector('.posterFallback')) return;
     const fallback = document.createElement('div');
     fallback.className = 'posterFallback';
@@ -4405,7 +4432,13 @@ function createPoster(m, className, isNew){
     img.height = poster.h || 300;
     img.onerror = showFallback;
     img.src = poster.u;
-    wrap.appendChild(img);
+    const zoom = document.createElement('button');
+    zoom.type = 'button';
+    zoom.className = 'posterZoom';
+    zoom.setAttribute('aria-label', `View larger poster for ${m.t}`);
+    zoom.onclick = () => openPosterViewer(m, poster.u);
+    zoom.appendChild(img);
+    wrap.appendChild(zoom);
   }else{
     showFallback();
   }
@@ -4418,6 +4451,15 @@ function createPoster(m, className, isNew){
   }
 
   return wrap;
+}
+
+function openPosterViewer(m, url){
+  const viewer = document.getElementById('posterViewer');
+  const img = document.getElementById('posterViewerImg');
+  img.src = url;
+  img.alt = `Poster for ${m.t}`;
+  document.getElementById('posterViewerTitle').textContent = `${m.t} (${m.y})`;
+  viewer.showModal();
 }
 
 function loadState(){
@@ -5206,8 +5248,18 @@ function moodScore(idx){
   return 0;
 }
 
+// Scores each movie once up front: calling moodScore() inside the sort
+// comparator re-scored every movie on every comparison, which made a single
+// Tonight pick take well over a second on a 1,100-title catalog.
+function moodScoresFor(indices){
+  const scores = new Map();
+  indices.forEach(idx => { if(!scores.has(idx)) scores.set(idx, moodScore(idx)); });
+  return scores;
+}
+
 function sortForTonightMood(indices, baseCompare){
-  return indices.slice().sort((a, b) => moodScore(a) - moodScore(b) || baseCompare(a, b));
+  const scores = moodScoresFor(indices);
+  return indices.slice().sort((a, b) => scores.get(a) - scores.get(b) || baseCompare(a, b));
 }
 
 function tonightSourceTiers(){
@@ -5235,7 +5287,8 @@ function flattenTonightPool(tiered){
   tiered.forEach(tier => {
     tier.indices.forEach(idx => pool.push({ idx, source: tier.source }));
   });
-  return pool.sort((a, b) => moodScore(a.idx) - moodScore(b.idx) || compareByAge(a.idx, b.idx));
+  const scores = moodScoresFor(pool.map(candidate => candidate.idx));
+  return pool.sort((a, b) => scores.get(a.idx) - scores.get(b.idx) || compareByAge(a.idx, b.idx));
 }
 
 function findTonightCandidate(){
@@ -5324,73 +5377,6 @@ function tonightVerdictLabel(verdict){
 // so the loudest control on screen invited rejecting the result before the
 // result had been read. Label and emphasis move together here so the three
 // call sites can't drift apart the way the label alone once did.
-// The pick is the one moment this app exists to deliver, and it used to
-// resolve like a form field: the whole result present in frame one, no beat
-// of anticipation. This sifts a few candidate titles and settles.
-//
-// It deliberately never touches #tonightPickTitle, which already holds the
-// real pick before this runs. The shuffle is a separate overlay, so the DOM
-// is truthful from the first frame -- screen readers announce the actual
-// pick, and anything reading the card mid-reveal gets the real title rather
-// than a decorative frame.
-const PICK_REVEAL_MS = 550;
-const PICK_REVEAL_TICK = 70;
-
-function prefersReducedMotion(){
-  return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-}
-
-function stopPickReveal(card){
-  clearInterval(stopPickReveal._tick);
-  clearTimeout(stopPickReveal._end);
-  clearTimeout(stopPickReveal._settle);
-  if(!card) return;
-  const stale = card.querySelector('.pickShuffle');
-  if(stale) stale.remove();
-  card.classList.remove('revealing', 'revealed');
-}
-
-function runPickReveal(card, currentLabel){
-  stopPickReveal(card);
-  if(!card || prefersReducedMotion()) return;
-
-  // Sift real catalog titles, so it reads as the app looking rather than as
-  // an ornament spinning.
-  // Top-level `const MOVIES` is script-scoped, so it is not a window
-  // property -- reach it lexically, the way createPoster() does.
-  const pool = [];
-  if(typeof MOVIES !== 'undefined' && Array.isArray(MOVIES) && MOVIES.length){
-    for(let i = 0; i < 6; i++){
-      const m = MOVIES[Math.floor(Math.random() * MOVIES.length)];
-      if(m && m.t) pool.push(`${m.t} (${m.y})`);
-    }
-  }
-  if(!pool.length) return;
-
-  const titleEl = document.getElementById('tonightPickTitle');
-  if(!titleEl) return;
-  const shuffle = document.createElement('div');
-  shuffle.className = 'pickShuffle';
-  shuffle.setAttribute('aria-hidden', 'true');
-  shuffle.textContent = pool[0];
-  titleEl.insertAdjacentElement('afterend', shuffle);
-  card.classList.add('revealing');
-
-  let i = 0;
-  stopPickReveal._tick = setInterval(()=>{
-    i += 1;
-    shuffle.textContent = pool[i % pool.length];
-  }, PICK_REVEAL_TICK);
-
-  stopPickReveal._end = setTimeout(()=>{
-    clearInterval(stopPickReveal._tick);
-    shuffle.remove();
-    card.classList.remove('revealing');
-    card.classList.add('revealed');
-    stopPickReveal._settle = setTimeout(()=>card.classList.remove('revealed'), 420);
-  }, PICK_REVEAL_MS);
-}
-
 function setFindPickMode(mode){
   const btn = document.getElementById('findTonightPickBtn');
   if(!btn) return;
@@ -5410,7 +5396,6 @@ function showTonightPick(candidateOverride){
   if(candidate.noMatch){
     tonightSelection.currentPickIdx = null;
     tonightSelection.currentPickSource = null;
-    stopPickReveal(document.getElementById('tonightPickCard'));
     document.getElementById('homeScreen').classList.remove('hasPick');
     document.getElementById('tonightPickCard').style.display = 'none';
     const noMatchCard = document.getElementById('tonightNoMatchCard');
@@ -5520,7 +5505,6 @@ function showTonightPick(candidateOverride){
   updateTonightWatchAnywayBtn();
   document.getElementById('tonightPickCard').style.display = 'block';
   document.getElementById('homeScreen').classList.add('hasPick');
-  runPickReveal(document.getElementById('tonightPickCard'), `${movie.t} (${movie.y})`);
   document.getElementById('tonightPickStatus').textContent = `${tonightVerdictLabel(verdict.verdict)}: ${movie.t} (${movie.y}). ${copy[0]}`;
   // Issue #57: the button's static markup says "Find tonight's pick", but a
   // pick showing switches its own click handler over to skip-behavior. Keep
@@ -5837,7 +5821,6 @@ function resetTonightSkips(){
   // mistake a stale title for one evaluated under the newly selected
   // context, and since Mark watched/Watch anyway/Skip live inside
   // tonightPickCard, hiding it also takes those actions off screen.
-  stopPickReveal(document.getElementById('tonightPickCard'));
   document.getElementById('homeScreen').classList.remove('hasPick');
   document.getElementById('tonightPickCard').style.display = 'none';
   document.getElementById('tonightNoMatchCard').style.display = 'none';
@@ -7841,6 +7824,11 @@ document.getElementById('tabHome').addEventListener('click', ()=>{
 });
 document.getElementById('tabBrowse').addEventListener('click', ()=>{
   showScreen('browse');
+});
+// Tapping anywhere closes it: the close button, the poster, or the backdrop
+// (a click on the backdrop targets the <dialog> element itself).
+document.getElementById('posterViewer').addEventListener('click', event => {
+  if(event.target.id !== 'posterViewerTitle') document.getElementById('posterViewer').close();
 });
 document.getElementById('whatsNewBackBtn').addEventListener('click', ()=>{
   showScreen('browse');
