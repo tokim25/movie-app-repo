@@ -2973,11 +2973,11 @@ function reportError(err){
         <div class="pickStage" id="tonightPickStage"></div>
         <div class="pickMeta" id="tonightVerdict">Tonight's pick</div>
         <div class="pickTitle" id="tonightPickTitle"></div>
+        <ul class="pickReasons" id="tonightPickReasons"></ul>
         <section class="preShow" id="tonightPreShow" aria-labelledby="tonightPreShowLabel" hidden>
           <h2 class="preShowLabel" id="tonightPreShowLabel">Pre-show</h2>
           <div id="tonightPreShowBody"></div>
         </section>
-        <ul class="pickReasons" id="tonightPickReasons"></ul>
         <div class="recommendationEvidence" id="tonightEvidence"></div>
         <button type="button" class="detailLink" id="tonightDetailBtn" aria-expanded="false" aria-controls="tonightDetailBody">Details</button>
         <div class="detail" id="tonightDetailBody"></div>
@@ -3068,6 +3068,13 @@ function reportError(err){
     <span class="homeSectionLabel">Browse by</span>
     <div class="studioGrid" id="studioGrid"></div>
   </div>
+  <ul id="list"></ul>
+  <div class="listPagination" id="listPagination" style="display:none;">
+    <button type="button" id="listPagePrevBtn">Previous</button>
+    <span id="listPageStatus" aria-live="polite"></span>
+    <button type="button" id="listPageNextBtn">Next</button>
+  </div>
+  <div class="empty" id="emptyMsg" style="display:none;">No movies match your search.</div>
   <section class="requestPanel" id="requestMoviePanel" aria-labelledby="requestMovieTitle">
     <h2 id="requestMovieTitle">Request a movie</h2>
     <p>Ask for a title to be added to the shelf.</p>
@@ -3079,13 +3086,6 @@ function reportError(err){
     </form>
     <p class="requestStatus" id="requestMovieStatus" aria-live="polite"></p>
   </section>
-  <ul id="list"></ul>
-  <div class="listPagination" id="listPagination" style="display:none;">
-    <button type="button" id="listPagePrevBtn">Previous</button>
-    <span id="listPageStatus" aria-live="polite"></span>
-    <button type="button" id="listPageNextBtn">Next</button>
-  </div>
-  <div class="empty" id="emptyMsg" style="display:none;">No movies match your search.</div>
 </main>
 
 <main id="whatsNewScreen" class="screenWrap" style="display:none;" hidden aria-labelledby="whatsNewScreenHeading">
@@ -4370,19 +4370,21 @@ function createFitSignals(idx){
   const signal = document.createElement('span');
   signal.className = 'fitSignal' + (fit.verdict === 'green' ? '' : ` ${fit.verdict}`);
   const names = kids.length === state.children.length ? 'selected kids' : kids.map(child => child.name).join(' + ');
-  signal.textContent = fit.verdict === 'green'
+  const verdictText = fit.verdict === 'green'
     ? `Fits ${names}`
     : fit.verdict === 'amber'
       ? `Review for ${names}`
       : `Above settings for ${names}`;
-  wrap.appendChild(signal);
-  if(fit.issues.length){
-    const issue = fit.issues[0];
-    const detail = document.createElement('span');
-    detail.className = 'fitSignal amber';
-    detail.textContent = `${issue.child.name}: ${issue.flag.label}`;
-    wrap.appendChild(detail);
+  // One chip per row: the verdict, then the reason that drives it (the worst
+  // issue first), so the reason never reads as a separate, milder warning.
+  const driving = fit.issues.filter(issue => issue.severity === fit.verdict);
+  if(driving.length){
+    const more = driving.length - 1;
+    signal.textContent = `${verdictText} · ${driving[0].child.name}: ${driving[0].flag.label}${more ? ` (+${more} more)` : ''}`;
+  }else{
+    signal.textContent = verdictText;
   }
+  wrap.appendChild(signal);
   return wrap;
 }
 
@@ -4945,7 +4947,7 @@ function dismissWatchAnywayCue(childId, flagId){
 function reviewChildFlagSetting(childId, flagId){
   setSelectedFamilyChild(childId);
   const panel = document.getElementById('familySettingsPanel');
-  if(panel) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if(panel) panel.scrollIntoView({ behavior: scrollBehavior(), block: 'start' });
   const row = document.querySelector(`#familySettingsRows [data-flag="${flagId}"]`);
   if(row){
     row.setAttribute('tabindex', '-1');
@@ -5387,13 +5389,13 @@ function tonightVerdictLabel(verdict){
 // so the loudest control on screen invited rejecting the result before the
 // result had been read. Label and emphasis move together here so the three
 // call sites can't drift apart the way the label alone once did.
+// While a pick shows, the card's own Skip (which also asks why) is the one
+// way to move on, so this top button steps aside instead of becoming a
+// second, silent "Skip to next pick".
 function setFindPickMode(mode){
   const btn = document.getElementById('findTonightPickBtn');
   if(!btn) return;
-  const skipping = mode === 'skip';
-  btn.textContent = skipping ? 'Skip to next pick' : "Find tonight's pick";
-  btn.classList.toggle('primaryBtn', !skipping);
-  btn.classList.toggle('secondaryBtn', skipping);
+  btn.hidden = mode === 'skip';
 }
 
 function showTonightPick(candidateOverride){
@@ -5516,11 +5518,8 @@ function showTonightPick(candidateOverride){
   document.getElementById('tonightPickCard').style.display = 'block';
   document.getElementById('homeScreen').classList.add('hasPick');
   document.getElementById('tonightPickStatus').textContent = `${tonightVerdictLabel(verdict.verdict)}: ${movie.t} (${movie.y}). ${copy[0]}`;
-  // Issue #57: the button's static markup says "Find tonight's pick", but a
-  // pick showing switches its own click handler over to skip-behavior. Keep
-  // the label honest about which action it now performs; resetTonightSkips()
-  // (the one function every Change-panel handler already calls to invalidate
-  // the current pick) is the matching place that reverts it.
+  // resetTonightSkips() (which every Change-panel handler calls to
+  // invalidate the current pick) is the matching place that brings it back.
   setFindPickMode('skip');
   document.getElementById('tonightAlternatives').hidden = true;
   document.getElementById('tonightAlternativesBtn').setAttribute('aria-expanded', 'false');
@@ -5929,6 +5928,10 @@ const SCREENS = ['setup', 'home', 'browse', 'whatsNew', 'family'];
 let screens = {};
 let tabs = {};
 
+function scrollBehavior(){
+  return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+}
+
 function showScreen(target){
   const isSameScreen = target === currentScreen;
   currentScreen = target;
@@ -5947,7 +5950,7 @@ function showScreen(target){
   if(quickBar) quickBar.style.display = target === 'setup' ? 'none' : 'flex';
   renderCurrentView();
   if(isSameScreen){
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    window.scrollTo({top: 0, behavior: scrollBehavior()});
   }
 }
 
@@ -6841,6 +6844,9 @@ function syncFilterToggleState(){
 
 function render(){
   posterEagerBudget = 24;
+  // Search renders after a short typing pause, so this records which query
+  // the list currently reflects.
+  listEl.dataset.renderedQuery = query;
   const q = query.trim().toLowerCase();
   const orderPosition = new Map(state.order.map((idx, pos) => [idx, pos]));
   let visibleOrder = state.order.filter(idx=>{
@@ -7043,14 +7049,14 @@ if(listPagePrevBtn) listPagePrevBtn.addEventListener('click', ()=>{
     listPage -= 1;
     render();
     (listPagePrevBtn.disabled ? listPageNextBtn : listPagePrevBtn).focus();
-    if(listEl) listEl.scrollIntoView({ behavior:'smooth', block:'start' });
+    if(listEl) listEl.scrollIntoView({ behavior: scrollBehavior(), block:'start' });
   }
 });
 if(listPageNextBtn) listPageNextBtn.addEventListener('click', ()=>{
   listPage += 1;
   render();
   (listPageNextBtn.disabled ? listPagePrevBtn : listPageNextBtn).focus();
-  if(listEl) listEl.scrollIntoView({ behavior:'smooth', block:'start' });
+  if(listEl) listEl.scrollIntoView({ behavior: scrollBehavior(), block:'start' });
 });
 
 document.getElementById('skipToNavLink').addEventListener('click', e=>{
@@ -7059,9 +7065,13 @@ document.getElementById('skipToNavLink').addEventListener('click', e=>{
   if(quickBar) quickBar.focus();
 });
 
+// Search only affects the Shelf list, so it re-renders just that list, and
+// waits for a short pause in typing instead of rebuilding on every keystroke.
+let searchRenderTimer = null;
 document.getElementById('search').addEventListener('input', e=>{
   query = e.target.value;
-  renderCurrentView();
+  clearTimeout(searchRenderTimer);
+  searchRenderTimer = setTimeout(render, 120);
 });
 
 document.getElementById('clearSearchBtn').addEventListener('click', ()=>{
@@ -7102,7 +7112,7 @@ document.querySelectorAll('[data-edit-child]').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     const target = document.getElementById(btn.dataset.editChild);
     const panel = document.getElementById('childrenSettingsPanel');
-    if(panel) panel.scrollIntoView({ behavior:'smooth', block:'start' });
+    if(panel) panel.scrollIntoView({ behavior: scrollBehavior(), block:'start' });
     if(target){
       setTimeout(()=>target.focus(), 260);
     }
@@ -7403,7 +7413,7 @@ function renderChildren(){
       settings.addEventListener('click', ()=>{
         setSelectedFamilyChild(child.id);
         const panel = document.getElementById('familySettingsPanel');
-        if(panel) panel.scrollIntoView({ behavior:'smooth', block:'start' });
+        if(panel) panel.scrollIntoView({ behavior: scrollBehavior(), block:'start' });
         const heading = document.getElementById('familySettingsChildName');
         if(heading) setTimeout(()=>heading.focus(), 260);
       });
@@ -7935,10 +7945,6 @@ document.getElementById('tonightDoneBtn').addEventListener('click', ()=>{
 });
 
 document.getElementById('findTonightPickBtn').addEventListener('click', ()=>{
-  if(tonightSelection.currentPickIdx !== null && document.getElementById('tonightPickCard').style.display !== 'none'){
-    skipCurrentTonightPick();
-    return;
-  }
   showTonightPick();
 });
 

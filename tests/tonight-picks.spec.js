@@ -47,15 +47,27 @@ test('mood and time taps keep the Change panel open like kid taps do (#56)', asy
   await expect(page.locator('#tonightEditPanel')).toBeHidden();
 });
 
-test('find pick button relabels to skip after a pick shows, and resets when selections change (#57)', async ({ page }) => {
+test('the card\'s Skip is the only skip once a pick shows; the find button returns when selections change', async ({ page }) => {
   await expect(page.locator('#findTonightPickBtn')).toHaveText("Find tonight's pick");
 
   await page.locator('#findTonightPickBtn').click();
-  await expect(page.locator('#findTonightPickBtn')).toHaveText('Skip to next pick');
+  await expect(page.locator('#findTonightPickBtn')).toBeHidden();
+  await expect(page.locator('#tonightPickCard').getByRole('button', { name: /skip/i })).toHaveCount(1);
 
   await openTonightAskEditor(page);
   await page.locator('#tonightMoodChoices .choiceChip').filter({ hasText: 'Big and silly' }).click();
+  await expect(page.locator('#findTonightPickBtn')).toBeVisible();
   await expect(page.locator('#findTonightPickBtn')).toHaveText("Find tonight's pick");
+});
+
+test('the fit verdict reads before the Pre-Show notes', async ({ page }) => {
+  await page.locator('#findTonightPickBtn').click();
+  const order = await page.evaluate(() => {
+    const reasons = document.getElementById('tonightPickReasons');
+    const preShow = document.getElementById('tonightPreShow');
+    return Boolean(reasons.compareDocumentPosition(preShow) & Node.DOCUMENT_POSITION_FOLLOWING);
+  });
+  expect(order).toBe(true);
 });
 
 test('initial mobile tonight surface fits without scrolling', async ({ page }) => {
@@ -99,16 +111,6 @@ test('skip advances to a different tonight pick', async ({ page }) => {
 
   await expect(page.locator('#tonightPickTitle')).not.toHaveText(firstPick);
   await expect(page.locator('#toast')).toContainText('Skipped.');
-});
-
-test('finding another pick after a result behaves like skip', async ({ page }) => {
-  await loosenSampleFamilyForBroadEligibility(page);
-  await page.locator('#findTonightPickBtn').click();
-  const firstPick = await page.locator('#tonightPickTitle').textContent();
-
-  await page.locator('#findTonightPickBtn').click();
-
-  await expect(page.locator('#tonightPickTitle')).not.toHaveText(firstPick);
 });
 
 test('watching tonight pick shows watched visual state', async ({ page }) => {
