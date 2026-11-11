@@ -2541,21 +2541,6 @@ function reportError(err){
   .whatsNewWeek h2.newHeader{
     font-size:12px;
   }
-  .newSeeAll{
-    display:block;
-    width:100%;
-    text-align:left;
-    background:none;
-    border:none;
-    border-top:1px solid var(--line);
-    margin-top:4px;
-    padding:12px 0 2px;
-    color:var(--new);
-    font-family:inherit;
-    font-size:13px;
-    font-weight:600;
-    cursor:pointer;
-  }
 
   .viewSwitch{
     max-width:680px;
@@ -3072,7 +3057,6 @@ function reportError(err){
     <span id="searchResultCount" role="status" aria-live="polite"></span>
     <button type="button" id="clearSearchBtn">Clear search</button>
   </div>
-  <div id="newSection" class="newSection" style="display:none;"></div>
   <div class="homeSection" id="browseBySection">
     <span class="homeSectionLabel">Browse by</span>
     <div class="studioGrid" id="studioGrid"></div>
@@ -3859,7 +3843,6 @@ function decadeOf(y){
   return Math.floor(n / 10) * 10;
 }
 
-const NEW_TEASER_CAP = 5;
 const RECENT_RELEASE_YEAR_WINDOW = 3;
 
 function localDateKey(date){
@@ -3868,8 +3851,8 @@ function localDateKey(date){
 }
 
 // Calendar weeks start on Monday, in the viewer's local time. "New" means
-// added this week or last week, so the Shelf teaser, the filter toggle and
-// the What's new screen always agree on the same set.
+// added this week or last week, so the Shelf filter toggle, the "New"
+// poster ribbon and the What's new tab always agree on the same set.
 function newWeekRanges(){
   const today = new Date(Date.now());
   const monday = new Date(today.getFullYear(), today.getMonth(), today.getDate() - ((today.getDay() + 6) % 7));
@@ -3890,13 +3873,6 @@ function isRecent(m){
 
 function compareByAddedAtDesc(a, b){
   return (MOVIES[b].addedAt || '').localeCompare(MOVIES[a].addedAt || '');
-}
-
-function getNewIndices(){
-  return MOVIES
-    .map((m, i) => i)
-    .filter(i => isRecent(MOVIES[i]))
-    .sort(compareByAddedAtDesc);
 }
 
 function getNewIndicesByWeek(){
@@ -4695,7 +4671,7 @@ function focusPreservingRerender(idx, rerender){
   }
   const activeIdx = role && active.dataset.idx !== undefined ? Number(active.dataset.idx) : null;
   const container = role
-    ? (active.closest('#whatsNewList') ? '#whatsNewList' : active.closest('.newRow') ? '#newSection' : active.closest('li.row') ? '#list' : null)
+    ? (active.closest('#whatsNewList') ? '#whatsNewList' : active.closest('li.row') ? '#list' : null)
     : null;
 
   rerender();
@@ -4787,12 +4763,6 @@ function browseStudio(studio){
   studioFilter = studio;
   document.getElementById('studioFilter').value = studio;
   showScreen('browse');
-}
-
-function browseNew(){
-  showScreen('whatsNew');
-  window.scrollTo(0, 0);
-  document.getElementById('whatsNewScreenHeading').focus();
 }
 
 function createChild(name, rawAge, id){
@@ -6028,7 +5998,6 @@ function renderCurrentView(){
   posterEagerBudget = 24;
   const firstRunShelfIntro = document.getElementById('firstRunShelfIntro');
   if(firstRunShelfIntro) firstRunShelfIntro.hidden = !!(state.children && state.children.length);
-  renderNewSection();
   updateWhatsNewTabCount();
   renderChildren();
   renderTonightKidChoices();
@@ -6038,42 +6007,8 @@ function renderCurrentView(){
 }
 
 function refreshCatalogData(){
-  renderNewSection();
   render();
   updateStats();
-}
-
-function renderNewSection(){
-  const section = document.getElementById('newSection');
-  if(query.trim()){
-    section.style.display = 'none';
-    section.replaceChildren();
-    return;
-  }
-  const indices = getNewIndices();
-
-  if(indices.length === 0){
-    section.style.display = 'none';
-    section.replaceChildren();
-    return;
-  }
-
-  section.style.display = 'block';
-  section.replaceChildren();
-
-  const header = document.createElement('p');
-  header.className = 'newHeader';
-  header.textContent = `What's new (${indices.length})`;
-  section.appendChild(header);
-
-  indices.slice(0, NEW_TEASER_CAP).forEach(idx => appendNewRow(section, idx, 'new'));
-
-  const seeAll = document.createElement('button');
-  seeAll.type = 'button';
-  seeAll.className = 'newSeeAll';
-  seeAll.textContent = `See all ${indices.length} by week →`;
-  seeAll.onclick = () => browseNew();
-  section.appendChild(seeAll);
 }
 
 function appendNewRow(container, idx, detailScope){

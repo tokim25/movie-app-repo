@@ -56,20 +56,9 @@ test('a child added via the Family tab after the first one is included in fit ba
   await expect(page.locator('#list .fitSignal').first()).toContainText('selected kids');
 });
 
-test('searching Shelf hides the New this week teaser', async ({ page }) => {
-  // Regression test for issue #55: renderNewSection() ignored the active
-  // search query entirely, so "New this week" kept showing unrelated (and
-  // potentially unsuitable) titles above the actual search results while a
-  // parent was mid-search.
-  //
-  // The clock is pinned just after the catalog's real most-recent `addedAt`
-  // (new means added this calendar week or last) instead of relying on real
-  // wall-clock time: this test started failing in CI on 2026-10-02, on runs
-  // that never touched this code, once the real most-recent addedAt
-  // (2026-09-25) aged past the 7-day window mid-run -- a ticking time bomb,
-  // not a flake. Freezing before navigation avoids any app timer advancing
-  // before the freeze takes effect, same pattern as google-sync.spec.js's
-  // pre-navigation clock use.
+test('Shelf has no What\'s new block now that What\'s new is its own tab', async ({ page }) => {
+  // The clock is pinned inside the "added this week or last" window, so
+  // recent titles exist and a leftover teaser would have something to show.
   const pinnedNow = new Date(`${latestCatalogAddedAt()}T12:00:00Z`);
   await page.clock.install({ time: pinnedNow });
   await page.clock.pauseAt(pinnedNow);
@@ -79,17 +68,6 @@ test('searching Shelf hides the New this week teaser', async ({ page }) => {
   await page.locator('#tabBrowse').click();
   await page.locator('#browseScreen').waitFor({ state: 'visible' });
 
-  // The catalog has recent titles, so the teaser is showing before search.
-  await expect(page.locator('#newSection')).toBeVisible();
-  await expect(page.locator('#newSection .newRow').first()).toBeVisible();
-
-  await page.locator('#search').fill('a completely unrelated made-up query xyz');
-
-  await expect(page.locator('#newSection')).toBeHidden();
-  await expect(page.locator('#newSection .newRow')).toHaveCount(0);
-
-  // Clearing the query restores the teaser.
-  await page.locator('#search').fill('');
-  await expect(page.locator('#newSection')).toBeVisible();
-  await expect(page.locator('#newSection .newRow').first()).toBeVisible();
+  await expect(page.locator('#browseScreen .newRow')).toHaveCount(0);
+  await expect(page.locator('#browseScreen')).not.toContainText("What's new");
 });
