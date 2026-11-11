@@ -194,7 +194,7 @@ function reportError(err){
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#F4F6FA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#F7F5F0" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#262624" media="(prefers-color-scheme: dark)">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -226,20 +226,20 @@ function reportError(err){
 <style>
   :root{
     color-scheme:light dark;
-    --bg:#F4F6FA;
-    --bg-sub:#E9EEF7;
+    --bg:#F7F5F0;
+    --bg-sub:#EFEBE3;
     --surface:#FFFFFF;
-    --ink:#172033;
+    --ink:#1F1E1B;
     --on-ink:#FFFFFF;
-    --ink-soft:#566176;
-    --ink-faint:#5F6A7F;
-    --line:#CFD7E6;
-    --accent:#2F5FEA;
-    --accent-rgb:47,95,234;
-    --accent-text:#2348B7;
+    --ink-soft:#57534B;
+    --ink-faint:#625D54;
+    --line:#DDD7CB;
+    --accent:#AE4E2C;
+    --accent-rgb:174,78,44;
+    --accent-text:#9A3F1F;
     --on-accent:#FFFFFF;
-    --select-rgb:47,95,234;
-    --error-bg:#FDECEA;
+    --select-rgb:174,78,44;
+    --error-bg:#FBE7EC;
     --check:var(--ink);
     /* --favorite is the want-to-watch glyph colour and must clear 3:1 against
        --bg/--surface as a state-bearing graphic (WCAG 1.4.11); --favorite-fill
@@ -252,37 +252,37 @@ function reportError(err){
        lightness and one chroma so no category can read as more urgent than
        another -- a parent must not infer that Violence is "redder" and so
        scarier than Drinking. Hues also dodge every taken meaning: no red
-       (--error), green (--success), gold (--favorite/--warning) or blue
+       (--error), green (--success), gold (--favorite/--warning) or clay
        (--accent/--new). Stated in oklch so the equal-L, equal-C constraint
        is enforced by the notation rather than asserted in a comment. */
     --flag-violence:oklch(0.55 0.09 285);
     --flag-language:oklch(0.55 0.09 190);
     --flag-romance:oklch(0.55 0.09 345);
     --flag-drinking:oklch(0.55 0.09 250);
-    --new:#2354B8;
-    --new-bg:#E7EEFF;
+    --new:#9A3F1F;
+    --new-bg:#F6E4DB;
     --success:#18794E;
-    --error:#B42318;
+    --error:#B3123F;
     --on-error:#FFFFFF;
     --warning:#8A5A00;
     --warning-rgb:138,90,0;
     --warning-soft:#FFF4D6;
-    --nudge-surface:#FFF2BE;
-    --nudge-ink:#2B220D;
-    --nudge-ink-soft:#5E4A17;
-    --nudge-line:#D3A126;
-    --nudge-primary:#2B220D;
-    --nudge-on-primary:#FFF9E8;
-    --error-rgb:180,35,24;
-    --shadow-rgb:11,16,32;
-    --focus:#5B8DEF;
-    --shadow-soft:0 10px 28px rgba(23,32,51,0.06);
-    --shadow-card:0 14px 36px rgba(23,32,51,0.08);
+    --nudge-surface:var(--surface);
+    --nudge-ink:var(--ink);
+    --nudge-ink-soft:var(--ink-soft);
+    --nudge-line:var(--accent);
+    --nudge-primary:var(--ink);
+    --nudge-on-primary:var(--on-ink);
+    --error-rgb:179,18,63;
+    --shadow-rgb:31,30,27;
+    --focus:#9A3F1F;
+    --shadow-soft:0 10px 28px rgba(31,30,27,0.06);
+    --shadow-card:0 14px 36px rgba(31,30,27,0.08);
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
       /* Warm charcoal neutrals and a clay accent, modelled on Claude's dark
-         mode. Light mode keeps its blue accent. Every text token clears 4.5:1
+         mode, matching light mode's warm paper and deeper clay. Every text token clears 4.5:1
          against --bg, --surface and --bg-sub; --accent clears 3:1 as a UI
          graphic, with --on-accent text on it at 5.3:1. */
       --bg:#262624;
@@ -293,12 +293,12 @@ function reportError(err){
       --ink-soft:#C9C6BC;
       --ink-faint:#A8A59B;
       --line:#4A4843;
-      --accent:#D97757;
-      --accent-rgb:217,119,87;
+      --accent:#E0896B;
+      --accent-rgb:224,137,107;
       --accent-text:#EB9878;
       --on-accent:#1F1E1D;
-      --select-rgb:217,119,87;
-      --error-bg:#3B2024;
+      --select-rgb:224,137,107;
+      --error-bg:#3D2229;
       --check:#FAF9F5;
       --favorite:#F2C14E;
       --favorite-fill:#F2C14E;
@@ -310,18 +310,18 @@ function reportError(err){
       --new:#EFAB90;
       --new-bg:#4A2C22;
       --success:#4CC38A;
-      --error:#FF7A70;
+      --error:#FF94A8;
       --on-error:#262624;
       --warning:#F2C14E;
       --warning-rgb:242,193,78;
       --warning-soft:#382F18;
-      --nudge-surface:#3B2B0E;
-      --nudge-ink:#FFF3C4;
-      --nudge-ink-soft:#E7D294;
-      --nudge-line:#C99A2D;
-      --nudge-primary:#FFF3C4;
-      --nudge-on-primary:#2B220D;
-      --error-rgb:255,122,112;
+      --nudge-surface:var(--surface);
+      --nudge-ink:var(--ink);
+      --nudge-ink-soft:var(--ink-soft);
+      --nudge-line:var(--accent);
+      --nudge-primary:var(--ink);
+      --nudge-on-primary:var(--on-ink);
+      --error-rgb:255,148,168;
       --shadow-rgb:0,0,0;
       --focus:#EB9878;
       --shadow-soft:0 10px 28px rgba(0,0,0,0.2);
@@ -337,12 +337,12 @@ function reportError(err){
     --ink-soft:#C9C6BC;
     --ink-faint:#A8A59B;
     --line:#4A4843;
-    --accent:#D97757;
-    --accent-rgb:217,119,87;
+    --accent:#E0896B;
+    --accent-rgb:224,137,107;
     --accent-text:#EB9878;
     --on-accent:#1F1E1D;
-    --select-rgb:217,119,87;
-    --error-bg:#3B2024;
+    --select-rgb:224,137,107;
+    --error-bg:#3D2229;
     --check:#FAF9F5;
     --favorite:#F2C14E;
     --favorite-fill:#F2C14E;
@@ -354,18 +354,18 @@ function reportError(err){
     --new:#EFAB90;
     --new-bg:#4A2C22;
     --success:#4CC38A;
-    --error:#FF7A70;
+    --error:#FF94A8;
     --on-error:#262624;
     --warning:#F2C14E;
     --warning-rgb:242,193,78;
     --warning-soft:#382F18;
-    --nudge-surface:#3B2B0E;
-    --nudge-ink:#FFF3C4;
-    --nudge-ink-soft:#E7D294;
-    --nudge-line:#C99A2D;
-    --nudge-primary:#FFF3C4;
-    --nudge-on-primary:#2B220D;
-    --error-rgb:255,122,112;
+    --nudge-surface:var(--surface);
+    --nudge-ink:var(--ink);
+    --nudge-ink-soft:var(--ink-soft);
+    --nudge-line:var(--accent);
+    --nudge-primary:var(--ink);
+    --nudge-on-primary:var(--on-ink);
+    --error-rgb:255,148,168;
     --shadow-rgb:0,0,0;
     --focus:#EB9878;
     --shadow-soft:0 10px 28px rgba(0,0,0,0.2);
@@ -2263,9 +2263,12 @@ function reportError(err){
     background:var(--warning-soft);
     color:var(--warning);
   }
+  /* The border is a shape cue no accent-coloured element uses, so "above
+     settings" never reads as decoration next to clay links or ribbons. */
   .fitSignal.red{
     background:rgba(var(--error-rgb),0.1);
     color:var(--error);
+    box-shadow:inset 0 0 0 1px var(--error);
   }
   .ageDefault{
     margin-top:10px;
@@ -4695,7 +4698,7 @@ function toggleCheck(idx){
     saveState();
     renderCurrentView();
   });
-  maybeShowGoogleSignInNudge();
+  maybeShowGoogleSignInNudgeAfterMarks();
 }
 
 function togglePriority(idx){
@@ -4707,7 +4710,7 @@ function togglePriority(idx){
     saveState();
     renderCurrentView();
   });
-  maybeShowGoogleSignInNudge();
+  maybeShowGoogleSignInNudgeAfterMarks();
 }
 
 function move(idx, dir){
@@ -7609,6 +7612,16 @@ function rememberGoogleSignInNudge(){
   }catch(e){ /* session guard still prevents repeated prompts */ }
 }
 
+// The backup offer used to open on the very first watched/star tap, covering
+// the list mid-task. It now waits until a family has marked a few titles,
+// when keeping their shelf is worth something to them.
+const GOOGLE_SIGN_IN_NUDGE_AFTER_MARKS = 3;
+let marksThisSession = 0;
+function maybeShowGoogleSignInNudgeAfterMarks(){
+  marksThisSession += 1;
+  if(marksThisSession >= GOOGLE_SIGN_IN_NUDGE_AFTER_MARKS) maybeShowGoogleSignInNudge();
+}
+
 function maybeShowGoogleSignInNudge(){
   if(googleAccessToken || googleSyncIntent || readGoogleSyncMeta().enabled || hasSeenGoogleSignInNudge()) return;
   const dialog = document.getElementById('googleSignInNudge');
@@ -8413,7 +8426,7 @@ function updateThemeColorMeta(pref){
     meta.setAttribute('name', 'theme-color');
     document.head.appendChild(meta);
   }
-  meta.setAttribute('content', effectiveDark ? '#262624' : '#F4F6FA');
+  meta.setAttribute('content', effectiveDark ? '#262624' : '#F7F5F0');
 }
 
 function applyTheme(pref){

@@ -18,10 +18,14 @@ test('the initial Tonight markup never exposes example or user-like child names'
   expect(initialSummary && initialSummary[1]).toBe('Adults only');
 });
 
-test('the first watched or Want to watch action offers Google backup once', async ({ page }) => {
+test('Google backup is offered once, after a few marks rather than on the first tap', async ({ page }) => {
   await page.goto('/');
 
   await page.locator('#list .star').first().click();
+  await expect(page.locator('#googleSignInNudge')).toBeHidden();
+  await page.locator('#list .star').nth(1).click();
+  await expect(page.locator('#googleSignInNudge')).toBeHidden();
+  await page.locator('#list .star').nth(2).click();
   await expect(page.locator('#googleSignInNudge')).toBeVisible();
   await expect(page.locator('#googleSignInNudge')).toContainText('Keep your shelf with you');
   await expect(page.locator('#googleSignInNudgeConfirm')).toHaveText('Sign in with Google');
@@ -34,7 +38,7 @@ test('the first watched or Want to watch action offers Google backup once', asyn
   await expect(page.locator('#googleSignInNudge')).toBeHidden();
 
   await page.reload();
-  await page.locator('#list .check').first().click();
+  for (let i = 0; i < 3; i++) await page.locator('#list .check').nth(i).click();
   await expect(page.locator('#googleSignInNudge')).toBeHidden();
 });
 
