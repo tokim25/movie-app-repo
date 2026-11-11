@@ -6,7 +6,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 // The real catalog's most recent `addedAt` across every data-*.js file (plus
 // the base data.js), as an ISO "YYYY-MM-DD" string. Used to pin a test clock
-// inside the app's NEW_WINDOW_DAYS window instead of depending on real
+// inside the app's "this week or last week" window instead of depending on real
 // wall-clock time vs. whenever titles were last added -- see
 // shelf-fit.spec.js's "New this week" test for the failure this guards.
 export function latestCatalogAddedAt() {
