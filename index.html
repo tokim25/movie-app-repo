@@ -4332,7 +4332,7 @@ function createMeta(idx, m, detailScope){
   detailBtn.setAttribute('aria-label', `${isOpen ? 'Hide' : 'Show'} details for ${m.t}`);
   detailBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   detailBtn.setAttribute('aria-controls', detailId);
-  detailBtn.onclick = () => toggleDetail(idx);
+  detailBtn.onclick = event => toggleDetail(idx, event.currentTarget);
   links.appendChild(detailBtn);
 
   const sourceUrl = m.srcUrl ? safeSourceUrl(m.srcUrl) : '';
@@ -4724,11 +4724,24 @@ function move(idx, dir){
   });
 }
 
-function toggleDetail(idx){
+// Opening one movie's details closes any other open one. When the closed one
+// sat above, everything below shifted up and the tapped row slid off screen,
+// so this re-pins the tapped row to where it was before the re-render.
+function toggleDetail(idx, anchor){
+  const row = anchor && anchor.closest('li.row, .newRow');
+  const link = row && row.querySelector('.detailLink[aria-controls]');
+  const detailId = link && link.getAttribute('aria-controls');
+  const topBefore = row ? row.getBoundingClientRect().top : null;
+
   focusPreservingRerender(idx, () => {
     openDetail = openDetail === idx ? null : idx;
     renderCurrentView();
   });
+
+  if(!detailId || topBefore === null) return;
+  const newLink = document.querySelector(`.detailLink[aria-controls="${detailId}"]`);
+  const newRow = newLink && newLink.closest('li.row, .newRow');
+  if(newRow) window.scrollBy(0, newRow.getBoundingClientRect().top - topBefore);
 }
 
 function resetOrder(){
@@ -6018,7 +6031,7 @@ function appendNewRow(container, idx, detailScope){
   const title = document.createElement('div');
   title.className = 'title';
   title.textContent = `${m.t} (${m.y})`;
-  title.onclick = () => toggleDetail(idx);
+  title.onclick = event => toggleDetail(idx, event.currentTarget);
   const tag = document.createElement('div');
   tag.className = 'newTag';
   tag.textContent = m.addedVia === 'request' ? 'By request' : 'New release';
@@ -6938,7 +6951,7 @@ function render(){
     const title = document.createElement('div');
     title.className = 'title';
     title.textContent = `${m.t} (${m.y})`;
-    title.onclick = () => toggleDetail(idx);
+    title.onclick = event => toggleDetail(idx, event.currentTarget);
     const meta = createMeta(idx, m, 'list');
     info.appendChild(title);
     info.appendChild(meta);
