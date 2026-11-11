@@ -26,7 +26,7 @@ function expectedWeekCounts(now) {
   return counts;
 }
 
-test('What\'s new lists this week and last week, opened from the Shelf teaser', async ({ page }) => {
+test('What\'s new lists this week and last week', async ({ page }) => {
   const pinnedNow = new Date(`${latestCatalogAddedAt()}T12:00:00Z`);
   const [thisWeek, lastWeek] = expectedWeekCounts(pinnedNow);
   await page.clock.install({ time: pinnedNow });
@@ -34,16 +34,10 @@ test('What\'s new lists this week and last week, opened from the Shelf teaser', 
   await page.goto('/');
   await setupSampleFamily(page);
 
-  await page.locator('#tabBrowse').click();
-  await page.locator('#browseScreen').waitFor({ state: 'visible' });
-
-  const total = thisWeek + lastWeek;
-  await expect(page.locator('#newSection .newHeader')).toHaveText(`What's new (${total})`);
-  await page.locator('#newSection .newSeeAll').click();
+  await page.locator('#tabWhatsNew').click();
 
   await expect(page.locator('#whatsNewScreen')).toBeVisible();
   await expect(page.locator('#browseScreen')).toBeHidden();
-  await expect(page.locator('#whatsNewScreenHeading')).toBeFocused();
 
   const weeks = page.locator('#whatsNewList .whatsNewWeek');
   await expect(weeks).toHaveCount(2);

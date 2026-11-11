@@ -317,8 +317,8 @@ example `wikidata:Q12345` or `wikipedia:Film title`), and `runtimeVerifiedAt`
 Check for accidental duplicate `num` values and duplicate titles within the new
 batch itself, not just against the existing catalog.
 
-**Also set going forward (added 2026-08-24, powers the Shelf's "What's new"
-teaser and the What's new screen, which group titles by the calendar week
+**Also set going forward (added 2026-08-24, powers the What's new tab and the
+"New" poster ribbon, which group titles by the calendar week
 they were added, this week and last week):** `addedAt`, today's date as `"YYYY-MM-DD"`, and `addedVia`, either
 `"request"` (came from the movie-request Google Sheet) or `"discovery"` (came
 from the weekly new-release scan). Field order convention: place both right
