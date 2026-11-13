@@ -1113,5 +1113,7 @@ const MOVIE_POSTERS = Object.freeze({
   1145: {"u":"https://upload.wikimedia.org/wikipedia/en/4/4b/Missing_Link_2019_poster.png","w":259,"h":384,"p":"Missing Link (2019 film)"},
   1146: {"u":"https://upload.wikimedia.org/wikipedia/en/4/40/Poster_of_the_movie_Spookley_the_Square_Pumpkin.jpg","w":263,"h":379,"p":"Spookley the Square Pumpkin"},
   1147: {"u":"https://upload.wikimedia.org/wikipedia/en/0/0b/El_Camino_de_Xico_poster.jpg","w":264,"h":377,"p":"El camino de Xico"},
-  1148: {"u":"https://upload.wikimedia.org/wikipedia/en/f/f5/Barbie_Princess_Adventure_Film.jpg","w":316,"h":316,"p":"Barbie: Princess Adventure"}
+  1148: {"u":"https://upload.wikimedia.org/wikipedia/en/f/f5/Barbie_Princess_Adventure_Film.jpg","w":316,"h":316,"p":"Barbie: Princess Adventure"},
+  1150: {"u":"https://upload.wikimedia.org/wikipedia/en/c/ca/Avatar_Aang_The_Last_Airbender_poster.jpg","w":258,"h":387,"p":"Avatar Aang: The Last Airbender"},
+  1151: {"u":"https://upload.wikimedia.org/wikipedia/en/0/08/DrummerBoy.jpeg","w":260,"h":385,"p":"Drummer Boy (film)"}
 });
