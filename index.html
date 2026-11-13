@@ -5681,6 +5681,10 @@ function loadOpenUI(){
       css.rel = 'stylesheet';
       css.href = OPENUI_BASE + 'openui-styles.css';
       document.head.appendChild(css);
+      // zod inside the bundle probes for eval with a caught new Function("").
+      // CSP blocks it and files a report (Sentry JAVASCRIPT-K); jitless mode
+      // skips the probe. zod reads this global when the bundle loads.
+      globalThis.__zod_globalConfig = Object.assign(globalThis.__zod_globalConfig || {}, { jitless: true });
       const script = document.createElement('script');
       script.src = OPENUI_BASE + 'openui-bundle.min.js';
       script.onload = () => window.__OpenUI ? resolve(window.__OpenUI) : reject(new Error('OpenUI missing'));
