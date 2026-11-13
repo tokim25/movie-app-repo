@@ -217,3 +217,20 @@ test('changing who is watching clears the worry filter', async ({ page }) => {
   await page.evaluate(() => { tonightWorryExclude = 'parentInDanger'; resetTonightSkips(); });
   expect(await page.evaluate(() => tonightWorryExclude)).toBeNull();
 });
+
+test('Loading the Pre-show renderer triggers no CSP violation (Sentry JAVASCRIPT-K)', async ({ page }) => {
+  // zod, bundled inside OpenUI, probes for eval support with a caught
+  // `new Function("")`. The catch keeps rendering working, but the browser
+  // still files a CSP report for the blocked call, which Sentry logged as
+  // JAVASCRIPT-K. Running zod in jitless mode skips the probe.
+  await page.addInitScript(() => {
+    window.__cspViolations = [];
+    document.addEventListener('securitypolicyviolation', e => {
+      window.__cspViolations.push(`${e.violatedDirective} ${e.blockedURI}`);
+    });
+  });
+  await prepare(page);
+  await showPick(page, 'Finding Nemo');
+  await expect(page.locator('#tonightPreShow')).toContainText('Be ready early on');
+  expect(await page.evaluate(() => window.__cspViolations)).toEqual([]);
+});
