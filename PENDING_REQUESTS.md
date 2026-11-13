@@ -419,3 +419,20 @@ Checked the movie-request Google Sheet: no rows after 9/25/2026 (last two, Puss 
 CSM nightly sweep queue (tools/csm-sweep-queue.json): still 210/216 lists read, 7 slugs in `read` with only a CSM age noted (no title/full-text/genre/studio/runtime research done yet — not actually ready to add). Did not continue the sweep or research those 7 this run: finishing them means the same full per-title research this file's newer entries describe, which felt like a bigger scope expansion than a maintainer check-in should take on unprompted. Leaving them for the next dedicated nightly-batch run. Rate-guard usage this run: 9 of 220 (all CSM review-page fetches for the 9 titles above).
 
 Co-authored with Claude.
+
+11/13/2026 — Weekly new-release discovery (the 11/12 weekly run, finished 11/13). Read CSM's "New Kids' Movies" list, deduped it against every data file on origin/master, and read each new title's CSM review page. Added 6, all `addedVia: "discovery"`:
+
+- 1149 A Dog's Perfect Christmas (2026), CSM 10+, 101 min (runtime from CSM; Wikipedia's API was rate-limiting me), Netflix
+- 1150 Avatar Aang: The Last Airbender (2026), CSM 9+, PG, 99 min, Nickelodeon
+- 1151 Drummer Boy (2026), CSM 10+, PG-13, 128 min (BC classification board via Wikipedia; CSM says 127), Angel Studios
+- 1152 In the Company of Wolves: An American Journey (2026), CSM 8+, 83 min (CSM; no Wikipedia page), Vision Films, no poster
+- 1153 Not My Dog (2026), CSM 8+, 81 min (Wikipedia; CSM says 82), Trash Panda Pictures, no poster (infobox has none)
+- 1154 Super-Charlie (2026), CSM 8+, 82 min (CSM; no Wikipedia page), Viva Pictures, no poster
+
+Skipped: Monster High: New Ghoul at School is on CSM's new list but is a 23-minute 2010 TV special, not a new release.
+
+Flags: A Dog's Perfect Christmas and Drummer Boy (CSM age 10) and Avatar Aang (CSM violence 4) are hold-outs under the flag rule and stay unflagged for a human call. Flags for 1152-1154 go in a separate PR. Hexed (Disney, PG) has no CSM review yet; check next week.
+
+CSM requests used: 8 pages (the list plus 7 reviews), none blocked. Wikipedia: rate-limited after about five API calls at 1-2 second spacing; posters were fetched straight from upload.wikimedia.org instead.
+
+Co-authored with Claude.
