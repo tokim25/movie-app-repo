@@ -1583,61 +1583,70 @@ function reportError(err){
     border-radius:20px;
     box-shadow:var(--shadow-card);
   }
-  .tonightSummary{
+  /* Who / time / mood as pills that stay on screen. Each opens a small
+     popover under the row instead of the old full-height Change panel. */
+  .tonightPills{
+    position:relative;
     display:flex;
-    align-items:flex-start;
-    justify-content:space-between;
-    gap:16px;
+    flex-wrap:wrap;
+    gap:6px;
   }
-  .tonightSummaryCopy{
-    min-width:0;
-    flex:1 1 auto;
-  }
-  .tonightSummaryLabel{
-    display:none;
-  }
-  .tonightSummaryText{
-    margin-top:0;
-    color:var(--ink);
-    font-size:28px;
-    line-height:1.08;
-    font-weight:700;
-    text-wrap:balance;
-  }
-  .tonightContext{
-    margin-top:7px;
-    color:var(--ink-soft);
-    font-size:17px;
-    line-height:1.3;
-    font-weight:500;
-    text-wrap:pretty;
-  }
-  .tonightChangeButton{
+  .tonightPill{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    max-width:100%;
     min-height:44px;
-    border:0;
-    background:transparent;
-    padding:2px 0 2px 12px;
-    color:var(--accent);
+    padding:6px 12px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    background:var(--surface);
+    color:var(--ink);
+    font-family:inherit;
     font-size:14px;
     font-weight:600;
+    cursor:pointer;
+  }
+  .tonightPill::after{
+    content:"";
+    flex:0 0 auto;
+    border-left:4px solid transparent;
+    border-right:4px solid transparent;
+    border-top:5px solid var(--ink-soft);
+  }
+  .tonightPill[aria-expanded="true"]{
+    border-color:var(--accent);
+    box-shadow:0 0 0 2px rgba(var(--accent-rgb),0.15);
+  }
+  .tonightPill.adultsOnly{
+    background:var(--warning-soft);
+    border-color:rgba(var(--warning-rgb),0.45);
+    color:var(--warning);
+  }
+  #tonightWatchingSummary{
+    min-width:0;
+    overflow:hidden;
+    text-overflow:ellipsis;
     white-space:nowrap;
   }
-  .tonightEditPanel{
-    display:grid;
-    gap:14px;
-    margin-top:16px;
-    padding-top:16px;
-    border-top:1px solid var(--line);
+  .tonightPop{
+    position:absolute;
+    left:0;
+    right:0;
+    top:calc(100% + 6px);
+    z-index:15;
+    padding:12px 14px 14px;
+    border:1px solid var(--line);
+    border-radius:14px;
+    background:var(--surface);
+    box-shadow:var(--shadow-card);
   }
-  .tonightEditPanel[hidden]{
-    display:none;
-  }
-  .tonightEditPanel h2,
-  .tonightEditPanel h3{
-    font-size:17px;
-  }
-  .tonightEditPanel .setupActions{
-    margin-top:0;
+  .tonightPop[hidden]{ display:none; }
+  .tonightPopLabel{
+    margin:0;
+    color:var(--ink-soft);
+    font-size:13px;
+    line-height:1.4;
   }
   .tonightActions{
     margin-top:24px;
@@ -1691,9 +1700,149 @@ function reportError(err){
     text-align:left;
   }
   .pickCard{
-    margin-top:18px;
-    padding:18px 0 0;
+    margin-top:16px;
+    padding:16px 0 0;
     border-top:1px solid var(--line);
+  }
+  .pickChange{
+    margin:0 0 10px;
+    color:var(--ink-soft);
+    font-size:13px;
+  }
+  .pickChange[hidden]{ display:none; }
+  /* Poster beside the title, so verdict, title, warning and the decision
+     all fit on the first screen of a phone. */
+  .pickHead{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+  }
+  .pickHeadText{
+    flex:1;
+    min-width:0;
+  }
+  .pickFacts{
+    margin-top:6px;
+    color:var(--ink-soft);
+    font-size:14px;
+    line-height:1.4;
+  }
+  .headsUp{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px solid var(--line);
+    font-size:14px;
+    line-height:1.45;
+  }
+  .headsUpText{
+    flex:1;
+    margin:0;
+    color:var(--ink-soft);
+  }
+  /* Two lines at most until More; opened, the full Pre-show below says it
+     all, so the line steps aside instead of repeating it. */
+  .headsUp:not(.open) .headsUpText{
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+  .headsUp.open .headsUpText{ visibility:hidden; height:0; }
+  .headsUp.open{ border-top:0; padding-top:0; margin-top:4px; justify-content:flex-end; }
+  .headsUp.caution .headsUpText{ color:var(--ink); }
+  .headsUp.caution .headsUpText strong{ color:var(--warning); }
+  .headsUpToggle{
+    flex:0 0 auto;
+    color:var(--accent-text);
+    font-size:14px;
+  }
+  .headsUpToggle[hidden]{ display:none; }
+  .preShowFallback .askAfter{
+    margin:8px 0 0;
+    font-family:"Newsreader", Georgia, "Times New Roman", serif;
+    font-size:16px;
+    font-style:italic;
+    color:var(--ink);
+  }
+  .preShowFallback[hidden],
+  #tonightPreShowBody[hidden]{ display:none; }
+  .tonightActionBar{ margin-top:16px; }
+  .barWarning{
+    display:none;
+    margin:0 0 6px;
+    color:var(--warning);
+    font-size:13px;
+    font-weight:600;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .barButtons{
+    display:flex;
+    gap:10px;
+  }
+  .barButtons button{
+    flex:1;
+    min-height:50px;
+    margin:0;
+  }
+  .barButtons .primaryBtn{ flex:1.5; }
+  .barButtons [hidden]{ display:none; }
+  .primaryBtn.warnBtn{
+    background:var(--warning);
+    border-color:var(--warning);
+    color:var(--on-ink);
+  }
+  .pickLinks{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:0 20px;
+    margin-top:6px;
+  }
+  .pickLinks .linkBtn{
+    min-height:44px;
+    color:var(--accent-text);
+    font-size:14px;
+  }
+  .pickLinks .recommendationEvidence{
+    margin:0;
+    padding:0;
+    border:0;
+    font-size:14px;
+  }
+  /* On a phone the decision sits in a bar above the bottom nav, so Skip and
+     Watch stay in thumb reach however far the card scrolls. On short screens
+     (or zoomed text making the viewport short) it stays in the card. */
+  @media (max-width:899px) and (min-height:560px){
+    #homeScreen.hasPick .tonightActionBar{
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:calc(75px + env(safe-area-inset-bottom, 0px));
+      z-index:19;
+      margin:0;
+      padding:8px 16px 10px;
+      border-top:1px solid var(--line);
+      background:var(--bg);
+      box-shadow:0 -4px 14px rgba(var(--shadow-rgb),0.08);
+      transition:transform 0.22s ease;
+    }
+    #homeScreen.hasPick .barWarning:not([hidden]){ display:block; }
+    #homeScreen.hasPick{ padding-bottom:120px; }
+    html:has(#homeScreen.hasPick:not([hidden])){ scroll-padding-bottom:200px; }
+    body:has(#homeScreen.hasPick:not([hidden])) .toast{
+      bottom:calc(84px + 80px + env(safe-area-inset-bottom, 0px));
+    }
+    body:has(#quickBar.qbHidden) #homeScreen.hasPick .tonightActionBar{
+      transform:translateY(calc(100% + 80px));
+    }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .tonightActionBar{ transition:none !important; }
   }
   /* Watched is a memory, not a cancelled item: a ticket stub stamps onto the
      card instead of striking the title through. */
@@ -1746,10 +1895,10 @@ function reportError(err){
      register, and makes the serif the content face rather than a second
      competing voice inside the same card. */
   .pickTitle{
-    margin-top:5px;
+    margin:4px 0 0;
     color:var(--ink);
     font-family:"Newsreader", Georgia, "Times New Roman", serif;
-    font-size:30px;
+    font-size:26px;
     font-weight:600;
     line-height:1.15;
     text-wrap:balance;
@@ -1769,8 +1918,10 @@ function reportError(err){
      hatch all collapse; the heading only shrinks, because #homeScreen is
      aria-labelledby it and it carries the focus target. */
   .homeScreen.hasPick .subtitle,
+  .homeScreen.hasPick .memories,
   .homeScreen.hasPick .stats,
-  .homeScreen.hasPick #tonightShelfBtn{
+  .homeScreen.hasPick #tonightShelfBtn,
+  .homeScreen.hasPick .tonightActions{
     display:none;
   }
   .homeScreen.hasPick h1{
@@ -1779,22 +1930,30 @@ function reportError(err){
     margin-bottom:2px;
   }
   .pickStage{
-    display:flex;
-    justify-content:center;
-    margin-bottom:14px;
+    flex:0 0 auto;
   }
   .pickStage:empty{ display:none; }
   .poster.pickPoster{
-    width:132px;
+    width:84px;
     border-radius:10px;
     box-shadow:var(--shadow-card);
   }
   .pickReasons{
-    margin:10px 0 0;
-    padding-left:18px;
+    margin:12px 0 0;
+    padding:0;
+    list-style:none;
     color:var(--ink-soft);
     font-size:14px;
     line-height:1.45;
+  }
+  .pickReasons li + li{ margin-top:4px; }
+  /* An amber/red pick's reason is the line a parent must not miss. */
+  .pickReasons.warn li:first-child{
+    padding:8px 10px;
+    border-radius:10px;
+    background:var(--warning-soft);
+    color:var(--warning);
+    font-weight:600;
   }
   .pickCard .detailLink{
     display:inline-block;
@@ -2384,10 +2543,6 @@ function reportError(err){
     .limitControl{ width:100%; }
     .limitControl button{ width:100%; }
     .tonightCard{ padding:18px; }
-    .tonightSummary{ gap:10px; }
-    .tonightSummaryText{ font-size:24px; }
-    .tonightContext{ font-size:15px; }
-    .tonightChangeButton{ flex:0 0 auto; }
     .tonightActions{
       display:grid;
       gap:10px;
@@ -2993,41 +3148,36 @@ function reportError(err){
 
   <div class="homeSection tight">
     <div class="familyCard tonightCard">
-      <div class="tonightSummary">
-        <div class="tonightSummaryCopy">
-          <div class="tonightSummaryLabel" aria-hidden="true"></div>
-          <div id="tonightAskSummary">
-            <div class="tonightSummaryText" id="tonightWatchingSummary">Adults only</div>
-            <div class="tonightContext" id="tonightContextSummary">About 90 minutes · Calm it down</div>
+      <div class="tonightPills" role="group" aria-label="Tonight's settings">
+        <div class="tonightPillWrap">
+          <button type="button" class="tonightPill" id="tonightWhoPill" aria-expanded="false" aria-controls="tonightWhoPop"><span class="srOnly">Who's watching: </span><span id="tonightWatchingSummary">Adults only</span></button>
+          <div class="tonightPop" id="tonightWhoPop" role="group" aria-labelledby="tonightWhoPopLabel" hidden>
+            <p class="tonightPopLabel" id="tonightWhoPopLabel">Who's watching? Adults only turns off child limits.</p>
+            <div class="choiceGrid" id="tonightKidChoices" aria-label="People watching"></div>
           </div>
         </div>
-        <button type="button" class="tonightChangeButton" id="tonightChangeBtn" aria-expanded="false" aria-controls="tonightEditPanel">Change</button>
-      </div>
-      <div class="tonightEditPanel" id="tonightEditPanel" hidden>
-        <div>
-          <h2>Who is watching?</h2>
-          <p>Select the children watching, or choose Adults only. Child content limits won't apply to an adults-only night.</p>
-          <div class="choiceGrid" id="tonightKidChoices" aria-label="People watching"></div>
-        </div>
-        <div>
-          <h3>How much time?</h3>
-          <div class="choiceGrid" id="tonightTimeChoices" aria-label="Time available">
-            <button type="button" class="choiceChip selected" data-time="90" aria-pressed="true">About 90 minutes</button>
-            <button type="button" class="choiceChip" data-time="120" aria-pressed="false">Up to 2 hours</button>
-            <button type="button" class="choiceChip" data-time="999" aria-pressed="false">Any length</button>
+        <div class="tonightPillWrap">
+          <button type="button" class="tonightPill" id="tonightTimePill" aria-expanded="false" aria-controls="tonightTimePop"><span class="srOnly">Time: </span><span id="tonightTimeSummary">90 min</span></button>
+          <div class="tonightPop" id="tonightTimePop" role="group" aria-labelledby="tonightTimePopLabel" hidden>
+            <p class="tonightPopLabel" id="tonightTimePopLabel">How much time?</p>
+            <div class="choiceGrid" id="tonightTimeChoices" aria-label="Time available">
+              <button type="button" class="choiceChip selected" data-time="90" aria-pressed="true">About 90 minutes</button>
+              <button type="button" class="choiceChip" data-time="120" aria-pressed="false">Up to 2 hours</button>
+              <button type="button" class="choiceChip" data-time="999" aria-pressed="false">Any length</button>
+            </div>
           </div>
         </div>
-        <div>
-          <h3>What kind of night?</h3>
-          <div class="choiceGrid" id="tonightMoodChoices" aria-label="Mood">
-            <button type="button" class="choiceChip selected" data-mood="calm" aria-pressed="true">Calm it down</button>
-            <button type="button" class="choiceChip" data-mood="silly" aria-pressed="false">Big and silly</button>
-            <button type="button" class="choiceChip" data-mood="new" aria-pressed="false">Something new</button>
-            <button type="button" class="choiceChip" data-mood="favorite" aria-pressed="false">Old favourite</button>
+        <div class="tonightPillWrap">
+          <button type="button" class="tonightPill" id="tonightMoodPill" aria-expanded="false" aria-controls="tonightMoodPop"><span class="srOnly">Mood: </span><span id="tonightMoodSummary">Calm</span></button>
+          <div class="tonightPop" id="tonightMoodPop" role="group" aria-labelledby="tonightMoodPopLabel" hidden>
+            <p class="tonightPopLabel" id="tonightMoodPopLabel">What kind of night?</p>
+            <div class="choiceGrid" id="tonightMoodChoices" aria-label="Mood">
+              <button type="button" class="choiceChip selected" data-mood="calm" aria-pressed="true">Calm it down</button>
+              <button type="button" class="choiceChip" data-mood="silly" aria-pressed="false">Big and silly</button>
+              <button type="button" class="choiceChip" data-mood="new" aria-pressed="false">Something new</button>
+              <button type="button" class="choiceChip" data-mood="favorite" aria-pressed="false">Old favourite</button>
+            </div>
           </div>
-        </div>
-        <div class="setupActions">
-          <button type="button" class="secondaryBtn" id="tonightDoneBtn">Done</button>
         </div>
       </div>
       <div class="setupActions tonightActions">
@@ -3036,26 +3186,42 @@ function reportError(err){
       </div>
       <div class="srOnly" id="tonightPickStatus" role="status" aria-live="polite" aria-atomic="true"></div>
       <div class="pickCard" id="tonightPickCard" style="display:none;">
-        <div class="pickStage" id="tonightPickStage"></div>
-        <div class="pickMeta" id="tonightVerdict">Tonight's pick</div>
-        <div class="pickTitle" id="tonightPickTitle"></div>
+        <p class="pickChange" id="tonightPickChange" hidden></p>
+        <div class="pickHead">
+          <div class="pickStage" id="tonightPickStage"></div>
+          <div class="pickHeadText">
+            <div class="pickMeta" id="tonightVerdict">Tonight's pick</div>
+            <h2 class="pickTitle" id="tonightPickTitle" tabindex="-1"></h2>
+            <div class="pickFacts" id="tonightPickFacts"></div>
+          </div>
+        </div>
         <ul class="pickReasons" id="tonightPickReasons"></ul>
+        <div class="headsUp" id="tonightHeadsUp">
+          <p class="headsUpText" id="tonightHeadsUpText"></p>
+          <button type="button" class="linkBtn headsUpToggle" id="tonightHeadsUpBtn" aria-expanded="false" aria-controls="tonightPreShow">More</button>
+        </div>
         <section class="preShow" id="tonightPreShow" aria-labelledby="tonightPreShowLabel" hidden>
-          <h2 class="preShowLabel" id="tonightPreShowLabel">Pre-show</h2>
+          <h3 class="preShowLabel" id="tonightPreShowLabel">Pre-show</h3>
+          <div class="preShowFallback" id="tonightPreShowFallback"></div>
           <div id="tonightPreShowBody"></div>
         </section>
-        <div class="recommendationEvidence" id="tonightEvidence"></div>
-        <button type="button" class="detailLink" id="tonightDetailBtn" aria-expanded="false" aria-controls="tonightDetailBody">Details</button>
-        <div class="detail" id="tonightDetailBody"></div>
-        <div class="setupActions">
-          <button type="button" class="primaryBtn" id="tonightWatchBtn">Mark watched</button>
-          <button type="button" class="secondaryBtn" id="tonightWatchAnywayBtn">Watch anyway</button>
-          <button type="button" class="secondaryBtn" id="tonightSkipBtn" aria-expanded="false" aria-controls="tonightSkipFeedback">Skip</button>
-          <button type="button" class="secondaryBtn" id="tonightAlternativesBtn" aria-expanded="false" aria-controls="tonightAlternatives">See two alternatives</button>
+        <div class="tonightActionBar" id="tonightActionBar" role="group" aria-label="Decide on tonight's pick">
+          <p class="barWarning" id="tonightBarWarning" hidden></p>
+          <div class="barButtons">
+            <button type="button" class="secondaryBtn" id="tonightSkipBtn" aria-expanded="false" aria-controls="tonightSkipFeedback">Skip</button>
+            <button type="button" class="primaryBtn" id="tonightWatchBtn">Mark watched</button>
+            <button type="button" class="primaryBtn warnBtn" id="tonightWatchAnywayBtn" aria-pressed="false">Watch anyway</button>
+          </div>
         </div>
+        <div class="pickLinks">
+          <button type="button" class="linkBtn" id="tonightAlternativesBtn" aria-expanded="false" aria-controls="tonightAlternatives">See two alternatives</button>
+          <button type="button" class="linkBtn" id="tonightDetailBtn" aria-expanded="false" aria-controls="tonightDetailBody">Details</button>
+          <span class="recommendationEvidence" id="tonightEvidence"></span>
+        </div>
+        <div class="detail" id="tonightDetailBody"></div>
         <div class="choiceGrid" id="tonightAlternatives" aria-label="Alternative recommendations" hidden></div>
         <div class="skipFeedback" id="tonightSkipFeedback" role="group" aria-labelledby="tonightSkipPrompt" hidden>
-          <p id="tonightSkipPrompt" aria-live="polite">What missed? Optional—this won't change your family settings.</p>
+          <p id="tonightSkipPrompt">What missed? Optional—this won't change your family settings.</p>
           <button type="button" class="choiceChip" data-skip-reason="Wrong mood" aria-pressed="false">Wrong mood</button>
           <button type="button" class="choiceChip" data-skip-reason="Not interested" aria-pressed="false">Not interested</button>
           <button type="button" class="choiceChip" data-skip-reason="Already seen" aria-pressed="false">Already seen</button>
@@ -4902,20 +5068,97 @@ function tonightWatchingLabel(){
   return kids.map(child => child.name).join(' + ');
 }
 
-function renderTonightSummary(){
-  const watching = document.getElementById('tonightWatchingSummary');
-  const context = document.getElementById('tonightContextSummary');
-  if(watching) watching.textContent = tonightWatchingLabel();
-  if(context) context.textContent = `${tonightTimeLabel()} · ${tonightMoodLabel()}`;
+function tonightTimeShortLabel(){
+  if(tonightSelection.time === 120) return 'Up to 2 hours';
+  if(tonightSelection.time === 999) return 'Any length';
+  return '90 min';
 }
 
-function setTonightEditOpen(open){
-  const panel = document.getElementById('tonightEditPanel');
-  const button = document.getElementById('tonightChangeBtn');
-  if(!panel || !button) return;
-  panel.hidden = !open;
-  button.setAttribute('aria-expanded', open ? 'true' : 'false');
-  button.textContent = open ? 'Close' : 'Change';
+function tonightMoodShortLabel(){
+  const labels = { calm: 'Calm', silly: 'Big and silly', new: 'Something new', favorite: 'Old favourite' };
+  return labels[tonightSelection.mood] || 'Calm';
+}
+
+// The pills show who/time/mood at a glance; with three or more kids the
+// names are replaced by a count so the row never wraps on a phone.
+function tonightWhoPillLabel(){
+  const kids = selectedKids();
+  if(!kids.length) return 'Adults only';
+  if(kids.length >= 3) return kids.length === state.children.length ? `All ${kids.length} kids` : `${kids.length} kids`;
+  return kids.map(child => child.name).join(' + ');
+}
+
+function renderTonightSummary(){
+  const watching = document.getElementById('tonightWatchingSummary');
+  const time = document.getElementById('tonightTimeSummary');
+  const mood = document.getElementById('tonightMoodSummary');
+  if(watching) watching.textContent = tonightWhoPillLabel();
+  if(time) time.textContent = tonightTimeShortLabel();
+  if(mood) mood.textContent = tonightMoodShortLabel();
+  const whoPill = document.getElementById('tonightWhoPill');
+  if(whoPill) whoPill.classList.toggle('adultsOnly', selectedKids().length === 0 && state.children.length > 0);
+}
+
+// ---- Tonight's who/time/mood pills. Each opens a small non-modal popover
+// under the pill row; only one is open at a time, and outside tap or Escape
+// closes it and returns focus to its pill.
+const TONIGHT_PILLS = [
+  ['tonightWhoPill', 'tonightWhoPop'],
+  ['tonightTimePill', 'tonightTimePop'],
+  ['tonightMoodPill', 'tonightMoodPop']
+];
+
+function closeTonightPops({ restoreFocus = false } = {}){
+  TONIGHT_PILLS.forEach(([pillId, popId])=>{
+    const pill = document.getElementById(pillId);
+    const pop = document.getElementById(popId);
+    if(!pill || !pop || pop.hidden) return;
+    pop.hidden = true;
+    pill.setAttribute('aria-expanded', 'false');
+    if(restoreFocus) pill.focus();
+  });
+}
+
+function toggleTonightPop(pillId){
+  const entry = TONIGHT_PILLS.find(([id]) => id === pillId);
+  if(!entry) return;
+  const pop = document.getElementById(entry[1]);
+  const opening = pop.hidden;
+  closeTonightPops();
+  if(!opening) return;
+  pop.hidden = false;
+  document.getElementById(pillId).setAttribute('aria-expanded', 'true');
+  const first = pop.querySelector('.choiceChip.selected') || pop.querySelector('.choiceChip');
+  if(first) first.focus();
+}
+
+// Tonight's who/time/mood are remembered on this device so the next movie
+// night starts where the last one left off. Per-device on purpose: it's a
+// convenience, not family data, so it stays out of the synced state.
+const TONIGHT_PREFS_KEY = 'movieNight.tonightPrefs';
+
+function saveTonightPrefs(){
+  try{
+    localStorage.setItem(TONIGHT_PREFS_KEY, JSON.stringify({
+      time: tonightSelection.time,
+      mood: tonightSelection.mood,
+      excludedChildIds: Array.from(tonightSelection.excludedChildIds)
+    }));
+  }catch(err){}
+}
+
+function loadTonightPrefs(){
+  let saved = null;
+  try{ saved = JSON.parse(localStorage.getItem(TONIGHT_PREFS_KEY) || 'null'); }catch(err){ saved = null; }
+  if(!saved || typeof saved !== 'object') return;
+  if([90, 120, 999].includes(saved.time)) tonightSelection.time = saved.time;
+  if(['calm', 'silly', 'new', 'favorite'].includes(saved.mood)) tonightSelection.mood = saved.mood;
+  if(Array.isArray(saved.excludedChildIds)){
+    const known = new Set((state.children || []).map(child => child.id));
+    tonightSelection.excludedChildIds = new Set(saved.excludedChildIds.filter(id => known.has(id)));
+  }
+  setSelectedChoice('tonightTimeChoices', 'time', tonightSelection.time);
+  setSelectedChoice('tonightMoodChoices', 'mood', tonightSelection.mood);
 }
 
 function setSelectedChoice(containerId, attr, value){
@@ -5482,7 +5725,7 @@ function setFindPickMode(mode){
 }
 
 function showTonightPick(candidateOverride){
-  setTonightEditOpen(false);
+  closeTonightPops();
   const candidate = candidateOverride || findTonightCandidate();
   if(!candidate) return;
   // Issue #93: the typed no-match result gets its own dedicated state --
@@ -5517,22 +5760,25 @@ function showTonightPick(candidateOverride){
   tonightSelection.verdict = verdict.verdict;
 
   const verdictEl = document.getElementById('tonightVerdict');
-  document.getElementById('tonightPickCard').dataset.admit = 'Admit one';
-  document.getElementById('tonightPickCard').classList.toggle('watched', markValue(state.checked, idx));
-  updateTonightWatchBtn();
+  const card = document.getElementById('tonightPickCard');
+  card.dataset.admit = 'Admit one';
+  card.dataset.verdict = verdict.verdict;
+  card.classList.toggle('watched', markValue(state.checked, idx));
   verdictEl.textContent = tonightVerdictLabel(verdict.verdict);
   document.getElementById('tonightPickTitle').textContent = `${displayTitle(movie)}`;
+  const facts = [movie.studio && movie.studio !== 'Other' ? movie.studio : '', Number.isInteger(movie.runtimeMinutes) ? formatRuntime(movie.runtimeMinutes) : '', parseAge(movie.ca) === null ? 'No CSM age' : `CSM ${movie.ca}`].filter(Boolean);
+  document.getElementById('tonightPickFacts').textContent = facts.join(' · ');
   // Only stage real art. createPoster() falls back to a bordered "Movie/year"
-  // box, which reads fine at Shelf's 42px but becomes a large empty rectangle
-  // at hero size -- worse than no poster at all for the ~14 catalogue titles
-  // that have none. .pickStage:empty collapses the gap.
+  // box, which reads fine at Shelf's 42px but becomes an empty rectangle
+  // beside the title for the titles that have none. .pickStage:empty
+  // collapses the gap.
   const stage = document.getElementById('tonightPickStage');
   if(stage){
     stage.textContent = '';
     const art = typeof MOVIE_POSTERS !== 'undefined' && MOVIE_POSTERS[movie.num];
     if(art && art.u) stage.appendChild(createPoster(movie, 'pickPoster', false));
   }
-  renderTonightPreShow(movie);
+  renderTonightHeadsUp(movie);
   // Issue #78: a new pick showing (including via Skip) always starts with its
   // details collapsed, same as Shelf's detail never carries over between
   // different movies.
@@ -5556,59 +5802,57 @@ function showTonightPick(candidateOverride){
   }else{
     copy.push(verdict.reasons[0] || 'Within the selected child settings.');
   }
-  copy.push(tonightSelection.time === 999
-    ? `${formatRuntime(movie.runtimeMinutes)} runtime.`
-    : `${formatRuntime(movie.runtimeMinutes)} · Fits your ${tonightSelection.time}-minute window.`);
-  copy.push(candidate.source === 'Want to watch' ? 'Someone in your family starred this one.' : candidate.source === 'Recent releases' ? 'Pulled from recent releases.' : 'Pulled from the rest of Shelf.');
-  const reasonLines = copy.slice(0, 3);
+  // The runtime now sits in the facts line under the title; only a starred
+  // or recent-release pick says where it came from, since "the rest of
+  // Shelf" told a parent nothing.
+  if(candidate.source === 'Want to watch') copy.push('Someone in your family starred this one.');
+  else if(candidate.source === 'Recent releases') copy.push('Pulled from recent releases.');
+  const reasonLines = copy.slice();
   if(tonightWorryExclude) reasonLines.push(`Leaving out titles whose notes mention ${WORRY_LABELS[tonightWorryExclude].toLowerCase()}, or that haven't been checked for it.`);
   reasonLines.forEach(text=>{
     const li = document.createElement('li');
     li.textContent = text;
     reasons.appendChild(li);
   });
+  reasons.classList.toggle('warn', verdict.verdict !== 'green');
   const evidence = document.getElementById('tonightEvidence');
   evidence.replaceChildren();
   const sourceUrl = movie.srcUrl ? safeSourceUrl(movie.srcUrl) : '';
   let sourceHost = '';
   try{ sourceHost = sourceUrl ? new URL(sourceUrl).hostname : ''; }catch(e){ sourceHost = ''; }
   const hasCsmSource = /(^|\.)commonsensemedia\.org$/i.test(sourceHost);
-  const evidenceTitle = document.createElement('strong');
-  evidenceTitle.textContent = movie.flags && hasCsmSource
-    ? 'Common Sense Media review available'
-    : movie.flags && sourceUrl
-      ? 'Content guidance with source'
-      : 'Limited guidance';
-  const evidenceCopy = document.createElement('div');
-  evidenceCopy.textContent = movie.flags
-    ? 'This recommendation uses title-specific content guidance and your current selections.'
-    : 'No direct Common Sense Media review is available. This suggestion uses general title information and comparison material.';
-  evidence.appendChild(evidenceTitle);
-  evidence.appendChild(evidenceCopy);
   if(sourceUrl){
     const source = document.createElement('a');
     source.className = 'recommendationSource';
     source.href = sourceUrl;
     source.target = '_blank';
     source.rel = 'noopener';
-    source.textContent = 'View source';
+    source.textContent = hasCsmSource ? 'Common Sense Media ↗' : 'Source ↗';
     evidence.appendChild(source);
+  }else if(!movie.flags){
+    evidence.textContent = 'Limited guidance';
   }
-  // Issue #49B: "Watch anyway" is the same override workflow for red as for
-  // amber -- a parent choosing to proceed past a caution -- so it shows for
-  // either non-green verdict, not just amber.
-  document.getElementById('tonightWatchAnywayBtn').style.display = verdict.verdict !== 'green' ? 'inline-block' : 'none';
+  // Watch anyway replaces Mark watched as the main button whenever the fit
+  // isn't green, with the reason repeated in the action bar, so the warning
+  // travels with the button however far the card is scrolled.
+  const barWarning = document.getElementById('tonightBarWarning');
+  barWarning.textContent = verdict.verdict !== 'green' ? `⚠ ${copy[0]}` : '';
+  barWarning.hidden = verdict.verdict === 'green';
+  document.getElementById('tonightWatchBtn').hidden = verdict.verdict !== 'green';
+  document.getElementById('tonightWatchAnywayBtn').hidden = verdict.verdict === 'green';
+  updateTonightWatchBtn();
   updateTonightWatchAnywayBtn();
-  document.getElementById('tonightPickCard').style.display = 'block';
+  card.style.display = 'block';
   document.getElementById('homeScreen').classList.add('hasPick');
   document.getElementById('tonightPickStatus').textContent = `${tonightVerdictLabel(verdict.verdict)}: ${displayTitle(movie)}. ${copy[0]}`;
-  // resetTonightSkips() (which every Change-panel handler calls to
-  // invalidate the current pick) is the matching place that brings it back.
   setFindPickMode('skip');
   document.getElementById('tonightAlternatives').hidden = true;
   document.getElementById('tonightAlternativesBtn').setAttribute('aria-expanded', 'false');
   document.getElementById('tonightSkipFeedback').hidden = true;
   document.getElementById('tonightSkipBtn').setAttribute('aria-expanded', 'false');
+  const change = document.getElementById('tonightPickChange');
+  change.hidden = true;
+  change.textContent = '';
 }
 
 // ---- Guidance data (MOVIE_GUIDANCE, from data-guidance.js via
@@ -5666,13 +5910,6 @@ function fillMovieDetail(detail, m, isOpen){
   detail.appendChild(guide);
 }
 
-// ---- Pre-show. The OpenUI renderer is self-hosted (CSP only allows
-// same-origin scripts, and sw.js only caches same-origin) and pinned to
-// one exact version. It's ~3.2 MB, so it loads only when a pick that has
-// a Pre-show opens; sw.js keeps it in its own cache for offline. Any
-// failure (offline before first load, bad program, render error) just
-// hides the band.
-
 // OpenUI 0.2+ picks light/dark itself from the OS unless
 // <html data-openui-theme> says otherwise. The app has its own Light / Dark /
 // Match device setting (data-theme on <html>), so mirror the app's effective
@@ -5720,20 +5957,88 @@ function loadOpenUI(){
   return openuiLoading;
 }
 
-function renderTonightPreShow(movie){
+// The warning line under the title is plain text from the Pre-Show program
+// (preShowNotes()), so it shows with the pick even if the OpenUI renderer
+// hasn't loaded or can't. "More" opens the full Pre-Show.
+let tonightPreShowOpen = false;
+
+function renderTonightHeadsUp(movie){
+  const notes = preShowNotes(movie);
+  const text = document.getElementById('tonightHeadsUpText');
+  const box = document.getElementById('tonightHeadsUp');
+  const btn = document.getElementById('tonightHeadsUpBtn');
+  text.replaceChildren();
+  box.classList.toggle('caution', !!notes.before);
+  if(notes.before){
+    const title = document.createElement('strong');
+    title.textContent = `${notes.before.title.replace(/[.!?]$/, '')}. `;
+    text.appendChild(title);
+    text.appendChild(document.createTextNode(notes.before.text));
+  }else if(notes.gentle){
+    text.textContent = 'Gentle. Nothing to prep for.';
+  }else{
+    text.textContent = 'No Pre-Show notes for this one yet.';
+  }
+  const fallback = document.getElementById('tonightPreShowFallback');
+  fallback.replaceChildren();
+  if(notes.before){
+    const before = document.createElement('p');
+    const strong = document.createElement('strong');
+    strong.textContent = `${notes.before.title.replace(/[.!?]$/, '')}. `;
+    before.appendChild(strong);
+    before.appendChild(document.createTextNode(notes.before.text));
+    fallback.appendChild(before);
+  }
+  if(notes.askAfter){
+    const ask = document.createElement('p');
+    ask.className = 'askAfter';
+    ask.textContent = `Ask after: ${notes.askAfter}`;
+    fallback.appendChild(ask);
+  }
+  const hasMore = !!(movieGuidanceFor(movie.num) && (notes.before || notes.askAfter));
+  btn.hidden = !hasMore;
+  tonightPreShowOpen = false;
+  setTonightPreShowOpen(false, movie);
+}
+
+function setTonightPreShowOpen(open, movie){
+  tonightPreShowOpen = open;
+  const btn = document.getElementById('tonightHeadsUpBtn');
+  const box = document.getElementById('tonightHeadsUp');
+  btn.textContent = open ? 'Less' : 'More';
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  box.classList.toggle('open', open);
   const band = document.getElementById('tonightPreShow');
+  if(!open){
+    ++preShowToken;
+    band.hidden = true;
+    return;
+  }
+  band.hidden = false;
+  document.getElementById('tonightPreShowFallback').hidden = false;
+  renderTonightPreShow(movie);
+}
+
+// ---- Pre-show. The OpenUI renderer is self-hosted (CSP only allows
+// same-origin scripts, and sw.js only caches same-origin) and pinned to
+// one exact version. It's ~3.2 MB, so it loads only when a parent opens a
+// pick's Pre-show; sw.js keeps it in its own cache for offline. While it
+// loads, or if it fails, the plain-text notes stay in its place.
+function renderTonightPreShow(movie){
   const guidance = movieGuidanceFor(movie.num);
   const code = guidance && typeof guidance.preShow === 'string' ? guidance.preShow.trim() : '';
   const token = ++preShowToken;
-  band.hidden = true;
+  const body = document.getElementById('tonightPreShowBody');
+  const fallback = document.getElementById('tonightPreShowFallback');
+  body.hidden = true;
   if(!code) return;
-  const hide = () => { if(token === preShowToken) band.hidden = true; };
+  const showFallback = () => { if(token === preShowToken){ body.hidden = true; fallback.hidden = false; } };
   loadOpenUI().then(openui=>{
     if(token !== preShowToken) return;
     const { React, createRoot, Renderer, openuiChatLibrary } = openui;
     if(!preShowRoot){
-      preShowRoot = createRoot(document.getElementById('tonightPreShowBody'), {
-        onUncaughtError: () => { band.hidden = true; }
+      preShowRoot = createRoot(body, {
+        onUncaughtError: () => { body.hidden = true; fallback.hidden = false; }
       });
     }
     // FollowUpItem renders as a chat button that would do nothing here, so
@@ -5749,12 +6054,13 @@ function renderTonightPreShow(movie){
       return React.createElement('div', { ref }, React.createElement(Renderer, {
         response: code,
         library: openuiChatLibrary,
-        onError: errors => { if((errors || []).some(e => e.severity !== 'warning')) hide(); }
+        onError: errors => { if((errors || []).some(e => e.severity !== 'warning')) showFallback(); }
       }));
     }
     preShowRoot.render(React.createElement(PreShow, { key: token }));
-    band.hidden = false;
-  }).catch(hide);
+    body.hidden = false;
+    fallback.hidden = true;
+  }).catch(showFallback);
 }
 
 // ---- Check a worry. Deterministic lookup in MOVIE_GUIDANCE[num].concerns,
@@ -5880,16 +6186,21 @@ function findActiveWatchAnywayEvent(idx, childId, flagId){
 // instead of staying identical across taps, and updateTonightWatchBtn()'s
 // sibling call sites (showTonightPick(), skip, mark-watched) all need this
 // kept in sync with the current pick the same way.
+function isWatchAnywayLogged(idx){
+  return idx !== null && selectedKids().some(child => {
+    const flagId = primaryOverrideFlagForChild(MOVIES[idx], child);
+    return flagId && findActiveWatchAnywayEvent(idx, child.id, flagId);
+  });
+}
+
 function updateTonightWatchAnywayBtn(){
   const btn = document.getElementById('tonightWatchAnywayBtn');
   if(!btn) return;
   const idx = tonightSelection.currentPickIdx;
-  const logged = idx !== null && selectedKids().some(child => {
-    const flagId = primaryOverrideFlagForChild(MOVIES[idx], child);
-    return flagId && findActiveWatchAnywayEvent(idx, child.id, flagId);
-  });
-  btn.textContent = logged ? '✓ Logged (tap to undo)' : 'Watch anyway';
-  btn.setAttribute('aria-pressed', logged ? 'true' : 'false');
+  const watched = idx !== null && !!markValue(state.checked, idx);
+  btn.textContent = watched ? '✓ Watched' : 'Watch anyway';
+  btn.setAttribute('aria-pressed', watched ? 'true' : 'false');
+  btn.classList.toggle('done', watched);
 }
 
 function logWatchAnywaySignal(){
@@ -5971,6 +6282,34 @@ function resetTonightSkips(){
   document.getElementById('tonightPickStatus').textContent = '';
 }
 
+// A who/time/mood change used to throw away the pick and every skip and send
+// the parent back to "Find tonight's pick". Now the pick updates in place:
+// skipped titles stay skipped, a who/time change keeps the current movie if
+// it still passes every check, and a mood change always finds a new one.
+function applyTonightSettingsChange(kind){
+  saveTonightPrefs();
+  renderTonightSummary();
+  const card = document.getElementById('tonightPickCard');
+  const noMatch = document.getElementById('tonightNoMatchCard');
+  const showing = card.style.display !== 'none' || noMatch.style.display !== 'none';
+  if(!showing) return;
+  const idx = tonightSelection.currentPickIdx;
+  const kids = selectedKids();
+  const keep = kind !== 'mood' && idx !== null && isTonightEligible(idx, kids, true, true);
+  const before = idx;
+  if(keep) showTonightPick({ idx, source: tonightSelection.currentPickSource });
+  else showTonightPick();
+  const label = kind === 'who' ? tonightWhoPillLabel() : kind === 'time' ? tonightTimeLabel().toLowerCase() : tonightMoodLabel().toLowerCase();
+  const note = keep ? `Still a good fit for ${label}.` : (tonightSelection.currentPickIdx !== null && tonightSelection.currentPickIdx !== before ? `New pick for ${label}.` : '');
+  const change = document.getElementById('tonightPickChange');
+  if(note && card.style.display !== 'none'){
+    change.textContent = note;
+    change.hidden = false;
+    const status = document.getElementById('tonightPickStatus');
+    status.textContent = `${note} ${status.textContent}`;
+  }
+}
+
 function renderTonightKidChoices(){
   const container = document.getElementById('tonightKidChoices');
   if(!container) return;
@@ -5984,9 +6323,10 @@ function renderTonightKidChoices(){
     btn.addEventListener('click', ()=>{
       if(tonightSelection.excludedChildIds.has(child.id)) tonightSelection.excludedChildIds.delete(child.id);
       else tonightSelection.excludedChildIds.add(child.id);
-      resetTonightSkips();
       renderTonightKidChoices();
-      renderTonightSummary();
+      applyTonightSettingsChange('who');
+      const again = Array.from(document.querySelectorAll('#tonightKidChoices .choiceChip')).find(b => b.textContent === child.name);
+      if(again) again.focus();
     });
     container.appendChild(btn);
   });
@@ -5997,9 +6337,9 @@ function renderTonightKidChoices(){
   adultsOnly.setAttribute('aria-pressed', selectedKids().length === 0 ? 'true' : 'false');
   adultsOnly.addEventListener('click', ()=>{
     tonightSelection.excludedChildIds = new Set(state.children.map(child => child.id));
-    resetTonightSkips();
     renderTonightKidChoices();
-    renderTonightSummary();
+    applyTonightSettingsChange('who');
+    closeTonightPops({ restoreFocus: true });
   });
   container.appendChild(adultsOnly);
   renderTonightSummary();
@@ -6097,7 +6437,7 @@ function tonightSubtitleFor(date){
   const hour = date.getHours();
   const day = date.getDay();
   const month = date.getMonth();
-  if(hour >= 20 || hour < 4) return 'Late start? Set a shorter time under Change.';
+  if(hour >= 20 || hour < 4) return 'Late start? Tap 90 min to pick a shorter time.';
   if(day === 5) return 'Friday night. Big-screen energy.';
   if(day === 6) return 'Saturday night at the movies.';
   if((month === 10 && date.getDate() >= 20) || month === 11) return 'Cozy season. Blankets optional, popcorn encouraged.';
@@ -8028,7 +8368,8 @@ document.getElementById('tonightShelfBtn').addEventListener('click', ()=>{
 });
 
 document.getElementById('tonightNoMatchChangeBtn').addEventListener('click', ()=>{
-  setTonightEditOpen(true);
+  window.scrollTo({ top: 0, behavior: scrollBehavior() });
+  toggleTonightPop('tonightWhoPill');
 });
 
 document.getElementById('tonightNoMatchFamilyBtn').addEventListener('click', ()=>{
@@ -8039,13 +8380,28 @@ document.getElementById('tonightNoMatchShelfBtn').addEventListener('click', ()=>
   showScreen('browse');
 });
 
-document.getElementById('tonightChangeBtn').addEventListener('click', ()=>{
-  const panel = document.getElementById('tonightEditPanel');
-  setTonightEditOpen(panel ? panel.hidden : true);
+TONIGHT_PILLS.forEach(([pillId])=>{
+  document.getElementById(pillId).addEventListener('click', () => toggleTonightPop(pillId));
 });
 
-document.getElementById('tonightDoneBtn').addEventListener('click', ()=>{
-  setTonightEditOpen(false);
+// composedPath() is captured at dispatch, so a tap on a chip that re-renders
+// itself out of the DOM (the kid chips do) still counts as inside.
+document.addEventListener('click', event=>{
+  const inside = event.composedPath().some(el => el.classList && (el.classList.contains('tonightPillWrap') || el.id === 'tonightNoMatchChangeBtn'));
+  if(!inside) closeTonightPops();
+});
+
+document.addEventListener('keydown', event=>{
+  if(event.key !== 'Escape') return;
+  if(TONIGHT_PILLS.some(([, popId]) => !document.getElementById(popId).hidden)){
+    closeTonightPops({ restoreFocus: true });
+  }
+});
+
+document.getElementById('tonightHeadsUpBtn').addEventListener('click', ()=>{
+  const idx = tonightSelection.currentPickIdx;
+  if(idx === null) return;
+  setTonightPreShowOpen(!tonightPreShowOpen, MOVIES[idx]);
 });
 
 document.getElementById('findTonightPickBtn').addEventListener('click', ()=>{
@@ -8081,7 +8437,27 @@ document.getElementById('tonightWatchBtn').addEventListener('click', ()=>{
   }
 });
 
-document.getElementById('tonightWatchAnywayBtn').addEventListener('click', logWatchAnywaySignal);
+// Watch anyway is the main button on an amber/red pick, so it does what
+// Mark watched does (adds it to the family's log) and records the override
+// as a gentle Family review signal. A second tap undoes both.
+document.getElementById('tonightWatchAnywayBtn').addEventListener('click', ()=>{
+  const idx = tonightSelection.currentPickIdx;
+  if(idx === null) return;
+  const wasWatched = !!markValue(state.checked, idx);
+  // Keep the review signal in step with watched: log it when marking, remove
+  // it when undoing. logWatchAnywaySignal() toggles, so only call it when
+  // the signal's current state disagrees with where we're heading.
+  if(isWatchAnywayLogged(idx) === wasWatched) logWatchAnywaySignal();
+  toggleCheck(idx);
+  const isWatched = !!markValue(state.checked, idx);
+  const card = document.getElementById('tonightPickCard');
+  if(isWatched) card.dataset.admit = `Admit one · ${new Date(Date.now()).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' })}`;
+  card.classList.toggle('watched', isWatched);
+  document.getElementById('tonightVerdict').textContent = isWatched ? 'Watched' : tonightVerdictLabel(tonightSelection.verdict);
+  updateTonightWatchBtn();
+  updateTonightWatchAnywayBtn();
+  showToast(isWatched ? "Added to your family's movie log. Noted for Family review." : 'Removed from watched');
+});
 
 document.getElementById('tonightDetailBtn').addEventListener('click', toggleTonightDetail);
 
@@ -8106,8 +8482,17 @@ document.getElementById('tonightSkipBtn').addEventListener('click', ()=>{
     btn.setAttribute('aria-pressed', 'false');
   });
   resetWorryCheck();
-  const firstReason = document.querySelector('[data-skip-reason]');
-  if(firstReason) firstReason.focus();
+  // Land on the new pick, not the optional reason chips further down: the
+  // title is what a parent needs to see next, and moving focus to the chips
+  // used to scroll it off screen.
+  const status = document.getElementById('tonightPickStatus');
+  if(document.getElementById('tonightPickCard').style.display !== 'none'){
+    status.textContent = `Skipped ${skippedTitle}. ${status.textContent}`;
+    const title = document.getElementById('tonightPickTitle');
+    title.focus({ preventScroll: true });
+    const top = document.getElementById('tonightPickCard').getBoundingClientRect().top;
+    if(top < 0 || top > window.innerHeight * 0.5) document.getElementById('tonightPickCard').scrollIntoView({ block: 'start', behavior: scrollBehavior() });
+  }
 });
 
 document.getElementById('tonightSkipContinueBtn').addEventListener('click', ()=>{
@@ -8204,18 +8589,18 @@ document.getElementById('tonightAlternativesBtn').addEventListener('click', ()=>
 document.querySelectorAll('#tonightTimeChoices .choiceChip').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     tonightSelection.time = parseInt(btn.dataset.time, 10);
-    resetTonightSkips();
     setSelectedChoice('tonightTimeChoices', 'time', tonightSelection.time);
-    renderTonightSummary();
+    closeTonightPops({ restoreFocus: true });
+    applyTonightSettingsChange('time');
   });
 });
 
 document.querySelectorAll('#tonightMoodChoices .choiceChip').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     tonightSelection.mood = btn.dataset.mood;
-    resetTonightSkips();
     setSelectedChoice('tonightMoodChoices', 'mood', tonightSelection.mood);
-    renderTonightSummary();
+    closeTonightPops({ restoreFocus: true });
+    applyTonightSettingsChange('mood');
   });
 });
 
@@ -8618,6 +9003,7 @@ loadState();
 loadRecentTonightPicks();
 loadNotInterested();
 loadSkipped();
+loadTonightPrefs();
 tryInitGoogleSync();
 renderStudioGrid();
 // No tonightSelection seeding needed here: excludedChildIds starts empty
