@@ -994,7 +994,7 @@ function reportError(err){
     color:var(--ink-faint);
   }
   .star.on{ color:var(--favorite); }
-  .info{ flex:1; min-width:0; }
+  .info{ flex:1; min-width:0; overflow-wrap:break-word; }
   .title{
     font-family:"Newsreader", Georgia, "Times New Roman", serif;
     font-weight:600;
@@ -1014,18 +1014,23 @@ function reportError(err){
   }
   .movieFacts{
     line-height:1.45;
+    display:flex;
+    flex-wrap:wrap;
+    column-gap:10px;
+    max-width:100%;
   }
   .badge{
     color:var(--ink-soft);
+    min-width:0;
   }
   .badge.csm{ color:var(--ink); font-weight:500; }
   .badge.runtime{
-    margin-left:10px;
     white-space:nowrap;
   }
   .metaLinks{
     display:flex;
-    gap:10px;
+    flex-wrap:wrap;
+    column-gap:10px;
     align-items:center;
   }
   .detailLink{
@@ -2926,6 +2931,23 @@ function reportError(err){
     .safeBetDetail.noPosterDetail{
       padding-left:46px;
     }
+    /* What's new cards sit inside the screen margin, so their own padding
+       left the title column about 70px wide at 320px and pushed the page
+       sideways. */
+    .newSection{
+      padding:14px 12px;
+    }
+    .newRow{
+      display:grid;
+      grid-template-columns:44px auto minmax(0, 1fr);
+      column-gap:10px;
+      row-gap:4px;
+    }
+    /* Watched and star share one column so the title gets the room. */
+    .newRow > .check{ grid-column:1; grid-row:1; }
+    .newRow > .star{ grid-column:1; grid-row:2; }
+    .newRow > .poster{ grid-column:2; grid-row:1 / span 2; }
+    .newRow > .info{ grid-column:3; grid-row:1 / span 3; }
   }
 </style>
 </head>
@@ -4357,7 +4379,10 @@ function createMeta(idx, m, detailScope){
   csmBadge.textContent = `${m.studio} `;
   const csmAge = document.createElement('span');
   csmAge.className = 'nowrap';
-  csmAge.textContent = `· CSM ${m.ca}`;
+  // Substitute-source entries store a sentence in `ca`; Pre-Show already
+  // shows those as "No CSM age", and a long unbreakable label here pushed
+  // the page wider than a phone screen.
+  csmAge.textContent = parseAge(m.ca) === null ? '· No CSM age' : `· CSM ${m.ca}`;
   csmBadge.appendChild(csmAge);
   facts.appendChild(csmBadge);
 
