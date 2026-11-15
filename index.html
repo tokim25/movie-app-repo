@@ -1204,16 +1204,14 @@ function reportError(err){
   .shelfJumpRail{
     position:fixed;
     top:calc(74px + env(safe-area-inset-top, 0px));
-    right:4px;
+    right:1px;
     bottom:calc(86px + env(safe-area-inset-bottom, 0px));
     z-index:15;
-    width:34px;
-    padding:5px 3px;
-    border:1px solid var(--line);
-    border-radius:17px;
-    background:rgba(255,255,255,0.94);
-    box-shadow:0 4px 18px rgba(var(--shadow-rgb),0.12);
-    backdrop-filter:blur(8px);
+    width:26px;
+    padding:4px 1px;
+    border:0;
+    border-radius:10px 0 0 10px;
+    background:rgba(255,255,255,0.82);
   }
   .shelfJumpRail[hidden]{ display:none; }
   .shelfJumpItems{
@@ -1230,19 +1228,20 @@ function reportError(err){
     border:0;
     border-radius:999px;
     background:transparent;
-    color:var(--accent-text);
+    color:var(--ink-soft);
     font:inherit;
-    font-size:11px;
-    font-weight:700;
+    font-size:9.5px;
+    font-weight:600;
     line-height:1;
     cursor:pointer;
   }
   .shelfJumpBtn:hover,
   .shelfJumpBtn:focus-visible{
     background:var(--new-bg);
+    color:var(--accent-text);
     outline:none;
   }
-  #browseScreen.railVisible{ padding-right:50px; }
+  #browseScreen.railVisible{ padding-right:32px; }
   .quickBar{
     position:fixed;
     left:0; right:0; bottom:0;
@@ -2875,7 +2874,7 @@ function reportError(err){
       right:max(12px, calc((100vw - 188px - 680px) / 2 + 12px));
       bottom:28px;
     }
-    #browseScreen.railVisible{ padding-right:54px; }
+    #browseScreen.railVisible{ padding-right:36px; }
     .sheet{
       left:auto;
       right:24px;
@@ -3824,7 +3823,6 @@ function reportError(err){
     <span class="qbCount" id="whatsNewTabCount" hidden></span>
   </button>
   <button type="button" class="qbBtn" id="tabFamily">
-    <span class="qbDot" aria-hidden="true"></span>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 11a4 4 0 1 0-8 0v3a4 4 0 0 0 8 0v-3z"/><path d="M7 21a7 7 0 0 1 10 0"/><path d="M4 12a3 3 0 0 1 2-2.8"/><path d="M20 12a3 3 0 0 0-2-2.8"/></svg>
     <span>Family</span>
   </button>

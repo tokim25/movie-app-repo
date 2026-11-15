@@ -63,6 +63,8 @@ test('the permanent decade rail stays fixed and loads a distant decade', async (
 
   await expect(page.locator('#list .chapterHead').first()).toHaveCSS('position', 'sticky');
   await expect(page.locator('#shelfJumpRail')).toHaveCSS('position', 'fixed');
+  await expect(page.locator('#shelfJumpRail')).toHaveCSS('box-shadow', 'none');
+  expect((await page.locator('#shelfJumpRail').boundingBox()).width).toBeLessThanOrEqual(26);
   await page.getByRole('button', { name: 'Jump to the 2020s' }).click();
   await expect(page.locator('#shelf-decade-2020')).toBeFocused();
   expect(await page.locator('#list > li.row').count()).toBeGreaterThan(50);
