@@ -5,7 +5,7 @@
 *{ box-sizing:border-box; }
 body{
   margin:0; background:var(--bg); color:var(--ink);
-  font:400 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font:400 15px/1.5 "Inter", Arial, sans-serif;
 }
 .bar{
   display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:8px;
@@ -38,5 +38,5 @@ button.quiet{ background:var(--surface); color:var(--accent-text); border-color:
   --openui-text-brand:var(--accent-text);
 }
 #deskBatch .openui-card{ background:transparent; border:0; box-shadow:none; padding:0; }
-#deskBatch .openui-header-top-left{ font-family:"Newsreader", Georgia, serif; font-size:20px; font-weight:600; }
+#deskBatch .openui-header-top-left{ font-family:"Inter", Arial, sans-serif; font-size:20px; font-weight:700; letter-spacing:-0.02em; }
 #deskBatch .openui-callout-warning{ background:var(--surface); border:1px solid var(--line); border-left:3px solid var(--star); }
