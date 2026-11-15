@@ -32,12 +32,17 @@ export async function setupSampleFamily(page) {
   // loading overlay first is a no-op for every other test and makes this
   // helper race-free for that one.
   await page.locator('#bootSyncLoading').waitFor({ state: 'hidden' });
+  const needsSetup = await page.evaluate(() => state.children.length === 0);
+  if (needsSetup && !await page.locator('#browseScreen').isVisible() && !await page.locator('#setupScreen').isVisible()) {
+    await page.locator('#tabBrowse').click();
+    await page.locator('#browseScreen').waitFor({ state: 'visible' });
+  }
   if (await page.locator('#browseScreen').isVisible() && await page.locator('#firstRunShelfIntro').isVisible()) {
     await page.locator('#firstRunFamilySetupBtn').click();
   }
   if (await page.locator('#setupScreen').isVisible()) {
     await page.locator('#setupSampleFamilyBtn').click();
-    await page.locator('#browseScreen').waitFor({ state: 'visible' });
+    await page.locator('#homeScreen').waitFor({ state: 'visible' });
   }
   // Most suites exercise established-user behavior, not the one-time nudge.
   // Keep that prompt scoped to first-run-onboarding.spec.js so it cannot
@@ -48,7 +53,7 @@ export async function setupSampleFamily(page) {
   // Preserve this long-standing helper's established-user semantics for
   // suites that exercise Tonight. First-run landing behavior is tested
   // directly, without this helper, in first-run-onboarding.spec.js.
-  if (await page.locator('#browseScreen').isVisible()) {
+  if (!await page.locator('#homeScreen').isVisible()) {
     await page.locator('#tabHome').click();
     await page.locator('#homeScreen').waitFor({ state: 'visible' });
   }

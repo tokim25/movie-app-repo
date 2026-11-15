@@ -31,10 +31,10 @@ async function watchAsAdultsOnly(page) {
   await page.keyboard.press('Escape');
 }
 
-test('Lists is its own tab, between Tonight and Shelf', async ({ page }) => {
+test('Lists is its own tab, between Shelf and Tonight', async ({ page }) => {
   await startOn(page, '2026-12-18T19:00:00');
   const labels = await page.locator('#quickBar .qbBtn > span:not(.qbCount):not(.qbDot)').allTextContents();
-  expect(labels).toEqual(['Tonight', 'Lists', 'Shelf', "What's new", 'Family']);
+  expect(labels).toEqual(['Shelf', 'Lists', 'Tonight', "What's new", 'Family']);
   await openLists(page);
   await expect(page.locator('#tabLists')).toHaveAttribute('aria-current', 'page');
   await expect(page.locator('#listsScreenHeading')).toHaveText('Lists');

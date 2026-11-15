@@ -56,18 +56,19 @@ test('Compact Shelf rows are shorter and the preference survives reload', async 
   await expect(page.locator('#list')).toHaveClass(/shelfCompact/);
 });
 
-test('decade headings stick and the jump control loads a distant decade', async ({ page }) => {
+test('the permanent decade rail stays fixed and loads a distant decade', async ({ page }) => {
   await page.goto('/');
   await setupSampleFamily(page);
   await page.locator('#tabBrowse').click();
 
   await expect(page.locator('#list .chapterHead').first()).toHaveCSS('position', 'sticky');
-  await page.locator('#shelfJumpSelect').selectOption('decade:2020');
+  await expect(page.locator('#shelfJumpRail')).toHaveCSS('position', 'fixed');
+  await page.getByRole('button', { name: 'Jump to the 2020s' }).click();
   await expect(page.locator('#shelf-decade-2020')).toBeFocused();
   expect(await page.locator('#list > li.row').count()).toBeGreaterThan(50);
 });
 
-test('the jump control switches from decades to A-Z when sorted by title', async ({ page }) => {
+test('the permanent rail switches from decades to A-Z when sorted by title', async ({ page }) => {
   await page.goto('/');
   await setupSampleFamily(page);
   await page.locator('#tabBrowse').click();
@@ -76,7 +77,8 @@ test('the jump control switches from decades to A-Z when sorted by title', async
   await page.locator('#applyFiltersBtn').click();
 
   await expect(page.locator('#shelfJumpLabel')).toHaveText('Jump to letter');
-  await expect(page.locator('#shelfJumpSelect option[value="letter:A"]')).toHaveCount(1);
+  await expect(page.getByRole('button', { name: 'Jump to A', exact: true })).toBeVisible();
+  await expect(page.locator('#shelfJumpRail')).toBeVisible();
 });
 
 test('nearing the end automatically loads the next 50 without moving focus', async ({ page }) => {

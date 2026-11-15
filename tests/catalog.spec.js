@@ -9,7 +9,7 @@ test('renders without console errors and shows the full catalog', async ({ page 
   });
 
   await page.goto('/');
-  await expect(page.locator('#browseScreen')).toBeVisible();
+  await expect(page.locator('#homeScreen')).toBeVisible();
   await setupSampleFamily(page);
   await page.locator('#tabBrowse').click();
   await expect(page.locator('#browseScreen h1')).toHaveText('Shelf');
