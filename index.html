@@ -1201,28 +1201,48 @@ function reportError(err){
     color:var(--ink);
     box-shadow:0 1px 3px rgba(var(--shadow-rgb),0.12);
   }
-  .shelfJumpField{
-    display:flex;
-    align-items:center;
-    gap:7px;
-    color:var(--ink-soft);
-    font-size:13px;
-    font-weight:600;
-  }
-  .shelfJumpField[hidden]{ display:none; }
-  .shelfJumpField select{
-    min-height:44px;
-    max-width:150px;
-    padding:0 30px 0 10px;
+  .shelfJumpRail{
+    position:fixed;
+    top:calc(74px + env(safe-area-inset-top, 0px));
+    right:4px;
+    bottom:calc(86px + env(safe-area-inset-bottom, 0px));
+    z-index:15;
+    width:34px;
+    padding:5px 3px;
     border:1px solid var(--line);
-    border-radius:9px;
-    background:var(--surface);
-    color:var(--ink);
-    font:inherit;
-    font-size:14px;
-    font-weight:500;
-    line-height:1;
+    border-radius:17px;
+    background:rgba(255,255,255,0.94);
+    box-shadow:0 4px 18px rgba(var(--shadow-rgb),0.12);
+    backdrop-filter:blur(8px);
   }
+  .shelfJumpRail[hidden]{ display:none; }
+  .shelfJumpItems{
+    display:grid;
+    grid-template-rows:repeat(var(--jump-count, 1), minmax(18px, 1fr));
+    height:100%;
+  }
+  .shelfJumpBtn{
+    display:grid;
+    place-items:center;
+    width:100%;
+    min-height:0;
+    padding:0;
+    border:0;
+    border-radius:999px;
+    background:transparent;
+    color:var(--accent-text);
+    font:inherit;
+    font-size:11px;
+    font-weight:700;
+    line-height:1;
+    cursor:pointer;
+  }
+  .shelfJumpBtn:hover,
+  .shelfJumpBtn:focus-visible{
+    background:var(--new-bg);
+    outline:none;
+  }
+  #browseScreen.railVisible{ padding-right:50px; }
   .quickBar{
     position:fixed;
     left:0; right:0; bottom:0;
@@ -2851,6 +2871,11 @@ function reportError(err){
     .qbBtn span{ font-size:15px; }
     .qbBtn .qbCount{ position:static; margin-left:auto; font-size:11px; }
     .qbBtn.on{ background:rgba(var(--accent-rgb),0.1); }
+    .shelfJumpRail{
+      right:max(12px, calc((100vw - 188px - 680px) / 2 + 12px));
+      bottom:28px;
+    }
+    #browseScreen.railVisible{ padding-right:54px; }
     .sheet{
       left:auto;
       right:24px;
@@ -3512,11 +3537,11 @@ function reportError(err){
       <button type="button" id="comfortableDensityBtn" data-density="comfortable" aria-pressed="true">Comfortable</button>
       <button type="button" id="compactDensityBtn" data-density="compact" aria-pressed="false">Compact</button>
     </fieldset>
-    <label class="shelfJumpField" id="shelfJumpField" for="shelfJumpSelect" hidden>
-      <span id="shelfJumpLabel">Jump to</span>
-      <select id="shelfJumpSelect"><option value="">Choose</option></select>
-    </label>
   </div>
+  <nav class="shelfJumpRail" id="shelfJumpRail" aria-labelledby="shelfJumpLabel" hidden>
+    <span class="srOnly" id="shelfJumpLabel">Jump to decade</span>
+    <div class="shelfJumpItems" id="shelfJumpItems"></div>
+  </nav>
   <div id="browseBySection">
     <button type="button" class="listsTeaser" id="listsTeaser">
       <span class="tzMedals" id="listsTeaserMedals" aria-hidden="true"></span>
@@ -3781,17 +3806,17 @@ function reportError(err){
 <div class="srOnly" id="assertiveStatus" role="alert" aria-live="assertive" aria-atomic="true"></div>
 
 <nav class="quickBar" id="quickBar" aria-label="Main navigation" tabindex="-1">
-  <button type="button" class="qbBtn" id="tabHome">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h14v14H5z"/><path d="M9 9h6"/><path d="M9 13h4"/></svg>
-    <span>Tonight</span>
+  <button type="button" class="qbBtn" id="tabBrowse">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>
+    <span>Shelf</span>
   </button>
   <button type="button" class="qbBtn" id="tabLists">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20.5h18"/><rect x="4.5" y="6" width="4" height="14.5" rx="1"/><rect x="9.5" y="3.5" width="4" height="17" rx="1"/><path d="M15.2 7.6l3.6-1 3.4 13.4"/><path d="M6.5 9.5v2"/></svg>
     <span>Lists</span>
   </button>
-  <button type="button" class="qbBtn" id="tabBrowse">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>
-    <span>Shelf</span>
+  <button type="button" class="qbBtn" id="tabHome">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h14v14H5z"/><path d="M9 9h6"/><path d="M9 13h4"/></svg>
+    <span>Tonight</span>
   </button>
   <button type="button" class="qbBtn" id="tabWhatsNew">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3l1.9 5.1L18 10l-5.1 1.9L11 17l-1.9-5.1L4 10l5.1-1.9z"/><path d="M18.5 15l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></svg>
@@ -4040,7 +4065,7 @@ let ageFilter = "";
 let genreFilter = "";
 let studioFilter = "";
 let sortMode = "year";
-let currentScreen = "browse";
+let currentScreen = "home";
 const SHELF_DENSITY_KEY = 'family-feature-shelf-density-v1';
 let shelfDensity = readShelfDensity();
 // The Shelf list can hold 1,000+ movies. Rendering it all unpaginated makes
@@ -5874,11 +5899,11 @@ function completeSetupWithChildren(children){
   saveState();
   // Fresh setup: nobody has been deselected yet, so everyone starts included.
   tonightSelection.excludedChildIds = new Set();
-  showScreen('browse');
+  showScreen('home');
   clearSetupValidation();
   showToast('Family setup saved');
-  document.getElementById('browseScreenHeading').focus();
-  announceAssertive('Family setup complete. Your shelf is ready.');
+  document.getElementById('homeScreenHeading').focus();
+  announceAssertive('Family setup complete. Tonight is ready.');
 }
 
 function selectedKids(){
@@ -8238,9 +8263,9 @@ function renderListPagination(totalPages, totalCount, shownCount){
   listShowMoreBtn.hidden = shownCount >= totalCount;
 }
 
-const shelfJumpField = document.getElementById('shelfJumpField');
+const shelfJumpRail = document.getElementById('shelfJumpRail');
 const shelfJumpLabel = document.getElementById('shelfJumpLabel');
-const shelfJumpSelect = document.getElementById('shelfJumpSelect');
+const shelfJumpItems = document.getElementById('shelfJumpItems');
 
 function titleJumpLetter(title){
   const match = String(title || '').trim().toUpperCase().match(/[A-Z]/);
@@ -8250,19 +8275,27 @@ function titleJumpLetter(title){
 function renderShelfJump(items){
   const byDecade = sortMode === 'year';
   const byTitle = sortMode === 'title';
-  shelfJumpField.hidden = !items.length || (!byDecade && !byTitle);
-  if(shelfJumpField.hidden) return;
+  shelfJumpRail.hidden = !items.length || (!byDecade && !byTitle);
+  document.getElementById('browseScreen').classList.toggle('railVisible', !shelfJumpRail.hidden);
+  shelfJumpItems.replaceChildren();
+  if(shelfJumpRail.hidden) return;
 
   shelfJumpLabel.textContent = byDecade ? 'Jump to decade' : 'Jump to letter';
-  shelfJumpSelect.setAttribute('aria-label', shelfJumpLabel.textContent);
-  shelfJumpSelect.replaceChildren(new Option(byDecade ? 'Choose decade' : 'Choose letter', ''));
   const seen = new Set();
   items.forEach(idx => {
     const group = byDecade ? decadeOf(MOVIES[idx].y) : titleJumpLetter(MOVIES[idx].t);
     if(group === null || seen.has(group)) return;
     seen.add(group);
-    shelfJumpSelect.appendChild(new Option(byDecade ? `${group}s` : group, `${byDecade ? 'decade' : 'letter'}:${group}`));
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'shelfJumpBtn';
+    button.dataset.jumpKind = byDecade ? 'decade' : 'letter';
+    button.dataset.jumpValue = String(group);
+    button.textContent = byDecade ? `${String(group).slice(2)}s` : group;
+    button.setAttribute('aria-label', byDecade ? `Jump to the ${group}s` : `Jump to ${group}`);
+    shelfJumpItems.appendChild(button);
   });
+  shelfJumpItems.style.setProperty('--jump-count', String(seen.size));
 }
 
 // A soft line for each decade chapter: what the films have in common, not
@@ -8321,9 +8354,7 @@ document.querySelectorAll('.densityControl button').forEach(button => {
 });
 setShelfDensity(shelfDensity, false);
 
-shelfJumpSelect.addEventListener('change', () => {
-  const [kind, value] = shelfJumpSelect.value.split(':');
-  if(!value) return;
+function jumpShelfTo(kind, value){
   const targetPosition = lastVisibleOrder.findIndex(idx => kind === 'decade'
     ? decadeOf(MOVIES[idx].y) === Number(value)
     : titleJumpLetter(MOVIES[idx].t) === value);
@@ -8339,7 +8370,12 @@ shelfJumpSelect.addEventListener('change', () => {
     target.scrollIntoView({ block:'start', behavior:scrollBehavior() });
     target.focus({ preventScroll:true });
   });
-  shelfJumpSelect.value = '';
+}
+
+shelfJumpItems.addEventListener('click', event => {
+  const button = event.target.closest('.shelfJumpBtn');
+  if(!button) return;
+  jumpShelfTo(button.dataset.jumpKind, button.dataset.jumpValue);
 });
 
 document.getElementById('skipToNavLink').addEventListener('click', e=>{
@@ -9799,7 +9835,7 @@ async function decideInitialScreen(){
     // excluded is already included, with no bookkeeping required at any
     // children-mutating call site (see tonightSelection's declaration).
   }
-  showScreen('browse');
+  showScreen('home');
 }
 
 initScreens();
