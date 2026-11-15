@@ -83,6 +83,7 @@ vm.runInContext(`
   this.__PREREQS__ = typeof MOVIE_PREREQUISITES !== 'undefined' ? MOVIE_PREREQUISITES : {};
   this.__LISTS__ = typeof MOVIE_LISTS !== 'undefined' ? MOVIE_LISTS : [];
   this.__LIST_ICONS__ = typeof LIST_ICONS !== 'undefined' ? LIST_ICONS : {};
+  this.__LIST_SHELVES__ = typeof MOVIE_LIST_SHELVES !== 'undefined' ? MOVIE_LIST_SHELVES : [];
 `, context);
 
 const movies = context.__MOVIES__;
@@ -226,6 +227,8 @@ for (const movie of movies) {
     if (!list.id || ids.has(list.id)) errors.push(`${label}: missing or duplicate id`);
     ids.add(list.id);
     if (!list.name || !list.blurb) errors.push(`${label}: needs a name and blurb`);
+    if (typeof list.copy !== 'string' || !list.copy.trim()) errors.push(`${label}: needs a one-line copy for its cover`);
+    if (!(Number.isInteger(list.hue) && list.hue >= 0 && list.hue <= 359)) errors.push(`${label}: hue must be a whole number from 0 to 359`);
     if (!Array.isArray(list.pins) || !list.pins.length) errors.push(`${label}: needs pins`);
     const pins = new Set();
     for (const num of list.pins || []) {
@@ -245,6 +248,23 @@ for (const movie of movies) {
     }
     if (list.minFit !== undefined && !(Number.isInteger(list.minFit) && list.minFit >= 1 && list.minFit <= 5)) {
       errors.push(`${label}: minFit must be a whole number from 1 to 5`);
+    }
+  }
+  // MOVIE_LIST_SHELVES: real list ids, and every year-round list on exactly one shelf.
+  const shelved = new Map();
+  for (const shelf of context.__LIST_SHELVES__) {
+    if (!shelf.id || !shelf.name || !shelf.aside) errors.push(`MOVIE_LIST_SHELVES ${shelf.id}: needs an id, name and aside`);
+    for (const id of shelf.lists || []) {
+      if (!ids.has(id)) errors.push(`MOVIE_LIST_SHELVES ${shelf.id}: unknown list ${id}`);
+      if (shelved.has(id)) errors.push(`MOVIE_LIST_SHELVES: ${id} is on two shelves`);
+      shelved.set(id, shelf.id);
+    }
+  }
+  if (context.__LIST_SHELVES__.length) {
+    for (const list of context.__LISTS__) {
+      const seasonal = !!(list.season || list.dates);
+      if (seasonal && shelved.has(list.id)) errors.push(`MOVIE_LIST_SHELVES: seasonal list ${list.id} should not be on a shelf`);
+      if (!seasonal && !shelved.has(list.id)) errors.push(`MOVIE_LIST_SHELVES: year-round list ${list.id} is on no shelf`);
     }
   }
   // LIST_ICONS: one inline SVG per list, nothing that could run script.

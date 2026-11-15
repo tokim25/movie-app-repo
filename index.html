@@ -238,6 +238,9 @@ function reportError(err){
     --accent-rgb:174,78,44;
     --accent-text:#9A3F1F;
     --icon-tint:#ECC6B3;
+    --cv-s1:32%; --cv-l1:88%; --cv-s2:30%; --cv-l2:82%; --cv-is:48%; --cv-il:26%; --cv-ts:42%; --cv-tl:76%;
+    --plank:#E3D6C1; --plank-edge:#CDBDA3; --fp-border:#FFFFFF; --rev-dot:#D49A1F; --medal-bg:rgba(255,255,255,0.62);
+    --story-shadow:0 1px 2px rgba(60,40,20,0.10), 0 6px 18px rgba(60,40,20,0.07);
     --on-accent:#FFFFFF;
     --select-rgb:174,78,44;
     --error-bg:#FBE7EC;
@@ -298,6 +301,9 @@ function reportError(err){
       --accent-rgb:224,137,107;
       --accent-text:#EB9878;
       --icon-tint:#5A4238;
+      --cv-s1:16%; --cv-l1:22%; --cv-s2:16%; --cv-l2:27%; --cv-is:55%; --cv-il:80%; --cv-ts:18%; --cv-tl:38%;
+      --plank:#3F3A33; --plank-edge:#2E2A25; --fp-border:#3A3833; --rev-dot:#E0A93A; --medal-bg:rgba(0,0,0,0.26);
+      --story-shadow:0 1px 2px rgba(0,0,0,0.35);
       --on-accent:#1F1E1D;
       --select-rgb:224,137,107;
       --error-bg:#3D2229;
@@ -343,6 +349,9 @@ function reportError(err){
     --accent-rgb:224,137,107;
     --accent-text:#EB9878;
     --icon-tint:#5A4238;
+    --cv-s1:16%; --cv-l1:22%; --cv-s2:16%; --cv-l2:27%; --cv-is:55%; --cv-il:80%; --cv-ts:18%; --cv-tl:38%;
+    --plank:#3F3A33; --plank-edge:#2E2A25; --fp-border:#3A3833; --rev-dot:#E0A93A; --medal-bg:rgba(0,0,0,0.26);
+    --story-shadow:0 1px 2px rgba(0,0,0,0.35);
     --on-accent:#1F1E1D;
     --select-rgb:224,137,107;
     --error-bg:#3D2229;
@@ -3170,6 +3179,218 @@ function reportError(err){
     .newRow > .poster{ grid-column:2; grid-row:1 / span 2; }
     .newRow > .info{ grid-column:3; grid-row:1 / span 3; }
   }
+
+  /* ---------- Storybook: Lists tab and the shared movie row ----------
+     Each list cover takes its colour from --cv-hue (set per cover from the
+     list's `hue`); the lightness/saturation pairs below switch with the
+     theme so every cover passes contrast in light and dark. */
+  .listCover, .storyCover, .tuckedRow, .medal-xs{
+    --cv-bg:hsl(var(--cv-hue, 20) var(--cv-s1) var(--cv-l1));
+    --cv-bg2:hsl(var(--cv-hue, 20) var(--cv-s2) var(--cv-l2));
+    --cv-ink:hsl(var(--cv-hue, 20) var(--cv-is) var(--cv-il));
+    --icon-tint:hsl(var(--cv-hue, 20) var(--cv-ts) var(--cv-tl));
+  }
+  .storyHead{ padding:6px 0 10px; }
+  .storyHead h1{ margin:0; }
+  .storySub{ color:var(--ink-soft); margin:6px 0 0; font-size:15px; }
+  .storySection{ margin-top:14px; }
+  .storySectionHead{ display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; margin:10px 0 12px; font-size:inherit; }
+  .shName{ font-family:"Newsreader", Georgia, serif; font-weight:700; font-size:20px; line-height:1.2; }
+  .shAside{ font-family:"Newsreader", Georgia, serif; font-style:italic; font-weight:500; font-size:16px; color:var(--ink-soft); }
+  .medal{
+    display:inline-grid; place-items:center; flex:none;
+    width:44px; height:44px; border-radius:50%;
+    background:var(--medal-bg); color:var(--cv-ink, var(--accent-text));
+    box-shadow:inset 0 0 0 1.5px rgba(0,0,0,0.05);
+  }
+  .medal svg{ width:30px; height:30px; display:block; }
+  .medal-l{ width:56px; height:56px; }
+  .medal-l svg{ width:38px; height:38px; }
+  .medal-s{ width:40px; height:40px; }
+  .medal-s svg{ width:26px; height:26px; }
+  .medal-xs{ width:30px; height:30px; background:var(--cv-bg); }
+  .medal-xs svg{ width:20px; height:20px; }
+
+  /* poster fan */
+  .fan{ position:absolute; right:14px; bottom:-14px; height:calc(var(--pw) * 1.5); width:calc(var(--pw) * 2.15); }
+  .fp{
+    position:absolute; bottom:0; width:var(--pw); height:calc(var(--pw) * 1.5);
+    object-fit:cover; border-radius:4px; background:var(--cv-bg2);
+    border:2px solid var(--fp-border); box-shadow:0 1px 0 rgba(0,0,0,0.12), 0 4px 10px rgba(40,25,10,0.22);
+  }
+  .fan .fp:nth-child(1){ left:0; transform:rotate(-9deg); transform-origin:bottom right; }
+  .fan .fp:nth-child(2){ left:calc(var(--pw) * 0.58); transform:rotate(-1deg); z-index:2; }
+  .fan .fp:nth-child(3){ left:calc(var(--pw) * 1.15); transform:rotate(8deg); transform-origin:bottom left; z-index:1; }
+  .fan4{ width:calc(var(--pw) * 2.6); }
+  .fan4 .fp:nth-child(2){ left:calc(var(--pw) * 0.5); }
+  .fan4 .fp:nth-child(3){ left:calc(var(--pw) * 1.0); }
+  .fan4 .fp:nth-child(4){ left:calc(var(--pw) * 1.6); transform:rotate(11deg); transform-origin:bottom left; }
+  .plate{
+    display:flex; flex-direction:column; justify-content:center; align-items:center; gap:2px;
+    text-align:center; padding:4px; overflow:hidden;
+    background:repeating-linear-gradient(135deg, var(--cv-bg2, var(--bg-sub)) 0 6px, var(--cv-bg, var(--line)) 6px 12px);
+    color:var(--cv-ink, var(--ink-soft));
+  }
+  .plateTitle{ font-family:"Newsreader", Georgia, serif; font-style:italic; font-weight:600; font-size:11px; line-height:1.1;
+    display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; overflow-wrap:anywhere; }
+  .plateYear{ font-weight:700; font-size:9px; letter-spacing:0.06em; }
+  .fan .plate .plateTitle{ display:none; }
+
+  /* book covers */
+  .storyGrid{ display:grid; grid-template-columns:1fr 1fr; gap:16px 12px; }
+  .storyBook{
+    --pw:46px; position:relative; display:flex; flex-direction:column; text-align:left;
+    background:var(--cv-bg); color:var(--ink); border:0; padding:0; font:inherit; cursor:pointer;
+    border-radius:5px 14px 14px 5px; overflow:hidden; min-height:44px; box-shadow:var(--story-shadow);
+  }
+  .storyBook::before{ content:""; position:absolute; left:0; top:0; bottom:0; width:7px; background:var(--cv-ink); opacity:0.28; z-index:3; }
+  .bookArt{ position:relative; display:block; height:118px; overflow:hidden; background:var(--cv-bg2); }
+  .bookArt .medal{ position:absolute; left:16px; top:12px; }
+  .bookTxt{ display:flex; flex-direction:column; gap:3px; padding:10px 12px 12px 18px; }
+  .bookName{ font-family:"Newsreader", Georgia, serif; font-weight:700; font-size:17px; line-height:1.15; }
+  .bookCopy{ font-size:13px; line-height:1.3; color:var(--ink-soft); }
+  .bookFit{ font-size:12.5px; font-weight:600; color:var(--cv-ink); margin-top:3px; }
+  .plank{ height:8px; margin:12px -4px 18px; border-radius:4px; background:var(--plank); box-shadow:0 3px 0 var(--plank-edge); }
+
+  /* marquee hero for the in-season list */
+  .bulbs{ display:block; height:12px; background:radial-gradient(circle, var(--accent) 2.4px, transparent 3px) 4px 50% / 15px 12px repeat-x, var(--cv-bg2); }
+  .storyHero{
+    --pw:64px; display:block; width:100%; position:relative; text-align:left;
+    background:var(--cv-bg); color:var(--ink); border:0; padding:0; font:inherit; cursor:pointer;
+    border-radius:16px; overflow:hidden; margin-bottom:16px; box-shadow:var(--story-shadow);
+  }
+  .heroIn{ position:relative; display:block; padding:16px 18px 18px; }
+  .heroTxt{ position:relative; z-index:4; display:flex; flex-direction:column; gap:4px; }
+  .heroTxt .medal{ margin-bottom:44px; }
+  .eyebrow{ font-weight:700; font-size:11.5px; line-height:1.2; letter-spacing:0.09em; text-transform:uppercase; color:var(--cv-ink); }
+  .heroName{ font-family:"Newsreader", Georgia, serif; font-weight:700; font-size:30px; line-height:1.08; }
+  .heroCopy{ font-family:"Newsreader", Georgia, serif; font-style:italic; font-weight:500; font-size:16px; line-height:1.3; color:var(--ink-soft); }
+  .heroCta{ display:inline-flex; align-items:center; align-self:flex-start; min-height:44px; margin-top:8px; padding:0 14px;
+    border-radius:999px; background:var(--ink); color:var(--bg); font-weight:600; font-size:14px; }
+  .storyHero .fan{ right:14px; top:18px; bottom:auto; }
+
+  /* coming back later */
+  .storyLaters{ display:flex; flex-direction:column; gap:8px; }
+  .storyLater{ display:flex; align-items:center; gap:12px; min-height:60px; padding:8px 10px; border-radius:14px;
+    background:var(--cv-bg); color:var(--ink); border:0; font:inherit; text-align:left; cursor:pointer; width:100%; }
+  .laterTxt{ display:flex; flex-direction:column; flex:1; min-width:0; }
+  .laterName{ font-family:"Newsreader", Georgia, serif; font-weight:700; font-size:16px; line-height:1.2; }
+  .laterWhen{ font-size:13px; color:var(--ink-soft); }
+  .chev{ font-size:26px; line-height:1; color:var(--ink-soft); padding:0 4px; }
+
+  /* tucked away */
+  .tucked{ margin-top:26px; padding:16px; border:1.5px dashed var(--line); border-radius:14px; }
+  .tuckedHead{ font-family:"Newsreader", Georgia, serif; font-weight:700; font-size:18px; margin:0; }
+  .tuckedNote{ font-size:13.5px; color:var(--ink-soft); margin:6px 0 10px; }
+  .tuckedRow{ display:flex; align-items:center; gap:10px; padding:6px; border-radius:12px; background:var(--cv-bg); margin-top:8px; }
+  .tuckedName{ flex:1; min-width:0; font-weight:600; font-size:14.5px; }
+  .storyEmpty{ color:var(--ink-soft); margin:16px 0; }
+
+  /* pills */
+  .storyPill{ display:inline-flex; align-items:center; justify-content:center; gap:6px; min-height:44px; padding:0 18px; border-radius:999px;
+    border:1.5px solid var(--line); background:var(--surface); color:var(--ink); font:inherit; font-weight:600; font-size:14.5px; cursor:pointer; }
+  .storyPillSm{ padding:0 14px; font-size:13.5px; }
+  .storyPill svg{ width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+  .storyTopbar{ padding:4px 0 12px; }
+  .storyBack{ padding:0 16px 0 10px; }
+  .storyMore{ display:flex; width:100%; margin-top:8px; }
+
+  /* opened list: a title page */
+  .storyCover{ --pw:62px; border-radius:18px; overflow:hidden; background:var(--cv-bg); box-shadow:var(--story-shadow); }
+  .coverIn{ padding:16px 18px 18px; display:flex; flex-direction:column; gap:6px; }
+  .coverHead{ display:flex; align-items:center; gap:12px; }
+  .coverName{ font-family:"Newsreader", Georgia, serif; font-weight:700; font-size:32px; line-height:1.05; margin:6px 0 0; }
+  .coverName:focus{ outline:none; }
+  .coverName:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+  .coverCopy{ color:var(--ink-soft); font-size:15px; margin:0; }
+  .coverMeta{ font-size:13px; color:var(--ink-soft); font-weight:500; margin:0; }
+  .collage{ position:relative; display:block; height:122px; margin:14px 0 8px; }
+  .cp{ position:absolute; top:8px; width:68px; height:102px; object-fit:cover; border-radius:5px; background:var(--cv-bg2);
+    border:2.5px solid var(--fp-border); box-shadow:0 1px 0 rgba(0,0,0,0.12), 0 6px 14px rgba(40,25,10,0.25); }
+  .cp:nth-child(1){ left:0; transform:rotate(-7deg); }
+  .cp:nth-child(2){ left:19%; transform:rotate(3deg); top:2px; z-index:2; }
+  .cp:nth-child(3){ left:39%; transform:rotate(-2deg); z-index:3; }
+  .cp:nth-child(4){ left:59%; transform:rotate(5deg); top:2px; z-index:2; }
+  .cp:nth-child(5){ right:0; transform:rotate(-4deg); z-index:1; }
+  .storySeg{ display:flex; gap:6px; margin:16px 0 6px; flex-wrap:wrap; }
+  .segBtn{ min-height:44px; padding:0 16px; border-radius:999px; border:1.5px solid var(--line); background:transparent;
+    font:inherit; font-weight:600; font-size:14px; color:var(--ink-soft); cursor:pointer; }
+  .segBtn.on{ background:var(--ink); border-color:var(--ink); color:var(--bg); }
+  .openListOver{ font-size:13px; color:var(--ink-soft); margin:12px 0 0; }
+  .notForUs{ margin-top:22px; padding:16px; border-radius:14px; background:var(--bg-sub); display:flex; flex-direction:column; gap:10px; align-items:flex-start; }
+  .notForUs p{ font-size:14px; color:var(--ink-soft); margin:0; }
+  .notForUs b{ color:var(--ink); }
+
+  /* the shared movie row (Shelf and opened lists) */
+  ul.rows, ol.rows{ list-style:none; margin:8px 0 0; padding:0; }
+  .rows > .row{ display:block; padding:0; gap:0; border-bottom:1px solid var(--line); }
+  .rowLine{ display:flex; align-items:center; gap:10px; padding:10px 0; }
+  .rows .poster.rowPoster{ width:54px; flex:none; }
+  .rowNum{ flex:none; width:22px; font-family:"Newsreader", Georgia, serif; font-style:italic; font-weight:600; font-size:20px; line-height:1; color:var(--accent-text); }
+  .rowMain{ flex:1; min-width:0; display:flex; flex-direction:column; align-items:flex-start; gap:2px; min-height:44px;
+    background:none; border:0; padding:4px 0; margin:0; text-align:left; font:inherit; color:var(--ink); cursor:pointer; }
+  .rowMain .title{ font-size:17px; overflow-wrap:anywhere; }
+  .rowMeta{ font-size:13px; color:var(--ink-soft); }
+  .rowMain .fitSignals{ margin-top:2px; }
+  .rowMain .fitSignal{ background:none; box-shadow:none; padding:0; min-height:0; gap:6px; font-size:12.5px; align-items:baseline; color:var(--ink-soft); }
+  .rowMain .fitSignal.amber{ background:none; color:var(--warning); }
+  .rowMain .fitSignal.red{ background:none; box-shadow:none; color:var(--error); }
+  .fitDot{ width:8px; height:8px; border-radius:50%; flex:none; align-self:center; background:var(--success); }
+  .fitSignal.amber .fitDot{ background:var(--rev-dot); }
+  .fitSignal.red .fitDot{ background:var(--error); }
+  .rowActs{ display:flex; flex-direction:column; flex:none; }
+  .rowActs .check{ margin-top:0; }
+  .rowActs .star{ margin-top:0; font-size:22px; }
+  .rows > .row > .detail{ padding:0 4px 16px; border-bottom:0; }
+  .rows .moves{ flex-direction:column; }
+
+  /* decade chapters on Shelf */
+  .chapterHead{ list-style:none; padding:22px 0 6px; border-bottom:1px dashed var(--line); }
+  .chapterHead h2{ margin:0; display:flex; flex-direction:column; font-size:inherit; }
+  .chName{ font-family:"Newsreader", Georgia, serif; font-weight:700; font-size:21px; line-height:1.15; }
+  .chAside{ font-family:"Newsreader", Georgia, serif; font-style:italic; font-weight:500; font-size:15px; color:var(--ink-soft); }
+
+  /* Shelf teaser for the Lists tab */
+  .listsTeaser{ display:flex; align-items:center; gap:12px; width:100%; margin:10px 0 4px; padding:10px 10px 10px 12px;
+    border-radius:14px; background:var(--bg-sub); border:0; min-height:56px; font:inherit; color:var(--ink); text-align:left; cursor:pointer; }
+  .tzMedals{ display:flex; flex:none; }
+  .tzMedals .medal{ margin-left:-8px; box-shadow:0 0 0 2px var(--bg-sub); }
+  .tzMedals .medal:first-child{ margin-left:0; }
+  .tzTxt{ flex:1; min-width:0; font-size:13.5px; color:var(--ink-soft); line-height:1.35; }
+  .tzTxt b{ color:var(--ink); }
+
+  /* Show 50 more */
+  .listPagination{ flex-direction:column; gap:8px; }
+  .listPagination .storyPill{ width:100%; }
+
+  /* a softer request card */
+  .requestPanel{ border-radius:16px; background:var(--bg-sub); }
+
+  /* five tabs at 320px */
+  @media (max-width:899px){
+    .qbBtn{ padding:8px 0 7px; min-width:0; }
+    .qbBtn span{ white-space:nowrap; }
+  }
+  @media (max-width:360px){
+    .storyGrid{ gap:14px 10px; }
+    .storyBook{ --pw:38px; }
+    .bookArt{ height:104px; }
+    .bookArt .medal{ left:14px; top:10px; width:38px; height:38px; }
+    .bookTxt{ padding:9px 10px 11px 16px; }
+    .bookName{ font-size:16px; }
+    .storyHero{ --pw:46px; }
+    .heroIn{ padding:14px 14px 16px; }
+    .heroTxt .medal{ margin-bottom:30px; }
+    .heroName{ font-size:26px; }
+    .heroCta{ font-size:13px; padding:0 12px; }
+    .rows .poster.rowPoster{ width:48px; }
+    .qbBtn span{ font-size:10.5px; letter-spacing:-0.02em; }
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .storyBook .fp, .storyHero .fp{ transition:transform 0.25s ease; }
+    .storyBook:hover .fan .fp:nth-child(1), .storyBook:focus-visible .fan .fp:nth-child(1){ transform:rotate(-13deg); }
+    .storyBook:hover .fan .fp:nth-child(3), .storyBook:focus-visible .fan .fp:nth-child(3){ transform:rotate(12deg); }
+  }
 </style>
 </head>
 <body>
@@ -3358,37 +3579,31 @@ function reportError(err){
     <input type="text" id="search" placeholder="Search movies" autocomplete="off">
     <div class="seg" id="filterSeg">
       <button data-filter="all" class="active" aria-pressed="true">All</button>
-      <button data-filter="todo" aria-pressed="false">To watch</button>
-      <button data-filter="done" aria-pressed="false">Watched</button>
-      <button data-filter="priority" aria-pressed="false">Want to watch</button>
+      <button data-filter="todo" aria-pressed="false">Not seen</button>
+      <button data-filter="done" aria-pressed="false">Seen</button>
+      <button data-filter="priority" aria-pressed="false">Starred</button>
     </div>
   </div>
   <div class="searchStatusRow" id="searchStatusRow" hidden>
     <span id="searchResultCount" role="status" aria-live="polite"></span>
     <button type="button" id="clearSearchBtn">Clear search</button>
   </div>
-  <div class="homeSection" id="browseBySection">
-    <span class="homeSectionLabel">Browse by</span>
-    <div class="studioGrid listGrid" id="listGrid" aria-label="Lists" role="group"></div>
-    <div class="studioGrid" id="studioGrid" aria-label="Studios" role="group"></div>
+  <div id="browseBySection">
+    <button type="button" class="listsTeaser" id="listsTeaser">
+      <span class="tzMedals" id="listsTeaserMedals" aria-hidden="true"></span>
+      <span class="tzTxt"><b>Looking for ideas?</b> The hand-picked lists have their own tab now.</span>
+      <span class="chev" aria-hidden="true">›</span>
+    </button>
   </div>
-  <section class="listHeader" id="listHeader" aria-labelledby="listHeaderName" hidden>
-    <button type="button" class="listBackBtn" id="listBackBtn">← All movies</button>
-    <h2 id="listHeaderName" tabindex="-1"></h2>
-    <p class="listHeaderBlurb" id="listHeaderBlurb"></p>
-    <p class="listHeaderNote" id="listHeaderNote"></p>
-    <button type="button" class="listHideBtn" id="listHideBtn">Not for us</button>
-  </section>
-  <ul id="list"></ul>
+  <ul id="list" class="rows"></ul>
   <div class="listPagination" id="listPagination" style="display:none;">
-    <button type="button" id="listPagePrevBtn">Previous</button>
     <span id="listPageStatus" aria-live="polite"></span>
-    <button type="button" id="listPageNextBtn">Next</button>
+    <button type="button" class="storyPill" id="listShowMoreBtn">Show 50 more</button>
   </div>
   <div class="empty" id="emptyMsg" style="display:none;">No movies match your search.</div>
   <section class="requestPanel" id="requestMoviePanel" aria-labelledby="requestMovieTitle">
-    <h2 id="requestMovieTitle">Request a movie</h2>
-    <p>Ask for a title to be added to the shelf.</p>
+    <h2 id="requestMovieTitle">Can’t find a movie?</h2>
+    <p>Tell us the title and we’ll look into adding it.</p>
     <p class="requestDisclosure" id="requestMovieDisclosure">Movie titles are sent to Google Forms so they can land in the request queue. Please enter only the title, not personal notes.</p>
     <form id="requestMovieForm" class="requestForm">
       <label class="requestLabel" for="requestMovieInput">Movie title</label>
@@ -3397,6 +3612,17 @@ function reportError(err){
     </form>
     <p class="requestStatus" id="requestMovieStatus" aria-live="polite"></p>
   </section>
+</main>
+
+<main id="listsScreen" class="screenWrap listsScreen" style="display:none;" hidden aria-labelledby="listsScreenHeading">
+  <div id="listsIndex">
+    <header class="storyHead">
+      <h1 id="listsScreenHeading" tabindex="-1">Lists</h1>
+      <p class="storySub" id="listsSub"></p>
+    </header>
+    <div id="listsBody"></div>
+  </div>
+  <div id="listOpen" hidden></div>
 </main>
 
 <main id="whatsNewScreen" class="screenWrap" style="display:none;" hidden aria-labelledby="whatsNewScreenHeading">
@@ -3641,6 +3867,10 @@ function reportError(err){
   <button type="button" class="qbBtn" id="tabHome">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h14v14H5z"/><path d="M9 9h6"/><path d="M9 13h4"/></svg>
     <span>Tonight</span>
+  </button>
+  <button type="button" class="qbBtn" id="tabLists">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20.5h18"/><rect x="4.5" y="6" width="4" height="14.5" rx="1"/><rect x="9.5" y="3.5" width="4" height="17" rx="1"/><path d="M15.2 7.6l3.6-1 3.4 13.4"/><path d="M6.5 9.5v2"/></svg>
+    <span>Lists</span>
   </button>
   <button type="button" class="qbBtn" id="tabBrowse">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>
@@ -3893,7 +4123,6 @@ let decadeFilter = "";
 let ageFilter = "";
 let genreFilter = "";
 let studioFilter = "";
-let listFilter = "";
 let sortMode = "year";
 let currentScreen = "browse";
 // The Shelf list can hold 1,000+ movies. Rendering it all unpaginated makes
@@ -3903,6 +4132,7 @@ let currentScreen = "browse";
 // manageable page instead. See render()'s LIST_PAGE_SIZE use and
 // renderListPagination().
 let listPage = 1;
+const LIST_PAGE_SIZE = 50;
 let lastListSignature = "";
 // excludedChildIds (not an opt-in childIds allowlist) so every child-roster
 // mutation path -- local addChild(), completeSetupWithChildren(), boot,
@@ -4034,11 +4264,6 @@ function compareByAge(a, b){
 function sortMovieIndices(indices, mode){
   if(mode === 'custom') return indices.slice();
   const sorted = indices.slice();
-  const list = mode === 'list' && listFilter ? listById(listFilter) : null;
-  if(list){
-    const position = new Map(list.pins.map((num, pos) => [num, pos]));
-    return sorted.sort((a, b) => (position.get(MOVIES[a].num) ?? 1e9) - (position.get(MOVIES[b].num) ?? 1e9));
-  }
   if(mode === 'age') return sorted.sort(compareByAge);
   if(mode === 'title') return sorted.sort(titleCompare);
   return sorted.sort(compareByYear);
@@ -5104,8 +5329,6 @@ function browseStudio(studio){
   sortMode = 'year';
   document.getElementById('sortMode').value = sortMode;
   studioFilter = studio;
-  listFilter = '';
-  syncListSortOption();
   document.getElementById('studioFilter').value = studio;
   showScreen('browse');
 }
@@ -5116,7 +5339,6 @@ function browseStudio(studio){
 const HIDDEN_LISTS_KEY = 'movieNight.hiddenLists';
 const LIST_MIN_FITTING = 5;
 let hiddenListIds = new Set();
-let showAllLists = false;
 const MOVIE_IDX_BY_NUM = new Map(MOVIES.map((m, idx) => [m.num, idx]));
 
 function loadHiddenLists(){
@@ -5174,9 +5396,57 @@ function listCountText(list){
   return selectedKids().length ? `${count} that fit` : `${count} films`;
 }
 
-// Icons come from LIST_ICONS in data-lists.js: our own static SVG strings,
-// two-tone via currentColor and var(--icon-tint). Decorative, so hidden from
-// assistive tech; the list name next to it carries the meaning.
+
+// ---- Lists tab (storybook covers) ----
+// Each list is a picture-book cover: its icon on a medallion, its own soft
+// colour (from `hue`, set as a CSS custom property through CSSOM, so no
+// style attribute), a fan of its first posters and one warm line of copy.
+let openListId = null;
+let openListUnseenOnly = false;
+let openListShowAll = false;
+const OPEN_LIST_FIRST = 10;
+
+function kidNames(){
+  return selectedKids().map(child => child.name).join(' + ');
+}
+function shortDate(value){
+  // value is "MM-DD" or "YYYY-MM-DD"
+  const parts = value.split('-').map(Number);
+  const [month, day] = parts.length === 3 ? [parts[1], parts[2]] : parts;
+  return new Date(2000, month - 1, day).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+function listUntilText(list, date){
+  if(list.dates){
+    const today = isoDay(date);
+    const range = list.dates.find(([from, to]) => today >= from && today <= to);
+    return range ? `until ${shortDate(range[1])}` : '';
+  }
+  return list.season ? `until ${shortDate(list.season.to)}` : '';
+}
+function listBackText(list, date){
+  if(list.dates){
+    const today = isoDay(date);
+    const next = list.dates.find(([from]) => from > today);
+    return next ? `Back ${shortDate(next[0])}` : 'Open any time';
+  }
+  return list.season ? `Back ${shortDate(list.season.from)}` : '';
+}
+function listFitLine(list){
+  const count = listFitCount(list);
+  return selectedKids().length ? `${count} fit` : `${count} films`;
+}
+function applyListHue(el, list){
+  if(Number.isInteger(list.hue)) el.style.setProperty('--cv-hue', String(list.hue));
+}
+function createListMedal(id, size){
+  const svg = typeof LIST_ICONS !== 'undefined' ? LIST_ICONS[id] : null;
+  const medal = document.createElement('span');
+  medal.className = 'medal' + (size ? ` medal-${size}` : '');
+  medal.setAttribute('aria-hidden', 'true');
+  if(svg) medal.innerHTML = svg;
+  return medal;
+}
+// The Tonight season card keeps the plain icon it has always had.
 function createListIcon(id){
   const svg = typeof LIST_ICONS !== 'undefined' ? LIST_ICONS[id] : null;
   if(!svg) return null;
@@ -5186,55 +5456,410 @@ function createListIcon(id){
   icon.innerHTML = svg;
   return icon;
 }
+function createCoverPoster(m, className){
+  const posters = typeof MOVIE_POSTERS !== 'undefined' ? MOVIE_POSTERS : {};
+  const poster = m && posters[m.num];
+  if(poster && poster.u){
+    const img = document.createElement('img');
+    img.className = className;
+    img.alt = '';
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.src = poster.u;
+    img.onerror = () => img.replaceWith(createPosterPlate(m, className));
+    return img;
+  }
+  return createPosterPlate(m, className);
+}
+// A little storybook plate in the list's colour, not "MOVIE".
+function createPosterPlate(m, className){
+  const plate = document.createElement('span');
+  plate.className = `${className} plate`;
+  const title = document.createElement('span');
+  title.className = 'plateTitle';
+  title.textContent = m ? m.t : '';
+  const year = document.createElement('span');
+  year.className = 'plateYear';
+  year.textContent = m ? m.y : '';
+  plate.appendChild(title);
+  plate.appendChild(year);
+  return plate;
+}
+// Covers prefer films that have a poster; plates only fill the gaps.
+function coverFilms(list, n){
+  const posters = typeof MOVIE_POSTERS !== 'undefined' ? MOVIE_POSTERS : {};
+  const films = listIndices(list).map(idx => MOVIES[idx]);
+  return films.filter(m => posters[m.num]).concat(films.filter(m => !posters[m.num])).slice(0, n);
+}
+function createPosterFan(list, n){
+  const fan = document.createElement('span');
+  fan.className = `fan fan${n}`;
+  fan.setAttribute('aria-hidden', 'true');
+  coverFilms(list, n).forEach(m => fan.appendChild(createCoverPoster(m, 'fp')));
+  return fan;
+}
+function spanText(className, text){
+  const span = document.createElement('span');
+  span.className = className;
+  span.textContent = text;
+  return span;
+}
 
-function renderListGrid(){
-  const grid = document.getElementById('listGrid');
-  if(!grid) return;
-  grid.replaceChildren();
+function createListHero(list, today){
+  const hero = document.createElement('button');
+  hero.type = 'button';
+  hero.className = 'storyHero listCover';
+  hero.dataset.list = list.id;
+  applyListHue(hero, list);
+  const bulbs = spanText('bulbs', '');
+  bulbs.setAttribute('aria-hidden', 'true');
+  const inner = spanText('heroIn', '');
+  const text = spanText('heroTxt', '');
+  text.appendChild(createListMedal(list.id, 'l'));
+  text.appendChild(spanText('eyebrow', 'Now showing'));
+  text.appendChild(spanText('heroName', list.name));
+  text.appendChild(spanText('heroCopy', list.copy || ''));
+  const kids = selectedKids();
+  const until = listUntilText(list, today);
+  text.appendChild(spanText('heroCta', `${listFitCount(list)} ${kids.length ? `fit ${kidNames()}` : 'films'}${until ? ` · ${until}` : ''} →`));
+  inner.appendChild(text);
+  inner.appendChild(createPosterFan(list, 4));
+  hero.appendChild(bulbs);
+  hero.appendChild(inner);
+  hero.onclick = () => openList(list.id);
+  return hero;
+}
+function createListBook(list, extra){
+  const book = document.createElement('button');
+  book.type = 'button';
+  book.className = 'storyBook listCover';
+  book.dataset.list = list.id;
+  applyListHue(book, list);
+  const art = spanText('bookArt', '');
+  art.appendChild(createListMedal(list.id));
+  art.appendChild(createPosterFan(list, 3));
+  const text = spanText('bookTxt', '');
+  text.appendChild(spanText('bookName', list.name));
+  text.appendChild(spanText('bookCopy', list.copy || ''));
+  text.appendChild(spanText('bookFit', listFitLine(list) + (extra ? ` · ${extra}` : '')));
+  book.appendChild(art);
+  book.appendChild(text);
+  book.onclick = () => openList(list.id);
+  return book;
+}
+function createListLater(list, today){
+  const row = document.createElement('button');
+  row.type = 'button';
+  row.className = 'storyLater listCover';
+  row.dataset.list = list.id;
+  applyListHue(row, list);
+  row.appendChild(createListMedal(list.id, 's'));
+  const text = spanText('laterTxt', '');
+  text.appendChild(spanText('laterName', list.name));
+  text.appendChild(spanText('laterWhen', `${listBackText(list, today)} · ${listFitLine(list)}`));
+  row.appendChild(text);
+  const chev = spanText('chev', '›');
+  chev.setAttribute('aria-hidden', 'true');
+  row.appendChild(chev);
+  row.onclick = () => openList(list.id);
+  return row;
+}
+function createShelfSection(id, name, aside, children, withPlank){
+  const section = document.createElement('section');
+  section.className = 'storySection';
+  section.setAttribute('aria-labelledby', `lists-h-${id}`);
+  const heading = document.createElement('h2');
+  heading.className = 'storySectionHead';
+  heading.id = `lists-h-${id}`;
+  heading.appendChild(spanText('shName', name));
+  if(aside) heading.appendChild(spanText('shAside', aside));
+  section.appendChild(heading);
+  children.forEach(child => section.appendChild(child));
+  if(withPlank){
+    const plank = document.createElement('div');
+    plank.className = 'plank';
+    plank.setAttribute('aria-hidden', 'true');
+    section.appendChild(plank);
+  }
+  return section;
+}
+function storyGrid(nodes){
+  const grid = document.createElement('div');
+  grid.className = 'storyGrid';
+  nodes.forEach(node => grid.appendChild(node));
+  return grid;
+}
+
+function renderListsScreen(){
+  const index = document.getElementById('listsIndex');
+  const open = document.getElementById('listOpen');
+  if(!index || !open) return;
+  const list = openListId ? listById(openListId) : null;
+  if(openListId && !list) openListId = null;
+  index.hidden = !!list;
+  open.hidden = !list;
+  if(list) renderOpenList(list);
+  else renderListsIndex();
+}
+
+function renderListsIndex(){
   const today = new Date(Date.now());
-  const lists = shownLists(today);
-  const visible = showAllLists ? lists : lists.slice(0, 4);
-  visible.forEach(list => {
-    const tile = document.createElement('button');
-    tile.type = 'button';
-    tile.className = 'studioTile listTile';
-    tile.dataset.list = list.id;
-    const icon = createListIcon(list.id);
-    if(icon) tile.appendChild(icon);
-    if(listInSeason(list, today)){
-      const tag = document.createElement('span');
-      tag.className = 'listTileTag';
-      tag.textContent = 'In season';
-      tile.appendChild(tag);
-    }
-    const name = document.createElement('span');
-    name.className = 'studioTileName';
-    name.textContent = list.name;
-    const count = document.createElement('span');
-    count.className = 'studioTileCount';
-    count.textContent = listCountText(list);
-    tile.appendChild(name);
-    tile.appendChild(count);
-    tile.onclick = () => browseList(list.id);
-    grid.appendChild(tile);
+  const kids = selectedKids();
+  document.getElementById('listsSub').textContent = kids.length
+    ? `Little shelves we filled by hand. Showing what fits ${kidNames()}.`
+    : 'Little shelves we filled by hand.';
+  const body = document.getElementById('listsBody');
+  body.replaceChildren();
+  const all = curatedLists();
+  const fitsFloor = list => listFitCount(list) >= (list.minFit || LIST_MIN_FITTING);
+  const visible = all.filter(list => !hiddenListIds.has(list.id) && fitsFloor(list));
+  const isSeasonal = list => !!(list.season || list.dates);
+
+  const inSeason = visible.filter(list => listInSeason(list, today));
+  if(inSeason.length){
+    const dayLabel = today.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+    const nodes = [createListHero(inSeason[0], today)];
+    if(inSeason.length > 1) nodes.push(storyGrid(inSeason.slice(1).map(list => createListBook(list, listUntilText(list, today)))));
+    body.appendChild(createShelfSection('season', 'In season', dayLabel, nodes, true));
+  }
+
+  const shelves = typeof MOVIE_LIST_SHELVES !== 'undefined' ? MOVIE_LIST_SHELVES : [];
+  const shelved = new Set();
+  shelves.forEach(shelf => {
+    shelf.lists.forEach(id => shelved.add(id));
+    const lists = shelf.lists.map(listById).filter(list => list && visible.includes(list));
+    if(lists.length) body.appendChild(createShelfSection(shelf.id, shelf.name, shelf.aside, [storyGrid(lists.map(list => createListBook(list)))], true));
   });
-  if(lists.length > 4 || hiddenListIds.size){
+  const loose = visible.filter(list => !isSeasonal(list) && !shelved.has(list.id));
+  if(loose.length) body.appendChild(createShelfSection('more', 'More lists', '', [storyGrid(loose.map(list => createListBook(list)))], true));
+
+  const later = visible.filter(list => isSeasonal(list) && !listInSeason(list, today));
+  if(later.length){
+    const wrap = document.createElement('div');
+    wrap.className = 'storyLaters';
+    later.forEach(list => wrap.appendChild(createListLater(list, today)));
+    body.appendChild(createShelfSection('later', 'Coming back later', 'Open any time', [wrap], false));
+  }
+
+  if(!visible.length){
+    const empty = document.createElement('p');
+    empty.className = 'storyEmpty';
+    empty.textContent = 'No lists fit everyone selected right now. Try changing who’s watching on Tonight.';
+    body.appendChild(empty);
+  }
+
+  const resting = all.filter(list => !hiddenListIds.has(list.id) && !fitsFloor(list));
+  const tucked = all.filter(list => hiddenListIds.has(list.id));
+  if(tucked.length || resting.length){
+    const box = document.createElement('section');
+    box.className = 'tucked';
+    box.setAttribute('aria-labelledby', 'lists-h-tucked');
+    const head = document.createElement('h2');
+    head.className = 'tuckedHead';
+    head.id = 'lists-h-tucked';
+    head.textContent = tucked.length ? 'Tucked away on this phone' : 'Resting lists';
+    box.appendChild(head);
+    if(tucked.length){
+      const note = document.createElement('p');
+      note.className = 'tuckedNote';
+      note.textContent = 'You said “Not for us” to these. They stay hidden until you put them back.';
+      box.appendChild(note);
+      tucked.forEach(list => {
+        const row = document.createElement('div');
+        row.className = 'tuckedRow';
+        applyListHue(row, list);
+        row.appendChild(createListMedal(list.id, 's'));
+        row.appendChild(spanText('tuckedName', list.name));
+        const putBack = document.createElement('button');
+        putBack.type = 'button';
+        putBack.className = 'storyPill storyPillSm';
+        putBack.textContent = 'Put back';
+        putBack.setAttribute('aria-label', `Put back ${list.name}`);
+        putBack.onclick = () => {
+          hiddenListIds.delete(list.id);
+          saveHiddenLists();
+          renderCurrentView();
+          showToast(`${list.name} is back.`, 2000);
+        };
+        row.appendChild(putBack);
+        box.appendChild(row);
+      });
+    }
+    if(resting.length){
+      const note = document.createElement('p');
+      note.className = 'tuckedNote';
+      const who = kids.length ? kidNames() : 'everyone';
+      note.textContent = resting.length === 1
+        ? `One more list is resting until enough of its films fit ${who}.`
+        : `${resting.length} more lists are resting until enough of their films fit ${who}.`;
+      box.appendChild(note);
+    }
+    body.appendChild(box);
+  }
+}
+
+function renderOpenList(list){
+  const today = new Date(Date.now());
+  const open = document.getElementById('listOpen');
+  open.replaceChildren();
+
+  const back = document.createElement('button');
+  back.type = 'button';
+  back.className = 'storyPill storyBack';
+  back.id = 'listsBackBtn';
+  back.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"/></svg>';
+  back.appendChild(spanText('', 'Lists'));
+  back.onclick = () => {
+    const id = openListId;
+    openListId = null;
+    renderCurrentView();
+    window.scrollTo(0, 0);
+    const cover = document.querySelector(`#listsBody .listCover[data-list="${id}"]`);
+    (cover || document.getElementById('listsScreenHeading')).focus();
+  };
+  const topbar = document.createElement('div');
+  topbar.className = 'storyTopbar';
+  topbar.appendChild(back);
+  open.appendChild(topbar);
+
+  const inSeason = listInSeason(list, today);
+  const cover = document.createElement('section');
+  cover.className = 'storyCover';
+  cover.setAttribute('aria-labelledby', 'openListName');
+  applyListHue(cover, list);
+  if(inSeason){
+    const bulbs = spanText('bulbs', '');
+    bulbs.setAttribute('aria-hidden', 'true');
+    cover.appendChild(bulbs);
+  }
+  const inner = document.createElement('div');
+  inner.className = 'coverIn';
+  const head = document.createElement('div');
+  head.className = 'coverHead';
+  head.appendChild(createListMedal(list.id, 'l'));
+  const eyebrow = inSeason
+    ? `In season · ${listUntilText(list, today)}`
+    : (list.season || list.dates) ? listBackText(list, today) : 'Picked by hand';
+  head.appendChild(spanText('eyebrow', eyebrow));
+  inner.appendChild(head);
+  const name = document.createElement('h2');
+  name.className = 'coverName';
+  name.id = 'openListName';
+  name.tabIndex = -1;
+  name.textContent = list.name;
+  inner.appendChild(name);
+  const blurb = document.createElement('p');
+  blurb.className = 'coverCopy';
+  blurb.textContent = list.blurb;
+  inner.appendChild(blurb);
+  const collage = spanText('collage', '');
+  collage.setAttribute('aria-hidden', 'true');
+  coverFilms(list, 5).forEach(m => collage.appendChild(createCoverPoster(m, 'cp')));
+  inner.appendChild(collage);
+  const metaLine = document.createElement('p');
+  metaLine.className = 'coverMeta';
+  metaLine.textContent = 'Picked by hand · in the order we’d watch them';
+  inner.appendChild(metaLine);
+  cover.appendChild(inner);
+  open.appendChild(cover);
+
+  const kids = selectedKids();
+  const all = listIndices(list);
+  const fitting = all.filter(idx => fitsSelectedKids(MOVIES[idx], kids));
+  const unseen = fitting.filter(idx => !markValue(state.checked, idx));
+  const items = openListUnseenOnly ? unseen : fitting;
+
+  const seg = document.createElement('div');
+  seg.className = 'storySeg';
+  seg.setAttribute('role', 'group');
+  seg.setAttribute('aria-label', 'Show');
+  [['all', `All ${fitting.length}`, !openListUnseenOnly], ['unseen', `Not seen ${unseen.length}`, openListUnseenOnly]].forEach(([key, label, on]) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'segBtn' + (on ? ' on' : '');
+    btn.id = key === 'all' ? 'openListAllBtn' : 'openListUnseenBtn';
+    btn.textContent = label;
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.onclick = () => { openListUnseenOnly = key === 'unseen'; openListShowAll = false; renderCurrentView(); };
+    seg.appendChild(btn);
+  });
+  open.appendChild(seg);
+
+  const rows = document.createElement('ol');
+  rows.className = 'rows rowsNum';
+  rows.id = 'openListRows';
+  const shown = openListShowAll ? items : items.slice(0, OPEN_LIST_FIRST);
+  shown.forEach((idx, i) => rows.appendChild(createMovieRow(idx, { num: i + 1, scope: 'list' })));
+  open.appendChild(rows);
+
+  if(!items.length){
+    const done = document.createElement('p');
+    done.className = 'storyEmpty';
+    done.textContent = openListUnseenOnly ? 'You’ve seen every film on this list. Nicely done.' : 'None of these fit everyone selected right now.';
+    open.appendChild(done);
+  }
+  if(items.length > shown.length){
     const more = document.createElement('button');
     more.type = 'button';
-    more.className = 'moreStudiosTile';
-    more.id = 'allListsBtn';
-    if(!showAllLists){
-      more.textContent = `All lists · ${lists.length} →`;
-      more.onclick = () => { showAllLists = true; renderListGrid(); };
-    }else if(hiddenListIds.size){
-      more.textContent = `Show ${hiddenListIds.size} hidden list${hiddenListIds.size === 1 ? '' : 's'}`;
-      more.onclick = () => { hiddenListIds.clear(); saveHiddenLists(); renderCurrentView(); };
-    }else{
-      more.textContent = 'Fewer lists';
-      more.onclick = () => { showAllLists = false; renderListGrid(); };
-    }
-    grid.appendChild(more);
+    more.className = 'storyPill storyMore';
+    more.id = 'openListShowAllBtn';
+    more.textContent = `Show all ${items.length}`;
+    more.onclick = () => { openListShowAll = true; renderCurrentView(); };
+    open.appendChild(more);
   }
+  const over = all.length - fitting.length;
+  if(over > 0 && kids.length){
+    const note = document.createElement('p');
+    note.className = 'openListOver';
+    note.textContent = `${over} more on this list ${over === 1 ? 'is' : 'are'} over the content settings for ${kidNames()}.`;
+    open.appendChild(note);
+  }
+
+  const notForUs = document.createElement('div');
+  notForUs.className = 'notForUs';
+  const p = document.createElement('p');
+  const strong = document.createElement('b');
+  strong.textContent = 'Not for us? ';
+  p.appendChild(strong);
+  p.appendChild(document.createTextNode('Tuck this list away on this phone. You can put it back from the bottom of Lists.'));
+  notForUs.appendChild(p);
+  const hide = document.createElement('button');
+  hide.type = 'button';
+  hide.className = 'storyPill';
+  hide.id = 'listHideBtn';
+  hide.textContent = 'Tuck it away';
+  hide.onclick = () => {
+    hiddenListIds.add(list.id);
+    saveHiddenLists();
+    openListId = null;
+    renderCurrentView();
+    window.scrollTo(0, 0);
+    document.getElementById('listsScreenHeading').focus();
+    showToast(`Tucked away ${list.name}. Put it back from the bottom of Lists.`, 3000);
+  };
+  notForUs.appendChild(hide);
+  open.appendChild(notForUs);
+}
+
+function openList(id){
+  openListId = id;
+  openListUnseenOnly = false;
+  openListShowAll = false;
+  if(currentScreen !== 'lists') showScreen('lists');
+  else renderCurrentView();
+  window.scrollTo(0, 0);
+  const heading = document.getElementById('openListName');
+  if(heading) heading.focus();
+}
+
+function renderListsTeaser(){
+  const medals = document.getElementById('listsTeaserMedals');
+  if(!medals || medals.childElementCount) return;
+  shownLists(new Date(Date.now())).slice(0, 3).forEach(list => {
+    const medal = createListMedal(list.id, 'xs');
+    applyListHue(medal, list);
+    medals.appendChild(medal);
+  });
 }
 
 function renderSeasonCard(){
@@ -5254,56 +5879,121 @@ function renderSeasonCard(){
     : `${listFitCount(list)} films →`;
 }
 
-function renderListHeader(){
-  const header = document.getElementById('listHeader');
-  const list = listFilter ? listById(listFilter) : null;
-  header.hidden = !list;
-  if(!list) return;
-  document.getElementById('listHeaderName').textContent = list.name;
-  document.getElementById('listHeaderBlurb').textContent = list.blurb;
-  const kids = selectedKids();
-  document.getElementById('listHeaderNote').textContent = hideAboveSettings && kids.length
-    ? `Picked by hand. Showing the ones that fit ${kids.map(k => k.name).join(' + ')}.`
-    : 'Picked by hand.';
-}
+// ---- Movie row, shared by Shelf and an opened list ----
+// The whole title area opens the details (it keeps the .detailLink class the
+// detail toggle and its scroll pinning look for); the poster keeps its own
+// zoom button, and Star and Watched sit stacked on the right. The details
+// panel lives inside the row so lists stay valid lists.
+function createMovieRow(idx, opts = {}){
+  const m = MOVIES[idx];
+  const scope = opts.scope || 'list';
+  const isChecked = markValue(state.checked, idx);
+  const isOpen = openDetail === idx;
+  const detailId = `shelf-${scope}-detail-${m.num}`;
 
-function browseList(id){
-  decadeFilter = ''; ageFilter = ''; genreFilter = ''; studioFilter = ''; priorityOnly = false; newOnly = false; query = ''; filter = 'all';
-  document.getElementById('decadeFilter').value = '';
-  document.getElementById('ageFilter').value = '';
-  document.getElementById('genreFilter').value = '';
-  document.getElementById('studioFilter').value = '';
-  document.getElementById('search').value = '';
-  hideAboveSettings = selectedKids().length > 0;
-  listFilter = id;
-  sortMode = 'list';
-  syncListSortOption();
-  showScreen('browse');
-  window.scrollTo(0, 0);
-  document.getElementById('listHeaderName').focus();
-}
+  const li = document.createElement('li');
+  li.className = 'row' + (isChecked ? ' checked' : '');
+  const line = document.createElement('div');
+  line.className = 'rowLine';
 
-function clearListFilter(){
-  listFilter = '';
-  hideAboveSettings = false;
-  if(sortMode === 'list') sortMode = 'year';
-  syncListSortOption();
-}
-
-// The "List order" sort only exists while a list is open (Safari ignores
-// `hidden` on <option>, so it is added and removed instead).
-function syncListSortOption(){
-  const select = document.getElementById('sortMode');
-  let option = select.querySelector('option[value="list"]');
-  if(listFilter && !option){
-    option = document.createElement('option');
-    option.value = 'list';
-    option.textContent = 'List order';
-    select.prepend(option);
-  }else if(!listFilter && option){
-    option.remove();
+  if(opts.num !== undefined){
+    const num = document.createElement('span');
+    num.className = opts.custom ? 'num' : 'rowNum';
+    num.textContent = opts.num;
+    if(!opts.custom) num.setAttribute('aria-hidden', 'true');
+    line.appendChild(num);
   }
-  select.value = sortMode;
+
+  const poster = createPoster(m, 'rowPoster', isRecent(m));
+  if(poster) line.appendChild(poster);
+
+  const main = document.createElement('button');
+  main.type = 'button';
+  main.className = 'detailLink rowMain';
+  main.dataset.idx = idx;
+  main.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  main.setAttribute('aria-controls', detailId);
+  main.setAttribute('aria-label', `${isOpen ? 'Hide' : 'Show'} details for ${m.t}`);
+  main.onclick = event => toggleDetail(idx, event.currentTarget);
+  main.appendChild(spanText('title', displayTitle(m)));
+  // Studio · CSM age · runtime, each in its own span so the runtime stays
+  // findable; substitute-source titles say "No CSM age", not the placeholder.
+  const meta = spanText('rowMeta', '');
+  const facts = [];
+  if(m.studio && m.studio !== 'Other') facts.push(spanText('rowStudio', m.studio));
+  facts.push(spanText('csmAge', parseAge(m.ca) === null ? 'No CSM age' : `CSM ${m.ca}`));
+  if(Number.isInteger(m.runtimeMinutes) && m.runtimeMinutes > 0) facts.push(spanText('runtime', formatRuntime(m.runtimeMinutes)));
+  facts.forEach((fact, i) => {
+    if(i) meta.appendChild(document.createTextNode(' · '));
+    meta.appendChild(fact);
+  });
+  main.appendChild(meta);
+  const fit = createRowFit(idx);
+  if(fit) main.appendChild(fit);
+  line.appendChild(main);
+
+  const acts = document.createElement('div');
+  acts.className = 'rowActs';
+  acts.appendChild(createStarButton(idx, m, markValue(state.priority, idx)));
+  const check = document.createElement('button');
+  check.type = 'button';
+  check.className = 'check' + (isChecked ? ' on' : '');
+  check.setAttribute('aria-label', isChecked ? `Mark ${m.t} unwatched` : `Mark ${m.t} watched`);
+  check.setAttribute('aria-pressed', isChecked ? 'true' : 'false');
+  check.dataset.idx = idx;
+  check.onclick = () => toggleCheck(idx);
+  acts.appendChild(check);
+  line.appendChild(acts);
+
+  if(opts.custom){
+    const globalPos = opts.globalPos;
+    const moves = document.createElement('div');
+    moves.className = 'moves';
+    const up = document.createElement('button');
+    up.className = 'moveUp';
+    up.dataset.idx = idx;
+    up.textContent = '▲';
+    up.setAttribute('aria-label', `Move ${m.t} up`);
+    up.disabled = globalPos === 0;
+    up.onclick = () => move(idx, -1);
+    const down = document.createElement('button');
+    down.className = 'moveDown';
+    down.dataset.idx = idx;
+    down.textContent = '▼';
+    down.setAttribute('aria-label', `Move ${m.t} down`);
+    down.disabled = globalPos === state.order.length - 1;
+    down.onclick = () => move(idx, 1);
+    moves.appendChild(up);
+    moves.appendChild(down);
+    line.appendChild(moves);
+  }
+
+  li.appendChild(line);
+  const detail = document.createElement('div');
+  detail.id = detailId;
+  detail.className = 'detail' + (isOpen ? ' open' : '') + (poster ? '' : ' noPosterDetail');
+  detail.hidden = !isOpen;
+  fillMovieDetail(detail, m, isOpen);
+  li.appendChild(detail);
+  return li;
+}
+
+// The fit note: one coloured dot and a line of text, quieter than a chip.
+function createRowFit(idx){
+  const signals = createFitSignals(idx);
+  if(!signals) return null;
+  const chip = signals.querySelector('.fitSignal');
+  const wrap = document.createElement('span');
+  wrap.className = 'fitSignals';
+  const signal = document.createElement('span');
+  signal.className = chip.className;
+  const dot = document.createElement('span');
+  dot.className = 'fitDot';
+  dot.setAttribute('aria-hidden', 'true');
+  signal.appendChild(dot);
+  signal.appendChild(document.createTextNode(chip.textContent));
+  wrap.appendChild(signal);
+  return wrap;
 }
 
 function createChild(name, rawAge, id){
@@ -6637,7 +7327,7 @@ function renderTonightKidChoices(){
 // hand-written functions, showHomeScreen()/showLegacyScreen(), where the
 // second only ever removed Home's "on" class and never gave Browse/More
 // their own, and both tabs fell back to the same single legacy view).
-const SCREENS = ['setup', 'home', 'browse', 'whatsNew', 'family'];
+const SCREENS = ['setup', 'home', 'lists', 'browse', 'whatsNew', 'family'];
 let screens = {};
 let tabs = {};
 
@@ -6672,6 +7362,7 @@ function initScreens(){
     screens[name] = document.getElementById(name + 'Screen');
   });
   tabs.home = document.getElementById('tabHome');
+  tabs.lists = document.getElementById('tabLists');
   tabs.browse = document.getElementById('tabBrowse');
   tabs.whatsNew = document.getElementById('tabWhatsNew');
   tabs.family = document.getElementById('tabFamily');
@@ -6684,38 +7375,6 @@ function initScreens(){
   populateAgeSelect(document.getElementById('newChildAge'), MIN_CHILD_AGE);
 }
 
-function renderStudioGrid(){
-  const grid = document.getElementById('studioGrid');
-  grid.replaceChildren();
-
-  const realStudios = [...MOVIES_BY_STUDIO.entries()].filter(([studio]) => studio !== 'Other');
-  realStudios.sort((a, b) => b[1].length - a[1].length);
-  const top = realStudios.slice(0, 6);
-  const restStudioCount = MOVIES_BY_STUDIO.size - top.length;
-
-  top.forEach(([studio, indices]) => {
-    const tile = document.createElement('button');
-    tile.type = 'button';
-    tile.className = 'studioTile';
-    const name = document.createElement('span');
-    name.className = 'studioTileName';
-    name.textContent = studio;
-    const count = document.createElement('span');
-    count.className = 'studioTileCount';
-    count.textContent = `${indices.length} film${indices.length === 1 ? '' : 's'}`;
-    tile.appendChild(name);
-    tile.appendChild(count);
-    tile.onclick = () => browseStudio(studio);
-    grid.appendChild(tile);
-  });
-
-  const more = document.createElement('button');
-  more.type = 'button';
-  more.className = 'moreStudiosTile';
-  more.textContent = `More studios · ${restStudioCount} →`;
-  more.onclick = () => showScreen('browse');
-  grid.appendChild(more);
-}
 
 const TONIGHT_SUBTITLE_DEFAULT = 'One good pick for the people, time, and mood you have tonight.';
 function tonightSubtitleFor(date){
@@ -6738,6 +7397,7 @@ function renderCurrentView(){
   renderChildren();
   renderTonightKidChoices();
   if(currentScreen === 'whatsNew') renderWhatsNew();
+  if(currentScreen === 'lists') renderListsScreen();
   if(currentScreen === 'browse') render();
   else updateStats();
 }
@@ -7577,9 +8237,6 @@ function render(){
   listEl.dataset.renderedQuery = query;
   const q = query.trim().toLowerCase();
   const orderPosition = new Map(state.order.map((idx, pos) => [idx, pos]));
-  const activeList = listFilter ? listById(listFilter) : null;
-  if(listFilter && !activeList) clearListFilter();
-  const listPins = new Set(activeList ? activeList.pins : []);
   let visibleOrder = state.order.filter(idx=>{
     const m = MOVIES[idx];
     if(q){
@@ -7600,7 +8257,6 @@ function render(){
     }
     if(genreFilter && !(m.genre || []).includes(genreFilter)) return false;
     if(studioFilter && m.studio !== studioFilter) return false;
-    if(listFilter && !listPins.has(m.num)) return false;
     if(priorityOnly && !markValue(state.priority, idx)) return false;
     if(newOnly && !isRecent(m)) return false;
     if(hideAboveSettings){
@@ -7622,7 +8278,7 @@ function render(){
   }
 
   listEl.replaceChildren();
-  const activeFilterCount = [decadeFilter, ageFilter, genreFilter, studioFilter, listFilter].filter(Boolean).length
+  const activeFilterCount = [decadeFilter, ageFilter, genreFilter, studioFilter].filter(Boolean).length
     + (priorityOnly ? 1 : 0) + (newOnly ? 1 : 0) + (hideAboveSettings ? 1 : 0);
   updateFilterBadge(activeFilterCount);
   syncFilterToggleState();
@@ -7634,9 +8290,8 @@ function render(){
   searchResultCount.textContent = trimmedQuery
     ? `${visibleOrder.length} movie${visibleOrder.length === 1 ? '' : 's'} found`
     : '';
-  browseBySection.style.display = trimmedQuery || listFilter ? 'none' : '';
-  renderListGrid();
-  renderListHeader();
+  browseBySection.style.display = trimmedQuery ? 'none' : '';
+  renderListsTeaser();
   renderSeasonCard();
   emptyMsg.style.display = visibleOrder.length ? 'none' : 'block';
   if(!visibleOrder.length){
@@ -7668,131 +8323,94 @@ function render(){
   // something else (e.g. toggling a check/star mark) keeps the page the
   // user was on.
   const listSignature = JSON.stringify([
-    q, filter, decadeFilter, ageFilter, genreFilter, studioFilter, listFilter,
+    q, filter, decadeFilter, ageFilter, genreFilter, studioFilter,
     priorityOnly, newOnly, hideAboveSettings, sortMode
   ]);
   if(listSignature !== lastListSignature){
     listPage = 1;
     lastListSignature = listSignature;
   }
-  const LIST_PAGE_SIZE = 50;
   const totalPages = Math.max(1, Math.ceil(visibleOrder.length / LIST_PAGE_SIZE));
   if(listPage > totalPages) listPage = totalPages;
   if(listPage < 1) listPage = 1;
-  const pageStart = (listPage - 1) * LIST_PAGE_SIZE;
-  const pageItems = visibleOrder.slice(pageStart, pageStart + LIST_PAGE_SIZE);
-  renderListPagination(totalPages, visibleOrder.length);
+  // "Show 50 more" grows the list in place instead of paging away from it.
+  const pageItems = visibleOrder.slice(0, listPage * LIST_PAGE_SIZE);
+  renderListPagination(totalPages, visibleOrder.length, pageItems.length);
 
+  // Sorted by year with no search, the Shelf reads in decade chapters.
+  const useChapters = sortMode === 'year' && !q;
+  let chapterDecade = null;
   pageItems.forEach((idx, i) => {
-    const visiblePos = pageStart + i;
     const m = MOVIES[idx];
-    const isChecked = markValue(state.checked, idx);
-    const globalPos = orderPosition.get(idx);
-
-    const li = document.createElement('li');
-    li.className = 'row' + (isChecked ? ' checked' : '');
-
-    const num = document.createElement('div');
-    num.className = 'num';
-    num.textContent = (sortMode === 'custom' ? globalPos : visiblePos) + 1;
-    num.hidden = sortMode !== 'custom';
-
-    const check = document.createElement('button');
-    check.className = 'check' + (isChecked ? ' on' : '');
-    check.setAttribute('aria-label', isChecked ? `Mark ${m.t} unwatched` : `Mark ${m.t} watched`);
-    check.setAttribute('aria-pressed', isChecked ? 'true' : 'false');
-    check.dataset.idx = idx;
-    check.onclick = () => toggleCheck(idx);
-
-    const isPriority = markValue(state.priority, idx);
-    const star = createStarButton(idx, m, isPriority);
-
-    const poster = createPoster(m, null, isRecent(m));
-
-    const info = document.createElement('div');
-    info.className = 'info';
-    const title = document.createElement('div');
-    title.className = 'title';
-    title.textContent = `${displayTitle(m)}`;
-    title.onclick = event => toggleDetail(idx, event.currentTarget);
-    const meta = createMeta(idx, m, 'list');
-    info.appendChild(title);
-    info.appendChild(meta);
-    const fitSignals = createFitSignals(idx);
-    if(fitSignals) info.appendChild(fitSignals);
-
-    const moves = document.createElement('div');
-    moves.className = 'moves';
-    const up = document.createElement('button');
-    up.className = 'moveUp';
-    up.dataset.idx = idx;
-    up.textContent = '\u25b2';
-    up.setAttribute('aria-label', `Move ${m.t} up`);
-    up.disabled = globalPos === 0;
-    up.onclick = () => move(idx, -1);
-    const down = document.createElement('button');
-    down.className = 'moveDown';
-    down.dataset.idx = idx;
-    down.textContent = '\u25bc';
-    down.setAttribute('aria-label', `Move ${m.t} down`);
-    down.disabled = globalPos === state.order.length - 1;
-    down.onclick = () => move(idx, 1);
-    moves.appendChild(up);
-    moves.appendChild(down);
-    moves.style.display = sortMode === 'custom' ? 'flex' : 'none';
-
-    li.appendChild(num);
-    li.appendChild(check);
-    li.appendChild(star);
-    if(poster) li.appendChild(poster);
-    li.appendChild(info);
-    li.appendChild(moves);
-    listEl.appendChild(li);
-
-    const detail = document.createElement('div');
-    detail.id = `shelf-list-detail-${m.num}`;
-    detail.className = 'detail' + (openDetail === idx ? ' open' : '') + (poster ? '' : ' noPosterDetail');
-    detail.hidden = openDetail !== idx;
-    fillMovieDetail(detail, m, openDetail === idx);
-    listEl.appendChild(detail);
+    if(useChapters){
+      const decade = decadeOf(m.y);
+      if(decade !== chapterDecade){
+        chapterDecade = decade;
+        listEl.appendChild(createChapterHead(decade));
+      }
+    }
+    const custom = sortMode === 'custom';
+    listEl.appendChild(createMovieRow(idx, {
+      scope: 'list',
+      num: custom ? orderPosition.get(idx) + 1 : undefined,
+      custom,
+      globalPos: orderPosition.get(idx)
+    }));
   });
 
   updateStats();
 }
 
 const listPaginationEl = document.getElementById('listPagination');
-const listPagePrevBtn = document.getElementById('listPagePrevBtn');
-const listPageNextBtn = document.getElementById('listPageNextBtn');
+const listShowMoreBtn = document.getElementById('listShowMoreBtn');
 const listPageStatusEl = document.getElementById('listPageStatus');
 
 // Updates the existing pagination controls in place (never recreates them)
 // so a click on Prev/Next never loses focus the way rebuilding the row list
 // would.
-function renderListPagination(totalPages, totalCount){
+function renderListPagination(totalPages, totalCount, shownCount){
   if(!listPaginationEl) return;
-  if(totalPages <= 1){
+  if(totalCount <= LIST_PAGE_SIZE){
     listPaginationEl.style.display = 'none';
     return;
   }
   listPaginationEl.style.display = 'flex';
-  listPagePrevBtn.disabled = listPage <= 1;
-  listPageNextBtn.disabled = listPage >= totalPages;
-  listPageStatusEl.textContent = `Page ${listPage} of ${totalPages} (${totalCount} movies)`;
+  listPageStatusEl.textContent = `Showing ${shownCount.toLocaleString('en-US')} of ${totalCount.toLocaleString('en-US')}`;
+  listShowMoreBtn.hidden = shownCount >= totalCount;
 }
 
-if(listPagePrevBtn) listPagePrevBtn.addEventListener('click', ()=>{
-  if(listPage > 1){
-    listPage -= 1;
-    render();
-    (listPagePrevBtn.disabled ? listPageNextBtn : listPagePrevBtn).focus();
-    if(listEl) listEl.scrollIntoView({ behavior: scrollBehavior(), block:'start' });
-  }
-});
-if(listPageNextBtn) listPageNextBtn.addEventListener('click', ()=>{
+// A soft line for each decade chapter: what the films have in common, not
+// who they are for.
+const DECADE_ASIDES = {
+  1920: 'Silent laughs and the first cartoons',
+  1930: 'Black-and-white treasures',
+  1940: 'Puppets, elephants and an orchestra',
+  1950: 'Glass slippers and flying boys',
+  1960: 'Spoonfuls of sugar and singing nuns',
+  1970: 'Muppets, droids and a chocolate factory',
+  1980: 'Bikes, goblins and the movies on tape',
+  1990: 'Big musicals and the first Toy Story',
+  2000: 'Ogres, fish and a rat who cooks',
+  2010: 'Snow queens and big-hearted robots',
+  2020: 'The newest on the shelf'
+};
+function createChapterHead(decade){
+  const li = document.createElement('li');
+  li.className = 'chapterHead';
+  const h = document.createElement('h2');
+  h.appendChild(spanText('chName', `The ${decade}s`));
+  if(DECADE_ASIDES[decade]) h.appendChild(spanText('chAside', DECADE_ASIDES[decade]));
+  li.appendChild(h);
+  return li;
+}
+
+if(listShowMoreBtn) listShowMoreBtn.addEventListener('click', ()=>{
+  const firstNew = listPage * LIST_PAGE_SIZE;
   listPage += 1;
   render();
-  (listPageNextBtn.disabled ? listPagePrevBtn : listPageNextBtn).focus();
-  if(listEl) listEl.scrollIntoView({ behavior: scrollBehavior(), block:'start' });
+  // Keep the reader where they were: focus the first newly shown title.
+  const rows = listEl.querySelectorAll('li.row .rowMain');
+  if(rows[firstNew]) rows[firstNew].focus();
 });
 
 document.getElementById('skipToNavLink').addEventListener('click', e=>{
@@ -8600,7 +9218,6 @@ document.getElementById('genreFilter').addEventListener('change', e=>{
 });
 document.getElementById('studioFilter').addEventListener('change', e=>{
   studioFilter = e.target.value;
-  if(studioFilter) clearListFilter();
   renderCurrentView();
 });
 document.getElementById('priorityToggleBtn').addEventListener('click', ()=>{
@@ -8612,6 +9229,11 @@ document.getElementById('priorityToggleBtn').addEventListener('click', ()=>{
 document.getElementById('tabHome').addEventListener('click', ()=>{
   showScreen('home');
   maybeShowGoogleSignInNudge();
+});
+document.getElementById('tabLists').addEventListener('click', ()=>{
+  // Tapping Lists again from an open list goes back to the shelves.
+  if(currentScreen === 'lists') openListId = null;
+  showScreen('lists');
 });
 document.getElementById('tabBrowse').addEventListener('click', ()=>{
   showScreen('browse');
@@ -9010,26 +9632,16 @@ document.getElementById('clearFiltersBtn').addEventListener('click', ()=>{
   document.getElementById('ageFilter').value = '';
   document.getElementById('genreFilter').value = '';
   document.getElementById('studioFilter').value = '';
-  clearListFilter();
   renderCurrentView();
 });
 
-document.getElementById('listBackBtn').addEventListener('click', ()=>{
-  clearListFilter();
-  renderCurrentView();
-  document.getElementById('browseScreenHeading').focus();
-});
-document.getElementById('listHideBtn').addEventListener('click', ()=>{
-  const list = listById(listFilter);
-  if(list) hiddenListIds.add(list.id);
-  saveHiddenLists();
-  clearListFilter();
-  renderCurrentView();
-  document.getElementById('browseScreenHeading').focus();
-  if(list) showToast(`Hid ${list.name}. Bring it back under All lists.`, 3000);
-});
 document.getElementById('tonightSeasonCard').addEventListener('click', e=>{
-  browseList(e.currentTarget.dataset.list);
+  openList(e.currentTarget.dataset.list);
+});
+document.getElementById('listsTeaser').addEventListener('click', ()=>{
+  openListId = null;
+  showScreen('lists');
+  document.getElementById('listsScreenHeading').focus();
 });
 
 window.addEventListener('online', ()=>{
@@ -9318,7 +9930,6 @@ loadSkipped();
 loadHiddenLists();
 loadTonightPrefs();
 tryInitGoogleSync();
-renderStudioGrid();
 // No tonightSelection seeding needed here: excludedChildIds starts empty
 // (see its declaration), so every child loadState() just populated is
 // already included by default.

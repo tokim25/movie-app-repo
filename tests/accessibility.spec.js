@@ -262,10 +262,8 @@ test('Shelf Details keeps focus and stable disclosure semantics through rerender
   await expect(page.locator(':focus')).toHaveAttribute('aria-expanded', 'true');
   await expect(page.locator(`#${controlledId}`)).toBeVisible();
 
-  await page.locator('#listPageNextBtn').click();
-  await expect(page.locator('#listPageNextBtn')).toBeFocused();
-  await page.locator('#listPagePrevBtn').click();
-  await expect(page.locator('#listPageNextBtn')).toBeFocused();
+  await page.locator('#listShowMoreBtn').click();
+  await expect(page.locator('#list > li.row').nth(50).locator('.rowMain')).toBeFocused();
 
   const restoredDetails = page.locator('#list > li.row').filter({ hasText: title }).first().locator('.detailLink');
   await expect(restoredDetails).toHaveAttribute('aria-controls', controlledId);
