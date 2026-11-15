@@ -149,10 +149,8 @@ test('every list tile and the season card show a decorative icon', async ({ page
   expect(Math.round(box.width)).toBe(40);
 });
 
-// These check the dates, not one family's fit: with the sample family's
-// 3-year-old only 2 of the 4 Hanukkah films fit, below the list's minimum of
-// 3, so the list correctly stays hidden for them. Watching as adults only,
-// every film counts.
+// These check the dates, not one family's fit. Watching as adults only,
+// every Hanukkah film counts.
 async function watchAsAdultsOnly(page) {
   await page.locator('#tonightWhoPill').click();
   for (const name of ['Simon', 'Nora']) {
@@ -179,12 +177,12 @@ test('after Hanukkah ends, the card goes back to Christmas', async ({ page }) =>
   await expect(page.locator('#tonightSeasonCard')).toContainText('Christmas movies');
 });
 
-test('the Hanukkah list stays hidden when fewer than 3 of its films fit the kids', async ({ page }) => {
+test('the Hanukkah list still shows for young kids when only 2 of its films fit', async ({ page }) => {
   await startOn(page, '2026-12-05T19:00:00');
-  const fit = await page.evaluate(() => listFitCount(listById('hanukkah')));
-  test.skip(fit >= 3, 'every Hanukkah film fits this family now');
+  expect(await page.evaluate(() => listFitCount(listById('hanukkah')))).toBe(2);
   await page.locator('#tabHome').click();
-  await expect(page.locator('#tonightSeasonCard')).not.toContainText('Hanukkah movies');
+  await expect(page.locator('#tonightSeasonCard')).toContainText('Hanukkah movies');
+  await expect(page.locator('#tonightSeasonCard')).toContainText('2 that fit Simon + Nora');
 });
 
 test('the season card count follows who is watching', async ({ page }) => {

@@ -13,13 +13,13 @@ const MOVIE_LISTS = Object.freeze([
     // days before the first candle to the last night) instead of a season.
     // Dates checked against hebcal.com on 2026-11-15; add a year each
     // December. It sits ahead of Christmas so its short window gets the
-    // Tonight card, and needs only 3 fitting titles (tokim25, 2026-11-15)
-    // because so few Hanukkah films exist.
+    // Tonight card, and needs only 2 fitting titles (tokim25, 2026-11-15:
+    // show it even when only two fit) because so few Hanukkah films exist.
     id: 'hanukkah',
     name: 'Hanukkah movies',
     blurb: 'The story of the Hanukkah lights, a Rugrats special and two films with a Hanukkah at their heart.',
     dates: [['2026-12-01', '2026-12-12'], ['2027-12-21', '2028-01-01'], ['2028-12-09', '2028-12-20'], ['2029-11-28', '2029-12-09'], ['2030-12-17', '2030-12-28']],
-    minFit: 3,
+    minFit: 2,
     pins: [1155, 1156, 617, 197]
   },
   {
