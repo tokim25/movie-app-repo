@@ -528,6 +528,8 @@ if a future redesign adds one back, update this paragraph to say where.
 
 "Find a movie" (Tonight) does not recommend a sequel until its predecessor is marked watched. The link lives in `data-series.js` (`MOVIE_PREREQUISITES`, a map of sequel `num` to the `num` of its immediate predecessor). When you add a direct sequel whose predecessor is in the catalog, add one line there. Leave out remakes, reboots, and prequels or midquels with an ambiguous watch order. A title with no entry is never gated. `scripts/validate-data.mjs` fails on unknown nums and on loops. `data-series.js` is in `dataFiles`, so the bundle and DATA_VERSION re-stamps cover it.
 
+**Curated lists (added 2026-11-14).** `data-lists.js` (`MOVIE_LISTS`) holds hand-picked lists such as Christmas movies, Baseball movies and the '80s. When a new title clearly belongs to one (a Christmas film, a baseball film), add its `num` to that list's `pins` where a parent would want to see it. Lists describe what is in the film, never which families it suits. `scripts/validate-data.mjs` fails on unknown or repeated nums. `data-lists.js` is in `dataFiles`, so the bundle and DATA_VERSION re-stamps cover it.
+
 ## Step 6 — Commit, push, verify
 
 **Before committing, apply the data-file re-sync hard rule's part (2)** from

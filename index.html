@@ -1392,6 +1392,59 @@ function reportError(err){
     cursor:pointer;
   }
 
+  .listGrid{ margin-bottom:10px; }
+  .listTileTag{
+    display:inline-block;
+    font-size:12px;
+    font-weight:600;
+    color:var(--accent-text);
+    margin-bottom:4px;
+  }
+  .listHeader{
+    margin:4px 0 16px;
+  }
+  .listHeader h2{
+    font-family:"Newsreader", Georgia, "Times New Roman", serif;
+    font-size:24px;
+    line-height:1.2;
+    margin:8px 0 6px;
+  }
+  .listHeaderBlurb{ margin:0 0 4px; color:var(--ink); }
+  .listHeaderNote{ margin:0 0 10px; font-size:13px; color:var(--ink-soft); }
+  .listBackBtn, .listHideBtn{
+    background:none;
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:8px 14px;
+    min-height:40px;
+    font:inherit;
+    font-size:14px;
+    font-weight:500;
+    color:var(--accent-text);
+    cursor:pointer;
+  }
+  .listHideBtn{ color:var(--ink-soft); }
+  .seasonCard{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:2px;
+    width:100%;
+    margin-top:14px;
+    background:var(--bg-sub);
+    border:none;
+    border-radius:12px;
+    padding:14px;
+    text-align:left;
+    font:inherit;
+    color:var(--ink);
+    cursor:pointer;
+  }
+  .seasonCard[hidden]{ display:none; }
+  .seasonCardEyebrow{ font-size:12px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--accent-text); }
+  .seasonCardName{ font-weight:600; font-size:16px; }
+  .seasonCardCount{ font-size:14px; color:var(--ink-soft); }
+
   /* Browse / Family screens */
   .screenWrap{
     max-width:680px;
@@ -1921,6 +1974,7 @@ function reportError(err){
   .homeScreen.hasPick .memories,
   .homeScreen.hasPick .stats,
   .homeScreen.hasPick #tonightShelfBtn,
+  .homeScreen.hasPick .seasonCard,
   .homeScreen.hasPick .tonightActions{
     display:none;
   }
@@ -3184,6 +3238,11 @@ function reportError(err){
         <button type="button" class="primaryBtn" id="findTonightPickBtn">Find tonight's pick</button>
         <button type="button" class="secondaryBtn" id="tonightShelfBtn">Browse Shelf instead</button>
       </div>
+      <button type="button" class="seasonCard" id="tonightSeasonCard" hidden>
+        <span class="seasonCardEyebrow">In season</span>
+        <span class="seasonCardName" id="tonightSeasonName"></span>
+        <span class="seasonCardCount" id="tonightSeasonCount"></span>
+      </button>
       <div class="srOnly" id="tonightPickStatus" role="status" aria-live="polite" aria-atomic="true"></div>
       <div class="pickCard" id="tonightPickCard" style="display:none;">
         <p class="pickChange" id="tonightPickChange" hidden></p>
@@ -3298,8 +3357,16 @@ function reportError(err){
   </div>
   <div class="homeSection" id="browseBySection">
     <span class="homeSectionLabel">Browse by</span>
-    <div class="studioGrid" id="studioGrid"></div>
+    <div class="studioGrid listGrid" id="listGrid" aria-label="Lists" role="group"></div>
+    <div class="studioGrid" id="studioGrid" aria-label="Studios" role="group"></div>
   </div>
+  <section class="listHeader" id="listHeader" aria-labelledby="listHeaderName" hidden>
+    <button type="button" class="listBackBtn" id="listBackBtn">← All movies</button>
+    <h2 id="listHeaderName" tabindex="-1"></h2>
+    <p class="listHeaderBlurb" id="listHeaderBlurb"></p>
+    <p class="listHeaderNote" id="listHeaderNote"></p>
+    <button type="button" class="listHideBtn" id="listHideBtn">Not for us</button>
+  </section>
   <ul id="list"></ul>
   <div class="listPagination" id="listPagination" style="display:none;">
     <button type="button" id="listPagePrevBtn">Previous</button>
@@ -3814,6 +3881,7 @@ let decadeFilter = "";
 let ageFilter = "";
 let genreFilter = "";
 let studioFilter = "";
+let listFilter = "";
 let sortMode = "year";
 let currentScreen = "browse";
 // The Shelf list can hold 1,000+ movies. Rendering it all unpaginated makes
@@ -3954,6 +4022,11 @@ function compareByAge(a, b){
 function sortMovieIndices(indices, mode){
   if(mode === 'custom') return indices.slice();
   const sorted = indices.slice();
+  const list = mode === 'list' && listFilter ? listById(listFilter) : null;
+  if(list){
+    const position = new Map(list.pins.map((num, pos) => [num, pos]));
+    return sorted.sort((a, b) => (position.get(MOVIES[a].num) ?? 1e9) - (position.get(MOVIES[b].num) ?? 1e9));
+  }
   if(mode === 'age') return sorted.sort(compareByAge);
   if(mode === 'title') return sorted.sort(titleCompare);
   return sorted.sort(compareByYear);
@@ -5019,8 +5092,181 @@ function browseStudio(studio){
   sortMode = 'year';
   document.getElementById('sortMode').value = sortMode;
   studioFilter = studio;
+  listFilter = '';
+  syncListSortOption();
   document.getElementById('studioFilter').value = studio;
   showScreen('browse');
+}
+
+// ---- Curated lists (MOVIE_LISTS, from data-lists.js) ----
+// "Not for us" hides a list on this device only, like the other Tonight
+// conveniences; it is not family data, so it stays out of the synced state.
+const HIDDEN_LISTS_KEY = 'movieNight.hiddenLists';
+const LIST_MIN_FITTING = 5;
+let hiddenListIds = new Set();
+let showAllLists = false;
+const MOVIE_IDX_BY_NUM = new Map(MOVIES.map((m, idx) => [m.num, idx]));
+
+function loadHiddenLists(){
+  try{
+    const saved = JSON.parse(localStorage.getItem(HIDDEN_LISTS_KEY) || '[]');
+    hiddenListIds = new Set(Array.isArray(saved) ? saved : []);
+  }catch(e){
+    hiddenListIds = new Set();
+  }
+}
+function saveHiddenLists(){
+  try{ localStorage.setItem(HIDDEN_LISTS_KEY, JSON.stringify([...hiddenListIds])); }catch(e){}
+}
+function curatedLists(){
+  return typeof MOVIE_LISTS === 'undefined' ? [] : MOVIE_LISTS;
+}
+function listById(id){
+  return curatedLists().find(list => list.id === id) || null;
+}
+function listIndices(list){
+  return list.pins.map(num => MOVIE_IDX_BY_NUM.get(num)).filter(idx => idx !== undefined);
+}
+// Same test as the Shelf's "Hide above settings" toggle, which a list turns on.
+function fitsSelectedKids(m, kids){
+  return !kids.length || !hasConfirmedContentData(m) || movieFitForKids(m, kids).verdict !== 'red';
+}
+function listFitCount(list){
+  const kids = selectedKids();
+  return listIndices(list).filter(idx => fitsSelectedKids(MOVIES[idx], kids)).length;
+}
+function monthDayNumber(date){
+  return (date.getMonth() + 1) * 100 + date.getDate();
+}
+function listInSeason(list, date){
+  if(!list.season) return false;
+  const [from, to] = [list.season.from, list.season.to].map(s => Number(s.replace('-', '')));
+  const today = monthDayNumber(date);
+  return from <= to ? (today >= from && today <= to) : (today >= from || today <= to);
+}
+// In-season lists first, then lists with no season, then the ones out of season.
+function shownLists(date){
+  const shown = curatedLists().filter(list => !hiddenListIds.has(list.id) && listFitCount(list) >= LIST_MIN_FITTING);
+  const rank = list => listInSeason(list, date) ? 0 : (list.season ? 2 : 1);
+  return shown.slice().sort((a, b) => rank(a) - rank(b));
+}
+function listCountText(list){
+  const count = listFitCount(list);
+  return selectedKids().length ? `${count} that fit` : `${count} films`;
+}
+
+function renderListGrid(){
+  const grid = document.getElementById('listGrid');
+  if(!grid) return;
+  grid.replaceChildren();
+  const today = new Date(Date.now());
+  const lists = shownLists(today);
+  const visible = showAllLists ? lists : lists.slice(0, 4);
+  visible.forEach(list => {
+    const tile = document.createElement('button');
+    tile.type = 'button';
+    tile.className = 'studioTile listTile';
+    tile.dataset.list = list.id;
+    if(listInSeason(list, today)){
+      const tag = document.createElement('span');
+      tag.className = 'listTileTag';
+      tag.textContent = 'In season';
+      tile.appendChild(tag);
+    }
+    const name = document.createElement('span');
+    name.className = 'studioTileName';
+    name.textContent = list.name;
+    const count = document.createElement('span');
+    count.className = 'studioTileCount';
+    count.textContent = listCountText(list);
+    tile.appendChild(name);
+    tile.appendChild(count);
+    tile.onclick = () => browseList(list.id);
+    grid.appendChild(tile);
+  });
+  if(lists.length > 4 || hiddenListIds.size){
+    const more = document.createElement('button');
+    more.type = 'button';
+    more.className = 'moreStudiosTile';
+    more.id = 'allListsBtn';
+    if(!showAllLists){
+      more.textContent = `All lists · ${lists.length} →`;
+      more.onclick = () => { showAllLists = true; renderListGrid(); };
+    }else if(hiddenListIds.size){
+      more.textContent = `Show ${hiddenListIds.size} hidden list${hiddenListIds.size === 1 ? '' : 's'}`;
+      more.onclick = () => { hiddenListIds.clear(); saveHiddenLists(); renderCurrentView(); };
+    }else{
+      more.textContent = 'Fewer lists';
+      more.onclick = () => { showAllLists = false; renderListGrid(); };
+    }
+    grid.appendChild(more);
+  }
+}
+
+function renderSeasonCard(){
+  const card = document.getElementById('tonightSeasonCard');
+  if(!card) return;
+  const list = shownLists(new Date(Date.now())).find(l => listInSeason(l, new Date(Date.now())));
+  card.hidden = !list;
+  if(!list) return;
+  card.dataset.list = list.id;
+  document.getElementById('tonightSeasonName').textContent = list.name;
+  const kids = selectedKids();
+  document.getElementById('tonightSeasonCount').textContent = kids.length
+    ? `${listFitCount(list)} that fit ${kids.map(k => k.name).join(' + ')} →`
+    : `${listFitCount(list)} films →`;
+}
+
+function renderListHeader(){
+  const header = document.getElementById('listHeader');
+  const list = listFilter ? listById(listFilter) : null;
+  header.hidden = !list;
+  if(!list) return;
+  document.getElementById('listHeaderName').textContent = list.name;
+  document.getElementById('listHeaderBlurb').textContent = list.blurb;
+  const kids = selectedKids();
+  document.getElementById('listHeaderNote').textContent = hideAboveSettings && kids.length
+    ? `Picked by hand. Showing the ones that fit ${kids.map(k => k.name).join(' + ')}.`
+    : 'Picked by hand.';
+}
+
+function browseList(id){
+  decadeFilter = ''; ageFilter = ''; genreFilter = ''; studioFilter = ''; priorityOnly = false; newOnly = false; query = ''; filter = 'all';
+  document.getElementById('decadeFilter').value = '';
+  document.getElementById('ageFilter').value = '';
+  document.getElementById('genreFilter').value = '';
+  document.getElementById('studioFilter').value = '';
+  document.getElementById('search').value = '';
+  hideAboveSettings = selectedKids().length > 0;
+  listFilter = id;
+  sortMode = 'list';
+  syncListSortOption();
+  showScreen('browse');
+  window.scrollTo(0, 0);
+  document.getElementById('listHeaderName').focus();
+}
+
+function clearListFilter(){
+  listFilter = '';
+  hideAboveSettings = false;
+  if(sortMode === 'list') sortMode = 'year';
+  syncListSortOption();
+}
+
+// The "List order" sort only exists while a list is open (Safari ignores
+// `hidden` on <option>, so it is added and removed instead).
+function syncListSortOption(){
+  const select = document.getElementById('sortMode');
+  let option = select.querySelector('option[value="list"]');
+  if(listFilter && !option){
+    option = document.createElement('option');
+    option.value = 'list';
+    option.textContent = 'List order';
+    select.prepend(option);
+  }else if(!listFilter && option){
+    option.remove();
+  }
+  select.value = sortMode;
 }
 
 function createChild(name, rawAge, id){
@@ -7292,6 +7538,9 @@ function render(){
   listEl.dataset.renderedQuery = query;
   const q = query.trim().toLowerCase();
   const orderPosition = new Map(state.order.map((idx, pos) => [idx, pos]));
+  const activeList = listFilter ? listById(listFilter) : null;
+  if(listFilter && !activeList) clearListFilter();
+  const listPins = new Set(activeList ? activeList.pins : []);
   let visibleOrder = state.order.filter(idx=>{
     const m = MOVIES[idx];
     if(q){
@@ -7312,6 +7561,7 @@ function render(){
     }
     if(genreFilter && !(m.genre || []).includes(genreFilter)) return false;
     if(studioFilter && m.studio !== studioFilter) return false;
+    if(listFilter && !listPins.has(m.num)) return false;
     if(priorityOnly && !markValue(state.priority, idx)) return false;
     if(newOnly && !isRecent(m)) return false;
     if(hideAboveSettings){
@@ -7333,7 +7583,7 @@ function render(){
   }
 
   listEl.replaceChildren();
-  const activeFilterCount = [decadeFilter, ageFilter, genreFilter, studioFilter].filter(Boolean).length
+  const activeFilterCount = [decadeFilter, ageFilter, genreFilter, studioFilter, listFilter].filter(Boolean).length
     + (priorityOnly ? 1 : 0) + (newOnly ? 1 : 0) + (hideAboveSettings ? 1 : 0);
   updateFilterBadge(activeFilterCount);
   syncFilterToggleState();
@@ -7345,7 +7595,10 @@ function render(){
   searchResultCount.textContent = trimmedQuery
     ? `${visibleOrder.length} movie${visibleOrder.length === 1 ? '' : 's'} found`
     : '';
-  browseBySection.style.display = trimmedQuery ? 'none' : '';
+  browseBySection.style.display = trimmedQuery || listFilter ? 'none' : '';
+  renderListGrid();
+  renderListHeader();
+  renderSeasonCard();
   emptyMsg.style.display = visibleOrder.length ? 'none' : 'block';
   if(!visibleOrder.length){
     if(trimmedQuery){
@@ -7376,7 +7629,7 @@ function render(){
   // something else (e.g. toggling a check/star mark) keeps the page the
   // user was on.
   const listSignature = JSON.stringify([
-    q, filter, decadeFilter, ageFilter, genreFilter, studioFilter,
+    q, filter, decadeFilter, ageFilter, genreFilter, studioFilter, listFilter,
     priorityOnly, newOnly, hideAboveSettings, sortMode
   ]);
   if(listSignature !== lastListSignature){
@@ -8308,6 +8561,7 @@ document.getElementById('genreFilter').addEventListener('change', e=>{
 });
 document.getElementById('studioFilter').addEventListener('change', e=>{
   studioFilter = e.target.value;
+  if(studioFilter) clearListFilter();
   renderCurrentView();
 });
 document.getElementById('priorityToggleBtn').addEventListener('click', ()=>{
@@ -8717,7 +8971,26 @@ document.getElementById('clearFiltersBtn').addEventListener('click', ()=>{
   document.getElementById('ageFilter').value = '';
   document.getElementById('genreFilter').value = '';
   document.getElementById('studioFilter').value = '';
+  clearListFilter();
   renderCurrentView();
+});
+
+document.getElementById('listBackBtn').addEventListener('click', ()=>{
+  clearListFilter();
+  renderCurrentView();
+  document.getElementById('browseScreenHeading').focus();
+});
+document.getElementById('listHideBtn').addEventListener('click', ()=>{
+  const list = listById(listFilter);
+  if(list) hiddenListIds.add(list.id);
+  saveHiddenLists();
+  clearListFilter();
+  renderCurrentView();
+  document.getElementById('browseScreenHeading').focus();
+  if(list) showToast(`Hid ${list.name}. Bring it back under All lists.`, 3000);
+});
+document.getElementById('tonightSeasonCard').addEventListener('click', e=>{
+  browseList(e.currentTarget.dataset.list);
 });
 
 window.addEventListener('online', ()=>{
@@ -9003,6 +9276,7 @@ loadState();
 loadRecentTonightPicks();
 loadNotInterested();
 loadSkipped();
+loadHiddenLists();
 loadTonightPrefs();
 tryInitGoogleSync();
 renderStudioGrid();
