@@ -2583,5 +2583,43 @@ const MOVIE_LISTS = Object.freeze([
     name: 'What Mom & Dad watched: the ’90s',
     blurb: 'Nineties classics, from Disney musicals to the Sandlot.',
     pins: [101, 281, 282, 4, 286, 110, 389, 116, 118, 1066, 71, 387, 1067, 596, 115, 624, 626, 929, 395, 397, 869, 606, 605, 594, 599, 602, 881]
+  },
+  {
+    id: 'summer-break',
+    name: 'Summer break',
+    blurb: 'Beaches, camps, road trips and long summer days.',
+    season: { from: '06-01', to: '08-31' },
+    pins: [12, 1, 9, 71, 632, 1105, 292, 303, 1119, 606, 150, 156, 603, 578, 654, 407, 227, 561, 1091, 1077, 1126, 92]
+  },
+  {
+    id: 'back-to-school',
+    name: 'Back to school',
+    blurb: 'New classrooms, new kids and first days, for the start of the school year.',
+    season: { from: '08-15', to: '09-15' },
+    pins: [10, 492, 118, 1010, 974, 549, 955, 543, 466, 1017, 160, 214, 155, 125, 85, 140, 98, 1001, 498, 89]
+  },
+  {
+    id: 'studio-ghibli',
+    name: 'Studio Ghibli, where to start',
+    blurb: 'The Japanese studio behind Totoro, in a good order to watch it.',
+    pins: [1, 104, 9, 831, 820, 829, 121, 827, 828, 832, 825, 835, 833, 823, 824, 836, 834, 837, 830, 822, 826]
+  },
+  {
+    id: 'dogs',
+    name: 'Dog movies',
+    blurb: 'Good dogs, lost dogs, sled dogs and one dog who plays basketball.',
+    pins: [266, 268, 389, 298, 936, 399, 1079, 74, 395, 597, 422, 408, 465, 278, 380, 1051, 427, 555, 339, 423, 157, 464, 394, 1153, 442, 973, 915, 275, 338]
+  },
+  {
+    id: 'read-the-book-first',
+    name: 'Read the book first',
+    blurb: 'Films of children’s books, from picture books to chapter books, to read before you watch.',
+    pins: [1132, 1144, 1018, 1071, 6, 5, 641, 994, 396, 113, 67, 118, 116, 542, 1010, 974, 531, 74, 47, 14, 39, 870, 92, 425, 98, 57, 105, 1014, 1016, 1017, 1021, 70, 30]
+  },
+  {
+    id: 'award-winners',
+    name: 'Oscar winners: Best Animated Feature',
+    blurb: 'Every winner of the Academy Award for Best Animated Feature that is in the catalog, newest first.',
+    pins: [673, 837, 11, 49, 495, 133, 111, 13, 10, 302, 103, 491, 557, 494, 22, 109, 485, 968, 508, 489, 2, 121, 502]
   }
 ]);
