@@ -5150,7 +5150,14 @@ function listFitCount(list){
 function monthDayNumber(date){
   return (date.getMonth() + 1) * 100 + date.getDate();
 }
+function isoDay(date){
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+}
 function listInSeason(list, date){
+  if(list.dates){
+    const today = isoDay(date);
+    return list.dates.some(([from, to]) => today >= from && today <= to);
+  }
   if(!list.season) return false;
   const [from, to] = [list.season.from, list.season.to].map(s => Number(s.replace('-', '')));
   const today = monthDayNumber(date);
@@ -5158,8 +5165,8 @@ function listInSeason(list, date){
 }
 // In-season lists first, then lists with no season, then the ones out of season.
 function shownLists(date){
-  const shown = curatedLists().filter(list => !hiddenListIds.has(list.id) && listFitCount(list) >= LIST_MIN_FITTING);
-  const rank = list => listInSeason(list, date) ? 0 : (list.season ? 2 : 1);
+  const shown = curatedLists().filter(list => !hiddenListIds.has(list.id) && listFitCount(list) >= (list.minFit || LIST_MIN_FITTING));
+  const rank = list => listInSeason(list, date) ? 0 : (list.season || list.dates ? 2 : 1);
   return shown.slice().sort((a, b) => rank(a) - rank(b));
 }
 function listCountText(list){
