@@ -2621,6 +2621,30 @@ const MOVIE_LISTS = Object.freeze([
     name: 'Oscar winners: Best Animated Feature',
     blurb: 'Every winner of the Academy Award for Best Animated Feature that is in the catalog, newest first.',
     pins: [673, 837, 11, 49, 495, 133, 111, 13, 10, 302, 103, 491, 557, 494, 22, 109, 485, 968, 508, 489, 2, 121, 502]
+  },
+  {
+    id: 'funny-for-grown-ups-too',
+    name: 'Funny for grown-ups too',
+    blurb: 'Comedies with jokes for the kids and a second layer of jokes for the adults on the couch.',
+    pins: [120, 5, 310, 4, 439, 106, 290, 18, 502, 513, 1071, 524, 47, 762, 53, 537, 489, 13, 133, 70, 1086]
+  },
+  {
+    id: 'made-by-hand',
+    name: 'Made by hand',
+    blurb: 'Stop-motion films, where every puppet and set was moved by hand one frame at a time.',
+    pins: [7, 665, 1089, 102, 508, 1121, 664, 540, 113, 396, 672, 1145, 626, 69, 442, 650, 971, 972, 973, 1130]
+  },
+  {
+    id: 'real-life-adventures',
+    name: 'Real-life adventures',
+    blurb: 'True stories and nature documentaries, from penguins and polar bears to a girl who hunts with an eagle.',
+    pins: [21, 471, 470, 446, 455, 478, 16, 17, 66, 61, 63, 58, 86, 85, 60, 83]
+  },
+  {
+    id: 'sing-along-musicals',
+    name: 'Sing-along musicals',
+    blurb: 'Big, hummable songs the whole family ends up singing, from Disney favorites to the classic stage musicals.',
+    pins: [270, 101, 103, 300, 286, 19, 29, 30, 282, 279, 303, 11, 67, 612, 28, 615, 299, 285, 353, 1001, 1037, 385]
   }
 ]);
 
