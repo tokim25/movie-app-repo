@@ -1288,6 +1288,63 @@ function reportError(err){
     color:var(--ink-soft);
     font-size:13px;
   }
+  .shelfBrowseTools{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:12px 0 4px;
+  }
+  .densityControl{
+    display:inline-flex;
+    min-width:0;
+    margin:0;
+    padding:3px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--bg-sub);
+  }
+  .densityControl button{
+    min-height:38px;
+    padding:0 12px;
+    border:0;
+    border-radius:7px;
+    background:transparent;
+    color:var(--ink-soft);
+    font:inherit;
+    font-size:13px;
+    font-weight:600;
+    line-height:1;
+    cursor:pointer;
+  }
+  .densityControl button[aria-pressed="true"]{
+    background:var(--surface);
+    color:var(--ink);
+    box-shadow:0 1px 3px rgba(var(--shadow-rgb),0.12);
+  }
+  .shelfJumpField{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    color:var(--ink-soft);
+    font-size:13px;
+    font-weight:600;
+  }
+  .shelfJumpField[hidden]{ display:none; }
+  .shelfJumpField select{
+    min-height:44px;
+    max-width:150px;
+    padding:0 30px 0 10px;
+    border:1px solid var(--line);
+    border-radius:9px;
+    background:var(--surface);
+    color:var(--ink);
+    font:inherit;
+    font-size:14px;
+    font-weight:500;
+    line-height:1;
+  }
   .quickBar{
     position:fixed;
     left:0; right:0; bottom:0;
@@ -3308,8 +3365,44 @@ function reportError(err){
   .rows > .row > .detail{ padding:0 4px 16px; border-bottom:0; }
   .rows .moves{ flex-direction:column; }
 
+  /* Compact Shelf rows keep every action at a 44px touch target while
+     putting the two actions side by side. The row itself settles near 64px. */
+  #list.shelfCompact .rowLine{ gap:8px; min-height:64px; padding:8px 0; }
+  #list.shelfCompact .poster.rowPoster{ width:32px; }
+  #list.shelfCompact .rowMain{
+    display:grid;
+    grid-template-columns:minmax(0, 1fr) auto;
+    align-items:center;
+    column-gap:6px;
+    min-height:44px;
+    padding:0;
+  }
+  #list.shelfCompact .rowMain .title{
+    min-width:0;
+    max-width:100%;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    font-size:15.5px;
+  }
+  #list.shelfCompact .rowMeta{ display:none; }
+  #list.shelfCompact .rowMain .fitSignals{ margin:0; }
+  #list.shelfCompact .rowMain .fitSignal{ gap:0; font-size:0; }
+  #list.shelfCompact .rowActs,
+  #list.shelfCompact .moves{ flex-direction:row; }
+
   /* decade chapters on Shelf */
-  .chapterHead{ list-style:none; padding:22px 0 6px; border-bottom:1px dashed var(--line); }
+  .chapterHead{
+    position:sticky;
+    top:0;
+    z-index:3;
+    list-style:none;
+    padding:12px 0 6px;
+    border-bottom:1px dashed var(--line);
+    background:color-mix(in srgb, var(--bg) 94%, transparent);
+    backdrop-filter:blur(8px);
+    scroll-margin-top:8px;
+  }
   .chapterHead h2{ margin:0; display:flex; flex-direction:column; font-size:inherit; }
   .chName{ font-family:"Newsreader", Georgia, serif; font-weight:700; font-size:21px; line-height:1.15; }
   .chAside{ font-family:"Newsreader", Georgia, serif; font-style:italic; font-weight:500; font-size:15px; color:var(--ink-soft); }
@@ -3343,6 +3436,8 @@ function reportError(err){
     .ppNum{ font-size:18px; white-space:nowrap; }
     .stamp{ width:88px; height:88px; }
     .rows .poster.rowPoster{ width:48px; }
+    #list.shelfCompact .poster.rowPoster{ width:32px; }
+    .densityControl button{ padding:0 9px; }
     .qbBtn span{ font-size:10.5px; letter-spacing:-0.02em; }
   }
   @media (prefers-reduced-motion:no-preference){
@@ -3545,6 +3640,17 @@ function reportError(err){
   <div class="searchStatusRow" id="searchStatusRow" hidden>
     <span id="searchResultCount" role="status" aria-live="polite"></span>
     <button type="button" id="clearSearchBtn">Clear search</button>
+  </div>
+  <div class="shelfBrowseTools">
+    <fieldset class="densityControl" aria-label="Shelf row size">
+      <legend class="srOnly">Shelf row size</legend>
+      <button type="button" id="comfortableDensityBtn" data-density="comfortable" aria-pressed="true">Comfortable</button>
+      <button type="button" id="compactDensityBtn" data-density="compact" aria-pressed="false">Compact</button>
+    </fieldset>
+    <label class="shelfJumpField" id="shelfJumpField" for="shelfJumpSelect" hidden>
+      <span id="shelfJumpLabel">Jump to</span>
+      <select id="shelfJumpSelect"><option value="">Choose</option></select>
+    </label>
   </div>
   <div id="browseBySection">
     <button type="button" class="listsTeaser" id="listsTeaser">
@@ -4083,6 +4189,8 @@ let genreFilter = "";
 let studioFilter = "";
 let sortMode = "year";
 let currentScreen = "browse";
+const SHELF_DENSITY_KEY = 'family-feature-shelf-density-v1';
+let shelfDensity = readShelfDensity();
 // The Shelf list can hold 1,000+ movies. Rendering it all unpaginated makes
 // every row's controls (check/star/details/source/move) into keyboard tab
 // stops, so reaching the nav bar from deep in the list can take thousands of
@@ -4092,6 +4200,7 @@ let currentScreen = "browse";
 let listPage = 1;
 const LIST_PAGE_SIZE = 50;
 let lastListSignature = "";
+let lastVisibleOrder = [];
 // excludedChildIds (not an opt-in childIds allowlist) so every child-roster
 // mutation path -- local addChild(), completeSetupWithChildren(), boot,
 // a Drive sync-merge, or any future path (import, invite, undo) -- includes
@@ -4348,6 +4457,25 @@ function decadeOf(y){
   const n = parseInt(y, 10);
   if(isNaN(n)) return null;
   return Math.floor(n / 10) * 10;
+}
+
+function readShelfDensity(){
+  try{
+    return localStorage.getItem(SHELF_DENSITY_KEY) === 'compact' ? 'compact' : 'comfortable';
+  }catch(e){
+    return 'comfortable';
+  }
+}
+
+function setShelfDensity(density, persist = true){
+  shelfDensity = density === 'compact' ? 'compact' : 'comfortable';
+  if(persist){
+    try{ localStorage.setItem(SHELF_DENSITY_KEY, shelfDensity); }catch(e){}
+  }
+  listEl.classList.toggle('shelfCompact', shelfDensity === 'compact');
+  document.querySelectorAll('.densityControl button').forEach(button => {
+    button.setAttribute('aria-pressed', button.dataset.density === shelfDensity ? 'true' : 'false');
+  });
 }
 
 const RECENT_RELEASE_YEAR_WINDOW = 3;
@@ -5779,6 +5907,7 @@ function createMovieRow(idx, opts = {}){
 
   const li = document.createElement('li');
   li.className = 'row' + (isChecked ? ' checked' : '');
+  li.dataset.movieIdx = idx;
   const line = document.createElement('div');
   line.className = 'rowLine';
 
@@ -8162,8 +8291,10 @@ function render(){
     });
     visibleOrder = exact.concat(fuzzy);
   }
+  lastVisibleOrder = visibleOrder.slice();
 
   listEl.replaceChildren();
+  setShelfDensity(shelfDensity, false);
   const activeFilterCount = [decadeFilter, ageFilter, genreFilter, studioFilter].filter(Boolean).length
     + (priorityOnly ? 1 : 0) + (newOnly ? 1 : 0) + (hideAboveSettings ? 1 : 0);
   updateFilterBadge(activeFilterCount);
@@ -8222,6 +8353,7 @@ function render(){
   // "Show 50 more" grows the list in place instead of paging away from it.
   const pageItems = visibleOrder.slice(0, listPage * LIST_PAGE_SIZE);
   renderListPagination(totalPages, visibleOrder.length, pageItems.length);
+  renderShelfJump(visibleOrder);
 
   // Sorted by year with no search, the Shelf reads in decade chapters.
   const useChapters = sortMode === 'year' && !q;
@@ -8265,6 +8397,33 @@ function renderListPagination(totalPages, totalCount, shownCount){
   listShowMoreBtn.hidden = shownCount >= totalCount;
 }
 
+const shelfJumpField = document.getElementById('shelfJumpField');
+const shelfJumpLabel = document.getElementById('shelfJumpLabel');
+const shelfJumpSelect = document.getElementById('shelfJumpSelect');
+
+function titleJumpLetter(title){
+  const match = String(title || '').trim().toUpperCase().match(/[A-Z]/);
+  return match ? match[0] : '#';
+}
+
+function renderShelfJump(items){
+  const byDecade = sortMode === 'year';
+  const byTitle = sortMode === 'title';
+  shelfJumpField.hidden = !items.length || (!byDecade && !byTitle);
+  if(shelfJumpField.hidden) return;
+
+  shelfJumpLabel.textContent = byDecade ? 'Jump to decade' : 'Jump to letter';
+  shelfJumpSelect.setAttribute('aria-label', shelfJumpLabel.textContent);
+  shelfJumpSelect.replaceChildren(new Option(byDecade ? 'Choose decade' : 'Choose letter', ''));
+  const seen = new Set();
+  items.forEach(idx => {
+    const group = byDecade ? decadeOf(MOVIES[idx].y) : titleJumpLetter(MOVIES[idx].t);
+    if(group === null || seen.has(group)) return;
+    seen.add(group);
+    shelfJumpSelect.appendChild(new Option(byDecade ? `${group}s` : group, `${byDecade ? 'decade' : 'letter'}:${group}`));
+  });
+}
+
 // A soft line for each decade chapter: what the films have in common, not
 // who they are for.
 const DECADE_ASIDES = {
@@ -8283,6 +8442,8 @@ const DECADE_ASIDES = {
 function createChapterHead(decade){
   const li = document.createElement('li');
   li.className = 'chapterHead';
+  li.id = `shelf-decade-${decade}`;
+  li.tabIndex = -1;
   const h = document.createElement('h2');
   h.appendChild(spanText('chName', `The ${decade}s`));
   if(DECADE_ASIDES[decade]) h.appendChild(spanText('chAside', DECADE_ASIDES[decade]));
@@ -8290,13 +8451,54 @@ function createChapterHead(decade){
   return li;
 }
 
-if(listShowMoreBtn) listShowMoreBtn.addEventListener('click', ()=>{
+function loadNextShelfPage(focusNew){
+  const totalPages = Math.max(1, Math.ceil(lastVisibleOrder.length / LIST_PAGE_SIZE));
+  if(listPage >= totalPages) return;
   const firstNew = listPage * LIST_PAGE_SIZE;
   listPage += 1;
   render();
-  // Keep the reader where they were: focus the first newly shown title.
-  const rows = listEl.querySelectorAll('li.row .rowMain');
-  if(rows[firstNew]) rows[firstNew].focus();
+  if(focusNew){
+    // A manual load carries keyboard and screen-reader users to the first
+    // new title. Automatic loading never moves focus or scroll position.
+    const rows = listEl.querySelectorAll('li.row .rowMain');
+    if(rows[firstNew]) rows[firstNew].focus();
+  }
+}
+
+if(listShowMoreBtn) listShowMoreBtn.addEventListener('click', ()=> loadNextShelfPage(true));
+
+if('IntersectionObserver' in window && listPaginationEl){
+  const shelfLoadObserver = new IntersectionObserver(entries => {
+    if(currentScreen !== 'browse' || !entries.some(entry => entry.isIntersecting)) return;
+    loadNextShelfPage(false);
+  }, { rootMargin:'600px 0px' });
+  shelfLoadObserver.observe(listPaginationEl);
+}
+
+document.querySelectorAll('.densityControl button').forEach(button => {
+  button.addEventListener('click', () => setShelfDensity(button.dataset.density));
+});
+setShelfDensity(shelfDensity, false);
+
+shelfJumpSelect.addEventListener('change', () => {
+  const [kind, value] = shelfJumpSelect.value.split(':');
+  if(!value) return;
+  const targetPosition = lastVisibleOrder.findIndex(idx => kind === 'decade'
+    ? decadeOf(MOVIES[idx].y) === Number(value)
+    : titleJumpLetter(MOVIES[idx].t) === value);
+  if(targetPosition < 0) return;
+  listPage = Math.max(listPage, Math.floor(targetPosition / LIST_PAGE_SIZE) + 1);
+  const targetMovieIdx = lastVisibleOrder[targetPosition];
+  render();
+  requestAnimationFrame(() => {
+    const target = kind === 'decade' && !query.trim()
+      ? document.getElementById(`shelf-decade-${value}`)
+      : listEl.querySelector(`li.row[data-movie-idx="${targetMovieIdx}"] .rowMain`);
+    if(!target) return;
+    target.scrollIntoView({ block:'start', behavior:scrollBehavior() });
+    target.focus({ preventScroll:true });
+  });
+  shelfJumpSelect.value = '';
 });
 
 document.getElementById('skipToNavLink').addEventListener('click', e=>{
