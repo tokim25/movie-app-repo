@@ -19,7 +19,7 @@ async function openShelf(page) {
 }
 
 test('in December, Christmas comes first on Shelf and opens in list order', async ({ page }) => {
-  await startOn(page, '2026-12-10T19:00:00');
+  await startOn(page, '2026-12-18T19:00:00');
   await openShelf(page);
   const first = page.locator('#listGrid .listTile').first();
   await expect(first).toContainText('Christmas movies');
@@ -42,7 +42,7 @@ test('in December, Christmas comes first on Shelf and opens in list order', asyn
 });
 
 test('Tonight shows the in-season list and opens it on Shelf', async ({ page }) => {
-  await startOn(page, '2026-12-10T19:00:00');
+  await startOn(page, '2026-12-18T19:00:00');
   await page.locator('#tabHome').click();
   const card = page.locator('#tonightSeasonCard');
   await expect(card).toBeVisible();
@@ -62,7 +62,7 @@ test('out of every season, Tonight shows no list card', async ({ page }) => {
 });
 
 test('the season card steps aside while a pick is showing', async ({ page }) => {
-  await startOn(page, '2026-12-10T19:00:00');
+  await startOn(page, '2026-12-18T19:00:00');
   await page.locator('#tabHome').click();
   await page.locator('#findTonightPickBtn').click();
   await expect(page.locator('#tonightPickTitle')).not.toBeEmpty();
@@ -70,7 +70,7 @@ test('the season card steps aside while a pick is showing', async ({ page }) => 
 });
 
 test('Not for us hides a list on this device until it is brought back', async ({ page }) => {
-  await startOn(page, '2026-12-10T19:00:00');
+  await startOn(page, '2026-12-18T19:00:00');
   await openShelf(page);
   await page.locator('#listGrid .listTile', { hasText: 'Christmas movies' }).click();
   await page.locator('#listHideBtn').click();
@@ -90,7 +90,7 @@ test('Not for us hides a list on this device until it is brought back', async ({
 });
 
 test('a list with fewer than 5 titles that fit is not shown', async ({ page }) => {
-  await startOn(page, '2026-12-10T19:00:00');
+  await startOn(page, '2026-12-18T19:00:00');
   await page.evaluate(() => {
     const realLists = curatedLists();
     const nums = MOVIES.slice(0, 4).map(m => m.num);
@@ -104,7 +104,7 @@ test('a list with fewer than 5 titles that fit is not shown', async ({ page }) =
 });
 
 test('opening a studio after a list clears the list', async ({ page }) => {
-  await startOn(page, '2026-12-10T19:00:00');
+  await startOn(page, '2026-12-18T19:00:00');
   await openShelf(page);
   await page.locator('#listGrid .listTile').first().click();
   await page.evaluate(() => browseStudio('Pixar'));
@@ -114,7 +114,7 @@ test('opening a studio after a list clears the list', async ({ page }) => {
 });
 
 test('Lists row and list page pass axe', async ({ page }) => {
-  await startOn(page, '2026-12-10T19:00:00');
+  await startOn(page, '2026-12-18T19:00:00');
   await openShelf(page);
   await expectNoA11yViolations(page, '#browseBySection');
   await page.locator('#listGrid .listTile').first().click();
@@ -125,7 +125,7 @@ test.describe('in dark mode', () => {
   test.use({ colorScheme: 'dark' });
 
   test('Lists row, list page and season card pass axe', async ({ page }) => {
-    await startOn(page, '2026-12-10T19:00:00');
+    await startOn(page, '2026-12-18T19:00:00');
     await page.locator('#tabHome').click();
     await expectNoA11yViolations(page, '#tonightSeasonCard');
     await openShelf(page);
@@ -136,7 +136,7 @@ test.describe('in dark mode', () => {
 });
 
 test('every list tile and the season card show a decorative icon', async ({ page }) => {
-  await startOn(page, '2026-12-10T19:00:00');
+  await startOn(page, '2026-12-18T19:00:00');
   await page.locator('#tabHome').click();
   await expect(page.locator('#tonightSeasonCard .listIcon[aria-hidden="true"] svg')).toHaveCount(1);
   await openShelf(page);
@@ -147,4 +147,19 @@ test('every list tile and the season card show a decorative icon', async ({ page
   await expect(page.locator('#listGrid .listTile .listIcon[aria-hidden="true"] svg')).toHaveCount(count);
   const box = await page.locator('#listGrid .listTile .listIcon').first().boundingBox();
   expect(Math.round(box.width)).toBe(40);
+});
+
+test('during Hanukkah, Tonight offers the Hanukkah list, and Christmas comes back after', async ({ page }) => {
+  await startOn(page, '2026-12-05T19:00:00');
+  await page.locator('#tabHome').click();
+  await expect(page.locator('#tonightSeasonCard')).toContainText('Hanukkah movies');
+  await page.locator('#tonightSeasonCard').click();
+  await expect(page.locator('#listHeaderName')).toHaveText('Hanukkah movies');
+  await expect(page.locator('#list li.row').first()).toContainText('Lights');
+});
+
+test('after Hanukkah ends, the card goes back to Christmas', async ({ page }) => {
+  await startOn(page, '2026-12-14T19:00:00');
+  await page.locator('#tabHome').click();
+  await expect(page.locator('#tonightSeasonCard')).toContainText('Christmas movies');
 });

@@ -236,6 +236,16 @@ for (const movie of movies) {
     if (list.season && !(mmdd.test(list.season.from) && mmdd.test(list.season.to))) {
       errors.push(`${label}: season needs from/to as MM-DD`);
     }
+    if (list.season && list.dates) errors.push(`${label}: use season or dates, not both`);
+    for (const range of list.dates || []) {
+      const iso = /^\d{4}-\d{2}-\d{2}$/;
+      if (!Array.isArray(range) || range.length !== 2 || !iso.test(range[0]) || !iso.test(range[1]) || range[0] > range[1]) {
+        errors.push(`${label}: dates need [from, to] as YYYY-MM-DD with from <= to`);
+      }
+    }
+    if (list.minFit !== undefined && !(Number.isInteger(list.minFit) && list.minFit >= 1 && list.minFit <= 5)) {
+      errors.push(`${label}: minFit must be a whole number from 1 to 5`);
+    }
   }
   // LIST_ICONS: one inline SVG per list, nothing that could run script.
   if (Object.keys(context.__LIST_ICONS__).length) {
