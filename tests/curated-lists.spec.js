@@ -2,9 +2,9 @@ import { test, expect } from '@playwright/test';
 import { setupSampleFamily } from './helpers.js';
 import { expectNoA11yViolations } from './a11y.js';
 
-// Curated lists (data-lists.js) live on their own Lists tab as storybook
-// covers: the in-season list as a marquee, the rest on themed shelves,
-// out-of-season lists under "Coming back later" and tucked-away lists in a
+// Curated lists (data-lists.js) live on their own Lists tab: the in-season
+// list as a passport card, the rest as stamps on themed shelves, out-of-season
+// lists as dashed stamps under "Coming back later" and tucked-away lists in a
 // box at the bottom. The first in-season list also gets a card on Tonight.
 // A list with fewer than 5 titles that fit the selected kids is not shown
 // (Hanukkah needs only 2).
@@ -40,14 +40,14 @@ test('Lists is its own tab, between Tonight and Shelf', async ({ page }) => {
   await expect(page.locator('#listsScreenHeading')).toHaveText('Lists');
 });
 
-test('in December, Christmas is the marquee and opens as a title page in list order', async ({ page }) => {
+test('in December, Christmas gets the passport card and opens in list order', async ({ page }) => {
   await startOn(page, '2026-12-18T19:00:00');
   await openLists(page);
-  const hero = page.locator('#listsBody .storyHero');
+  const hero = page.locator('#listsBody .passport');
   await expect(hero).toContainText('Now showing');
   await expect(hero).toContainText('Christmas movies');
-  await expect(hero).toContainText('fit Simon + Nora');
-  await expect(page.locator('#listsBody .storyBook', { hasText: 'Snow day' })).toBeVisible();
+  await expect(hero).toContainText('Fit Simon + Nora');
+  await expect(page.locator('#listsBody .stamp', { hasText: 'Snow day' })).toBeVisible();
 
   await hero.click();
   await expect(page.locator('#openListName')).toHaveText('Christmas movies');
@@ -61,7 +61,7 @@ test('in December, Christmas is the marquee and opens as a title page in list or
 
   await page.locator('#listsBackBtn').click();
   await expect(page.locator('#listsIndex')).toBeVisible();
-  await expect(page.locator('#listsBody .storyHero')).toBeFocused();
+  await expect(page.locator('#listsBody .passport')).toBeFocused();
 });
 
 test('year-round lists sit on themed shelves, and off-season lists say when they come back', async ({ page }) => {
@@ -69,14 +69,14 @@ test('year-round lists sit on themed shelves, and off-season lists say when they
   await openLists(page);
   await expect(page.locator('#lists-h-story-time')).toContainText('Story time');
   await expect(page.locator('#lists-h-cheer-them-on')).toContainText('Cheer them on');
-  const later = page.locator('#listsBody .storyLater', { hasText: 'Summer break' });
+  const later = page.locator('#listsBody .stamp.later', { hasText: 'Summer break' });
   await expect(later).toContainText('Back Jun 1');
 });
 
 test('Not seen hides watched films in an opened list', async ({ page }) => {
   await startOn(page, '2026-12-18T19:00:00');
   await openLists(page);
-  await page.locator('#listsBody .storyHero').click();
+  await page.locator('#listsBody .passport').click();
   const first = page.locator('#openListRows > li.row').first();
   await first.locator('.check').click();
   await page.locator('#openListUnseenBtn').click();
@@ -114,18 +114,18 @@ test('the season card steps aside while a pick is showing', async ({ page }) => 
 test('Tuck it away hides a list on this device until it is put back', async ({ page }) => {
   await startOn(page, '2026-12-18T19:00:00');
   await openLists(page);
-  await page.locator('#listsBody .storyBook', { hasText: 'Dog movies' }).click();
+  await page.locator('#listsBody .stamp', { hasText: 'Dog movies' }).click();
   await page.locator('#listHideBtn').click();
   await expect(page.locator('#listsIndex')).toBeVisible();
-  await expect(page.locator('#listsBody .storyBook', { hasText: 'Dog movies' })).toHaveCount(0);
+  await expect(page.locator('#listsBody .stamp', { hasText: 'Dog movies' })).toHaveCount(0);
 
   await page.reload();
   await openLists(page);
-  await expect(page.locator('#listsBody .storyBook', { hasText: 'Dog movies' })).toHaveCount(0);
+  await expect(page.locator('#listsBody .stamp', { hasText: 'Dog movies' })).toHaveCount(0);
   const tucked = page.locator('#listsBody .tuckedRow', { hasText: 'Dog movies' });
   await expect(tucked).toBeVisible();
   await tucked.getByRole('button', { name: 'Put back Dog movies' }).click();
-  await expect(page.locator('#listsBody .storyBook', { hasText: 'Dog movies' })).toHaveCount(1);
+  await expect(page.locator('#listsBody .stamp', { hasText: 'Dog movies' })).toHaveCount(1);
 });
 
 test('a list with fewer than 5 titles that fit rests until more do', async ({ page }) => {
@@ -138,7 +138,7 @@ test('a list with fewer than 5 titles that fit rests until more do', async ({ pa
   await openLists(page);
   await expect(page.locator('#listsBody .listCover', { hasText: 'Tiny list' })).toHaveCount(0);
   await expect(page.locator('#listsBody .tucked')).toContainText('resting');
-  await expect(page.locator('#listsBody .storyBook', { hasText: 'Good teammates' })).toHaveCount(1);
+  await expect(page.locator('#listsBody .stamp', { hasText: 'Good teammates' })).toHaveCount(1);
 });
 
 test('Shelf points to the Lists tab', async ({ page }) => {
@@ -149,7 +149,7 @@ test('Shelf points to the Lists tab', async ({ page }) => {
   await expect(page.locator('#listsScreenHeading')).toBeFocused();
 });
 
-test('every cover and the season card show a decorative icon', async ({ page }) => {
+test('the passport card, every stamp and the season card show a decorative icon', async ({ page }) => {
   await startOn(page, '2026-12-18T19:00:00');
   await page.locator('#tabHome').click();
   await expect(page.locator('#tonightSeasonCard .listIcon[aria-hidden="true"] svg')).toHaveCount(1);
@@ -157,7 +157,8 @@ test('every cover and the season card show a decorative icon', async ({ page }) 
   const covers = page.locator('#listsBody .listCover');
   const count = await covers.count();
   expect(count).toBeGreaterThan(10);
-  await expect(page.locator('#listsBody .listCover .medal[aria-hidden="true"] svg')).toHaveCount(count);
+  await expect(page.locator('#listsBody .listCover .medal svg')).toHaveCount(count);
+  await expect(page.locator('#listsBody .stamp .stampFace[aria-hidden="true"] .medal svg')).toHaveCount(count - 1);
 });
 
 test('during Hanukkah, Tonight offers the Hanukkah list, and Christmas comes back after', async ({ page }) => {
@@ -200,7 +201,7 @@ for (const scheme of ['light', 'dark']) {
       await startOn(page, '2026-12-05T19:00:00');
       await openLists(page);
       await expectNoA11yViolations(page, '#listsScreen');
-      await page.locator('#listsBody .storyBook').first().click();
+      await page.locator('#listsBody .stamp').first().click();
       await expectNoA11yViolations(page, '#listsScreen');
       await page.locator('#tabBrowse').click();
       await expectNoA11yViolations(page, '#browseScreen');

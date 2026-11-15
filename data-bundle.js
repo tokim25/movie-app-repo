@@ -2532,8 +2532,10 @@ const MOVIE_PREREQUISITES = Object.freeze({
 // which families they suit. Lists without a `season` (or `dates`) are never pushed on
 // Tonight. Rules for adding entries: real catalog nums only, in the order a
 // parent would want to see them; a list needs at least 5 titles that fit the
-// selected kids before the app shows it at all. `copy` is the one warm line
-// on its cover, and `hue` (0-359) tints its storybook cover on the Lists tab.
+// selected kids before the app shows it at all. `hue` (0-359) colours its
+// stamp and passport card on the Lists tab, and an optional `short` name
+// (up to 22 characters) goes inside the stamp when the full name is long.
+// `copy` is a one-line description kept for future use.
 const MOVIE_LISTS = Object.freeze([
   {
     // Hanukkah moves every year, so it uses real date ranges (from three
@@ -2543,6 +2545,7 @@ const MOVIE_LISTS = Object.freeze([
     // Tonight card, and needs only 2 fitting titles (tokim25, 2026-11-15:
     // show it even when only two fit) because so few Hanukkah films exist.
     id: 'hanukkah',
+    short: 'Hanukkah',
     name: 'Hanukkah movies',
     copy: 'Candles, latkes and a Rugrats special.',
     hue: 218,
@@ -2553,6 +2556,7 @@ const MOVIE_LISTS = Object.freeze([
   },
   {
     id: 'christmas',
+    short: 'Christmas',
     name: 'Christmas movies',
     copy: 'Cocoa, cardigans and a reindeer or two.',
     hue: 145,
@@ -2571,6 +2575,7 @@ const MOVIE_LISTS = Object.freeze([
   },
   {
     id: 'spooky-not-too-scary',
+    short: 'Spooky',
     name: 'Spooky but not too scary',
     copy: 'Friendly ghosts and goofy monsters.',
     hue: 26,
@@ -2580,6 +2585,7 @@ const MOVIE_LISTS = Object.freeze([
   },
   {
     id: 'baseball',
+    short: 'Baseball',
     name: 'Baseball movies',
     copy: 'Sandlots, big leagues, one good dog.',
     hue: 6,
@@ -2597,6 +2603,7 @@ const MOVIE_LISTS = Object.freeze([
   },
   {
     id: 'underdogs',
+    short: 'Underdogs',
     name: 'Underdogs who never quit',
     copy: 'Long shots who keep on going.',
     hue: 92,
@@ -2605,6 +2612,7 @@ const MOVIE_LISTS = Object.freeze([
   },
   {
     id: 'eighties',
+    short: 'The ’80s',
     name: 'What Mom & Dad watched: the ’80s',
     copy: 'The ones you wore out on tape.',
     hue: 332,
@@ -2613,6 +2621,7 @@ const MOVIE_LISTS = Object.freeze([
   },
   {
     id: 'nineties',
+    short: 'The ’90s',
     name: 'What Mom & Dad watched: the ’90s',
     copy: 'Big musicals and the first Toy Story.',
     hue: 266,
@@ -2639,6 +2648,7 @@ const MOVIE_LISTS = Object.freeze([
   },
   {
     id: 'studio-ghibli',
+    short: 'Studio Ghibli',
     name: 'Studio Ghibli, where to start',
     copy: 'Totoro first, then wander on.',
     hue: 176,
@@ -2663,6 +2673,7 @@ const MOVIE_LISTS = Object.freeze([
   },
   {
     id: 'award-winners',
+    short: 'Oscar winners',
     name: 'Oscar winners: Best Animated Feature',
     copy: 'Every Best Animated winner we have.',
     hue: 40,
@@ -2671,6 +2682,7 @@ const MOVIE_LISTS = Object.freeze([
   },
   {
     id: 'funny-for-grown-ups-too',
+    short: 'Funny for grown-ups',
     name: 'Funny for grown-ups too',
     copy: 'Jokes for them, and jokes for you.',
     hue: 352,
@@ -2687,6 +2699,7 @@ const MOVIE_LISTS = Object.freeze([
   },
   {
     id: 'real-life-adventures',
+    short: 'Real-life adventures',
     name: 'Real-life adventures',
     copy: 'Penguins, polar bears, true stories.',
     hue: 160,

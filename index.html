@@ -238,13 +238,13 @@ function reportError(err){
     --accent-rgb:174,78,44;
     --accent-text:#9A3F1F;
     --icon-tint:#ECC6B3;
-    /* Storybook covers: each list's hue is mixed into an aged cloth / paper
-       base so covers read like old clothbound books, not flat UI colours. */
+    /* List medals mix each list's hue into a warm base. */
     --cv-base:#E8DCC3; --cv-base2:#DDCDB0; --cv-inkbase:#3A2C1E;
     --cv-mix:30%; --cv-mix2:38%; --cv-inkmix:45%; --cv-s:34%; --cv-l:58%; --cv-is:40%; --cv-il:30%; --cv-ts:30%; --cv-tl:70%;
-    --cover-edge:rgba(70,45,20,0.16); --linen:rgba(60,40,20,0.05); --cover-soft:#463F35;
-    --plank:#E3D6C1; --plank-edge:#CDBDA3; --fp-border:#FFFFFF; --rev-dot:#D49A1F; --medal-bg:rgba(250,244,230,0.7);
-    --story-shadow:0 1px 2px rgba(60,40,20,0.10), 0 6px 18px rgba(60,40,20,0.07);
+    --rev-dot:#D49A1F; --medal-bg:rgba(250,244,230,0.7);
+    /* Passport cards and stamps on the Lists tab (hue comes from each list). */
+    --pp-bg:#FFFFFF; --pp-line:rgba(31,30,27,0.10); --pp-shadow:rgba(31,30,27,0.08);
+    --pp-ds:55%; --pp-dl:92%; --pp-il:30%; --pp-tl:78%; --st-s:55%; --st-l:34%;
     --on-accent:#FFFFFF;
     --select-rgb:174,78,44;
     --error-bg:#FBE7EC;
@@ -305,9 +305,10 @@ function reportError(err){
       --accent-rgb:224,137,107;
       --accent-text:#EB9878;
       --icon-tint:#5A4238;
-      --cv-base:#2C2823; --cv-base2:#34302A; --cv-inkbase:#F2E8D8; --cv-mix:30%; --cv-mix2:34%; --cv-inkmix:55%; --cv-s:30%; --cv-l:46%; --cv-is:45%; --cv-il:80%; --cv-ts:22%; --cv-tl:40%; --cover-edge:rgba(0,0,0,0.35); --linen:rgba(255,245,230,0.035); --cover-soft:var(--ink-soft);
-      --plank:#3F3A33; --plank-edge:#2E2A25; --fp-border:#3A3833; --rev-dot:#E0A93A; --medal-bg:rgba(0,0,0,0.26);
-      --story-shadow:0 1px 2px rgba(0,0,0,0.35);
+      --cv-base:#2C2823; --cv-base2:#34302A; --cv-inkbase:#F2E8D8; --cv-mix:30%; --cv-mix2:34%; --cv-inkmix:55%; --cv-s:30%; --cv-l:46%; --cv-is:45%; --cv-il:80%; --cv-ts:22%; --cv-tl:40%;
+      --rev-dot:#E0A93A; --medal-bg:rgba(0,0,0,0.26);
+      --pp-bg:#302F2C; --pp-line:rgba(255,255,255,0.10); --pp-shadow:rgba(0,0,0,0.40);
+      --pp-ds:25%; --pp-dl:26%; --pp-il:82%; --pp-tl:40%; --st-s:55%; --st-l:72%;
       --on-accent:#1F1E1D;
       --select-rgb:224,137,107;
       --error-bg:#3D2229;
@@ -353,9 +354,10 @@ function reportError(err){
     --accent-rgb:224,137,107;
     --accent-text:#EB9878;
     --icon-tint:#5A4238;
-    --cv-base:#2C2823; --cv-base2:#34302A; --cv-inkbase:#F2E8D8; --cv-mix:30%; --cv-mix2:34%; --cv-inkmix:55%; --cv-s:30%; --cv-l:46%; --cv-is:45%; --cv-il:80%; --cv-ts:22%; --cv-tl:40%; --cover-edge:rgba(0,0,0,0.35); --linen:rgba(255,245,230,0.035); --cover-soft:var(--ink-soft);
-    --plank:#3F3A33; --plank-edge:#2E2A25; --fp-border:#3A3833; --rev-dot:#E0A93A; --medal-bg:rgba(0,0,0,0.26);
-    --story-shadow:0 1px 2px rgba(0,0,0,0.35);
+    --cv-base:#2C2823; --cv-base2:#34302A; --cv-inkbase:#F2E8D8; --cv-mix:30%; --cv-mix2:34%; --cv-inkmix:55%; --cv-s:30%; --cv-l:46%; --cv-is:45%; --cv-il:80%; --cv-ts:22%; --cv-tl:40%;
+    --rev-dot:#E0A93A; --medal-bg:rgba(0,0,0,0.26);
+    --pp-bg:#302F2C; --pp-line:rgba(255,255,255,0.10); --pp-shadow:rgba(0,0,0,0.40);
+    --pp-ds:25%; --pp-dl:26%; --pp-il:82%; --pp-tl:40%; --st-s:55%; --st-l:72%;
     --on-accent:#1F1E1D;
     --select-rgb:224,137,107;
     --error-bg:#3D2229;
@@ -3184,38 +3186,21 @@ function reportError(err){
     .newRow > .info{ grid-column:3; grid-row:1 / span 3; }
   }
 
-  /* ---------- Storybook: Lists tab and the shared movie row ----------
-     Each list cover takes its colour from --cv-hue (set per cover from the
-     list's `hue`); the lightness/saturation pairs below switch with the
-     theme so every cover passes contrast in light and dark. */
-  .listCover, .storyCover, .tuckedRow, .medal-xs{
+  /* ---------- Lists tab: passport cards and stamps ----------
+     Each card or stamp takes its colour from --cv-hue (set per element from
+     the list's `hue`); the lightness pairs switch with the theme so text
+     passes contrast in light and dark. */
+  .listCover, .tuckedRow, .medal-xs{
     --cv-bg:color-mix(in oklab, hsl(var(--cv-hue, 20) var(--cv-s) var(--cv-l)) var(--cv-mix), var(--cv-base));
     --cv-bg2:color-mix(in oklab, hsl(var(--cv-hue, 20) var(--cv-s) var(--cv-l)) var(--cv-mix2), var(--cv-base2));
     --cv-ink:color-mix(in oklab, hsl(var(--cv-hue, 20) var(--cv-is) var(--cv-il)) var(--cv-inkmix), var(--cv-inkbase));
     --icon-tint:color-mix(in oklab, hsl(var(--cv-hue, 20) var(--cv-ts) var(--cv-tl)) 70%, var(--cv-base2));
   }
-  /* The book feel: a fine linen weave over the list's own cloth colour. */
-  .storyBook, .storyHero, .storyCover, .storyLater, .tuckedRow{
-    background:
-      repeating-linear-gradient(0deg, var(--linen) 0 1px, transparent 1px 2px),
-      repeating-linear-gradient(90deg, var(--linen) 0 1px, transparent 1px 2px),
-      var(--cv-bg);
-    box-shadow:inset 0 0 0 1px var(--cover-edge), var(--story-shadow);
-  }
-  .bookArt, .bulbs{
-    background-image:
-      repeating-linear-gradient(0deg, var(--linen) 0 1px, transparent 1px 2px),
-      repeating-linear-gradient(90deg, var(--linen) 0 1px, transparent 1px 2px);
-    background-color:var(--cv-bg2);
-  }
-  /* Secondary text on the aged covers is a shade darker than elsewhere so it
-     stays above 4.5:1 on every cover colour. */
-  .bookCopy, .heroCopy, .laterWhen, .coverCopy, .coverMeta, .tuckedName{ color:var(--cover-soft); }
   .storyHead{ padding:6px 0 10px; }
   .storyHead h1{ margin:0; }
   .storySub{ color:var(--ink-soft); margin:6px 0 0; font-size:15px; }
-  .storySection{ margin-top:14px; }
-  .storySectionHead{ display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; margin:10px 0 12px; font-size:inherit; }
+  .storySection{ margin-top:22px; }
+  .storySectionHead{ display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; margin:10px 0 14px; font-size:inherit; }
   .shName{ font-family:"Newsreader", Georgia, serif; font-weight:700; font-size:20px; line-height:1.2; }
   .shAside{ font-family:"Newsreader", Georgia, serif; font-style:italic; font-weight:500; font-size:16px; color:var(--ink-soft); }
   .medal{
@@ -3225,90 +3210,63 @@ function reportError(err){
     box-shadow:inset 0 0 0 1.5px color-mix(in oklab, var(--cv-ink, var(--accent-text)) 22%, transparent), 0 1px 0 rgba(255,255,255,0.25);
   }
   .medal svg{ width:30px; height:30px; display:block; }
-  .medal-l{ width:56px; height:56px; }
-  .medal-l svg{ width:38px; height:38px; }
   .medal-s{ width:40px; height:40px; }
   .medal-s svg{ width:26px; height:26px; }
   .medal-xs{ width:30px; height:30px; background:var(--cv-bg); }
   .medal-xs svg{ width:20px; height:20px; }
 
-  /* poster fan */
-  .fan{ position:absolute; right:14px; bottom:-14px; height:calc(var(--pw) * 1.5); width:calc(var(--pw) * 2.15); }
-  .fp{
-    position:absolute; bottom:0; width:var(--pw); height:calc(var(--pw) * 1.5);
-    object-fit:cover; border-radius:4px; background:var(--cv-bg2);
-    border:2px solid var(--fp-border); box-shadow:0 1px 0 rgba(0,0,0,0.12), 0 4px 10px rgba(40,25,10,0.22);
+  /* passport card: the in-season list, and the top of an opened list */
+  .passport{
+    display:grid; grid-template-columns:minmax(0, 1.15fr) minmax(0, 1fr); align-items:center; column-gap:8px;
+    width:100%; padding:24px 20px 22px 12px; margin:2px 0 8px; border:0; border-radius:28px;
+    background:var(--pp-bg); color:var(--ink); font:inherit; text-align:left;
+    box-shadow:0 10px 30px var(--pp-shadow), 0 2px 6px var(--pp-shadow);
   }
-  .fan .fp:nth-child(1){ left:0; transform:rotate(-9deg); transform-origin:bottom right; }
-  .fan .fp:nth-child(2){ left:calc(var(--pw) * 0.58); transform:rotate(-1deg); z-index:2; }
-  .fan .fp:nth-child(3){ left:calc(var(--pw) * 1.15); transform:rotate(8deg); transform-origin:bottom left; z-index:1; }
-  .fan4{ width:calc(var(--pw) * 2.6); }
-  .fan4 .fp:nth-child(2){ left:calc(var(--pw) * 0.5); }
-  .fan4 .fp:nth-child(3){ left:calc(var(--pw) * 1.0); }
-  .fan4 .fp:nth-child(4){ left:calc(var(--pw) * 1.6); transform:rotate(11deg); transform-origin:bottom left; }
-  .plate{
-    display:flex; flex-direction:column; justify-content:center; align-items:center; gap:2px;
-    text-align:center; padding:4px; overflow:hidden;
-    background:repeating-linear-gradient(135deg, var(--cv-bg2, var(--bg-sub)) 0 6px, var(--cv-bg, var(--line)) 6px 12px);
-    color:var(--cv-ink, var(--ink-soft));
-  }
-  .plateTitle{ font-family:"Newsreader", Georgia, serif; font-style:italic; font-weight:600; font-size:11px; line-height:1.1;
-    display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; overflow-wrap:anywhere; }
-  .plateYear{ font-weight:700; font-size:9px; letter-spacing:0.06em; }
-  .fan .plate .plateTitle{ display:none; }
+  button.passport{ cursor:pointer; }
+  .ppId{ display:flex; flex-direction:column; align-items:center; text-align:center; min-width:0; }
+  .ppDisc{ position:relative; display:grid; place-items:center; width:108px; height:108px; margin-bottom:12px; border-radius:50%;
+    background:hsl(var(--cv-hue, 20) var(--pp-ds) var(--pp-dl)); color:hsl(var(--cv-hue, 20) 45% var(--pp-il)); }
+  .ppDisc .medal{ width:auto; height:auto; background:none; box-shadow:none; color:inherit; --icon-tint:hsl(var(--cv-hue, 20) 50% var(--pp-tl)); }
+  .ppDisc .medal svg{ width:58px; height:58px; }
+  .ppBadge{ position:absolute; right:-2px; bottom:2px; display:grid; place-items:center; width:34px; height:34px; border-radius:50%;
+    background:var(--accent); color:var(--on-accent); box-shadow:0 0 0 3px var(--pp-bg); }
+  .ppBadge svg{ width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; }
+  .ppName{ margin:0; font:800 23px/1.12 Inter, system-ui, sans-serif; letter-spacing:-0.02em; overflow-wrap:anywhere; }
+  .ppName:focus{ outline:none; }
+  .ppName:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+  .ppSub{ margin-top:4px; font-size:14px; line-height:1.3; color:var(--ink-soft); }
+  .ppStats{ display:flex; flex-direction:column; padding-left:10px; min-width:0; }
+  .ppStat{ padding:10px 0; border-bottom:1px solid var(--pp-line); }
+  .ppStat:first-child{ padding-top:0; }
+  .ppStat:last-child{ padding-bottom:0; border-bottom:0; }
+  .ppNum{ display:block; font:800 24px/1.05 Inter, system-ui, sans-serif; letter-spacing:-0.02em; }
+  .ppLbl{ display:block; margin-top:2px; font-size:12.5px; font-weight:600; line-height:1.25; color:var(--ink); }
 
-  /* book covers */
-  .storyGrid{ display:grid; grid-template-columns:1fr 1fr; gap:16px 12px; }
-  .storyBook{
-    --pw:46px; position:relative; display:flex; flex-direction:column; text-align:left;
-    color:var(--ink); border:0; padding:0; font:inherit; cursor:pointer;
-    border-radius:3px 12px 10px 3px / 3px 10px 12px 3px; overflow:hidden; min-height:44px;
-  }
-  .storyBook::before{ content:""; position:absolute; left:0; top:0; bottom:0; width:9px; z-index:3; opacity:0.55;
-    background:linear-gradient(90deg, rgba(0,0,0,0.28), rgba(255,255,255,0.18) 45%, rgba(0,0,0,0.12) 70%, rgba(0,0,0,0.3)), var(--cv-ink); }
-  .storyBook::after{ content:""; position:absolute; left:9px; top:0; bottom:0; width:2px; background:rgba(0,0,0,0.12); z-index:3; }
-  .bookArt{ position:relative; display:block; height:118px; overflow:hidden; border-bottom:1px solid var(--cover-edge); }
-  .bookArt .medal{ position:absolute; left:16px; top:12px; }
-  .bookTxt{ display:flex; flex-direction:column; gap:3px; padding:10px 12px 12px 18px; }
-  .bookName{ font-family:"Newsreader", Georgia, serif; font-weight:700; font-size:17px; line-height:1.15; }
-  .bookCopy{ font-size:13px; line-height:1.3; color:var(--ink-soft); }
-  .bookFit{ font-size:12.5px; font-weight:600; color:var(--cv-ink); margin-top:3px; }
-  .plank{ height:9px; margin:12px -4px 18px; border-radius:3px;
-    background:repeating-linear-gradient(90deg, rgba(90,60,30,0.10) 0 2px, transparent 2px 9px, rgba(90,60,30,0.06) 9px 10px, transparent 10px 23px), var(--plank);
-    box-shadow:0 3px 0 var(--plank-edge), 0 6px 8px rgba(60,40,20,0.12); }
-
-  /* marquee hero for the in-season list */
-  .bulbs{ display:block; height:12px; }
-  .bulbs::before{ content:""; display:block; height:100%; background:radial-gradient(circle, #E9B65C 2.2px, rgba(233,182,92,0.35) 3.4px, transparent 4px) 4px 50% / 15px 12px repeat-x; }
-  .storyHero{
-    --pw:64px; display:block; width:100%; position:relative; text-align:left;
-    color:var(--ink); border:0; padding:0; font:inherit; cursor:pointer;
-    border-radius:6px 16px 14px 6px / 6px 14px 16px 6px; overflow:hidden; margin-bottom:16px;
-  }
-  .heroIn{ position:relative; display:block; padding:16px 18px 18px; }
-  .heroTxt{ position:relative; z-index:4; display:flex; flex-direction:column; gap:4px; }
-  .heroTxt .medal{ margin-bottom:44px; }
-  .eyebrow{ font-weight:700; font-size:11.5px; line-height:1.2; letter-spacing:0.09em; text-transform:uppercase; color:var(--cv-ink); }
-  .heroName{ font-family:"Newsreader", Georgia, serif; font-weight:700; font-size:30px; line-height:1.08; }
-  .heroCopy{ font-family:"Newsreader", Georgia, serif; font-style:italic; font-weight:500; font-size:16px; line-height:1.3; color:var(--ink-soft); }
-  .heroCta{ display:inline-flex; align-items:center; align-self:flex-start; min-height:44px; margin-top:8px; padding:0 14px;
-    border-radius:999px; background:var(--ink); color:var(--bg); font-weight:600; font-size:14px; }
-  .storyHero .fan{ right:14px; top:18px; bottom:auto; }
-
-  /* coming back later */
-  .storyLaters{ display:flex; flex-direction:column; gap:8px; }
-  .storyLater{ display:flex; align-items:center; gap:12px; min-height:60px; padding:8px 10px; border-radius:4px 12px 12px 4px;
-    color:var(--ink); border:0; font:inherit; text-align:left; cursor:pointer; width:100%; }
-  .laterTxt{ display:flex; flex-direction:column; flex:1; min-width:0; }
-  .laterName{ font-family:"Newsreader", Georgia, serif; font-weight:700; font-size:16px; line-height:1.2; }
-  .laterWhen{ font-size:13px; color:var(--ink-soft); }
-  .chev{ font-size:26px; line-height:1; color:var(--ink-soft); padding:0 4px; }
+  /* stamps: every other list, in a two-column grid */
+  .stampGrid{ display:grid; grid-template-columns:1fr 1fr; gap:18px 14px; }
+  .stamp{ display:flex; flex-direction:column; min-width:0; padding:0; border:0; background:none; font:inherit; color:var(--ink); text-align:center; cursor:pointer; }
+  .stampFace{ position:relative; display:block; height:118px; color:hsl(var(--cv-hue, 20) var(--st-s) var(--st-l)); }
+  .stampFrame{ position:absolute; inset:0; width:100%; height:100%; overflow:visible; fill:none; stroke:currentColor; stroke-width:3; }
+  .stamp.later .stampFrame{ stroke-dasharray:7 5; }
+  .stampName{ position:absolute; top:13px; left:14px; right:14px; font:800 17px/1.08 Inter, system-ui, sans-serif; letter-spacing:-0.02em; text-align:left; overflow-wrap:anywhere; }
+  .stampCode{ position:absolute; left:14px; bottom:13px; font-size:11.5px; font-weight:800; line-height:1; letter-spacing:0.04em; text-transform:uppercase; }
+  .stampArt{ position:absolute; right:10px; bottom:9px; }
+  .stampArt .medal{ width:auto; height:auto; background:none; box-shadow:none; color:inherit; --icon-tint:transparent; }
+  .stampArt .medal svg{ width:40px; height:40px; }
+  .stamp.tag .stampName{ left:38px; text-align:right; }
+  .stamp.tag .stampCode{ left:auto; right:14px; top:13px; bottom:auto; }
+  .stamp.tag .stampName{ top:auto; bottom:13px; }
+  .stamp.tag .stampArt{ right:auto; left:34px; top:12px; bottom:auto; }
+  .stamp.ticket .stampName, .stamp.ticket .stampCode{ left:22px; }
+  .stamp.ticket .stampArt{ right:22px; }
+  .stampCap{ display:block; margin-top:8px; font-size:14px; line-height:1.3; color:var(--ink); }
+  .stampWhen{ display:block; font-size:13px; line-height:1.3; color:var(--ink-soft); }
 
   /* tucked away */
   .tucked{ margin-top:26px; padding:16px; border:1.5px dashed var(--line); border-radius:14px; }
   .tuckedHead{ font-family:"Newsreader", Georgia, serif; font-weight:700; font-size:18px; margin:0; }
   .tuckedNote{ font-size:13.5px; color:var(--ink-soft); margin:6px 0 10px; }
-  .tuckedRow{ display:flex; align-items:center; gap:10px; padding:6px; border-radius:4px 12px 12px 4px; margin-top:8px; }
+  .tuckedRow{ display:flex; align-items:center; gap:10px; padding:6px; border-radius:12px; margin-top:8px; background:var(--bg-sub); }
   .tuckedName{ flex:1; min-width:0; font-weight:600; font-size:14.5px; }
   .storyEmpty{ color:var(--ink-soft); margin:16px 0; }
 
@@ -3321,23 +3279,9 @@ function reportError(err){
   .storyBack{ padding:0 16px 0 10px; }
   .storyMore{ display:flex; width:100%; margin-top:8px; }
 
-  /* opened list: a title page */
-  .storyCover{ --pw:62px; border-radius:6px 18px 16px 6px / 6px 16px 18px 6px; overflow:hidden; }
-  .coverIn{ padding:16px 18px 18px; display:flex; flex-direction:column; gap:6px; }
-  .coverHead{ display:flex; align-items:center; gap:12px; }
-  .coverName{ font-family:"Newsreader", Georgia, serif; font-weight:700; font-size:32px; line-height:1.05; margin:6px 0 0; }
-  .coverName:focus{ outline:none; }
-  .coverName:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
-  .coverCopy{ color:var(--ink-soft); font-size:15px; margin:0; }
-  .coverMeta{ font-size:13px; color:var(--ink-soft); font-weight:500; margin:0; }
-  .collage{ position:relative; display:block; height:122px; margin:14px 0 8px; }
-  .cp{ position:absolute; top:8px; width:68px; height:102px; object-fit:cover; border-radius:5px; background:var(--cv-bg2);
-    border:2.5px solid var(--fp-border); box-shadow:0 1px 0 rgba(0,0,0,0.12), 0 6px 14px rgba(40,25,10,0.25); }
-  .cp:nth-child(1){ left:0; transform:rotate(-7deg); }
-  .cp:nth-child(2){ left:19%; transform:rotate(3deg); top:2px; z-index:2; }
-  .cp:nth-child(3){ left:39%; transform:rotate(-2deg); z-index:3; }
-  .cp:nth-child(4){ left:59%; transform:rotate(5deg); top:2px; z-index:2; }
-  .cp:nth-child(5){ right:0; transform:rotate(-4deg); z-index:1; }
+  /* opened list */
+  .coverCopy{ color:var(--ink-soft); font-size:15px; margin:14px 0 0; }
+  .coverMeta{ font-size:13px; color:var(--ink-soft); font-weight:500; margin:6px 0 0; }
   .storySeg{ display:flex; gap:6px; margin:16px 0 6px; flex-wrap:wrap; }
   .segBtn{ min-height:44px; padding:0 16px; border-radius:999px; border:1.5px solid var(--line); background:transparent;
     font:inherit; font-weight:600; font-size:14px; color:var(--ink-soft); cursor:pointer; }
@@ -3398,24 +3342,22 @@ function reportError(err){
     .qbBtn span{ white-space:nowrap; }
   }
   @media (max-width:360px){
-    .storyGrid{ gap:14px 10px; }
-    .storyBook{ --pw:38px; }
-    .bookArt{ height:104px; }
-    .bookArt .medal{ left:14px; top:10px; width:38px; height:38px; }
-    .bookTxt{ padding:9px 10px 11px 16px; }
-    .bookName{ font-size:16px; }
-    .storyHero{ --pw:46px; }
-    .heroIn{ padding:14px 14px 16px; }
-    .heroTxt .medal{ margin-bottom:30px; }
-    .heroName{ font-size:26px; }
-    .heroCta{ font-size:13px; padding:0 12px; }
+    .stampGrid{ gap:16px 10px; }
+    .stampFace{ height:108px; }
+    .stampName{ font-size:15.5px; left:12px; right:12px; }
+    .stamp.tag .stampName{ left:32px; }
+    .stampArt .medal svg{ width:34px; height:34px; }
+    .passport{ padding:20px 14px 18px 8px; }
+    .ppDisc{ width:88px; height:88px; }
+    .ppDisc .medal svg{ width:48px; height:48px; }
+    .ppName{ font-size:20px; }
+    .ppNum{ font-size:19px; white-space:nowrap; }
     .rows .poster.rowPoster{ width:48px; }
     .qbBtn span{ font-size:10.5px; letter-spacing:-0.02em; }
   }
   @media (prefers-reduced-motion:no-preference){
-    .storyBook .fp, .storyHero .fp{ transition:transform 0.25s ease; }
-    .storyBook:hover .fan .fp:nth-child(1), .storyBook:focus-visible .fan .fp:nth-child(1){ transform:rotate(-13deg); }
-    .storyBook:hover .fan .fp:nth-child(3), .storyBook:focus-visible .fan .fp:nth-child(3){ transform:rotate(12deg); }
+    .stampFace, .passport{ transition:transform 0.2s ease; }
+    .stamp:hover .stampFace, .stamp:focus-visible .stampFace{ transform:rotate(-2deg) scale(1.02); }
   }
 </style>
 </head>
@@ -5482,48 +5424,6 @@ function createListIcon(id){
   icon.innerHTML = svg;
   return icon;
 }
-function createCoverPoster(m, className){
-  const posters = typeof MOVIE_POSTERS !== 'undefined' ? MOVIE_POSTERS : {};
-  const poster = m && posters[m.num];
-  if(poster && poster.u){
-    const img = document.createElement('img');
-    img.className = className;
-    img.alt = '';
-    img.loading = 'lazy';
-    img.decoding = 'async';
-    img.src = poster.u;
-    img.onerror = () => img.replaceWith(createPosterPlate(m, className));
-    return img;
-  }
-  return createPosterPlate(m, className);
-}
-// A little storybook plate in the list's colour, not "MOVIE".
-function createPosterPlate(m, className){
-  const plate = document.createElement('span');
-  plate.className = `${className} plate`;
-  const title = document.createElement('span');
-  title.className = 'plateTitle';
-  title.textContent = m ? m.t : '';
-  const year = document.createElement('span');
-  year.className = 'plateYear';
-  year.textContent = m ? m.y : '';
-  plate.appendChild(title);
-  plate.appendChild(year);
-  return plate;
-}
-// Covers prefer films that have a poster; plates only fill the gaps.
-function coverFilms(list, n){
-  const posters = typeof MOVIE_POSTERS !== 'undefined' ? MOVIE_POSTERS : {};
-  const films = listIndices(list).map(idx => MOVIES[idx]);
-  return films.filter(m => posters[m.num]).concat(films.filter(m => !posters[m.num])).slice(0, n);
-}
-function createPosterFan(list, n){
-  const fan = document.createElement('span');
-  fan.className = `fan fan${n}`;
-  fan.setAttribute('aria-hidden', 'true');
-  coverFilms(list, n).forEach(m => fan.appendChild(createCoverPoster(m, 'fp')));
-  return fan;
-}
 function spanText(className, text){
   const span = document.createElement('span');
   span.className = className;
@@ -5531,66 +5431,98 @@ function spanText(className, text){
   return span;
 }
 
+function listYearSpan(list){
+  const years = listIndices(list).map(idx => Number(MOVIES[idx].y)).filter(Boolean);
+  if(!years.length) return '';
+  const lo = Math.min(...years), hi = Math.max(...years);
+  return lo === hi ? String(lo) : `${lo}–${hi}`;
+}
+// A passport card: big icon and name on the left, three numbers on the right.
+// Used for the in-season list (a button) and the top of an opened list.
+function createPassport(list, opts){
+  const card = document.createElement(opts.tag || 'button');
+  card.className = 'passport listCover';
+  card.dataset.list = list.id;
+  if(card.tagName === 'BUTTON') card.type = 'button';
+  applyListHue(card, list);
+  const id = document.createElement(card.tagName === 'BUTTON' ? 'span' : 'div');
+  id.className = 'ppId';
+  const disc = spanText('ppDisc', '');
+  disc.appendChild(createListMedal(list.id));
+  if(opts.badge){
+    const badge = spanText('ppBadge', '');
+    badge.setAttribute('aria-hidden', 'true');
+    badge.innerHTML = '<svg viewBox="0 0 24 24"><path d="M4 9h16v11H4zM4 9l3-5M10 9l3-5M16 9l3-5"/></svg>';
+    disc.appendChild(badge);
+  }
+  id.appendChild(disc);
+  const name = opts.nameEl || spanText('ppName', list.name);
+  id.appendChild(name);
+  if(opts.sub) id.appendChild(spanText('ppSub', opts.sub));
+  const stats = spanText('ppStats', '');
+  const stat = (num, label) => {
+    const row = spanText('ppStat', '');
+    row.appendChild(spanText('ppNum', num));
+    row.appendChild(spanText('ppLbl', label));
+    stats.appendChild(row);
+  };
+  if(selectedKids().length) stat(String(listFitCount(list)), `Fit ${kidNames()}`);
+  stat(String(listIndices(list).length), 'Films');
+  const span = listYearSpan(list);
+  if(span) stat(span, 'Years');
+  card.appendChild(id);
+  card.appendChild(stats);
+  return card;
+}
 function createListHero(list, today){
-  const hero = document.createElement('button');
-  hero.type = 'button';
-  hero.className = 'storyHero listCover';
-  hero.dataset.list = list.id;
-  applyListHue(hero, list);
-  const bulbs = spanText('bulbs', '');
-  bulbs.setAttribute('aria-hidden', 'true');
-  const inner = spanText('heroIn', '');
-  const text = spanText('heroTxt', '');
-  text.appendChild(createListMedal(list.id, 'l'));
-  text.appendChild(spanText('eyebrow', 'Now showing'));
-  text.appendChild(spanText('heroName', list.name));
-  text.appendChild(spanText('heroCopy', list.copy || ''));
-  const kids = selectedKids();
   const until = listUntilText(list, today);
-  text.appendChild(spanText('heroCta', `${listFitCount(list)} ${kids.length ? `fit ${kidNames()}` : 'films'}${until ? ` · ${until}` : ''} →`));
-  inner.appendChild(text);
-  inner.appendChild(createPosterFan(list, 4));
-  hero.appendChild(bulbs);
-  hero.appendChild(inner);
+  const hero = createPassport(list, { badge: true, sub: `Now showing${until ? ` · ${until}` : ''}` });
   hero.onclick = () => openList(list.id);
   return hero;
 }
-function createListBook(list, extra){
-  const book = document.createElement('button');
-  book.type = 'button';
-  book.className = 'storyBook listCover';
-  book.dataset.list = list.id;
-  applyListHue(book, list);
-  const art = spanText('bookArt', '');
+// Stamp outlines, drawn in a 176×124 box and stretched to fit.
+const STAMP_SHAPES = {
+  rect: 'M14 2H162Q174 2 174 14V110Q174 122 162 122H14Q2 122 2 110V14Q2 2 14 2Z',
+  tag: 'M40 2H162Q174 2 174 14V110Q174 122 162 122H40Q34 122 30 117L4 68Q1 62 4 56L30 7Q34 2 40 2Z',
+  ticket: 'M14 2H162Q174 2 174 14V44A18 18 0 0 0 174 80V110Q174 122 162 122H14Q2 122 2 110V80A18 18 0 0 0 2 44V14Q2 2 14 2Z'
+};
+const STAMP_ORDER = ['rect', 'tag', 'ticket', 'rect', 'ticket', 'tag'];
+function createListStamp(list, index, opts){
+  const shape = STAMP_ORDER[index % STAMP_ORDER.length];
+  const stamp = document.createElement('button');
+  stamp.type = 'button';
+  stamp.className = `stamp listCover ${shape}` + (opts.later ? ' later' : '');
+  stamp.dataset.list = list.id;
+  applyListHue(stamp, list);
+  const face = spanText('stampFace', '');
+  face.setAttribute('aria-hidden', 'true');
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('class', 'stampFrame');
+  svg.setAttribute('viewBox', '0 0 176 124');
+  svg.setAttribute('preserveAspectRatio', 'none');
+  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path.setAttribute('d', STAMP_SHAPES[shape]);
+  path.setAttribute('vector-effect', 'non-scaling-stroke');
+  svg.appendChild(path);
+  face.appendChild(svg);
+  face.appendChild(spanText('stampName', list.short || list.name));
+  face.appendChild(spanText('stampCode', opts.code));
+  const art = spanText('stampArt', '');
   art.appendChild(createListMedal(list.id));
-  art.appendChild(createPosterFan(list, 3));
-  const text = spanText('bookTxt', '');
-  text.appendChild(spanText('bookName', list.name));
-  text.appendChild(spanText('bookCopy', list.copy || ''));
-  text.appendChild(spanText('bookFit', listFitLine(list) + (extra ? ` · ${extra}` : '')));
-  book.appendChild(art);
-  book.appendChild(text);
-  book.onclick = () => openList(list.id);
-  return book;
+  face.appendChild(art);
+  stamp.appendChild(face);
+  stamp.appendChild(spanText('stampCap', list.name));
+  stamp.appendChild(spanText('stampWhen', opts.when));
+  stamp.onclick = () => openList(list.id);
+  return stamp;
 }
-function createListLater(list, today){
-  const row = document.createElement('button');
-  row.type = 'button';
-  row.className = 'storyLater listCover';
-  row.dataset.list = list.id;
-  applyListHue(row, list);
-  row.appendChild(createListMedal(list.id, 's'));
-  const text = spanText('laterTxt', '');
-  text.appendChild(spanText('laterName', list.name));
-  text.appendChild(spanText('laterWhen', `${listBackText(list, today)} · ${listFitLine(list)}`));
-  row.appendChild(text);
-  const chev = spanText('chev', '›');
-  chev.setAttribute('aria-hidden', 'true');
-  row.appendChild(chev);
-  row.onclick = () => openList(list.id);
-  return row;
+function stampGrid(lists, optsFor){
+  const grid = document.createElement('div');
+  grid.className = 'stampGrid';
+  lists.forEach((list, i) => grid.appendChild(createListStamp(list, i, optsFor(list))));
+  return grid;
 }
-function createShelfSection(id, name, aside, children, withPlank){
+function createShelfSection(id, name, aside, children){
   const section = document.createElement('section');
   section.className = 'storySection';
   section.setAttribute('aria-labelledby', `lists-h-${id}`);
@@ -5601,21 +5533,8 @@ function createShelfSection(id, name, aside, children, withPlank){
   if(aside) heading.appendChild(spanText('shAside', aside));
   section.appendChild(heading);
   children.forEach(child => section.appendChild(child));
-  if(withPlank){
-    const plank = document.createElement('div');
-    plank.className = 'plank';
-    plank.setAttribute('aria-hidden', 'true');
-    section.appendChild(plank);
-  }
   return section;
 }
-function storyGrid(nodes){
-  const grid = document.createElement('div');
-  grid.className = 'storyGrid';
-  nodes.forEach(node => grid.appendChild(node));
-  return grid;
-}
-
 function renderListsScreen(){
   const index = document.getElementById('listsIndex');
   const open = document.getElementById('listOpen');
@@ -5645,26 +5564,28 @@ function renderListsIndex(){
   if(inSeason.length){
     const dayLabel = today.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
     const nodes = [createListHero(inSeason[0], today)];
-    if(inSeason.length > 1) nodes.push(storyGrid(inSeason.slice(1).map(list => createListBook(list, listUntilText(list, today)))));
-    body.appendChild(createShelfSection('season', 'In season', dayLabel, nodes, true));
+    if(inSeason.length > 1) nodes.push(stampGrid(inSeason.slice(1), list => ({ code: listFitLine(list), when: listUntilText(list, today) })));
+    body.appendChild(createShelfSection('season', 'In season', dayLabel, nodes));
   }
 
   const shelves = typeof MOVIE_LIST_SHELVES !== 'undefined' ? MOVIE_LIST_SHELVES : [];
   const shelved = new Set();
+  const yearRound = list => ({ code: listYearSpan(list).replace(/(\d{2})(\d{2})/g, '’$2'), when: listFitLine(list) });
   shelves.forEach(shelf => {
     shelf.lists.forEach(id => shelved.add(id));
     const lists = shelf.lists.map(listById).filter(list => list && visible.includes(list));
-    if(lists.length) body.appendChild(createShelfSection(shelf.id, shelf.name, shelf.aside, [storyGrid(lists.map(list => createListBook(list)))], true));
+    if(lists.length) body.appendChild(createShelfSection(shelf.id, shelf.name, shelf.aside, [stampGrid(lists, yearRound)]));
   });
   const loose = visible.filter(list => !isSeasonal(list) && !shelved.has(list.id));
-  if(loose.length) body.appendChild(createShelfSection('more', 'More lists', '', [storyGrid(loose.map(list => createListBook(list)))], true));
+  if(loose.length) body.appendChild(createShelfSection('more', 'More lists', '', [stampGrid(loose, yearRound)]));
 
   const later = visible.filter(list => isSeasonal(list) && !listInSeason(list, today));
   if(later.length){
-    const wrap = document.createElement('div');
-    wrap.className = 'storyLaters';
-    later.forEach(list => wrap.appendChild(createListLater(list, today)));
-    body.appendChild(createShelfSection('later', 'Coming back later', 'Open any time', [wrap], false));
+    const grid = stampGrid(later, list => {
+      const back = listBackText(list, today);
+      return { later: true, code: back.replace(/^Back /, ''), when: `${back} · ${listFitLine(list)}` };
+    });
+    body.appendChild(createShelfSection('later', 'Coming back later', 'Open any time', [grid]));
   }
 
   if(!visible.length){
@@ -5749,45 +5670,25 @@ function renderOpenList(list){
   open.appendChild(topbar);
 
   const inSeason = listInSeason(list, today);
-  const cover = document.createElement('section');
-  cover.className = 'storyCover';
-  cover.setAttribute('aria-labelledby', 'openListName');
-  applyListHue(cover, list);
-  if(inSeason){
-    const bulbs = spanText('bulbs', '');
-    bulbs.setAttribute('aria-hidden', 'true');
-    cover.appendChild(bulbs);
-  }
-  const inner = document.createElement('div');
-  inner.className = 'coverIn';
-  const head = document.createElement('div');
-  head.className = 'coverHead';
-  head.appendChild(createListMedal(list.id, 'l'));
-  const eyebrow = inSeason
-    ? `In season · ${listUntilText(list, today)}`
-    : (list.season || list.dates) ? listBackText(list, today) : 'Picked by hand';
-  head.appendChild(spanText('eyebrow', eyebrow));
-  inner.appendChild(head);
   const name = document.createElement('h2');
-  name.className = 'coverName';
+  name.className = 'ppName';
   name.id = 'openListName';
   name.tabIndex = -1;
   name.textContent = list.name;
-  inner.appendChild(name);
+  const sub = inSeason
+    ? `In season · ${listUntilText(list, today)}`
+    : (list.season || list.dates) ? listBackText(list, today) : '';
+  const cover = createPassport(list, { tag: 'section', nameEl: name, badge: inSeason, sub });
+  cover.setAttribute('aria-labelledby', 'openListName');
+  open.appendChild(cover);
   const blurb = document.createElement('p');
   blurb.className = 'coverCopy';
   blurb.textContent = list.blurb;
-  inner.appendChild(blurb);
-  const collage = spanText('collage', '');
-  collage.setAttribute('aria-hidden', 'true');
-  coverFilms(list, 5).forEach(m => collage.appendChild(createCoverPoster(m, 'cp')));
-  inner.appendChild(collage);
+  open.appendChild(blurb);
   const metaLine = document.createElement('p');
   metaLine.className = 'coverMeta';
   metaLine.textContent = 'Picked by hand · in the order we’d watch them';
-  inner.appendChild(metaLine);
-  cover.appendChild(inner);
-  open.appendChild(cover);
+  open.appendChild(metaLine);
 
   const kids = selectedKids();
   const all = listIndices(list);
