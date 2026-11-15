@@ -238,6 +238,11 @@ for (const movie of movies) {
     }
   }
   // LIST_ICONS: one inline SVG per list, nothing that could run script.
+  if (Object.keys(context.__LIST_ICONS__).length) {
+    for (const id of ids) {
+      if (!context.__LIST_ICONS__[id]) errors.push(`LIST_ICONS: list ${id} has no icon`);
+    }
+  }
   for (const [id, svg] of Object.entries(context.__LIST_ICONS__)) {
     if (!ids.has(id)) errors.push(`LIST_ICONS: ${id} is not a list id`);
     if (!/^<svg[\s>]/.test(svg) || !svg.trim().endsWith('</svg>')) errors.push(`LIST_ICONS ${id}: must be one <svg> element`);
