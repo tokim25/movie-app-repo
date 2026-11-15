@@ -149,9 +149,23 @@ test('every list tile and the season card show a decorative icon', async ({ page
   expect(Math.round(box.width)).toBe(40);
 });
 
+// These check the dates, not one family's fit: with the sample family's
+// 3-year-old only 2 of the 4 Hanukkah films fit, below the list's minimum of
+// 3, so the list correctly stays hidden for them. Watching as adults only,
+// every film counts.
+async function watchAsAdultsOnly(page) {
+  await page.locator('#tonightWhoPill').click();
+  for (const name of ['Simon', 'Nora']) {
+    await page.locator('#tonightKidChoices .choiceChip', { hasText: name }).click();
+  }
+  await expect(page.locator('#tonightWhoPill')).toContainText('Adults only');
+  await page.keyboard.press('Escape');
+}
+
 test('during Hanukkah, Tonight offers the Hanukkah list, and Christmas comes back after', async ({ page }) => {
   await startOn(page, '2026-12-05T19:00:00');
   await page.locator('#tabHome').click();
+  await watchAsAdultsOnly(page);
   await expect(page.locator('#tonightSeasonCard')).toContainText('Hanukkah movies');
   await page.locator('#tonightSeasonCard').click();
   await expect(page.locator('#listHeaderName')).toHaveText('Hanukkah movies');
@@ -161,5 +175,23 @@ test('during Hanukkah, Tonight offers the Hanukkah list, and Christmas comes bac
 test('after Hanukkah ends, the card goes back to Christmas', async ({ page }) => {
   await startOn(page, '2026-12-14T19:00:00');
   await page.locator('#tabHome').click();
+  await watchAsAdultsOnly(page);
   await expect(page.locator('#tonightSeasonCard')).toContainText('Christmas movies');
+});
+
+test('the Hanukkah list stays hidden when fewer than 3 of its films fit the kids', async ({ page }) => {
+  await startOn(page, '2026-12-05T19:00:00');
+  const fit = await page.evaluate(() => listFitCount(listById('hanukkah')));
+  test.skip(fit >= 3, 'every Hanukkah film fits this family now');
+  await page.locator('#tabHome').click();
+  await expect(page.locator('#tonightSeasonCard')).not.toContainText('Hanukkah movies');
+});
+
+test('the season card count follows who is watching', async ({ page }) => {
+  await startOn(page, '2026-12-18T19:00:00');
+  await page.locator('#tabHome').click();
+  await expect(page.locator('#tonightSeasonCard')).toContainText('fit Simon + Nora');
+  await watchAsAdultsOnly(page);
+  await expect(page.locator('#tonightSeasonCard')).not.toContainText('Simon');
+  await expect(page.locator('#tonightSeasonCard')).toContainText('films');
 });
