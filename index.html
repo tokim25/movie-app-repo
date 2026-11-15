@@ -220,12 +220,13 @@ function reportError(err){
      inline script content not covered by a pinned hash. The <noscript>
      fallback keeps it blocking (as before) for the rare case JS is
      unavailable, since nothing below can flip it then. -->
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap">
-<link id="googleFontStylesheet" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap" media="print">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap"></noscript>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&display=swap">
+<link id="googleFontStylesheet" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&display=swap" media="print">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&display=swap"></noscript>
 <style>
   :root{
     color-scheme:light dark;
+    --font-sans:"Inter", Arial, sans-serif;
     --bg:#F7F5F0;
     --bg-sub:#EFEBE3;
     --surface:#FFFFFF;
@@ -442,7 +443,7 @@ function reportError(err){
   body{
     background:var(--bg);
     color:var(--ink);
-    font-family:-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    font-family:var(--font-sans);
     min-height:100vh;
     padding-bottom:calc(84px + env(safe-area-inset-bottom, 0px));
   }
@@ -456,15 +457,12 @@ function reportError(err){
     max-width:680px;
     margin:0 auto;
   }
-  /* Tab names are navigation, not voice, and at clamp(34-48px) the question
-     out-sized its own answer roughly 2:1. They share the pick title's serif
-     so every screen speaks in one voice, but stay smaller than it, so the
-     pick still reads as the loudest thing on the screen. */
+  /* Tab names stay quieter than the selected movie title. Weight and tight
+     tracking distinguish display text without introducing a second face. */
   h1{
-    font-family:"Newsreader", Georgia, "Times New Roman", serif;
     font-size:clamp(23px,4.8vw,27px);
-    font-weight:600;
-    letter-spacing:0;
+    font-weight:700;
+    letter-spacing:-0.025em;
     margin:0 0 8px;
     color:var(--ink);
     text-wrap:balance;
@@ -1014,11 +1012,10 @@ function reportError(err){
   .star.on{ color:var(--favorite); }
   .info{ flex:1; min-width:0; overflow-wrap:break-word; }
   .title{
-    font-family:"Newsreader", Georgia, "Times New Roman", serif;
     font-weight:600;
     font-size:19px;
     line-height:1.25;
-    letter-spacing:-0.005em;
+    letter-spacing:-0.015em;
     cursor:pointer;
   }
   .meta{
@@ -1488,8 +1485,9 @@ function reportError(err){
     margin:4px 0 16px;
   }
   .listHeader h2{
-    font-family:"Newsreader", Georgia, "Times New Roman", serif;
     font-size:24px;
+    font-weight:700;
+    letter-spacing:-0.025em;
     line-height:1.2;
     margin:8px 0 6px;
   }
@@ -1899,8 +1897,8 @@ function reportError(err){
   .headsUpToggle[hidden]{ display:none; }
   .preShowFallback .askAfter{
     margin:8px 0 0;
-    font-family:"Newsreader", Georgia, "Times New Roman", serif;
     font-size:16px;
+    font-weight:500;
     font-style:italic;
     color:var(--ink);
   }
@@ -2026,27 +2024,22 @@ function reportError(err){
     text-transform:uppercase;
     letter-spacing:0.04em;
   }
-  /* The serif was dressing the chrome ("Shelf", "Family") while the movie
-     title -- the one noun this screen exists to deliver -- was set in small
-     UI sans. Moving Newsreader onto the content gives the reveal a marquee
-     register, and makes the serif the content face rather than a second
-     competing voice inside the same card. */
+  /* The movie is the loudest noun on the screen: size, weight and tighter
+     tracking give it a display register while keeping the app in Inter. */
   .pickTitle{
     margin:4px 0 0;
     color:var(--ink);
-    font-family:"Newsreader", Georgia, "Times New Roman", serif;
     font-size:26px;
-    font-weight:600;
+    font-weight:800;
+    letter-spacing:-0.03em;
     line-height:1.15;
     text-wrap:balance;
   }
-  /* Light text on a dark ground optically thins the stroke, so the serif at
-     display size reads lighter in dark than its light-mode twin. Newsreader
-     already ships 700; this buys the weight back rather than a new file. */
+  /* Light text on a dark ground optically thins the stroke. */
   @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]) .pickTitle{ font-weight:700; }
+    :root:not([data-theme="light"]) .pickTitle{ font-weight:800; }
   }
-  :root[data-theme="dark"] .pickTitle{ font-weight:700; }
+  :root[data-theme="dark"] .pickTitle{ font-weight:800; }
   /* Once a pick is on screen the preamble has done its job, and on a real
      phone (667px of usable height, not the 844 a desktop emulator shows) it
      was costing 431px before the pick card even began -- enough that the
@@ -2169,9 +2162,8 @@ function reportError(err){
     place-items:center;
     background:rgba(var(--accent-rgb),0.12);
     color:var(--accent-text);
-    font-family:"Newsreader", Georgia, "Times New Roman", serif;
     font-size:21px;
-    font-weight:600;
+    font-weight:700;
     flex:0 0 auto;
   }
   .familyAvatar.alt{ background:rgba(var(--accent-rgb),0.2); }
@@ -2774,8 +2766,9 @@ function reportError(err){
   }
   .syncNudge h2{
     margin:0 0 10px;
-    font-family:"Newsreader", Georgia, serif;
     font-size:24px;
+    font-weight:750;
+    letter-spacing:-0.025em;
     line-height:1.15;
   }
   .syncNudge p{
@@ -3109,7 +3102,7 @@ function reportError(err){
   #tonightPreShowBody .openui-card > :last-child:not(:first-child) > .openui-text-content .openui-markdown-renderer,
   #tonightPreShowBody .openui-card > :last-child:not(:first-child) > .openui-text-content p{
     color:var(--ink);
-    font:italic 500 16px/1.4 "Newsreader", Georgia, serif;
+    font:italic 500 16px/1.4 var(--font-sans);
   }
   /* FollowUpItem is a chat "send this as a message" button; there's no chat
      here, so it's shown as the after-the-movie question it really is. */
@@ -3119,7 +3112,7 @@ function reportError(err){
     border:0;
     padding:0;
     color:var(--ink);
-    font-family:"Newsreader", Georgia, serif;
+    font-family:var(--font-sans);
     font-size:16px;
     font-style:italic;
     text-align:left;
@@ -3258,8 +3251,8 @@ function reportError(err){
   .storySub{ color:var(--ink-soft); margin:6px 0 0; font-size:15px; }
   .storySection{ margin-top:22px; }
   .storySectionHead{ display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; margin:10px 0 14px; font-size:inherit; }
-  .shName{ font-family:"Newsreader", Georgia, serif; font-weight:700; font-size:20px; line-height:1.2; }
-  .shAside{ font-family:"Newsreader", Georgia, serif; font-style:italic; font-weight:500; font-size:16px; color:var(--ink-soft); }
+  .shName{ font-weight:700; font-size:20px; line-height:1.2; letter-spacing:-0.02em; }
+  .shAside{ font-style:italic; font-weight:500; font-size:15px; color:var(--ink-soft); }
   .medal{
     display:inline-grid; place-items:center; flex:none;
     width:44px; height:44px; border-radius:50%;
@@ -3289,7 +3282,7 @@ function reportError(err){
   .ppBadge{ position:absolute; left:50%; bottom:-7px; transform:translateX(-50%); white-space:nowrap;
     padding:5px 8px; border-radius:999px; background:var(--accent); color:var(--on-accent);
     font-size:10px; font-weight:700; line-height:1; letter-spacing:0.04em; text-transform:uppercase; }
-  .ppName{ margin:0; font-family:"Newsreader", Georgia, serif; font-weight:700; font-size:19px; line-height:1.15; overflow-wrap:anywhere; }
+  .ppName{ margin:0; font-weight:700; font-size:19px; line-height:1.15; letter-spacing:-0.02em; overflow-wrap:anywhere; }
   .ppName:focus{ outline:none; }
   .ppName:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
   .ppSub{ font-size:13px; line-height:1.3; color:var(--ink-soft); }
@@ -3315,7 +3308,7 @@ function reportError(err){
 
   /* tucked away */
   .tucked{ margin-top:26px; padding:16px; border:1.5px dashed var(--line); border-radius:14px; }
-  .tuckedHead{ font-family:"Newsreader", Georgia, serif; font-weight:700; font-size:18px; margin:0; }
+  .tuckedHead{ font-weight:700; font-size:18px; letter-spacing:-0.015em; margin:0; }
   .tuckedNote{ font-size:13.5px; color:var(--ink-soft); margin:6px 0 10px; }
   .tuckedRow{ display:flex; align-items:center; gap:10px; padding:6px; border-radius:12px; margin-top:8px; background:var(--bg-sub); }
   .tuckedName{ flex:1; min-width:0; font-weight:600; font-size:14.5px; }
@@ -3347,7 +3340,7 @@ function reportError(err){
   .rows > .row{ display:block; padding:0; gap:0; border-bottom:1px solid var(--line); }
   .rowLine{ display:flex; align-items:center; gap:10px; padding:10px 0; }
   .rows .poster.rowPoster{ width:54px; flex:none; }
-  .rowNum{ flex:none; width:22px; font-family:"Newsreader", Georgia, serif; font-style:italic; font-weight:600; font-size:20px; line-height:1; color:var(--accent-text); }
+  .rowNum{ flex:none; width:22px; font-style:italic; font-weight:600; font-size:18px; line-height:1; letter-spacing:-0.02em; color:var(--accent-text); }
   .rowMain{ flex:1; min-width:0; display:flex; flex-direction:column; align-items:flex-start; gap:2px; min-height:44px;
     background:none; border:0; padding:4px 0; margin:0; text-align:left; font:inherit; color:var(--ink); cursor:pointer; }
   .rowMain .title{ font-size:17px; overflow-wrap:anywhere; }
@@ -3404,8 +3397,8 @@ function reportError(err){
     scroll-margin-top:8px;
   }
   .chapterHead h2{ margin:0; display:flex; flex-direction:column; font-size:inherit; }
-  .chName{ font-family:"Newsreader", Georgia, serif; font-weight:700; font-size:21px; line-height:1.15; }
-  .chAside{ font-family:"Newsreader", Georgia, serif; font-style:italic; font-weight:500; font-size:15px; color:var(--ink-soft); }
+  .chName{ font-weight:700; font-size:21px; line-height:1.15; letter-spacing:-0.025em; }
+  .chAside{ font-style:italic; font-weight:500; font-size:14.5px; color:var(--ink-soft); }
 
   /* Shelf teaser for the Lists tab */
   .listsTeaser{ display:flex; align-items:center; gap:12px; width:100%; margin:10px 0 4px; padding:10px 10px 10px 12px;
