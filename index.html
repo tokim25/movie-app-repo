@@ -5380,6 +5380,8 @@ function renderTonightSummary(){
   if(mood) mood.textContent = tonightMoodShortLabel();
   const whoPill = document.getElementById('tonightWhoPill');
   if(whoPill) whoPill.classList.toggle('adultsOnly', selectedKids().length === 0 && state.children.length > 0);
+  // The season card's fit count depends on who is watching.
+  renderSeasonCard();
 }
 
 // ---- Tonight's who/time/mood pills. Each opens a small non-modal popover
