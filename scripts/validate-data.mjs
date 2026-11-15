@@ -81,6 +81,7 @@ vm.runInContext(`
   this.__POSTERS__ = typeof MOVIE_POSTERS !== 'undefined' ? MOVIE_POSTERS : {};
   this.__GUIDANCE__ = typeof MOVIE_GUIDANCE !== 'undefined' ? MOVIE_GUIDANCE : undefined;
   this.__PREREQS__ = typeof MOVIE_PREREQUISITES !== 'undefined' ? MOVIE_PREREQUISITES : {};
+  this.__LISTS__ = typeof MOVIE_LISTS !== 'undefined' ? MOVIE_LISTS : [];
 `, context);
 
 const movies = context.__MOVIES__;
@@ -210,6 +211,29 @@ for (const movie of movies) {
     for (let cur = prereq; cur !== undefined; cur = context.__PREREQS__[cur]) {
       if (seen.has(cur)) { errors.push(`MOVIE_PREREQUISITES: ${sequel} is part of a loop`); break; }
       seen.add(cur);
+    }
+  }
+}
+
+// data-lists.js (MOVIE_LISTS): unique ids, a name and blurb, real catalog
+// nums with no repeats, and a season in "MM-DD" form when there is one.
+{
+  const ids = new Set();
+  const mmdd = /^(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+  for (const list of context.__LISTS__) {
+    const label = `MOVIE_LISTS ${list.id}`;
+    if (!list.id || ids.has(list.id)) errors.push(`${label}: missing or duplicate id`);
+    ids.add(list.id);
+    if (!list.name || !list.blurb) errors.push(`${label}: needs a name and blurb`);
+    if (!Array.isArray(list.pins) || !list.pins.length) errors.push(`${label}: needs pins`);
+    const pins = new Set();
+    for (const num of list.pins || []) {
+      if (!seenNums.has(num)) errors.push(`${label}: unknown num ${num}`);
+      if (pins.has(num)) errors.push(`${label}: num ${num} listed twice`);
+      pins.add(num);
+    }
+    if (list.season && !(mmdd.test(list.season.from) && mmdd.test(list.season.to))) {
+      errors.push(`${label}: season needs from/to as MM-DD`);
     }
   }
 }

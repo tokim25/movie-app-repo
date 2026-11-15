@@ -39,7 +39,8 @@ export const dataFiles = [
   'data-sonyanim.js',
   'data-posters.js',
   'data-guidance.js',
-  'data-series.js'
+  'data-series.js',
+  'data-lists.js'
 ];
 
 const DATA_VERSION_PATTERN = /const DATA_VERSION = '([0-9a-f]*)';/;
