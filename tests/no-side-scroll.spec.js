@@ -31,6 +31,11 @@ test('no screen scrolls sideways at 320px', async ({ page }) => {
   await page.locator('#list .detailLink').first().evaluate(el => el.click());
   await expectNoSideScroll(page, 'Shelf with details open');
 
+  await openTab(page, '#tabLists', '#listsScreen');
+  await expectNoSideScroll(page, 'Lists');
+  await page.locator('#listsBody .listCover').first().evaluate(el => el.click());
+  await expectNoSideScroll(page, 'an opened list');
+
   await openTab(page, '#tabWhatsNew', '#whatsNewScreen');
   await expectNoSideScroll(page, "What's new");
   const newDetails = page.locator('#whatsNewList .detailLink').first();
@@ -61,6 +66,6 @@ test('substitute-source titles show "No CSM age" instead of the placeholder sent
   const title = await page.evaluate(() => MOVIES.find(m => m.ca === 'Not on CSM; substitute source used').t);
   await page.locator('#search').fill(title);
   const row = page.locator('#list li.row', { hasText: title }).first();
-  await expect(row.locator('.badge.csm')).toContainText('No CSM age');
-  await expect(row.locator('.badge.csm')).not.toContainText('substitute source');
+  await expect(row.locator('.rowMeta')).toContainText('No CSM age');
+  await expect(row.locator('.rowMeta')).not.toContainText('substitute source');
 });

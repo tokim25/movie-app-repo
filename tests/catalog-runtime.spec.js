@@ -12,6 +12,5 @@ test('every catalog movie has a verified runtime and displays it on Shelf', asyn
 
   expect(missing).toEqual([]);
   await page.locator('#tabBrowse').click();
-  await page.locator('#studioGrid .moreStudiosTile').click();
-  await expect(page.locator('#list .badge.runtime').first()).toBeVisible();
+  await expect(page.locator('#list .rowMeta .runtime').first()).toBeVisible();
 });
