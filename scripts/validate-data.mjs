@@ -82,6 +82,7 @@ vm.runInContext(`
   this.__GUIDANCE__ = typeof MOVIE_GUIDANCE !== 'undefined' ? MOVIE_GUIDANCE : undefined;
   this.__PREREQS__ = typeof MOVIE_PREREQUISITES !== 'undefined' ? MOVIE_PREREQUISITES : {};
   this.__LISTS__ = typeof MOVIE_LISTS !== 'undefined' ? MOVIE_LISTS : [];
+  this.__LIST_ICONS__ = typeof LIST_ICONS !== 'undefined' ? LIST_ICONS : {};
 `, context);
 
 const movies = context.__MOVIES__;
@@ -235,6 +236,12 @@ for (const movie of movies) {
     if (list.season && !(mmdd.test(list.season.from) && mmdd.test(list.season.to))) {
       errors.push(`${label}: season needs from/to as MM-DD`);
     }
+  }
+  // LIST_ICONS: one inline SVG per list, nothing that could run script.
+  for (const [id, svg] of Object.entries(context.__LIST_ICONS__)) {
+    if (!ids.has(id)) errors.push(`LIST_ICONS: ${id} is not a list id`);
+    if (!/^<svg[\s>]/.test(svg) || !svg.trim().endsWith('</svg>')) errors.push(`LIST_ICONS ${id}: must be one <svg> element`);
+    if (/<script|\son\w+=|javascript:|<foreignObject|href=/i.test(svg)) errors.push(`LIST_ICONS ${id}: scripts, event handlers and links are not allowed`);
   }
 }
 

@@ -134,3 +134,17 @@ test.describe('in dark mode', () => {
     await expectNoA11yViolations(page, '#listHeader');
   });
 });
+
+test('every list tile and the season card show a decorative icon', async ({ page }) => {
+  await startOn(page, '2026-12-10T19:00:00');
+  await page.locator('#tabHome').click();
+  await expect(page.locator('#tonightSeasonCard .listIcon[aria-hidden="true"] svg')).toHaveCount(1);
+  await openShelf(page);
+  await page.locator('#allListsBtn').click();
+  const tiles = page.locator('#listGrid .listTile');
+  const count = await tiles.count();
+  expect(count).toBeGreaterThan(4);
+  await expect(page.locator('#listGrid .listTile .listIcon[aria-hidden="true"] svg')).toHaveCount(count);
+  const box = await page.locator('#listGrid .listTile .listIcon').first().boundingBox();
+  expect(Math.round(box.width)).toBe(40);
+});
