@@ -22,7 +22,7 @@ test('first run starts on Shelf and family setup keeps all three tabs available'
   await expect(page.locator('#familyScreen')).toBeVisible();
   await expect(page.locator('#homeScreen')).toBeHidden();
   await expect(page.locator('#tabFamily')).toHaveClass(/on/);
-  await expect(page.locator('#familyScreen h2')).toContainText(['Family members', 'Content limits', 'Appearance and sync', 'About Family Feature']);
+  await expect(page.locator('#familyScreen h2')).toContainText(['Family members', 'Content limits', 'Hidden from Tonight', 'About Family Feature']);
   await expect(page.locator('#childrenSettingsPanel')).toContainText('Add or update a family member');
   await expect(page.locator('#familyChildrenList .familyChild')).toHaveCount(2);
   await expect(page.locator('#childEditorList .childEditRow')).toHaveCount(2);

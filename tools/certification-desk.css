@@ -1,6 +1,6 @@
 :root{
-  --bg:#F4F6FA; --bg-sub:#E9EEF7; --surface:#fff; --ink:#172033; --ink-soft:#566176;
-  --line:#CFD7E6; --accent:#2F5FEA; --accent-text:#2348B7; --star:#D59B16;
+  --bg:#FFFFFF; --bg-sub:#F7F7F7; --surface:#fff; --ink:#111111; --ink-soft:#5F5F5F;
+  --line:#DDDDDD; --accent:#C9184A; --accent-text:#B30E3F; --star:#8A5A00;
 }
 *{ box-sizing:border-box; }
 body{
@@ -19,7 +19,7 @@ main{ max-width:880px; margin:0 auto; padding:20px 16px 48px; display:grid; gap:
 .choices p{ margin:0 0 10px; color:var(--ink-soft); font-size:14px; }
 #deskStatus{ margin:0 0 8px; color:var(--ink-soft); font-size:14px; }
 #deskStatus:empty{ display:none; }
-#deskStatus.error{ color:#8a2a1c; }
+#deskStatus.error{ color:#B42318; }
 #deskChoices{ margin:0 0 12px; padding-left:20px; }
 #deskChoices:empty{ display:none; }
 label{ display:block; font-weight:600; font-size:14px; margin-bottom:4px; }

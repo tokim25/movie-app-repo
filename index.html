@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>
-(function(){
-  try{
-    var pref = localStorage.getItem('family-feature-theme-v1');
-    if(pref === 'light' || pref === 'dark'){
-      document.documentElement.setAttribute('data-theme', pref);
-    }
-  }catch(e){ /* storage unavailable; fall back to system preference */ }
-})();
-</script>
 <!-- Sentry crash/error tracking + user feedback widget. Loaded first (before anything
      else in <head>) so it can catch errors from every script that follows. sendDefaultPii
      is off (no IP/cookies/user context), and the DOM click/input breadcrumb capture that
@@ -194,8 +184,7 @@ function reportError(err){
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#F7F5F0" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#262624" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FFFFFF">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Family Feature">
@@ -225,170 +214,62 @@ function reportError(err){
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&display=swap"></noscript>
 <style>
   :root{
-    color-scheme:light dark;
+    color-scheme:light;
     --font-sans:"Inter", Arial, sans-serif;
-    --bg:#F7F5F0;
-    --bg-sub:#EFEBE3;
+    --bg:#FFFFFF;
+    --bg-sub:#F7F7F7;
     --surface:#FFFFFF;
-    --ink:#1F1E1B;
+    --ink:#111111;
     --on-ink:#FFFFFF;
-    --ink-soft:#57534B;
-    --ink-faint:#625D54;
-    --line:#DDD7CB;
-    --accent:#AE4E2C;
-    --accent-rgb:174,78,44;
-    --accent-text:#9A3F1F;
-    --icon-tint:#ECC6B3;
-    /* List medals mix each list's hue into a warm base. */
-    --cv-base:#E8DCC3; --cv-base2:#DDCDB0; --cv-inkbase:#3A2C1E;
-    --cv-mix:30%; --cv-mix2:38%; --cv-inkmix:45%; --cv-s:34%; --cv-l:58%; --cv-is:40%; --cv-il:30%; --cv-ts:30%; --cv-tl:70%;
-    --rev-dot:#D49A1F; --medal-bg:rgba(250,244,230,0.7);
-    /* Passport cards and stamps on the Lists tab (hue comes from each list). */
-    --pp-bg:#FFFFFF; --pp-line:rgba(31,30,27,0.10); --pp-shadow:rgba(31,30,27,0.08);
-    --pp-ds:55%; --pp-dl:92%; --pp-il:30%; --pp-tl:78%; --st-s:55%; --st-l:34%;
+    --ink-soft:#5F5F5F;
+    --ink-faint:#656565;
+    --line:#DDDDDD;
+    --accent:#C9184A;
+    --accent-rgb:201,24,74;
+    --accent-text:#B30E3F;
+    --icon-tint:#F8CEDA;
+    --cv-bg:#F7F7F7;
+    --cv-bg2:#EEEEEE;
+    --cv-ink:#111111;
+    --rev-dot:#A96500;
+    --medal-bg:#FFF0F3;
+    --pp-bg:#FFFFFF;
+    --pp-line:rgba(17,17,17,0.12);
+    --pp-shadow:rgba(17,17,17,0.10);
+    --pp-disc:#FFF0F3;
+    --pp-icon:#B30E3F;
+    --stamp-accent:#B30E3F;
     --on-accent:#FFFFFF;
-    --select-rgb:174,78,44;
-    --error-bg:#FBE7EC;
+    --select-rgb:201,24,74;
+    --error-bg:#FFF1F0;
     --check:var(--ink);
-    /* --favorite is the want-to-watch glyph colour and must clear 3:1 against
-       --bg/--surface as a state-bearing graphic (WCAG 1.4.11); --favorite-fill
-       is the brighter tint used behind --on-favorite text, where the pairing
-       (not the swatch) carries the contrast. One token cannot do both jobs. */
-    --favorite:#9A6B08;
-    --favorite-fill:#D59B16;
-    --on-favorite:#172033;
-    /* Category hues identify a topic; they must never rate it. Held at one
-       lightness and one chroma so no category can read as more urgent than
-       another -- a parent must not infer that Violence is "redder" and so
-       scarier than Drinking. Hues also dodge every taken meaning: no red
-       (--error), green (--success), gold (--favorite/--warning) or clay
-       (--accent/--new). Stated in oklch so the equal-L, equal-C constraint
-       is enforced by the notation rather than asserted in a comment. */
-    --flag-violence:oklch(0.55 0.09 285);
-    --flag-language:oklch(0.55 0.09 190);
-    --flag-romance:oklch(0.55 0.09 345);
-    --flag-drinking:oklch(0.55 0.09 250);
-    --new:#9A3F1F;
-    --new-bg:#F6E4DB;
-    --success:#136A43;
-    --error:#B3123F;
+    --favorite:#C9184A;
+    --favorite-fill:#C9184A;
+    --on-favorite:#FFFFFF;
+    /* Category icons share one accent so hue never implies severity. */
+    --flag-violence:#6554C0;
+    --flag-language:#6554C0;
+    --flag-romance:#6554C0;
+    --flag-drinking:#6554C0;
+    --new:#B30E3F;
+    --new-bg:#FFF0F3;
+    --success:#13795B;
+    --error:#B42318;
     --on-error:#FFFFFF;
     --warning:#8A5A00;
     --warning-rgb:138,90,0;
-    --warning-soft:#FFF4D6;
-    --nudge-surface:var(--surface);
+    --warning-soft:#FFF7E6;
+    --nudge-surface:var(--bg-sub);
     --nudge-ink:var(--ink);
     --nudge-ink-soft:var(--ink-soft);
     --nudge-line:var(--accent);
     --nudge-primary:var(--ink);
     --nudge-on-primary:var(--on-ink);
-    --error-rgb:179,18,63;
-    --shadow-rgb:31,30,27;
-    --focus:#9A3F1F;
-    --shadow-soft:0 10px 28px rgba(31,30,27,0.06);
-    --shadow-card:0 14px 36px rgba(31,30,27,0.08);
-  }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      /* Warm charcoal neutrals and a clay accent, modelled on Claude's dark
-         mode, matching light mode's warm paper and deeper clay. Every text token clears 4.5:1
-         against --bg, --surface and --bg-sub; --accent clears 3:1 as a UI
-         graphic, with --on-accent text on it at 5.3:1. */
-      --bg:#262624;
-      --bg-sub:#383733;
-      --surface:#30302E;
-      --ink:#FAF9F5;
-      --on-ink:#262624;
-      --ink-soft:#C9C6BC;
-      --ink-faint:#A8A59B;
-      --line:#4A4843;
-      --accent:#E0896B;
-      --accent-rgb:224,137,107;
-      --accent-text:#EB9878;
-      --icon-tint:#5A4238;
-      --cv-base:#2C2823; --cv-base2:#34302A; --cv-inkbase:#F2E8D8; --cv-mix:30%; --cv-mix2:34%; --cv-inkmix:55%; --cv-s:30%; --cv-l:46%; --cv-is:45%; --cv-il:80%; --cv-ts:22%; --cv-tl:40%;
-      --rev-dot:#E0A93A; --medal-bg:rgba(0,0,0,0.26);
-      --pp-bg:#302F2C; --pp-line:rgba(255,255,255,0.10); --pp-shadow:rgba(0,0,0,0.40);
-      --pp-ds:25%; --pp-dl:26%; --pp-il:82%; --pp-tl:40%; --st-s:55%; --st-l:72%;
-      --on-accent:#1F1E1D;
-      --select-rgb:224,137,107;
-      --error-bg:#3D2229;
-      --check:#FAF9F5;
-      --favorite:#F2C14E;
-      --favorite-fill:#F2C14E;
-      --on-favorite:#262624;
-      --flag-violence:oklch(0.72 0.08 285);
-      --flag-language:oklch(0.72 0.08 190);
-      --flag-romance:oklch(0.72 0.08 345);
-      --flag-drinking:oklch(0.72 0.08 250);
-      --new:#EFAB90;
-      --new-bg:#4A2C22;
-      --success:#4CC38A;
-      --error:#FF94A8;
-      --on-error:#262624;
-      --warning:#F2C14E;
-      --warning-rgb:242,193,78;
-      --warning-soft:#382F18;
-      --nudge-surface:var(--surface);
-      --nudge-ink:var(--ink);
-      --nudge-ink-soft:var(--ink-soft);
-      --nudge-line:var(--accent);
-      --nudge-primary:var(--ink);
-      --nudge-on-primary:var(--on-ink);
-      --error-rgb:255,148,168;
-      --shadow-rgb:0,0,0;
-      --focus:#EB9878;
-      --shadow-soft:0 10px 28px rgba(0,0,0,0.2);
-      --shadow-card:0 18px 44px rgba(0,0,0,0.28);
-    }
-  }
-  :root[data-theme="dark"]{
-    --bg:#262624;
-    --bg-sub:#383733;
-    --surface:#30302E;
-    --ink:#FAF9F5;
-    --on-ink:#262624;
-    --ink-soft:#C9C6BC;
-    --ink-faint:#A8A59B;
-    --line:#4A4843;
-    --accent:#E0896B;
-    --accent-rgb:224,137,107;
-    --accent-text:#EB9878;
-    --icon-tint:#5A4238;
-    --cv-base:#2C2823; --cv-base2:#34302A; --cv-inkbase:#F2E8D8; --cv-mix:30%; --cv-mix2:34%; --cv-inkmix:55%; --cv-s:30%; --cv-l:46%; --cv-is:45%; --cv-il:80%; --cv-ts:22%; --cv-tl:40%;
-    --rev-dot:#E0A93A; --medal-bg:rgba(0,0,0,0.26);
-    --pp-bg:#302F2C; --pp-line:rgba(255,255,255,0.10); --pp-shadow:rgba(0,0,0,0.40);
-    --pp-ds:25%; --pp-dl:26%; --pp-il:82%; --pp-tl:40%; --st-s:55%; --st-l:72%;
-    --on-accent:#1F1E1D;
-    --select-rgb:224,137,107;
-    --error-bg:#3D2229;
-    --check:#FAF9F5;
-    --favorite:#F2C14E;
-    --favorite-fill:#F2C14E;
-    --on-favorite:#262624;
-    --flag-violence:oklch(0.72 0.08 285);
-    --flag-language:oklch(0.72 0.08 190);
-    --flag-romance:oklch(0.72 0.08 345);
-    --flag-drinking:oklch(0.72 0.08 250);
-    --new:#EFAB90;
-    --new-bg:#4A2C22;
-    --success:#4CC38A;
-    --error:#FF94A8;
-    --on-error:#262624;
-    --warning:#F2C14E;
-    --warning-rgb:242,193,78;
-    --warning-soft:#382F18;
-    --nudge-surface:var(--surface);
-    --nudge-ink:var(--ink);
-    --nudge-ink-soft:var(--ink-soft);
-    --nudge-line:var(--accent);
-    --nudge-primary:var(--ink);
-    --nudge-on-primary:var(--on-ink);
-    --error-rgb:255,148,168;
-    --shadow-rgb:0,0,0;
-    --focus:#EB9878;
-    --shadow-soft:0 10px 28px rgba(0,0,0,0.2);
-    --shadow-card:0 18px 44px rgba(0,0,0,0.28);
+    --error-rgb:180,35,24;
+    --shadow-rgb:17,17,17;
+    --focus:#B30E3F;
+    --shadow-soft:0 8px 24px rgba(17,17,17,0.08);
+    --shadow-card:0 12px 32px rgba(17,17,17,0.10);
   }
   *{box-sizing:border-box; -webkit-font-smoothing:antialiased;}
   .srOnly{
@@ -2035,11 +1916,6 @@ function reportError(err){
     line-height:1.15;
     text-wrap:balance;
   }
-  /* Light text on a dark ground optically thins the stroke. */
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]) .pickTitle{ font-weight:800; }
-  }
-  :root[data-theme="dark"] .pickTitle{ font-weight:800; }
   /* Once a pick is on screen the preamble has done its job, and on a real
      phone (667px of usable height, not the 844 a desktop emulator shows) it
      was costing 431px before the pick card even began -- enough that the
@@ -3237,14 +3113,10 @@ function reportError(err){
   }
 
   /* ---------- Lists tab: passport cards and stamps ----------
-     Each card or stamp takes its colour from --cv-hue (set per element from
-     the list's `hue`); the lightness pairs switch with the theme so text
-     passes contrast in light and dark. */
+     List identity comes from the icon and copy. A fixed neutral/coral palette
+     keeps the collection calm instead of assigning every list a new hue. */
   .listCover, .tuckedRow, .medal-xs{
-    --cv-bg:color-mix(in oklab, hsl(var(--cv-hue, 20) var(--cv-s) var(--cv-l)) var(--cv-mix), var(--cv-base));
-    --cv-bg2:color-mix(in oklab, hsl(var(--cv-hue, 20) var(--cv-s) var(--cv-l)) var(--cv-mix2), var(--cv-base2));
-    --cv-ink:color-mix(in oklab, hsl(var(--cv-hue, 20) var(--cv-is) var(--cv-il)) var(--cv-inkmix), var(--cv-inkbase));
-    --icon-tint:color-mix(in oklab, hsl(var(--cv-hue, 20) var(--cv-ts) var(--cv-tl)) 70%, var(--cv-base2));
+    --icon-tint:#F8CEDA;
   }
   .storyHead{ padding:6px 0 10px; }
   .storyHead h1{ margin:0; }
@@ -3276,8 +3148,8 @@ function reportError(err){
   button.passport{ cursor:pointer; }
   .ppId{ display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center; min-width:0; }
   .ppDisc{ position:relative; display:grid; place-items:center; width:84px; height:84px; border-radius:50%;
-    background:hsl(var(--cv-hue, 20) var(--pp-ds) var(--pp-dl)); color:hsl(var(--cv-hue, 20) 45% var(--pp-il)); }
-  .ppDisc .medal{ width:auto; height:auto; background:none; box-shadow:none; color:inherit; --icon-tint:hsl(var(--cv-hue, 20) 50% var(--pp-tl)); }
+    background:var(--pp-disc); color:var(--pp-icon); }
+  .ppDisc .medal{ width:auto; height:auto; background:none; box-shadow:none; color:inherit; --icon-tint:#F8CEDA; }
   .ppDisc .medal svg{ width:46px; height:46px; }
   .ppBadge{ position:absolute; left:50%; bottom:-7px; transform:translateX(-50%); white-space:nowrap;
     padding:5px 8px; border-radius:999px; background:var(--accent); color:var(--on-accent);
@@ -3296,7 +3168,7 @@ function reportError(err){
   .stampRow{ display:flex; flex-wrap:wrap; gap:14px 10px; padding:6px 2px 4px; }
   .stamp{ display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; flex:none;
     width:104px; height:104px; padding:0 8px; border-radius:50%; background:var(--bg); font:inherit; text-align:center; cursor:pointer;
-    color:hsl(var(--cv-hue, 20) 45% var(--st-l));
+    color:var(--stamp-accent);
     border:2px solid currentColor; box-shadow:inset 0 0 0 4px var(--bg), inset 0 0 0 5px currentColor; }
   .stamp:nth-child(3n+1){ transform:rotate(-8deg); }
   .stamp:nth-child(3n+2){ transform:rotate(5deg); }
@@ -3749,18 +3621,6 @@ function reportError(err){
   </div>
 
   <div class="homeSection">
-    <h2 class="homeSectionLabel">Appearance and sync</h2>
-    <div class="familyCard">
-      <p>Choose how Family Feature looks on this device.</p>
-      <div class="choiceGrid" id="themeChoices">
-        <button type="button" class="choiceChip" data-theme-choice="system" aria-pressed="false">Match device</button>
-        <button type="button" class="choiceChip" data-theme-choice="light" aria-pressed="false">Light</button>
-        <button type="button" class="choiceChip" data-theme-choice="dark" aria-pressed="false">Dark</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="homeSection">
     <h2 class="homeSectionLabel">Hidden from Tonight</h2>
     <div class="familyCard" id="hiddenTitlesCard">
       <p>Titles you skip, or mark as not interested, stay out of Tonight's picks for a while. Bring any back here.</p>
@@ -4006,7 +3866,6 @@ const MOVIES = MOVIES_BASE
   .concat(typeof MOVIES_SONYANIM !== 'undefined' ? MOVIES_SONYANIM : []);
 const STORAGE_KEY = "family-movie-watchlist-v1";
 const DEVICE_ID_KEY = "family-feature-device-id";
-const THEME_KEY = "family-feature-theme-v1";
 const RECENT_TONIGHT_PICKS_KEY = "family-feature-recent-tonight-picks-v1";
 // How many of the most recently shown Tonight picks to avoid repeating.
 // Deliberately a plain device-local list, not part of the synced `state`
@@ -6893,28 +6752,17 @@ function fillMovieDetail(detail, m, isOpen){
   detail.appendChild(guide);
 }
 
-// OpenUI 0.2+ picks light/dark itself from the OS unless
-// <html data-openui-theme> says otherwise. The app has its own Light / Dark /
-// Match device setting (data-theme on <html>), so mirror the app's effective
-// theme onto that attribute and keep it in sync when either one changes.
+// Family Feature has one light theme. Pin OpenUI to it so a dark OS setting
+// cannot introduce a second palette inside the Pre-show panel.
 function syncOpenUITheme(){
   const root = document.documentElement;
-  const appTheme = root.getAttribute('data-theme');
-  const effective = appTheme === 'light' || appTheme === 'dark'
-    ? appTheme
-    : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-  if(root.getAttribute('data-openui-theme') !== effective) root.setAttribute('data-openui-theme', effective);
+  if(root.getAttribute('data-openui-theme') !== 'light') root.setAttribute('data-openui-theme', 'light');
 }
 
 function watchOpenUITheme(){
   if(watchOpenUITheme.started) return;
   watchOpenUITheme.started = true;
   syncOpenUITheme();
-  new MutationObserver(syncOpenUITheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-  if(window.matchMedia){
-    const media = window.matchMedia('(prefers-color-scheme: dark)');
-    if(media.addEventListener) media.addEventListener('change', syncOpenUITheme);
-  }
 }
 
 function loadOpenUI(){
@@ -9923,54 +9771,6 @@ if(document.getElementById('pushAlertsBtn')){
   refreshPushAlertsButton();
 }
 
-function getThemePreference(){
-  try{
-    const pref = localStorage.getItem(THEME_KEY);
-    return (pref === 'light' || pref === 'dark') ? pref : 'system';
-  }catch(e){
-    return 'system';
-  }
-}
-
-function updateThemeColorMeta(pref){
-  const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const effectiveDark = pref === 'dark' || (pref === 'system' && systemDark);
-  let meta = document.getElementById('themeColorOverride');
-  if(!meta){
-    meta = document.createElement('meta');
-    meta.id = 'themeColorOverride';
-    meta.setAttribute('name', 'theme-color');
-    document.head.appendChild(meta);
-  }
-  meta.setAttribute('content', effectiveDark ? '#262624' : '#F7F5F0');
-}
-
-function applyTheme(pref){
-  if(pref === 'light' || pref === 'dark'){
-    document.documentElement.setAttribute('data-theme', pref);
-  }else{
-    document.documentElement.removeAttribute('data-theme');
-  }
-  try{
-    if(pref === 'system') localStorage.removeItem(THEME_KEY);
-    else localStorage.setItem(THEME_KEY, pref);
-  }catch(e){ /* storage unavailable; theme still applies for this load */ }
-
-  updateThemeColorMeta(pref);
-  document.querySelectorAll('#themeChoices .choiceChip').forEach(btn=>{
-    const selected = btn.dataset.themeChoice === pref;
-    btn.classList.toggle('selected', selected);
-    btn.setAttribute('aria-pressed', selected ? 'true' : 'false');
-  });
-}
-
-function initTheme(){
-  applyTheme(getThemePreference());
-  document.querySelectorAll('#themeChoices .choiceChip').forEach(btn=>{
-    btn.addEventListener('click', () => applyTheme(btn.dataset.themeChoice));
-  });
-}
-
 async function decideInitialScreen(){
   // A returning signed-in device's local storage can be empty (a cleared
   // browser, a new device, this device just never having synced yet) while
@@ -10003,7 +9803,7 @@ async function decideInitialScreen(){
 }
 
 initScreens();
-initTheme();
+syncOpenUITheme();
 loadState();
 loadRecentTonightPicks();
 loadNotInterested();
