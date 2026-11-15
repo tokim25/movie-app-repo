@@ -76,28 +76,15 @@ test('the warning line shows as plain text with the pick; the renderer loads onl
   await expect(page.locator('#tonightHeadsUp')).toContainText('Gentle. Nothing to prep for.');
 });
 
-test("Pre-show follows the app's theme setting, not the OS", async ({ page }) => {
-  await page.emulateMedia({ colorScheme: 'light' });
+test("Pre-show stays light when the OS is dark", async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'dark' });
   await prepare(page);
   await showPick(page, 'Finding Nemo');
   await openPreShow(page);
   await page.waitForFunction(() => window.__OpenUI);
   const openuiTheme = () => page.evaluate(() => document.documentElement.getAttribute('data-openui-theme'));
   await expect.poll(openuiTheme).toBe('light');
-
-  await page.evaluate(() => applyTheme('dark'));
-  await expect.poll(openuiTheme).toBe('dark');
-  // The renderer's own tokens switch with it (its dark background is near-black).
-  await expect.poll(() => page.evaluate(() =>
-    getComputedStyle(document.documentElement).getPropertyValue('--openui-background').trim())).toContain('0.145');
-
-  await page.evaluate(() => applyTheme('light'));
-  await expect.poll(openuiTheme).toBe('light');
-
-  // "Match device" hands the choice back to the OS.
-  await page.evaluate(() => applyTheme('system'));
-  await page.emulateMedia({ colorScheme: 'dark' });
-  await expect.poll(openuiTheme).toBe('dark');
+  await expect(page.locator('html')).toHaveCSS('color-scheme', 'light');
 });
 
 test('Pre-show stays hidden, and nothing loads, when there is no guidance data', async ({ page }) => {

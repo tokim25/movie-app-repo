@@ -27,11 +27,9 @@ test('stateful choices expose pressed state', async ({ page }) => {
   await expect(page.locator('[data-time="90"]')).toHaveAttribute('aria-pressed', 'false');
 
   await page.locator('#tabFamily').click();
-  const dark = page.locator('[data-theme-choice="dark"]');
-  await dark.click();
-  await expect(dark).toHaveAttribute('aria-pressed', 'true');
-  await expect(page.locator('[data-theme-choice="system"]')).toHaveAttribute('aria-pressed', 'false');
   await expect(page.locator('#tabFamily')).toHaveAttribute('aria-current', 'page');
+  await expect(page.locator('[data-theme-choice]')).toHaveCount(0);
+  await expect(page.locator('html')).toHaveCSS('color-scheme', 'light');
 });
 
 test('adults-only recommendations explain limits and expose evidence', async ({ page }) => {

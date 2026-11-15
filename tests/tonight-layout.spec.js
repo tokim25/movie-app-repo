@@ -122,7 +122,7 @@ test('on a wide screen the action bar stays in the card', async ({ page }) => {
   expect(position).toBe('static');
 });
 
-test.describe('in dark mode', () => {
+test.describe('with a dark OS preference', () => {
   test.use({ viewport: { width: 390, height: 844 }, colorScheme: 'dark' });
 
   test('amber and green picks, bar included, pass axe', async ({ page }) => {

@@ -194,7 +194,7 @@ test('the season card count follows who is watching', async ({ page }) => {
 });
 
 for (const scheme of ['light', 'dark']) {
-  test.describe(`in ${scheme} mode`, () => {
+  test.describe(`with a ${scheme} OS preference`, () => {
     test.use({ colorScheme: scheme });
 
     test('the Lists tab, an opened list and Shelf pass axe', async ({ page }) => {

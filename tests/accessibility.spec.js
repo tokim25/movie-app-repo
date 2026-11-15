@@ -38,7 +38,7 @@ test('the active bottom-nav tab label meets AA text contrast in light mode (#77)
   );
 });
 
-test('the active Want to watch filter meets AA contrast in dark mode', async ({ page }) => {
+test('the active Want to watch filter meets AA contrast with a dark OS preference', async ({ page }) => {
   await page.emulateMedia({ colorScheme: 'dark' });
   await switchToFlatView(page);
   await page.locator('#filterSheetBtn').click();
