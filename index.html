@@ -3215,52 +3215,46 @@ function reportError(err){
   .medal-xs{ width:30px; height:30px; background:var(--cv-bg); }
   .medal-xs svg{ width:20px; height:20px; }
 
-  /* passport card: the in-season list, and the top of an opened list */
+  /* passport card: one per list, and the top of an opened list */
+  .ppStack{ display:flex; flex-direction:column; gap:14px; }
   .passport{
-    display:grid; grid-template-columns:minmax(0, 1.15fr) minmax(0, 1fr); align-items:center; column-gap:8px;
-    width:100%; padding:24px 20px 22px 12px; margin:2px 0 8px; border:0; border-radius:28px;
+    display:grid; grid-template-columns:minmax(0, 1.25fr) minmax(0, 1fr); align-items:center; column-gap:4px;
+    width:100%; min-height:150px; padding:16px 16px 16px 12px; margin:0; border:0; border-radius:24px;
     background:var(--pp-bg); color:var(--ink); font:inherit; text-align:left;
-    box-shadow:0 10px 30px var(--pp-shadow), 0 2px 6px var(--pp-shadow);
+    box-shadow:0 0 0 1px var(--pp-line), 0 8px 24px var(--pp-shadow), 0 2px 4px var(--pp-shadow);
   }
   button.passport{ cursor:pointer; }
-  .ppId{ display:flex; flex-direction:column; align-items:center; text-align:center; min-width:0; }
-  .ppDisc{ position:relative; display:grid; place-items:center; width:108px; height:108px; margin-bottom:12px; border-radius:50%;
+  .ppId{ display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center; min-width:0; }
+  .ppDisc{ position:relative; display:grid; place-items:center; width:84px; height:84px; border-radius:50%;
     background:hsl(var(--cv-hue, 20) var(--pp-ds) var(--pp-dl)); color:hsl(var(--cv-hue, 20) 45% var(--pp-il)); }
   .ppDisc .medal{ width:auto; height:auto; background:none; box-shadow:none; color:inherit; --icon-tint:hsl(var(--cv-hue, 20) 50% var(--pp-tl)); }
-  .ppDisc .medal svg{ width:58px; height:58px; }
-  .ppBadge{ position:absolute; right:-2px; bottom:2px; display:grid; place-items:center; width:34px; height:34px; border-radius:50%;
-    background:var(--accent); color:var(--on-accent); box-shadow:0 0 0 3px var(--pp-bg); }
-  .ppBadge svg{ width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; }
-  .ppName{ margin:0; font:800 23px/1.12 Inter, system-ui, sans-serif; letter-spacing:-0.02em; overflow-wrap:anywhere; }
+  .ppDisc .medal svg{ width:46px; height:46px; }
+  .ppBadge{ position:absolute; left:50%; bottom:-7px; transform:translateX(-50%); white-space:nowrap;
+    padding:5px 8px; border-radius:999px; background:var(--accent); color:var(--on-accent);
+    font-size:10px; font-weight:700; line-height:1; letter-spacing:0.04em; text-transform:uppercase; }
+  .ppName{ margin:0; font-family:"Newsreader", Georgia, serif; font-weight:700; font-size:19px; line-height:1.15; overflow-wrap:anywhere; }
   .ppName:focus{ outline:none; }
   .ppName:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
-  .ppSub{ margin-top:4px; font-size:14px; line-height:1.3; color:var(--ink-soft); }
-  .ppStats{ display:flex; flex-direction:column; padding-left:10px; min-width:0; }
-  .ppStat{ padding:10px 0; border-bottom:1px solid var(--pp-line); }
-  .ppStat:first-child{ padding-top:0; }
-  .ppStat:last-child{ padding-bottom:0; border-bottom:0; }
-  .ppNum{ display:block; font:800 24px/1.05 Inter, system-ui, sans-serif; letter-spacing:-0.02em; }
-  .ppLbl{ display:block; margin-top:2px; font-size:12.5px; font-weight:600; line-height:1.25; color:var(--ink); }
+  .ppSub{ font-size:13px; line-height:1.3; color:var(--ink-soft); }
+  .ppStats{ display:flex; flex-direction:column; padding-left:12px; min-width:0; }
+  .ppStat{ padding:9px 0; border-bottom:1px solid var(--pp-line); }
+  .ppStat:last-child{ border-bottom:0; }
+  .ppNum{ display:block; font-size:21px; font-weight:700; line-height:1.05; letter-spacing:-0.01em; }
+  .ppLbl{ display:block; margin-top:3px; font-size:11px; font-weight:600; line-height:1.2; color:var(--ink-soft); }
 
-  /* stamps: every other list, in a two-column grid */
-  .stampGrid{ display:grid; grid-template-columns:1fr 1fr; gap:18px 14px; }
-  .stamp{ display:flex; flex-direction:column; min-width:0; padding:0; border:0; background:none; font:inherit; color:var(--ink); text-align:center; cursor:pointer; }
-  .stampFace{ position:relative; display:block; height:118px; color:hsl(var(--cv-hue, 20) var(--st-s) var(--st-l)); }
-  .stampFrame{ position:absolute; inset:0; width:100%; height:100%; overflow:visible; fill:none; stroke:currentColor; stroke-width:3; }
-  .stamp.later .stampFrame{ stroke-dasharray:7 5; }
-  .stampName{ position:absolute; top:13px; left:14px; right:14px; font:800 17px/1.08 Inter, system-ui, sans-serif; letter-spacing:-0.02em; text-align:left; overflow-wrap:anywhere; }
-  .stampCode{ position:absolute; left:14px; bottom:13px; font-size:11.5px; font-weight:800; line-height:1; letter-spacing:0.04em; text-transform:uppercase; }
-  .stampArt{ position:absolute; right:10px; bottom:9px; }
-  .stampArt .medal{ width:auto; height:auto; background:none; box-shadow:none; color:inherit; --icon-tint:transparent; }
-  .stampArt .medal svg{ width:40px; height:40px; }
-  .stamp.tag .stampName{ left:38px; text-align:right; }
-  .stamp.tag .stampCode{ left:auto; right:14px; top:13px; bottom:auto; }
-  .stamp.tag .stampName{ top:auto; bottom:13px; }
-  .stamp.tag .stampArt{ right:auto; left:34px; top:12px; bottom:auto; }
-  .stamp.ticket .stampName, .stamp.ticket .stampCode{ left:22px; }
-  .stamp.ticket .stampArt{ right:22px; }
-  .stampCap{ display:block; margin-top:8px; font-size:14px; line-height:1.3; color:var(--ink); }
-  .stampWhen{ display:block; font-size:13px; line-height:1.3; color:var(--ink-soft); }
+  /* round stamps: lists that come back later */
+  .stampRow{ display:flex; flex-wrap:wrap; gap:14px 10px; padding:6px 2px 4px; }
+  .stamp{ display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; flex:none;
+    width:104px; height:104px; padding:0 8px; border-radius:50%; background:var(--bg); font:inherit; text-align:center; cursor:pointer;
+    color:hsl(var(--cv-hue, 20) 45% var(--st-l));
+    border:2px solid currentColor; box-shadow:inset 0 0 0 4px var(--bg), inset 0 0 0 5px currentColor; }
+  .stamp:nth-child(3n+1){ transform:rotate(-8deg); }
+  .stamp:nth-child(3n+2){ transform:rotate(5deg); }
+  .stamp:nth-child(3n){ transform:rotate(-3deg); }
+  .stamp .medal{ width:auto; height:auto; background:none; box-shadow:none; color:inherit; --icon-tint:transparent; }
+  .stamp .medal svg{ width:24px; height:24px; }
+  .stampName{ max-width:84px; font-size:9.5px; font-weight:800; line-height:1.1; letter-spacing:0.06em; text-transform:uppercase; }
+  .stampWhen{ font-size:10px; font-weight:700; line-height:1; }
 
   /* tucked away */
   .tucked{ margin-top:26px; padding:16px; border:1.5px dashed var(--line); border-radius:14px; }
@@ -3342,22 +3336,18 @@ function reportError(err){
     .qbBtn span{ white-space:nowrap; }
   }
   @media (max-width:360px){
-    .stampGrid{ gap:16px 10px; }
-    .stampFace{ height:108px; }
-    .stampName{ font-size:15.5px; left:12px; right:12px; }
-    .stamp.tag .stampName{ left:32px; }
-    .stampArt .medal svg{ width:34px; height:34px; }
-    .passport{ padding:20px 14px 18px 8px; }
-    .ppDisc{ width:88px; height:88px; }
-    .ppDisc .medal svg{ width:48px; height:48px; }
-    .ppName{ font-size:20px; }
-    .ppNum{ font-size:19px; white-space:nowrap; }
+    .passport{ padding:14px 12px 14px 8px; }
+    .ppDisc{ width:70px; height:70px; }
+    .ppDisc .medal svg{ width:38px; height:38px; }
+    .ppName{ font-size:17px; }
+    .ppNum{ font-size:18px; white-space:nowrap; }
+    .stamp{ width:88px; height:88px; }
     .rows .poster.rowPoster{ width:48px; }
     .qbBtn span{ font-size:10.5px; letter-spacing:-0.02em; }
   }
   @media (prefers-reduced-motion:no-preference){
-    .stampFace, .passport{ transition:transform 0.2s ease; }
-    .stamp:hover .stampFace, .stamp:focus-visible .stampFace{ transform:rotate(-2deg) scale(1.02); }
+    .passport{ transition:transform 0.2s ease; }
+    .passport:hover{ transform:translateY(-2px); }
   }
 </style>
 </head>
@@ -5437,28 +5427,26 @@ function listYearSpan(list){
   const lo = Math.min(...years), hi = Math.max(...years);
   return lo === hi ? String(lo) : `${lo}–${hi}`;
 }
-// A passport card: big icon and name on the left, three numbers on the right.
-// Used for the in-season list (a button) and the top of an opened list.
-function createPassport(list, opts){
+// A passport card: big icon, name and one line of copy on the left, three
+// numbers on the right. Used for every list, and the top of an opened list.
+function createPassport(list, opts = {}){
   const card = document.createElement(opts.tag || 'button');
-  card.className = 'passport listCover';
+  card.className = 'passport listCover' + (opts.badge ? ' hero' : '');
   card.dataset.list = list.id;
-  if(card.tagName === 'BUTTON') card.type = 'button';
+  if(card.tagName === 'BUTTON'){
+    card.type = 'button';
+    card.onclick = () => openList(list.id);
+  }
   applyListHue(card, list);
   const id = document.createElement(card.tagName === 'BUTTON' ? 'span' : 'div');
   id.className = 'ppId';
   const disc = spanText('ppDisc', '');
   disc.appendChild(createListMedal(list.id));
-  if(opts.badge){
-    const badge = spanText('ppBadge', '');
-    badge.setAttribute('aria-hidden', 'true');
-    badge.innerHTML = '<svg viewBox="0 0 24 24"><path d="M4 9h16v11H4zM4 9l3-5M10 9l3-5M16 9l3-5"/></svg>';
-    disc.appendChild(badge);
-  }
+  if(opts.badge) disc.appendChild(spanText('ppBadge', opts.badge));
   id.appendChild(disc);
-  const name = opts.nameEl || spanText('ppName', list.name);
-  id.appendChild(name);
-  if(opts.sub) id.appendChild(spanText('ppSub', opts.sub));
+  id.appendChild(opts.nameEl || spanText('ppName', list.name));
+  const sub = opts.sub !== undefined ? opts.sub : list.copy;
+  if(sub) id.appendChild(spanText('ppSub', sub));
   const stats = spanText('ppStats', '');
   const stat = (num, label) => {
     const row = spanText('ppStat', '');
@@ -5466,61 +5454,32 @@ function createPassport(list, opts){
     row.appendChild(spanText('ppLbl', label));
     stats.appendChild(row);
   };
-  if(selectedKids().length) stat(String(listFitCount(list)), `Fit ${kidNames()}`);
-  stat(String(listIndices(list).length), 'Films');
+  if(selectedKids().length) stat(String(listFitCount(list)), `fit ${kidNames()}`);
+  stat(String(listIndices(list).length), 'films');
   const span = listYearSpan(list);
-  if(span) stat(span, 'Years');
+  if(span) stat(span, 'years');
   card.appendChild(id);
   card.appendChild(stats);
   return card;
 }
-function createListHero(list, today){
-  const until = listUntilText(list, today);
-  const hero = createPassport(list, { badge: true, sub: `Now showing${until ? ` · ${until}` : ''}` });
-  hero.onclick = () => openList(list.id);
-  return hero;
+function passportStack(lists, optsFor){
+  const stack = document.createElement('div');
+  stack.className = 'ppStack';
+  lists.forEach(list => stack.appendChild(createPassport(list, optsFor ? optsFor(list) : {})));
+  return stack;
 }
-// Stamp outlines, drawn in a 176×124 box and stretched to fit.
-const STAMP_SHAPES = {
-  rect: 'M14 2H162Q174 2 174 14V110Q174 122 162 122H14Q2 122 2 110V14Q2 2 14 2Z',
-  tag: 'M40 2H162Q174 2 174 14V110Q174 122 162 122H40Q34 122 30 117L4 68Q1 62 4 56L30 7Q34 2 40 2Z',
-  ticket: 'M14 2H162Q174 2 174 14V44A18 18 0 0 0 174 80V110Q174 122 162 122H14Q2 122 2 110V80A18 18 0 0 0 2 44V14Q2 2 14 2Z'
-};
-const STAMP_ORDER = ['rect', 'tag', 'ticket', 'rect', 'ticket', 'tag'];
-function createListStamp(list, index, opts){
-  const shape = STAMP_ORDER[index % STAMP_ORDER.length];
+// A round rubber stamp for a list that is out of season.
+function createListStamp(list, today){
   const stamp = document.createElement('button');
   stamp.type = 'button';
-  stamp.className = `stamp listCover ${shape}` + (opts.later ? ' later' : '');
+  stamp.className = 'stamp listCover';
   stamp.dataset.list = list.id;
   applyListHue(stamp, list);
-  const face = spanText('stampFace', '');
-  face.setAttribute('aria-hidden', 'true');
-  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-  svg.setAttribute('class', 'stampFrame');
-  svg.setAttribute('viewBox', '0 0 176 124');
-  svg.setAttribute('preserveAspectRatio', 'none');
-  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-  path.setAttribute('d', STAMP_SHAPES[shape]);
-  path.setAttribute('vector-effect', 'non-scaling-stroke');
-  svg.appendChild(path);
-  face.appendChild(svg);
-  face.appendChild(spanText('stampName', list.short || list.name));
-  face.appendChild(spanText('stampCode', opts.code));
-  const art = spanText('stampArt', '');
-  art.appendChild(createListMedal(list.id));
-  face.appendChild(art);
-  stamp.appendChild(face);
-  stamp.appendChild(spanText('stampCap', list.name));
-  stamp.appendChild(spanText('stampWhen', opts.when));
+  stamp.appendChild(createListMedal(list.id));
+  stamp.appendChild(spanText('stampName', list.short || list.name));
+  stamp.appendChild(spanText('stampWhen', listBackText(list, today)));
   stamp.onclick = () => openList(list.id);
   return stamp;
-}
-function stampGrid(lists, optsFor){
-  const grid = document.createElement('div');
-  grid.className = 'stampGrid';
-  lists.forEach((list, i) => grid.appendChild(createListStamp(list, i, optsFor(list))));
-  return grid;
 }
 function createShelfSection(id, name, aside, children){
   const section = document.createElement('section');
@@ -5563,29 +5522,29 @@ function renderListsIndex(){
   const inSeason = visible.filter(list => listInSeason(list, today));
   if(inSeason.length){
     const dayLabel = today.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
-    const nodes = [createListHero(inSeason[0], today)];
-    if(inSeason.length > 1) nodes.push(stampGrid(inSeason.slice(1), list => ({ code: listFitLine(list), when: listUntilText(list, today) })));
-    body.appendChild(createShelfSection('season', 'In season', dayLabel, nodes));
+    const until = list => listUntilText(list, today);
+    const stack = passportStack(inSeason, list => list === inSeason[0]
+      ? { badge: 'Now showing', sub: `${list.copy} · ${until(list)}` }
+      : { sub: `${list.copy} · ${until(list)}` });
+    body.appendChild(createShelfSection('season', 'In season', dayLabel, [stack]));
   }
 
   const shelves = typeof MOVIE_LIST_SHELVES !== 'undefined' ? MOVIE_LIST_SHELVES : [];
   const shelved = new Set();
-  const yearRound = list => ({ code: listYearSpan(list).replace(/(\d{2})(\d{2})/g, '’$2'), when: listFitLine(list) });
   shelves.forEach(shelf => {
     shelf.lists.forEach(id => shelved.add(id));
     const lists = shelf.lists.map(listById).filter(list => list && visible.includes(list));
-    if(lists.length) body.appendChild(createShelfSection(shelf.id, shelf.name, shelf.aside, [stampGrid(lists, yearRound)]));
+    if(lists.length) body.appendChild(createShelfSection(shelf.id, shelf.name, shelf.aside, [passportStack(lists)]));
   });
   const loose = visible.filter(list => !isSeasonal(list) && !shelved.has(list.id));
-  if(loose.length) body.appendChild(createShelfSection('more', 'More lists', '', [stampGrid(loose, yearRound)]));
+  if(loose.length) body.appendChild(createShelfSection('more', 'More lists', '', [passportStack(loose)]));
 
   const later = visible.filter(list => isSeasonal(list) && !listInSeason(list, today));
   if(later.length){
-    const grid = stampGrid(later, list => {
-      const back = listBackText(list, today);
-      return { later: true, code: back.replace(/^Back /, ''), when: `${back} · ${listFitLine(list)}` };
-    });
-    body.appendChild(createShelfSection('later', 'Coming back later', 'Open any time', [grid]));
+    const row = document.createElement('div');
+    row.className = 'stampRow';
+    later.forEach(list => row.appendChild(createListStamp(list, today)));
+    body.appendChild(createShelfSection('later', 'Coming back later', 'Open any time', [row]));
   }
 
   if(!visible.length){
@@ -5677,8 +5636,8 @@ function renderOpenList(list){
   name.textContent = list.name;
   const sub = inSeason
     ? `In season · ${listUntilText(list, today)}`
-    : (list.season || list.dates) ? listBackText(list, today) : '';
-  const cover = createPassport(list, { tag: 'section', nameEl: name, badge: inSeason, sub });
+    : (list.season || list.dates) ? listBackText(list, today) : undefined;
+  const cover = createPassport(list, { tag: 'section', nameEl: name, badge: inSeason ? 'Now showing' : '', sub });
   cover.setAttribute('aria-labelledby', 'openListName');
   open.appendChild(cover);
   const blurb = document.createElement('p');
