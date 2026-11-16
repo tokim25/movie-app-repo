@@ -3187,17 +3187,16 @@ function reportError(err){
   .ppNum{ display:block; font-size:21px; font-weight:700; line-height:1.05; letter-spacing:-0.01em; }
   .ppLbl{ display:block; margin-top:3px; font-size:11px; font-weight:600; line-height:1.2; color:var(--ink-soft); }
 
-  /* Intact tickets: upcoming seasonal lists. The dashed date edge reads as
-     a future admission ticket, not a collected passport stamp. */
-  .ticketRow{ display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:10px; padding:4px 0; }
-  .comingTicket{
-    position:relative;
+  /* Calendar cards make each seasonal list's return date the useful cue. */
+  .calendarRow{ display:grid; gap:10px; padding:4px 0; }
+  .returnCalendar{
     display:grid;
-    grid-template-columns:minmax(0, 1fr) 50px;
+    grid-template-columns:54px minmax(0, 1fr) 30px;
+    align-items:center;
+    gap:12px;
     min-width:0;
-    min-height:86px;
-    padding:0;
-    overflow:hidden;
+    min-height:76px;
+    padding:9px 12px 9px 9px;
     border:1px solid var(--line);
     border-radius:14px;
     background:var(--surface);
@@ -3207,50 +3206,32 @@ function reportError(err){
     text-align:left;
     cursor:pointer;
   }
-  .ticketMain{
-    display:grid;
-    grid-template-columns:28px minmax(0, 1fr);
-    align-items:center;
-    gap:7px;
-    min-width:0;
-    padding:11px 9px;
-  }
-  .comingTicket .medal{
-    width:28px;
-    height:28px;
-    background:var(--new-bg);
-    box-shadow:none;
-    color:var(--accent-text);
-  }
-  .comingTicket .medal svg{ width:19px; height:19px; }
-  .ticketName{ min-width:0; font-size:13px; font-weight:600; line-height:1.15; overflow-wrap:anywhere; }
-  .ticketDate{
-    position:relative;
+  .calendarDate{
+    align-self:stretch;
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
     gap:3px;
-    padding:8px 3px;
-    border-left:1px dashed var(--line);
+    border:1px solid var(--line);
+    border-radius:10px;
     background:var(--bg-sub);
     color:var(--accent-text);
     text-align:center;
   }
-  .ticketDate::before,
-  .ticketDate::after{
-    content:"";
-    position:absolute;
-    left:-5px;
-    width:9px;
-    height:9px;
-    border-radius:50%;
-    background:var(--bg);
+  .calendarMonth{ font-size:9px; font-weight:700; line-height:1; letter-spacing:0.07em; text-transform:uppercase; }
+  .calendarDay{ font-size:22px; font-weight:700; line-height:1; letter-spacing:-0.03em; }
+  .calendarCopy{ min-width:0; }
+  .calendarName{ display:block; min-width:0; font-size:15px; font-weight:700; line-height:1.15; overflow-wrap:anywhere; }
+  .calendarReturn{ display:block; margin-top:4px; color:var(--ink-soft); font-size:12px; font-weight:500; line-height:1.2; }
+  .returnCalendar .medal{
+    width:30px;
+    height:30px;
+    background:var(--new-bg);
+    box-shadow:none;
+    color:var(--accent-text);
   }
-  .ticketDate::before{ top:-5px; }
-  .ticketDate::after{ bottom:-5px; }
-  .ticketReturn{ font-size:8px; font-weight:700; line-height:1; letter-spacing:0.05em; text-transform:uppercase; }
-  .ticketWhen{ font-size:12px; font-weight:700; line-height:1.05; }
+  .returnCalendar .medal svg{ width:19px; height:19px; }
 
   /* tucked away */
   .tucked{ margin-top:26px; padding:16px; border:1.5px dashed var(--line); border-radius:14px; }
@@ -3373,13 +3354,12 @@ function reportError(err){
     .ppDisc .medal svg{ width:38px; height:38px; }
     .ppName{ font-size:17px; }
     .ppNum{ font-size:18px; white-space:nowrap; }
-    .ticketRow{ gap:8px; }
-    .comingTicket{ grid-template-columns:minmax(0, 1fr) 44px; min-height:82px; }
-    .ticketMain{ grid-template-columns:24px minmax(0, 1fr); gap:5px; padding:9px 7px; }
-    .comingTicket .medal{ width:24px; height:24px; }
-    .comingTicket .medal svg{ width:17px; height:17px; }
-    .ticketName{ font-size:12px; }
-    .ticketWhen{ font-size:11px; }
+    .calendarRow{ gap:8px; }
+    .returnCalendar{ grid-template-columns:48px minmax(0, 1fr) 26px; gap:9px; min-height:72px; padding:8px 10px 8px 8px; }
+    .calendarDay{ font-size:20px; }
+    .calendarName{ font-size:14px; }
+    .returnCalendar .medal{ width:26px; height:26px; }
+    .returnCalendar .medal svg{ width:17px; height:17px; }
     .rows .poster.rowPoster{ width:48px; }
     #list.shelfCompact .poster.rowPoster{ width:32px; }
     .densityControl button{ padding:0 9px; }
@@ -5527,29 +5507,32 @@ function passportStack(lists, optsFor){
   lists.forEach(list => stack.appendChild(createPassport(list, optsFor ? optsFor(list) : {})));
   return stack;
 }
-// An intact admission ticket for a list that is out of season.
-function createComingTicket(list, today){
-  const ticket = document.createElement('button');
-  ticket.type = 'button';
-  ticket.className = 'comingTicket listCover';
-  ticket.dataset.list = list.id;
-  applyListHue(ticket, list);
-
-  const main = document.createElement('span');
-  main.className = 'ticketMain';
-  main.appendChild(createListMedal(list.id));
-  main.appendChild(spanText('ticketName', list.short || list.name));
+// A compact calendar card for a list that is out of season.
+function createReturnCalendar(list, today){
+  const card = document.createElement('button');
+  card.type = 'button';
+  card.className = 'returnCalendar listCover';
+  card.dataset.list = list.id;
+  applyListHue(card, list);
 
   const returnText = listBackText(list, today);
+  const match = returnText.match(/^Returns ([A-Z][a-z]{2}) (\d{1,2})$/);
   const date = document.createElement('span');
-  date.className = 'ticketDate';
-  date.appendChild(spanText('ticketReturn', returnText === 'Open any time' ? 'Available' : 'Returns'));
-  date.appendChild(spanText('ticketWhen', returnText === 'Open any time' ? 'Anytime' : returnText.replace(/^Returns /, '')));
+  date.className = 'calendarDate';
+  date.setAttribute('aria-hidden', 'true');
+  date.appendChild(spanText('calendarMonth', match ? match[1] : 'Any'));
+  date.appendChild(spanText('calendarDay', match ? match[2] : '—'));
 
-  ticket.appendChild(main);
-  ticket.appendChild(date);
-  ticket.onclick = () => openList(list.id);
-  return ticket;
+  const copy = document.createElement('span');
+  copy.className = 'calendarCopy';
+  copy.appendChild(spanText('calendarName', list.short || list.name));
+  copy.appendChild(spanText('calendarReturn', returnText));
+
+  card.appendChild(date);
+  card.appendChild(copy);
+  card.appendChild(createListMedal(list.id));
+  card.onclick = () => openList(list.id);
+  return card;
 }
 function createShelfSection(id, name, aside, children){
   const section = document.createElement('section');
@@ -5612,8 +5595,8 @@ function renderListsIndex(){
   const later = visible.filter(list => isSeasonal(list) && !listInSeason(list, today));
   if(later.length){
     const row = document.createElement('div');
-    row.className = 'ticketRow';
-    later.forEach(list => row.appendChild(createComingTicket(list, today)));
+    row.className = 'calendarRow';
+    later.forEach(list => row.appendChild(createReturnCalendar(list, today)));
     body.appendChild(createShelfSection('later', 'Coming attractions', 'Browse any list now', [row]));
   }
 
