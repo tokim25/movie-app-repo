@@ -263,7 +263,9 @@ test('Shelf Details keeps focus and stable disclosure semantics through rerender
   await expect(page.locator(':focus')).toHaveAttribute('aria-expanded', 'true');
   await expect(page.locator(`#${controlledId}`)).toBeVisible();
 
-  await page.locator('#listShowMoreBtn').click();
+  // Dispatch directly, as pagination.spec.js does: scrolling to the button
+  // would trigger the automatic loader first and make this test racy.
+  await page.locator('#listShowMoreBtn').dispatchEvent('click');
   await expect(page.locator('#list > li.row').nth(50).locator('.rowMain')).toBeFocused();
 
   const restoredDetails = page.locator('#list > li.row').filter({ hasText: title }).first().locator('.detailLink');

@@ -106,6 +106,21 @@ test('the permanent rail switches from decades to A-Z when sorted by title', asy
   await expect(page.locator('#shelfJumpRail')).toBeVisible();
 });
 
+// Tabbing to Show 50 more scrolls it into view, which can trigger the
+// automatic loader before the key press. The press must then focus the first
+// title auto-load added, not load another 50 and skip past them.
+test('a keyboard press on Show 50 more after an auto-load focuses that batch instead of skipping it', async ({ page }) => {
+  await page.goto('/');
+  await setupSampleFamily(page);
+  await page.locator('#tabBrowse').click();
+  await expect(page.locator('#list > li.row')).toHaveCount(50);
+  await page.locator('#listShowMoreBtn').focus();
+  await expect(page.locator('#list > li.row')).toHaveCount(100);
+  await page.keyboard.press('Enter');
+  await expect(page.locator('#list > li.row').nth(50).locator('.rowMain')).toBeFocused();
+  await expect(page.locator('#list > li.row')).toHaveCount(100);
+});
+
 test('nearing the end automatically loads the next 50 without moving focus', async ({ page }) => {
   await page.goto('/');
   await setupSampleFamily(page);
