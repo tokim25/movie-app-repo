@@ -7,7 +7,8 @@ import { expectNoA11yViolations } from './a11y.js';
 // themed shelves, out-of-season lists as calendar cards under "Coming
 // attractions" and tucked-away lists in a box at the bottom. The first in-season list also gets a card on Tonight.
 // A list with fewer than 5 titles that fit the selected kids is not shown
-// (Hanukkah needs only 2).
+// (A small number of intentionally narrow representation lists set a lower
+// threshold explicitly while the catalog grows).
 
 async function startOn(page, isoDate) {
   await page.clock.setFixedTime(new Date(isoDate));
@@ -197,6 +198,33 @@ test('the season card count follows who is watching', async ({ page }) => {
   await watchAsAdultsOnly(page);
   await expect(page.locator('#tonightSeasonCard')).not.toContainText('Simon');
   await expect(page.locator('#tonightSeasonCard')).toContainText('films');
+});
+
+test('the seven new community, family and curiosity lists are available', async ({ page }) => {
+  await startOn(page, '2026-11-16T19:00:00');
+  await watchAsAdultsOnly(page);
+  await openLists(page);
+
+  for (const name of [
+    'Muslim kids at the center',
+    'Sibling teams',
+    'Girls lead the way',
+    'Food, family and the table',
+    'Inventors and problem-solvers',
+    'Around the world'
+  ]) {
+    await expect(page.locator('#listsBody .passport', { hasText: name })).toHaveCount(1);
+  }
+  await expect(page.locator('#listsBody .returnCalendar', { hasText: 'Ramadan & Eid' })).toHaveCount(1);
+});
+
+test('during Ramadan, Tonight opens Ramadan nights and Eid mornings with American Eid first', async ({ page }) => {
+  await startOn(page, '2027-02-08T19:00:00');
+  await watchAsAdultsOnly(page);
+  await expect(page.locator('#tonightSeasonCard')).toContainText('Ramadan nights and Eid mornings');
+  await page.locator('#tonightSeasonCard').click();
+  await expect(page.locator('#openListName')).toHaveText('Ramadan nights and Eid mornings');
+  await expect(page.locator('#openListRows > li.row').first()).toContainText('American Eid');
 });
 
 for (const scheme of ['light', 'dark']) {
