@@ -3218,10 +3218,42 @@ function reportError(err){
   }
   button.passport{ cursor:pointer; }
   .ppId{ display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center; min-width:0; }
-  .ppDisc{ position:relative; display:grid; place-items:center; width:84px; height:84px; border-radius:50%;
-    background:color-mix(in oklab, var(--icon-3, var(--pp-disc)) 32%, white); color:var(--pp-icon); }
-  .ppDisc .medal{ width:auto; height:auto; background:none; box-shadow:none; color:var(--icon-line, inherit); --icon-tint:var(--icon-1, #F8CEDA); }
-  .ppDisc .medal svg{ width:46px; height:46px; }
+  .ppFan{
+    position:relative;
+    display:block;
+    width:112px;
+    height:88px;
+    flex:none;
+  }
+  .ppFanPoster{
+    position:absolute;
+    top:9px;
+    left:31px;
+    width:50px;
+    aspect-ratio:2 / 3;
+    overflow:hidden;
+    border:2px solid var(--surface);
+    border-radius:7px;
+    background:var(--bg-sub);
+    box-shadow:0 6px 12px rgba(var(--shadow-rgb),0.20);
+    transform:rotate(0deg);
+  }
+  .ppFanPoster:first-child{ left:5px; top:14px; transform:rotate(-7deg); }
+  .ppFanPoster:last-child{ left:57px; top:14px; transform:rotate(7deg); }
+  .ppFanPoster:nth-child(2){ z-index:2; }
+  .ppFanPoster:first-child:nth-last-child(2){ left:17px; top:13px; transform:rotate(-6deg); }
+  .ppFanPoster:first-child:nth-last-child(2) + .ppFanPoster{ left:45px; top:8px; transform:rotate(6deg); z-index:2; }
+  .ppFanPoster img{ width:100%; height:100%; display:block; object-fit:cover; }
+  .ppFanPoster.isFallback{
+    display:grid;
+    place-items:center;
+    padding:4px;
+    color:var(--ink-soft);
+    font-size:9px;
+    font-weight:700;
+    line-height:1.1;
+    text-align:center;
+  }
   .ppBadge{ position:absolute; left:50%; bottom:-7px; transform:translateX(-50%); white-space:nowrap;
     padding:5px 8px; border-radius:999px; background:var(--accent); color:var(--on-accent);
     font-size:10px; font-weight:700; line-height:1; letter-spacing:0.04em; text-transform:uppercase; }
@@ -3399,8 +3431,12 @@ function reportError(err){
   }
   @media (max-width:360px){
     .passport{ padding:14px 12px 14px 8px; }
-    .ppDisc{ width:70px; height:70px; }
-    .ppDisc .medal svg{ width:38px; height:38px; }
+    .ppFan{ width:96px; height:76px; }
+    .ppFanPoster{ width:42px; left:27px; top:6px; }
+    .ppFanPoster:first-child{ left:5px; top:10px; }
+    .ppFanPoster:last-child{ left:49px; top:10px; }
+    .ppFanPoster:first-child:nth-last-child(2){ left:15px; top:10px; }
+    .ppFanPoster:first-child:nth-last-child(2) + .ppFanPoster{ left:39px; top:6px; }
     .ppName{ font-size:17px; }
     .ppNum{ font-size:18px; white-space:nowrap; }
     .calendarRow{ gap:8px; }
@@ -5502,6 +5538,41 @@ function createListIcon(id){
   icon.innerHTML = svg;
   return icon;
 }
+function createListPosterFan(list){
+  const fan = document.createElement('span');
+  fan.className = 'ppFan';
+  fan.setAttribute('aria-hidden', 'true');
+  const orderedMovies = listIndices(list).map(idx => MOVIES[idx]);
+  const moviesWithArt = orderedMovies.filter(movie => typeof MOVIE_POSTERS !== 'undefined' && MOVIE_POSTERS[movie.num]?.u);
+  const moviesWithoutArt = orderedMovies.filter(movie => !moviesWithArt.includes(movie));
+  const movies = (moviesWithArt.length >= 2 ? moviesWithArt : moviesWithArt.concat(moviesWithoutArt)).slice(0, 3);
+  movies.forEach(movie => {
+    const frame = document.createElement('span');
+    frame.className = 'ppFanPoster';
+    const art = typeof MOVIE_POSTERS !== 'undefined' ? MOVIE_POSTERS[movie.num] : null;
+    if(art && art.u){
+      const img = document.createElement('img');
+      img.alt = '';
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.fetchPriority = 'low';
+      img.width = art.w || 200;
+      img.height = art.h || 300;
+      img.src = art.u;
+      img.onerror = () => {
+        img.remove();
+        frame.classList.add('isFallback');
+        frame.textContent = movie.y || 'Movie';
+      };
+      frame.appendChild(img);
+    }else{
+      frame.classList.add('isFallback');
+      frame.textContent = movie.y || 'Movie';
+    }
+    fan.appendChild(frame);
+  });
+  return fan;
+}
 function spanText(className, text){
   const span = document.createElement('span');
   span.className = className;
@@ -5515,7 +5586,7 @@ function listYearSpan(list){
   const lo = Math.min(...years), hi = Math.max(...years);
   return lo === hi ? String(lo) : `${lo}–${hi}`;
 }
-// A passport card: big icon, name and one line of copy on the left, three
+// A passport card: a fan of its first three curated movies, name and one line of copy on the left, three
 // numbers on the right. Used for every list, and the top of an opened list.
 function createPassport(list, opts = {}){
   const card = document.createElement(opts.tag || 'button');
@@ -5527,11 +5598,9 @@ function createPassport(list, opts = {}){
   }
   const id = document.createElement(card.tagName === 'BUTTON' ? 'span' : 'div');
   id.className = 'ppId';
-  const disc = spanText('ppDisc', '');
-  disc.dataset.listIcon = list.id;
-  disc.appendChild(createListMedal(list.id));
-  if(opts.badge) disc.appendChild(spanText('ppBadge', opts.badge));
-  id.appendChild(disc);
+  const fan = createListPosterFan(list);
+  if(opts.badge) fan.appendChild(spanText('ppBadge', opts.badge));
+  id.appendChild(fan);
   id.appendChild(opts.nameEl || spanText('ppName', list.name));
   const sub = opts.sub !== undefined ? opts.sub : list.copy;
   if(sub) id.appendChild(spanText('ppSub', sub));

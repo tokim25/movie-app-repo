@@ -156,44 +156,36 @@ test('Shelf points to the Lists tab', async ({ page }) => {
   await expect(page.locator('#listsScreenHeading')).toBeFocused();
 });
 
-test('every passport card, return calendar and the season card show a decorative icon', async ({ page }) => {
+test('passport cards show poster fans while compact seasonal contexts keep decorative icons', async ({ page }) => {
   await startOn(page, '2026-12-18T19:00:00');
   await page.locator('#tabHome').click();
   await expect(page.locator('#tonightSeasonCard .listIcon[aria-hidden="true"] svg')).toHaveCount(1);
   await openLists(page);
-  const covers = page.locator('#listsBody .listCover');
-  const count = await covers.count();
-  expect(count).toBeGreaterThan(10);
-  await expect(page.locator('#listsBody .listCover .medal svg')).toHaveCount(count);
-  await expect(page.locator('#listsBody .listCover .medal[aria-hidden="true"]')).toHaveCount(count);
+  const passports = page.locator('#listsBody .passport');
+  const passportCount = await passports.count();
+  expect(passportCount).toBeGreaterThan(10);
+  await expect(page.locator('#listsBody .passport .ppFan[aria-hidden="true"]')).toHaveCount(passportCount);
+  const fanSizes = await page.locator('#listsBody .passport .ppFan').evaluateAll(fans => fans.map(fan => fan.querySelectorAll('.ppFanPoster').length));
+  expect(fanSizes.every(size => size === 2 || size === 3)).toBe(true);
+  const frameCount = fanSizes.reduce((sum, size) => sum + size, 0);
+  await expect(page.locator('#listsBody .passport .ppFanPoster img')).toHaveCount(frameCount);
+  const returnCards = page.locator('#listsBody .returnCalendar');
+  const returnCount = await returnCards.count();
+  await expect(page.locator('#listsBody .returnCalendar .medal[aria-hidden="true"] svg')).toHaveCount(returnCount);
 });
 
-test('new collection icons use deliberate multi-color palettes without relying on color for meaning', async ({ page }) => {
+test('a poster fan follows the collection lead-title order', async ({ page }) => {
   await startOn(page, '2026-11-16T19:00:00');
   await watchAsAdultsOnly(page);
   await openLists(page);
-
-  const ids = [
-    'ramadan-eid', 'muslim-kids-at-the-center', 'sibling-teams', 'girls-lead-the-way',
-    'food-family-and-the-table', 'inventors-and-problem-solvers', 'around-the-world',
-    'nothing-but-net', 'the-beautiful-game', 'friday-night-football',
-    'ice-snow-and-underdogs', 'wheels-and-waves', 'girls-in-the-game',
-    'black-joy-family-big-dreams', 'latino-families-many-stories',
-    'asian-families-many-stories', 'more-than-one-culture-at-home', 'families-with-pride'
-  ];
-  const palettes = [];
-  for (const id of ids) {
-    const icon = page.locator(`[data-list-icon="${id}"]`).first();
-    await expect(icon.locator('svg[aria-hidden="true"]')).toHaveCount(1);
-    const palette = await icon.evaluate((node) => {
-      const style = getComputedStyle(node);
-      return [1, 2, 3].map((slot) => style.getPropertyValue(`--icon-${slot}`).trim());
-    });
-    expect(palette.every(Boolean)).toBe(true);
-    expect(new Set(palette).size).toBe(3);
-    palettes.push(palette.join('|'));
-  }
-  expect(new Set(palettes).size).toBeGreaterThan(10);
+  const card = page.locator('#listsBody .passport', { hasText: 'Black joy, family and big dreams' });
+  const actual = await card.locator('.ppFanPoster img').evaluateAll(images => images.map(image => image.getAttribute('src')));
+  const expected = await page.evaluate(() => {
+    const list = listById('black-joy-family-big-dreams');
+    return list.pins.filter(num => MOVIE_POSTERS[num]?.u).slice(0, 3).map(num => MOVIE_POSTERS[num].u);
+  });
+  expect(actual).toEqual(expected);
+  expect(await card.locator('.ppFanPoster img').evaluateAll(images => images.map(image => image.getAttribute('alt')))).toEqual(['', '', '']);
 });
 
 test('during Hanukkah, Tonight offers the Hanukkah list, and Christmas comes back after', async ({ page }) => {

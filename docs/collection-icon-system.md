@@ -1,6 +1,14 @@
 # Collection icon system
 
-Collection icons are small navigation marks, not flags or cultural summaries. They identify a list at 19–46 px while the collection name carries the full meaning.
+Collection icons are small navigation marks, not flags or cultural summaries. Large collection cards use a poster fan instead, while compact contexts keep icons only as utility cues.
+
+## Poster fan
+
+- Show the first two or three curated movies with available artwork, preserving list order so the fan remains traceable to editorial choices.
+- Prefer three posters and place the second in front as the visual lead. When only two have artwork, show an honest centered pair rather than duplicating a poster or inventing a third card.
+- Use the fan on passport cards and opened-list covers only. Never shrink it into calendar, teaser or Tonight icon slots.
+- Treat the fan as decorative because the adjacent collection title is the accessible label. Poster images use empty alt text.
+- Fall back to a quiet year card when artwork is unavailable; a broken poster must never collapse the layout.
 
 ## Construction
 
