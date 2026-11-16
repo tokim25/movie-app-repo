@@ -252,6 +252,12 @@ function reportError(err){
     --flag-drinking:#6554C0;
     --new:#B30E3F;
     --new-bg:#FFF0F3;
+    /* Teal complement to the coral accent, for coming-attraction tickets.
+       Shifted from the true opposite (hue 163) to 179 so it never reads as
+       --success green. */
+    --complement:#0B6E6D;
+    --complement-bg:#E8F5F4;
+    --complement-line:#9CCFCB;
     --success:#13795B;
     --error:#B42318;
     --on-error:#FFFFFF;
@@ -3237,9 +3243,9 @@ function reportError(err){
     justify-content:center;
     gap:3px;
     padding:8px 3px;
-    border-left:1px dashed var(--line);
-    background:var(--bg-sub);
-    color:var(--accent-text);
+    border-left:1.5px dashed var(--complement-line);
+    background:var(--complement-bg);
+    color:var(--complement);
     text-align:center;
   }
   .ticketDate::before,
