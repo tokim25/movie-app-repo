@@ -227,8 +227,7 @@ for (const movie of movies) {
     if (!list.id || ids.has(list.id)) errors.push(`${label}: missing or duplicate id`);
     ids.add(list.id);
     if (!list.name || !list.blurb) errors.push(`${label}: needs a name and blurb`);
-    if (typeof list.copy !== 'string' || !list.copy.trim()) errors.push(`${label}: needs a one-line copy for its cover`);
-    if (!(Number.isInteger(list.hue) && list.hue >= 0 && list.hue <= 359)) errors.push(`${label}: hue must be a whole number from 0 to 359`);
+    if (typeof list.copy !== 'string' || !list.copy.trim()) errors.push(`${label}: needs a one-line copy for its passport card`);
     if (list.short !== undefined && !(typeof list.short === 'string' && list.short.trim() && list.short.length <= 22)) errors.push(`${label}: short must be a name of 1 to 22 characters`);
     if (!Array.isArray(list.pins) || !list.pins.length) errors.push(`${label}: needs pins`);
     const pins = new Set();

@@ -70,6 +70,29 @@ test('the permanent decade rail stays fixed and loads a distant decade', async (
   expect(await page.locator('#list > li.row').count()).toBeGreaterThan(50);
 });
 
+// A finger dragged down the rail jumps to whichever decade is under it, the
+// way a phone's A-Z contacts index works, so a tap one label off is fixed by
+// sliding instead of needing a 44px target on a 26px-wide strip.
+test('dragging a finger along the decade rail jumps to the decade under it', async ({ page }) => {
+  await page.goto('/');
+  await setupSampleFamily(page);
+  await page.locator('#tabBrowse').click();
+  const from = await page.getByRole('button', { name: 'Jump to the 1950s' }).boundingBox();
+  const to = await page.getByRole('button', { name: 'Jump to the 1990s' }).boundingBox();
+  await page.locator('#shelfJumpItems').evaluate((rail, [a, b]) => {
+    const fire = (type, y) => rail.dispatchEvent(new PointerEvent(type, {
+      bubbles: true, pointerId: 7, pointerType: 'touch', clientX: a.x + a.width / 2, clientY: y
+    }));
+    fire('pointerdown', a.y + a.height / 2);
+    fire('pointermove', (a.y + b.y) / 2);
+    fire('pointermove', b.y + b.height / 2);
+    fire('pointerup', b.y + b.height / 2);
+  }, [from, to]);
+  await expect(page.locator('#shelf-decade-1990')).toBeFocused();
+  await expect(page.locator('#shelfJumpItems .scrubbing')).toHaveCount(0);
+  await expect(page.getByRole('button', { name: 'Jump to the 1990s' })).toHaveCSS('font-size', '12px');
+});
+
 test('the permanent rail switches from decades to A-Z when sorted by title', async ({ page }) => {
   await page.goto('/');
   await setupSampleFamily(page);
