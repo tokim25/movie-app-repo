@@ -228,6 +228,16 @@ function reportError(err){
     --accent-rgb:201,24,74;
     --accent-text:#B30E3F;
     --icon-tint:#F8CEDA;
+    --icon-coral:#F8CEDA;
+    --icon-gold:#F3D28A;
+    --icon-sky:#BFDCEB;
+    --icon-sage:#BCD8C5;
+    --icon-rose:#EFA9BC;
+    --icon-orange:#F2A36B;
+    --icon-violet:#C9B7E8;
+    --icon-aqua:#91D5D0;
+    --icon-blue:#8EBFE6;
+    --icon-lime:#CADD8C;
     --cv-bg:#F7F7F7;
     --cv-bg2:#EEEEEE;
     --cv-ink:#111111;
@@ -3146,11 +3156,36 @@ function reportError(err){
   }
 
   /* ---------- Lists tab: passport cards and coming-attraction tickets ----------
-     List identity comes from the icon and copy. A fixed neutral/coral palette
-     keeps the collection calm instead of assigning every list a new hue. */
+     Each new collection gets a small, reusable palette. Colors repeat across
+     audiences so hue adds delight without becoming an identity label. */
   .listCover, .tuckedRow, .medal-xs{
     --icon-tint:#F8CEDA;
+    --icon-1:var(--icon-tint);
+    --icon-2:var(--accent);
+    --icon-3:var(--icon-sky);
   }
+  [data-list-icon]{
+    --icon-tint:var(--icon-1, #F8CEDA);
+    color:var(--icon-line, #64243C);
+  }
+  [data-list-icon="ramadan-eid"]{ --icon-1:var(--icon-violet); --icon-2:#E4A42C; --icon-3:var(--icon-aqua); }
+  [data-list-icon="muslim-kids-at-the-center"]{ --icon-1:var(--icon-aqua); --icon-2:#D49A25; --icon-3:var(--icon-violet); }
+  [data-list-icon="sibling-teams"]{ --icon-1:var(--icon-blue); --icon-2:var(--icon-orange); --icon-3:var(--icon-lime); }
+  [data-list-icon="girls-lead-the-way"]{ --icon-1:var(--icon-violet); --icon-2:var(--icon-orange); --icon-3:var(--icon-rose); }
+  [data-list-icon="food-family-and-the-table"]{ --icon-1:var(--icon-orange); --icon-2:var(--icon-sage); --icon-3:var(--icon-gold); }
+  [data-list-icon="inventors-and-problem-solvers"]{ --icon-1:var(--icon-gold); --icon-2:var(--icon-blue); --icon-3:var(--icon-violet); }
+  [data-list-icon="around-the-world"]{ --icon-1:var(--icon-blue); --icon-2:var(--icon-lime); --icon-3:var(--icon-orange); }
+  [data-list-icon="nothing-but-net"]{ --icon-1:var(--icon-orange); --icon-2:var(--icon-blue); --icon-3:var(--icon-gold); }
+  [data-list-icon="the-beautiful-game"]{ --icon-1:var(--icon-lime); --icon-2:var(--icon-blue); --icon-3:var(--icon-orange); }
+  [data-list-icon="friday-night-football"]{ --icon-1:var(--icon-gold); --icon-2:var(--icon-violet); --icon-3:var(--icon-blue); }
+  [data-list-icon="ice-snow-and-underdogs"]{ --icon-1:var(--icon-sky); --icon-2:var(--icon-violet); --icon-3:var(--icon-aqua); }
+  [data-list-icon="wheels-and-waves"]{ --icon-1:var(--icon-aqua); --icon-2:var(--icon-orange); --icon-3:var(--icon-violet); }
+  [data-list-icon="girls-in-the-game"]{ --icon-1:var(--icon-rose); --icon-2:var(--icon-gold); --icon-3:var(--icon-blue); }
+  [data-list-icon="black-joy-family-big-dreams"]{ --icon-1:var(--icon-gold); --icon-2:var(--icon-violet); --icon-3:var(--icon-aqua); }
+  [data-list-icon="latino-families-many-stories"]{ --icon-1:var(--icon-orange); --icon-2:var(--icon-aqua); --icon-3:var(--icon-rose); }
+  [data-list-icon="asian-families-many-stories"]{ --icon-1:var(--icon-blue); --icon-2:var(--icon-orange); --icon-3:var(--icon-lime); }
+  [data-list-icon="more-than-one-culture-at-home"]{ --icon-1:var(--icon-violet); --icon-2:var(--icon-aqua); --icon-3:var(--icon-orange); }
+  [data-list-icon="families-with-pride"]{ --icon-1:#F3A29A; --icon-2:#F0CA62; --icon-3:#79C9C3; }
   .storyHead{ padding:6px 0 10px; }
   .storyHead h1{ margin:0; }
   .storySub{ color:var(--ink-soft); margin:6px 0 0; font-size:15px; }
@@ -3163,6 +3198,9 @@ function reportError(err){
     width:44px; height:44px; border-radius:50%;
     background:var(--medal-bg); color:var(--cv-ink, var(--accent-text));
     box-shadow:inset 0 0 0 1.5px color-mix(in oklab, var(--cv-ink, var(--accent-text)) 22%, transparent), 0 1px 0 rgba(255,255,255,0.25);
+  }
+  .medal[data-list-icon]{
+    background:color-mix(in oklab, var(--icon-3, var(--medal-bg)) 42%, white);
   }
   .medal svg{ width:30px; height:30px; display:block; }
   .medal-s{ width:40px; height:40px; }
@@ -3181,8 +3219,8 @@ function reportError(err){
   button.passport{ cursor:pointer; }
   .ppId{ display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center; min-width:0; }
   .ppDisc{ position:relative; display:grid; place-items:center; width:84px; height:84px; border-radius:50%;
-    background:var(--pp-disc); color:var(--pp-icon); }
-  .ppDisc .medal{ width:auto; height:auto; background:none; box-shadow:none; color:inherit; --icon-tint:#F8CEDA; }
+    background:color-mix(in oklab, var(--icon-3, var(--pp-disc)) 32%, white); color:var(--pp-icon); }
+  .ppDisc .medal{ width:auto; height:auto; background:none; box-shadow:none; color:var(--icon-line, inherit); --icon-tint:var(--icon-1, #F8CEDA); }
   .ppDisc .medal svg{ width:46px; height:46px; }
   .ppBadge{ position:absolute; left:50%; bottom:-7px; transform:translateX(-50%); white-space:nowrap;
     padding:5px 8px; border-radius:999px; background:var(--accent); color:var(--on-accent);
@@ -5448,6 +5486,7 @@ function createListMedal(id, size){
   const svg = typeof LIST_ICONS !== 'undefined' ? LIST_ICONS[id] : null;
   const medal = document.createElement('span');
   medal.className = 'medal' + (size ? ` medal-${size}` : '');
+  medal.dataset.listIcon = id;
   medal.setAttribute('aria-hidden', 'true');
   if(svg) medal.innerHTML = svg;
   return medal;
@@ -5458,6 +5497,7 @@ function createListIcon(id){
   if(!svg) return null;
   const icon = document.createElement('span');
   icon.className = 'listIcon';
+  icon.dataset.listIcon = id;
   icon.setAttribute('aria-hidden', 'true');
   icon.innerHTML = svg;
   return icon;
@@ -5488,6 +5528,7 @@ function createPassport(list, opts = {}){
   const id = document.createElement(card.tagName === 'BUTTON' ? 'span' : 'div');
   id.className = 'ppId';
   const disc = spanText('ppDisc', '');
+  disc.dataset.listIcon = list.id;
   disc.appendChild(createListMedal(list.id));
   if(opts.badge) disc.appendChild(spanText('ppBadge', opts.badge));
   id.appendChild(disc);
