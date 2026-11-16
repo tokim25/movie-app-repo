@@ -8390,26 +8390,46 @@ function createChapterHead(decade){
   return li;
 }
 
+function focusShelfRow(position){
+  const rows = listEl.querySelectorAll('li.row .rowMain');
+  if(rows[position]) rows[position].focus();
+}
+
+// Returns the position of the first newly shown title, or -1 when every
+// page is already showing.
 function loadNextShelfPage(focusNew){
   const totalPages = Math.max(1, Math.ceil(lastVisibleOrder.length / LIST_PAGE_SIZE));
-  if(listPage >= totalPages) return;
+  if(listPage >= totalPages) return -1;
   const firstNew = listPage * LIST_PAGE_SIZE;
   listPage += 1;
   render();
-  if(focusNew){
-    // A manual load carries keyboard and screen-reader users to the first
-    // new title. Automatic loading never moves focus or scroll position.
-    const rows = listEl.querySelectorAll('li.row .rowMain');
-    if(rows[firstNew]) rows[firstNew].focus();
-  }
+  // A manual load carries keyboard and screen-reader users to the first
+  // new title. Automatic loading never moves focus or scroll position.
+  if(focusNew) focusShelfRow(firstNew);
+  return firstNew;
 }
 
-if(listShowMoreBtn) listShowMoreBtn.addEventListener('click', ()=> loadNextShelfPage(true));
+// A keyboard user who tabs to "Show 50 more" scrolls it into view, which
+// can trip the automatic loader before they press it. Without this, the
+// press would load a second batch and focus would skip the 50 titles the
+// auto-load just added. So when auto-load runs while the button has focus,
+// the next press focuses that batch's first title instead.
+let shelfAutoLoadFirst = -1;
+if(listShowMoreBtn){
+  listShowMoreBtn.addEventListener('click', ()=> {
+    const first = shelfAutoLoadFirst;
+    shelfAutoLoadFirst = -1;
+    if(first >= 0) focusShelfRow(first);
+    else loadNextShelfPage(true);
+  });
+  listShowMoreBtn.addEventListener('blur', ()=> { shelfAutoLoadFirst = -1; });
+}
 
 if('IntersectionObserver' in window && listPaginationEl){
   const shelfLoadObserver = new IntersectionObserver(entries => {
     if(currentScreen !== 'browse' || !entries.some(entry => entry.isIntersecting)) return;
-    loadNextShelfPage(false);
+    const first = loadNextShelfPage(false);
+    if(first >= 0 && document.activeElement === listShowMoreBtn && shelfAutoLoadFirst < 0) shelfAutoLoadFirst = first;
   }, { rootMargin:'600px 0px' });
   shelfLoadObserver.observe(listPaginationEl);
 }
