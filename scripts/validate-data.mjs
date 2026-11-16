@@ -21,6 +21,7 @@ const movieArrays = [
   'MOVIES_DREAMWORKS',
   'MOVIES_NICK',
   'MOVIES_EXTRA',
+  'MOVIES_MUSLIM',
   'MOVIES_CSM',
   'MOVIES_MCUDC',
   'MOVIES_GHIBLI',

@@ -27,6 +27,19 @@ const MOVIE_LISTS = Object.freeze([
     pins: [1155, 1156, 617, 197]
   },
   {
+    // Ramadan and Eid move through the Gregorian calendar. These calculated
+    // North American dates come from the Fiqh Council of North America and
+    // can vary by a day with local moon sighting; checked 2026-11-16.
+    id: 'ramadan-eid',
+    short: 'Ramadan & Eid',
+    name: 'Ramadan nights and Eid mornings',
+    copy: 'Faith, family and a joyful Eid morning.',
+    blurb: 'Muslim children and families at the center, from Ramadan reflection to the joy of Eid.',
+    dates: [['2027-02-08', '2027-03-10'], ['2028-01-28', '2028-02-27'], ['2029-01-16', '2029-02-15'], ['2030-01-05', '2030-02-05'], ['2030-12-26', '2031-01-25']],
+    minFit: 1,
+    pins: [1157, 1158, 1160, 84, 1159, 63]
+  },
+  {
     id: 'christmas',
     short: 'Christmas',
     name: 'Christmas movies',
@@ -60,6 +73,53 @@ const MOVIE_LISTS = Object.freeze([
     blurb: 'Sandlots, big leagues and one very good dog, for baseball season.',
     season: { from: '03-20', to: '10-31' },
     pins: [71, 1067, 391, 410, 445, 583, 196]
+  },
+  {
+    id: 'muslim-kids-at-the-center',
+    short: 'Muslim kids',
+    name: 'Muslim kids at the center',
+    copy: 'Their homes, hopes and everyday courage.',
+    blurb: 'Stories that put Muslim children, families and communities at the heart of the frame.',
+    minFit: 1,
+    pins: [1157, 1158, 84, 63, 1159, 1160]
+  },
+  {
+    id: 'sibling-teams',
+    name: 'Sibling teams',
+    copy: 'Built-in teammates, occasional rivals.',
+    blurb: 'Brothers and sisters who squabble, solve problems and show up for one another.',
+    pins: [103, 305, 35, 292, 489, 11, 53, 294]
+  },
+  {
+    id: 'girls-lead-the-way',
+    short: 'Girls lead',
+    name: 'Girls lead the way',
+    copy: 'Brave choices and big ideas.',
+    blurb: 'Girls taking the lead with courage, curiosity and their own point of view.',
+    pins: [303, 286, 48, 491, 118, 125, 80, 104, 650, 93]
+  },
+  {
+    id: 'food-family-and-the-table',
+    short: 'Food & family',
+    name: 'Food, family and the table',
+    copy: 'Recipes, restaurants and room for everyone.',
+    blurb: 'Food as craft, memory and the thing that brings a family back around the same table.',
+    pins: [485, 299, 1071, 1002, 1031, 9, 104, 11]
+  },
+  {
+    id: 'inventors-and-problem-solvers',
+    short: 'Problem-solvers',
+    name: 'Inventors and problem-solvers',
+    copy: 'Tinker, test, fail, try again.',
+    blurb: 'Curious kids and grown-ups who build, experiment and find another way through.',
+    pins: [302, 297, 397, 382, 548, 646, 109, 93, 78, 53]
+  },
+  {
+    id: 'around-the-world',
+    name: 'Around the world',
+    copy: 'A passport full of stories.',
+    blurb: 'Family stories and adventures rooted in places and cultures around the world.',
+    pins: [1, 111, 657, 637, 63, 80, 78, 72, 655, 1158, 104]
   },
   {
     id: 'good-teammates',
@@ -177,6 +237,8 @@ const MOVIE_LISTS = Object.freeze([
 // one shelf (validate-data.mjs checks).
 const MOVIE_LIST_SHELVES = Object.freeze([
   { id: 'story-time', name: 'Story time', aside: 'Books, puppets and songs', lists: ['read-the-book-first', 'studio-ghibli', 'made-by-hand', 'sing-along-musicals'] },
+  { id: 'families-and-neighbors', name: 'Families and neighbors', aside: 'Home, community and the wider world', lists: ['muslim-kids-at-the-center', 'sibling-teams', 'food-family-and-the-table', 'around-the-world'] },
+  { id: 'brave-and-curious', name: 'Brave and curious', aside: 'Leaders, makers and bright ideas', lists: ['girls-lead-the-way', 'inventors-and-problem-solvers'] },
   { id: 'cheer-them-on', name: 'Cheer them on', aside: 'Teams, long shots, good dogs', lists: ['good-teammates', 'underdogs', 'dogs', 'real-life-adventures'] },
   { id: 'from-the-grown-ups', name: 'From the grown-ups', aside: 'The ones you remember', lists: ['eighties', 'nineties', 'funny-for-grown-ups-too', 'award-winners'] }
 ]);
@@ -201,5 +263,12 @@ const LIST_ICONS = Object.freeze({
   "made-by-hand": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\" focusable=\"false\"><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" stroke-linecap=\"round\" d=\"M3 8.5V3h5.5M23.5 3H29v5.5M29 23.5V29h-5.5M8.5 29H3v-5.5\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" stroke-linecap=\"round\" d=\"M20.6 18.6l4-3.2\"/><path fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" stroke-linecap=\"round\" d=\"M9.2 26.4c-.6-4.4.8-8.2 3.2-9.9-1.6-1.4-1.8-4.3 0-6s5-1.8 6.6 0 1.6 4.6 0 6c2.4 1.7 3.8 5.5 3.2 9.9z\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linejoin=\"round\" stroke-linecap=\"round\" d=\"M14.4 15.3q1.3 1 2.6 0\"/><path fill=\"currentColor\" d=\"M14.2 12.8a.95.95 0 1 0 .01 0zM17.2 12.8a.95.95 0 1 0 .01 0z\"/></svg>",
   "real-life-adventures": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\" focusable=\"false\"><rect fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" stroke-linecap=\"round\" x=\"5\" y=\"6\" width=\"9\" height=\"13\" rx=\"2.5\"/><rect fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" stroke-linecap=\"round\" x=\"18\" y=\"6\" width=\"9\" height=\"13\" rx=\"2.5\"/><rect fill=\"currentColor\" x=\"13\" y=\"10\" width=\"6\" height=\"5\" rx=\"1\"/><circle fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" stroke-linecap=\"round\" cx=\"9.5\" cy=\"21\" r=\"6\"/><circle fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" stroke-linecap=\"round\" cx=\"22.5\" cy=\"21\" r=\"6\"/><path fill=\"currentColor\" d=\"M8 18.4a2.2 2.2 0 1 0 .01 0zM21 18.4a2.2 2.2 0 1 0 .01 0z\"/></svg>",
   "sing-along-musicals": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\" focusable=\"false\"><path fill=\"currentColor\" d=\"M15.1 15.2l3.6 3.6-9.4 9a1.9 1.9 0 0 1-2.7-2.7z\"/><circle fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" stroke-linecap=\"round\" cx=\"20.6\" cy=\"11.4\" r=\"6\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linejoin=\"round\" stroke-linecap=\"round\" d=\"M16.4 7.2l8.4 8.4\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" stroke-linecap=\"round\" d=\"M5.2 13.5V4.6l6-1.4V12\"/><path fill=\"currentColor\" d=\"M5.2 13.5a1.9 1.5 -20 1 1-3.6 1.2 1.9 1.5 -20 1 1 3.6-1.2zM11.2 12a1.9 1.5 -20 1 1-3.6 1.2 1.9 1.5 -20 1 1 3.6-1.2z\"/></svg>",
-  "hanukkah": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\" focusable=\"false\"><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linejoin=\"round\" stroke-linecap=\"round\" d=\"M4 15.5V12M7 15.5V12M10 15.5V12M13 15.5V12M16 15.5V8.5M19 15.5V12M22 15.5V12M25 15.5V12M28 15.5V12\"/><path fill=\"currentColor\" d=\"M4 8c.75.9 1.1 1.6 1.1 2.2a1.1 1.1 0 0 1-2.2 0c0-.6.35-1.3 1.1-2.2zM7 8c.75.9 1.1 1.6 1.1 2.2a1.1 1.1 0 0 1-2.2 0c0-.6.35-1.3 1.1-2.2zM10 8c.75.9 1.1 1.6 1.1 2.2a1.1 1.1 0 0 1-2.2 0c0-.6.35-1.3 1.1-2.2zM13 8c.75.9 1.1 1.6 1.1 2.2a1.1 1.1 0 0 1-2.2 0c0-.6.35-1.3 1.1-2.2zM16 4.5c.75.9 1.1 1.6 1.1 2.2a1.1 1.1 0 0 1-2.2 0c0-.6.35-1.3 1.1-2.2zM19 8c.75.9 1.1 1.6 1.1 2.2a1.1 1.1 0 0 1-2.2 0c0-.6.35-1.3 1.1-2.2zM22 8c.75.9 1.1 1.6 1.1 2.2a1.1 1.1 0 0 1-2.2 0c0-.6.35-1.3 1.1-2.2zM25 8c.75.9 1.1 1.6 1.1 2.2a1.1 1.1 0 0 1-2.2 0c0-.6.35-1.3 1.1-2.2zM28 8c.75.9 1.1 1.6 1.1 2.2a1.1 1.1 0 0 1-2.2 0c0-.6.35-1.3 1.1-2.2z\"/><rect fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" stroke-linecap=\"round\" x=\"3\" y=\"15.5\" width=\"26\" height=\"3.6\" rx=\"1.8\"/><path fill=\"currentColor\" d=\"M14.6 19h2.8v5.4h-2.8z\"/><path fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" stroke-linecap=\"round\" d=\"M9 28.5c0-2.9 3.1-4.6 7-4.6s7 1.7 7 4.6z\"/></svg>"
+  "hanukkah": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\" focusable=\"false\"><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linejoin=\"round\" stroke-linecap=\"round\" d=\"M4 15.5V12M7 15.5V12M10 15.5V12M13 15.5V12M16 15.5V8.5M19 15.5V12M22 15.5V12M25 15.5V12M28 15.5V12\"/><path fill=\"currentColor\" d=\"M4 8c.75.9 1.1 1.6 1.1 2.2a1.1 1.1 0 0 1-2.2 0c0-.6.35-1.3 1.1-2.2zM7 8c.75.9 1.1 1.6 1.1 2.2a1.1 1.1 0 0 1-2.2 0c0-.6.35-1.3 1.1-2.2zM10 8c.75.9 1.1 1.6 1.1 2.2a1.1 1.1 0 0 1-2.2 0c0-.6.35-1.3 1.1-2.2zM13 8c.75.9 1.1 1.6 1.1 2.2a1.1 1.1 0 0 1-2.2 0c0-.6.35-1.3 1.1-2.2zM16 4.5c.75.9 1.1 1.6 1.1 2.2a1.1 1.1 0 0 1-2.2 0c0-.6.35-1.3 1.1-2.2zM19 8c.75.9 1.1 1.6 1.1 2.2a1.1 1.1 0 0 1-2.2 0c0-.6.35-1.3 1.1-2.2zM22 8c.75.9 1.1 1.6 1.1 2.2a1.1 1.1 0 0 1-2.2 0c0-.6.35-1.3 1.1-2.2zM25 8c.75.9 1.1 1.6 1.1 2.2a1.1 1.1 0 0 1-2.2 0c0-.6.35-1.3 1.1-2.2zM28 8c.75.9 1.1 1.6 1.1 2.2a1.1 1.1 0 0 1-2.2 0c0-.6.35-1.3 1.1-2.2z\"/><rect fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" stroke-linecap=\"round\" x=\"3\" y=\"15.5\" width=\"26\" height=\"3.6\" rx=\"1.8\"/><path fill=\"currentColor\" d=\"M14.6 19h2.8v5.4h-2.8z\"/><path fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" stroke-linecap=\"round\" d=\"M9 28.5c0-2.9 3.1-4.6 7-4.6s7 1.7 7 4.6z\"/></svg>",
+  "ramadan-eid": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\"><path fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" d=\"M9 11h14l-2 17H11z\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" d=\"M12 11V7h8v4M16 7V3\"/><path fill=\"currentColor\" d=\"M18.7 15.4a4.2 4.2 0 1 0 0 7.2 3.5 3.5 0 1 1 0-7.2z\"/></svg>",
+  "muslim-kids-at-the-center": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\"><circle fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" cx=\"11\" cy=\"10\" r=\"4\"/><circle fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" cx=\"22\" cy=\"10\" r=\"4\"/><path fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" d=\"M4 28v-5a7 7 0 0 1 14 0v5zM15 28v-5a7 7 0 0 1 14 0v5z\"/><path fill=\"currentColor\" d=\"M16 18c-3-2-5 2-2 4l2 2 2-2c3-2 1-6-2-4z\"/></svg>",
+  "sibling-teams": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\"><circle fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" cx=\"10\" cy=\"9\" r=\"4\"/><circle fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" cx=\"22\" cy=\"9\" r=\"4\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" d=\"M5 28v-7a5 5 0 0 1 10 0v7M17 28v-7a5 5 0 0 1 10 0v7M13 18l3 3 3-3\"/></svg>",
+  "girls-lead-the-way": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\"><circle fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" cx=\"16\" cy=\"16\" r=\"12\"/><path fill=\"currentColor\" d=\"m18 7-4 7-7 4 7 1 1 7 4-7 7-4-7-1z\"/></svg>",
+  "food-family-and-the-table": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\"><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" d=\"M4 25h24M8 25v4M24 25v4\"/><path fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" d=\"M6 14h20c0 7-4 10-10 10S6 21 6 14z\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" d=\"M10 10c0-3 3-3 3-6M17 10c0-3 3-3 3-6\"/></svg>",
+  "inventors-and-problem-solvers": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\"><path fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" d=\"M8 13a8 8 0 1 1 13 6v4H11v-4a8 8 0 0 1-3-6z\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" d=\"M11 27h10M13 23v-7l3 2 3-2v7\"/></svg>",
+  "around-the-world": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\"><circle fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" cx=\"16\" cy=\"16\" r=\"13\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" d=\"M3 16h26M16 3c5 5 5 21 0 26M16 3c-5 5-5 21 0 26\"/></svg>"
 });

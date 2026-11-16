@@ -33,6 +33,7 @@ export const dataFiles = [
   'data-dreamworks.js',
   'data-nickelodeon.js',
   'data-extra.js',
+  'data-muslim.js',
   'data-csm.js',
   'data-mcudc.js',
   'data-ghibli.js',
