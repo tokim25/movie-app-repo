@@ -15,12 +15,16 @@ only product typeface; hierarchy comes from size, weight, spacing, and case.
 | Borders | `--line` | `#DDDDDD` |
 | Brand and selected state | `--accent` | `#C9184A` |
 | Accessible accent text | `--accent-text` | `#B30E3F` |
+| Complement (teal) | `--complement`, `--complement-bg`, `--complement-line` | `#0B6E6D`, `#E8F5F4`, `#9CCFCB` |
 | Informational category icons | `--flag-*` | `#6554C0` |
 | Success | `--success` | `#13795B` |
 | Error | `--error` | `#B42318` |
 | Warning | `--warning` | `#8A5A00` |
 
 Use coral only for brand emphasis, links, favorites, and selected controls.
+Use the teal complement sparingly, as a second note beside coral: today only
+the date block on coming-attraction calendar cards. It sits at hue 179 rather than
+the exact opposite of coral (163) so it never reads as success green.
 Use purple only for non-severity content-category icons. Reserve green, red,
 and amber for semantic feedback. Do not add per-list theme colors or automatic
 dark-mode overrides.

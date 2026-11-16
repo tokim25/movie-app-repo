@@ -252,6 +252,12 @@ function reportError(err){
     --flag-drinking:#6554C0;
     --new:#B30E3F;
     --new-bg:#FFF0F3;
+    /* Teal complement to the coral accent, for coming-attraction tickets.
+       Shifted from the true opposite (hue 163) to 179 so it never reads as
+       --success green. */
+    --complement:#0B6E6D;
+    --complement-bg:#E8F5F4;
+    --complement-line:#9CCFCB;
     --success:#13795B;
     --error:#B42318;
     --on-error:#FFFFFF;
@@ -1229,11 +1235,15 @@ function reportError(err){
     background:transparent;
     color:var(--ink-soft);
     font:inherit;
-    font-size:9.5px;
+    font-size:12px;
     font-weight:600;
     line-height:1;
     cursor:pointer;
   }
+  /* Touch users drag along the rail, like a phone's A-Z contacts index, so
+     the narrow strip doesn't need precise taps. */
+  .shelfJumpItems{ touch-action:none; }
+  .shelfJumpBtn.scrubbing,
   .shelfJumpBtn:hover,
   .shelfJumpBtn:focus-visible{
     background:var(--new-bg);
@@ -3181,6 +3191,7 @@ function reportError(err){
   .ppName:focus{ outline:none; }
   .ppName:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
   .ppSub{ font-size:13px; line-height:1.3; color:var(--ink-soft); }
+  .ppWhen{ margin-top:-4px; font-size:13px; font-weight:600; line-height:1.3; color:var(--accent-text); }
   .ppStats{ display:flex; flex-direction:column; padding-left:12px; min-width:0; }
   .ppStat{ padding:9px 0; border-bottom:1px solid var(--pp-line); }
   .ppStat:last-child{ border-bottom:0; }
@@ -3213,10 +3224,10 @@ function reportError(err){
     align-items:center;
     justify-content:center;
     gap:3px;
-    border:1px solid var(--line);
+    border:1px solid var(--complement-line);
     border-radius:10px;
-    background:var(--bg-sub);
-    color:var(--accent-text);
+    background:var(--complement-bg);
+    color:var(--complement);
     text-align:center;
   }
   .calendarMonth{ font-size:9px; font-weight:700; line-height:1; letter-spacing:0.07em; text-transform:uppercase; }
@@ -5394,10 +5405,9 @@ function listCountText(list){
 }
 
 
-// ---- Lists tab (storybook covers) ----
-// Each list is a picture-book cover: its icon on a medallion, its own soft
-// colour (from `hue`, set as a CSS custom property through CSSOM, so no
-// style attribute), a fan of its first posters and one warm line of copy.
+// ---- Lists tab (passport cards) ----
+// Each list is a white passport card: its icon, name, one line of copy and
+// three numbers. Off-season lists are coming-attraction tickets.
 let openListId = null;
 let openListUnseenOnly = false;
 let openListShowAll = false;
@@ -5431,9 +5441,6 @@ function listBackText(list, date){
 function listFitLine(list){
   const count = listFitCount(list);
   return selectedKids().length ? `${count} fit` : `${count} films`;
-}
-function applyListHue(el, list){
-  if(Number.isInteger(list.hue)) el.style.setProperty('--cv-hue', String(list.hue));
 }
 function createListMedal(id, size){
   const svg = typeof LIST_ICONS !== 'undefined' ? LIST_ICONS[id] : null;
@@ -5476,7 +5483,6 @@ function createPassport(list, opts = {}){
     card.type = 'button';
     card.onclick = () => openList(list.id);
   }
-  applyListHue(card, list);
   const id = document.createElement(card.tagName === 'BUTTON' ? 'span' : 'div');
   id.className = 'ppId';
   const disc = spanText('ppDisc', '');
@@ -5486,6 +5492,7 @@ function createPassport(list, opts = {}){
   id.appendChild(opts.nameEl || spanText('ppName', list.name));
   const sub = opts.sub !== undefined ? opts.sub : list.copy;
   if(sub) id.appendChild(spanText('ppSub', sub));
+  if(opts.when) id.appendChild(spanText('ppWhen', opts.when));
   const stats = spanText('ppStats', '');
   const stat = (num, label) => {
     const row = spanText('ppStat', '');
@@ -5513,7 +5520,6 @@ function createReturnCalendar(list, today){
   card.type = 'button';
   card.className = 'returnCalendar listCover';
   card.dataset.list = list.id;
-  applyListHue(card, list);
 
   const returnText = listBackText(list, today);
   const match = returnText.match(/^Returns ([A-Z][a-z]{2}) (\d{1,2})$/);
@@ -5577,8 +5583,8 @@ function renderListsIndex(){
     const dayLabel = today.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
     const until = list => listUntilText(list, today);
     const stack = passportStack(inSeason, list => list === inSeason[0]
-      ? { badge: 'Now showing', sub: `${list.copy} · ${until(list)}` }
-      : { sub: `${list.copy} · ${until(list)}` });
+      ? { badge: 'Now showing', when: until(list) }
+      : { when: until(list) });
     body.appendChild(createShelfSection('season', 'In season', dayLabel, [stack]));
   }
 
@@ -5626,7 +5632,6 @@ function renderListsIndex(){
       tucked.forEach(list => {
         const row = document.createElement('div');
         row.className = 'tuckedRow';
-        applyListHue(row, list);
         row.appendChild(createListMedal(list.id, 's'));
         row.appendChild(spanText('tuckedName', list.name));
         const putBack = document.createElement('button');
@@ -5795,9 +5800,7 @@ function renderListsTeaser(){
   const medals = document.getElementById('listsTeaserMedals');
   if(!medals || medals.childElementCount) return;
   shownLists(new Date(Date.now())).slice(0, 3).forEach(list => {
-    const medal = createListMedal(list.id, 'xs');
-    applyListHue(medal, list);
-    medals.appendChild(medal);
+    medals.appendChild(createListMedal(list.id, 'xs'));
   });
 }
 
@@ -8373,26 +8376,46 @@ function createChapterHead(decade){
   return li;
 }
 
+function focusShelfRow(position){
+  const rows = listEl.querySelectorAll('li.row .rowMain');
+  if(rows[position]) rows[position].focus();
+}
+
+// Returns the position of the first newly shown title, or -1 when every
+// page is already showing.
 function loadNextShelfPage(focusNew){
   const totalPages = Math.max(1, Math.ceil(lastVisibleOrder.length / LIST_PAGE_SIZE));
-  if(listPage >= totalPages) return;
+  if(listPage >= totalPages) return -1;
   const firstNew = listPage * LIST_PAGE_SIZE;
   listPage += 1;
   render();
-  if(focusNew){
-    // A manual load carries keyboard and screen-reader users to the first
-    // new title. Automatic loading never moves focus or scroll position.
-    const rows = listEl.querySelectorAll('li.row .rowMain');
-    if(rows[firstNew]) rows[firstNew].focus();
-  }
+  // A manual load carries keyboard and screen-reader users to the first
+  // new title. Automatic loading never moves focus or scroll position.
+  if(focusNew) focusShelfRow(firstNew);
+  return firstNew;
 }
 
-if(listShowMoreBtn) listShowMoreBtn.addEventListener('click', ()=> loadNextShelfPage(true));
+// A keyboard user who tabs to "Show 50 more" scrolls it into view, which
+// can trip the automatic loader before they press it. Without this, the
+// press would load a second batch and focus would skip the 50 titles the
+// auto-load just added. So when auto-load runs while the button has focus,
+// the next press focuses that batch's first title instead.
+let shelfAutoLoadFirst = -1;
+if(listShowMoreBtn){
+  listShowMoreBtn.addEventListener('click', ()=> {
+    const first = shelfAutoLoadFirst;
+    shelfAutoLoadFirst = -1;
+    if(first >= 0) focusShelfRow(first);
+    else loadNextShelfPage(true);
+  });
+  listShowMoreBtn.addEventListener('blur', ()=> { shelfAutoLoadFirst = -1; });
+}
 
 if('IntersectionObserver' in window && listPaginationEl){
   const shelfLoadObserver = new IntersectionObserver(entries => {
     if(currentScreen !== 'browse' || !entries.some(entry => entry.isIntersecting)) return;
-    loadNextShelfPage(false);
+    const first = loadNextShelfPage(false);
+    if(first >= 0 && document.activeElement === listShowMoreBtn && shelfAutoLoadFirst < 0) shelfAutoLoadFirst = first;
   }, { rootMargin:'600px 0px' });
   shelfLoadObserver.observe(listPaginationEl);
 }
@@ -8402,7 +8425,7 @@ document.querySelectorAll('.densityControl button').forEach(button => {
 });
 setShelfDensity(shelfDensity, false);
 
-function jumpShelfTo(kind, value){
+function jumpShelfTo(kind, value, instant){
   const targetPosition = lastVisibleOrder.findIndex(idx => kind === 'decade'
     ? decadeOf(MOVIES[idx].y) === Number(value)
     : titleJumpLetter(MOVIES[idx].t) === value);
@@ -8415,7 +8438,7 @@ function jumpShelfTo(kind, value){
       ? document.getElementById(`shelf-decade-${value}`)
       : listEl.querySelector(`li.row[data-movie-idx="${targetMovieIdx}"] .rowMain`);
     if(!target) return;
-    target.scrollIntoView({ block:'start', behavior:scrollBehavior() });
+    target.scrollIntoView({ block:'start', behavior:instant ? 'auto' : scrollBehavior() });
     target.focus({ preventScroll:true });
   });
 }
@@ -8425,6 +8448,36 @@ shelfJumpItems.addEventListener('click', event => {
   if(!button) return;
   jumpShelfTo(button.dataset.jumpKind, button.dataset.jumpValue);
 });
+
+// Dragging a finger along the rail jumps to whichever decade or letter is
+// under it, so a tap that lands one label off is corrected by sliding.
+let shelfScrubKey = null;
+function scrubShelfRail(event){
+  const box = shelfJumpItems.getBoundingClientRect();
+  const y = Math.min(box.bottom - 1, Math.max(box.top + 1, event.clientY));
+  const hit = document.elementFromPoint(box.left + box.width / 2, y);
+  const button = hit && hit.closest('.shelfJumpBtn');
+  if(!button || button.dataset.jumpValue === shelfScrubKey) return;
+  shelfScrubKey = button.dataset.jumpValue;
+  shelfJumpItems.querySelectorAll('.scrubbing').forEach(b => b.classList.remove('scrubbing'));
+  button.classList.add('scrubbing');
+  jumpShelfTo(button.dataset.jumpKind, button.dataset.jumpValue, true);
+}
+function endShelfScrub(){
+  shelfScrubKey = null;
+  shelfJumpItems.querySelectorAll('.scrubbing').forEach(b => b.classList.remove('scrubbing'));
+}
+shelfJumpItems.addEventListener('pointerdown', event => {
+  if(event.pointerType === 'mouse') return;
+  shelfScrubKey = '';
+  shelfJumpItems.setPointerCapture(event.pointerId);
+  scrubShelfRail(event);
+});
+shelfJumpItems.addEventListener('pointermove', event => {
+  if(shelfScrubKey !== null) scrubShelfRail(event);
+});
+shelfJumpItems.addEventListener('pointerup', endShelfScrub);
+shelfJumpItems.addEventListener('pointercancel', endShelfScrub);
 
 document.getElementById('skipToNavLink').addEventListener('click', e=>{
   e.preventDefault();

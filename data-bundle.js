@@ -2532,10 +2532,9 @@ const MOVIE_PREREQUISITES = Object.freeze({
 // which families they suit. Lists without a `season` (or `dates`) are never pushed on
 // Tonight. Rules for adding entries: real catalog nums only, in the order a
 // parent would want to see them; a list needs at least 5 titles that fit the
-// selected kids before the app shows it at all. `hue` (0-359) colours its
-// stamp and passport card on the Lists tab, and an optional `short` name
-// (up to 22 characters) goes inside the stamp when the full name is long.
-// `copy` is a one-line description kept for future use.
+// selected kids before the app shows it at all. `copy` is the one line under
+// the name on its passport card, and an optional `short` name (up to 22
+// characters) goes on its coming-attraction ticket when the full name is long.
 const MOVIE_LISTS = Object.freeze([
   {
     // Hanukkah moves every year, so it uses real date ranges (from three
@@ -2548,7 +2547,6 @@ const MOVIE_LISTS = Object.freeze([
     short: 'Hanukkah',
     name: 'Hanukkah movies',
     copy: 'Candles, latkes and a Rugrats special.',
-    hue: 218,
     blurb: 'The story of the Hanukkah lights, a Rugrats special and two films with a Hanukkah at their heart.',
     dates: [['2026-12-01', '2026-12-12'], ['2027-12-21', '2028-01-01'], ['2028-12-09', '2028-12-20'], ['2029-11-28', '2029-12-09'], ['2030-12-17', '2030-12-28']],
     minFit: 2,
@@ -2559,7 +2557,6 @@ const MOVIE_LISTS = Object.freeze([
     short: 'Christmas',
     name: 'Christmas movies',
     copy: 'Cocoa, cardigans and a reindeer or two.',
-    hue: 145,
     blurb: 'Specials, classics and newer favorites for the weeks before Christmas.',
     season: { from: '11-20', to: '12-26' },
     pins: [1137, 863, 1138, 864, 917, 624, 966, 1142, 653, 663, 962, 390, 112, 1118, 463, 908, 909, 1030, 115, 866, 381, 1083, 1075, 178, 186, 229, 559, 660, 959, 250, 1049, 1061, 1149]
@@ -2568,7 +2565,6 @@ const MOVIE_LISTS = Object.freeze([
     id: 'snow-day',
     name: 'Snow day',
     copy: 'Sleds, snowmen and a lot of ice.',
-    hue: 200,
     blurb: 'Snow, ice and sled dogs for the cold months.',
     season: { from: '12-01', to: '02-28' },
     pins: [103, 305, 546, 1138, 966, 645, 968, 969, 936, 408, 422, 465, 387, 596, 414, 1095, 478]
@@ -2578,7 +2574,6 @@ const MOVIE_LISTS = Object.freeze([
     short: 'Spooky',
     name: 'Spooky but not too scary',
     copy: 'Friendly ghosts and goofy monsters.',
-    hue: 26,
     blurb: 'Pumpkins, friendly ghosts and goofy monsters for October.',
     season: { from: '10-01', to: '10-31' },
     pins: [1139, 1146, 929, 1103, 1104, 1106, 142, 143, 202, 213, 1094, 1098, 1099, 209, 216, 139, 626, 642, 87, 1109, 1110, 1028, 1029, 594, 475]
@@ -2588,7 +2583,6 @@ const MOVIE_LISTS = Object.freeze([
     short: 'Baseball',
     name: 'Baseball movies',
     copy: 'Sandlots, big leagues, one good dog.',
-    hue: 6,
     blurb: 'Sandlots, big leagues and one very good dog, for baseball season.',
     season: { from: '03-20', to: '10-31' },
     pins: [71, 1067, 391, 410, 445, 583, 196]
@@ -2597,7 +2591,6 @@ const MOVIE_LISTS = Object.freeze([
     id: 'good-teammates',
     name: 'Good teammates',
     copy: 'Winning, and losing, together.',
-    hue: 18,
     blurb: 'Teams that win, and lose, by sticking together.',
     pins: [596, 851, 852, 1068, 1069, 71, 387, 406, 414, 448, 391, 1081, 187, 190, 169, 197, 214, 664]
   },
@@ -2606,7 +2599,6 @@ const MOVIE_LISTS = Object.freeze([
     short: 'Underdogs',
     name: 'Underdogs who never quit',
     copy: 'Long shots who keep on going.',
-    hue: 92,
     blurb: 'Long shots who keep going when nobody expects them to.',
     pins: [1119, 523, 488, 1080, 1085, 435, 387, 1067, 410, 420, 414, 664, 571, 991, 96, 448, 445, 90, 424, 132]
   },
@@ -2615,7 +2607,6 @@ const MOVIE_LISTS = Object.freeze([
     short: 'The ’80s',
     name: 'What Mom & Dad watched: the ’80s',
     copy: 'The ones you wore out on tape.',
-    hue: 332,
     blurb: 'The movies a lot of parents grew up on.',
     pins: [36, 70, 88, 114, 119, 1, 621, 617, 279, 382, 379, 901, 872, 840, 841, 912, 913, 104, 866, 129, 1059, 90, 902, 906, 876]
   },
@@ -2624,7 +2615,6 @@ const MOVIE_LISTS = Object.freeze([
     short: 'The ’90s',
     name: 'What Mom & Dad watched: the ’90s',
     copy: 'Big musicals and the first Toy Story.',
-    hue: 266,
     blurb: 'Nineties classics, from Disney musicals to the Sandlot.',
     pins: [101, 281, 282, 4, 286, 110, 389, 116, 118, 1066, 71, 387, 1067, 596, 115, 624, 626, 929, 395, 397, 869, 606, 605, 594, 599, 602, 881]
   },
@@ -2632,7 +2622,6 @@ const MOVIE_LISTS = Object.freeze([
     id: 'summer-break',
     name: 'Summer break',
     copy: 'Beaches, camps and long, lazy days.',
-    hue: 44,
     blurb: 'Beaches, camps, road trips and long summer days.',
     season: { from: '06-01', to: '08-31' },
     pins: [12, 1, 9, 71, 632, 1105, 292, 303, 1119, 606, 150, 156, 603, 578, 654, 407, 227, 561, 1091, 1077, 1126, 92]
@@ -2641,7 +2630,6 @@ const MOVIE_LISTS = Object.freeze([
     id: 'back-to-school',
     name: 'Back to school',
     copy: 'New classrooms and first-day jitters.',
-    hue: 14,
     blurb: 'New classrooms, new kids and first days, for the start of the school year.',
     season: { from: '08-15', to: '09-15' },
     pins: [10, 492, 118, 1010, 974, 549, 955, 543, 466, 1017, 160, 214, 155, 125, 85, 140, 98, 1001, 498, 89]
@@ -2651,7 +2639,6 @@ const MOVIE_LISTS = Object.freeze([
     short: 'Studio Ghibli',
     name: 'Studio Ghibli, where to start',
     copy: 'Totoro first, then wander on.',
-    hue: 176,
     blurb: 'The Japanese studio behind Totoro, in a good order to watch it.',
     pins: [1, 104, 9, 831, 820, 829, 121, 827, 828, 832, 825, 835, 833, 823, 824, 836, 834, 837, 830, 822, 826]
   },
@@ -2659,7 +2646,6 @@ const MOVIE_LISTS = Object.freeze([
     id: 'dogs',
     name: 'Dog movies',
     copy: 'Good dogs, lost dogs, sled dogs.',
-    hue: 32,
     blurb: 'Good dogs, lost dogs, sled dogs and one dog who plays basketball.',
     pins: [266, 268, 389, 298, 936, 399, 1079, 74, 395, 597, 422, 408, 465, 278, 380, 1051, 427, 555, 339, 423, 157, 464, 394, 1153, 442, 973, 915, 275, 338]
   },
@@ -2667,7 +2653,6 @@ const MOVIE_LISTS = Object.freeze([
     id: 'read-the-book-first',
     name: 'Read the book first',
     copy: 'Read it at bedtime, watch it Friday.',
-    hue: 48,
     blurb: 'Films of children’s books, from picture books to chapter books, to read before you watch.',
     pins: [1132, 1144, 1018, 1071, 6, 5, 641, 994, 396, 113, 67, 118, 116, 542, 1010, 974, 531, 74, 47, 14, 39, 870, 92, 425, 98, 57, 105, 1014, 1016, 1017, 1021, 70, 30]
   },
@@ -2676,7 +2661,6 @@ const MOVIE_LISTS = Object.freeze([
     short: 'Oscar winners',
     name: 'Oscar winners: Best Animated Feature',
     copy: 'Every Best Animated winner we have.',
-    hue: 40,
     blurb: 'Every winner of the Academy Award for Best Animated Feature that is in the catalog, newest first.',
     pins: [673, 837, 11, 49, 495, 133, 111, 13, 10, 302, 103, 491, 557, 494, 22, 109, 485, 968, 508, 489, 2, 121, 502]
   },
@@ -2685,7 +2669,6 @@ const MOVIE_LISTS = Object.freeze([
     short: 'Funny for grown-ups',
     name: 'Funny for grown-ups too',
     copy: 'Jokes for them, and jokes for you.',
-    hue: 352,
     blurb: 'Comedies with jokes for the kids and a second layer of jokes for the adults on the couch.',
     pins: [120, 5, 310, 4, 439, 106, 290, 18, 502, 513, 1071, 524, 47, 762, 53, 537, 489, 13, 133, 70, 1086]
   },
@@ -2693,7 +2676,6 @@ const MOVIE_LISTS = Object.freeze([
     id: 'made-by-hand',
     name: 'Made by hand',
     copy: 'Puppets moved one frame at a time.',
-    hue: 22,
     blurb: 'Stop-motion films, where every puppet and set was moved by hand one frame at a time.',
     pins: [7, 665, 1089, 102, 508, 1121, 664, 540, 113, 396, 672, 1145, 626, 69, 442, 650, 971, 972, 973, 1130]
   },
@@ -2702,7 +2684,6 @@ const MOVIE_LISTS = Object.freeze([
     short: 'Real-life adventures',
     name: 'Real-life adventures',
     copy: 'Penguins, polar bears, true stories.',
-    hue: 160,
     blurb: 'True stories and nature documentaries, from penguins and polar bears to a girl who hunts with an eagle.',
     pins: [21, 471, 470, 446, 455, 478, 16, 17, 66, 61, 63, 58, 86, 85, 60, 83]
   },
@@ -2710,7 +2691,6 @@ const MOVIE_LISTS = Object.freeze([
     id: 'sing-along-musicals',
     name: 'Sing-along musicals',
     copy: 'Songs you will hum all week.',
-    hue: 300,
     blurb: 'Big, hummable songs the whole family ends up singing, from Disney favorites to the classic stage musicals.',
     pins: [270, 101, 103, 300, 286, 19, 29, 30, 282, 279, 303, 11, 67, 612, 28, 615, 299, 285, 353, 1001, 1037, 385]
   }

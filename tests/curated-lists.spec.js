@@ -139,7 +139,7 @@ test('a list with fewer than 5 titles that fit rests until more do', async ({ pa
   await page.evaluate(() => {
     const realLists = curatedLists();
     const nums = MOVIES.slice(0, 4).map(m => m.num);
-    window.curatedLists = () => realLists.concat([{ id: 'tiny', name: 'Tiny list', blurb: 'Only four.', copy: 'Small.', hue: 10, pins: nums }]);
+    window.curatedLists = () => realLists.concat([{ id: 'tiny', name: 'Tiny list', blurb: 'Only four.', copy: 'Small.', pins: nums }]);
   });
   await openLists(page);
   await expect(page.locator('#listsBody .listCover', { hasText: 'Tiny list' })).toHaveCount(0);
