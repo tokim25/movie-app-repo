@@ -23,7 +23,7 @@ only product typeface; hierarchy comes from size, weight, spacing, and case.
 
 Use coral only for brand emphasis, links, favorites, and selected controls.
 Use the teal complement sparingly, as a second note beside coral: today only
-the date stub on coming-attraction tickets. It sits at hue 179 rather than
+the date block on coming-attraction calendar cards. It sits at hue 179 rather than
 the exact opposite of coral (163) so it never reads as success green.
 Use purple only for non-severity content-category icons. Reserve green, red,
 and amber for semantic feedback. Do not add per-list theme colors or automatic

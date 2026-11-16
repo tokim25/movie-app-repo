@@ -4,7 +4,7 @@ import { expectNoA11yViolations } from './a11y.js';
 
 // Curated lists (data-lists.js) live on their own Lists tab as passport
 // cards: the in-season list first with a "Now showing" badge, the rest on
-// themed shelves, out-of-season lists as intact tickets under "Coming
+// themed shelves, out-of-season lists as calendar cards under "Coming
 // attractions" and tucked-away lists in a box at the bottom. The first in-season list also gets a card on Tonight.
 // A list with fewer than 5 titles that fit the selected kids is not shown
 // (Hanukkah needs only 2).
@@ -64,17 +64,18 @@ test('in December, Christmas gets the passport card and opens in list order', as
   await expect(page.locator('#listsBody .passport.hero')).toBeFocused();
 });
 
-test('year-round lists sit on themed shelves, and off-season lists use coming-attraction tickets', async ({ page }) => {
+test('year-round lists sit on themed shelves, and off-season lists use return-date calendars', async ({ page }) => {
   await startOn(page, '2026-12-18T19:00:00');
   await openLists(page);
   await expect(page.locator('#lists-h-story-time')).toContainText('Story time');
   await expect(page.locator('#lists-h-cheer-them-on')).toContainText('Cheer them on');
   await expect(page.locator('#lists-h-later')).toContainText('Coming attractions');
   await expect(page.locator('#lists-h-later')).toContainText('Browse any list now');
-  const later = page.locator('#listsBody .comingTicket', { hasText: 'Summer break' });
-  await expect(later.locator('.ticketReturn')).toHaveText('Returns');
-  await expect(later.locator('.ticketWhen')).toHaveText('Jun 1');
-  await expect(later.locator('.ticketDate')).toHaveCSS('border-left-style', 'dashed');
+  const later = page.locator('#listsBody .returnCalendar', { hasText: 'Summer break' });
+  await expect(later.locator('.calendarMonth')).toHaveText('Jun');
+  await expect(later.locator('.calendarDay')).toHaveText('1');
+  await expect(later.locator('.calendarReturn')).toHaveText('Returns Jun 1');
+  await expect(later).toHaveCSS('display', 'grid');
   await expect(later).toHaveCSS('transform', 'none');
 });
 
@@ -154,7 +155,7 @@ test('Shelf points to the Lists tab', async ({ page }) => {
   await expect(page.locator('#listsScreenHeading')).toBeFocused();
 });
 
-test('every passport card, coming ticket and the season card show a decorative icon', async ({ page }) => {
+test('every passport card, return calendar and the season card show a decorative icon', async ({ page }) => {
   await startOn(page, '2026-12-18T19:00:00');
   await page.locator('#tabHome').click();
   await expect(page.locator('#tonightSeasonCard .listIcon[aria-hidden="true"] svg')).toHaveCount(1);
