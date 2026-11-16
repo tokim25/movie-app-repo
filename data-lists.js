@@ -75,6 +75,89 @@ const MOVIE_LISTS = Object.freeze([
     pins: [71, 1067, 391, 410, 445, 583, 196]
   },
   {
+    id: 'nothing-but-net',
+    name: 'Nothing but net',
+    copy: 'Big shots, buzzer beaters and one very good dog.',
+    blurb: 'Basketball dreams, unlikely teams and players learning when to pass.',
+    pins: [399, 869, 140, 187, 197, 1035]
+  },
+  {
+    id: 'the-beautiful-game',
+    name: 'The beautiful game',
+    copy: 'Big goals and teams built from scratch.',
+    blurb: 'Soccer stories about finding your position, your people and the back of the net.',
+    pins: [1069, 664, 582, 43, 1081]
+  },
+  {
+    id: 'friday-night-football',
+    short: 'Football nights',
+    name: 'Friday night football',
+    copy: 'Hail Marys, hard hits and second chances.',
+    blurb: 'Football teams and families learning what matters after the whistle.',
+    pins: [1143, 581, 1068, 406, 424, 468, 132]
+  },
+  {
+    id: 'ice-snow-and-underdogs',
+    short: 'Ice & snow',
+    name: 'Ice, snow and underdogs',
+    copy: 'Skates, snowboards and one fast bobsled.',
+    blurb: 'Cold-weather competitors finding their nerve on ice, snow and the bobsled track.',
+    pins: [206, 851, 234, 162, 414, 387, 596, 1095]
+  },
+  {
+    id: 'wheels-and-waves',
+    name: 'Wheels and waves',
+    copy: 'Boards, bikes and the courage to commit.',
+    blurb: 'Surfers, skaters and racers chasing the next wave, turn or finish line.',
+    pins: [1119, 158, 170, 162, 179, 194, 171, 1080, 1120]
+  },
+  {
+    id: 'girls-in-the-game',
+    name: 'Girls in the game',
+    copy: 'They came to play—and changed the field.',
+    blurb: 'Girls competing, leading and making room for the athletes coming next.',
+    pins: [170, 187, 194, 206, 234, 1068, 1095, 63, 190]
+  },
+  {
+    id: 'black-joy-family-big-dreams',
+    short: 'Black joy',
+    name: 'Black joy, family and big dreams',
+    copy: 'Big imaginations, close families and room to shine.',
+    blurb: 'Black children and families finding joy, chasing ambitions and showing up for one another.',
+    pins: [299, 636, 49, 125, 214, 55, 869, 919, 468, 80, 93]
+  },
+  {
+    id: 'latino-families-many-stories',
+    short: 'Latino families',
+    name: 'Latino families, many stories',
+    copy: 'Music, adventure and families with plenty to say.',
+    blurb: 'Latino children and families at the center of stories about home, memory, courage and celebration.',
+    pins: [11, 111, 23, 122, 661, 133, 190, 567, 1091, 1147, 448]
+  },
+  {
+    id: 'asian-families-many-stories',
+    short: 'Asian families',
+    name: 'Asian families, many stories',
+    copy: 'Tradition, change and adventures of their own.',
+    blurb: 'Distinct East, South, Southeast and Central Asian stories about family, heritage and growing into yourself.',
+    pins: [15, 50, 248, 211, 51, 48, 286, 497, 1093, 1157, 63, 73]
+  },
+  {
+    id: 'more-than-one-culture-at-home',
+    short: 'More than one culture',
+    name: 'More than one culture at home',
+    copy: 'Families shaped by more than one story.',
+    blurb: 'Multiracial, blended, adoptive and bicultural families finding their own way to belong together.',
+    pins: [45, 1161, 457, 408, 636, 1162]
+  },
+  {
+    id: 'families-with-pride',
+    name: 'Families with pride',
+    copy: 'Queer kids, parents and love, right at home.',
+    blurb: 'Stories where LGBTQ+ kids, parents and partners are part of the family—not a punchline or a passing cameo.',
+    pins: [306, 53, 252, 496, 1163, 1164]
+  },
+  {
     id: 'muslim-kids-at-the-center',
     short: 'Muslim kids',
     name: 'Muslim kids at the center',
@@ -237,7 +320,8 @@ const MOVIE_LISTS = Object.freeze([
 // one shelf (validate-data.mjs checks).
 const MOVIE_LIST_SHELVES = Object.freeze([
   { id: 'story-time', name: 'Story time', aside: 'Books, puppets and songs', lists: ['read-the-book-first', 'studio-ghibli', 'made-by-hand', 'sing-along-musicals'] },
-  { id: 'families-and-neighbors', name: 'Families and neighbors', aside: 'Home, community and the wider world', lists: ['muslim-kids-at-the-center', 'sibling-teams', 'food-family-and-the-table', 'around-the-world'] },
+  { id: 'families-and-neighbors', name: 'Families and neighbors', aside: 'Home, identity and the wider world', lists: ['muslim-kids-at-the-center', 'black-joy-family-big-dreams', 'latino-families-many-stories', 'asian-families-many-stories', 'more-than-one-culture-at-home', 'families-with-pride', 'sibling-teams', 'food-family-and-the-table', 'around-the-world'] },
+  { id: 'game-day', name: 'Game day', aside: 'Courts, fields, ice and open water', lists: ['nothing-but-net', 'the-beautiful-game', 'friday-night-football', 'ice-snow-and-underdogs', 'wheels-and-waves', 'girls-in-the-game'] },
   { id: 'brave-and-curious', name: 'Brave and curious', aside: 'Leaders, makers and bright ideas', lists: ['girls-lead-the-way', 'inventors-and-problem-solvers'] },
   { id: 'cheer-them-on', name: 'Cheer them on', aside: 'Teams, long shots, good dogs', lists: ['good-teammates', 'underdogs', 'dogs', 'real-life-adventures'] },
   { id: 'from-the-grown-ups', name: 'From the grown-ups', aside: 'The ones you remember', lists: ['eighties', 'nineties', 'funny-for-grown-ups-too', 'award-winners'] }
@@ -270,5 +354,16 @@ const LIST_ICONS = Object.freeze({
   "girls-lead-the-way": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\"><circle fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" cx=\"16\" cy=\"16\" r=\"12\"/><path fill=\"currentColor\" d=\"m18 7-4 7-7 4 7 1 1 7 4-7 7-4-7-1z\"/></svg>",
   "food-family-and-the-table": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\"><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" d=\"M4 25h24M8 25v4M24 25v4\"/><path fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" d=\"M6 14h20c0 7-4 10-10 10S6 21 6 14z\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" d=\"M10 10c0-3 3-3 3-6M17 10c0-3 3-3 3-6\"/></svg>",
   "inventors-and-problem-solvers": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\"><path fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" d=\"M8 13a8 8 0 1 1 13 6v4H11v-4a8 8 0 0 1-3-6z\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" d=\"M11 27h10M13 23v-7l3 2 3-2v7\"/></svg>",
-  "around-the-world": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\"><circle fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" cx=\"16\" cy=\"16\" r=\"13\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" d=\"M3 16h26M16 3c5 5 5 21 0 26M16 3c-5 5-5 21 0 26\"/></svg>"
+  "around-the-world": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\"><circle fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" cx=\"16\" cy=\"16\" r=\"13\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" d=\"M3 16h26M16 3c5 5 5 21 0 26M16 3c-5 5-5 21 0 26\"/></svg>",
+  "nothing-but-net": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\"><circle fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" cx=\"16\" cy=\"16\" r=\"12\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" d=\"M4 16h24M16 4c-5 5-5 19 0 24M16 4c5 5 5 19 0 24M7 8c5 4 13 4 18 0M7 24c5-4 13-4 18 0\"/></svg>",
+  "the-beautiful-game": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\"><circle fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" cx=\"16\" cy=\"16\" r=\"12\"/><path fill=\"currentColor\" d=\"m16 10 5 4-2 6h-6l-2-6z\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" d=\"m16 10-2-6M21 14l6-1M19 20l3 6M13 20l-3 6M11 14l-6-1\"/></svg>",
+  "friday-night-football": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\"><path fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" d=\"M4 20C7 8 17 3 28 8c-3 12-13 17-24 12z\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" d=\"m10 19 10-8M13 14l5 3M16 11l5 3\"/></svg>",
+  "ice-snow-and-underdogs": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\"><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" d=\"M16 3v26M5 9l22 14M5 23 27 9M10 5l6 4 6-4M10 27l6-4 6 4M4 15l6 1-1 6M28 17l-6-1 1-6\"/><circle fill=\"var(--icon-tint, #ECC6B3)\" cx=\"16\" cy=\"16\" r=\"4\"/></svg>",
+  "wheels-and-waves": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\"><circle fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" cx=\"9\" cy=\"23\" r=\"4\"/><circle fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" cx=\"24\" cy=\"23\" r=\"4\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"m9 23 6-10 4 10 5-8h-8M4 8c4-5 8 5 12 0s8 5 12 0\"/></svg>",
+  "girls-in-the-game": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\"><path fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" d=\"M10 4h12v7c0 5-2 8-6 8s-6-3-6-8z\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" d=\"M10 7H5c0 5 2 8 6 8M22 7h5c0 5-2 8-6 8M16 19v5M10 28h12\"/><path fill=\"currentColor\" d=\"m16 7 1.2 2.4 2.7.4-2 1.9.5 2.7-2.4-1.3-2.4 1.3.5-2.7-2-1.9 2.7-.4z\"/></svg>",
+  "black-joy-family-big-dreams": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\"><circle fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" cx=\"16\" cy=\"16\" r=\"8\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" d=\"M16 2v5M16 25v5M2 16h5M25 16h5M6 6l4 4M22 22l4 4M26 6l-4 4M10 22l-4 4\"/><path fill=\"currentColor\" d=\"m16 11 1.5 3 3.5.5-2.5 2.5.6 3.5-3.1-1.7-3.1 1.7.6-3.5-2.5-2.5 3.5-.5z\"/></svg>",
+  "latino-families-many-stories": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\"><path fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" d=\"M4 5h24v17H14l-6 5v-5H4z\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" d=\"M10 12h12M10 17h8\"/></svg>",
+  "asian-families-many-stories": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\"><path fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" d=\"M16 8C12 5 7 5 3 6v20c5-1 9 0 13 3zM16 8c4-3 9-3 13-2v20c-5-1-9 0-13 3z\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" d=\"M7 11h5M7 16h5M20 11h5M20 16h5\"/></svg>",
+  "more-than-one-culture-at-home": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\"><path fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" d=\"M4 15 16 5l12 10v13H4z\"/><path fill=\"currentColor\" d=\"M12 16c-3-3-7 1-4 4l4 4 4-4c3-3-1-7-4-4zM21 13c-2-2-5 1-3 3l3 3 3-3c2-2-1-5-3-3z\"/></svg>",
+  "families-with-pride": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\"><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" d=\"M5 24a11 11 0 0 1 22 0M10 24a6 6 0 0 1 12 0\"/><path fill=\"var(--icon-tint, #ECC6B3)\" d=\"M16 17c-3-4-8 1-4 5l4 4 4-4c4-4-1-9-4-5z\"/></svg>"
 });
