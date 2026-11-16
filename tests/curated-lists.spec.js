@@ -168,6 +168,34 @@ test('every passport card, return calendar and the season card show a decorative
   await expect(page.locator('#listsBody .listCover .medal[aria-hidden="true"]')).toHaveCount(count);
 });
 
+test('new collection icons use deliberate multi-color palettes without relying on color for meaning', async ({ page }) => {
+  await startOn(page, '2026-11-16T19:00:00');
+  await watchAsAdultsOnly(page);
+  await openLists(page);
+
+  const ids = [
+    'ramadan-eid', 'muslim-kids-at-the-center', 'sibling-teams', 'girls-lead-the-way',
+    'food-family-and-the-table', 'inventors-and-problem-solvers', 'around-the-world',
+    'nothing-but-net', 'the-beautiful-game', 'friday-night-football',
+    'ice-snow-and-underdogs', 'wheels-and-waves', 'girls-in-the-game',
+    'black-joy-family-big-dreams', 'latino-families-many-stories',
+    'asian-families-many-stories', 'more-than-one-culture-at-home', 'families-with-pride'
+  ];
+  const palettes = [];
+  for (const id of ids) {
+    const icon = page.locator(`[data-list-icon="${id}"]`).first();
+    await expect(icon.locator('svg[aria-hidden="true"]')).toHaveCount(1);
+    const palette = await icon.evaluate((node) => {
+      const style = getComputedStyle(node);
+      return [1, 2, 3].map((slot) => style.getPropertyValue(`--icon-${slot}`).trim());
+    });
+    expect(palette.every(Boolean)).toBe(true);
+    expect(new Set(palette).size).toBe(3);
+    palettes.push(palette.join('|'));
+  }
+  expect(new Set(palettes).size).toBeGreaterThan(10);
+});
+
 test('during Hanukkah, Tonight offers the Hanukkah list, and Christmas comes back after', async ({ page }) => {
   await startOn(page, '2026-12-05T19:00:00');
   await watchAsAdultsOnly(page);
