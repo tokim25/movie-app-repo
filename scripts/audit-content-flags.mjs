@@ -39,6 +39,7 @@ const dataFiles = [
   'data-nickelodeon.js',
   'data-extra.js',
   'data-muslim.js',
+  'data-representation.js',
   'data-csm.js',
   'data-mcudc.js',
   'data-ghibli.js'
@@ -54,6 +55,7 @@ const movieArrays = [
   'MOVIES_NICK',
   'MOVIES_EXTRA',
   'MOVIES_MUSLIM',
+  'MOVIES_REPRESENTATION',
   'MOVIES_CSM',
   'MOVIES_MCUDC',
   'MOVIES_GHIBLI',

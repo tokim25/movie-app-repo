@@ -218,6 +218,46 @@ test('the seven new community, family and curiosity lists are available', async 
   await expect(page.locator('#listsBody .returnCalendar', { hasText: 'Ramadan & Eid' })).toHaveCount(1);
 });
 
+test('sports and family-representation collections are all available', async ({ page }) => {
+  await startOn(page, '2026-11-16T19:00:00');
+  await watchAsAdultsOnly(page);
+  await openLists(page);
+
+  for (const name of [
+    'Nothing but net',
+    'The beautiful game',
+    'Friday night football',
+    'Ice, snow and underdogs',
+    'Wheels and waves',
+    'Girls in the game',
+    'Black joy, family and big dreams',
+    'Latino families, many stories',
+    'Asian families, many stories',
+    'More than one culture at home',
+    'Families with pride'
+  ]) {
+    await expect(page.locator('#listsBody .passport', { hasText: name })).toHaveCount(1);
+  }
+});
+
+test('representation collections open with a deliberate lead title', async ({ page }) => {
+  await startOn(page, '2026-11-16T19:00:00');
+  await watchAsAdultsOnly(page);
+  await openLists(page);
+
+  for (const [listName, firstTitle] of [
+    ['Black joy, family and big dreams', 'The Princess and the Frog'],
+    ['Latino families, many stories', 'Encanto'],
+    ['Asian families, many stories', 'Over the Moon'],
+    ['More than one culture at home', 'Yes Day'],
+    ['Families with pride', 'Strange World']
+  ]) {
+    await page.locator('#listsBody .passport', { hasText: listName }).click();
+    await expect(page.locator('#openListRows > li.row').first()).toContainText(firstTitle);
+    await page.locator('#listsBackBtn').click();
+  }
+});
+
 test('during Ramadan, Tonight opens Ramadan nights and Eid mornings with American Eid first', async ({ page }) => {
   await startOn(page, '2027-02-08T19:00:00');
   await watchAsAdultsOnly(page);
