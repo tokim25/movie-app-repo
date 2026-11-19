@@ -38,7 +38,7 @@ test('the active bottom-nav tab label meets AA text contrast in light mode (#77)
   );
 });
 
-test('the active Want to watch filter meets AA contrast in dark mode', async ({ page }) => {
+test('the active Want to watch filter meets AA contrast with a dark OS preference', async ({ page }) => {
   await page.emulateMedia({ colorScheme: 'dark' });
   await switchToFlatView(page);
   await page.locator('#filterSheetBtn').click();
@@ -132,9 +132,10 @@ test('reorder buttons and content-level buttons expose a descriptive accessible 
   expect(levelAriaLabel).toMatch(/^Level \d+: .+/);
 });
 
-test('sample-family setup clears stale validation and returns focus to Shelf (#110)', async ({ page }) => {
+test('sample-family setup clears stale validation and returns focus to Tonight (#110)', async ({ page }) => {
   await page.goto('/');
   await page.locator('#bootSyncLoading').waitFor({ state: 'hidden' });
+  await page.locator('#tabBrowse').click();
   await page.locator('#firstRunFamilySetupBtn').click();
 
   await page.locator('#setupSaveChildBtn').click();
@@ -143,10 +144,10 @@ test('sample-family setup clears stale validation and returns focus to Shelf (#1
 
   await page.locator('#setupSampleFamilyBtn').click();
 
-  await expect(page.locator('#browseScreenHeading')).toBeFocused();
+  await expect(page.locator('#homeScreenHeading')).toBeFocused();
   await expect(page.locator('#setupChildName')).not.toHaveAttribute('aria-invalid', 'true');
   await expect(page.locator('#setupChildNameError')).toBeHidden();
-  await expect(page.locator('#assertiveStatus')).toHaveText('Family setup complete. Your shelf is ready.');
+  await expect(page.locator('#assertiveStatus')).toHaveText('Family setup complete. Tonight is ready.');
 });
 
 test('every app screen exposes exactly one visible labelled main landmark (#114)', async ({ page }) => {
@@ -160,14 +161,14 @@ test('every app screen exposes exactly one visible labelled main landmark (#114)
     await expect(page.locator(`#${headingId}`)).toBeVisible();
   };
 
+  await assertMain('homeScreen', 'homeScreenHeading');
+  await page.locator('#tabBrowse').click();
   await assertMain('browseScreen', 'browseScreenHeading');
   await page.locator('#firstRunFamilySetupBtn').click();
   await assertMain('setupScreen', 'setupScreenHeading');
   await page.locator('#setupSampleFamilyBtn').click();
-  await assertMain('browseScreen', 'browseScreenHeading');
-  await page.evaluate(() => localStorage.setItem('family-feature-google-sign-in-nudge-v1-seen', '1'));
-  await page.locator('#tabHome').click();
   await assertMain('homeScreen', 'homeScreenHeading');
+  await page.evaluate(() => localStorage.setItem('family-feature-google-sign-in-nudge-v1-seen', '1'));
   await page.locator('#tabFamily').click();
   await assertMain('familyScreen', 'familyScreenHeading');
 });
@@ -262,10 +263,10 @@ test('Shelf Details keeps focus and stable disclosure semantics through rerender
   await expect(page.locator(':focus')).toHaveAttribute('aria-expanded', 'true');
   await expect(page.locator(`#${controlledId}`)).toBeVisible();
 
-  await page.locator('#listPageNextBtn').click();
-  await expect(page.locator('#listPageNextBtn')).toBeFocused();
-  await page.locator('#listPagePrevBtn').click();
-  await expect(page.locator('#listPageNextBtn')).toBeFocused();
+  // Dispatch directly, as pagination.spec.js does: scrolling to the button
+  // would trigger the automatic loader first and make this test racy.
+  await page.locator('#listShowMoreBtn').dispatchEvent('click');
+  await expect(page.locator('#list > li.row').nth(50).locator('.rowMain')).toBeFocused();
 
   const restoredDetails = page.locator('#list > li.row').filter({ hasText: title }).first().locator('.detailLink');
   await expect(restoredDetails).toHaveAttribute('aria-controls', controlledId);

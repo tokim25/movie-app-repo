@@ -33,13 +33,16 @@ export const dataFiles = [
   'data-dreamworks.js',
   'data-nickelodeon.js',
   'data-extra.js',
+  'data-muslim.js',
+  'data-representation.js',
   'data-csm.js',
   'data-mcudc.js',
   'data-ghibli.js',
   'data-sonyanim.js',
   'data-posters.js',
   'data-guidance.js',
-  'data-series.js'
+  'data-series.js',
+  'data-lists.js'
 ];
 
 const DATA_VERSION_PATTERN = /const DATA_VERSION = '([0-9a-f]*)';/;

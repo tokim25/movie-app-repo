@@ -25,7 +25,9 @@ test('marking tonight\'s pick watched stamps a ticket stub instead of striking i
   expect(look.opacity).toBe('1');
 
   await expect(page.locator('#toast')).toHaveText('Your first movie night, logged.');
-  await expect(page.locator('#tonightMemoriesCounts')).toBeVisible();
+  // The memory line hides while a pick is on screen (the pick needs the
+  // room) but its count is already updated for when it shows again.
+  await expect(page.locator('#tonightMemoriesCounts')).not.toHaveAttribute('hidden', /.*/);
   await expect(page.locator('#statChecked')).toHaveText('1');
 });
 
@@ -50,7 +52,7 @@ test('the Tonight subtitle follows the evening without changing any behavior', a
     cozyWednesday: tonightSubtitleFor(new Date(2026, 10, 25, 18, 0)),
     plainWednesday: tonightSubtitleFor(new Date(2026, 10, 11, 18, 0)),
   }));
-  expect(lines.lateTuesday).toBe('Late start? Set a shorter time under Change.');
+  expect(lines.lateTuesday).toBe('Late start? Tap 90 min to pick a shorter time.');
   expect(lines.friday).toBe('Friday night. Big-screen energy.');
   expect(lines.saturday).toBe('Saturday night at the movies.');
   expect(lines.cozyWednesday).toBe('Cozy season. Blankets optional, popcorn encouraged.');

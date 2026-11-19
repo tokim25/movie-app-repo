@@ -1,12 +1,13 @@
 import { test, expect } from '@playwright/test';
 
-test('a new visitor lands on Shelf without being forced through family setup', async ({ page }) => {
+test('a new visitor lands on Tonight without being forced through family setup', async ({ page }) => {
   await page.goto('/');
 
-  await expect(page.locator('#browseScreen')).toBeVisible();
+  await expect(page.locator('#homeScreen')).toBeVisible();
   await expect(page.locator('#setupScreen')).toBeHidden();
   await expect(page.locator('#quickBar')).toBeVisible();
-  await expect(page.locator('#tabBrowse')).toHaveClass(/on/);
+  await expect(page.locator('#tabHome')).toHaveClass(/on/);
+  await page.locator('#tabBrowse').click();
   await expect(page.locator('#firstRunShelfIntro')).toContainText('Start with the shelf');
 });
 
@@ -20,6 +21,7 @@ test('the initial Tonight markup never exposes example or user-like child names'
 
 test('Google backup is offered once, after a few marks rather than on the first tap', async ({ page }) => {
   await page.goto('/');
+  await page.locator('#tabBrowse').click();
 
   await page.locator('#list .star').first().click();
   await expect(page.locator('#googleSignInNudge')).toBeHidden();
@@ -38,6 +40,7 @@ test('Google backup is offered once, after a few marks rather than on the first 
   await expect(page.locator('#googleSignInNudge')).toBeHidden();
 
   await page.reload();
+  await page.locator('#tabBrowse').click();
   for (let i = 0; i < 3; i++) await page.locator('#list .check').nth(i).click();
   await expect(page.locator('#googleSignInNudge')).toBeHidden();
 });
@@ -57,6 +60,7 @@ test('user-facing copy never calls customized limits starter settings (#164)', a
   await page.goto('/');
 
   await expect(page.locator('body')).not.toContainText(/starter settings/i);
+  await page.locator('#tabBrowse').click();
   await page.locator('#firstRunFamilySetupBtn').click();
   await expect(page.locator('#setupScreen')).toContainText('age-based content limits');
   await expect(page.locator('#setupScreen')).not.toContainText(/starter settings/i);

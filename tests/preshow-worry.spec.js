@@ -37,53 +37,54 @@ async function showPick(page, title){
   await expect(page.locator('#tonightPickTitle')).toContainText(title);
 }
 
-test('Pre-show loads the self-hosted renderer only once a pick with a Pre-show opens', async ({ page }) => {
+// The full Pre-show opens from the warning line's "More" button.
+async function openPreShow(page){
+  await page.locator('#tonightHeadsUpBtn').click();
+  await expect(page.locator('#tonightPreShow')).toBeVisible();
+}
+
+test('the warning line shows as plain text with the pick; the renderer loads only when Pre-show opens', async ({ page }) => {
   const bundleRequests = [];
   page.on('request', req => { if(req.url().includes('/assets/openui-0.2.1/')) bundleRequests.push(req.url()); });
   await prepare(page);
   expect(await page.evaluate(() => typeof window.__OpenUI)).toBe('undefined');
+
+  await showPick(page, 'Finding Nemo');
+  // The warning is on screen before anything heavy loads.
+  await expect(page.locator('#tonightHeadsUp')).toContainText('Be ready early on');
+  await expect(page.locator('#tonightPreShow')).toBeHidden();
   expect(bundleRequests).toEqual([]);
 
-  await showPick(page, 'Finding Nemo');
+  await openPreShow(page);
   const band = page.locator('#tonightPreShow');
-  await expect(band).toBeVisible();
   await expect(band.getByRole('heading', { name: 'Pre-show' })).toBeVisible();
-  await expect(band).toContainText('Be ready early on');
   await expect(band).toContainText("Nemo's mother and siblings-to-be killed by a predator");
   await expect(band).toContainText('why was Marlin so scared');
+  await expect(page.locator('#tonightHeadsUpBtn')).toHaveAttribute('aria-expanded', 'true');
   expect(bundleRequests.some(u => u.endsWith('openui-bundle.min.js'))).toBe(true);
   expect(bundleRequests.some(u => u.endsWith('openui-styles.css'))).toBe(true);
-  await expectNoA11yViolations(page, '#tonightPreShow');
+  await expectNoA11yViolations(page, '#tonightPickCard');
 
-  // Switching to a pick without a Pre-show hides the band again.
+  // A pick without a Pre-show says so instead of showing nothing, which
+  // would read as "safe".
   await showPick(page, 'Paddington');
   await expect(band).toBeHidden();
-  // A gentle film can be a one-liner.
+  await expect(page.locator('#tonightHeadsUp')).toContainText('No Pre-Show notes');
+  await expect(page.locator('#tonightHeadsUpBtn')).toBeHidden();
+  // A gentle film is a one-liner.
   await showPick(page, "Kiki's Delivery Service");
-  await expect(band).toContainText('Gentle. Nothing to prep for.');
+  await expect(page.locator('#tonightHeadsUp')).toContainText('Gentle. Nothing to prep for.');
 });
 
-test("Pre-show follows the app's theme setting, not the OS", async ({ page }) => {
-  await page.emulateMedia({ colorScheme: 'light' });
+test("Pre-show stays light when the OS is dark", async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'dark' });
   await prepare(page);
   await showPick(page, 'Finding Nemo');
-  await expect(page.locator('#tonightPreShow')).toContainText('Be ready early on');
+  await openPreShow(page);
+  await page.waitForFunction(() => window.__OpenUI);
   const openuiTheme = () => page.evaluate(() => document.documentElement.getAttribute('data-openui-theme'));
   await expect.poll(openuiTheme).toBe('light');
-
-  await page.evaluate(() => applyTheme('dark'));
-  await expect.poll(openuiTheme).toBe('dark');
-  // The renderer's own tokens switch with it (its dark background is near-black).
-  await expect.poll(() => page.evaluate(() =>
-    getComputedStyle(document.documentElement).getPropertyValue('--openui-background').trim())).toContain('0.145');
-
-  await page.evaluate(() => applyTheme('light'));
-  await expect.poll(openuiTheme).toBe('light');
-
-  // "Match device" hands the choice back to the OS.
-  await page.evaluate(() => applyTheme('system'));
-  await page.emulateMedia({ colorScheme: 'dark' });
-  await expect.poll(openuiTheme).toBe('dark');
+  await expect(page.locator('html')).toHaveCSS('color-scheme', 'light');
 });
 
 test('Pre-show stays hidden, and nothing loads, when there is no guidance data', async ({ page }) => {
@@ -105,32 +106,37 @@ test.describe('without the service worker', () => {
   // page.route(), so this one test runs uncontrolled.
   test.use({ serviceWorkers: 'block' });
 
-  test('Pre-show hides silently when the renderer fails to load', async ({ page }) => {
+  test('Pre-show falls back to plain text when the renderer fails to load', async ({ page }) => {
     const errors = [];
     page.on('pageerror', err => errors.push(err.message));
     await page.route('**/assets/openui-0.2.1/openui-bundle.min.js', route => route.abort());
     await prepare(page);
     await showPick(page, 'Finding Nemo');
+    await openPreShow(page);
     await page.waitForTimeout(500);
-    await expect(page.locator('#tonightPreShow')).toBeHidden();
-    await expect(page.locator('#tonightPickCard')).toBeVisible();
+    await expect(page.locator('#tonightPreShowFallback')).toBeVisible();
+    await expect(page.locator('#tonightPreShowFallback')).toContainText('Be ready early on');
+    await expect(page.locator('#tonightPreShowBody')).toBeHidden();
     expect(errors).toEqual([]);
   });
 });
 
-test('Pre-show hides when its program has errors', async ({ page }) => {
-  await prepare(page, { '2': { preShow: 'root = NotAComponent("x")' } });
+test('Pre-show falls back to plain text when its program has errors', async ({ page }) => {
+  await prepare(page, { '2': { preShow: 'root = Card([w, a])\nw = Callout("warning", "Shark", "A shark chases them.")\na = NotAComponent("x")' } });
   await showPick(page, 'Finding Nemo');
+  await openPreShow(page);
   await page.waitForFunction(() => window.__OpenUI);
   await page.waitForTimeout(300);
-  await expect(page.locator('#tonightPreShow')).toBeHidden();
+  await expect(page.locator('#tonightPreShowBody')).toBeHidden();
+  await expect(page.locator('#tonightPreShowFallback')).toContainText('A shark chases them.');
 });
 
 test('Pre-show renderer is cached by the service worker and works offline', async ({ page, context }) => {
   await prepare(page);
   await page.waitForFunction(() => navigator.serviceWorker.controller !== null, null, { timeout: 15000 });
   await showPick(page, 'Finding Nemo');
-  await expect(page.locator('#tonightPreShow')).toContainText('Be ready early on');
+  await openPreShow(page);
+  await expect(page.locator('#tonightPreShowBody')).toContainText('Be ready early on');
   await expect.poll(() => page.evaluate(async () => {
     const cache = await caches.open('openui-browser-bundle-0.2.1');
     return (await cache.keys()).map(r => new URL(r.url).pathname).sort();
@@ -140,12 +146,14 @@ test('Pre-show renderer is cached by the service worker and works offline', asyn
   try{
     await page.reload();
     await page.locator('#bootSyncLoading').waitFor({ state: 'hidden' });
+    await page.locator('#tabHome').click();
     await page.evaluate(([fixture, titles]) => {
       state.children.forEach(child => { child.age = 12; CONTENT_FLAG_IDS.forEach(f => setChildFlagLimit(child.id, f, 4)); });
       movieGuidanceFor = num => fixture[String(num)] || null;
       showTonightPick({ idx: MOVIES.findIndex(m => m.t === titles[0]), source: 'Shelf' });
     }, [FIXTURE, TITLES]);
-    await expect(page.locator('#tonightPreShow')).toContainText('Be ready early on');
+    await openPreShow(page);
+    await expect(page.locator('#tonightPreShowBody')).toContainText('Be ready early on');
   }finally{
     await context.setOffline(false);
   }
@@ -231,6 +239,7 @@ test('Loading the Pre-show renderer triggers no CSP violation (Sentry JAVASCRIPT
   });
   await prepare(page);
   await showPick(page, 'Finding Nemo');
-  await expect(page.locator('#tonightPreShow')).toContainText('Be ready early on');
+  await openPreShow(page);
+  await expect(page.locator('#tonightPreShowBody')).toContainText('Be ready early on');
   expect(await page.evaluate(() => window.__cspViolations)).toEqual([]);
 });

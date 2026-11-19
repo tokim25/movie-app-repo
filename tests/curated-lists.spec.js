@@ -1,0 +1,304 @@
+import { test, expect } from '@playwright/test';
+import { setupSampleFamily } from './helpers.js';
+import { expectNoA11yViolations } from './a11y.js';
+
+// Curated lists (data-lists.js) live on their own Lists tab as passport
+// cards: the in-season list first with a "Now showing" badge, the rest on
+// themed shelves, out-of-season lists as calendar cards under "Coming
+// attractions" and tucked-away lists in a box at the bottom. The first in-season list also gets a card on Tonight.
+// A list with fewer than 5 titles that fit the selected kids is not shown
+// (A small number of intentionally narrow representation lists set a lower
+// threshold explicitly while the catalog grows).
+
+async function startOn(page, isoDate) {
+  await page.clock.setFixedTime(new Date(isoDate));
+  await page.goto('/');
+  await setupSampleFamily(page);
+}
+
+async function openLists(page) {
+  await page.locator('#tabLists').click();
+  await page.locator('#listsScreen').waitFor({ state: 'visible' });
+}
+
+// Watching as adults only, every film on a list counts.
+async function watchAsAdultsOnly(page) {
+  await page.locator('#tabHome').click();
+  await page.locator('#tonightWhoPill').click();
+  for (const name of ['Simon', 'Nora']) {
+    await page.locator('#tonightKidChoices .choiceChip', { hasText: name }).click();
+  }
+  await expect(page.locator('#tonightWhoPill')).toContainText('Adults only');
+  await page.keyboard.press('Escape');
+}
+
+test('Lists is its own tab, between Shelf and Tonight', async ({ page }) => {
+  await startOn(page, '2026-12-18T19:00:00');
+  const labels = await page.locator('#quickBar .qbBtn > span:not(.qbCount):not(.qbDot)').allTextContents();
+  expect(labels).toEqual(['Shelf', 'Lists', 'Tonight', "What's new", 'Family']);
+  await openLists(page);
+  await expect(page.locator('#tabLists')).toHaveAttribute('aria-current', 'page');
+  await expect(page.locator('#listsScreenHeading')).toHaveText('Lists');
+});
+
+test('in December, Christmas gets the passport card and opens in list order', async ({ page }) => {
+  await startOn(page, '2026-12-18T19:00:00');
+  await openLists(page);
+  const hero = page.locator('#listsBody .passport.hero');
+  await expect(hero).toContainText('Now showing');
+  await expect(hero).toContainText('Christmas movies');
+  await expect(hero).toContainText('fit Simon + Nora');
+  await expect(page.locator('#listsBody .passport', { hasText: 'Snow day' })).toBeVisible();
+
+  await hero.click();
+  await expect(page.locator('#openListName')).toHaveText('Christmas movies');
+  await expect(page.locator('#openListName')).toBeFocused();
+  await expect(page.locator('#listOpen .coverMeta')).toContainText('Picked by hand');
+  await expect(page.locator('#openListRows > li.row').first()).toContainText('Rudolph the Red-Nosed Reindeer');
+  await expect(page.locator('#openListRows > li.row').first().locator('.rowNum')).toHaveText('1');
+  await expect(page.locator('#openListRows > li.row')).toHaveCount(10);
+  await page.locator('#openListShowAllBtn').click();
+  expect(await page.locator('#openListRows > li.row').count()).toBeGreaterThan(10);
+
+  await page.locator('#listsBackBtn').click();
+  await expect(page.locator('#listsIndex')).toBeVisible();
+  await expect(page.locator('#listsBody .passport.hero')).toBeFocused();
+});
+
+test('year-round lists sit on themed shelves, and off-season lists use return-date calendars', async ({ page }) => {
+  await startOn(page, '2026-12-18T19:00:00');
+  await openLists(page);
+  await expect(page.locator('#lists-h-story-time')).toContainText('Story time');
+  await expect(page.locator('#lists-h-cheer-them-on')).toContainText('Cheer them on');
+  await expect(page.locator('#lists-h-later')).toContainText('Coming attractions');
+  await expect(page.locator('#lists-h-later')).toContainText('Browse any list now');
+  const later = page.locator('#listsBody .returnCalendar', { hasText: 'Summer break' });
+  await expect(later.locator('.calendarMonth')).toHaveText('Jun');
+  await expect(later.locator('.calendarDay')).toHaveText('1');
+  await expect(later.locator('.calendarReturn')).toHaveText('Returns Jun 1');
+  await expect(later).toHaveCSS('display', 'grid');
+  await expect(later).toHaveCSS('transform', 'none');
+});
+
+test('Not seen hides watched films in an opened list', async ({ page }) => {
+  await startOn(page, '2026-12-18T19:00:00');
+  await openLists(page);
+  await page.locator('#listsBody .passport.hero').click();
+  const first = page.locator('#openListRows > li.row').first();
+  await first.locator('.check').click();
+  await page.locator('#openListUnseenBtn').click();
+  await expect(page.locator('#openListUnseenBtn')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('#openListRows > li.row').first()).not.toContainText('Rudolph the Red-Nosed Reindeer');
+});
+
+test('Tonight shows the in-season list and opens it on the Lists tab', async ({ page }) => {
+  await startOn(page, '2026-12-18T19:00:00');
+  await page.locator('#tabHome').click();
+  const card = page.locator('#tonightSeasonCard');
+  await expect(card).toContainText('Christmas movies');
+  await expect(card).toContainText('that fit Simon + Nora');
+  await expectNoA11yViolations(page, '#tonightSeasonCard');
+  await card.click();
+  await expect(page.locator('#listsScreen')).toBeVisible();
+  await expect(page.locator('#openListName')).toHaveText('Christmas movies');
+});
+
+test('out of every season, Tonight shows no list card', async ({ page }) => {
+  await startOn(page, '2026-11-05T19:00:00');
+  await page.locator('#tabHome').click();
+  await expect(page.locator('#findTonightPickBtn')).toBeVisible();
+  await expect(page.locator('#tonightSeasonCard')).toBeHidden();
+});
+
+test('the season card steps aside while a pick is showing', async ({ page }) => {
+  await startOn(page, '2026-12-18T19:00:00');
+  await page.locator('#tabHome').click();
+  await page.locator('#findTonightPickBtn').click();
+  await expect(page.locator('#tonightPickTitle')).not.toBeEmpty();
+  await expect(page.locator('#tonightSeasonCard')).toBeHidden();
+});
+
+test('Tuck it away hides a list on this device until it is put back', async ({ page }) => {
+  await startOn(page, '2026-12-18T19:00:00');
+  await openLists(page);
+  await page.locator('#listsBody .passport', { hasText: 'Dog movies' }).click();
+  await page.locator('#listHideBtn').click();
+  await expect(page.locator('#listsIndex')).toBeVisible();
+  await expect(page.locator('#listsBody .passport', { hasText: 'Dog movies' })).toHaveCount(0);
+
+  await page.reload();
+  await openLists(page);
+  await expect(page.locator('#listsBody .passport', { hasText: 'Dog movies' })).toHaveCount(0);
+  const tucked = page.locator('#listsBody .tuckedRow', { hasText: 'Dog movies' });
+  await expect(tucked).toBeVisible();
+  await tucked.getByRole('button', { name: 'Put back Dog movies' }).click();
+  await expect(page.locator('#listsBody .passport', { hasText: 'Dog movies' })).toHaveCount(1);
+});
+
+test('a list with fewer than 5 titles that fit rests until more do', async ({ page }) => {
+  await startOn(page, '2026-12-18T19:00:00');
+  await page.evaluate(() => {
+    const realLists = curatedLists();
+    const nums = MOVIES.slice(0, 4).map(m => m.num);
+    window.curatedLists = () => realLists.concat([{ id: 'tiny', name: 'Tiny list', blurb: 'Only four.', copy: 'Small.', pins: nums }]);
+  });
+  await openLists(page);
+  await expect(page.locator('#listsBody .listCover', { hasText: 'Tiny list' })).toHaveCount(0);
+  await expect(page.locator('#listsBody .tucked')).toContainText('resting');
+  await expect(page.locator('#listsBody .passport', { hasText: 'Good teammates' })).toHaveCount(1);
+});
+
+test('Shelf points to the Lists tab', async ({ page }) => {
+  await startOn(page, '2026-12-18T19:00:00');
+  await page.locator('#tabBrowse').click();
+  await page.locator('#listsTeaser').click();
+  await expect(page.locator('#listsScreen')).toBeVisible();
+  await expect(page.locator('#listsScreenHeading')).toBeFocused();
+});
+
+test('passport cards show poster fans while compact seasonal contexts keep decorative icons', async ({ page }) => {
+  await startOn(page, '2026-12-18T19:00:00');
+  await page.locator('#tabHome').click();
+  await expect(page.locator('#tonightSeasonCard .listIcon[aria-hidden="true"] svg')).toHaveCount(1);
+  await openLists(page);
+  const passports = page.locator('#listsBody .passport');
+  const passportCount = await passports.count();
+  expect(passportCount).toBeGreaterThan(10);
+  await expect(page.locator('#listsBody .passport .ppFan[aria-hidden="true"]')).toHaveCount(passportCount);
+  const fanSizes = await page.locator('#listsBody .passport .ppFan').evaluateAll(fans => fans.map(fan => fan.querySelectorAll('.ppFanPoster').length));
+  expect(fanSizes.every(size => size === 2 || size === 3)).toBe(true);
+  const frameCount = fanSizes.reduce((sum, size) => sum + size, 0);
+  await expect(page.locator('#listsBody .passport .ppFanPoster img')).toHaveCount(frameCount);
+  const returnCards = page.locator('#listsBody .returnCalendar');
+  const returnCount = await returnCards.count();
+  await expect(page.locator('#listsBody .returnCalendar .medal[aria-hidden="true"] svg')).toHaveCount(returnCount);
+});
+
+test('a poster fan follows the collection lead-title order', async ({ page }) => {
+  await startOn(page, '2026-11-16T19:00:00');
+  await watchAsAdultsOnly(page);
+  await openLists(page);
+  const card = page.locator('#listsBody .passport', { hasText: 'Black joy, family and big dreams' });
+  const actual = await card.locator('.ppFanPoster img').evaluateAll(images => images.map(image => image.getAttribute('src')));
+  const expected = await page.evaluate(() => {
+    const list = listById('black-joy-family-big-dreams');
+    return list.pins.filter(num => MOVIE_POSTERS[num]?.u).slice(0, 3).map(num => MOVIE_POSTERS[num].u);
+  });
+  expect(actual).toEqual(expected);
+  expect(await card.locator('.ppFanPoster img').evaluateAll(images => images.map(image => image.getAttribute('alt')))).toEqual(['', '', '']);
+});
+
+test('during Hanukkah, Tonight offers the Hanukkah list, and Christmas comes back after', async ({ page }) => {
+  await startOn(page, '2026-12-05T19:00:00');
+  await watchAsAdultsOnly(page);
+  await expect(page.locator('#tonightSeasonCard')).toContainText('Hanukkah movies');
+  await page.locator('#tonightSeasonCard').click();
+  await expect(page.locator('#openListName')).toHaveText('Hanukkah movies');
+  await expect(page.locator('#openListRows > li.row').first()).toContainText('Lights');
+});
+
+test('after Hanukkah ends, the card goes back to Christmas', async ({ page }) => {
+  await startOn(page, '2026-12-14T19:00:00');
+  await watchAsAdultsOnly(page);
+  await expect(page.locator('#tonightSeasonCard')).toContainText('Christmas movies');
+});
+
+test('the Hanukkah list still shows for young kids when only 2 of its films fit', async ({ page }) => {
+  await startOn(page, '2026-12-05T19:00:00');
+  expect(await page.evaluate(() => listFitCount(listById('hanukkah')))).toBe(2);
+  await page.locator('#tabHome').click();
+  await expect(page.locator('#tonightSeasonCard')).toContainText('Hanukkah movies');
+  await expect(page.locator('#tonightSeasonCard')).toContainText('2 that fit Simon + Nora');
+});
+
+test('the season card count follows who is watching', async ({ page }) => {
+  await startOn(page, '2026-12-18T19:00:00');
+  await page.locator('#tabHome').click();
+  await expect(page.locator('#tonightSeasonCard')).toContainText('fit Simon + Nora');
+  await watchAsAdultsOnly(page);
+  await expect(page.locator('#tonightSeasonCard')).not.toContainText('Simon');
+  await expect(page.locator('#tonightSeasonCard')).toContainText('films');
+});
+
+test('the seven new community, family and curiosity lists are available', async ({ page }) => {
+  await startOn(page, '2026-11-16T19:00:00');
+  await watchAsAdultsOnly(page);
+  await openLists(page);
+
+  for (const name of [
+    'Muslim kids at the center',
+    'Sibling teams',
+    'Girls lead the way',
+    'Food, family and the table',
+    'Inventors and problem-solvers',
+    'Around the world'
+  ]) {
+    await expect(page.locator('#listsBody .passport', { hasText: name })).toHaveCount(1);
+  }
+  await expect(page.locator('#listsBody .returnCalendar', { hasText: 'Ramadan & Eid' })).toHaveCount(1);
+});
+
+test('sports and family-representation collections are all available', async ({ page }) => {
+  await startOn(page, '2026-11-16T19:00:00');
+  await watchAsAdultsOnly(page);
+  await openLists(page);
+
+  for (const name of [
+    'Nothing but net',
+    'The beautiful game',
+    'Friday night football',
+    'Ice, snow and underdogs',
+    'Wheels and waves',
+    'Girls in the game',
+    'Black joy, family and big dreams',
+    'Latino families, many stories',
+    'Asian families, many stories',
+    'More than one culture at home',
+    'Families with pride'
+  ]) {
+    await expect(page.locator('#listsBody .passport', { hasText: name })).toHaveCount(1);
+  }
+});
+
+test('representation collections open with a deliberate lead title', async ({ page }) => {
+  await startOn(page, '2026-11-16T19:00:00');
+  await watchAsAdultsOnly(page);
+  await openLists(page);
+
+  for (const [listName, firstTitle] of [
+    ['Black joy, family and big dreams', 'The Princess and the Frog'],
+    ['Latino families, many stories', 'Encanto'],
+    ['Asian families, many stories', 'Over the Moon'],
+    ['More than one culture at home', 'Yes Day'],
+    ['Families with pride', 'Strange World']
+  ]) {
+    await page.locator('#listsBody .passport', { hasText: listName }).click();
+    await expect(page.locator('#openListRows > li.row').first()).toContainText(firstTitle);
+    await page.locator('#listsBackBtn').click();
+  }
+});
+
+test('during Ramadan, Tonight opens Ramadan nights and Eid mornings with American Eid first', async ({ page }) => {
+  await startOn(page, '2027-02-08T19:00:00');
+  await watchAsAdultsOnly(page);
+  await expect(page.locator('#tonightSeasonCard')).toContainText('Ramadan nights and Eid mornings');
+  await page.locator('#tonightSeasonCard').click();
+  await expect(page.locator('#openListName')).toHaveText('Ramadan nights and Eid mornings');
+  await expect(page.locator('#openListRows > li.row').first()).toContainText('American Eid');
+});
+
+for (const scheme of ['light', 'dark']) {
+  test.describe(`with a ${scheme} OS preference`, () => {
+    test.use({ colorScheme: scheme });
+
+    test('the Lists tab, an opened list and Shelf pass axe', async ({ page }) => {
+      await startOn(page, '2026-12-05T19:00:00');
+      await openLists(page);
+      await expectNoA11yViolations(page, '#listsScreen');
+      await page.locator('#listsBody .passport').first().click();
+      await expectNoA11yViolations(page, '#listsScreen');
+      await page.locator('#tabBrowse').click();
+      await expectNoA11yViolations(page, '#browseScreen');
+    });
+  });
+}

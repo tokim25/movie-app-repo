@@ -1,18 +1,22 @@
 import { test, expect } from '@playwright/test';
 import { setupSampleFamily } from './helpers.js';
 
-test('first run starts on Shelf and family setup keeps all three tabs available', async ({ page }) => {
+test('Tonight is the centered default and family setup returns there', async ({ page }) => {
   await page.goto('/');
 
-  await expect(page.locator('#browseScreen')).toBeVisible();
-  await expect(page.locator('#firstRunShelfIntro')).toBeVisible();
+  await expect(page.locator('#homeScreen')).toBeVisible();
   await expect(page.locator('#quickBar')).toBeVisible();
-  await expect(page.locator('#tabBrowse')).toHaveClass(/on/);
+  await expect(page.locator('#tabHome')).toHaveClass(/on/);
+  const labels = await page.locator('#quickBar .qbBtn > span:not(.qbCount):not(.qbDot)').allTextContents();
+  expect(labels).toEqual(['Shelf', 'Lists', 'Tonight', "What's new", 'Family']);
+
+  await page.locator('#tabBrowse').click();
+  await expect(page.locator('#firstRunShelfIntro')).toBeVisible();
   await page.locator('#firstRunFamilySetupBtn').click();
   await page.locator('#setupSampleFamilyBtn').click();
-  await expect(page.locator('#browseScreen')).toBeVisible();
+  await expect(page.locator('#homeScreen')).toBeVisible();
   await expect(page.locator('#familyScreen')).toBeHidden();
-  await expect(page.locator('#tabBrowse')).toHaveClass(/on/);
+  await expect(page.locator('#tabHome')).toHaveClass(/on/);
   await expect(page.locator('#firstRunShelfIntro')).toBeHidden();
   await expect(page.locator('#tabHome')).toContainText('Tonight');
   await expect(page.locator('#tabBrowse')).toContainText('Shelf');
@@ -22,7 +26,7 @@ test('first run starts on Shelf and family setup keeps all three tabs available'
   await expect(page.locator('#familyScreen')).toBeVisible();
   await expect(page.locator('#homeScreen')).toBeHidden();
   await expect(page.locator('#tabFamily')).toHaveClass(/on/);
-  await expect(page.locator('#familyScreen h2')).toContainText(['Family members', 'Content limits', 'Appearance and sync', 'About Family Feature']);
+  await expect(page.locator('#familyScreen h2')).toContainText(['Family members', 'Content limits', 'Hidden from Tonight', 'About Family Feature']);
   await expect(page.locator('#childrenSettingsPanel')).toContainText('Add or update a family member');
   await expect(page.locator('#familyChildrenList .familyChild')).toHaveCount(2);
   await expect(page.locator('#childEditorList .childEditRow')).toHaveCount(2);
@@ -75,24 +79,30 @@ test('mobile tab bar stays horizontal after setup', async ({ page }) => {
   await setupSampleFamily(page);
 
   const navBox = await page.locator('#quickBar').boundingBox();
-  const tabs = await Promise.all([
-    page.locator('#tabHome').boundingBox(),
-    page.locator('#tabBrowse').boundingBox(),
-    page.locator('#tabFamily').boundingBox(),
-  ]);
+  const tabs = await page.locator('#quickBar .qbBtn').evaluateAll(buttons => buttons.map(button => {
+    const box = button.getBoundingClientRect();
+    return { x: box.x, y: box.y, width: box.width, height: box.height };
+  }));
 
   expect(navBox).not.toBeNull();
   for (const tab of tabs) expect(tab).not.toBeNull();
 
   const centers = tabs.map((tab) => tab.x + tab.width / 2);
-  expect(centers[0]).toBeLessThan(centers[1]);
-  expect(centers[1]).toBeLessThan(centers[2]);
+  for (let i = 1; i < centers.length; i++) expect(centers[i - 1]).toBeLessThan(centers[i]);
+  expect(await page.locator('#tabHome').evaluate(button => Array.from(button.parentElement.children).indexOf(button))).toBe(2);
   expect(Math.max(...tabs.map((tab) => tab.y)) - Math.min(...tabs.map((tab) => tab.y))).toBeLessThan(8);
   expect(navBox.height).toBeLessThan(96);
+
+  const iconCenters = await page.locator('#quickBar .qbBtn > svg').evaluateAll(icons => icons.map(icon => {
+    const box = icon.getBoundingClientRect();
+    return box.y + box.height / 2;
+  }));
+  expect(Math.max(...iconCenters) - Math.min(...iconCenters)).toBeLessThan(1);
 });
 
 test('first-run setup copy is parent-facing, and the sample-family option is clearly a shortcut (#50)', async ({ page }) => {
   await page.goto('/');
+  await page.locator('#tabBrowse').click();
   await page.locator('#firstRunFamilySetupBtn').click();
 
   const setupText = await page.locator('#setupScreen').textContent();

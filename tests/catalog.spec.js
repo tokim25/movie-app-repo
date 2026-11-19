@@ -9,7 +9,7 @@ test('renders without console errors and shows the full catalog', async ({ page 
   });
 
   await page.goto('/');
-  await expect(page.locator('#browseScreen')).toBeVisible();
+  await expect(page.locator('#homeScreen')).toBeVisible();
   await setupSampleFamily(page);
   await page.locator('#tabBrowse').click();
   await expect(page.locator('#browseScreen h1')).toHaveText('Shelf');
@@ -18,12 +18,8 @@ test('renders without console errors and shows the full catalog', async ({ page 
   expect(movieCount).toBeGreaterThan(500);
   await expect(page.locator('#statLeftMore')).toHaveText(String(movieCount));
 
-  // Shelf owns browsing and catalog facets.
-  const studioTileCount = await page.locator('#studioGrid .studioTile').count();
-  expect(studioTileCount).toBeGreaterThan(0);
-
-  await page.locator('#studioGrid .moreStudiosTile').click();
-  await page.locator('#browseScreen').waitFor({ state: 'visible' });
+  // Shelf points to the Lists tab for browsing ideas.
+  await expect(page.locator('#listsTeaser')).toBeVisible();
   const rowCount = await page.locator('#list > li.row').count();
   expect(rowCount).toBeGreaterThan(0);
 

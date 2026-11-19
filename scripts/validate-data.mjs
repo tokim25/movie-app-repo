@@ -21,6 +21,8 @@ const movieArrays = [
   'MOVIES_DREAMWORKS',
   'MOVIES_NICK',
   'MOVIES_EXTRA',
+  'MOVIES_MUSLIM',
+  'MOVIES_REPRESENTATION',
   'MOVIES_CSM',
   'MOVIES_MCUDC',
   'MOVIES_GHIBLI',
@@ -81,6 +83,9 @@ vm.runInContext(`
   this.__POSTERS__ = typeof MOVIE_POSTERS !== 'undefined' ? MOVIE_POSTERS : {};
   this.__GUIDANCE__ = typeof MOVIE_GUIDANCE !== 'undefined' ? MOVIE_GUIDANCE : undefined;
   this.__PREREQS__ = typeof MOVIE_PREREQUISITES !== 'undefined' ? MOVIE_PREREQUISITES : {};
+  this.__LISTS__ = typeof MOVIE_LISTS !== 'undefined' ? MOVIE_LISTS : [];
+  this.__LIST_ICONS__ = typeof LIST_ICONS !== 'undefined' ? LIST_ICONS : {};
+  this.__LIST_SHELVES__ = typeof MOVIE_LIST_SHELVES !== 'undefined' ? MOVIE_LIST_SHELVES : [];
 `, context);
 
 const movies = context.__MOVIES__;
@@ -211,6 +216,69 @@ for (const movie of movies) {
       if (seen.has(cur)) { errors.push(`MOVIE_PREREQUISITES: ${sequel} is part of a loop`); break; }
       seen.add(cur);
     }
+  }
+}
+
+// data-lists.js (MOVIE_LISTS): unique ids, a name and blurb, real catalog
+// nums with no repeats, and a season in "MM-DD" form when there is one.
+{
+  const ids = new Set();
+  const mmdd = /^(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+  for (const list of context.__LISTS__) {
+    const label = `MOVIE_LISTS ${list.id}`;
+    if (!list.id || ids.has(list.id)) errors.push(`${label}: missing or duplicate id`);
+    ids.add(list.id);
+    if (!list.name || !list.blurb) errors.push(`${label}: needs a name and blurb`);
+    if (typeof list.copy !== 'string' || !list.copy.trim()) errors.push(`${label}: needs a one-line copy for its passport card`);
+    if (list.short !== undefined && !(typeof list.short === 'string' && list.short.trim() && list.short.length <= 22)) errors.push(`${label}: short must be a name of 1 to 22 characters`);
+    if (!Array.isArray(list.pins) || !list.pins.length) errors.push(`${label}: needs pins`);
+    const pins = new Set();
+    for (const num of list.pins || []) {
+      if (!seenNums.has(num)) errors.push(`${label}: unknown num ${num}`);
+      if (pins.has(num)) errors.push(`${label}: num ${num} listed twice`);
+      pins.add(num);
+    }
+    if (list.season && !(mmdd.test(list.season.from) && mmdd.test(list.season.to))) {
+      errors.push(`${label}: season needs from/to as MM-DD`);
+    }
+    if (list.season && list.dates) errors.push(`${label}: use season or dates, not both`);
+    for (const range of list.dates || []) {
+      const iso = /^\d{4}-\d{2}-\d{2}$/;
+      if (!Array.isArray(range) || range.length !== 2 || !iso.test(range[0]) || !iso.test(range[1]) || range[0] > range[1]) {
+        errors.push(`${label}: dates need [from, to] as YYYY-MM-DD with from <= to`);
+      }
+    }
+    if (list.minFit !== undefined && !(Number.isInteger(list.minFit) && list.minFit >= 1 && list.minFit <= 5)) {
+      errors.push(`${label}: minFit must be a whole number from 1 to 5`);
+    }
+  }
+  // MOVIE_LIST_SHELVES: real list ids, and every year-round list on exactly one shelf.
+  const shelved = new Map();
+  for (const shelf of context.__LIST_SHELVES__) {
+    if (!shelf.id || !shelf.name || !shelf.aside) errors.push(`MOVIE_LIST_SHELVES ${shelf.id}: needs an id, name and aside`);
+    for (const id of shelf.lists || []) {
+      if (!ids.has(id)) errors.push(`MOVIE_LIST_SHELVES ${shelf.id}: unknown list ${id}`);
+      if (shelved.has(id)) errors.push(`MOVIE_LIST_SHELVES: ${id} is on two shelves`);
+      shelved.set(id, shelf.id);
+    }
+  }
+  if (context.__LIST_SHELVES__.length) {
+    for (const list of context.__LISTS__) {
+      const seasonal = !!(list.season || list.dates);
+      if (seasonal && shelved.has(list.id)) errors.push(`MOVIE_LIST_SHELVES: seasonal list ${list.id} should not be on a shelf`);
+      if (!seasonal && !shelved.has(list.id)) errors.push(`MOVIE_LIST_SHELVES: year-round list ${list.id} is on no shelf`);
+    }
+  }
+  // LIST_ICONS: one inline SVG per list, nothing that could run script.
+  if (Object.keys(context.__LIST_ICONS__).length) {
+    for (const id of ids) {
+      if (!context.__LIST_ICONS__[id]) errors.push(`LIST_ICONS: list ${id} has no icon`);
+    }
+  }
+  for (const [id, svg] of Object.entries(context.__LIST_ICONS__)) {
+    if (!ids.has(id)) errors.push(`LIST_ICONS: ${id} is not a list id`);
+    if (!/^<svg[\s>]/.test(svg) || !svg.trim().endsWith('</svg>')) errors.push(`LIST_ICONS ${id}: must be one <svg> element`);
+    if (/<script|\son\w+=|javascript:|<foreignObject|href=/i.test(svg)) errors.push(`LIST_ICONS ${id}: scripts, event handlers and links are not allowed`);
   }
 }
 

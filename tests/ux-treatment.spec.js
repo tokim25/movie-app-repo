@@ -4,6 +4,7 @@ import { setupSampleFamily } from './helpers.js';
 test('blank onboarding name is reported inline and focused', async ({ page }) => {
   await page.goto('/');
   await page.locator('#bootSyncLoading').waitFor({ state: 'hidden' });
+  await page.locator('#tabBrowse').click();
   await page.locator('#firstRunFamilySetupBtn').click();
   await page.locator('#setupSaveChildBtn').click();
 
@@ -18,33 +19,32 @@ test('blank onboarding name is reported inline and focused', async ({ page }) =>
 test('stateful choices expose pressed state', async ({ page }) => {
   await page.goto('/');
   await setupSampleFamily(page);
-  await page.locator('#tonightChangeBtn').click();
+  await page.locator('#tonightTimePill').click();
 
   const anyLength = page.locator('[data-time="999"]');
   await anyLength.click();
   await expect(anyLength).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('#tonightTimePill')).toHaveAttribute('aria-expanded', 'false');
   await expect(page.locator('[data-time="90"]')).toHaveAttribute('aria-pressed', 'false');
 
   await page.locator('#tabFamily').click();
-  const dark = page.locator('[data-theme-choice="dark"]');
-  await dark.click();
-  await expect(dark).toHaveAttribute('aria-pressed', 'true');
-  await expect(page.locator('[data-theme-choice="system"]')).toHaveAttribute('aria-pressed', 'false');
   await expect(page.locator('#tabFamily')).toHaveAttribute('aria-current', 'page');
+  await expect(page.locator('[data-theme-choice]')).toHaveCount(0);
+  await expect(page.locator('html')).toHaveCSS('color-scheme', 'light');
 });
 
 test('adults-only recommendations explain limits and expose evidence', async ({ page }) => {
   await page.goto('/');
   await setupSampleFamily(page);
-  await page.locator('#tonightChangeBtn').click();
+  await page.locator('#tonightWhoPill').click();
   await page.getByRole('button', { name: 'Adults only' }).click();
-  await page.locator('#tonightDoneBtn').click();
+  await expect(page.locator('#tonightWhoPill')).toContainText('Adults only');
   await page.locator('#findTonightPickBtn').click();
 
   await expect(page.locator('#tonightVerdict')).toHaveText("Tonight's pick");
   await expect(page.locator('#tonightPickReasons')).toContainText("No children watching—child content limits won't apply.");
-  await expect(page.locator('#tonightEvidence')).toBeVisible();
-  await expect(page.locator('#tonightEvidence strong')).toHaveText(/Common Sense Media review available|Content guidance with source|Limited guidance/);
+  // The evidence is now one source link (or "Limited guidance" without one).
+  await expect(page.locator('#tonightEvidence')).toHaveText(/Common Sense Media ↗|Source ↗|Limited guidance/);
 
   const currentPick = await page.locator('#tonightPickTitle').textContent();
   await page.locator('#tonightAlternativesBtn').click();
@@ -62,7 +62,9 @@ test('adults-only recommendations explain limits and expose evidence', async ({ 
   await page.locator('#tonightSkipBtn').click();
   const reason = page.locator('[data-skip-reason="Wrong mood"]');
   await expect(page.locator('#tonightSkipPrompt')).toContainText(alternativeTitles[0].replace(/ \(\d{4}\)$/, ''));
-  await expect(reason).toBeFocused();
+  // Focus lands on the new pick's title, not the optional reason chips, so
+  // the new movie is what's on screen.
+  await expect(page.locator('#tonightPickTitle')).toBeFocused();
   await expect(page.locator('#tonightSkipBtn')).toHaveAttribute('aria-expanded', 'true');
   await reason.click();
   await expect(reason).toHaveAttribute('aria-pressed', 'true');
@@ -80,9 +82,8 @@ test('adults-only recommendations explain limits and expose evidence', async ({ 
 test('alternative-pick chips are not styled as fully-rounded single-line pills', async ({ page }) => {
   await page.goto('/');
   await setupSampleFamily(page);
-  await page.locator('#tonightChangeBtn').click();
+  await page.locator('#tonightWhoPill').click();
   await page.getByRole('button', { name: 'Adults only' }).click();
-  await page.locator('#tonightDoneBtn').click();
   await page.locator('#findTonightPickBtn').click();
   await page.locator('#tonightAlternativesBtn').click();
 

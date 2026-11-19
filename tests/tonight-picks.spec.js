@@ -6,58 +6,81 @@ test.beforeEach(async ({ page }) => {
   await setupSampleFamily(page);
 });
 
-async function openTonightAskEditor(page){
-  await page.locator('#tonightChangeBtn').click();
-  await expect(page.locator('#tonightEditPanel')).toBeVisible();
+// Who / time / mood are three pills; each opens a small popover. These
+// helpers open the right one and wait for it.
+async function openPill(page, which){
+  const pill = page.locator(`#tonight${which}Pill`);
+  if(await pill.getAttribute('aria-expanded') !== 'true') await pill.click();
+  await expect(page.locator(`#tonight${which}Pop`)).toBeVisible();
 }
 
-test('tonight ask starts compact and expands only when opened via Change', async ({ page }) => {
+async function chooseMood(page, label){
+  await openPill(page, 'Mood');
+  await page.locator('#tonightMoodChoices .choiceChip').filter({ hasText: label }).click();
+}
+
+async function chooseTime(page, label){
+  await openPill(page, 'Time');
+  await page.locator('#tonightTimeChoices .choiceChip').filter({ hasText: label }).click();
+}
+
+async function chooseWho(page, label){
+  await openPill(page, 'Who');
+  await page.locator('#tonightKidChoices .choiceChip').filter({ hasText: label }).click();
+}
+
+test('who, time and mood show as pills, each opening its own popover', async ({ page }) => {
   await expect(page.locator('#homeScreen h1')).toHaveText('What should we watch tonight?');
-  await expect(page.locator('#homeScreen')).not.toContainText('Tonight ask');
-  await expect(page.locator('#tonightAskSummary')).toContainText('Simon + Nora');
-  await expect(page.locator('#tonightAskSummary')).toContainText('About 90 minutes · Calm it down');
-  await expect(page.locator('#tonightEditPanel')).toBeHidden();
+  await expect(page.locator('#tonightWhoPill')).toContainText('Simon + Nora');
+  await expect(page.locator('#tonightTimePill')).toContainText('90 min');
+  await expect(page.locator('#tonightMoodPill')).toContainText('Calm');
+  for(const which of ['Who', 'Time', 'Mood']) await expect(page.locator(`#tonight${which}Pop`)).toBeHidden();
 
-  await openTonightAskEditor(page);
-  await page.locator('#tonightMoodChoices .choiceChip').filter({ hasText: 'Big and silly' }).click();
+  await openPill(page, 'Mood');
+  await expect(page.locator('#tonightMoodPill')).toHaveAttribute('aria-expanded', 'true');
+  // Only one popover open at a time.
+  await openPill(page, 'Time');
+  await expect(page.locator('#tonightMoodPop')).toBeHidden();
+  await page.keyboard.press('Escape');
+  await expect(page.locator('#tonightTimePop')).toBeHidden();
+  await expect(page.locator('#tonightTimePill')).toBeFocused();
 
-  await expect(page.locator('#tonightAskSummary')).toContainText('Simon + Nora');
-  await expect(page.locator('#tonightAskSummary')).toContainText('About 90 minutes · Big and silly');
-  // Issue #56: a mood tap used to close the panel itself. The panel should
-  // stay open (matching how a kid-chip tap already behaves) until Done.
-  await expect(page.locator('#tonightEditPanel')).toBeVisible();
-
-  await page.locator('#tonightDoneBtn').click();
-  await expect(page.locator('#tonightEditPanel')).toBeHidden();
+  await chooseMood(page, 'Big and silly');
+  await expect(page.locator('#tonightMoodPill')).toContainText('Big and silly');
+  // A mood or time choice closes its popover; kid toggles keep the Who popover
+  // open so several kids can be changed in a row.
+  await expect(page.locator('#tonightMoodPop')).toBeHidden();
+  await chooseWho(page, 'Nora');
+  await expect(page.locator('#tonightWhoPop')).toBeVisible();
+  await expect(page.locator('#tonightWhoPill')).toContainText('Simon');
+  await expect(page.locator('#tonightWhoPill')).not.toContainText('Nora');
 });
 
-test('mood and time taps keep the Change panel open like kid taps do (#56)', async ({ page }) => {
-  await openTonightAskEditor(page);
-
-  await page.locator('#tonightTimeChoices .choiceChip').filter({ hasText: 'Up to 2 hours' }).click();
-  await expect(page.locator('#tonightEditPanel')).toBeVisible();
-
-  await page.locator('#tonightMoodChoices .choiceChip').filter({ hasText: 'Something new' }).click();
-  await expect(page.locator('#tonightEditPanel')).toBeVisible();
-
-  await page.locator('#tonightKidChoices .choiceChip').filter({ hasText: 'Adults only' }).click();
-  await expect(page.locator('#tonightEditPanel')).toBeVisible();
-
-  await page.locator('#tonightDoneBtn').click();
-  await expect(page.locator('#tonightEditPanel')).toBeHidden();
+test('who, time and mood are remembered for the next visit', async ({ page }) => {
+  await chooseTime(page, 'Up to 2 hours');
+  await chooseMood(page, 'Something new');
+  await chooseWho(page, 'Nora');
+  await page.reload();
+  await page.locator('#bootSyncLoading').waitFor({ state: 'hidden' });
+  await page.locator('#tabHome').click();
+  await expect(page.locator('#tonightTimePill')).toContainText('Up to 2 hours');
+  await expect(page.locator('#tonightMoodPill')).toContainText('Something new');
+  await expect(page.locator('#tonightWhoPill')).toContainText('Simon');
+  await expect(page.locator('#tonightWhoPill')).not.toContainText('Nora');
 });
 
-test('the card\'s Skip is the only skip once a pick shows; the find button returns when selections change', async ({ page }) => {
+test('the card\'s Skip is the only skip once a pick shows, and changing a setting updates the pick in place', async ({ page }) => {
   await expect(page.locator('#findTonightPickBtn')).toHaveText("Find tonight's pick");
 
   await page.locator('#findTonightPickBtn').click();
   await expect(page.locator('#findTonightPickBtn')).toBeHidden();
   await expect(page.locator('#tonightPickCard').getByRole('button', { name: /skip/i })).toHaveCount(1);
 
-  await openTonightAskEditor(page);
-  await page.locator('#tonightMoodChoices .choiceChip').filter({ hasText: 'Big and silly' }).click();
-  await expect(page.locator('#findTonightPickBtn')).toBeVisible();
-  await expect(page.locator('#findTonightPickBtn')).toHaveText("Find tonight's pick");
+  await chooseMood(page, 'Big and silly');
+  // No trip back to "Find tonight's pick": a new pick is already showing.
+  await expect(page.locator('#findTonightPickBtn')).toBeHidden();
+  await expect(page.locator('#tonightPickCard')).toBeVisible();
+  await expect(page.locator('#tonightPickChange')).toContainText('big and silly');
 });
 
 test('the fit verdict reads before the Pre-Show notes', async ({ page }) => {
@@ -194,14 +217,11 @@ test('night mood changes the selected movie', async ({ page }) => {
     tonightSourceTiers = () => [{ source: 'Want to watch', indices: [gentleIdx, actionIdx] }];
   });
 
-  await openTonightAskEditor(page);
-  await page.locator('#tonightMoodChoices .choiceChip').filter({ hasText: 'Calm it down' }).click();
+  await chooseMood(page, 'Calm it down');
   await page.locator('#findTonightPickBtn').click();
   await expect(page.locator('#tonightPickTitle')).toContainText('Winnie the Pooh');
 
-  await openTonightAskEditor(page);
-  await page.locator('#tonightMoodChoices .choiceChip').filter({ hasText: 'Old favourite' }).click();
-  await page.locator('#findTonightPickBtn').click();
+  await chooseMood(page, 'Old favourite');
   await expect(page.locator('#tonightPickTitle')).toContainText('The Incredibles');
 });
 
@@ -271,9 +291,8 @@ test('adults-only new picks use recent releases instead of recently added titles
     return `${newest.movie.t} (${newest.movie.y})`;
   });
 
-  await openTonightAskEditor(page);
-  await page.locator('#tonightKidChoices .choiceChip').filter({ hasText: 'Adults only' }).click();
-  await page.locator('#tonightMoodChoices .choiceChip').filter({ hasText: 'Something new' }).click();
+  await chooseWho(page, 'Adults only');
+  await chooseMood(page, 'Something new');
   await page.locator('#findTonightPickBtn').click();
 
   await expect(page.locator('#tonightPickTitle')).toHaveText(expected);
@@ -337,7 +356,7 @@ test('a green top pick with multiple kids selected cites every kid in its reason
     return {
       verdictText: document.getElementById('tonightVerdict').textContent,
       reasons: Array.from(document.querySelectorAll('#tonightPickReasons li')).map(li => li.textContent),
-      watchAnywayDisplay: document.getElementById('tonightWatchAnywayBtn').style.display
+      watchAnywayDisplay: (document.getElementById('tonightWatchAnywayBtn').hidden ? 'none' : 'inline-block')
     };
   });
 
@@ -361,7 +380,7 @@ test('a red top pick is labeled Above settings and Watch anyway works for it (#4
     return {
       verdictText: document.getElementById('tonightVerdict').textContent,
       reasons: Array.from(document.querySelectorAll('#tonightPickReasons li')).map(li => li.textContent),
-      watchAnywayDisplay: document.getElementById('tonightWatchAnywayBtn').style.display,
+      watchAnywayDisplay: (document.getElementById('tonightWatchAnywayBtn').hidden ? 'none' : 'inline-block'),
       loggedForRed
     };
   });
@@ -382,12 +401,16 @@ test('an amber top pick is labeled Review fit, distinct from red and green (#49)
     showTonightPick();
     return {
       verdictText: document.getElementById('tonightVerdict').textContent,
-      watchAnywayDisplay: document.getElementById('tonightWatchAnywayBtn').style.display
+      watchAnywayDisplay: (document.getElementById('tonightWatchAnywayBtn').hidden ? 'none' : 'inline-block')
     };
   });
 
   expect(result.verdictText).toBe('Review fit');
   expect(result.watchAnywayDisplay).toBe('inline-block');
+  // Watch anyway takes Mark watched's place as the main button, and the
+  // action bar repeats the reason next to it.
+  await expect(page.locator('#tonightWatchBtn')).toBeHidden();
+  await expect(page.locator('#tonightBarWarning')).toContainText('Over');
 });
 
 // Issue #108: the existing red/amber tests above both land exactly at
@@ -547,14 +570,17 @@ test.describe('Tonight runtime limits (#89)', () => {
     await expect(page.locator('#tonightPickReasons')).not.toContainText('Fits your');
   });
 
-  test('the recommendation explains the selected film runtime and window fit', async ({ page }) => {
+  test('the recommendation shows the film runtime next to the time pill', async ({ page }) => {
     await page.evaluate(() => {
-      const idx = MOVIES.push({ t: 'Runtime Copy Fixture', y: '2005', ca: '3+', genre: [], num: 9000303, flags: { violence: 1, language: 1, romance: 1, drinking: 1 }, runtimeMinutes: 88, runtimeSourceId: 'fixture', runtimeVerifiedAt: '2026-09-26' }) - 1;
+      const idx = MOVIES.push({ t: 'Runtime Copy Fixture', y: '2005', ca: '3+', studio: 'Fixture Films', genre: [], num: 9000303, flags: { violence: 1, language: 1, romance: 1, drinking: 1 }, runtimeMinutes: 88, runtimeSourceId: 'fixture', runtimeVerifiedAt: '2026-09-26' }) - 1;
       tonightSelection.time = 90;
       showTonightPick({ idx, source: 'Shelf' });
     });
 
-    await expect(page.locator('#tonightPickReasons')).toContainText('1h 28m · Fits your 90-minute window.');
+    // The runtime sits under the title; the window it has to fit is the
+    // time pill above it.
+    await expect(page.locator('#tonightPickFacts')).toHaveText('Fixture Films · 1h 28m · CSM 3+');
+    await expect(page.locator('#tonightTimePill')).toContainText('90 min');
   });
 });
 
@@ -661,7 +687,7 @@ test.describe('typed no-match state instead of an unvalidated fallback pick (#93
     await expect(page.locator('#tonightPickCard')).toBeVisible();
   });
 
-  test('no-match recovery actions open the edit panel and Browse', async ({ page }) => {
+  test('no-match recovery actions open the Who popover and Browse', async ({ page }) => {
     await page.evaluate(() => {
       tonightSourceTiers = () => [{ source: 'Shelf', indices: [] }];
       resetTonightSkips();
@@ -670,8 +696,8 @@ test.describe('typed no-match state instead of an unvalidated fallback pick (#93
     await expect(page.locator('#tonightNoMatchCard')).toBeVisible();
 
     await page.locator('#tonightNoMatchChangeBtn').click();
-    await expect(page.locator('#tonightEditPanel')).toBeVisible();
-    await page.locator('#tonightDoneBtn').click();
+    await expect(page.locator('#tonightWhoPop')).toBeVisible();
+    await page.keyboard.press('Escape');
 
     await page.locator('#tonightNoMatchShelfBtn').click();
     await expect(page.locator('#browseScreen')).toBeVisible();
@@ -759,7 +785,24 @@ test.describe('Watch anyway is idempotent per recommendation, not per tap (#104)
 
     await expect(page.locator('#tonightWatchAnywayBtn')).toHaveText('Watch anyway');
     await page.locator('#tonightWatchAnywayBtn').click();
-    await expect(page.locator('#tonightWatchAnywayBtn')).toContainText('Logged');
+    // Watch anyway is the main button on this pick, so it marks the movie
+    // watched and logs the review signal together; a second tap undoes both.
+    await expect(page.locator('#tonightWatchAnywayBtn')).toHaveText('✓ Watched');
+    await expect(page.locator('#tonightWatchAnywayBtn')).toHaveAttribute('aria-pressed', 'true');
+    const after = await page.evaluate(() => ({
+      watched: !!markValue(state.checked, tonightSelection.currentPickIdx),
+      signals: (state.events || []).filter(e => e.type === 'watch_anyway').length
+    }));
+    expect(after.watched).toBe(true);
+    expect(after.signals).toBeGreaterThan(0);
+
+    await page.locator('#tonightWatchAnywayBtn').click();
+    await expect(page.locator('#tonightWatchAnywayBtn')).toHaveText('Watch anyway');
+    const undone = await page.evaluate(() => ({
+      watched: !!markValue(state.checked, tonightSelection.currentPickIdx),
+      signals: (state.events || []).filter(e => e.type === 'watch_anyway').length
+    }));
+    expect(undone).toEqual({ watched: false, signals: 0 });
   });
 
   test('one decision cannot satisfy the three-distinct-choice Family cue threshold', async ({ page }) => {
@@ -781,46 +824,56 @@ test.describe('Watch anyway is idempotent per recommendation, not per tap (#104)
   });
 });
 
-test.describe('changing viewers, mood, or duration clears the stale recommendation (#105)', () => {
-  test('switching mood hides the previous pick card until a new one is found', async ({ page }) => {
+test.describe('changing viewers, mood, or duration never leaves a stale recommendation (#105)', () => {
+  test('switching mood shows a new pick right away', async ({ page }) => {
     await page.locator('#findTonightPickBtn').click();
+    const before = await page.locator('#tonightPickTitle').textContent();
+
+    await chooseMood(page, 'Big and silly');
+
     await expect(page.locator('#tonightPickCard')).toBeVisible();
-
-    await openTonightAskEditor(page);
-    await page.locator('#tonightMoodChoices .choiceChip').filter({ hasText: 'Big and silly' }).click();
-
-    await expect(page.locator('#tonightPickCard')).toBeHidden();
+    await expect(page.locator('#tonightPickTitle')).not.toHaveText(before);
+    await expect(page.locator('#tonightPickChange')).toContainText('New pick for big and silly');
   });
 
-  test('switching to Adults only hides the previous child-context pick', async ({ page }) => {
+  test('switching to Adults only re-judges the pick without any child limits', async ({ page }) => {
     await page.locator('#findTonightPickBtn').click();
     await expect(page.locator('#tonightPickCard')).toBeVisible();
 
-    await openTonightAskEditor(page);
-    await page.locator('#tonightKidChoices .choiceChip').filter({ hasText: 'Adults only' }).click();
+    await chooseWho(page, 'Adults only');
 
-    await expect(page.locator('#tonightPickCard')).toBeHidden();
+    const shown = await page.evaluate(() => ({
+      verdict: tonightSelection.verdict,
+      kids: selectedKids().length,
+      idx: tonightSelection.currentPickIdx
+    }));
+    expect(shown.kids).toBe(0);
+    expect(shown.idx).not.toBeNull();
+    expect(shown.verdict).toBe('green');
+    await expect(page.locator('#tonightPickReasons')).not.toContainText('Simon');
+    await expect(page.locator('#tonightPickReasons')).not.toContainText('Nora');
   });
 
-  test('changing duration hides the previous pick', async ({ page }) => {
+  test('changing duration keeps a pick only if it still fits the new window', async ({ page }) => {
     await page.locator('#findTonightPickBtn').click();
-    await expect(page.locator('#tonightPickCard')).toBeVisible();
-
-    await openTonightAskEditor(page);
-    await page.locator('#tonightTimeChoices .choiceChip').filter({ hasText: 'Up to 2 hours' }).click();
-
-    await expect(page.locator('#tonightPickCard')).toBeHidden();
+    await chooseTime(page, 'Up to 2 hours');
+    const fits = await page.evaluate(() => {
+      const m = MOVIES[tonightSelection.currentPickIdx];
+      return m.runtimeMinutes <= 120;
+    });
+    expect(fits).toBe(true);
+    await expect(page.locator('#tonightPickChange')).toContainText(/Still a good fit|New pick/);
   });
 
-  test('result actions are unavailable once currentPickIdx is cleared', async ({ page }) => {
+  test('skipped titles stay skipped when a setting changes', async ({ page }) => {
     await page.locator('#findTonightPickBtn').click();
-    await expect(page.locator('#tonightPickCard')).toBeVisible();
-
-    await openTonightAskEditor(page);
-    await page.locator('#tonightMoodChoices .choiceChip').filter({ hasText: 'Something new' }).click();
-
-    const currentPickIdx = await page.evaluate(() => tonightSelection.currentPickIdx);
-    expect(currentPickIdx).toBeNull();
-    await expect(page.locator('#tonightPickCard')).toBeHidden();
+    const skipped = await page.locator('#tonightPickTitle').textContent();
+    await page.locator('#tonightSkipBtn').click();
+    await chooseTime(page, 'Any length');
+    await chooseTime(page, 'About 90 minutes');
+    await expect(page.locator('#tonightPickTitle')).not.toHaveText(skipped);
+    const stillSkipped = await page.evaluate(() => tonightSelection.skippedMovieNums.size);
+    expect(stillSkipped).toBeGreaterThan(0);
   });
 });
+

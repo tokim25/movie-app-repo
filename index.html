@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>
-(function(){
-  try{
-    var pref = localStorage.getItem('family-feature-theme-v1');
-    if(pref === 'light' || pref === 'dark'){
-      document.documentElement.setAttribute('data-theme', pref);
-    }
-  }catch(e){ /* storage unavailable; fall back to system preference */ }
-})();
-</script>
 <!-- Sentry crash/error tracking + user feedback widget. Loaded first (before anything
      else in <head>) so it can catch errors from every script that follows. sendDefaultPii
      is off (no IP/cookies/user context), and the DOM click/input breadcrumb capture that
@@ -194,8 +184,7 @@ function reportError(err){
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#F7F5F0" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#262624" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FFFFFF">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Family Feature">
@@ -220,156 +209,82 @@ function reportError(err){
      inline script content not covered by a pinned hash. The <noscript>
      fallback keeps it blocking (as before) for the rare case JS is
      unavailable, since nothing below can flip it then. -->
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap">
-<link id="googleFontStylesheet" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap" media="print">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap"></noscript>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&display=swap">
+<link id="googleFontStylesheet" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&display=swap" media="print">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&display=swap"></noscript>
 <style>
   :root{
-    color-scheme:light dark;
-    --bg:#F7F5F0;
-    --bg-sub:#EFEBE3;
+    color-scheme:light;
+    --font-sans:"Inter", Arial, sans-serif;
+    --bg:#FFFFFF;
+    --bg-sub:#F7F7F7;
     --surface:#FFFFFF;
-    --ink:#1F1E1B;
+    --ink:#111111;
     --on-ink:#FFFFFF;
-    --ink-soft:#57534B;
-    --ink-faint:#625D54;
-    --line:#DDD7CB;
-    --accent:#AE4E2C;
-    --accent-rgb:174,78,44;
-    --accent-text:#9A3F1F;
+    --ink-soft:#5F5F5F;
+    --ink-faint:#656565;
+    --line:#DDDDDD;
+    --accent:#C9184A;
+    --accent-rgb:201,24,74;
+    --accent-text:#B30E3F;
+    --icon-tint:#F8CEDA;
+    --icon-coral:#F8CEDA;
+    --icon-gold:#F3D28A;
+    --icon-sky:#BFDCEB;
+    --icon-sage:#BCD8C5;
+    --icon-rose:#EFA9BC;
+    --icon-orange:#F2A36B;
+    --icon-violet:#C9B7E8;
+    --icon-aqua:#91D5D0;
+    --icon-blue:#8EBFE6;
+    --icon-lime:#CADD8C;
+    --cv-bg:#F7F7F7;
+    --cv-bg2:#EEEEEE;
+    --cv-ink:#111111;
+    --rev-dot:#A96500;
+    --medal-bg:#FFF0F3;
+    --pp-bg:#FFFFFF;
+    --pp-line:rgba(17,17,17,0.12);
+    --pp-shadow:rgba(17,17,17,0.10);
+    --pp-disc:#FFF0F3;
+    --pp-icon:#B30E3F;
     --on-accent:#FFFFFF;
-    --select-rgb:174,78,44;
-    --error-bg:#FBE7EC;
+    --select-rgb:201,24,74;
+    --error-bg:#FFF1F0;
     --check:var(--ink);
-    /* --favorite is the want-to-watch glyph colour and must clear 3:1 against
-       --bg/--surface as a state-bearing graphic (WCAG 1.4.11); --favorite-fill
-       is the brighter tint used behind --on-favorite text, where the pairing
-       (not the swatch) carries the contrast. One token cannot do both jobs. */
-    --favorite:#9A6B08;
-    --favorite-fill:#D59B16;
-    --on-favorite:#172033;
-    /* Category hues identify a topic; they must never rate it. Held at one
-       lightness and one chroma so no category can read as more urgent than
-       another -- a parent must not infer that Violence is "redder" and so
-       scarier than Drinking. Hues also dodge every taken meaning: no red
-       (--error), green (--success), gold (--favorite/--warning) or clay
-       (--accent/--new). Stated in oklch so the equal-L, equal-C constraint
-       is enforced by the notation rather than asserted in a comment. */
-    --flag-violence:oklch(0.55 0.09 285);
-    --flag-language:oklch(0.55 0.09 190);
-    --flag-romance:oklch(0.55 0.09 345);
-    --flag-drinking:oklch(0.55 0.09 250);
-    --new:#9A3F1F;
-    --new-bg:#F6E4DB;
-    --success:#136A43;
-    --error:#B3123F;
+    --favorite:#C9184A;
+    --favorite-fill:#C9184A;
+    --on-favorite:#FFFFFF;
+    /* Category icons share one accent so hue never implies severity. */
+    --flag-violence:#6554C0;
+    --flag-language:#6554C0;
+    --flag-romance:#6554C0;
+    --flag-drinking:#6554C0;
+    --new:#B30E3F;
+    --new-bg:#FFF0F3;
+    /* Teal complement to the coral accent, for coming-attraction tickets.
+       Shifted from the true opposite (hue 163) to 179 so it never reads as
+       --success green. */
+    --complement:#0B6E6D;
+    --complement-bg:#E8F5F4;
+    --complement-line:#9CCFCB;
+    --success:#13795B;
+    --error:#B42318;
     --on-error:#FFFFFF;
     --warning:#8A5A00;
     --warning-rgb:138,90,0;
-    --warning-soft:#FFF4D6;
-    --nudge-surface:var(--surface);
+    --warning-soft:#FFF7E6;
+    --nudge-surface:var(--bg-sub);
     --nudge-ink:var(--ink);
     --nudge-ink-soft:var(--ink-soft);
     --nudge-line:var(--accent);
     --nudge-primary:var(--ink);
     --nudge-on-primary:var(--on-ink);
-    --error-rgb:179,18,63;
-    --shadow-rgb:31,30,27;
-    --focus:#9A3F1F;
-    --shadow-soft:0 10px 28px rgba(31,30,27,0.06);
-    --shadow-card:0 14px 36px rgba(31,30,27,0.08);
-  }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      /* Warm charcoal neutrals and a clay accent, modelled on Claude's dark
-         mode, matching light mode's warm paper and deeper clay. Every text token clears 4.5:1
-         against --bg, --surface and --bg-sub; --accent clears 3:1 as a UI
-         graphic, with --on-accent text on it at 5.3:1. */
-      --bg:#262624;
-      --bg-sub:#383733;
-      --surface:#30302E;
-      --ink:#FAF9F5;
-      --on-ink:#262624;
-      --ink-soft:#C9C6BC;
-      --ink-faint:#A8A59B;
-      --line:#4A4843;
-      --accent:#E0896B;
-      --accent-rgb:224,137,107;
-      --accent-text:#EB9878;
-      --on-accent:#1F1E1D;
-      --select-rgb:224,137,107;
-      --error-bg:#3D2229;
-      --check:#FAF9F5;
-      --favorite:#F2C14E;
-      --favorite-fill:#F2C14E;
-      --on-favorite:#262624;
-      --flag-violence:oklch(0.72 0.08 285);
-      --flag-language:oklch(0.72 0.08 190);
-      --flag-romance:oklch(0.72 0.08 345);
-      --flag-drinking:oklch(0.72 0.08 250);
-      --new:#EFAB90;
-      --new-bg:#4A2C22;
-      --success:#4CC38A;
-      --error:#FF94A8;
-      --on-error:#262624;
-      --warning:#F2C14E;
-      --warning-rgb:242,193,78;
-      --warning-soft:#382F18;
-      --nudge-surface:var(--surface);
-      --nudge-ink:var(--ink);
-      --nudge-ink-soft:var(--ink-soft);
-      --nudge-line:var(--accent);
-      --nudge-primary:var(--ink);
-      --nudge-on-primary:var(--on-ink);
-      --error-rgb:255,148,168;
-      --shadow-rgb:0,0,0;
-      --focus:#EB9878;
-      --shadow-soft:0 10px 28px rgba(0,0,0,0.2);
-      --shadow-card:0 18px 44px rgba(0,0,0,0.28);
-    }
-  }
-  :root[data-theme="dark"]{
-    --bg:#262624;
-    --bg-sub:#383733;
-    --surface:#30302E;
-    --ink:#FAF9F5;
-    --on-ink:#262624;
-    --ink-soft:#C9C6BC;
-    --ink-faint:#A8A59B;
-    --line:#4A4843;
-    --accent:#E0896B;
-    --accent-rgb:224,137,107;
-    --accent-text:#EB9878;
-    --on-accent:#1F1E1D;
-    --select-rgb:224,137,107;
-    --error-bg:#3D2229;
-    --check:#FAF9F5;
-    --favorite:#F2C14E;
-    --favorite-fill:#F2C14E;
-    --on-favorite:#262624;
-    --flag-violence:oklch(0.72 0.08 285);
-    --flag-language:oklch(0.72 0.08 190);
-    --flag-romance:oklch(0.72 0.08 345);
-    --flag-drinking:oklch(0.72 0.08 250);
-    --new:#EFAB90;
-    --new-bg:#4A2C22;
-    --success:#4CC38A;
-    --error:#FF94A8;
-    --on-error:#262624;
-    --warning:#F2C14E;
-    --warning-rgb:242,193,78;
-    --warning-soft:#382F18;
-    --nudge-surface:var(--surface);
-    --nudge-ink:var(--ink);
-    --nudge-ink-soft:var(--ink-soft);
-    --nudge-line:var(--accent);
-    --nudge-primary:var(--ink);
-    --nudge-on-primary:var(--on-ink);
-    --error-rgb:255,148,168;
-    --shadow-rgb:0,0,0;
-    --focus:#EB9878;
-    --shadow-soft:0 10px 28px rgba(0,0,0,0.2);
-    --shadow-card:0 18px 44px rgba(0,0,0,0.28);
+    --error-rgb:180,35,24;
+    --shadow-rgb:17,17,17;
+    --focus:#B30E3F;
+    --shadow-soft:0 8px 24px rgba(17,17,17,0.08);
+    --shadow-card:0 12px 32px rgba(17,17,17,0.10);
   }
   *{box-sizing:border-box; -webkit-font-smoothing:antialiased;}
   .srOnly{
@@ -424,7 +339,7 @@ function reportError(err){
   body{
     background:var(--bg);
     color:var(--ink);
-    font-family:-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    font-family:var(--font-sans);
     min-height:100vh;
     padding-bottom:calc(84px + env(safe-area-inset-bottom, 0px));
   }
@@ -438,15 +353,12 @@ function reportError(err){
     max-width:680px;
     margin:0 auto;
   }
-  /* Tab names are navigation, not voice, and at clamp(34-48px) the question
-     out-sized its own answer roughly 2:1. They share the pick title's serif
-     so every screen speaks in one voice, but stay smaller than it, so the
-     pick still reads as the loudest thing on the screen. */
+  /* Tab names stay quieter than the selected movie title. Weight and tight
+     tracking distinguish display text without introducing a second face. */
   h1{
-    font-family:"Newsreader", Georgia, "Times New Roman", serif;
     font-size:clamp(23px,4.8vw,27px);
-    font-weight:600;
-    letter-spacing:0;
+    font-weight:700;
+    letter-spacing:-0.025em;
     margin:0 0 8px;
     color:var(--ink);
     text-wrap:balance;
@@ -994,13 +906,12 @@ function reportError(err){
     color:var(--ink-faint);
   }
   .star.on{ color:var(--favorite); }
-  .info{ flex:1; min-width:0; }
+  .info{ flex:1; min-width:0; overflow-wrap:break-word; }
   .title{
-    font-family:"Newsreader", Georgia, "Times New Roman", serif;
     font-weight:600;
     font-size:19px;
     line-height:1.25;
-    letter-spacing:-0.005em;
+    letter-spacing:-0.015em;
     cursor:pointer;
   }
   .meta{
@@ -1014,18 +925,23 @@ function reportError(err){
   }
   .movieFacts{
     line-height:1.45;
+    display:flex;
+    flex-wrap:wrap;
+    column-gap:10px;
+    max-width:100%;
   }
   .badge{
     color:var(--ink-soft);
+    min-width:0;
   }
   .badge.csm{ color:var(--ink); font-weight:500; }
   .badge.runtime{
-    margin-left:10px;
     white-space:nowrap;
   }
   .metaLinks{
     display:flex;
-    gap:10px;
+    flex-wrap:wrap;
+    column-gap:10px;
     align-items:center;
   }
   .detailLink{
@@ -1265,6 +1181,86 @@ function reportError(err){
     color:var(--ink-soft);
     font-size:13px;
   }
+  .shelfBrowseTools{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:12px 0 4px;
+  }
+  .densityControl{
+    display:inline-flex;
+    min-width:0;
+    margin:0;
+    padding:3px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--bg-sub);
+  }
+  .densityControl button{
+    min-height:38px;
+    padding:0 12px;
+    border:0;
+    border-radius:7px;
+    background:transparent;
+    color:var(--ink-soft);
+    font:inherit;
+    font-size:13px;
+    font-weight:600;
+    line-height:1;
+    cursor:pointer;
+  }
+  .densityControl button[aria-pressed="true"]{
+    background:var(--surface);
+    color:var(--ink);
+    box-shadow:0 1px 3px rgba(var(--shadow-rgb),0.12);
+  }
+  .shelfJumpRail{
+    position:fixed;
+    top:calc(74px + env(safe-area-inset-top, 0px));
+    right:1px;
+    bottom:calc(86px + env(safe-area-inset-bottom, 0px));
+    z-index:15;
+    width:26px;
+    padding:4px 1px;
+    border:0;
+    border-radius:10px 0 0 10px;
+    background:rgba(255,255,255,0.82);
+  }
+  .shelfJumpRail[hidden]{ display:none; }
+  .shelfJumpItems{
+    display:grid;
+    grid-template-rows:repeat(var(--jump-count, 1), minmax(18px, 1fr));
+    height:100%;
+  }
+  .shelfJumpBtn{
+    display:grid;
+    place-items:center;
+    width:100%;
+    min-height:0;
+    padding:0;
+    border:0;
+    border-radius:999px;
+    background:transparent;
+    color:var(--ink-soft);
+    font:inherit;
+    font-size:12px;
+    font-weight:600;
+    line-height:1;
+    cursor:pointer;
+  }
+  /* Touch users drag along the rail, like a phone's A-Z contacts index, so
+     the narrow strip doesn't need precise taps. */
+  .shelfJumpItems{ touch-action:none; }
+  .shelfJumpBtn.scrubbing,
+  .shelfJumpBtn:hover,
+  .shelfJumpBtn:focus-visible{
+    background:var(--new-bg);
+    color:var(--accent-text);
+    outline:none;
+  }
+  #browseScreen.railVisible{ padding-right:32px; }
   .quickBar{
     position:fixed;
     left:0; right:0; bottom:0;
@@ -1386,6 +1382,69 @@ function reportError(err){
     color:var(--ink-soft);
     cursor:pointer;
   }
+
+  .listGrid{ margin-bottom:10px; }
+  .listIcon{
+    display:block;
+    width:40px;
+    height:40px;
+    margin-bottom:8px;
+    color:var(--accent-text);
+  }
+  .listIcon svg{ display:block; width:100%; height:100%; }
+  .seasonCard .listIcon{ margin-bottom:4px; }
+  .listTileTag{
+    display:inline-block;
+    font-size:12px;
+    font-weight:600;
+    color:var(--accent-text);
+    margin-bottom:4px;
+  }
+  .listHeader{
+    margin:4px 0 16px;
+  }
+  .listHeader h2{
+    font-size:24px;
+    font-weight:700;
+    letter-spacing:-0.025em;
+    line-height:1.2;
+    margin:8px 0 6px;
+  }
+  .listHeaderBlurb{ margin:0 0 4px; color:var(--ink); }
+  .listHeaderNote{ margin:0 0 10px; font-size:13px; color:var(--ink-soft); }
+  .listBackBtn, .listHideBtn{
+    background:none;
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:8px 14px;
+    min-height:40px;
+    font:inherit;
+    font-size:14px;
+    font-weight:500;
+    color:var(--accent-text);
+    cursor:pointer;
+  }
+  .listHideBtn{ color:var(--ink-soft); }
+  .seasonCard{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:2px;
+    width:100%;
+    margin-top:14px;
+    background:var(--bg-sub);
+    border:none;
+    border-radius:12px;
+    padding:14px;
+    text-align:left;
+    font:inherit;
+    color:var(--ink);
+    cursor:pointer;
+  }
+  .seasonCard[hidden]{ display:none; }
+  .seasonCardEyebrow{ font-size:12px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--accent-text); }
+  .seasonCardName{ font-weight:600; font-size:16px; }
+  .seasonCardCount{ font-size:14px; color:var(--ink-soft); }
 
   /* Browse / Family screens */
   .screenWrap{
@@ -1578,61 +1637,70 @@ function reportError(err){
     border-radius:20px;
     box-shadow:var(--shadow-card);
   }
-  .tonightSummary{
+  /* Who / time / mood as pills that stay on screen. Each opens a small
+     popover under the row instead of the old full-height Change panel. */
+  .tonightPills{
+    position:relative;
     display:flex;
-    align-items:flex-start;
-    justify-content:space-between;
-    gap:16px;
+    flex-wrap:wrap;
+    gap:6px;
   }
-  .tonightSummaryCopy{
-    min-width:0;
-    flex:1 1 auto;
-  }
-  .tonightSummaryLabel{
-    display:none;
-  }
-  .tonightSummaryText{
-    margin-top:0;
-    color:var(--ink);
-    font-size:28px;
-    line-height:1.08;
-    font-weight:700;
-    text-wrap:balance;
-  }
-  .tonightContext{
-    margin-top:7px;
-    color:var(--ink-soft);
-    font-size:17px;
-    line-height:1.3;
-    font-weight:500;
-    text-wrap:pretty;
-  }
-  .tonightChangeButton{
+  .tonightPill{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    max-width:100%;
     min-height:44px;
-    border:0;
-    background:transparent;
-    padding:2px 0 2px 12px;
-    color:var(--accent);
+    padding:6px 12px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    background:var(--surface);
+    color:var(--ink);
+    font-family:inherit;
     font-size:14px;
     font-weight:600;
+    cursor:pointer;
+  }
+  .tonightPill::after{
+    content:"";
+    flex:0 0 auto;
+    border-left:4px solid transparent;
+    border-right:4px solid transparent;
+    border-top:5px solid var(--ink-soft);
+  }
+  .tonightPill[aria-expanded="true"]{
+    border-color:var(--accent);
+    box-shadow:0 0 0 2px rgba(var(--accent-rgb),0.15);
+  }
+  .tonightPill.adultsOnly{
+    background:var(--warning-soft);
+    border-color:rgba(var(--warning-rgb),0.45);
+    color:var(--warning);
+  }
+  #tonightWatchingSummary{
+    min-width:0;
+    overflow:hidden;
+    text-overflow:ellipsis;
     white-space:nowrap;
   }
-  .tonightEditPanel{
-    display:grid;
-    gap:14px;
-    margin-top:16px;
-    padding-top:16px;
-    border-top:1px solid var(--line);
+  .tonightPop{
+    position:absolute;
+    left:0;
+    right:0;
+    top:calc(100% + 6px);
+    z-index:15;
+    padding:12px 14px 14px;
+    border:1px solid var(--line);
+    border-radius:14px;
+    background:var(--surface);
+    box-shadow:var(--shadow-card);
   }
-  .tonightEditPanel[hidden]{
-    display:none;
-  }
-  .tonightEditPanel h2,
-  .tonightEditPanel h3{
-    font-size:17px;
-  }
-  .tonightEditPanel .setupActions{
-    margin-top:0;
+  .tonightPop[hidden]{ display:none; }
+  .tonightPopLabel{
+    margin:0;
+    color:var(--ink-soft);
+    font-size:13px;
+    line-height:1.4;
   }
   .tonightActions{
     margin-top:24px;
@@ -1686,9 +1754,149 @@ function reportError(err){
     text-align:left;
   }
   .pickCard{
-    margin-top:18px;
-    padding:18px 0 0;
+    margin-top:16px;
+    padding:16px 0 0;
     border-top:1px solid var(--line);
+  }
+  .pickChange{
+    margin:0 0 10px;
+    color:var(--ink-soft);
+    font-size:13px;
+  }
+  .pickChange[hidden]{ display:none; }
+  /* Poster beside the title, so verdict, title, warning and the decision
+     all fit on the first screen of a phone. */
+  .pickHead{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+  }
+  .pickHeadText{
+    flex:1;
+    min-width:0;
+  }
+  .pickFacts{
+    margin-top:6px;
+    color:var(--ink-soft);
+    font-size:14px;
+    line-height:1.4;
+  }
+  .headsUp{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px solid var(--line);
+    font-size:14px;
+    line-height:1.45;
+  }
+  .headsUpText{
+    flex:1;
+    margin:0;
+    color:var(--ink-soft);
+  }
+  /* Two lines at most until More; opened, the full Pre-show below says it
+     all, so the line steps aside instead of repeating it. */
+  .headsUp:not(.open) .headsUpText{
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+  .headsUp.open .headsUpText{ visibility:hidden; height:0; }
+  .headsUp.open{ border-top:0; padding-top:0; margin-top:4px; justify-content:flex-end; }
+  .headsUp.caution .headsUpText{ color:var(--ink); }
+  .headsUp.caution .headsUpText strong{ color:var(--warning); }
+  .headsUpToggle{
+    flex:0 0 auto;
+    color:var(--accent-text);
+    font-size:14px;
+  }
+  .headsUpToggle[hidden]{ display:none; }
+  .preShowFallback .askAfter{
+    margin:8px 0 0;
+    font-size:16px;
+    font-weight:500;
+    font-style:italic;
+    color:var(--ink);
+  }
+  .preShowFallback[hidden],
+  #tonightPreShowBody[hidden]{ display:none; }
+  .tonightActionBar{ margin-top:16px; }
+  .barWarning{
+    display:none;
+    margin:0 0 6px;
+    color:var(--warning);
+    font-size:13px;
+    font-weight:600;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .barButtons{
+    display:flex;
+    gap:10px;
+  }
+  .barButtons button{
+    flex:1;
+    min-height:50px;
+    margin:0;
+  }
+  .barButtons .primaryBtn{ flex:1.5; }
+  .barButtons [hidden]{ display:none; }
+  .primaryBtn.warnBtn{
+    background:var(--warning);
+    border-color:var(--warning);
+    color:var(--on-ink);
+  }
+  .pickLinks{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:0 20px;
+    margin-top:6px;
+  }
+  .pickLinks .linkBtn{
+    min-height:44px;
+    color:var(--accent-text);
+    font-size:14px;
+  }
+  .pickLinks .recommendationEvidence{
+    margin:0;
+    padding:0;
+    border:0;
+    font-size:14px;
+  }
+  /* On a phone the decision sits in a bar above the bottom nav, so Skip and
+     Watch stay in thumb reach however far the card scrolls. On short screens
+     (or zoomed text making the viewport short) it stays in the card. */
+  @media (max-width:899px) and (min-height:560px){
+    #homeScreen.hasPick .tonightActionBar{
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:calc(75px + env(safe-area-inset-bottom, 0px));
+      z-index:19;
+      margin:0;
+      padding:8px 16px 10px;
+      border-top:1px solid var(--line);
+      background:var(--bg);
+      box-shadow:0 -4px 14px rgba(var(--shadow-rgb),0.08);
+      transition:transform 0.22s ease;
+    }
+    #homeScreen.hasPick .barWarning:not([hidden]){ display:block; }
+    #homeScreen.hasPick{ padding-bottom:120px; }
+    html:has(#homeScreen.hasPick:not([hidden])){ scroll-padding-bottom:200px; }
+    body:has(#homeScreen.hasPick:not([hidden])) .toast{
+      bottom:calc(84px + 80px + env(safe-area-inset-bottom, 0px));
+    }
+    body:has(#quickBar.qbHidden) #homeScreen.hasPick .tonightActionBar{
+      transform:translateY(calc(100% + 80px));
+    }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .tonightActionBar{ transition:none !important; }
   }
   /* Watched is a memory, not a cancelled item: a ticket stub stamps onto the
      card instead of striking the title through. */
@@ -1735,27 +1943,17 @@ function reportError(err){
     text-transform:uppercase;
     letter-spacing:0.04em;
   }
-  /* The serif was dressing the chrome ("Shelf", "Family") while the movie
-     title -- the one noun this screen exists to deliver -- was set in small
-     UI sans. Moving Newsreader onto the content gives the reveal a marquee
-     register, and makes the serif the content face rather than a second
-     competing voice inside the same card. */
+  /* The movie is the loudest noun on the screen: size, weight and tighter
+     tracking give it a display register while keeping the app in Inter. */
   .pickTitle{
-    margin-top:5px;
+    margin:4px 0 0;
     color:var(--ink);
-    font-family:"Newsreader", Georgia, "Times New Roman", serif;
-    font-size:30px;
-    font-weight:600;
+    font-size:26px;
+    font-weight:800;
+    letter-spacing:-0.03em;
     line-height:1.15;
     text-wrap:balance;
   }
-  /* Light text on a dark ground optically thins the stroke, so the serif at
-     display size reads lighter in dark than its light-mode twin. Newsreader
-     already ships 700; this buys the weight back rather than a new file. */
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]) .pickTitle{ font-weight:700; }
-  }
-  :root[data-theme="dark"] .pickTitle{ font-weight:700; }
   /* Once a pick is on screen the preamble has done its job, and on a real
      phone (667px of usable height, not the 844 a desktop emulator shows) it
      was costing 431px before the pick card even began -- enough that the
@@ -1764,8 +1962,11 @@ function reportError(err){
      hatch all collapse; the heading only shrinks, because #homeScreen is
      aria-labelledby it and it carries the focus target. */
   .homeScreen.hasPick .subtitle,
+  .homeScreen.hasPick .memories,
   .homeScreen.hasPick .stats,
-  .homeScreen.hasPick #tonightShelfBtn{
+  .homeScreen.hasPick #tonightShelfBtn,
+  .homeScreen.hasPick .seasonCard,
+  .homeScreen.hasPick .tonightActions{
     display:none;
   }
   .homeScreen.hasPick h1{
@@ -1774,22 +1975,30 @@ function reportError(err){
     margin-bottom:2px;
   }
   .pickStage{
-    display:flex;
-    justify-content:center;
-    margin-bottom:14px;
+    flex:0 0 auto;
   }
   .pickStage:empty{ display:none; }
   .poster.pickPoster{
-    width:132px;
+    width:84px;
     border-radius:10px;
     box-shadow:var(--shadow-card);
   }
   .pickReasons{
-    margin:10px 0 0;
-    padding-left:18px;
+    margin:12px 0 0;
+    padding:0;
+    list-style:none;
     color:var(--ink-soft);
     font-size:14px;
     line-height:1.45;
+  }
+  .pickReasons li + li{ margin-top:4px; }
+  /* An amber/red pick's reason is the line a parent must not miss. */
+  .pickReasons.warn li:first-child{
+    padding:8px 10px;
+    border-radius:10px;
+    background:var(--warning-soft);
+    color:var(--warning);
+    font-weight:600;
   }
   .pickCard .detailLink{
     display:inline-block;
@@ -1867,9 +2076,8 @@ function reportError(err){
     place-items:center;
     background:rgba(var(--accent-rgb),0.12);
     color:var(--accent-text);
-    font-family:"Newsreader", Georgia, "Times New Roman", serif;
     font-size:21px;
-    font-weight:600;
+    font-weight:700;
     flex:0 0 auto;
   }
   .familyAvatar.alt{ background:rgba(var(--accent-rgb),0.2); }
@@ -2379,10 +2587,6 @@ function reportError(err){
     .limitControl{ width:100%; }
     .limitControl button{ width:100%; }
     .tonightCard{ padding:18px; }
-    .tonightSummary{ gap:10px; }
-    .tonightSummaryText{ font-size:24px; }
-    .tonightContext{ font-size:15px; }
-    .tonightChangeButton{ flex:0 0 auto; }
     .tonightActions{
       display:grid;
       gap:10px;
@@ -2476,8 +2680,9 @@ function reportError(err){
   }
   .syncNudge h2{
     margin:0 0 10px;
-    font-family:"Newsreader", Georgia, serif;
     font-size:24px;
+    font-weight:750;
+    letter-spacing:-0.025em;
     line-height:1.15;
   }
   .syncNudge p{
@@ -2684,6 +2889,11 @@ function reportError(err){
     .qbBtn span{ font-size:15px; }
     .qbBtn .qbCount{ position:static; margin-left:auto; font-size:11px; }
     .qbBtn.on{ background:rgba(var(--accent-rgb),0.1); }
+    .shelfJumpRail{
+      right:max(12px, calc((100vw - 188px - 680px) / 2 + 12px));
+      bottom:28px;
+    }
+    #browseScreen.railVisible{ padding-right:36px; }
     .sheet{
       left:auto;
       right:24px;
@@ -2811,7 +3021,7 @@ function reportError(err){
   #tonightPreShowBody .openui-card > :last-child:not(:first-child) > .openui-text-content .openui-markdown-renderer,
   #tonightPreShowBody .openui-card > :last-child:not(:first-child) > .openui-text-content p{
     color:var(--ink);
-    font:italic 500 16px/1.4 "Newsreader", Georgia, serif;
+    font:italic 500 16px/1.4 var(--font-sans);
   }
   /* FollowUpItem is a chat "send this as a message" button; there's no chat
      here, so it's shown as the after-the-movie question it really is. */
@@ -2821,7 +3031,7 @@ function reportError(err){
     border:0;
     padding:0;
     color:var(--ink);
-    font-family:"Newsreader", Georgia, serif;
+    font-family:var(--font-sans);
     font-size:16px;
     font-style:italic;
     text-align:left;
@@ -2926,6 +3136,323 @@ function reportError(err){
     .safeBetDetail.noPosterDetail{
       padding-left:46px;
     }
+    /* What's new cards sit inside the screen margin, so their own padding
+       left the title column about 70px wide at 320px and pushed the page
+       sideways. */
+    .newSection{
+      padding:14px 12px;
+    }
+    .newRow{
+      display:grid;
+      grid-template-columns:44px auto minmax(0, 1fr);
+      column-gap:10px;
+      row-gap:4px;
+    }
+    /* Watched and star share one column so the title gets the room. */
+    .newRow > .check{ grid-column:1; grid-row:1; }
+    .newRow > .star{ grid-column:1; grid-row:2; }
+    .newRow > .poster{ grid-column:2; grid-row:1 / span 2; }
+    .newRow > .info{ grid-column:3; grid-row:1 / span 3; }
+  }
+
+  /* ---------- Lists tab: passport cards and coming-attraction tickets ----------
+     Each new collection gets a small, reusable palette. Colors repeat across
+     audiences so hue adds delight without becoming an identity label. */
+  .listCover, .tuckedRow, .medal-xs{
+    --icon-tint:#F8CEDA;
+    --icon-1:var(--icon-tint);
+    --icon-2:var(--accent);
+    --icon-3:var(--icon-sky);
+  }
+  [data-list-icon]{
+    --icon-tint:var(--icon-1, #F8CEDA);
+    color:var(--icon-line, #64243C);
+  }
+  [data-list-icon="ramadan-eid"]{ --icon-1:var(--icon-violet); --icon-2:#E4A42C; --icon-3:var(--icon-aqua); }
+  [data-list-icon="muslim-kids-at-the-center"]{ --icon-1:var(--icon-aqua); --icon-2:#D49A25; --icon-3:var(--icon-violet); }
+  [data-list-icon="sibling-teams"]{ --icon-1:var(--icon-blue); --icon-2:var(--icon-orange); --icon-3:var(--icon-lime); }
+  [data-list-icon="girls-lead-the-way"]{ --icon-1:var(--icon-violet); --icon-2:var(--icon-orange); --icon-3:var(--icon-rose); }
+  [data-list-icon="food-family-and-the-table"]{ --icon-1:var(--icon-orange); --icon-2:var(--icon-sage); --icon-3:var(--icon-gold); }
+  [data-list-icon="inventors-and-problem-solvers"]{ --icon-1:var(--icon-gold); --icon-2:var(--icon-blue); --icon-3:var(--icon-violet); }
+  [data-list-icon="around-the-world"]{ --icon-1:var(--icon-blue); --icon-2:var(--icon-lime); --icon-3:var(--icon-orange); }
+  [data-list-icon="nothing-but-net"]{ --icon-1:var(--icon-orange); --icon-2:var(--icon-blue); --icon-3:var(--icon-gold); }
+  [data-list-icon="the-beautiful-game"]{ --icon-1:var(--icon-lime); --icon-2:var(--icon-blue); --icon-3:var(--icon-orange); }
+  [data-list-icon="friday-night-football"]{ --icon-1:var(--icon-gold); --icon-2:var(--icon-violet); --icon-3:var(--icon-blue); }
+  [data-list-icon="ice-snow-and-underdogs"]{ --icon-1:var(--icon-sky); --icon-2:var(--icon-violet); --icon-3:var(--icon-aqua); }
+  [data-list-icon="wheels-and-waves"]{ --icon-1:var(--icon-aqua); --icon-2:var(--icon-orange); --icon-3:var(--icon-violet); }
+  [data-list-icon="girls-in-the-game"]{ --icon-1:var(--icon-rose); --icon-2:var(--icon-gold); --icon-3:var(--icon-blue); }
+  [data-list-icon="black-joy-family-big-dreams"]{ --icon-1:var(--icon-gold); --icon-2:var(--icon-violet); --icon-3:var(--icon-aqua); }
+  [data-list-icon="latino-families-many-stories"]{ --icon-1:var(--icon-orange); --icon-2:var(--icon-aqua); --icon-3:var(--icon-rose); }
+  [data-list-icon="asian-families-many-stories"]{ --icon-1:var(--icon-blue); --icon-2:var(--icon-orange); --icon-3:var(--icon-lime); }
+  [data-list-icon="more-than-one-culture-at-home"]{ --icon-1:var(--icon-violet); --icon-2:var(--icon-aqua); --icon-3:var(--icon-orange); }
+  [data-list-icon="families-with-pride"]{ --icon-1:#F3A29A; --icon-2:#F0CA62; --icon-3:#79C9C3; }
+  .storyHead{ padding:6px 0 10px; }
+  .storyHead h1{ margin:0; }
+  .storySub{ color:var(--ink-soft); margin:6px 0 0; font-size:15px; }
+  .storySection{ margin-top:22px; }
+  .storySectionHead{ display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; margin:10px 0 14px; font-size:inherit; }
+  .shName{ font-weight:700; font-size:20px; line-height:1.2; letter-spacing:-0.02em; }
+  .shAside{ font-style:italic; font-weight:500; font-size:15px; color:var(--ink-soft); }
+  .medal{
+    display:inline-grid; place-items:center; flex:none;
+    width:44px; height:44px; border-radius:50%;
+    background:var(--medal-bg); color:var(--cv-ink, var(--accent-text));
+    box-shadow:inset 0 0 0 1.5px color-mix(in oklab, var(--cv-ink, var(--accent-text)) 22%, transparent), 0 1px 0 rgba(255,255,255,0.25);
+  }
+  .medal[data-list-icon]{
+    background:color-mix(in oklab, var(--icon-3, var(--medal-bg)) 42%, white);
+  }
+  .medal svg{ width:30px; height:30px; display:block; }
+  .medal-s{ width:40px; height:40px; }
+  .medal-s svg{ width:26px; height:26px; }
+  .medal-xs{ width:30px; height:30px; background:var(--cv-bg); }
+  .medal-xs svg{ width:20px; height:20px; }
+
+  /* passport card: one per list, and the top of an opened list */
+  .ppStack{ display:flex; flex-direction:column; gap:14px; }
+  .passport{
+    display:grid; grid-template-columns:minmax(0, 1.25fr) minmax(0, 1fr); align-items:center; column-gap:4px;
+    width:100%; min-height:150px; padding:16px 16px 16px 12px; margin:0; border:0; border-radius:24px;
+    background:var(--pp-bg); color:var(--ink); font:inherit; text-align:left;
+    box-shadow:0 0 0 1px var(--pp-line), 0 8px 24px var(--pp-shadow), 0 2px 4px var(--pp-shadow);
+  }
+  button.passport{ cursor:pointer; }
+  .ppId{ display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center; min-width:0; }
+  .ppFan{
+    position:relative;
+    display:block;
+    width:112px;
+    height:88px;
+    flex:none;
+  }
+  .ppFanPoster{
+    position:absolute;
+    top:9px;
+    left:31px;
+    width:50px;
+    aspect-ratio:2 / 3;
+    overflow:hidden;
+    border:2px solid var(--surface);
+    border-radius:7px;
+    background:var(--bg-sub);
+    box-shadow:0 6px 12px rgba(var(--shadow-rgb),0.20);
+    transform:rotate(0deg);
+  }
+  .ppFanPoster:first-child{ left:5px; top:14px; transform:rotate(-7deg); }
+  .ppFanPoster:last-child{ left:57px; top:14px; transform:rotate(7deg); }
+  .ppFanPoster:nth-child(2){ z-index:2; }
+  .ppFanPoster:first-child:nth-last-child(2){ left:17px; top:13px; transform:rotate(-6deg); }
+  .ppFanPoster:first-child:nth-last-child(2) + .ppFanPoster{ left:45px; top:8px; transform:rotate(6deg); z-index:2; }
+  .ppFanPoster img{ width:100%; height:100%; display:block; object-fit:cover; }
+  .ppFanPoster.isFallback{
+    display:grid;
+    place-items:center;
+    padding:4px;
+    color:var(--ink-soft);
+    font-size:9px;
+    font-weight:700;
+    line-height:1.1;
+    text-align:center;
+  }
+  .ppBadge{ position:absolute; left:50%; bottom:-7px; transform:translateX(-50%); white-space:nowrap;
+    padding:5px 8px; border-radius:999px; background:var(--accent); color:var(--on-accent);
+    font-size:10px; font-weight:700; line-height:1; letter-spacing:0.04em; text-transform:uppercase; }
+  .ppName{ margin:0; font-weight:700; font-size:19px; line-height:1.15; letter-spacing:-0.02em; overflow-wrap:anywhere; }
+  .ppName:focus{ outline:none; }
+  .ppName:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+  .ppSub{ font-size:13px; line-height:1.3; color:var(--ink-soft); }
+  .ppWhen{ margin-top:-4px; font-size:13px; font-weight:600; line-height:1.3; color:var(--accent-text); }
+  .ppStats{ display:flex; flex-direction:column; padding-left:12px; min-width:0; }
+  .ppStat{ padding:9px 0; border-bottom:1px solid var(--pp-line); }
+  .ppStat:last-child{ border-bottom:0; }
+  .ppNum{ display:block; font-size:21px; font-weight:700; line-height:1.05; letter-spacing:-0.01em; }
+  .ppLbl{ display:block; margin-top:3px; font-size:11px; font-weight:600; line-height:1.2; color:var(--ink-soft); }
+
+  /* Calendar cards make each seasonal list's return date the useful cue. */
+  .calendarRow{ display:grid; gap:10px; padding:4px 0; }
+  .returnCalendar{
+    display:grid;
+    grid-template-columns:54px minmax(0, 1fr) 30px;
+    align-items:center;
+    gap:12px;
+    min-width:0;
+    min-height:76px;
+    padding:9px 12px 9px 9px;
+    border:1px solid var(--line);
+    border-radius:14px;
+    background:var(--surface);
+    color:var(--ink);
+    box-shadow:0 2px 8px rgba(var(--shadow-rgb),0.06);
+    font:inherit;
+    text-align:left;
+    cursor:pointer;
+  }
+  .calendarDate{
+    align-self:stretch;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:3px;
+    border:1px solid var(--complement-line);
+    border-radius:10px;
+    background:var(--complement-bg);
+    color:var(--complement);
+    text-align:center;
+  }
+  .calendarMonth{ font-size:9px; font-weight:700; line-height:1; letter-spacing:0.07em; text-transform:uppercase; }
+  .calendarDay{ font-size:22px; font-weight:700; line-height:1; letter-spacing:-0.03em; }
+  .calendarCopy{ min-width:0; }
+  .calendarName{ display:block; min-width:0; font-size:15px; font-weight:700; line-height:1.15; overflow-wrap:anywhere; }
+  .calendarReturn{ display:block; margin-top:4px; color:var(--ink-soft); font-size:12px; font-weight:500; line-height:1.2; }
+  .returnCalendar .medal{
+    width:30px;
+    height:30px;
+    background:var(--new-bg);
+    box-shadow:none;
+    color:var(--accent-text);
+  }
+  .returnCalendar .medal svg{ width:19px; height:19px; }
+
+  /* tucked away */
+  .tucked{ margin-top:26px; padding:16px; border:1.5px dashed var(--line); border-radius:14px; }
+  .tuckedHead{ font-weight:700; font-size:18px; letter-spacing:-0.015em; margin:0; }
+  .tuckedNote{ font-size:13.5px; color:var(--ink-soft); margin:6px 0 10px; }
+  .tuckedRow{ display:flex; align-items:center; gap:10px; padding:6px; border-radius:12px; margin-top:8px; background:var(--bg-sub); }
+  .tuckedName{ flex:1; min-width:0; font-weight:600; font-size:14.5px; }
+  .storyEmpty{ color:var(--ink-soft); margin:16px 0; }
+
+  /* pills */
+  .storyPill{ display:inline-flex; align-items:center; justify-content:center; gap:6px; min-height:44px; padding:0 18px; border-radius:999px;
+    border:1.5px solid var(--line); background:var(--surface); color:var(--ink); font:inherit; font-weight:600; font-size:14.5px; cursor:pointer; }
+  .storyPillSm{ padding:0 14px; font-size:13.5px; }
+  .storyPill svg{ width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+  .storyTopbar{ padding:4px 0 12px; }
+  .storyBack{ padding:0 16px 0 10px; }
+  .storyMore{ display:flex; width:100%; margin-top:8px; }
+
+  /* opened list */
+  .coverCopy{ color:var(--ink-soft); font-size:15px; margin:14px 0 0; }
+  .coverMeta{ font-size:13px; color:var(--ink-soft); font-weight:500; margin:6px 0 0; }
+  .storySeg{ display:flex; gap:6px; margin:16px 0 6px; flex-wrap:wrap; }
+  .segBtn{ min-height:44px; padding:0 16px; border-radius:999px; border:1.5px solid var(--line); background:transparent;
+    font:inherit; font-weight:600; font-size:14px; color:var(--ink-soft); cursor:pointer; }
+  .segBtn.on{ background:var(--ink); border-color:var(--ink); color:var(--bg); }
+  .openListOver{ font-size:13px; color:var(--ink-soft); margin:12px 0 0; }
+  .notForUs{ margin-top:22px; padding:16px; border-radius:14px; background:var(--bg-sub); display:flex; flex-direction:column; gap:10px; align-items:flex-start; }
+  .notForUs p{ font-size:14px; color:var(--ink-soft); margin:0; }
+  .notForUs b{ color:var(--ink); }
+
+  /* the shared movie row (Shelf and opened lists) */
+  ul.rows, ol.rows{ list-style:none; margin:8px 0 0; padding:0; }
+  .rows > .row{ display:block; padding:0; gap:0; border-bottom:1px solid var(--line); }
+  .rowLine{ display:flex; align-items:center; gap:10px; padding:10px 0; }
+  .rows .poster.rowPoster{ width:54px; flex:none; }
+  .rowNum{ flex:none; width:22px; font-style:italic; font-weight:600; font-size:18px; line-height:1; letter-spacing:-0.02em; color:var(--accent-text); }
+  .rowMain{ flex:1; min-width:0; display:flex; flex-direction:column; align-items:flex-start; gap:2px; min-height:44px;
+    background:none; border:0; padding:4px 0; margin:0; text-align:left; font:inherit; color:var(--ink); cursor:pointer; }
+  .rowMain .title{ font-size:17px; overflow-wrap:anywhere; }
+  .rowMeta{ font-size:13px; color:var(--ink-soft); }
+  .rowMain .fitSignals{ margin-top:2px; }
+  .rowMain .fitSignal{ background:none; box-shadow:none; padding:0; min-height:0; gap:6px; font-size:12.5px; align-items:baseline; color:var(--ink-soft); }
+  .rowMain .fitSignal.amber{ background:none; color:var(--warning); }
+  .rowMain .fitSignal.red{ background:none; box-shadow:none; color:var(--error); }
+  .fitDot{ width:8px; height:8px; border-radius:50%; flex:none; align-self:center; background:var(--success); }
+  .fitSignal.amber .fitDot{ background:var(--rev-dot); }
+  .fitSignal.red .fitDot{ background:var(--error); }
+  .rowActs{ display:flex; flex-direction:column; flex:none; }
+  .rowActs .check{ margin-top:0; }
+  .rowActs .star{ margin-top:0; font-size:22px; }
+  .rows > .row > .detail{ padding:0 4px 16px; border-bottom:0; }
+  .rows .moves{ flex-direction:column; }
+
+  /* Compact Shelf rows keep every action at a 44px touch target while
+     putting the two actions side by side. The row itself settles near 64px. */
+  #list.shelfCompact .rowLine{ gap:8px; min-height:64px; padding:8px 0; }
+  #list.shelfCompact .poster.rowPoster{ width:32px; }
+  #list.shelfCompact .rowMain{
+    display:grid;
+    grid-template-columns:minmax(0, 1fr) auto;
+    align-items:center;
+    column-gap:6px;
+    min-height:44px;
+    padding:0;
+  }
+  #list.shelfCompact .rowMain .title{
+    min-width:0;
+    max-width:100%;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    font-size:15.5px;
+  }
+  #list.shelfCompact .rowMeta{ display:none; }
+  #list.shelfCompact .rowMain .fitSignals{ margin:0; }
+  #list.shelfCompact .rowMain .fitSignal{ gap:0; font-size:0; }
+  #list.shelfCompact .rowActs,
+  #list.shelfCompact .moves{ flex-direction:row; }
+
+  /* decade chapters on Shelf */
+  .chapterHead{
+    position:sticky;
+    top:0;
+    z-index:3;
+    list-style:none;
+    padding:12px 0 6px;
+    border-bottom:1px dashed var(--line);
+    background:color-mix(in srgb, var(--bg) 94%, transparent);
+    backdrop-filter:blur(8px);
+    scroll-margin-top:8px;
+  }
+  .chapterHead h2{ margin:0; display:flex; flex-direction:column; font-size:inherit; }
+  .chName{ font-weight:700; font-size:21px; line-height:1.15; letter-spacing:-0.025em; }
+  .chAside{ font-style:italic; font-weight:500; font-size:14.5px; color:var(--ink-soft); }
+
+  /* Shelf teaser for the Lists tab */
+  .listsTeaser{ display:flex; align-items:center; gap:12px; width:100%; margin:10px 0 4px; padding:10px 10px 10px 12px;
+    border-radius:14px; background:var(--bg-sub); border:0; min-height:56px; font:inherit; color:var(--ink); text-align:left; cursor:pointer; }
+  .tzMedals{ display:flex; flex:none; }
+  .tzMedals .medal{ margin-left:-8px; box-shadow:0 0 0 2px var(--bg-sub); }
+  .tzMedals .medal:first-child{ margin-left:0; }
+  .tzTxt{ flex:1; min-width:0; font-size:13.5px; color:var(--ink-soft); line-height:1.35; }
+  .tzTxt b{ color:var(--ink); }
+
+  /* Show 50 more */
+  .listPagination{ flex-direction:column; gap:8px; }
+  .listPagination .storyPill{ width:100%; }
+
+  /* a softer request card */
+  .requestPanel{ border-radius:16px; background:var(--bg-sub); }
+
+  /* five tabs at 320px */
+  @media (max-width:899px){
+    .qbBtn{ padding:8px 0 7px; min-width:0; }
+    .qbBtn span{ white-space:nowrap; }
+  }
+  @media (max-width:360px){
+    .passport{ padding:14px 12px 14px 8px; }
+    .ppFan{ width:96px; height:76px; }
+    .ppFanPoster{ width:42px; left:27px; top:6px; }
+    .ppFanPoster:first-child{ left:5px; top:10px; }
+    .ppFanPoster:last-child{ left:49px; top:10px; }
+    .ppFanPoster:first-child:nth-last-child(2){ left:15px; top:10px; }
+    .ppFanPoster:first-child:nth-last-child(2) + .ppFanPoster{ left:39px; top:6px; }
+    .ppName{ font-size:17px; }
+    .ppNum{ font-size:18px; white-space:nowrap; }
+    .calendarRow{ gap:8px; }
+    .returnCalendar{ grid-template-columns:48px minmax(0, 1fr) 26px; gap:9px; min-height:72px; padding:8px 10px 8px 8px; }
+    .calendarDay{ font-size:20px; }
+    .calendarName{ font-size:14px; }
+    .returnCalendar .medal{ width:26px; height:26px; }
+    .returnCalendar .medal svg{ width:17px; height:17px; }
+    .rows .poster.rowPoster{ width:48px; }
+    #list.shelfCompact .poster.rowPoster{ width:32px; }
+    .densityControl button{ padding:0 9px; }
+    .qbBtn span{ font-size:10.5px; letter-spacing:-0.02em; }
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .passport{ transition:transform 0.2s ease; }
+    .passport:hover{ transform:translateY(-2px); }
   }
 </style>
 </head>
@@ -2971,69 +3498,85 @@ function reportError(err){
 
   <div class="homeSection tight">
     <div class="familyCard tonightCard">
-      <div class="tonightSummary">
-        <div class="tonightSummaryCopy">
-          <div class="tonightSummaryLabel" aria-hidden="true"></div>
-          <div id="tonightAskSummary">
-            <div class="tonightSummaryText" id="tonightWatchingSummary">Adults only</div>
-            <div class="tonightContext" id="tonightContextSummary">About 90 minutes · Calm it down</div>
+      <div class="tonightPills" role="group" aria-label="Tonight's settings">
+        <div class="tonightPillWrap">
+          <button type="button" class="tonightPill" id="tonightWhoPill" aria-expanded="false" aria-controls="tonightWhoPop"><span class="srOnly">Who's watching: </span><span id="tonightWatchingSummary">Adults only</span></button>
+          <div class="tonightPop" id="tonightWhoPop" role="group" aria-labelledby="tonightWhoPopLabel" hidden>
+            <p class="tonightPopLabel" id="tonightWhoPopLabel">Who's watching? Adults only turns off child limits.</p>
+            <div class="choiceGrid" id="tonightKidChoices" aria-label="People watching"></div>
           </div>
         </div>
-        <button type="button" class="tonightChangeButton" id="tonightChangeBtn" aria-expanded="false" aria-controls="tonightEditPanel">Change</button>
-      </div>
-      <div class="tonightEditPanel" id="tonightEditPanel" hidden>
-        <div>
-          <h2>Who is watching?</h2>
-          <p>Select the children watching, or choose Adults only. Child content limits won't apply to an adults-only night.</p>
-          <div class="choiceGrid" id="tonightKidChoices" aria-label="People watching"></div>
-        </div>
-        <div>
-          <h3>How much time?</h3>
-          <div class="choiceGrid" id="tonightTimeChoices" aria-label="Time available">
-            <button type="button" class="choiceChip selected" data-time="90" aria-pressed="true">About 90 minutes</button>
-            <button type="button" class="choiceChip" data-time="120" aria-pressed="false">Up to 2 hours</button>
-            <button type="button" class="choiceChip" data-time="999" aria-pressed="false">Any length</button>
+        <div class="tonightPillWrap">
+          <button type="button" class="tonightPill" id="tonightTimePill" aria-expanded="false" aria-controls="tonightTimePop"><span class="srOnly">Time: </span><span id="tonightTimeSummary">90 min</span></button>
+          <div class="tonightPop" id="tonightTimePop" role="group" aria-labelledby="tonightTimePopLabel" hidden>
+            <p class="tonightPopLabel" id="tonightTimePopLabel">How much time?</p>
+            <div class="choiceGrid" id="tonightTimeChoices" aria-label="Time available">
+              <button type="button" class="choiceChip selected" data-time="90" aria-pressed="true">About 90 minutes</button>
+              <button type="button" class="choiceChip" data-time="120" aria-pressed="false">Up to 2 hours</button>
+              <button type="button" class="choiceChip" data-time="999" aria-pressed="false">Any length</button>
+            </div>
           </div>
         </div>
-        <div>
-          <h3>What kind of night?</h3>
-          <div class="choiceGrid" id="tonightMoodChoices" aria-label="Mood">
-            <button type="button" class="choiceChip selected" data-mood="calm" aria-pressed="true">Calm it down</button>
-            <button type="button" class="choiceChip" data-mood="silly" aria-pressed="false">Big and silly</button>
-            <button type="button" class="choiceChip" data-mood="new" aria-pressed="false">Something new</button>
-            <button type="button" class="choiceChip" data-mood="favorite" aria-pressed="false">Old favourite</button>
+        <div class="tonightPillWrap">
+          <button type="button" class="tonightPill" id="tonightMoodPill" aria-expanded="false" aria-controls="tonightMoodPop"><span class="srOnly">Mood: </span><span id="tonightMoodSummary">Calm</span></button>
+          <div class="tonightPop" id="tonightMoodPop" role="group" aria-labelledby="tonightMoodPopLabel" hidden>
+            <p class="tonightPopLabel" id="tonightMoodPopLabel">What kind of night?</p>
+            <div class="choiceGrid" id="tonightMoodChoices" aria-label="Mood">
+              <button type="button" class="choiceChip selected" data-mood="calm" aria-pressed="true">Calm it down</button>
+              <button type="button" class="choiceChip" data-mood="silly" aria-pressed="false">Big and silly</button>
+              <button type="button" class="choiceChip" data-mood="new" aria-pressed="false">Something new</button>
+              <button type="button" class="choiceChip" data-mood="favorite" aria-pressed="false">Old favourite</button>
+            </div>
           </div>
-        </div>
-        <div class="setupActions">
-          <button type="button" class="secondaryBtn" id="tonightDoneBtn">Done</button>
         </div>
       </div>
       <div class="setupActions tonightActions">
         <button type="button" class="primaryBtn" id="findTonightPickBtn">Find tonight's pick</button>
         <button type="button" class="secondaryBtn" id="tonightShelfBtn">Browse Shelf instead</button>
       </div>
+      <button type="button" class="seasonCard" id="tonightSeasonCard" hidden>
+        <span class="seasonCardEyebrow">In season</span>
+        <span class="seasonCardName" id="tonightSeasonName"></span>
+        <span class="seasonCardCount" id="tonightSeasonCount"></span>
+      </button>
       <div class="srOnly" id="tonightPickStatus" role="status" aria-live="polite" aria-atomic="true"></div>
       <div class="pickCard" id="tonightPickCard" style="display:none;">
-        <div class="pickStage" id="tonightPickStage"></div>
-        <div class="pickMeta" id="tonightVerdict">Tonight's pick</div>
-        <div class="pickTitle" id="tonightPickTitle"></div>
+        <p class="pickChange" id="tonightPickChange" hidden></p>
+        <div class="pickHead">
+          <div class="pickStage" id="tonightPickStage"></div>
+          <div class="pickHeadText">
+            <div class="pickMeta" id="tonightVerdict">Tonight's pick</div>
+            <h2 class="pickTitle" id="tonightPickTitle" tabindex="-1"></h2>
+            <div class="pickFacts" id="tonightPickFacts"></div>
+          </div>
+        </div>
         <ul class="pickReasons" id="tonightPickReasons"></ul>
+        <div class="headsUp" id="tonightHeadsUp">
+          <p class="headsUpText" id="tonightHeadsUpText"></p>
+          <button type="button" class="linkBtn headsUpToggle" id="tonightHeadsUpBtn" aria-expanded="false" aria-controls="tonightPreShow">More</button>
+        </div>
         <section class="preShow" id="tonightPreShow" aria-labelledby="tonightPreShowLabel" hidden>
-          <h2 class="preShowLabel" id="tonightPreShowLabel">Pre-show</h2>
+          <h3 class="preShowLabel" id="tonightPreShowLabel">Pre-show</h3>
+          <div class="preShowFallback" id="tonightPreShowFallback"></div>
           <div id="tonightPreShowBody"></div>
         </section>
-        <div class="recommendationEvidence" id="tonightEvidence"></div>
-        <button type="button" class="detailLink" id="tonightDetailBtn" aria-expanded="false" aria-controls="tonightDetailBody">Details</button>
-        <div class="detail" id="tonightDetailBody"></div>
-        <div class="setupActions">
-          <button type="button" class="primaryBtn" id="tonightWatchBtn">Mark watched</button>
-          <button type="button" class="secondaryBtn" id="tonightWatchAnywayBtn">Watch anyway</button>
-          <button type="button" class="secondaryBtn" id="tonightSkipBtn" aria-expanded="false" aria-controls="tonightSkipFeedback">Skip</button>
-          <button type="button" class="secondaryBtn" id="tonightAlternativesBtn" aria-expanded="false" aria-controls="tonightAlternatives">See two alternatives</button>
+        <div class="tonightActionBar" id="tonightActionBar" role="group" aria-label="Decide on tonight's pick">
+          <p class="barWarning" id="tonightBarWarning" hidden></p>
+          <div class="barButtons">
+            <button type="button" class="secondaryBtn" id="tonightSkipBtn" aria-expanded="false" aria-controls="tonightSkipFeedback">Skip</button>
+            <button type="button" class="primaryBtn" id="tonightWatchBtn">Mark watched</button>
+            <button type="button" class="primaryBtn warnBtn" id="tonightWatchAnywayBtn" aria-pressed="false">Watch anyway</button>
+          </div>
         </div>
+        <div class="pickLinks">
+          <button type="button" class="linkBtn" id="tonightAlternativesBtn" aria-expanded="false" aria-controls="tonightAlternatives">See two alternatives</button>
+          <button type="button" class="linkBtn" id="tonightDetailBtn" aria-expanded="false" aria-controls="tonightDetailBody">Details</button>
+          <span class="recommendationEvidence" id="tonightEvidence"></span>
+        </div>
+        <div class="detail" id="tonightDetailBody"></div>
         <div class="choiceGrid" id="tonightAlternatives" aria-label="Alternative recommendations" hidden></div>
         <div class="skipFeedback" id="tonightSkipFeedback" role="group" aria-labelledby="tonightSkipPrompt" hidden>
-          <p id="tonightSkipPrompt" aria-live="polite">What missed? Optional—this won't change your family settings.</p>
+          <p id="tonightSkipPrompt">What missed? Optional—this won't change your family settings.</p>
           <button type="button" class="choiceChip" data-skip-reason="Wrong mood" aria-pressed="false">Wrong mood</button>
           <button type="button" class="choiceChip" data-skip-reason="Not interested" aria-pressed="false">Not interested</button>
           <button type="button" class="choiceChip" data-skip-reason="Already seen" aria-pressed="false">Already seen</button>
@@ -3099,29 +3642,42 @@ function reportError(err){
     <input type="text" id="search" placeholder="Search movies" autocomplete="off">
     <div class="seg" id="filterSeg">
       <button data-filter="all" class="active" aria-pressed="true">All</button>
-      <button data-filter="todo" aria-pressed="false">To watch</button>
-      <button data-filter="done" aria-pressed="false">Watched</button>
-      <button data-filter="priority" aria-pressed="false">Want to watch</button>
+      <button data-filter="todo" aria-pressed="false">Not seen</button>
+      <button data-filter="done" aria-pressed="false">Seen</button>
+      <button data-filter="priority" aria-pressed="false">Starred</button>
     </div>
   </div>
   <div class="searchStatusRow" id="searchStatusRow" hidden>
     <span id="searchResultCount" role="status" aria-live="polite"></span>
     <button type="button" id="clearSearchBtn">Clear search</button>
   </div>
-  <div class="homeSection" id="browseBySection">
-    <span class="homeSectionLabel">Browse by</span>
-    <div class="studioGrid" id="studioGrid"></div>
+  <div class="shelfBrowseTools">
+    <fieldset class="densityControl" aria-label="Shelf row size">
+      <legend class="srOnly">Shelf row size</legend>
+      <button type="button" id="comfortableDensityBtn" data-density="comfortable" aria-pressed="true">Comfortable</button>
+      <button type="button" id="compactDensityBtn" data-density="compact" aria-pressed="false">Compact</button>
+    </fieldset>
   </div>
-  <ul id="list"></ul>
+  <nav class="shelfJumpRail" id="shelfJumpRail" aria-labelledby="shelfJumpLabel" hidden>
+    <span class="srOnly" id="shelfJumpLabel">Jump to decade</span>
+    <div class="shelfJumpItems" id="shelfJumpItems"></div>
+  </nav>
+  <div id="browseBySection">
+    <button type="button" class="listsTeaser" id="listsTeaser">
+      <span class="tzMedals" id="listsTeaserMedals" aria-hidden="true"></span>
+      <span class="tzTxt"><b>Looking for ideas?</b> The hand-picked lists have their own tab now.</span>
+      <span class="chev" aria-hidden="true">›</span>
+    </button>
+  </div>
+  <ul id="list" class="rows"></ul>
   <div class="listPagination" id="listPagination" style="display:none;">
-    <button type="button" id="listPagePrevBtn">Previous</button>
     <span id="listPageStatus" aria-live="polite"></span>
-    <button type="button" id="listPageNextBtn">Next</button>
+    <button type="button" class="storyPill" id="listShowMoreBtn">Show 50 more</button>
   </div>
   <div class="empty" id="emptyMsg" style="display:none;">No movies match your search.</div>
   <section class="requestPanel" id="requestMoviePanel" aria-labelledby="requestMovieTitle">
-    <h2 id="requestMovieTitle">Request a movie</h2>
-    <p>Ask for a title to be added to the shelf.</p>
+    <h2 id="requestMovieTitle">Can’t find a movie?</h2>
+    <p>Tell us the title and we’ll look into adding it.</p>
     <p class="requestDisclosure" id="requestMovieDisclosure">Movie titles are sent to Google Forms so they can land in the request queue. Please enter only the title, not personal notes.</p>
     <form id="requestMovieForm" class="requestForm">
       <label class="requestLabel" for="requestMovieInput">Movie title</label>
@@ -3130,6 +3686,17 @@ function reportError(err){
     </form>
     <p class="requestStatus" id="requestMovieStatus" aria-live="polite"></p>
   </section>
+</main>
+
+<main id="listsScreen" class="screenWrap listsScreen" style="display:none;" hidden aria-labelledby="listsScreenHeading">
+  <div id="listsIndex">
+    <header class="storyHead">
+      <h1 id="listsScreenHeading" tabindex="-1">Lists</h1>
+      <p class="storySub" id="listsSub"></p>
+    </header>
+    <div id="listsBody"></div>
+  </div>
+  <div id="listOpen" hidden></div>
 </main>
 
 <main id="whatsNewScreen" class="screenWrap" style="display:none;" hidden aria-labelledby="whatsNewScreenHeading">
@@ -3195,18 +3762,6 @@ function reportError(err){
       <div id="familySettingsNotice"></div>
       <div class="settingsIntro" id="familySettingsIntro"></div>
       <div class="familyRows" id="familySettingsRows"></div>
-    </div>
-  </div>
-
-  <div class="homeSection">
-    <h2 class="homeSectionLabel">Appearance and sync</h2>
-    <div class="familyCard">
-      <p>Choose how Family Feature looks on this device.</p>
-      <div class="choiceGrid" id="themeChoices">
-        <button type="button" class="choiceChip" data-theme-choice="system" aria-pressed="false">Match device</button>
-        <button type="button" class="choiceChip" data-theme-choice="light" aria-pressed="false">Light</button>
-        <button type="button" class="choiceChip" data-theme-choice="dark" aria-pressed="false">Dark</button>
-      </div>
     </div>
   </div>
 
@@ -3371,13 +3926,17 @@ function reportError(err){
 <div class="srOnly" id="assertiveStatus" role="alert" aria-live="assertive" aria-atomic="true"></div>
 
 <nav class="quickBar" id="quickBar" aria-label="Main navigation" tabindex="-1">
-  <button type="button" class="qbBtn" id="tabHome">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h14v14H5z"/><path d="M9 9h6"/><path d="M9 13h4"/></svg>
-    <span>Tonight</span>
-  </button>
   <button type="button" class="qbBtn" id="tabBrowse">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>
     <span>Shelf</span>
+  </button>
+  <button type="button" class="qbBtn" id="tabLists">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20.5h18"/><rect x="4.5" y="6" width="4" height="14.5" rx="1"/><rect x="9.5" y="3.5" width="4" height="17" rx="1"/><path d="M15.2 7.6l3.6-1 3.4 13.4"/><path d="M6.5 9.5v2"/></svg>
+    <span>Lists</span>
+  </button>
+  <button type="button" class="qbBtn" id="tabHome">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h14v14H5z"/><path d="M9 9h6"/><path d="M9 13h4"/></svg>
+    <span>Tonight</span>
   </button>
   <button type="button" class="qbBtn" id="tabWhatsNew">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3l1.9 5.1L18 10l-5.1 1.9L11 17l-1.9-5.1L4 10l5.1-1.9z"/><path d="M18.5 15l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></svg>
@@ -3385,7 +3944,6 @@ function reportError(err){
     <span class="qbCount" id="whatsNewTabCount" hidden></span>
   </button>
   <button type="button" class="qbBtn" id="tabFamily">
-    <span class="qbDot" aria-hidden="true"></span>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 11a4 4 0 1 0-8 0v3a4 4 0 0 0 8 0v-3z"/><path d="M7 21a7 7 0 0 1 10 0"/><path d="M4 12a3 3 0 0 1 2-2.8"/><path d="M20 12a3 3 0 0 0-2-2.8"/></svg>
     <span>Family</span>
   </button>
@@ -3446,13 +4004,14 @@ const MOVIES = MOVIES_BASE
   .concat(typeof MOVIES_DREAMWORKS !== 'undefined' ? MOVIES_DREAMWORKS : [])
   .concat(typeof MOVIES_NICK !== 'undefined' ? MOVIES_NICK : [])
   .concat(typeof MOVIES_EXTRA !== 'undefined' ? MOVIES_EXTRA : [])
+  .concat(typeof MOVIES_MUSLIM !== 'undefined' ? MOVIES_MUSLIM : [])
+  .concat(typeof MOVIES_REPRESENTATION !== 'undefined' ? MOVIES_REPRESENTATION : [])
   .concat(typeof MOVIES_CSM !== 'undefined' ? MOVIES_CSM : [])
   .concat(typeof MOVIES_MCUDC !== 'undefined' ? MOVIES_MCUDC : [])
   .concat(typeof MOVIES_GHIBLI !== 'undefined' ? MOVIES_GHIBLI : [])
   .concat(typeof MOVIES_SONYANIM !== 'undefined' ? MOVIES_SONYANIM : []);
 const STORAGE_KEY = "family-movie-watchlist-v1";
 const DEVICE_ID_KEY = "family-feature-device-id";
-const THEME_KEY = "family-feature-theme-v1";
 const RECENT_TONIGHT_PICKS_KEY = "family-feature-recent-tonight-picks-v1";
 // How many of the most recently shown Tonight picks to avoid repeating.
 // Deliberately a plain device-local list, not part of the synced `state`
@@ -3627,7 +4186,9 @@ let ageFilter = "";
 let genreFilter = "";
 let studioFilter = "";
 let sortMode = "year";
-let currentScreen = "browse";
+let currentScreen = "home";
+const SHELF_DENSITY_KEY = 'family-feature-shelf-density-v1';
+let shelfDensity = readShelfDensity();
 // The Shelf list can hold 1,000+ movies. Rendering it all unpaginated makes
 // every row's controls (check/star/details/source/move) into keyboard tab
 // stops, so reaching the nav bar from deep in the list can take thousands of
@@ -3635,7 +4196,9 @@ let currentScreen = "browse";
 // manageable page instead. See render()'s LIST_PAGE_SIZE use and
 // renderListPagination().
 let listPage = 1;
+const LIST_PAGE_SIZE = 50;
 let lastListSignature = "";
+let lastVisibleOrder = [];
 // excludedChildIds (not an opt-in childIds allowlist) so every child-roster
 // mutation path -- local addChild(), completeSetupWithChildren(), boot,
 // a Drive sync-merge, or any future path (import, invite, undo) -- includes
@@ -3892,6 +4455,25 @@ function decadeOf(y){
   const n = parseInt(y, 10);
   if(isNaN(n)) return null;
   return Math.floor(n / 10) * 10;
+}
+
+function readShelfDensity(){
+  try{
+    return localStorage.getItem(SHELF_DENSITY_KEY) === 'compact' ? 'compact' : 'comfortable';
+  }catch(e){
+    return 'comfortable';
+  }
+}
+
+function setShelfDensity(density, persist = true){
+  shelfDensity = density === 'compact' ? 'compact' : 'comfortable';
+  if(persist){
+    try{ localStorage.setItem(SHELF_DENSITY_KEY, shelfDensity); }catch(e){}
+  }
+  listEl.classList.toggle('shelfCompact', shelfDensity === 'compact');
+  document.querySelectorAll('.densityControl button').forEach(button => {
+    button.setAttribute('aria-pressed', button.dataset.density === shelfDensity ? 'true' : 'false');
+  });
 }
 
 const RECENT_RELEASE_YEAR_WINDOW = 3;
@@ -4357,7 +4939,10 @@ function createMeta(idx, m, detailScope){
   csmBadge.textContent = `${m.studio} `;
   const csmAge = document.createElement('span');
   csmAge.className = 'nowrap';
-  csmAge.textContent = `· CSM ${m.ca}`;
+  // Substitute-source entries store a sentence in `ca`; Pre-Show already
+  // shows those as "No CSM age", and a long unbreakable label here pushed
+  // the page wider than a phone screen.
+  csmAge.textContent = parseAge(m.ca) === null ? '· No CSM age' : `· CSM ${m.ca}`;
   csmBadge.appendChild(csmAge);
   facts.appendChild(csmBadge);
 
@@ -4832,6 +5417,640 @@ function browseStudio(studio){
   showScreen('browse');
 }
 
+// ---- Curated lists (MOVIE_LISTS, from data-lists.js) ----
+// "Not for us" hides a list on this device only, like the other Tonight
+// conveniences; it is not family data, so it stays out of the synced state.
+const HIDDEN_LISTS_KEY = 'movieNight.hiddenLists';
+const LIST_MIN_FITTING = 5;
+let hiddenListIds = new Set();
+const MOVIE_IDX_BY_NUM = new Map(MOVIES.map((m, idx) => [m.num, idx]));
+
+function loadHiddenLists(){
+  try{
+    const saved = JSON.parse(localStorage.getItem(HIDDEN_LISTS_KEY) || '[]');
+    hiddenListIds = new Set(Array.isArray(saved) ? saved : []);
+  }catch(e){
+    hiddenListIds = new Set();
+  }
+}
+function saveHiddenLists(){
+  try{ localStorage.setItem(HIDDEN_LISTS_KEY, JSON.stringify([...hiddenListIds])); }catch(e){}
+}
+function curatedLists(){
+  return typeof MOVIE_LISTS === 'undefined' ? [] : MOVIE_LISTS;
+}
+function listById(id){
+  return curatedLists().find(list => list.id === id) || null;
+}
+function listIndices(list){
+  return list.pins.map(num => MOVIE_IDX_BY_NUM.get(num)).filter(idx => idx !== undefined);
+}
+// Same test as the Shelf's "Hide above settings" toggle, which a list turns on.
+function fitsSelectedKids(m, kids){
+  return !kids.length || !hasConfirmedContentData(m) || movieFitForKids(m, kids).verdict !== 'red';
+}
+function listFitCount(list){
+  const kids = selectedKids();
+  return listIndices(list).filter(idx => fitsSelectedKids(MOVIES[idx], kids)).length;
+}
+function monthDayNumber(date){
+  return (date.getMonth() + 1) * 100 + date.getDate();
+}
+function isoDay(date){
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+}
+function listInSeason(list, date){
+  if(list.dates){
+    const today = isoDay(date);
+    return list.dates.some(([from, to]) => today >= from && today <= to);
+  }
+  if(!list.season) return false;
+  const [from, to] = [list.season.from, list.season.to].map(s => Number(s.replace('-', '')));
+  const today = monthDayNumber(date);
+  return from <= to ? (today >= from && today <= to) : (today >= from || today <= to);
+}
+// In-season lists first, then lists with no season, then the ones out of season.
+function shownLists(date){
+  const shown = curatedLists().filter(list => !hiddenListIds.has(list.id) && listFitCount(list) >= (list.minFit || LIST_MIN_FITTING));
+  const rank = list => listInSeason(list, date) ? 0 : (list.season || list.dates ? 2 : 1);
+  return shown.slice().sort((a, b) => rank(a) - rank(b));
+}
+function listCountText(list){
+  const count = listFitCount(list);
+  return selectedKids().length ? `${count} that fit` : `${count} films`;
+}
+
+
+// ---- Lists tab (passport cards) ----
+// Each list is a white passport card: its icon, name, one line of copy and
+// three numbers. Off-season lists are coming-attraction tickets.
+let openListId = null;
+let openListUnseenOnly = false;
+let openListShowAll = false;
+const OPEN_LIST_FIRST = 10;
+
+function kidNames(){
+  return selectedKids().map(child => child.name).join(' + ');
+}
+function shortDate(value){
+  // value is "MM-DD" or "YYYY-MM-DD"
+  const parts = value.split('-').map(Number);
+  const [month, day] = parts.length === 3 ? [parts[1], parts[2]] : parts;
+  return new Date(2000, month - 1, day).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+function listUntilText(list, date){
+  if(list.dates){
+    const today = isoDay(date);
+    const range = list.dates.find(([from, to]) => today >= from && today <= to);
+    return range ? `until ${shortDate(range[1])}` : '';
+  }
+  return list.season ? `until ${shortDate(list.season.to)}` : '';
+}
+function listBackText(list, date){
+  if(list.dates){
+    const today = isoDay(date);
+    const next = list.dates.find(([from]) => from > today);
+    return next ? `Returns ${shortDate(next[0])}` : 'Open any time';
+  }
+  return list.season ? `Returns ${shortDate(list.season.from)}` : '';
+}
+function listFitLine(list){
+  const count = listFitCount(list);
+  return selectedKids().length ? `${count} fit` : `${count} films`;
+}
+function createListMedal(id, size){
+  const svg = typeof LIST_ICONS !== 'undefined' ? LIST_ICONS[id] : null;
+  const medal = document.createElement('span');
+  medal.className = 'medal' + (size ? ` medal-${size}` : '');
+  medal.dataset.listIcon = id;
+  medal.setAttribute('aria-hidden', 'true');
+  if(svg) medal.innerHTML = svg;
+  return medal;
+}
+// The Tonight season card keeps the plain icon it has always had.
+function createListIcon(id){
+  const svg = typeof LIST_ICONS !== 'undefined' ? LIST_ICONS[id] : null;
+  if(!svg) return null;
+  const icon = document.createElement('span');
+  icon.className = 'listIcon';
+  icon.dataset.listIcon = id;
+  icon.setAttribute('aria-hidden', 'true');
+  icon.innerHTML = svg;
+  return icon;
+}
+function createListPosterFan(list){
+  const fan = document.createElement('span');
+  fan.className = 'ppFan';
+  fan.setAttribute('aria-hidden', 'true');
+  const orderedMovies = listIndices(list).map(idx => MOVIES[idx]);
+  const moviesWithArt = orderedMovies.filter(movie => typeof MOVIE_POSTERS !== 'undefined' && MOVIE_POSTERS[movie.num]?.u);
+  const moviesWithoutArt = orderedMovies.filter(movie => !moviesWithArt.includes(movie));
+  const movies = (moviesWithArt.length >= 2 ? moviesWithArt : moviesWithArt.concat(moviesWithoutArt)).slice(0, 3);
+  movies.forEach(movie => {
+    const frame = document.createElement('span');
+    frame.className = 'ppFanPoster';
+    const art = typeof MOVIE_POSTERS !== 'undefined' ? MOVIE_POSTERS[movie.num] : null;
+    if(art && art.u){
+      const img = document.createElement('img');
+      img.alt = '';
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.fetchPriority = 'low';
+      img.width = art.w || 200;
+      img.height = art.h || 300;
+      img.src = art.u;
+      img.onerror = () => {
+        img.remove();
+        frame.classList.add('isFallback');
+        frame.textContent = movie.y || 'Movie';
+      };
+      frame.appendChild(img);
+    }else{
+      frame.classList.add('isFallback');
+      frame.textContent = movie.y || 'Movie';
+    }
+    fan.appendChild(frame);
+  });
+  return fan;
+}
+function spanText(className, text){
+  const span = document.createElement('span');
+  span.className = className;
+  span.textContent = text;
+  return span;
+}
+
+function listYearSpan(list){
+  const years = listIndices(list).map(idx => Number(MOVIES[idx].y)).filter(Boolean);
+  if(!years.length) return '';
+  const lo = Math.min(...years), hi = Math.max(...years);
+  return lo === hi ? String(lo) : `${lo}–${hi}`;
+}
+// A passport card: a fan of its first three curated movies, name and one line of copy on the left, three
+// numbers on the right. Used for every list, and the top of an opened list.
+function createPassport(list, opts = {}){
+  const card = document.createElement(opts.tag || 'button');
+  card.className = 'passport listCover' + (opts.badge ? ' hero' : '');
+  card.dataset.list = list.id;
+  if(card.tagName === 'BUTTON'){
+    card.type = 'button';
+    card.onclick = () => openList(list.id);
+  }
+  const id = document.createElement(card.tagName === 'BUTTON' ? 'span' : 'div');
+  id.className = 'ppId';
+  const fan = createListPosterFan(list);
+  if(opts.badge) fan.appendChild(spanText('ppBadge', opts.badge));
+  id.appendChild(fan);
+  id.appendChild(opts.nameEl || spanText('ppName', list.name));
+  const sub = opts.sub !== undefined ? opts.sub : list.copy;
+  if(sub) id.appendChild(spanText('ppSub', sub));
+  if(opts.when) id.appendChild(spanText('ppWhen', opts.when));
+  const stats = spanText('ppStats', '');
+  const stat = (num, label) => {
+    const row = spanText('ppStat', '');
+    row.appendChild(spanText('ppNum', num));
+    row.appendChild(spanText('ppLbl', label));
+    stats.appendChild(row);
+  };
+  if(selectedKids().length) stat(String(listFitCount(list)), `fit ${kidNames()}`);
+  stat(String(listIndices(list).length), 'films');
+  const span = listYearSpan(list);
+  if(span) stat(span, 'years');
+  card.appendChild(id);
+  card.appendChild(stats);
+  return card;
+}
+function passportStack(lists, optsFor){
+  const stack = document.createElement('div');
+  stack.className = 'ppStack';
+  lists.forEach(list => stack.appendChild(createPassport(list, optsFor ? optsFor(list) : {})));
+  return stack;
+}
+// A compact calendar card for a list that is out of season.
+function createReturnCalendar(list, today){
+  const card = document.createElement('button');
+  card.type = 'button';
+  card.className = 'returnCalendar listCover';
+  card.dataset.list = list.id;
+
+  const returnText = listBackText(list, today);
+  const match = returnText.match(/^Returns ([A-Z][a-z]{2}) (\d{1,2})$/);
+  const date = document.createElement('span');
+  date.className = 'calendarDate';
+  date.setAttribute('aria-hidden', 'true');
+  date.appendChild(spanText('calendarMonth', match ? match[1] : 'Any'));
+  date.appendChild(spanText('calendarDay', match ? match[2] : '—'));
+
+  const copy = document.createElement('span');
+  copy.className = 'calendarCopy';
+  copy.appendChild(spanText('calendarName', list.short || list.name));
+  copy.appendChild(spanText('calendarReturn', returnText));
+
+  card.appendChild(date);
+  card.appendChild(copy);
+  card.appendChild(createListMedal(list.id));
+  card.onclick = () => openList(list.id);
+  return card;
+}
+function createShelfSection(id, name, aside, children){
+  const section = document.createElement('section');
+  section.className = 'storySection';
+  section.setAttribute('aria-labelledby', `lists-h-${id}`);
+  const heading = document.createElement('h2');
+  heading.className = 'storySectionHead';
+  heading.id = `lists-h-${id}`;
+  heading.appendChild(spanText('shName', name));
+  if(aside) heading.appendChild(spanText('shAside', aside));
+  section.appendChild(heading);
+  children.forEach(child => section.appendChild(child));
+  return section;
+}
+function renderListsScreen(){
+  const index = document.getElementById('listsIndex');
+  const open = document.getElementById('listOpen');
+  if(!index || !open) return;
+  const list = openListId ? listById(openListId) : null;
+  if(openListId && !list) openListId = null;
+  index.hidden = !!list;
+  open.hidden = !list;
+  if(list) renderOpenList(list);
+  else renderListsIndex();
+}
+
+function renderListsIndex(){
+  const today = new Date(Date.now());
+  const kids = selectedKids();
+  document.getElementById('listsSub').textContent = kids.length
+    ? `Little shelves we filled by hand. Showing what fits ${kidNames()}.`
+    : 'Little shelves we filled by hand.';
+  const body = document.getElementById('listsBody');
+  body.replaceChildren();
+  const all = curatedLists();
+  const fitsFloor = list => listFitCount(list) >= (list.minFit || LIST_MIN_FITTING);
+  const visible = all.filter(list => !hiddenListIds.has(list.id) && fitsFloor(list));
+  const isSeasonal = list => !!(list.season || list.dates);
+
+  const inSeason = visible.filter(list => listInSeason(list, today));
+  if(inSeason.length){
+    const dayLabel = today.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+    const until = list => listUntilText(list, today);
+    const stack = passportStack(inSeason, list => list === inSeason[0]
+      ? { badge: 'Now showing', when: until(list) }
+      : { when: until(list) });
+    body.appendChild(createShelfSection('season', 'In season', dayLabel, [stack]));
+  }
+
+  const shelves = typeof MOVIE_LIST_SHELVES !== 'undefined' ? MOVIE_LIST_SHELVES : [];
+  const shelved = new Set();
+  shelves.forEach(shelf => {
+    shelf.lists.forEach(id => shelved.add(id));
+    const lists = shelf.lists.map(listById).filter(list => list && visible.includes(list));
+    if(lists.length) body.appendChild(createShelfSection(shelf.id, shelf.name, shelf.aside, [passportStack(lists)]));
+  });
+  const loose = visible.filter(list => !isSeasonal(list) && !shelved.has(list.id));
+  if(loose.length) body.appendChild(createShelfSection('more', 'More lists', '', [passportStack(loose)]));
+
+  const later = visible.filter(list => isSeasonal(list) && !listInSeason(list, today));
+  if(later.length){
+    const row = document.createElement('div');
+    row.className = 'calendarRow';
+    later.forEach(list => row.appendChild(createReturnCalendar(list, today)));
+    body.appendChild(createShelfSection('later', 'Coming attractions', 'Browse any list now', [row]));
+  }
+
+  if(!visible.length){
+    const empty = document.createElement('p');
+    empty.className = 'storyEmpty';
+    empty.textContent = 'No lists fit everyone selected right now. Try changing who’s watching on Tonight.';
+    body.appendChild(empty);
+  }
+
+  const resting = all.filter(list => !hiddenListIds.has(list.id) && !fitsFloor(list));
+  const tucked = all.filter(list => hiddenListIds.has(list.id));
+  if(tucked.length || resting.length){
+    const box = document.createElement('section');
+    box.className = 'tucked';
+    box.setAttribute('aria-labelledby', 'lists-h-tucked');
+    const head = document.createElement('h2');
+    head.className = 'tuckedHead';
+    head.id = 'lists-h-tucked';
+    head.textContent = tucked.length ? 'Tucked away on this phone' : 'Resting lists';
+    box.appendChild(head);
+    if(tucked.length){
+      const note = document.createElement('p');
+      note.className = 'tuckedNote';
+      note.textContent = 'You said “Not for us” to these. They stay hidden until you put them back.';
+      box.appendChild(note);
+      tucked.forEach(list => {
+        const row = document.createElement('div');
+        row.className = 'tuckedRow';
+        row.appendChild(createListMedal(list.id, 's'));
+        row.appendChild(spanText('tuckedName', list.name));
+        const putBack = document.createElement('button');
+        putBack.type = 'button';
+        putBack.className = 'storyPill storyPillSm';
+        putBack.textContent = 'Put back';
+        putBack.setAttribute('aria-label', `Put back ${list.name}`);
+        putBack.onclick = () => {
+          hiddenListIds.delete(list.id);
+          saveHiddenLists();
+          renderCurrentView();
+          showToast(`${list.name} is back.`, 2000);
+        };
+        row.appendChild(putBack);
+        box.appendChild(row);
+      });
+    }
+    if(resting.length){
+      const note = document.createElement('p');
+      note.className = 'tuckedNote';
+      const who = kids.length ? kidNames() : 'everyone';
+      note.textContent = resting.length === 1
+        ? `One more list is resting until enough of its films fit ${who}.`
+        : `${resting.length} more lists are resting until enough of their films fit ${who}.`;
+      box.appendChild(note);
+    }
+    body.appendChild(box);
+  }
+}
+
+function renderOpenList(list){
+  const today = new Date(Date.now());
+  const open = document.getElementById('listOpen');
+  open.replaceChildren();
+
+  const back = document.createElement('button');
+  back.type = 'button';
+  back.className = 'storyPill storyBack';
+  back.id = 'listsBackBtn';
+  back.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"/></svg>';
+  back.appendChild(spanText('', 'Lists'));
+  back.onclick = () => {
+    const id = openListId;
+    openListId = null;
+    renderCurrentView();
+    window.scrollTo(0, 0);
+    const cover = document.querySelector(`#listsBody .listCover[data-list="${id}"]`);
+    (cover || document.getElementById('listsScreenHeading')).focus();
+  };
+  const topbar = document.createElement('div');
+  topbar.className = 'storyTopbar';
+  topbar.appendChild(back);
+  open.appendChild(topbar);
+
+  const inSeason = listInSeason(list, today);
+  const name = document.createElement('h2');
+  name.className = 'ppName';
+  name.id = 'openListName';
+  name.tabIndex = -1;
+  name.textContent = list.name;
+  const sub = inSeason
+    ? `In season · ${listUntilText(list, today)}`
+    : (list.season || list.dates) ? listBackText(list, today) : undefined;
+  const cover = createPassport(list, { tag: 'section', nameEl: name, badge: inSeason ? 'Now showing' : '', sub });
+  cover.setAttribute('aria-labelledby', 'openListName');
+  open.appendChild(cover);
+  const blurb = document.createElement('p');
+  blurb.className = 'coverCopy';
+  blurb.textContent = list.blurb;
+  open.appendChild(blurb);
+  const metaLine = document.createElement('p');
+  metaLine.className = 'coverMeta';
+  metaLine.textContent = 'Picked by hand · in the order we’d watch them';
+  open.appendChild(metaLine);
+
+  const kids = selectedKids();
+  const all = listIndices(list);
+  const fitting = all.filter(idx => fitsSelectedKids(MOVIES[idx], kids));
+  const unseen = fitting.filter(idx => !markValue(state.checked, idx));
+  const items = openListUnseenOnly ? unseen : fitting;
+
+  const seg = document.createElement('div');
+  seg.className = 'storySeg';
+  seg.setAttribute('role', 'group');
+  seg.setAttribute('aria-label', 'Show');
+  [['all', `All ${fitting.length}`, !openListUnseenOnly], ['unseen', `Not seen ${unseen.length}`, openListUnseenOnly]].forEach(([key, label, on]) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'segBtn' + (on ? ' on' : '');
+    btn.id = key === 'all' ? 'openListAllBtn' : 'openListUnseenBtn';
+    btn.textContent = label;
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.onclick = () => { openListUnseenOnly = key === 'unseen'; openListShowAll = false; renderCurrentView(); };
+    seg.appendChild(btn);
+  });
+  open.appendChild(seg);
+
+  const rows = document.createElement('ol');
+  rows.className = 'rows rowsNum';
+  rows.id = 'openListRows';
+  const shown = openListShowAll ? items : items.slice(0, OPEN_LIST_FIRST);
+  shown.forEach((idx, i) => rows.appendChild(createMovieRow(idx, { num: i + 1, scope: 'list' })));
+  open.appendChild(rows);
+
+  if(!items.length){
+    const done = document.createElement('p');
+    done.className = 'storyEmpty';
+    done.textContent = openListUnseenOnly ? 'You’ve seen every film on this list. Nicely done.' : 'None of these fit everyone selected right now.';
+    open.appendChild(done);
+  }
+  if(items.length > shown.length){
+    const more = document.createElement('button');
+    more.type = 'button';
+    more.className = 'storyPill storyMore';
+    more.id = 'openListShowAllBtn';
+    more.textContent = `Show all ${items.length}`;
+    more.onclick = () => { openListShowAll = true; renderCurrentView(); };
+    open.appendChild(more);
+  }
+  const over = all.length - fitting.length;
+  if(over > 0 && kids.length){
+    const note = document.createElement('p');
+    note.className = 'openListOver';
+    note.textContent = `${over} more on this list ${over === 1 ? 'is' : 'are'} over the content settings for ${kidNames()}.`;
+    open.appendChild(note);
+  }
+
+  const notForUs = document.createElement('div');
+  notForUs.className = 'notForUs';
+  const p = document.createElement('p');
+  const strong = document.createElement('b');
+  strong.textContent = 'Not for us? ';
+  p.appendChild(strong);
+  p.appendChild(document.createTextNode('Tuck this list away on this phone. You can put it back from the bottom of Lists.'));
+  notForUs.appendChild(p);
+  const hide = document.createElement('button');
+  hide.type = 'button';
+  hide.className = 'storyPill';
+  hide.id = 'listHideBtn';
+  hide.textContent = 'Tuck it away';
+  hide.onclick = () => {
+    hiddenListIds.add(list.id);
+    saveHiddenLists();
+    openListId = null;
+    renderCurrentView();
+    window.scrollTo(0, 0);
+    document.getElementById('listsScreenHeading').focus();
+    showToast(`Tucked away ${list.name}. Put it back from the bottom of Lists.`, 3000);
+  };
+  notForUs.appendChild(hide);
+  open.appendChild(notForUs);
+}
+
+function openList(id){
+  openListId = id;
+  openListUnseenOnly = false;
+  openListShowAll = false;
+  if(currentScreen !== 'lists') showScreen('lists');
+  else renderCurrentView();
+  window.scrollTo(0, 0);
+  const heading = document.getElementById('openListName');
+  if(heading) heading.focus();
+}
+
+function renderListsTeaser(){
+  const medals = document.getElementById('listsTeaserMedals');
+  if(!medals || medals.childElementCount) return;
+  shownLists(new Date(Date.now())).slice(0, 3).forEach(list => {
+    medals.appendChild(createListMedal(list.id, 'xs'));
+  });
+}
+
+function renderSeasonCard(){
+  const card = document.getElementById('tonightSeasonCard');
+  if(!card) return;
+  const list = shownLists(new Date(Date.now())).find(l => listInSeason(l, new Date(Date.now())));
+  card.hidden = !list;
+  if(!list) return;
+  card.dataset.list = list.id;
+  card.querySelector('.listIcon')?.remove();
+  const icon = createListIcon(list.id);
+  if(icon) card.prepend(icon);
+  document.getElementById('tonightSeasonName').textContent = list.name;
+  const kids = selectedKids();
+  document.getElementById('tonightSeasonCount').textContent = kids.length
+    ? `${listFitCount(list)} that fit ${kids.map(k => k.name).join(' + ')} →`
+    : `${listFitCount(list)} films →`;
+}
+
+// ---- Movie row, shared by Shelf and an opened list ----
+// The whole title area opens the details (it keeps the .detailLink class the
+// detail toggle and its scroll pinning look for); the poster keeps its own
+// zoom button, and Star and Watched sit stacked on the right. The details
+// panel lives inside the row so lists stay valid lists.
+function createMovieRow(idx, opts = {}){
+  const m = MOVIES[idx];
+  const scope = opts.scope || 'list';
+  const isChecked = markValue(state.checked, idx);
+  const isOpen = openDetail === idx;
+  const detailId = `shelf-${scope}-detail-${m.num}`;
+
+  const li = document.createElement('li');
+  li.className = 'row' + (isChecked ? ' checked' : '');
+  li.dataset.movieIdx = idx;
+  const line = document.createElement('div');
+  line.className = 'rowLine';
+
+  if(opts.num !== undefined){
+    const num = document.createElement('span');
+    num.className = opts.custom ? 'num' : 'rowNum';
+    num.textContent = opts.num;
+    if(!opts.custom) num.setAttribute('aria-hidden', 'true');
+    line.appendChild(num);
+  }
+
+  const poster = createPoster(m, 'rowPoster', isRecent(m));
+  if(poster) line.appendChild(poster);
+
+  const main = document.createElement('button');
+  main.type = 'button';
+  main.className = 'detailLink rowMain';
+  main.dataset.idx = idx;
+  main.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  main.setAttribute('aria-controls', detailId);
+  main.setAttribute('aria-label', `${isOpen ? 'Hide' : 'Show'} details for ${m.t}`);
+  main.onclick = event => toggleDetail(idx, event.currentTarget);
+  main.appendChild(spanText('title', displayTitle(m)));
+  // Studio · CSM age · runtime, each in its own span so the runtime stays
+  // findable; substitute-source titles say "No CSM age", not the placeholder.
+  const meta = spanText('rowMeta', '');
+  const facts = [];
+  if(m.studio && m.studio !== 'Other') facts.push(spanText('rowStudio', m.studio));
+  facts.push(spanText('csmAge', parseAge(m.ca) === null ? 'No CSM age' : `CSM ${m.ca}`));
+  if(Number.isInteger(m.runtimeMinutes) && m.runtimeMinutes > 0) facts.push(spanText('runtime', formatRuntime(m.runtimeMinutes)));
+  facts.forEach((fact, i) => {
+    if(i) meta.appendChild(document.createTextNode(' · '));
+    meta.appendChild(fact);
+  });
+  main.appendChild(meta);
+  const fit = createRowFit(idx);
+  if(fit) main.appendChild(fit);
+  line.appendChild(main);
+
+  const acts = document.createElement('div');
+  acts.className = 'rowActs';
+  acts.appendChild(createStarButton(idx, m, markValue(state.priority, idx)));
+  const check = document.createElement('button');
+  check.type = 'button';
+  check.className = 'check' + (isChecked ? ' on' : '');
+  check.setAttribute('aria-label', isChecked ? `Mark ${m.t} unwatched` : `Mark ${m.t} watched`);
+  check.setAttribute('aria-pressed', isChecked ? 'true' : 'false');
+  check.dataset.idx = idx;
+  check.onclick = () => toggleCheck(idx);
+  acts.appendChild(check);
+  line.appendChild(acts);
+
+  if(opts.custom){
+    const globalPos = opts.globalPos;
+    const moves = document.createElement('div');
+    moves.className = 'moves';
+    const up = document.createElement('button');
+    up.className = 'moveUp';
+    up.dataset.idx = idx;
+    up.textContent = '▲';
+    up.setAttribute('aria-label', `Move ${m.t} up`);
+    up.disabled = globalPos === 0;
+    up.onclick = () => move(idx, -1);
+    const down = document.createElement('button');
+    down.className = 'moveDown';
+    down.dataset.idx = idx;
+    down.textContent = '▼';
+    down.setAttribute('aria-label', `Move ${m.t} down`);
+    down.disabled = globalPos === state.order.length - 1;
+    down.onclick = () => move(idx, 1);
+    moves.appendChild(up);
+    moves.appendChild(down);
+    line.appendChild(moves);
+  }
+
+  li.appendChild(line);
+  const detail = document.createElement('div');
+  detail.id = detailId;
+  detail.className = 'detail' + (isOpen ? ' open' : '') + (poster ? '' : ' noPosterDetail');
+  detail.hidden = !isOpen;
+  fillMovieDetail(detail, m, isOpen);
+  li.appendChild(detail);
+  return li;
+}
+
+// The fit note: one coloured dot and a line of text, quieter than a chip.
+function createRowFit(idx){
+  const signals = createFitSignals(idx);
+  if(!signals) return null;
+  const chip = signals.querySelector('.fitSignal');
+  const wrap = document.createElement('span');
+  wrap.className = 'fitSignals';
+  const signal = document.createElement('span');
+  signal.className = chip.className;
+  const dot = document.createElement('span');
+  dot.className = 'fitDot';
+  dot.setAttribute('aria-hidden', 'true');
+  signal.appendChild(dot);
+  signal.appendChild(document.createTextNode(chip.textContent));
+  wrap.appendChild(signal);
+  return wrap;
+}
+
 function createChild(name, rawAge, id){
   return { id: id || makeChildId(), name: name.trim().slice(0, 60), age: clampChildAge(rawAge), settings: {} };
 }
@@ -4843,11 +6062,11 @@ function completeSetupWithChildren(children){
   saveState();
   // Fresh setup: nobody has been deselected yet, so everyone starts included.
   tonightSelection.excludedChildIds = new Set();
-  showScreen('browse');
+  showScreen('home');
   clearSetupValidation();
   showToast('Family setup saved');
-  document.getElementById('browseScreenHeading').focus();
-  announceAssertive('Family setup complete. Your shelf is ready.');
+  document.getElementById('homeScreenHeading').focus();
+  announceAssertive('Family setup complete. Tonight is ready.');
 }
 
 function selectedKids(){
@@ -4877,20 +6096,99 @@ function tonightWatchingLabel(){
   return kids.map(child => child.name).join(' + ');
 }
 
-function renderTonightSummary(){
-  const watching = document.getElementById('tonightWatchingSummary');
-  const context = document.getElementById('tonightContextSummary');
-  if(watching) watching.textContent = tonightWatchingLabel();
-  if(context) context.textContent = `${tonightTimeLabel()} · ${tonightMoodLabel()}`;
+function tonightTimeShortLabel(){
+  if(tonightSelection.time === 120) return 'Up to 2 hours';
+  if(tonightSelection.time === 999) return 'Any length';
+  return '90 min';
 }
 
-function setTonightEditOpen(open){
-  const panel = document.getElementById('tonightEditPanel');
-  const button = document.getElementById('tonightChangeBtn');
-  if(!panel || !button) return;
-  panel.hidden = !open;
-  button.setAttribute('aria-expanded', open ? 'true' : 'false');
-  button.textContent = open ? 'Close' : 'Change';
+function tonightMoodShortLabel(){
+  const labels = { calm: 'Calm', silly: 'Big and silly', new: 'Something new', favorite: 'Old favourite' };
+  return labels[tonightSelection.mood] || 'Calm';
+}
+
+// The pills show who/time/mood at a glance; with three or more kids the
+// names are replaced by a count so the row never wraps on a phone.
+function tonightWhoPillLabel(){
+  const kids = selectedKids();
+  if(!kids.length) return 'Adults only';
+  if(kids.length >= 3) return kids.length === state.children.length ? `All ${kids.length} kids` : `${kids.length} kids`;
+  return kids.map(child => child.name).join(' + ');
+}
+
+function renderTonightSummary(){
+  const watching = document.getElementById('tonightWatchingSummary');
+  const time = document.getElementById('tonightTimeSummary');
+  const mood = document.getElementById('tonightMoodSummary');
+  if(watching) watching.textContent = tonightWhoPillLabel();
+  if(time) time.textContent = tonightTimeShortLabel();
+  if(mood) mood.textContent = tonightMoodShortLabel();
+  const whoPill = document.getElementById('tonightWhoPill');
+  if(whoPill) whoPill.classList.toggle('adultsOnly', selectedKids().length === 0 && state.children.length > 0);
+  // The season card's fit count depends on who is watching.
+  renderSeasonCard();
+}
+
+// ---- Tonight's who/time/mood pills. Each opens a small non-modal popover
+// under the pill row; only one is open at a time, and outside tap or Escape
+// closes it and returns focus to its pill.
+const TONIGHT_PILLS = [
+  ['tonightWhoPill', 'tonightWhoPop'],
+  ['tonightTimePill', 'tonightTimePop'],
+  ['tonightMoodPill', 'tonightMoodPop']
+];
+
+function closeTonightPops({ restoreFocus = false } = {}){
+  TONIGHT_PILLS.forEach(([pillId, popId])=>{
+    const pill = document.getElementById(pillId);
+    const pop = document.getElementById(popId);
+    if(!pill || !pop || pop.hidden) return;
+    pop.hidden = true;
+    pill.setAttribute('aria-expanded', 'false');
+    if(restoreFocus) pill.focus();
+  });
+}
+
+function toggleTonightPop(pillId){
+  const entry = TONIGHT_PILLS.find(([id]) => id === pillId);
+  if(!entry) return;
+  const pop = document.getElementById(entry[1]);
+  const opening = pop.hidden;
+  closeTonightPops();
+  if(!opening) return;
+  pop.hidden = false;
+  document.getElementById(pillId).setAttribute('aria-expanded', 'true');
+  const first = pop.querySelector('.choiceChip.selected') || pop.querySelector('.choiceChip');
+  if(first) first.focus();
+}
+
+// Tonight's who/time/mood are remembered on this device so the next movie
+// night starts where the last one left off. Per-device on purpose: it's a
+// convenience, not family data, so it stays out of the synced state.
+const TONIGHT_PREFS_KEY = 'movieNight.tonightPrefs';
+
+function saveTonightPrefs(){
+  try{
+    localStorage.setItem(TONIGHT_PREFS_KEY, JSON.stringify({
+      time: tonightSelection.time,
+      mood: tonightSelection.mood,
+      excludedChildIds: Array.from(tonightSelection.excludedChildIds)
+    }));
+  }catch(err){}
+}
+
+function loadTonightPrefs(){
+  let saved = null;
+  try{ saved = JSON.parse(localStorage.getItem(TONIGHT_PREFS_KEY) || 'null'); }catch(err){ saved = null; }
+  if(!saved || typeof saved !== 'object') return;
+  if([90, 120, 999].includes(saved.time)) tonightSelection.time = saved.time;
+  if(['calm', 'silly', 'new', 'favorite'].includes(saved.mood)) tonightSelection.mood = saved.mood;
+  if(Array.isArray(saved.excludedChildIds)){
+    const known = new Set((state.children || []).map(child => child.id));
+    tonightSelection.excludedChildIds = new Set(saved.excludedChildIds.filter(id => known.has(id)));
+  }
+  setSelectedChoice('tonightTimeChoices', 'time', tonightSelection.time);
+  setSelectedChoice('tonightMoodChoices', 'mood', tonightSelection.mood);
 }
 
 function setSelectedChoice(containerId, attr, value){
@@ -5457,7 +6755,7 @@ function setFindPickMode(mode){
 }
 
 function showTonightPick(candidateOverride){
-  setTonightEditOpen(false);
+  closeTonightPops();
   const candidate = candidateOverride || findTonightCandidate();
   if(!candidate) return;
   // Issue #93: the typed no-match result gets its own dedicated state --
@@ -5492,22 +6790,25 @@ function showTonightPick(candidateOverride){
   tonightSelection.verdict = verdict.verdict;
 
   const verdictEl = document.getElementById('tonightVerdict');
-  document.getElementById('tonightPickCard').dataset.admit = 'Admit one';
-  document.getElementById('tonightPickCard').classList.toggle('watched', markValue(state.checked, idx));
-  updateTonightWatchBtn();
+  const card = document.getElementById('tonightPickCard');
+  card.dataset.admit = 'Admit one';
+  card.dataset.verdict = verdict.verdict;
+  card.classList.toggle('watched', markValue(state.checked, idx));
   verdictEl.textContent = tonightVerdictLabel(verdict.verdict);
   document.getElementById('tonightPickTitle').textContent = `${displayTitle(movie)}`;
+  const facts = [movie.studio && movie.studio !== 'Other' ? movie.studio : '', Number.isInteger(movie.runtimeMinutes) ? formatRuntime(movie.runtimeMinutes) : '', parseAge(movie.ca) === null ? 'No CSM age' : `CSM ${movie.ca}`].filter(Boolean);
+  document.getElementById('tonightPickFacts').textContent = facts.join(' · ');
   // Only stage real art. createPoster() falls back to a bordered "Movie/year"
-  // box, which reads fine at Shelf's 42px but becomes a large empty rectangle
-  // at hero size -- worse than no poster at all for the ~14 catalogue titles
-  // that have none. .pickStage:empty collapses the gap.
+  // box, which reads fine at Shelf's 42px but becomes an empty rectangle
+  // beside the title for the titles that have none. .pickStage:empty
+  // collapses the gap.
   const stage = document.getElementById('tonightPickStage');
   if(stage){
     stage.textContent = '';
     const art = typeof MOVIE_POSTERS !== 'undefined' && MOVIE_POSTERS[movie.num];
     if(art && art.u) stage.appendChild(createPoster(movie, 'pickPoster', false));
   }
-  renderTonightPreShow(movie);
+  renderTonightHeadsUp(movie);
   // Issue #78: a new pick showing (including via Skip) always starts with its
   // details collapsed, same as Shelf's detail never carries over between
   // different movies.
@@ -5531,59 +6832,57 @@ function showTonightPick(candidateOverride){
   }else{
     copy.push(verdict.reasons[0] || 'Within the selected child settings.');
   }
-  copy.push(tonightSelection.time === 999
-    ? `${formatRuntime(movie.runtimeMinutes)} runtime.`
-    : `${formatRuntime(movie.runtimeMinutes)} · Fits your ${tonightSelection.time}-minute window.`);
-  copy.push(candidate.source === 'Want to watch' ? 'Someone in your family starred this one.' : candidate.source === 'Recent releases' ? 'Pulled from recent releases.' : 'Pulled from the rest of Shelf.');
-  const reasonLines = copy.slice(0, 3);
+  // The runtime now sits in the facts line under the title; only a starred
+  // or recent-release pick says where it came from, since "the rest of
+  // Shelf" told a parent nothing.
+  if(candidate.source === 'Want to watch') copy.push('Someone in your family starred this one.');
+  else if(candidate.source === 'Recent releases') copy.push('Pulled from recent releases.');
+  const reasonLines = copy.slice();
   if(tonightWorryExclude) reasonLines.push(`Leaving out titles whose notes mention ${WORRY_LABELS[tonightWorryExclude].toLowerCase()}, or that haven't been checked for it.`);
   reasonLines.forEach(text=>{
     const li = document.createElement('li');
     li.textContent = text;
     reasons.appendChild(li);
   });
+  reasons.classList.toggle('warn', verdict.verdict !== 'green');
   const evidence = document.getElementById('tonightEvidence');
   evidence.replaceChildren();
   const sourceUrl = movie.srcUrl ? safeSourceUrl(movie.srcUrl) : '';
   let sourceHost = '';
   try{ sourceHost = sourceUrl ? new URL(sourceUrl).hostname : ''; }catch(e){ sourceHost = ''; }
   const hasCsmSource = /(^|\.)commonsensemedia\.org$/i.test(sourceHost);
-  const evidenceTitle = document.createElement('strong');
-  evidenceTitle.textContent = movie.flags && hasCsmSource
-    ? 'Common Sense Media review available'
-    : movie.flags && sourceUrl
-      ? 'Content guidance with source'
-      : 'Limited guidance';
-  const evidenceCopy = document.createElement('div');
-  evidenceCopy.textContent = movie.flags
-    ? 'This recommendation uses title-specific content guidance and your current selections.'
-    : 'No direct Common Sense Media review is available. This suggestion uses general title information and comparison material.';
-  evidence.appendChild(evidenceTitle);
-  evidence.appendChild(evidenceCopy);
   if(sourceUrl){
     const source = document.createElement('a');
     source.className = 'recommendationSource';
     source.href = sourceUrl;
     source.target = '_blank';
     source.rel = 'noopener';
-    source.textContent = 'View source';
+    source.textContent = hasCsmSource ? 'Common Sense Media ↗' : 'Source ↗';
     evidence.appendChild(source);
+  }else if(!movie.flags){
+    evidence.textContent = 'Limited guidance';
   }
-  // Issue #49B: "Watch anyway" is the same override workflow for red as for
-  // amber -- a parent choosing to proceed past a caution -- so it shows for
-  // either non-green verdict, not just amber.
-  document.getElementById('tonightWatchAnywayBtn').style.display = verdict.verdict !== 'green' ? 'inline-block' : 'none';
+  // Watch anyway replaces Mark watched as the main button whenever the fit
+  // isn't green, with the reason repeated in the action bar, so the warning
+  // travels with the button however far the card is scrolled.
+  const barWarning = document.getElementById('tonightBarWarning');
+  barWarning.textContent = verdict.verdict !== 'green' ? `⚠ ${copy[0]}` : '';
+  barWarning.hidden = verdict.verdict === 'green';
+  document.getElementById('tonightWatchBtn').hidden = verdict.verdict !== 'green';
+  document.getElementById('tonightWatchAnywayBtn').hidden = verdict.verdict === 'green';
+  updateTonightWatchBtn();
   updateTonightWatchAnywayBtn();
-  document.getElementById('tonightPickCard').style.display = 'block';
+  card.style.display = 'block';
   document.getElementById('homeScreen').classList.add('hasPick');
   document.getElementById('tonightPickStatus').textContent = `${tonightVerdictLabel(verdict.verdict)}: ${displayTitle(movie)}. ${copy[0]}`;
-  // resetTonightSkips() (which every Change-panel handler calls to
-  // invalidate the current pick) is the matching place that brings it back.
   setFindPickMode('skip');
   document.getElementById('tonightAlternatives').hidden = true;
   document.getElementById('tonightAlternativesBtn').setAttribute('aria-expanded', 'false');
   document.getElementById('tonightSkipFeedback').hidden = true;
   document.getElementById('tonightSkipBtn').setAttribute('aria-expanded', 'false');
+  const change = document.getElementById('tonightPickChange');
+  change.hidden = true;
+  change.textContent = '';
 }
 
 // ---- Guidance data (MOVIE_GUIDANCE, from data-guidance.js via
@@ -5641,35 +6940,17 @@ function fillMovieDetail(detail, m, isOpen){
   detail.appendChild(guide);
 }
 
-// ---- Pre-show. The OpenUI renderer is self-hosted (CSP only allows
-// same-origin scripts, and sw.js only caches same-origin) and pinned to
-// one exact version. It's ~3.2 MB, so it loads only when a pick that has
-// a Pre-show opens; sw.js keeps it in its own cache for offline. Any
-// failure (offline before first load, bad program, render error) just
-// hides the band.
-
-// OpenUI 0.2+ picks light/dark itself from the OS unless
-// <html data-openui-theme> says otherwise. The app has its own Light / Dark /
-// Match device setting (data-theme on <html>), so mirror the app's effective
-// theme onto that attribute and keep it in sync when either one changes.
+// Family Feature has one light theme. Pin OpenUI to it so a dark OS setting
+// cannot introduce a second palette inside the Pre-show panel.
 function syncOpenUITheme(){
   const root = document.documentElement;
-  const appTheme = root.getAttribute('data-theme');
-  const effective = appTheme === 'light' || appTheme === 'dark'
-    ? appTheme
-    : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-  if(root.getAttribute('data-openui-theme') !== effective) root.setAttribute('data-openui-theme', effective);
+  if(root.getAttribute('data-openui-theme') !== 'light') root.setAttribute('data-openui-theme', 'light');
 }
 
 function watchOpenUITheme(){
   if(watchOpenUITheme.started) return;
   watchOpenUITheme.started = true;
   syncOpenUITheme();
-  new MutationObserver(syncOpenUITheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-  if(window.matchMedia){
-    const media = window.matchMedia('(prefers-color-scheme: dark)');
-    if(media.addEventListener) media.addEventListener('change', syncOpenUITheme);
-  }
 }
 
 function loadOpenUI(){
@@ -5695,20 +6976,88 @@ function loadOpenUI(){
   return openuiLoading;
 }
 
-function renderTonightPreShow(movie){
+// The warning line under the title is plain text from the Pre-Show program
+// (preShowNotes()), so it shows with the pick even if the OpenUI renderer
+// hasn't loaded or can't. "More" opens the full Pre-Show.
+let tonightPreShowOpen = false;
+
+function renderTonightHeadsUp(movie){
+  const notes = preShowNotes(movie);
+  const text = document.getElementById('tonightHeadsUpText');
+  const box = document.getElementById('tonightHeadsUp');
+  const btn = document.getElementById('tonightHeadsUpBtn');
+  text.replaceChildren();
+  box.classList.toggle('caution', !!notes.before);
+  if(notes.before){
+    const title = document.createElement('strong');
+    title.textContent = `${notes.before.title.replace(/[.!?]$/, '')}. `;
+    text.appendChild(title);
+    text.appendChild(document.createTextNode(notes.before.text));
+  }else if(notes.gentle){
+    text.textContent = 'Gentle. Nothing to prep for.';
+  }else{
+    text.textContent = 'No Pre-Show notes for this one yet.';
+  }
+  const fallback = document.getElementById('tonightPreShowFallback');
+  fallback.replaceChildren();
+  if(notes.before){
+    const before = document.createElement('p');
+    const strong = document.createElement('strong');
+    strong.textContent = `${notes.before.title.replace(/[.!?]$/, '')}. `;
+    before.appendChild(strong);
+    before.appendChild(document.createTextNode(notes.before.text));
+    fallback.appendChild(before);
+  }
+  if(notes.askAfter){
+    const ask = document.createElement('p');
+    ask.className = 'askAfter';
+    ask.textContent = `Ask after: ${notes.askAfter}`;
+    fallback.appendChild(ask);
+  }
+  const hasMore = !!(movieGuidanceFor(movie.num) && (notes.before || notes.askAfter));
+  btn.hidden = !hasMore;
+  tonightPreShowOpen = false;
+  setTonightPreShowOpen(false, movie);
+}
+
+function setTonightPreShowOpen(open, movie){
+  tonightPreShowOpen = open;
+  const btn = document.getElementById('tonightHeadsUpBtn');
+  const box = document.getElementById('tonightHeadsUp');
+  btn.textContent = open ? 'Less' : 'More';
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  box.classList.toggle('open', open);
   const band = document.getElementById('tonightPreShow');
+  if(!open){
+    ++preShowToken;
+    band.hidden = true;
+    return;
+  }
+  band.hidden = false;
+  document.getElementById('tonightPreShowFallback').hidden = false;
+  renderTonightPreShow(movie);
+}
+
+// ---- Pre-show. The OpenUI renderer is self-hosted (CSP only allows
+// same-origin scripts, and sw.js only caches same-origin) and pinned to
+// one exact version. It's ~3.2 MB, so it loads only when a parent opens a
+// pick's Pre-show; sw.js keeps it in its own cache for offline. While it
+// loads, or if it fails, the plain-text notes stay in its place.
+function renderTonightPreShow(movie){
   const guidance = movieGuidanceFor(movie.num);
   const code = guidance && typeof guidance.preShow === 'string' ? guidance.preShow.trim() : '';
   const token = ++preShowToken;
-  band.hidden = true;
+  const body = document.getElementById('tonightPreShowBody');
+  const fallback = document.getElementById('tonightPreShowFallback');
+  body.hidden = true;
   if(!code) return;
-  const hide = () => { if(token === preShowToken) band.hidden = true; };
+  const showFallback = () => { if(token === preShowToken){ body.hidden = true; fallback.hidden = false; } };
   loadOpenUI().then(openui=>{
     if(token !== preShowToken) return;
     const { React, createRoot, Renderer, openuiChatLibrary } = openui;
     if(!preShowRoot){
-      preShowRoot = createRoot(document.getElementById('tonightPreShowBody'), {
-        onUncaughtError: () => { band.hidden = true; }
+      preShowRoot = createRoot(body, {
+        onUncaughtError: () => { body.hidden = true; fallback.hidden = false; }
       });
     }
     // FollowUpItem renders as a chat button that would do nothing here, so
@@ -5724,12 +7073,13 @@ function renderTonightPreShow(movie){
       return React.createElement('div', { ref }, React.createElement(Renderer, {
         response: code,
         library: openuiChatLibrary,
-        onError: errors => { if((errors || []).some(e => e.severity !== 'warning')) hide(); }
+        onError: errors => { if((errors || []).some(e => e.severity !== 'warning')) showFallback(); }
       }));
     }
     preShowRoot.render(React.createElement(PreShow, { key: token }));
-    band.hidden = false;
-  }).catch(hide);
+    body.hidden = false;
+    fallback.hidden = true;
+  }).catch(showFallback);
 }
 
 // ---- Check a worry. Deterministic lookup in MOVIE_GUIDANCE[num].concerns,
@@ -5855,16 +7205,21 @@ function findActiveWatchAnywayEvent(idx, childId, flagId){
 // instead of staying identical across taps, and updateTonightWatchBtn()'s
 // sibling call sites (showTonightPick(), skip, mark-watched) all need this
 // kept in sync with the current pick the same way.
+function isWatchAnywayLogged(idx){
+  return idx !== null && selectedKids().some(child => {
+    const flagId = primaryOverrideFlagForChild(MOVIES[idx], child);
+    return flagId && findActiveWatchAnywayEvent(idx, child.id, flagId);
+  });
+}
+
 function updateTonightWatchAnywayBtn(){
   const btn = document.getElementById('tonightWatchAnywayBtn');
   if(!btn) return;
   const idx = tonightSelection.currentPickIdx;
-  const logged = idx !== null && selectedKids().some(child => {
-    const flagId = primaryOverrideFlagForChild(MOVIES[idx], child);
-    return flagId && findActiveWatchAnywayEvent(idx, child.id, flagId);
-  });
-  btn.textContent = logged ? '✓ Logged (tap to undo)' : 'Watch anyway';
-  btn.setAttribute('aria-pressed', logged ? 'true' : 'false');
+  const watched = idx !== null && !!markValue(state.checked, idx);
+  btn.textContent = watched ? '✓ Watched' : 'Watch anyway';
+  btn.setAttribute('aria-pressed', watched ? 'true' : 'false');
+  btn.classList.toggle('done', watched);
 }
 
 function logWatchAnywaySignal(){
@@ -5946,6 +7301,34 @@ function resetTonightSkips(){
   document.getElementById('tonightPickStatus').textContent = '';
 }
 
+// A who/time/mood change used to throw away the pick and every skip and send
+// the parent back to "Find tonight's pick". Now the pick updates in place:
+// skipped titles stay skipped, a who/time change keeps the current movie if
+// it still passes every check, and a mood change always finds a new one.
+function applyTonightSettingsChange(kind){
+  saveTonightPrefs();
+  renderTonightSummary();
+  const card = document.getElementById('tonightPickCard');
+  const noMatch = document.getElementById('tonightNoMatchCard');
+  const showing = card.style.display !== 'none' || noMatch.style.display !== 'none';
+  if(!showing) return;
+  const idx = tonightSelection.currentPickIdx;
+  const kids = selectedKids();
+  const keep = kind !== 'mood' && idx !== null && isTonightEligible(idx, kids, true, true);
+  const before = idx;
+  if(keep) showTonightPick({ idx, source: tonightSelection.currentPickSource });
+  else showTonightPick();
+  const label = kind === 'who' ? tonightWhoPillLabel() : kind === 'time' ? tonightTimeLabel().toLowerCase() : tonightMoodLabel().toLowerCase();
+  const note = keep ? `Still a good fit for ${label}.` : (tonightSelection.currentPickIdx !== null && tonightSelection.currentPickIdx !== before ? `New pick for ${label}.` : '');
+  const change = document.getElementById('tonightPickChange');
+  if(note && card.style.display !== 'none'){
+    change.textContent = note;
+    change.hidden = false;
+    const status = document.getElementById('tonightPickStatus');
+    status.textContent = `${note} ${status.textContent}`;
+  }
+}
+
 function renderTonightKidChoices(){
   const container = document.getElementById('tonightKidChoices');
   if(!container) return;
@@ -5959,9 +7342,10 @@ function renderTonightKidChoices(){
     btn.addEventListener('click', ()=>{
       if(tonightSelection.excludedChildIds.has(child.id)) tonightSelection.excludedChildIds.delete(child.id);
       else tonightSelection.excludedChildIds.add(child.id);
-      resetTonightSkips();
       renderTonightKidChoices();
-      renderTonightSummary();
+      applyTonightSettingsChange('who');
+      const again = Array.from(document.querySelectorAll('#tonightKidChoices .choiceChip')).find(b => b.textContent === child.name);
+      if(again) again.focus();
     });
     container.appendChild(btn);
   });
@@ -5972,9 +7356,9 @@ function renderTonightKidChoices(){
   adultsOnly.setAttribute('aria-pressed', selectedKids().length === 0 ? 'true' : 'false');
   adultsOnly.addEventListener('click', ()=>{
     tonightSelection.excludedChildIds = new Set(state.children.map(child => child.id));
-    resetTonightSkips();
     renderTonightKidChoices();
-    renderTonightSummary();
+    applyTonightSettingsChange('who');
+    closeTonightPops({ restoreFocus: true });
   });
   container.appendChild(adultsOnly);
   renderTonightSummary();
@@ -5987,7 +7371,7 @@ function renderTonightKidChoices(){
 // hand-written functions, showHomeScreen()/showLegacyScreen(), where the
 // second only ever removed Home's "on" class and never gave Browse/More
 // their own, and both tabs fell back to the same single legacy view).
-const SCREENS = ['setup', 'home', 'browse', 'whatsNew', 'family'];
+const SCREENS = ['setup', 'home', 'lists', 'browse', 'whatsNew', 'family'];
 let screens = {};
 let tabs = {};
 
@@ -6022,6 +7406,7 @@ function initScreens(){
     screens[name] = document.getElementById(name + 'Screen');
   });
   tabs.home = document.getElementById('tabHome');
+  tabs.lists = document.getElementById('tabLists');
   tabs.browse = document.getElementById('tabBrowse');
   tabs.whatsNew = document.getElementById('tabWhatsNew');
   tabs.family = document.getElementById('tabFamily');
@@ -6034,45 +7419,13 @@ function initScreens(){
   populateAgeSelect(document.getElementById('newChildAge'), MIN_CHILD_AGE);
 }
 
-function renderStudioGrid(){
-  const grid = document.getElementById('studioGrid');
-  grid.replaceChildren();
-
-  const realStudios = [...MOVIES_BY_STUDIO.entries()].filter(([studio]) => studio !== 'Other');
-  realStudios.sort((a, b) => b[1].length - a[1].length);
-  const top = realStudios.slice(0, 6);
-  const restStudioCount = MOVIES_BY_STUDIO.size - top.length;
-
-  top.forEach(([studio, indices]) => {
-    const tile = document.createElement('button');
-    tile.type = 'button';
-    tile.className = 'studioTile';
-    const name = document.createElement('span');
-    name.className = 'studioTileName';
-    name.textContent = studio;
-    const count = document.createElement('span');
-    count.className = 'studioTileCount';
-    count.textContent = `${indices.length} film${indices.length === 1 ? '' : 's'}`;
-    tile.appendChild(name);
-    tile.appendChild(count);
-    tile.onclick = () => browseStudio(studio);
-    grid.appendChild(tile);
-  });
-
-  const more = document.createElement('button');
-  more.type = 'button';
-  more.className = 'moreStudiosTile';
-  more.textContent = `More studios · ${restStudioCount} →`;
-  more.onclick = () => showScreen('browse');
-  grid.appendChild(more);
-}
 
 const TONIGHT_SUBTITLE_DEFAULT = 'One good pick for the people, time, and mood you have tonight.';
 function tonightSubtitleFor(date){
   const hour = date.getHours();
   const day = date.getDay();
   const month = date.getMonth();
-  if(hour >= 20 || hour < 4) return 'Late start? Set a shorter time under Change.';
+  if(hour >= 20 || hour < 4) return 'Late start? Tap 90 min to pick a shorter time.';
   if(day === 5) return 'Friday night. Big-screen energy.';
   if(day === 6) return 'Saturday night at the movies.';
   if((month === 10 && date.getDate() >= 20) || month === 11) return 'Cozy season. Blankets optional, popcorn encouraged.';
@@ -6088,6 +7441,7 @@ function renderCurrentView(){
   renderChildren();
   renderTonightKidChoices();
   if(currentScreen === 'whatsNew') renderWhatsNew();
+  if(currentScreen === 'lists') renderListsScreen();
   if(currentScreen === 'browse') render();
   else updateStats();
 }
@@ -6966,8 +8320,10 @@ function render(){
     });
     visibleOrder = exact.concat(fuzzy);
   }
+  lastVisibleOrder = visibleOrder.slice();
 
   listEl.replaceChildren();
+  setShelfDensity(shelfDensity, false);
   const activeFilterCount = [decadeFilter, ageFilter, genreFilter, studioFilter].filter(Boolean).length
     + (priorityOnly ? 1 : 0) + (newOnly ? 1 : 0) + (hideAboveSettings ? 1 : 0);
   updateFilterBadge(activeFilterCount);
@@ -6981,6 +8337,8 @@ function render(){
     ? `${visibleOrder.length} movie${visibleOrder.length === 1 ? '' : 's'} found`
     : '';
   browseBySection.style.display = trimmedQuery ? 'none' : '';
+  renderListsTeaser();
+  renderSeasonCard();
   emptyMsg.style.display = visibleOrder.length ? 'none' : 'block';
   if(!visibleOrder.length){
     if(trimmedQuery){
@@ -7018,125 +8376,220 @@ function render(){
     listPage = 1;
     lastListSignature = listSignature;
   }
-  const LIST_PAGE_SIZE = 50;
   const totalPages = Math.max(1, Math.ceil(visibleOrder.length / LIST_PAGE_SIZE));
   if(listPage > totalPages) listPage = totalPages;
   if(listPage < 1) listPage = 1;
-  const pageStart = (listPage - 1) * LIST_PAGE_SIZE;
-  const pageItems = visibleOrder.slice(pageStart, pageStart + LIST_PAGE_SIZE);
-  renderListPagination(totalPages, visibleOrder.length);
+  // "Show 50 more" grows the list in place instead of paging away from it.
+  const pageItems = visibleOrder.slice(0, listPage * LIST_PAGE_SIZE);
+  renderListPagination(totalPages, visibleOrder.length, pageItems.length);
+  renderShelfJump(visibleOrder);
 
+  // Sorted by year with no search, the Shelf reads in decade chapters.
+  const useChapters = sortMode === 'year' && !q;
+  let chapterDecade = null;
   pageItems.forEach((idx, i) => {
-    const visiblePos = pageStart + i;
     const m = MOVIES[idx];
-    const isChecked = markValue(state.checked, idx);
-    const globalPos = orderPosition.get(idx);
-
-    const li = document.createElement('li');
-    li.className = 'row' + (isChecked ? ' checked' : '');
-
-    const num = document.createElement('div');
-    num.className = 'num';
-    num.textContent = (sortMode === 'custom' ? globalPos : visiblePos) + 1;
-    num.hidden = sortMode !== 'custom';
-
-    const check = document.createElement('button');
-    check.className = 'check' + (isChecked ? ' on' : '');
-    check.setAttribute('aria-label', isChecked ? `Mark ${m.t} unwatched` : `Mark ${m.t} watched`);
-    check.setAttribute('aria-pressed', isChecked ? 'true' : 'false');
-    check.dataset.idx = idx;
-    check.onclick = () => toggleCheck(idx);
-
-    const isPriority = markValue(state.priority, idx);
-    const star = createStarButton(idx, m, isPriority);
-
-    const poster = createPoster(m, null, isRecent(m));
-
-    const info = document.createElement('div');
-    info.className = 'info';
-    const title = document.createElement('div');
-    title.className = 'title';
-    title.textContent = `${displayTitle(m)}`;
-    title.onclick = event => toggleDetail(idx, event.currentTarget);
-    const meta = createMeta(idx, m, 'list');
-    info.appendChild(title);
-    info.appendChild(meta);
-    const fitSignals = createFitSignals(idx);
-    if(fitSignals) info.appendChild(fitSignals);
-
-    const moves = document.createElement('div');
-    moves.className = 'moves';
-    const up = document.createElement('button');
-    up.className = 'moveUp';
-    up.dataset.idx = idx;
-    up.textContent = '\u25b2';
-    up.setAttribute('aria-label', `Move ${m.t} up`);
-    up.disabled = globalPos === 0;
-    up.onclick = () => move(idx, -1);
-    const down = document.createElement('button');
-    down.className = 'moveDown';
-    down.dataset.idx = idx;
-    down.textContent = '\u25bc';
-    down.setAttribute('aria-label', `Move ${m.t} down`);
-    down.disabled = globalPos === state.order.length - 1;
-    down.onclick = () => move(idx, 1);
-    moves.appendChild(up);
-    moves.appendChild(down);
-    moves.style.display = sortMode === 'custom' ? 'flex' : 'none';
-
-    li.appendChild(num);
-    li.appendChild(check);
-    li.appendChild(star);
-    if(poster) li.appendChild(poster);
-    li.appendChild(info);
-    li.appendChild(moves);
-    listEl.appendChild(li);
-
-    const detail = document.createElement('div');
-    detail.id = `shelf-list-detail-${m.num}`;
-    detail.className = 'detail' + (openDetail === idx ? ' open' : '') + (poster ? '' : ' noPosterDetail');
-    detail.hidden = openDetail !== idx;
-    fillMovieDetail(detail, m, openDetail === idx);
-    listEl.appendChild(detail);
+    if(useChapters){
+      const decade = decadeOf(m.y);
+      if(decade !== chapterDecade){
+        chapterDecade = decade;
+        listEl.appendChild(createChapterHead(decade));
+      }
+    }
+    const custom = sortMode === 'custom';
+    listEl.appendChild(createMovieRow(idx, {
+      scope: 'list',
+      num: custom ? orderPosition.get(idx) + 1 : undefined,
+      custom,
+      globalPos: orderPosition.get(idx)
+    }));
   });
 
   updateStats();
 }
 
 const listPaginationEl = document.getElementById('listPagination');
-const listPagePrevBtn = document.getElementById('listPagePrevBtn');
-const listPageNextBtn = document.getElementById('listPageNextBtn');
+const listShowMoreBtn = document.getElementById('listShowMoreBtn');
 const listPageStatusEl = document.getElementById('listPageStatus');
 
 // Updates the existing pagination controls in place (never recreates them)
 // so a click on Prev/Next never loses focus the way rebuilding the row list
 // would.
-function renderListPagination(totalPages, totalCount){
+function renderListPagination(totalPages, totalCount, shownCount){
   if(!listPaginationEl) return;
-  if(totalPages <= 1){
+  if(totalCount <= LIST_PAGE_SIZE){
     listPaginationEl.style.display = 'none';
     return;
   }
   listPaginationEl.style.display = 'flex';
-  listPagePrevBtn.disabled = listPage <= 1;
-  listPageNextBtn.disabled = listPage >= totalPages;
-  listPageStatusEl.textContent = `Page ${listPage} of ${totalPages} (${totalCount} movies)`;
+  listPageStatusEl.textContent = `Showing ${shownCount.toLocaleString('en-US')} of ${totalCount.toLocaleString('en-US')}`;
+  listShowMoreBtn.hidden = shownCount >= totalCount;
 }
 
-if(listPagePrevBtn) listPagePrevBtn.addEventListener('click', ()=>{
-  if(listPage > 1){
-    listPage -= 1;
-    render();
-    (listPagePrevBtn.disabled ? listPageNextBtn : listPagePrevBtn).focus();
-    if(listEl) listEl.scrollIntoView({ behavior: scrollBehavior(), block:'start' });
-  }
-});
-if(listPageNextBtn) listPageNextBtn.addEventListener('click', ()=>{
+const shelfJumpRail = document.getElementById('shelfJumpRail');
+const shelfJumpLabel = document.getElementById('shelfJumpLabel');
+const shelfJumpItems = document.getElementById('shelfJumpItems');
+
+function titleJumpLetter(title){
+  const match = String(title || '').trim().toUpperCase().match(/[A-Z]/);
+  return match ? match[0] : '#';
+}
+
+function renderShelfJump(items){
+  const byDecade = sortMode === 'year';
+  const byTitle = sortMode === 'title';
+  shelfJumpRail.hidden = !items.length || (!byDecade && !byTitle);
+  document.getElementById('browseScreen').classList.toggle('railVisible', !shelfJumpRail.hidden);
+  shelfJumpItems.replaceChildren();
+  if(shelfJumpRail.hidden) return;
+
+  shelfJumpLabel.textContent = byDecade ? 'Jump to decade' : 'Jump to letter';
+  const seen = new Set();
+  items.forEach(idx => {
+    const group = byDecade ? decadeOf(MOVIES[idx].y) : titleJumpLetter(MOVIES[idx].t);
+    if(group === null || seen.has(group)) return;
+    seen.add(group);
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'shelfJumpBtn';
+    button.dataset.jumpKind = byDecade ? 'decade' : 'letter';
+    button.dataset.jumpValue = String(group);
+    button.textContent = byDecade ? `${String(group).slice(2)}s` : group;
+    button.setAttribute('aria-label', byDecade ? `Jump to the ${group}s` : `Jump to ${group}`);
+    shelfJumpItems.appendChild(button);
+  });
+  shelfJumpItems.style.setProperty('--jump-count', String(seen.size));
+}
+
+// A soft line for each decade chapter: what the films have in common, not
+// who they are for.
+const DECADE_ASIDES = {
+  1920: 'Silent laughs and the first cartoons',
+  1930: 'Black-and-white treasures',
+  1940: 'Puppets, elephants and an orchestra',
+  1950: 'Glass slippers and flying boys',
+  1960: 'Spoonfuls of sugar and singing nuns',
+  1970: 'Muppets, droids and a chocolate factory',
+  1980: 'Bikes, goblins and the movies on tape',
+  1990: 'Big musicals and the first Toy Story',
+  2000: 'Ogres, fish and a rat who cooks',
+  2010: 'Snow queens and big-hearted robots',
+  2020: 'The newest on the shelf'
+};
+function createChapterHead(decade){
+  const li = document.createElement('li');
+  li.className = 'chapterHead';
+  li.id = `shelf-decade-${decade}`;
+  li.tabIndex = -1;
+  const h = document.createElement('h2');
+  h.appendChild(spanText('chName', `The ${decade}s`));
+  if(DECADE_ASIDES[decade]) h.appendChild(spanText('chAside', DECADE_ASIDES[decade]));
+  li.appendChild(h);
+  return li;
+}
+
+function focusShelfRow(position){
+  const rows = listEl.querySelectorAll('li.row .rowMain');
+  if(rows[position]) rows[position].focus();
+}
+
+// Returns the position of the first newly shown title, or -1 when every
+// page is already showing.
+function loadNextShelfPage(focusNew){
+  const totalPages = Math.max(1, Math.ceil(lastVisibleOrder.length / LIST_PAGE_SIZE));
+  if(listPage >= totalPages) return -1;
+  const firstNew = listPage * LIST_PAGE_SIZE;
   listPage += 1;
   render();
-  (listPageNextBtn.disabled ? listPagePrevBtn : listPageNextBtn).focus();
-  if(listEl) listEl.scrollIntoView({ behavior: scrollBehavior(), block:'start' });
+  // A manual load carries keyboard and screen-reader users to the first
+  // new title. Automatic loading never moves focus or scroll position.
+  if(focusNew) focusShelfRow(firstNew);
+  return firstNew;
+}
+
+// A keyboard user who tabs to "Show 50 more" scrolls it into view, which
+// can trip the automatic loader before they press it. Without this, the
+// press would load a second batch and focus would skip the 50 titles the
+// auto-load just added. So when auto-load runs while the button has focus,
+// the next press focuses that batch's first title instead.
+let shelfAutoLoadFirst = -1;
+if(listShowMoreBtn){
+  listShowMoreBtn.addEventListener('click', ()=> {
+    const first = shelfAutoLoadFirst;
+    shelfAutoLoadFirst = -1;
+    if(first >= 0) focusShelfRow(first);
+    else loadNextShelfPage(true);
+  });
+  listShowMoreBtn.addEventListener('blur', ()=> { shelfAutoLoadFirst = -1; });
+}
+
+if('IntersectionObserver' in window && listPaginationEl){
+  const shelfLoadObserver = new IntersectionObserver(entries => {
+    if(currentScreen !== 'browse' || !entries.some(entry => entry.isIntersecting)) return;
+    const first = loadNextShelfPage(false);
+    if(first >= 0 && document.activeElement === listShowMoreBtn && shelfAutoLoadFirst < 0) shelfAutoLoadFirst = first;
+  }, { rootMargin:'600px 0px' });
+  shelfLoadObserver.observe(listPaginationEl);
+}
+
+document.querySelectorAll('.densityControl button').forEach(button => {
+  button.addEventListener('click', () => setShelfDensity(button.dataset.density));
 });
+setShelfDensity(shelfDensity, false);
+
+function jumpShelfTo(kind, value, instant){
+  const targetPosition = lastVisibleOrder.findIndex(idx => kind === 'decade'
+    ? decadeOf(MOVIES[idx].y) === Number(value)
+    : titleJumpLetter(MOVIES[idx].t) === value);
+  if(targetPosition < 0) return;
+  listPage = Math.max(listPage, Math.floor(targetPosition / LIST_PAGE_SIZE) + 1);
+  const targetMovieIdx = lastVisibleOrder[targetPosition];
+  render();
+  requestAnimationFrame(() => {
+    const target = kind === 'decade' && !query.trim()
+      ? document.getElementById(`shelf-decade-${value}`)
+      : listEl.querySelector(`li.row[data-movie-idx="${targetMovieIdx}"] .rowMain`);
+    if(!target) return;
+    target.scrollIntoView({ block:'start', behavior:instant ? 'auto' : scrollBehavior() });
+    target.focus({ preventScroll:true });
+  });
+}
+
+shelfJumpItems.addEventListener('click', event => {
+  const button = event.target.closest('.shelfJumpBtn');
+  if(!button) return;
+  jumpShelfTo(button.dataset.jumpKind, button.dataset.jumpValue);
+});
+
+// Dragging a finger along the rail jumps to whichever decade or letter is
+// under it, so a tap that lands one label off is corrected by sliding.
+let shelfScrubKey = null;
+function scrubShelfRail(event){
+  const box = shelfJumpItems.getBoundingClientRect();
+  const y = Math.min(box.bottom - 1, Math.max(box.top + 1, event.clientY));
+  const hit = document.elementFromPoint(box.left + box.width / 2, y);
+  const button = hit && hit.closest('.shelfJumpBtn');
+  if(!button || button.dataset.jumpValue === shelfScrubKey) return;
+  shelfScrubKey = button.dataset.jumpValue;
+  shelfJumpItems.querySelectorAll('.scrubbing').forEach(b => b.classList.remove('scrubbing'));
+  button.classList.add('scrubbing');
+  jumpShelfTo(button.dataset.jumpKind, button.dataset.jumpValue, true);
+}
+function endShelfScrub(){
+  shelfScrubKey = null;
+  shelfJumpItems.querySelectorAll('.scrubbing').forEach(b => b.classList.remove('scrubbing'));
+}
+shelfJumpItems.addEventListener('pointerdown', event => {
+  if(event.pointerType === 'mouse') return;
+  shelfScrubKey = '';
+  shelfJumpItems.setPointerCapture(event.pointerId);
+  scrubShelfRail(event);
+});
+shelfJumpItems.addEventListener('pointermove', event => {
+  if(shelfScrubKey !== null) scrubShelfRail(event);
+});
+shelfJumpItems.addEventListener('pointerup', endShelfScrub);
+shelfJumpItems.addEventListener('pointercancel', endShelfScrub);
 
 document.getElementById('skipToNavLink').addEventListener('click', e=>{
   e.preventDefault();
@@ -7955,6 +9408,11 @@ document.getElementById('tabHome').addEventListener('click', ()=>{
   showScreen('home');
   maybeShowGoogleSignInNudge();
 });
+document.getElementById('tabLists').addEventListener('click', ()=>{
+  // Tapping Lists again from an open list goes back to the shelves.
+  if(currentScreen === 'lists') openListId = null;
+  showScreen('lists');
+});
 document.getElementById('tabBrowse').addEventListener('click', ()=>{
   showScreen('browse');
 });
@@ -8003,7 +9461,8 @@ document.getElementById('tonightShelfBtn').addEventListener('click', ()=>{
 });
 
 document.getElementById('tonightNoMatchChangeBtn').addEventListener('click', ()=>{
-  setTonightEditOpen(true);
+  window.scrollTo({ top: 0, behavior: scrollBehavior() });
+  toggleTonightPop('tonightWhoPill');
 });
 
 document.getElementById('tonightNoMatchFamilyBtn').addEventListener('click', ()=>{
@@ -8014,13 +9473,28 @@ document.getElementById('tonightNoMatchShelfBtn').addEventListener('click', ()=>
   showScreen('browse');
 });
 
-document.getElementById('tonightChangeBtn').addEventListener('click', ()=>{
-  const panel = document.getElementById('tonightEditPanel');
-  setTonightEditOpen(panel ? panel.hidden : true);
+TONIGHT_PILLS.forEach(([pillId])=>{
+  document.getElementById(pillId).addEventListener('click', () => toggleTonightPop(pillId));
 });
 
-document.getElementById('tonightDoneBtn').addEventListener('click', ()=>{
-  setTonightEditOpen(false);
+// composedPath() is captured at dispatch, so a tap on a chip that re-renders
+// itself out of the DOM (the kid chips do) still counts as inside.
+document.addEventListener('click', event=>{
+  const inside = event.composedPath().some(el => el.classList && (el.classList.contains('tonightPillWrap') || el.id === 'tonightNoMatchChangeBtn'));
+  if(!inside) closeTonightPops();
+});
+
+document.addEventListener('keydown', event=>{
+  if(event.key !== 'Escape') return;
+  if(TONIGHT_PILLS.some(([, popId]) => !document.getElementById(popId).hidden)){
+    closeTonightPops({ restoreFocus: true });
+  }
+});
+
+document.getElementById('tonightHeadsUpBtn').addEventListener('click', ()=>{
+  const idx = tonightSelection.currentPickIdx;
+  if(idx === null) return;
+  setTonightPreShowOpen(!tonightPreShowOpen, MOVIES[idx]);
 });
 
 document.getElementById('findTonightPickBtn').addEventListener('click', ()=>{
@@ -8056,7 +9530,27 @@ document.getElementById('tonightWatchBtn').addEventListener('click', ()=>{
   }
 });
 
-document.getElementById('tonightWatchAnywayBtn').addEventListener('click', logWatchAnywaySignal);
+// Watch anyway is the main button on an amber/red pick, so it does what
+// Mark watched does (adds it to the family's log) and records the override
+// as a gentle Family review signal. A second tap undoes both.
+document.getElementById('tonightWatchAnywayBtn').addEventListener('click', ()=>{
+  const idx = tonightSelection.currentPickIdx;
+  if(idx === null) return;
+  const wasWatched = !!markValue(state.checked, idx);
+  // Keep the review signal in step with watched: log it when marking, remove
+  // it when undoing. logWatchAnywaySignal() toggles, so only call it when
+  // the signal's current state disagrees with where we're heading.
+  if(isWatchAnywayLogged(idx) === wasWatched) logWatchAnywaySignal();
+  toggleCheck(idx);
+  const isWatched = !!markValue(state.checked, idx);
+  const card = document.getElementById('tonightPickCard');
+  if(isWatched) card.dataset.admit = `Admit one · ${new Date(Date.now()).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' })}`;
+  card.classList.toggle('watched', isWatched);
+  document.getElementById('tonightVerdict').textContent = isWatched ? 'Watched' : tonightVerdictLabel(tonightSelection.verdict);
+  updateTonightWatchBtn();
+  updateTonightWatchAnywayBtn();
+  showToast(isWatched ? "Added to your family's movie log. Noted for Family review." : 'Removed from watched');
+});
 
 document.getElementById('tonightDetailBtn').addEventListener('click', toggleTonightDetail);
 
@@ -8081,8 +9575,17 @@ document.getElementById('tonightSkipBtn').addEventListener('click', ()=>{
     btn.setAttribute('aria-pressed', 'false');
   });
   resetWorryCheck();
-  const firstReason = document.querySelector('[data-skip-reason]');
-  if(firstReason) firstReason.focus();
+  // Land on the new pick, not the optional reason chips further down: the
+  // title is what a parent needs to see next, and moving focus to the chips
+  // used to scroll it off screen.
+  const status = document.getElementById('tonightPickStatus');
+  if(document.getElementById('tonightPickCard').style.display !== 'none'){
+    status.textContent = `Skipped ${skippedTitle}. ${status.textContent}`;
+    const title = document.getElementById('tonightPickTitle');
+    title.focus({ preventScroll: true });
+    const top = document.getElementById('tonightPickCard').getBoundingClientRect().top;
+    if(top < 0 || top > window.innerHeight * 0.5) document.getElementById('tonightPickCard').scrollIntoView({ block: 'start', behavior: scrollBehavior() });
+  }
 });
 
 document.getElementById('tonightSkipContinueBtn').addEventListener('click', ()=>{
@@ -8179,18 +9682,18 @@ document.getElementById('tonightAlternativesBtn').addEventListener('click', ()=>
 document.querySelectorAll('#tonightTimeChoices .choiceChip').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     tonightSelection.time = parseInt(btn.dataset.time, 10);
-    resetTonightSkips();
     setSelectedChoice('tonightTimeChoices', 'time', tonightSelection.time);
-    renderTonightSummary();
+    closeTonightPops({ restoreFocus: true });
+    applyTonightSettingsChange('time');
   });
 });
 
 document.querySelectorAll('#tonightMoodChoices .choiceChip').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     tonightSelection.mood = btn.dataset.mood;
-    resetTonightSkips();
     setSelectedChoice('tonightMoodChoices', 'mood', tonightSelection.mood);
-    renderTonightSummary();
+    closeTonightPops({ restoreFocus: true });
+    applyTonightSettingsChange('mood');
   });
 });
 
@@ -8308,6 +9811,15 @@ document.getElementById('clearFiltersBtn').addEventListener('click', ()=>{
   document.getElementById('genreFilter').value = '';
   document.getElementById('studioFilter').value = '';
   renderCurrentView();
+});
+
+document.getElementById('tonightSeasonCard').addEventListener('click', e=>{
+  openList(e.currentTarget.dataset.list);
+});
+document.getElementById('listsTeaser').addEventListener('click', ()=>{
+  openListId = null;
+  showScreen('lists');
+  document.getElementById('listsScreenHeading').focus();
 });
 
 window.addEventListener('online', ()=>{
@@ -8508,54 +10020,6 @@ if(document.getElementById('pushAlertsBtn')){
   refreshPushAlertsButton();
 }
 
-function getThemePreference(){
-  try{
-    const pref = localStorage.getItem(THEME_KEY);
-    return (pref === 'light' || pref === 'dark') ? pref : 'system';
-  }catch(e){
-    return 'system';
-  }
-}
-
-function updateThemeColorMeta(pref){
-  const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const effectiveDark = pref === 'dark' || (pref === 'system' && systemDark);
-  let meta = document.getElementById('themeColorOverride');
-  if(!meta){
-    meta = document.createElement('meta');
-    meta.id = 'themeColorOverride';
-    meta.setAttribute('name', 'theme-color');
-    document.head.appendChild(meta);
-  }
-  meta.setAttribute('content', effectiveDark ? '#262624' : '#F7F5F0');
-}
-
-function applyTheme(pref){
-  if(pref === 'light' || pref === 'dark'){
-    document.documentElement.setAttribute('data-theme', pref);
-  }else{
-    document.documentElement.removeAttribute('data-theme');
-  }
-  try{
-    if(pref === 'system') localStorage.removeItem(THEME_KEY);
-    else localStorage.setItem(THEME_KEY, pref);
-  }catch(e){ /* storage unavailable; theme still applies for this load */ }
-
-  updateThemeColorMeta(pref);
-  document.querySelectorAll('#themeChoices .choiceChip').forEach(btn=>{
-    const selected = btn.dataset.themeChoice === pref;
-    btn.classList.toggle('selected', selected);
-    btn.setAttribute('aria-pressed', selected ? 'true' : 'false');
-  });
-}
-
-function initTheme(){
-  applyTheme(getThemePreference());
-  document.querySelectorAll('#themeChoices .choiceChip').forEach(btn=>{
-    btn.addEventListener('click', () => applyTheme(btn.dataset.themeChoice));
-  });
-}
-
 async function decideInitialScreen(){
   // A returning signed-in device's local storage can be empty (a cleared
   // browser, a new device, this device just never having synced yet) while
@@ -8584,17 +10048,18 @@ async function decideInitialScreen(){
     // excluded is already included, with no bookkeeping required at any
     // children-mutating call site (see tonightSelection's declaration).
   }
-  showScreen('browse');
+  showScreen('home');
 }
 
 initScreens();
-initTheme();
+syncOpenUITheme();
 loadState();
 loadRecentTonightPicks();
 loadNotInterested();
 loadSkipped();
+loadHiddenLists();
+loadTonightPrefs();
 tryInitGoogleSync();
-renderStudioGrid();
 // No tonightSelection seeding needed here: excludedChildIds starts empty
 // (see its declaration), so every child loadState() just populated is
 // already included by default.
