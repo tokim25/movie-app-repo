@@ -438,3 +438,21 @@ CSM requests used: 8 pages (the list plus 7 reviews), none blocked. Wikipedia: r
 11/15/2026 — tokim25 asked for Hanukkah films for a seasonal list (option B). Added 1155 Lights (1984, CSM 6+, 24 min, SISU Home Entertainment) and 1156 A Rugrats Chanukah (1996, Nickelodeon special, 24 min; no CSM review, so Wikipedia is the source and `ca` is the substitute placeholder; `full` notes the ADL's criticism of the grandparents' character design). No posters: neither has a usable poster image (the Rugrats image is a wide promo still). Flags for Lights go in a separate PR for tokim25; the Rugrats special has no CSM scores, so it stays unflagged. New "Hanukkah movies" list in data-lists.js (Lights, A Rugrats Chanukah, An American Tail, Full-Court Miracle) with yearly date ranges from hebcal.com through 2030 and a 3-title minimum. Left out: Menorah in the Middle (adult romance, CSM calls it mediocre), Adam Sandler's Eight Crazy Nights (not for kids), Olaf's Frozen Adventure (Hanukkah only in passing), DreamWorks Home: For the Holidays (CSM flags a stereotyped character).
 
 Co-authored with Claude.
+
+11/19/2026 — Weekly new-release discovery. Read CSM's "New Kids' Movies" list (20 titles), deduped against every data file on master, and read each new title's CSM review page. Added 5, all `addedVia: "discovery"`:
+
+- 1165 Allen (2026), CSM 11+, 105 min (CSM), Netflix
+- 1166 Merry Christmas Aubrey Flint (2026), CSM 9+, 98 min (CSM), Samuel Goldwyn Films
+- 1167 Space Cadet (2026), CSM 6+, PG, 86 min (CSM), Viva Pictures
+- 1168 Tad and the Magic Lamp (2026), CSM 8+, PG, 94 min (CSM), Paramount Pictures
+- 1169 The Gospel of Christmas (2026), CSM 10+, 104 min (CSM), Netflix
+
+Skipped: A Merry Christmas Wish (a 2022 TV romance CSM only just reviewed, not a new release), Sense and Sensibility (adult Austen adaptation), Tenzing (10+ mountaineering biopic; borderline, left for a human call), Monster High: New Ghoul at School (2010 special, skipped last week too). Hexed (Disney, PG) has only a preview review with no CSM age; it opens 11/25, so check again next week.
+
+No posters: Wikipedia returned HTTP 429 on the first request, so the run stopped there per the rate-guard rule (signal-block recorded) and used CSM runtimes, as last week did. Posters for 1165-1169 are a backfill for the next run.
+
+Flags: Allen (violence 4, age 11), Merry Christmas Aubrey Flint (drinking 4) and The Gospel of Christmas (age 10) are hold-outs under the flag rule. Space Cadet (v3 s0 l0 d0) and Tad and the Magic Lamp (v3 s1 l1 d0) can be flagged; that goes in a separate PR.
+
+The request sheet has no rows after 9/25. CSM requests used: 10 pages (the list plus 9 reviews), none blocked.
+
+Co-authored with Claude.
