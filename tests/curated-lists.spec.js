@@ -5,7 +5,7 @@ import { expectNoA11yViolations } from './a11y.js';
 // Curated lists (data-lists.js) live on their own Lists tab as passport
 // cards: the in-season list first with a "Now showing" badge, the rest on
 // themed shelves, out-of-season lists as calendar cards under "Coming
-// attractions" and tucked-away lists in a box at the bottom. The first in-season list also gets a card on Tonight.
+// attractions" and tucked-away lists in a box at the bottom. Every in-season list (up to 3) also gets a card on Tonight.
 // A list with fewer than 5 titles that fit the selected kids is not shown
 // (A small number of intentionally narrow representation lists set a lower
 // threshold explicitly while the catalog grows).
@@ -94,10 +94,9 @@ test('Not seen hides watched films in an opened list', async ({ page }) => {
 test('Tonight shows the in-season list and opens it on the Lists tab', async ({ page }) => {
   await startOn(page, '2026-12-18T19:00:00');
   await page.locator('#tabHome').click();
-  const card = page.locator('#tonightSeasonCard');
-  await expect(card).toContainText('Christmas movies');
+  const card = page.locator('#tonightSeasonCards .seasonCard', { hasText: 'Christmas movies' });
   await expect(card).toContainText('that fit Simon + Nora');
-  await expectNoA11yViolations(page, '#tonightSeasonCard');
+  await expectNoA11yViolations(page, '#tonightSeasonCards');
   await card.click();
   await expect(page.locator('#listsScreen')).toBeVisible();
   await expect(page.locator('#openListName')).toHaveText('Christmas movies');
@@ -108,11 +107,11 @@ test('out of every season, Tonight shows no list card', async ({ page }) => {
   await startOn(page, '2027-03-12T19:00:00');
   await page.locator('#tabHome').click();
   await expect(page.locator('#findTonightPickBtn')).toBeVisible();
-  await expect(page.locator('#tonightSeasonCard')).toBeHidden();
+  await expect(page.locator('#tonightSeasonCards')).toBeHidden();
 });
 
 // Holidays that move each year (Hanukkah, Ramadan, Passover, Easter,
-// Thanksgiving) use real date ranges; earlier entries win the Tonight card.
+// Thanksgiving) use real date ranges; earlier entries come first on Tonight.
 for (const [when, name] of [
   ['2026-11-01T19:00:00', 'Día de los Muertos'],
   ['2026-11-22T19:00:00', 'Thanksgiving movies'],
@@ -122,18 +121,32 @@ for (const [when, name] of [
   test(`on ${when.slice(0, 10)}, Tonight and Lists lead with ${name}`, async ({ page }) => {
     await startOn(page, when);
     await watchAsAdultsOnly(page);
-    await expect(page.locator('#tonightSeasonCard')).toContainText(name);
+    await expect(page.locator('#tonightSeasonCards .seasonCard').first()).toContainText(name);
     await openLists(page);
     await expect(page.locator('#listsBody .passport.hero')).toContainText(name);
   });
 }
+
+test('Tonight shows every in-season list, in list order', async ({ page }) => {
+  await startOn(page, '2026-12-05T19:00:00');
+  await watchAsAdultsOnly(page);
+  const names = await page.locator('#tonightSeasonCards .seasonCardName').allTextContents();
+  expect(names).toEqual(['Hanukkah movies', 'Christmas movies', 'Snow day']);
+});
+
+test('in late November, Thanksgiving and Christmas both show on Tonight', async ({ page }) => {
+  await startOn(page, '2026-11-22T19:00:00');
+  await watchAsAdultsOnly(page);
+  const names = await page.locator('#tonightSeasonCards .seasonCardName').allTextContents();
+  expect(names).toEqual(['Thanksgiving movies', 'Christmas movies']);
+});
 
 test('the season card steps aside while a pick is showing', async ({ page }) => {
   await startOn(page, '2026-12-18T19:00:00');
   await page.locator('#tabHome').click();
   await page.locator('#findTonightPickBtn').click();
   await expect(page.locator('#tonightPickTitle')).not.toBeEmpty();
-  await expect(page.locator('#tonightSeasonCard')).toBeHidden();
+  await expect(page.locator('#tonightSeasonCards')).toBeHidden();
 });
 
 test('Tuck it away hides a list on this device until it is put back', async ({ page }) => {
@@ -177,7 +190,8 @@ test('Shelf points to the Lists tab', async ({ page }) => {
 test('passport cards show poster fans while compact seasonal contexts keep decorative icons', async ({ page }) => {
   await startOn(page, '2026-12-18T19:00:00');
   await page.locator('#tabHome').click();
-  await expect(page.locator('#tonightSeasonCard .listIcon[aria-hidden="true"] svg')).toHaveCount(1);
+  await expect(page.locator('#tonightSeasonCards .seasonCard')).toHaveCount(2);
+  await expect(page.locator('#tonightSeasonCards .seasonCard .listIcon[aria-hidden="true"] svg')).toHaveCount(2);
   await openLists(page);
   const passports = page.locator('#listsBody .passport');
   const passportCount = await passports.count();
@@ -260,33 +274,34 @@ test('after load, the app warms the top list posters before Lists is opened', as
 test('during Hanukkah, Tonight offers the Hanukkah list, and Christmas comes back after', async ({ page }) => {
   await startOn(page, '2026-12-05T19:00:00');
   await watchAsAdultsOnly(page);
-  await expect(page.locator('#tonightSeasonCard')).toContainText('Hanukkah movies');
-  await page.locator('#tonightSeasonCard').click();
+  await expect(page.locator('#tonightSeasonCards')).toContainText('Hanukkah movies');
+  await page.locator('#tonightSeasonCards .seasonCard', { hasText: 'Hanukkah movies' }).click();
   await expect(page.locator('#openListName')).toHaveText('Hanukkah movies');
   await expect(page.locator('#openListRows > li.row').first()).toContainText('Lights');
 });
 
-test('after Hanukkah ends, the card goes back to Christmas', async ({ page }) => {
+test('after Hanukkah ends, its card leaves and Christmas leads', async ({ page }) => {
   await startOn(page, '2026-12-14T19:00:00');
   await watchAsAdultsOnly(page);
-  await expect(page.locator('#tonightSeasonCard')).toContainText('Christmas movies');
+  await expect(page.locator('#tonightSeasonCards')).not.toContainText('Hanukkah');
+  await expect(page.locator('#tonightSeasonCards .seasonCard').first()).toContainText('Christmas movies');
 });
 
 test('the Hanukkah list still shows for young kids when only 2 of its films fit', async ({ page }) => {
   await startOn(page, '2026-12-05T19:00:00');
   expect(await page.evaluate(() => listFitCount(listById('hanukkah')))).toBe(2);
   await page.locator('#tabHome').click();
-  await expect(page.locator('#tonightSeasonCard')).toContainText('Hanukkah movies');
-  await expect(page.locator('#tonightSeasonCard')).toContainText('2 that fit Simon + Nora');
+  await expect(page.locator('#tonightSeasonCards')).toContainText('Hanukkah movies');
+  await expect(page.locator('#tonightSeasonCards')).toContainText('2 that fit Simon + Nora');
 });
 
 test('the season card count follows who is watching', async ({ page }) => {
   await startOn(page, '2026-12-18T19:00:00');
   await page.locator('#tabHome').click();
-  await expect(page.locator('#tonightSeasonCard')).toContainText('fit Simon + Nora');
+  await expect(page.locator('#tonightSeasonCards')).toContainText('fit Simon + Nora');
   await watchAsAdultsOnly(page);
-  await expect(page.locator('#tonightSeasonCard')).not.toContainText('Simon');
-  await expect(page.locator('#tonightSeasonCard')).toContainText('films');
+  await expect(page.locator('#tonightSeasonCards')).not.toContainText('Simon');
+  await expect(page.locator('#tonightSeasonCards')).toContainText('films');
 });
 
 test('the seven new community, family and curiosity lists are available', async ({ page }) => {
@@ -350,8 +365,8 @@ test('representation collections open with a deliberate lead title', async ({ pa
 test('during Ramadan, Tonight opens Ramadan nights and Eid mornings with American Eid first', async ({ page }) => {
   await startOn(page, '2027-02-08T19:00:00');
   await watchAsAdultsOnly(page);
-  await expect(page.locator('#tonightSeasonCard')).toContainText('Ramadan nights and Eid mornings');
-  await page.locator('#tonightSeasonCard').click();
+  await expect(page.locator('#tonightSeasonCards')).toContainText('Ramadan nights and Eid mornings');
+  await page.locator('#tonightSeasonCards .seasonCard', { hasText: 'Ramadan' }).click();
   await expect(page.locator('#openListName')).toHaveText('Ramadan nights and Eid mornings');
   await expect(page.locator('#openListRows > li.row').first()).toContainText('American Eid');
 });
