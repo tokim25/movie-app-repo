@@ -104,11 +104,29 @@ test('Tonight shows the in-season list and opens it on the Lists tab', async ({ 
 });
 
 test('out of every season, Tonight shows no list card', async ({ page }) => {
-  await startOn(page, '2026-11-05T19:00:00');
+  // Mid-March 2027 falls after Ramadan and before Easter.
+  await startOn(page, '2027-03-12T19:00:00');
   await page.locator('#tabHome').click();
   await expect(page.locator('#findTonightPickBtn')).toBeVisible();
   await expect(page.locator('#tonightSeasonCard')).toBeHidden();
 });
+
+// Holidays that move each year (Hanukkah, Ramadan, Passover, Easter,
+// Thanksgiving) use real date ranges; earlier entries win the Tonight card.
+for (const [when, name] of [
+  ['2026-11-01T19:00:00', 'Día de los Muertos'],
+  ['2026-11-22T19:00:00', 'Thanksgiving movies'],
+  ['2027-03-20T19:00:00', 'Easter movies'],
+  ['2027-04-20T19:00:00', 'Passover movies'],
+]) {
+  test(`on ${when.slice(0, 10)}, Tonight and Lists lead with ${name}`, async ({ page }) => {
+    await startOn(page, when);
+    await watchAsAdultsOnly(page);
+    await expect(page.locator('#tonightSeasonCard')).toContainText(name);
+    await openLists(page);
+    await expect(page.locator('#listsBody .passport.hero')).toContainText(name);
+  });
+}
 
 test('the season card steps aside while a pick is showing', async ({ page }) => {
   await startOn(page, '2026-12-18T19:00:00');

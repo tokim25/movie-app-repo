@@ -40,6 +40,46 @@ const MOVIE_LISTS = Object.freeze([
     pins: [1157, 1158, 1160, 84, 1159, 63]
   },
   {
+    // Passover moves with the Hebrew calendar. Dates run from a week before
+    // the first seder to the last day of Passover, worked out with the Gauss
+    // Passover formula and checked against known years on 2026-11-22. Add a
+    // year each spring. Few family Passover films exist, so it needs only 2.
+    id: 'passover',
+    short: 'Passover',
+    name: 'Passover movies',
+    copy: 'Moses, matzah and a puppet seder.',
+    blurb: 'The Exodus story for different ages, from a puppet seder to two big retellings.',
+    dates: [['2027-04-14', '2027-04-29'], ['2028-04-03', '2028-04-18'], ['2029-03-23', '2029-04-07'], ['2030-04-10', '2030-04-25']],
+    minFit: 2,
+    pins: [1170, 500, 1171]
+  },
+  {
+    // Easter (Western date) moves too: two weeks before through Easter
+    // Monday. Dates computed with the standard Gregorian Easter algorithm.
+    id: 'easter',
+    short: 'Easter',
+    name: 'Easter movies',
+    copy: 'Egg hunts, bunnies and a beagle.',
+    blurb: 'Specials, cartoons and an old musical for the weeks around Easter.',
+    dates: [['2027-03-14', '2027-03-29'], ['2028-04-02', '2028-04-17'], ['2029-03-18', '2029-04-02'], ['2030-04-07', '2030-04-22']],
+    minFit: 3,
+    pins: [1174, 1175, 1173, 1176, 1172, 521, 1177, 1178]
+  },
+  {
+    // US Thanksgiving, the fourth Thursday of November. It starts on
+    // November 3 so Día de los Muertos keeps the Tonight card through
+    // November 2, and sits ahead of Christmas so it gets the card until
+    // Thanksgiving Day.
+    id: 'thanksgiving',
+    short: 'Thanksgiving',
+    name: 'Thanksgiving movies',
+    copy: 'Toast, popcorn and two runaway turkeys.',
+    blurb: 'A Peanuts classic, a Pooh feast and a turkey comedy for November.',
+    dates: [['2026-11-03', '2026-11-26'], ['2027-11-03', '2027-11-25'], ['2028-11-03', '2028-11-23'], ['2029-11-03', '2029-11-22'], ['2030-11-03', '2030-11-28']],
+    minFit: 2,
+    pins: [1179, 1181, 1180]
+  },
+  {
     id: 'christmas',
     short: 'Christmas',
     name: 'Christmas movies',
@@ -64,6 +104,17 @@ const MOVIE_LISTS = Object.freeze([
     blurb: 'Pumpkins, friendly ghosts and goofy monsters for October.',
     season: { from: '10-01', to: '10-31' },
     pins: [1139, 1146, 929, 1103, 1104, 1106, 142, 143, 202, 213, 1094, 1098, 1099, 209, 216, 139, 626, 642, 87, 1109, 1110, 1028, 1029, 594, 475]
+  },
+  {
+    // Sits after Spooky so Spooky keeps the Tonight card through October 31.
+    id: 'dia-de-los-muertos',
+    short: 'Día de los Muertos',
+    name: 'Día de los Muertos',
+    copy: 'Marigolds, music and family memories.',
+    blurb: 'Stories about remembering the people we love, from a preschool special to Coco.',
+    season: { from: '10-25', to: '11-02' },
+    minFit: 2,
+    pins: [1182, 1183, 111, 1133, 1094]
   },
   {
     id: 'baseball',
@@ -329,6 +380,10 @@ const MOVIE_LIST_SHELVES = Object.freeze([
 // One small two-tone icon per list (32x32, currentColor plus var(--icon-tint)),
 // drawn for this app. Shown on the Shelf tile and the Tonight season card.
 const LIST_ICONS = Object.freeze({
+  "passover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\" focusable=\"false\"><rect fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" stroke-linecap=\"round\" x=\"3.5\" y=\"13.5\" width=\"15\" height=\"14.5\" rx=\"1.5\"/><path fill=\"currentColor\" d=\"M7 17.2h1.6v1.6H7zM11.2 17.2h1.6v1.6h-1.6zM15.4 17.2H17v1.6h-1.6zM7 22h1.6v1.6H7zM11.2 22h1.6v1.6h-1.6zM15.4 22H17v1.6h-1.6z\"/><path fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" stroke-linecap=\"round\" d=\"M19.5 4.5h8.5l-.8 6.2a3.5 3.5 0 0 1-6.9 0z\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" stroke-linecap=\"round\" d=\"M23.75 14.2v12.8M20.3 27.5h6.9\"/></svg>",
+  "easter": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\" focusable=\"false\"><path fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" stroke-linecap=\"round\" d=\"M16 3.5c5.4 0 9.5 8.2 9.5 14.2a9.5 9.5 0 0 1-19 0C6.5 11.7 10.6 3.5 16 3.5z\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linejoin=\"round\" stroke-linecap=\"round\" d=\"M7 15.8l3-2.6 3 2.6 3-2.6 3 2.6 3-2.6 3 2.6\"/><circle fill=\"currentColor\" cx=\"12\" cy=\"21.8\" r=\"1.4\"/><circle fill=\"currentColor\" cx=\"16\" cy=\"23.2\" r=\"1.4\"/><circle fill=\"currentColor\" cx=\"20\" cy=\"21.8\" r=\"1.4\"/><circle fill=\"currentColor\" cx=\"16\" cy=\"9.2\" r=\"1.3\"/></svg>",
+  "thanksgiving": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\" focusable=\"false\"><path fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" stroke-linecap=\"round\" d=\"M3.5 17.5C5 11.8 10 8.5 16 8.5s11 3.3 12.5 9z\"/><path fill=\"currentColor\" d=\"M3 17h26a1 1 0 0 1 1 1.2l-1.7 7.2a2 2 0 0 1-2 1.6H5.7a2 2 0 0 1-2-1.6L2 18.2A1 1 0 0 1 3 17z\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linejoin=\"round\" stroke-linecap=\"round\" d=\"M10 15.5l2.6-4.4M15 15.5l2.6-5.4M20 15.5l2.6-3.8\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linejoin=\"round\" stroke-linecap=\"round\" d=\"M13 3.2q-1.4 1.5 0 3M18 2.6q-1.4 1.5 0 3\"/></svg>",
+  "dia-de-los-muertos": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\" focusable=\"false\"><circle fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" stroke-linecap=\"round\" cx=\"11\" cy=\"11\" r=\"7.5\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linejoin=\"round\" stroke-linecap=\"round\" d=\"M11 3.8v3M11 15.2v3M3.8 11h3M15.2 11h3M5.9 5.9 8 8M14 14l2.1 2.1M16.1 5.9 14 8M8 14l-2.1 2.1\"/><circle fill=\"currentColor\" cx=\"11\" cy=\"11\" r=\"2.6\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" stroke-linecap=\"round\" d=\"M11 18.5v9.5M11 24.5c-2.6-.2-4.4-1.6-5-3.8 2.4-.2 4.2.9 5 3.8z\"/><rect fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" stroke-linecap=\"round\" x=\"19.5\" y=\"15.5\" width=\"8\" height=\"12.5\" rx=\"1.2\"/><path fill=\"currentColor\" d=\"M23.5 5.6c2.1 2.6 2.7 4.4 2.7 5.6a2.7 2.7 0 0 1-5.4 0c0-1.2.6-3 2.7-5.6z\"/></svg>",
   "christmas": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\" focusable=\"false\"><path fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" stroke-linecap=\"round\" d=\"M16 3.5 22 12h-3l6 10H7l6-10h-3z\"/><rect fill=\"currentColor\" x=\"13.5\" y=\"22\" width=\"5\" height=\"5.5\" rx=\"1\"/><circle fill=\"currentColor\" cx=\"13.2\" cy=\"18.2\" r=\"1.6\"/><circle fill=\"currentColor\" cx=\"19\" cy=\"15.6\" r=\"1.6\"/><circle fill=\"currentColor\" cx=\"16\" cy=\"9.6\" r=\"1.4\"/></svg>",
   "snow-day": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\" focusable=\"false\"><path fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" stroke-linecap=\"round\" d=\"M11.6 22.5V18.2C8.6 17.8 6.3 15.2 6.7 12.4c.3-1.7 2.3-2 3.4-.8l1.5 1.7v-2.8a5.6 5.6 0 0 1 11.2 0v12z\"/><rect fill=\"currentColor\" x=\"10.2\" y=\"22\" width=\"14\" height=\"5.8\" rx=\"1.6\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linejoin=\"round\" stroke-linecap=\"round\" d=\"M5.2 2.6v5.2M2.95 3.9l4.5 2.6M2.95 6.5l4.5-2.6M27.2 7v5.2M24.95 8.3l4.5 2.6M24.95 10.9l4.5-2.6\"/></svg>",
   "spooky-not-too-scary": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" aria-hidden=\"true\" focusable=\"false\"><path fill=\"var(--icon-tint, #ECC6B3)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" stroke-linecap=\"round\" d=\"M7.5 27.5V14.5a8.5 8.5 0 0 1 17 0v13l-2.83-2.2-2.84 2.2-2.83-2.2-2.83 2.2-2.84-2.2z\"/><ellipse fill=\"currentColor\" cx=\"12.7\" cy=\"14.8\" rx=\"1.5\" ry=\"2\"/><ellipse fill=\"currentColor\" cx=\"19.3\" cy=\"14.8\" rx=\"1.5\" ry=\"2\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linejoin=\"round\" stroke-linecap=\"round\" d=\"M14.3 19.4q1.7 1.5 3.4 0\"/></svg>",
