@@ -14,7 +14,7 @@ export function latestCatalogAddedAt() {
   let latest = null;
   for (const file of dataFiles) {
     const text = fs.readFileSync(path.join(ROOT, file), 'utf8');
-    for (const match of text.matchAll(/"addedAt":"(\d{4}-\d{2}-\d{2})"/g)) {
+    for (const match of text.matchAll(/"?addedAt"?\s*:\s*"(\d{4}-\d{2}-\d{2})"/g)) {
       if (!latest || match[1] > latest) latest = match[1];
     }
   }
