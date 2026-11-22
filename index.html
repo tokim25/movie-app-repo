@@ -1427,13 +1427,15 @@ function reportError(err){
     cursor:pointer;
   }
   .listHideBtn{ color:var(--ink-soft); }
+  .seasonCards{ display:flex; flex-direction:column; gap:8px; margin-top:14px; }
+  .seasonCards[hidden]{ display:none; }
+  .seasonCards .seasonCardEyebrow{ margin:0; }
   .seasonCard{
     display:flex;
     flex-direction:column;
     align-items:flex-start;
     gap:2px;
     width:100%;
-    margin-top:14px;
     background:var(--bg-sub);
     border:none;
     border-radius:12px;
@@ -1967,7 +1969,7 @@ function reportError(err){
   .homeScreen.hasPick .memories,
   .homeScreen.hasPick .stats,
   .homeScreen.hasPick #tonightShelfBtn,
-  .homeScreen.hasPick .seasonCard,
+  .homeScreen.hasPick .seasonCards,
   .homeScreen.hasPick .tonightActions{
     display:none;
   }
@@ -3539,11 +3541,9 @@ function reportError(err){
         <button type="button" class="primaryBtn" id="findTonightPickBtn">Find tonight's pick</button>
         <button type="button" class="secondaryBtn" id="tonightShelfBtn">Browse Shelf instead</button>
       </div>
-      <button type="button" class="seasonCard" id="tonightSeasonCard" hidden>
-        <span class="seasonCardEyebrow">In season</span>
-        <span class="seasonCardName" id="tonightSeasonName"></span>
-        <span class="seasonCardCount" id="tonightSeasonCount"></span>
-      </button>
+      <div class="seasonCards" id="tonightSeasonCards" hidden>
+        <p class="seasonCardEyebrow">In season</p>
+      </div>
       <div class="srOnly" id="tonightPickStatus" role="status" aria-live="polite" aria-atomic="true"></div>
       <div class="pickCard" id="tonightPickCard" style="display:none;">
         <p class="pickChange" id="tonightPickChange" hidden></p>
@@ -5933,21 +5933,31 @@ function renderListsTeaser(){
   });
 }
 
+// Tonight shows every in-season list, up to 3, in data-lists.js order.
+// No more than 3 lists are ever in season at once today, so the cap only
+// matters if a new seasonal list overlaps the busy weeks.
+const SEASON_CARD_MAX = 3;
 function renderSeasonCard(){
-  const card = document.getElementById('tonightSeasonCard');
-  if(!card) return;
-  const list = shownLists(new Date(Date.now())).find(l => listInSeason(l, new Date(Date.now())));
-  card.hidden = !list;
-  if(!list) return;
-  card.dataset.list = list.id;
-  card.querySelector('.listIcon')?.remove();
-  const icon = createListIcon(list.id);
-  if(icon) card.prepend(icon);
-  document.getElementById('tonightSeasonName').textContent = list.name;
+  const wrap = document.getElementById('tonightSeasonCards');
+  if(!wrap) return;
+  const today = new Date(Date.now());
+  const lists = shownLists(today).filter(l => listInSeason(l, today)).slice(0, SEASON_CARD_MAX);
+  wrap.querySelectorAll('.seasonCard').forEach(card => card.remove());
+  wrap.hidden = !lists.length;
   const kids = selectedKids();
-  document.getElementById('tonightSeasonCount').textContent = kids.length
-    ? `${listFitCount(list)} that fit ${kids.map(k => k.name).join(' + ')} →`
-    : `${listFitCount(list)} films →`;
+  lists.forEach(list => {
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'seasonCard';
+    card.dataset.list = list.id;
+    const icon = createListIcon(list.id);
+    if(icon) card.appendChild(icon);
+    card.appendChild(spanText('seasonCardName', list.name));
+    card.appendChild(spanText('seasonCardCount', kids.length
+      ? `${listFitCount(list)} that fit ${kids.map(k => k.name).join(' + ')} →`
+      : `${listFitCount(list)} films →`));
+    wrap.appendChild(card);
+  });
 }
 
 // ---- Movie row, shared by Shelf and an opened list ----
@@ -9830,8 +9840,9 @@ document.getElementById('clearFiltersBtn').addEventListener('click', ()=>{
   renderCurrentView();
 });
 
-document.getElementById('tonightSeasonCard').addEventListener('click', e=>{
-  openList(e.currentTarget.dataset.list);
+document.getElementById('tonightSeasonCards').addEventListener('click', e=>{
+  const card = e.target.closest('.seasonCard');
+  if(card) openList(card.dataset.list);
 });
 document.getElementById('listsTeaser').addEventListener('click', ()=>{
   openListId = null;

@@ -1,7 +1,7 @@
 // Curated lists: MOVIE_LISTS is a hand-picked, ordered set of catalog nums
 // per list. Shelf shows them under "Browse by"; a list with a `season`
 // ({from, to} as "MM-DD", may wrap the new year) is put first while in
-// season, and the first in-season list also gets a card on Tonight.
+// season, and every in-season list (up to 3, in this order) gets a card on Tonight.
 // Lists describe what is in the films (a holiday, a sport, a decade), never
 // which families they suit. Lists without a `season` (or `dates`) are never pushed on
 // Tonight. Rules for adding entries: real catalog nums only, in the order a
@@ -15,7 +15,7 @@ const MOVIE_LISTS = Object.freeze([
     // days before the first candle to the last night) instead of a season.
     // Dates checked against hebcal.com on 2026-11-15; add a year each
     // December. It sits ahead of Christmas so its short window gets the
-    // Tonight card, and needs only 2 fitting titles (tokim25, 2026-11-15:
+    // first Tonight card, and needs only 2 fitting titles (tokim25, 2026-11-15:
     // show it even when only two fit) because so few Hanukkah films exist.
     id: 'hanukkah',
     short: 'Hanukkah',
@@ -67,9 +67,9 @@ const MOVIE_LISTS = Object.freeze([
   },
   {
     // US Thanksgiving, the fourth Thursday of November. It starts on
-    // November 3 so Día de los Muertos keeps the Tonight card through
-    // November 2, and sits ahead of Christmas so it gets the card until
-    // Thanksgiving Day.
+    // November 3 so it doesn't overlap Día de los Muertos, which ends
+    // November 2, and sits ahead of Christmas so it comes first on Tonight
+    // until Thanksgiving Day.
     id: 'thanksgiving',
     short: 'Thanksgiving',
     name: 'Thanksgiving movies',
@@ -106,7 +106,7 @@ const MOVIE_LISTS = Object.freeze([
     pins: [1139, 1146, 929, 1103, 1104, 1106, 142, 143, 202, 213, 1094, 1098, 1099, 209, 216, 139, 626, 642, 87, 1109, 1110, 1028, 1029, 594, 475]
   },
   {
-    // Sits after Spooky so Spooky keeps the Tonight card through October 31.
+    // Sits after Spooky so Spooky comes first on Tonight through October 31.
     id: 'dia-de-los-muertos',
     short: 'Día de los Muertos',
     name: 'Día de los Muertos',
