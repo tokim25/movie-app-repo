@@ -12,6 +12,8 @@ function utcKey(date) {
   return date.toISOString().slice(0, 10);
 }
 
+// Matches addedAt in both JSON style ("addedAt":"...") and plain JS
+// style (addedAt: "..."); data files use both.
 // Mirrors the app's Monday-start "this week" / "last week" ranges, in UTC.
 function expectedWeekCounts(now) {
   const monday = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() - ((now.getUTCDay() + 6) % 7)));
@@ -20,7 +22,7 @@ function expectedWeekCounts(now) {
   const ranges = [[utcKey(monday), utcKey(now)], [utcKey(lastMonday), utcKey(lastSunday)]];
   const counts = [0, 0];
   const text = fs.readFileSync(path.join(ROOT, 'data-bundle.js'), 'utf8');
-  for (const match of text.matchAll(/"addedAt":"(\d{4}-\d{2}-\d{2})"/g)) {
+  for (const match of text.matchAll(/"?addedAt"?\s*:\s*"(\d{4}-\d{2}-\d{2})"/g)) {
     ranges.forEach(([from, to], i) => { if (match[1] >= from && match[1] <= to) counts[i]++; });
   }
   return counts;
