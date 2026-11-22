@@ -188,6 +188,57 @@ test('a poster fan follows the collection lead-title order', async ({ page }) =>
   expect(await card.locator('.ppFanPoster img').evaluateAll(images => images.map(image => image.getAttribute('alt')))).toEqual(['', '', '']);
 });
 
+// Serve every Wikimedia poster as a 1x1 PNG so poster behaviour can be
+// checked without the network, and record which poster URLs were asked for.
+async function stubPosters(page){
+  const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==', 'base64');
+  const requested = [];
+  await page.route('https://upload.wikimedia.org/**', route => {
+    requested.push(route.request().url());
+    return route.fulfill({ status: 200, contentType: 'image/png', body: png });
+  });
+  return requested;
+}
+
+test('the Now showing badge sits outside the poster fan, so the fan keeps all three posters in place', async ({ page }) => {
+  await stubPosters(page);
+  await startOn(page, '2026-12-18T19:00:00');
+  await openLists(page);
+  const hero = page.locator('#listsBody .passport.hero');
+  await expect(hero.locator('.ppArt > .ppBadge')).toHaveText('Now showing');
+  await expect(hero.locator('.ppFan .ppBadge')).toHaveCount(0);
+  const posters = hero.locator('.ppFan .ppFanPoster');
+  await expect(posters).toHaveCount(3);
+  const lefts = await posters.evaluateAll(els => els.map(el => parseFloat(getComputedStyle(el).left)));
+  expect(lefts[2]).toBeGreaterThan(lefts[1]);
+  const badgeZ = await hero.locator('.ppBadge').evaluate(el => Number(getComputedStyle(el).zIndex));
+  expect(badgeZ).toBeGreaterThan(2);
+});
+
+test('the top two list cards load their posters first, and the rest wait until scrolled to', async ({ page }) => {
+  await stubPosters(page);
+  await startOn(page, '2026-12-18T19:00:00');
+  await openLists(page);
+  const fans = page.locator('#listsBody .passport .ppFan');
+  for (const i of [0, 1]) {
+    const attrs = await fans.nth(i).locator('img').evaluateAll(imgs => imgs.map(img => [img.loading, img.getAttribute('fetchpriority')]));
+    expect(attrs.length).toBeGreaterThan(0);
+    expect(attrs.every(([loading, priority]) => loading === 'eager' && priority === 'high')).toBe(true);
+  }
+  const later = await fans.nth(4).locator('img').evaluateAll(imgs => imgs.map(img => img.loading));
+  expect(later.every(loading => loading === 'lazy')).toBe(true);
+});
+
+test('after load, the app warms the top list posters before Lists is opened', async ({ page }) => {
+  const requested = await stubPosters(page);
+  await startOn(page, '2026-12-18T19:00:00');
+  const expected = await page.evaluate(() => topListsForWarmup().flatMap(list => listFanMovies(list)).map(movie => MOVIE_POSTERS[movie.num]?.u).filter(Boolean));
+  expect(expected.length).toBeGreaterThan(0);
+  await page.evaluate(() => warmListPosters());
+  await expect.poll(() => expected.every(url => requested.includes(url))).toBe(true);
+  await expect(page.locator('#listsScreen')).toBeHidden();
+});
+
 test('during Hanukkah, Tonight offers the Hanukkah list, and Christmas comes back after', async ({ page }) => {
   await startOn(page, '2026-12-05T19:00:00');
   await watchAsAdultsOnly(page);

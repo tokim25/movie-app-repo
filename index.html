@@ -196,6 +196,8 @@ function reportError(err){
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Every poster comes from Wikimedia; open the connection before the first one is asked for. -->
+<link rel="preconnect" href="https://upload.wikimedia.org">
 <!-- Load-time fix: a plain <link rel="stylesheet"> here blocks first paint on
      fonts.googleapis.com responding, even though display=swap already means
      the page doesn't need to wait for the font FILE -- it's the CSS fetch
@@ -3254,7 +3256,10 @@ function reportError(err){
     line-height:1.1;
     text-align:center;
   }
-  .ppBadge{ position:absolute; left:50%; bottom:-7px; transform:translateX(-50%); white-space:nowrap;
+  /* The fan and its "Now showing" badge share a wrapper, so the badge is not
+     counted among the fan's posters and sits above them. */
+  .ppArt{ position:relative; display:block; flex:none; }
+  .ppBadge{ position:absolute; z-index:3; left:50%; bottom:-7px; transform:translateX(-50%); white-space:nowrap;
     padding:5px 8px; border-radius:999px; background:var(--accent); color:var(--on-accent);
     font-size:10px; font-weight:700; line-height:1; letter-spacing:0.04em; text-transform:uppercase; }
   .ppName{ margin:0; font-weight:700; font-size:19px; line-height:1.15; letter-spacing:-0.02em; overflow-wrap:anywhere; }
@@ -5538,24 +5543,33 @@ function createListIcon(id){
   icon.innerHTML = svg;
   return icon;
 }
+// The two or three films a list's poster fan shows, in curated order,
+// preferring films that have artwork.
+function listFanMovies(list){
+  const orderedMovies = listIndices(list).map(idx => MOVIES[idx]);
+  const moviesWithArt = orderedMovies.filter(movie => typeof MOVIE_POSTERS !== 'undefined' && MOVIE_POSTERS[movie.num]?.u);
+  const moviesWithoutArt = orderedMovies.filter(movie => !moviesWithArt.includes(movie));
+  return (moviesWithArt.length >= 2 ? moviesWithArt : moviesWithArt.concat(moviesWithoutArt)).slice(0, 3);
+}
+// How many of the next fans to build load their posters right away at high
+// priority (the cards at the top of the screen). The rest load as they scroll in.
+let listFanEagerBudget = 0;
 function createListPosterFan(list){
   const fan = document.createElement('span');
   fan.className = 'ppFan';
   fan.setAttribute('aria-hidden', 'true');
-  const orderedMovies = listIndices(list).map(idx => MOVIES[idx]);
-  const moviesWithArt = orderedMovies.filter(movie => typeof MOVIE_POSTERS !== 'undefined' && MOVIE_POSTERS[movie.num]?.u);
-  const moviesWithoutArt = orderedMovies.filter(movie => !moviesWithArt.includes(movie));
-  const movies = (moviesWithArt.length >= 2 ? moviesWithArt : moviesWithArt.concat(moviesWithoutArt)).slice(0, 3);
-  movies.forEach(movie => {
+  const eager = listFanEagerBudget > 0;
+  if(eager) listFanEagerBudget -= 1;
+  listFanMovies(list).forEach(movie => {
     const frame = document.createElement('span');
     frame.className = 'ppFanPoster';
     const art = typeof MOVIE_POSTERS !== 'undefined' ? MOVIE_POSTERS[movie.num] : null;
     if(art && art.u){
       const img = document.createElement('img');
       img.alt = '';
-      img.loading = 'lazy';
+      img.loading = eager ? 'eager' : 'lazy';
       img.decoding = 'async';
-      img.fetchPriority = 'low';
+      img.fetchPriority = eager ? 'high' : 'auto';
       img.width = art.w || 200;
       img.height = art.h || 300;
       img.src = art.u;
@@ -5598,9 +5612,10 @@ function createPassport(list, opts = {}){
   }
   const id = document.createElement(card.tagName === 'BUTTON' ? 'span' : 'div');
   id.className = 'ppId';
-  const fan = createListPosterFan(list);
-  if(opts.badge) fan.appendChild(spanText('ppBadge', opts.badge));
-  id.appendChild(fan);
+  const art = spanText('ppArt', '');
+  art.appendChild(createListPosterFan(list));
+  if(opts.badge) art.appendChild(spanText('ppBadge', opts.badge));
+  id.appendChild(art);
   id.appendChild(opts.nameEl || spanText('ppName', list.name));
   const sub = opts.sub !== undefined ? opts.sub : list.copy;
   if(sub) id.appendChild(spanText('ppSub', sub));
@@ -5685,6 +5700,7 @@ function renderListsIndex(){
     : 'Little shelves we filled by hand.';
   const body = document.getElementById('listsBody');
   body.replaceChildren();
+  listFanEagerBudget = 2;
   const all = curatedLists();
   const fitsFloor = list => listFitCount(list) >= (list.minFit || LIST_MIN_FITTING);
   const visible = all.filter(list => !hiddenListIds.has(list.id) && fitsFloor(list));
@@ -5807,6 +5823,7 @@ function renderOpenList(list){
   const sub = inSeason
     ? `In season · ${listUntilText(list, today)}`
     : (list.season || list.dates) ? listBackText(list, today) : undefined;
+  listFanEagerBudget = 1;
   const cover = createPassport(list, { tag: 'section', nameEl: name, badge: inSeason ? 'Now showing' : '', sub });
   cover.setAttribute('aria-labelledby', 'openListName');
   open.appendChild(cover);
@@ -9935,6 +9952,34 @@ if('serviceWorker' in navigator){
     navigator.serviceWorker.register('/sw.js').catch(err => { console.error('service worker registration failed', err); reportError(err); });
   });
 }
+
+// Front-load the posters at the top of the Lists tab: once the app is idle
+// after loading, fetch the first two lists' fan posters into the browser cache
+// so they are already there when Lists opens. Skipped on Save-Data.
+function topListsForWarmup(){
+  const today = new Date(Date.now());
+  const shown = curatedLists().filter(list => !hiddenListIds.has(list.id) && listFitCount(list) >= (list.minFit || LIST_MIN_FITTING));
+  const inSeason = shown.filter(list => listInSeason(list, today));
+  const shelves = typeof MOVIE_LIST_SHELVES !== 'undefined' ? MOVIE_LIST_SHELVES : [];
+  const shelved = shelves.flatMap(shelf => shelf.lists.map(listById)).filter(list => list && shown.includes(list));
+  return inSeason.concat(shelved).slice(0, 2);
+}
+function warmListPosters(){
+  if(navigator.connection && navigator.connection.saveData) return;
+  try{
+    topListsForWarmup().forEach(list => listFanMovies(list).forEach(movie => {
+      const art = MOVIE_POSTERS[movie.num];
+      if(!art || !art.u) return;
+      const img = new Image();
+      img.decoding = 'async';
+      img.src = art.u;
+    }));
+  }catch(err){ /* warming is best-effort */ }
+}
+window.addEventListener('load', ()=>{
+  const idle = window.requestIdleCallback || (fn => setTimeout(fn, 1500));
+  idle(warmListPosters, { timeout: 4000 });
+});
 
 const PUSH_VAPID_PUBLIC_KEY = 'BH8n0eAuOkmk3ocvZXDqq69E98GX_7ImmCDnIjGNEFLZqTXN0NC8UaM78uA19DXdTS4BC3SgkCvdBPccwzFb83c';
 
