@@ -222,7 +222,7 @@ const MOVIE_LISTS = Object.freeze([
     name: 'Sibling teams',
     copy: 'Built-in teammates, occasional rivals.',
     blurb: 'Brothers and sisters who squabble, solve problems and show up for one another.',
-    pins: [103, 305, 35, 292, 489, 11, 53, 294]
+    pins: [103, 305, 35, 292, 489, 11, 53, 294, 1184]
   },
   {
     id: 'girls-lead-the-way',
@@ -230,7 +230,7 @@ const MOVIE_LISTS = Object.freeze([
     name: 'Girls lead the way',
     copy: 'Brave choices and big ideas.',
     blurb: 'Girls taking the lead with courage, curiosity and their own point of view.',
-    pins: [303, 286, 48, 491, 118, 125, 80, 104, 650, 93]
+    pins: [303, 286, 48, 491, 118, 125, 80, 104, 650, 93, 1184]
   },
   {
     id: 'food-family-and-the-table',
