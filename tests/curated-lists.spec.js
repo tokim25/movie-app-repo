@@ -134,6 +134,22 @@ test('Tonight shows every in-season list, in list order', async ({ page }) => {
   expect(names).toEqual(['Hanukkah movies', 'Christmas movies', 'Snow day']);
 });
 
+test('with three lists in season, Tonight still fits a phone screen without scrolling', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await startOn(page, '2026-12-05T19:00:00');
+  await page.locator('#tabHome').click();
+  await expect(page.locator('#tonightSeasonCards .seasonCard')).toHaveCount(3);
+  await page.evaluate(() => window.scrollTo(0, 0));
+  const metrics = await page.evaluate(() => ({
+    scrollHeight: document.documentElement.scrollHeight,
+    clientHeight: document.documentElement.clientHeight,
+    homeBottom: document.getElementById('homeScreen').getBoundingClientRect().bottom,
+    navTop: document.querySelector('.quickBar').getBoundingClientRect().top
+  }));
+  expect(metrics.scrollHeight).toBeLessThanOrEqual(metrics.clientHeight);
+  expect(metrics.homeBottom).toBeLessThanOrEqual(metrics.navTop + 1);
+});
+
 test('in late November, Thanksgiving and Christmas both show on Tonight', async ({ page }) => {
   await startOn(page, '2026-11-22T19:00:00');
   await watchAsAdultsOnly(page);
