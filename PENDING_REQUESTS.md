@@ -496,6 +496,6 @@ Skipped from the queue without a CSM page request: Frozen 2, Star Wars Episode V
 
 Posters were verified and added for Chupa, A Ballerina's Tale, A Million Miles Away, Arctic Tale, Becoming and Chang Can Dunk. The other nine titles have no usable Wikipedia infobox poster. CSM requests used: 19 (one local list request timed out without an HTTP response, one successful list request, seven pre-read review pages and ten ordered queue review pages); no CSM block, CAPTCHA, 403 or 429 occurred. Wikipedia/Wikimedia requests were serial and guarded as well. Queue status: 1,569 unchecked candidates remain; `read` is empty.
 
-Checks on the titles branch: bundle and DATA_VERSION regenerated; `node scripts/validate-data.mjs` passed (1,183 movies, 1,115 poster entries); `node scripts/validate-guidance.mjs` passed; 21 unit tests passed; 306 Playwright tests passed. Pull requests: [titles PR](pending) and [flags PR](pending). Neither was merged.
+Checks on the titles branch: bundle and DATA_VERSION regenerated; `node scripts/validate-data.mjs` passed (1,183 movies, 1,115 poster entries); `node scripts/validate-guidance.mjs` passed; 21 unit tests passed; 306 Playwright tests passed. Pull requests: [titles PR](https://github.com/tokim25/movie-app-repo/pull/224) and [flags PR](https://github.com/tokim25/movie-app-repo/pull/225). Neither was merged.
 
 Co-authored with ChatGPT.
