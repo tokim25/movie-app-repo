@@ -1007,5 +1007,209 @@
   },
   "rule": 1,
   "held": true
+ },
+ "1187": {
+  "csm": {
+   "v": 2,
+   "s": 0,
+   "l": 0,
+   "d": 0,
+   "age": 4,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
+ },
+ "1188": {
+  "csm": {
+   "v": 3,
+   "s": 1,
+   "l": 0,
+   "d": 0,
+   "age": 6,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
+ },
+ "1189": {
+  "csm": {
+   "v": 1,
+   "s": 0,
+   "l": 0,
+   "d": 0,
+   "age": 3,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
+ },
+ "1190": {
+  "csm": {
+   "v": 1,
+   "s": 0,
+   "l": 0,
+   "d": 0,
+   "age": 3,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1,
+  "adj": {
+   "romance": {
+    "kind": "depicted",
+    "quote": "Tabby falls in love with another cat and they have kittens",
+    "why": "The cats' romance and kittens are shown in the film."
+   }
+  }
+ },
+ "1191": {
+  "csm": {
+   "v": 1,
+   "s": 0,
+   "l": 0,
+   "d": 0,
+   "age": 4,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
+ },
+ "1192": {
+  "csm": {
+   "v": 2,
+   "s": 0,
+   "l": 0,
+   "d": 0,
+   "age": 3,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
+ },
+ "1193": {
+  "csm": {
+   "v": 4,
+   "s": 0,
+   "l": 3,
+   "d": 0,
+   "age": 9,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1,
+  "held": true
+ },
+ "1194": {
+  "csm": {
+   "v": 2,
+   "s": 0,
+   "l": 0,
+   "d": 0,
+   "age": 8,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1,
+  "adj": {
+   "violence": {
+    "kind": "depicted",
+    "quote": "Death appears and offers to take Frida away",
+    "why": "The threatening encounter with Death is shown on screen."
+   }
+  }
+ },
+ "1195": {
+  "csm": {
+   "v": 0,
+   "s": 0,
+   "l": 0,
+   "d": 0,
+   "age": 9,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
+ },
+ "1196": {
+  "csm": {
+   "v": 3,
+   "s": 1,
+   "l": 2,
+   "d": 2,
+   "age": 10,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1,
+  "held": true
+ },
+ "1197": {
+  "csm": {
+   "v": 3,
+   "s": 0,
+   "l": 0,
+   "d": 0,
+   "age": 6,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1,
+  "adj": {
+   "violence": {
+    "kind": "depicted",
+    "quote": "her carcass is then eaten in full view",
+    "why": "The dead walrus and feeding are shown on screen."
+   }
+  }
+ },
+ "1198": {
+  "csm": {
+   "v": 1,
+   "s": 0,
+   "l": 0,
+   "d": 0,
+   "age": 9,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
+ },
+ "1199": {
+  "csm": {
+   "v": 2,
+   "s": 1,
+   "l": 2,
+   "d": 1,
+   "age": 10,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1,
+  "held": true
+ },
+ "1200": {
+  "csm": {
+   "v": 1,
+   "s": 0,
+   "l": 0,
+   "d": 0,
+   "age": 5,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
+ },
+ "1201": {
+  "csm": {
+   "v": 0,
+   "s": 0,
+   "l": 0,
+   "d": 0,
+   "age": 3,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
  }
 }
