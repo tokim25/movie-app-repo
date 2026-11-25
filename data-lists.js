@@ -86,7 +86,7 @@ const MOVIE_LISTS = Object.freeze([
     copy: 'Cocoa, cardigans and a reindeer or two.',
     blurb: 'Specials, classics and newer favorites for the weeks before Christmas.',
     season: { from: '11-20', to: '12-26' },
-    pins: [1137, 863, 1138, 864, 917, 624, 966, 1142, 653, 663, 962, 390, 112, 1118, 463, 908, 909, 1030, 115, 866, 381, 1083, 1075, 178, 186, 229, 559, 660, 959, 250, 1049, 1061, 1149]
+    pins: [1137, 863, 1138, 864, 917, 624, 966, 1142, 653, 663, 962, 390, 112, 1118, 463, 908, 909, 1030, 115, 866, 381, 1083, 1075, 178, 186, 229, 559, 660, 959, 250, 1049, 1061, 1149, 1211, 1216]
   },
   {
     id: 'snow-day',
@@ -94,7 +94,7 @@ const MOVIE_LISTS = Object.freeze([
     copy: 'Sleds, snowmen and a lot of ice.',
     blurb: 'Snow, ice and sled dogs for the cold months.',
     season: { from: '12-01', to: '02-28' },
-    pins: [103, 305, 546, 1138, 966, 645, 968, 969, 936, 408, 422, 465, 387, 596, 414, 1095, 478, 1197]
+    pins: [103, 305, 546, 1138, 966, 645, 968, 969, 936, 408, 422, 465, 387, 596, 414, 1095, 478, 1197, 1211]
   },
   {
     id: 'spooky-not-too-scary',
@@ -123,7 +123,7 @@ const MOVIE_LISTS = Object.freeze([
     copy: 'Sandlots, big leagues, one good dog.',
     blurb: 'Sandlots, big leagues and one very good dog, for baseball season.',
     season: { from: '03-20', to: '10-31' },
-    pins: [71, 1067, 391, 410, 445, 583, 196]
+    pins: [71, 1067, 391, 410, 445, 583, 196, 1205]
   },
   {
     id: 'nothing-but-net',
@@ -153,14 +153,14 @@ const MOVIE_LISTS = Object.freeze([
     name: 'Ice, snow and underdogs',
     copy: 'Skates, snowboards and one fast bobsled.',
     blurb: 'Cold-weather competitors finding their nerve on ice, snow and the bobsled track.',
-    pins: [206, 851, 234, 162, 414, 387, 596, 1095]
+    pins: [206, 851, 234, 162, 414, 387, 596, 1095, 1210]
   },
   {
     id: 'wheels-and-waves',
     name: 'Wheels and waves',
     copy: 'Boards, bikes and the courage to commit.',
     blurb: 'Surfers, skaters and racers chasing the next wave, turn or finish line.',
-    pins: [1119, 158, 170, 162, 179, 194, 171, 1080, 1120]
+    pins: [1119, 158, 170, 162, 179, 194, 171, 1080, 1120, 1209, 1212]
   },
   {
     id: 'girls-in-the-game',
@@ -175,7 +175,7 @@ const MOVIE_LISTS = Object.freeze([
     name: 'Black joy, family and big dreams',
     copy: 'Big imaginations, close families and room to shine.',
     blurb: 'Black children and families finding joy, chasing ambitions and showing up for one another.',
-    pins: [299, 636, 49, 125, 214, 55, 869, 919, 468, 80, 93, 1195, 1198, 1200]
+    pins: [299, 636, 49, 125, 214, 55, 869, 919, 468, 80, 93, 1195, 1198, 1200, 1213]
   },
   {
     id: 'latino-families-many-stories',
@@ -230,7 +230,7 @@ const MOVIE_LISTS = Object.freeze([
     name: 'Girls lead the way',
     copy: 'Brave choices and big ideas.',
     blurb: 'Girls taking the lead with courage, curiosity and their own point of view.',
-    pins: [303, 286, 48, 491, 118, 125, 80, 104, 650, 93, 1184, 1185, 1194, 1195, 1198, 1200]
+    pins: [303, 286, 48, 491, 118, 125, 80, 104, 650, 93, 1184, 1185, 1194, 1195, 1198, 1200, 1208, 1213, 1214]
   },
   {
     id: 'food-family-and-the-table',
@@ -246,21 +246,21 @@ const MOVIE_LISTS = Object.freeze([
     name: 'Inventors and problem-solvers',
     copy: 'Tinker, test, fail, try again.',
     blurb: 'Curious kids and grown-ups who build, experiment and find another way through.',
-    pins: [302, 297, 397, 382, 548, 646, 109, 93, 78, 53, 1189, 1196]
+    pins: [302, 297, 397, 382, 548, 646, 109, 93, 78, 53, 1189, 1196, 1202, 1204, 1207]
   },
   {
     id: 'around-the-world',
     name: 'Around the world',
     copy: 'A passport full of stories.',
     blurb: 'Family stories and adventures rooted in places and cultures around the world.',
-    pins: [1, 111, 657, 637, 63, 80, 78, 72, 655, 1158, 104, 1193, 1194]
+    pins: [1, 111, 657, 637, 63, 80, 78, 72, 655, 1158, 104, 1193, 1194, 1205, 1210, 1215]
   },
   {
     id: 'good-teammates',
     name: 'Good teammates',
     copy: 'Winning, and losing, together.',
     blurb: 'Teams that win, and lose, by sticking together.',
-    pins: [596, 851, 852, 1068, 1069, 71, 387, 406, 414, 448, 391, 1081, 187, 190, 169, 197, 214, 664, 1192, 1199]
+    pins: [596, 851, 852, 1068, 1069, 71, 387, 406, 414, 448, 391, 1081, 187, 190, 169, 197, 214, 664, 1192, 1199, 1205, 1208, 1209, 1210, 1212]
   },
   {
     id: 'underdogs',
@@ -268,7 +268,7 @@ const MOVIE_LISTS = Object.freeze([
     name: 'Underdogs who never quit',
     copy: 'Long shots who keep on going.',
     blurb: 'Long shots who keep going when nobody expects them to.',
-    pins: [1119, 523, 488, 1080, 1085, 435, 387, 1067, 410, 420, 414, 664, 571, 991, 96, 448, 445, 90, 424, 132, 1196, 1199]
+    pins: [1119, 523, 488, 1080, 1085, 435, 387, 1067, 410, 420, 414, 664, 571, 991, 96, 448, 445, 90, 424, 132, 1196, 1199, 1207]
   },
   {
     id: 'eighties',
@@ -284,7 +284,7 @@ const MOVIE_LISTS = Object.freeze([
     name: 'What Mom & Dad watched: the ’90s',
     copy: 'Big musicals and the first Toy Story.',
     blurb: 'Nineties classics, from Disney musicals to the Sandlot.',
-    pins: [101, 281, 282, 4, 286, 110, 389, 116, 118, 1066, 71, 387, 1067, 596, 115, 624, 626, 929, 395, 397, 869, 606, 605, 594, 599, 602, 881]
+    pins: [101, 281, 282, 4, 286, 110, 389, 116, 118, 1066, 71, 387, 1067, 596, 115, 624, 626, 929, 395, 397, 869, 606, 605, 594, 599, 602, 881, 1203, 1207]
   },
   {
     id: 'summer-break',
@@ -315,14 +315,14 @@ const MOVIE_LISTS = Object.freeze([
     name: 'Dog movies',
     copy: 'Good dogs, lost dogs, sled dogs.',
     blurb: 'Good dogs, lost dogs, sled dogs and one dog who plays basketball.',
-    pins: [266, 268, 389, 298, 936, 399, 1079, 74, 395, 597, 422, 408, 465, 278, 380, 1051, 427, 555, 339, 423, 157, 464, 394, 1153, 442, 973, 915, 275, 338, 1192]
+    pins: [266, 268, 389, 298, 936, 399, 1079, 74, 395, 597, 422, 408, 465, 278, 380, 1051, 427, 555, 339, 423, 157, 464, 394, 1153, 442, 973, 915, 275, 338, 1192, 1208, 1209]
   },
   {
     id: 'read-the-book-first',
     name: 'Read the book first',
     copy: 'Read it at bedtime, watch it Friday.',
     blurb: 'Films of children’s books, from picture books to chapter books, to read before you watch.',
-    pins: [1132, 1144, 1018, 1071, 6, 5, 641, 994, 396, 113, 67, 118, 116, 542, 1010, 974, 531, 74, 47, 14, 39, 870, 92, 425, 98, 57, 105, 1014, 1016, 1017, 1021, 70, 30, 1190, 1194]
+    pins: [1132, 1144, 1018, 1071, 6, 5, 641, 994, 396, 113, 67, 118, 116, 542, 1010, 974, 531, 74, 47, 14, 39, 870, 92, 425, 98, 57, 105, 1014, 1016, 1017, 1021, 70, 30, 1190, 1194, 1206, 1207]
   },
   {
     id: 'award-winners',
@@ -338,7 +338,7 @@ const MOVIE_LISTS = Object.freeze([
     name: 'Funny for grown-ups too',
     copy: 'Jokes for them, and jokes for you.',
     blurb: 'Comedies with jokes for the kids and a second layer of jokes for the adults on the couch.',
-    pins: [120, 5, 310, 4, 439, 106, 290, 18, 502, 513, 1071, 524, 47, 762, 53, 537, 489, 13, 133, 70, 1086]
+    pins: [120, 5, 310, 4, 439, 106, 290, 18, 502, 513, 1071, 524, 47, 762, 53, 537, 489, 13, 133, 70, 1086, 1203]
   },
   {
     id: 'made-by-hand',
@@ -353,14 +353,14 @@ const MOVIE_LISTS = Object.freeze([
     name: 'Real-life adventures',
     copy: 'Penguins, polar bears, true stories.',
     blurb: 'True stories and nature documentaries, from penguins and polar bears to a girl who hunts with an eagle.',
-    pins: [21, 471, 470, 446, 455, 478, 16, 17, 66, 61, 63, 58, 86, 85, 60, 83, 1186, 1188, 1194, 1195, 1196, 1197, 1198, 1200]
+    pins: [21, 471, 470, 446, 455, 478, 16, 17, 66, 61, 63, 58, 86, 85, 60, 83, 1186, 1188, 1194, 1195, 1196, 1197, 1198, 1200, 1204, 1205, 1207, 1210, 1213]
   },
   {
     id: 'sing-along-musicals',
     name: 'Sing-along musicals',
     copy: 'Songs you will hum all week.',
     blurb: 'Big, hummable songs the whole family ends up singing, from Disney favorites to the classic stage musicals.',
-    pins: [270, 101, 103, 300, 286, 19, 29, 30, 282, 279, 303, 11, 67, 612, 28, 615, 299, 285, 353, 1001, 1037, 385, 1201]
+    pins: [270, 101, 103, 300, 286, 19, 29, 30, 282, 279, 303, 11, 67, 612, 28, 615, 299, 285, 353, 1001, 1037, 385, 1201, 1206, 1215, 1216]
   }
 ]);
 

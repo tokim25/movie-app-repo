@@ -8342,7 +8342,22 @@
   "becoming",
   "chang-can-dunk",
   "dancing-in-the-light-the-janet-collins-story",
-  "daniel-tigers-neighborhood-tiger-family-trip"
+  "daniel-tigers-neighborhood-tiger-family-trip",
+  "dinosaur-train-whats-at-the-center-of-the-earth",
+  "galaxy-quest",
+  "good-night-oppy",
+  "koshien-japans-field-of-dreams",
+  "naked-mole-rat-gets-dressed-the-underground-rock-experience",
+  "october-sky",
+  "paw-patrol-jet-to-the-rescue",
+  "paw-patrol-ready-race-rescue",
+  "red-army",
+  "thomas-and-friends-the-christmas-engines",
+  "thomas-friends-race-for-the-sodor-cup",
+  "woman-in-motion",
+  "a-cinderella-story",
+  "a-monster-in-paris",
+  "a-muppets-christmas-letters-to-santa"
  ],
  "skipped": [
   {
@@ -8412,6 +8427,14 @@
   {
    "slug": "crouching-tiger-hidden-dragon",
    "reason": "held for tokim25: CSM age 12 with frequent lethal martial-arts violence, visible partial nudity and a death that may be suicide"
+  },
+  {
+   "slug": "the-ten-commandments",
+   "reason": "already in the catalog as The Ten Commandments (#1171)"
+  },
+  {
+   "slug": "10-years-of-thomas-the-tank-engine-and-friends",
+   "reason": "a collection of TV episodes, not a film, TV movie or special"
   }
  ],
  "notes": "210 of 216 lists read (the remaining 6 are re-found from the sitemap next time, one request). Score = how many lists read so far include the title. Titles are slug-derived placeholders. The catalog filter at crawl time matched on title text only, so already-catalogued films under different spellings can still appear; check each against every data-*.js file (match on key words, not just the full title) before reading its CSM page. Many entries are adult films, documentaries or concerts; they drop out at the CSM age check. \"read\" lists titles whose CSM page was read on 11/9 and qualify; they still need Wikipedia facts, an entry and flags.",
