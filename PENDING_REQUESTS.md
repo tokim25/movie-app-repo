@@ -499,3 +499,31 @@ Posters were verified and added for Chupa, A Ballerina's Tale, A Million Miles A
 Checks on the titles branch: bundle and DATA_VERSION regenerated; `node scripts/validate-data.mjs` passed (1,183 movies, 1,115 poster entries); `node scripts/validate-guidance.mjs` passed; 21 unit tests passed; 306 Playwright tests passed. Pull requests: [titles PR](https://github.com/tokim25/movie-app-repo/pull/224) and [flags PR](https://github.com/tokim25/movie-app-repo/pull/225). Neither was merged.
 
 Co-authored with ChatGPT.
+
+11/25/2026 (Codex catalog batch 2) — Added 15 backlog titles, nums 1202–1216, all with real CSM reviews and `addedVia: "discovery"`:
+
+- 1202 Dinosaur Train: What's at the Center of the Earth? (2017), CSM 3+, 120 min, PBS Home Videos
+- 1203 Galaxy Quest (1999), CSM 10+, 102 min, Universal Pictures
+- 1204 Good Night Oppy (2022), CSM 5+, 105 min, Amazon Studios
+- 1205 Koshien: Japan's Field of Dreams (2021), CSM 8+, 94 min, First Run Features
+- 1206 Naked Mole Rat Gets Dressed: The Underground Rock Experience (2022), CSM 3+, 55 min, HBO Max
+- 1207 October Sky (1999), CSM 10+, 108 min, Universal Pictures
+- 1208 PAW Patrol: Jet to the Rescue (2020), CSM 4+, 56 min, Paramount Pictures
+- 1209 PAW Patrol: Ready, Race, Rescue! (2019), CSM 3+, 66 min, Paramount Pictures
+- 1210 Red Army (2015), CSM 9+, 85 min, Sony Pictures Classics
+- 1211 Thomas and Friends: The Christmas Engines (2014), CSM 3+, 60 min, HIT Entertainment
+- 1212 Thomas & Friends: Race for the Sodor Cup (2022), CSM 3+, 60 min, Netflix
+- 1213 Woman in Motion (2021), CSM 8+, 105 min, Shout! Studios
+- 1214 A Cinderella Story (2004), CSM 7+, 95 min, Warner Bros.
+- 1215 A Monster in Paris (2013), CSM 8+, 90 min, Shout! Factory
+- 1216 A Muppets Christmas: Letters to Santa (2008), CSM 4+, 60 min, Disney
+
+New releases were checked first against CSM's current New Kids' Movies list. The three uncataloged entries on that list were older than the required 14-day or opening-this-week window, so this run added no new-release title and continued through the queue.
+
+Skipped from the queue: The Ten Commandments was already cataloged as #1171, so its CSM page was not requested. 10 Years of Thomas the Tank Engine and Friends was rejected after review because it is a collection of television episodes rather than a film, TV movie or special. No title was held during catalog selection.
+
+Posters were verified and added for Galaxy Quest, Good Night Oppy, October Sky, Red Army, A Cinderella Story, A Monster in Paris and A Muppets Christmas: Letters to Santa. The other eight titles have no exact Wikipedia film/special page with a usable infobox poster. CSM requests used: 20 (one new-release list, three uncataloged list reviews and sixteen ordered backlog reviews), with no block, CAPTCHA, 403 or 429. Wikipedia and Wikimedia requests were serial, guarded and normal. Queue status: 1,552 unchecked candidates remain; `read` is empty.
+
+Checks on both branches: bundle and DATA_VERSION regenerated; `node scripts/validate-data.mjs` passed (1,198 movies, 1,122 poster entries); `node scripts/validate-guidance.mjs` passed; 21 unit tests passed; Playwright passed with 305 tests and 1 expected skip. Pull requests: [titles PR](https://github.com/tokim25/movie-app-repo/pull/226) and [flags PR](https://github.com/tokim25/movie-app-repo/pull/227). Neither was merged.
+
+Co-authored with ChatGPT.

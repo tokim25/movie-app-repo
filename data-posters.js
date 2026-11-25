@@ -1121,5 +1121,12 @@ const MOVIE_POSTERS = Object.freeze({
   1196: {"u":"https://upload.wikimedia.org/wikipedia/en/c/c9/A_Million_Miles_Away_film_poster.png","w":250,"h":370,"p":"A Million Miles Away (film)"},
   1197: {"u":"https://upload.wikimedia.org/wikipedia/en/9/97/Arctic_Tale_Film_Poster.jpg","w":259,"h":383,"p":"Arctic Tale"},
   1198: {"u":"https://upload.wikimedia.org/wikipedia/en/e/ef/Becoming_%28film%29_poster.jpg","w":259,"h":383,"p":"Becoming (2020 documentary film)"},
-  1199: {"u":"https://upload.wikimedia.org/wikipedia/en/7/78/Chang_can_dunk.png","w":255,"h":378,"p":"Chang Can Dunk"}
+  1199: {"u":"https://upload.wikimedia.org/wikipedia/en/7/78/Chang_can_dunk.png","w":255,"h":378,"p":"Chang Can Dunk"},
+  1203: {"u":"https://upload.wikimedia.org/wikipedia/en/1/1f/Galaxy_Quest_poster.jpg","w":254,"h":376,"p":"Galaxy Quest"},
+  1204: {"u":"https://upload.wikimedia.org/wikipedia/en/d/df/Good_Night_Oppy.jpg","w":259,"h":384,"p":"Good Night Oppy"},
+  1207: {"u":"https://upload.wikimedia.org/wikipedia/en/7/73/October_sky_poster.jpg","w":260,"h":389,"p":"October Sky"},
+  1210: {"u":"https://upload.wikimedia.org/wikipedia/en/0/07/Red_Army_poster.png","w":220,"h":326,"p":"Red Army (film)"},
+  1214: {"u":"https://upload.wikimedia.org/wikipedia/en/b/b3/Movie_poster_a_cinderella_story.jpg","w":220,"h":325,"p":"A Cinderella Story"},
+  1215: {"u":"https://upload.wikimedia.org/wikipedia/en/6/6a/Monster_in_paris_theatrical.jpg","w":273,"h":364,"p":"A Monster in Paris"},
+  1216: {"u":"https://upload.wikimedia.org/wikipedia/en/e/e9/Muppets_Christmas_LTS.JPG","w":266,"h":374,"p":"A Muppets Christmas: Letters to Santa"},
 });
