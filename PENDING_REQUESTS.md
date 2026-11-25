@@ -470,3 +470,9 @@ Co-authored with Claude.
 11/25/2026 (later) — tokim25 approved Tenzing, held since 11/19. Added 1186 Tenzing (2026), CSM 10+, PG, 126 min (CSM), Apple Original Films, `addedVia: "request"`. CSM age 10 makes it a flag hold-out, so it stays unflagged and the hold is recorded in `data-flag-basis.json`. Added it to Real-life adventures, and added Hexed (1185) to Girls lead the way as tokim25 asked. No poster (Wikipedia still blocked).
 
 Co-authored with Claude.
+
+11/25/2026 — Codex catalog batch stopped before adding any titles. The new-release list had no uncataloged releases in the batch window. The Common Sense Media review for Blippi's Big Dino Adventure loaded, then the Wikipedia article request returned HTTP 404. Signaled the error with the rate guard and stopped under the batch guide. Blippi stays pending in the queue, with 1,589 distinct candidates still pending. No posters or flags were added.
+
+CSM requests used: 2 pages (the new-release list and the Blippi review). Wikipedia requests used: 1.
+
+Co-authored with ChatGPT.
