@@ -456,3 +456,13 @@ Flags: Allen (violence 4, age 11), Merry Christmas Aubrey Flint (drinking 4) and
 The request sheet has no rows after 9/25. CSM requests used: 10 pages (the list plus 9 reviews), none blocked.
 
 Co-authored with Claude.
+
+11/25/2026 — tokim25 asked whether there were new movies to add. The request sheet has no rows after 9/25. Read CSM's "New Kids' Movies" list (20 titles) and deduped it against every data file on master by title and review URL. Added 1:
+
+- 1185 Hexed (2026), CSM 8+, PG, 103 min (CSM), Disney, `addedVia: "discovery"`. Last week it had only a preview; the full review is now up.
+
+Everything else on the list is already in the catalog, or was skipped last week for the same reasons: A Merry Christmas Wish (2022 TV romance), Sense and Sensibility (adult adaptation), Monster High: New Ghoul at School (2010 special) and Tenzing (10+ biopic, still waiting on a human call).
+
+No poster: Wikipedia returned an error page on the one request. Flags for Hexed (v3 s1 l2 d0, no bumps) go in a separate PR. CSM requests used: 2 pages, none blocked.
+
+Co-authored with Claude.
