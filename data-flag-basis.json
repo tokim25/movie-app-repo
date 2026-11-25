@@ -1211,5 +1211,214 @@
    "on": "2026-11-25"
   },
   "rule": 1
+ },
+ "1217": {
+  "csm": {
+   "v": 3,
+   "s": 2,
+   "l": 1,
+   "d": 0,
+   "age": 6,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
+ },
+ "1218": {
+  "csm": {
+   "v": 1,
+   "s": 0,
+   "l": 0,
+   "d": 0,
+   "age": 8,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1,
+  "adj": {
+   "language": {
+    "kind": "depicted",
+    "quote": "the mild name-calling includes twerp",
+    "why": "The insult is spoken on screen."
+   },
+   "romance": {
+    "kind": "depicted",
+    "quote": "Reagan and a soccer-loving boy seem to have a crush but do not kiss",
+    "why": "Their mutual crush is depicted on screen."
+   }
+  }
+ },
+ "1219": {
+  "csm": {
+   "v": 4,
+   "s": 0,
+   "l": 3,
+   "d": 0,
+   "age": 11,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1,
+  "held": true
+ },
+ "1220": {
+  "csm": {
+   "v": 0,
+   "s": 0,
+   "l": 0,
+   "d": 0,
+   "age": 8,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
+ },
+ "1221": {
+  "csm": {
+   "v": 1,
+   "s": 0,
+   "l": 1,
+   "d": 1,
+   "age": 6,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
+ },
+ "1222": {
+  "csm": {
+   "v": 4,
+   "s": 2,
+   "l": 3,
+   "d": 3,
+   "age": 11,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1,
+  "held": true
+ },
+ "1223": {
+  "csm": {
+   "v": 3,
+   "s": 1,
+   "l": 1,
+   "d": 0,
+   "age": 8,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
+ },
+ "1224": {
+  "csm": {
+   "v": 2,
+   "s": 0,
+   "l": 3,
+   "d": 1,
+   "age": 11,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1,
+  "held": true
+ },
+ "1225": {
+  "csm": {
+   "v": 3,
+   "s": 1,
+   "l": 0,
+   "d": 0,
+   "age": 6,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1,
+  "adj": {
+   "violence": {
+    "kind": "depicted",
+    "quote": "a fox hunts, catches and eats a deer while decomposing remains are later shown",
+    "why": "The animal predation and remains are shown on screen."
+   }
+  }
+ },
+ "1226": {
+  "csm": {
+   "v": 2,
+   "s": 0,
+   "l": 0,
+   "d": 0,
+   "age": 5,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
+ },
+ "1227": {
+  "csm": {
+   "v": 1,
+   "s": 0,
+   "l": 1,
+   "d": 1,
+   "age": 7,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
+ },
+ "1228": {
+  "csm": {
+   "v": 0,
+   "s": 1,
+   "l": 1,
+   "d": 0,
+   "age": 3,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
+ },
+ "1229": {
+  "csm": {
+   "v": 1,
+   "s": 0,
+   "l": 0,
+   "d": 0,
+   "age": 3,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
+ },
+ "1230": {
+  "csm": {
+   "v": 1,
+   "s": 0,
+   "l": 0,
+   "d": 0,
+   "age": 7,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
+ },
+ "1231": {
+  "csm": {
+   "v": 1,
+   "s": 2,
+   "l": 3,
+   "d": 1,
+   "age": 9,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1,
+  "adj": {
+   "violence": {
+    "kind": "depicted",
+    "quote": "women hit sexist boys with sticks and other objects",
+    "why": "The food-court fight is depicted on screen."
+   }
+  }
  }
 }
