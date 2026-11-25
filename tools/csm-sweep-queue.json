@@ -8327,7 +8327,22 @@
   "missing-link",
   "spookley-the-square-pumpkin",
   "xicos-journey",
-  "barbie-princess-adventure"
+  "barbie-princess-adventure",
+  "blippis-big-dino-adventure",
+  "billy-molly-an-otter-love-story",
+  "bob-the-builder-the-legend-of-the-golden-hammer",
+  "tabby-mctat",
+  "a-go-go-cory-carson-halloween",
+  "paw-patrol-mighty-pups",
+  "chupa",
+  "hola-frida",
+  "a-ballerinas-tale",
+  "a-million-miles-away",
+  "arctic-tale",
+  "becoming",
+  "chang-can-dunk",
+  "dancing-in-the-light-the-janet-collins-story",
+  "daniel-tigers-neighborhood-tiger-family-trip"
  ],
  "skipped": [
   {
@@ -8377,37 +8392,28 @@
   {
    "slug": "nimona",
    "reason": "CSM age 11, violence 4, so its flags would be held out; not added yet"
+  },
+  {
+   "slug": "frozen-2",
+   "reason": "already in the catalog as Frozen II (#305)"
+  },
+  {
+   "slug": "star-wars-episode-vi-the-return-of-the-jedi",
+   "reason": "already in the catalog as Star Wars Episode VI: Return of the Jedi (#841)"
+  },
+  {
+   "slug": "super-monsters-vidas-first-halloween",
+   "reason": "already in the catalog as Super Monsters: Vida's First Halloween (#1183)"
+  },
+  {
+   "slug": "10-things-i-hate-about-you",
+   "reason": "CSM age 13, above this batch's age-12 maximum"
+  },
+  {
+   "slug": "crouching-tiger-hidden-dragon",
+   "reason": "held for tokim25: CSM age 12 with frequent lethal martial-arts violence, visible partial nudity and a death that may be suicide"
   }
  ],
  "notes": "210 of 216 lists read (the remaining 6 are re-found from the sitemap next time, one request). Score = how many lists read so far include the title. Titles are slug-derived placeholders. The catalog filter at crawl time matched on title text only, so already-catalogued films under different spellings can still appear; check each against every data-*.js file (match on key words, not just the full title) before reading its CSM page. Many entries are adult films, documentaries or concerts; they drop out at the CSM age check. \"read\" lists titles whose CSM page was read on 11/9 and qualify; they still need Wikipedia facts, an entry and flags.",
- "read": [
-  {
-   "slug": "blippis-big-dino-adventure",
-   "csmAge": 4
-  },
-  {
-   "slug": "billy-molly-an-otter-love-story",
-   "csmAge": 6
-  },
-  {
-   "slug": "bob-the-builder-the-legend-of-the-golden-hammer",
-   "csmAge": 3
-  },
-  {
-   "slug": "tabby-mctat",
-   "csmAge": 3
-  },
-  {
-   "slug": "a-go-go-cory-carson-halloween",
-   "csmAge": 4
-  },
-  {
-   "slug": "paw-patrol-mighty-pups",
-   "csmAge": 3
-  },
-  {
-   "slug": "chupa",
-   "csmAge": 9
-  }
- ]
+ "read": []
 }

@@ -1115,5 +1115,11 @@ const MOVIE_POSTERS = Object.freeze({
   1147: {"u":"https://upload.wikimedia.org/wikipedia/en/0/0b/El_Camino_de_Xico_poster.jpg","w":264,"h":377,"p":"El camino de Xico"},
   1148: {"u":"https://upload.wikimedia.org/wikipedia/en/f/f5/Barbie_Princess_Adventure_Film.jpg","w":316,"h":316,"p":"Barbie: Princess Adventure"},
   1150: {"u":"https://upload.wikimedia.org/wikipedia/en/c/ca/Avatar_Aang_The_Last_Airbender_poster.jpg","w":258,"h":387,"p":"Avatar Aang: The Last Airbender"},
-  1151: {"u":"https://upload.wikimedia.org/wikipedia/en/0/08/DrummerBoy.jpeg","w":260,"h":385,"p":"Drummer Boy (film)"}
+  1151: {"u":"https://upload.wikimedia.org/wikipedia/en/0/08/DrummerBoy.jpeg","w":260,"h":385,"p":"Drummer Boy (film)"},
+  1193: {"u":"https://upload.wikimedia.org/wikipedia/en/a/a8/Chupa_movie_poster.jpg","w":259,"h":384,"p":"Chupa (film)"},
+  1195: {"u":"https://upload.wikimedia.org/wikipedia/en/9/91/A_Ballerina%27s_Tale_poster.jpg","w":260,"h":384,"p":"A Ballerina's Tale"},
+  1196: {"u":"https://upload.wikimedia.org/wikipedia/en/c/c9/A_Million_Miles_Away_film_poster.png","w":250,"h":370,"p":"A Million Miles Away (film)"},
+  1197: {"u":"https://upload.wikimedia.org/wikipedia/en/9/97/Arctic_Tale_Film_Poster.jpg","w":259,"h":383,"p":"Arctic Tale"},
+  1198: {"u":"https://upload.wikimedia.org/wikipedia/en/e/ef/Becoming_%28film%29_poster.jpg","w":259,"h":383,"p":"Becoming (2020 documentary film)"},
+  1199: {"u":"https://upload.wikimedia.org/wikipedia/en/7/78/Chang_can_dunk.png","w":255,"h":378,"p":"Chang Can Dunk"}
 });
