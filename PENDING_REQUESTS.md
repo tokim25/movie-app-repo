@@ -329,6 +329,7 @@ Rate-limit note: while building a candidate list for a wider "all children's fil
 11/5/2026 — Weekly triage (scheduled trigger). Open PRs: #171 ("Backfill 5 missing posters") is still open and stale against master (already flagged on issue #5 on 10/22); nothing new to post. Merged-PR reconciliation: no PR merged in the last 8 days (the 11/4 work went to master directly), nothing to catch up. Open issues: #91 (roadmap epic) and #5 (digest), no change. Request sheet: re-read via `search_files` MAX_ALLOWED, last row is still 9/25's Puss in Boots / Forgotten Island, nothing submitted since. Discovery: Wildwood (LAIKA, stop-motion, released 10/23) is now out and has a real CSM review (read through a Vercel Sandbox, one request): CSM age 11+, PG-13, 139 minutes, with prolonged intense violence and peril, several characters killed and bodies shown, an apparent suicide, a decapitation and an impalement, plus partial nudity and one strong word. Not added: it is a borderline case like Street Fighter (10/16), so it is held for tokim25's decision. Treasure Trekkers still has no confirmed release or CSM review; not rechecked. The nightly "CSM children's-film catalog batch" scheduled task (created 11/4) fired at 09:23 UTC and ended about a minute later with no commit, no tools/csm-sweep-queue.json and no log entry, most likely because a scheduled session has no Vercel connector (the create call warned it stores none). No catalog changes this run.
 
 Co-authored with Claude.
+
 11/5/2026 (follow-up) — tokim25 approved adding Wildwood despite its CSM 11+ rating; added as num 1130 (data-extra.js): LAIKA stop-motion fantasy, PG-13, 132 min per Wikipedia (CSM lists 139), content summary leads with the opening suicide, on-screen deaths and the endangered baby, and the pre-show card carries a "Very heavy for young kids" callout. No flags stamped. Also reorganized: the 27 Sony Pictures Animation / Toy Story shorts / Grow entries moved out of data-extra.js into their own data-sonyanim.js (MOVIES_SONYANIM, source "SONYANIM") per the skill's one-file-per-curated-batch rule, wired into dataFiles, validate-data.mjs, validate-guidance.mjs, audit-content-flags.mjs, the index.html MOVIES concat (CSP hash re-stamped) and the service-worker test; the skill now documents where files live. PR #171 closed at tokim25's request. The nightly CSM batch task was deleted and recreated to run in this session (which holds the Vercel connector) after the first run did nothing. `node scripts/validate-data.mjs` and `validate-guidance.mjs` clean (1112 movies, 1092 poster entries).
 
 Co-authored with Claude.
@@ -470,3 +471,31 @@ Co-authored with Claude.
 11/25/2026 (later) — tokim25 approved Tenzing, held since 11/19. Added 1186 Tenzing (2026), CSM 10+, PG, 126 min (CSM), Apple Original Films, `addedVia: "request"`. CSM age 10 makes it a flag hold-out, so it stays unflagged and the hold is recorded in `data-flag-basis.json`. Added it to Real-life adventures, and added Hexed (1185) to Girls lead the way as tokim25 asked. No poster (Wikipedia still blocked).
 
 Co-authored with Claude.
+
+11/25/2026 (Codex catalog batch) — Added 15 backlog titles, nums 1187–1201, all with real CSM reviews and `addedVia: "discovery"`:
+
+- 1187 Blippi's Big Dino Adventure (2023), CSM 4+, 68 min, Netflix
+- 1188 Billy & Molly: An Otter Love Story (2024), CSM 6+, 77 min, National Geographic
+- 1189 Bob the Builder: The Legend of the Golden Hammer (2010), CSM 3+, 60 min, HIT Entertainment
+- 1190 Tabby McTat (2023), CSM 3+, 25 min, Magic Light Pictures
+- 1191 A Go! Go! Cory Carson Halloween (2020), CSM 4+, 24 min, Netflix
+- 1192 PAW Patrol: Mighty Pups (2019), CSM 3+, 44 min, Paramount Pictures
+- 1193 Chupa (2023), CSM 9+, 95 min, Netflix
+- 1194 Hola Frida (2025), CSM 8+, 82 min, Level 33 Entertainment
+- 1195 A Ballerina's Tale (2015), CSM 9+, 85 min, Sundance Selects
+- 1196 A Million Miles Away (2023), CSM 10+, 121 min, Prime Video
+- 1197 Arctic Tale (2007), CSM 6+, 97 min, National Geographic
+- 1198 Becoming (2020), CSM 9+, 89 min, Netflix
+- 1199 Chang Can Dunk (2023), CSM 10+, 109 min, Disney
+- 1200 Dancing in the Light: The Janet Collins Story (2015), CSM 5+, 17 min, Sweet Blackberry
+- 1201 Daniel Tiger's Neighborhood: Tiger Family Trip (2017), CSM 3+, 51 min, PBS Home Videos
+
+New releases were checked first against CSM's list updated 11/24. No new-release title needed adding: the current 2026 family releases were already cataloged, while the unmatched items were an old 2010 special or adult-oriented adaptations already logged as skips.
+
+Skipped from the queue without a CSM page request: Frozen 2, Star Wars Episode VI: Return of the Jedi and Super Monsters: Vida's First Halloween were already in the catalog under the same or normalized titles. Skipped after review: 10 Things I Hate About You is CSM 13+, above the batch maximum. Held for tokim25: Crouching Tiger, Hidden Dragon is CSM 12+ and the review describes frequent lethal martial-arts violence, visible partial nudity and a death that may be suicide.
+
+Posters were verified and added for Chupa, A Ballerina's Tale, A Million Miles Away, Arctic Tale, Becoming and Chang Can Dunk. The other nine titles have no usable Wikipedia infobox poster. CSM requests used: 19 (one local list request timed out without an HTTP response, one successful list request, seven pre-read review pages and ten ordered queue review pages); no CSM block, CAPTCHA, 403 or 429 occurred. Wikipedia/Wikimedia requests were serial and guarded as well. Queue status: 1,569 unchecked candidates remain; `read` is empty.
+
+Checks on the titles branch: bundle and DATA_VERSION regenerated; `node scripts/validate-data.mjs` passed (1,183 movies, 1,115 poster entries); `node scripts/validate-guidance.mjs` passed; 21 unit tests passed; 306 Playwright tests passed. Pull requests: [titles PR](https://github.com/tokim25/movie-app-repo/pull/224) and [flags PR](https://github.com/tokim25/movie-app-repo/pull/225). Neither was merged.
+
+Co-authored with ChatGPT.
