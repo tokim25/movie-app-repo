@@ -524,6 +524,6 @@ Skipped from the queue: The Ten Commandments was already cataloged as #1171, so 
 
 Posters were verified and added for Galaxy Quest, Good Night Oppy, October Sky, Red Army, A Cinderella Story, A Monster in Paris and A Muppets Christmas: Letters to Santa. The other eight titles have no exact Wikipedia film/special page with a usable infobox poster. CSM requests used: 20 (one new-release list, three uncataloged list reviews and sixteen ordered backlog reviews), with no block, CAPTCHA, 403 or 429. Wikipedia and Wikimedia requests were serial, guarded and normal. Queue status: 1,552 unchecked candidates remain; `read` is empty.
 
-Checks and pull requests: pending. Pull requests: [titles PR](pending) and [flags PR](pending). Neither was merged.
+Checks on both branches: bundle and DATA_VERSION regenerated; `node scripts/validate-data.mjs` passed (1,198 movies, 1,122 poster entries); `node scripts/validate-guidance.mjs` passed; 21 unit tests passed; Playwright passed with 305 tests and 1 expected skip. Pull requests: [titles PR](https://github.com/tokim25/movie-app-repo/pull/226) and [flags PR](https://github.com/tokim25/movie-app-repo/pull/227). Neither was merged.
 
 Co-authored with ChatGPT.
