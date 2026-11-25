@@ -466,3 +466,7 @@ Everything else on the list is already in the catalog, or was skipped last week 
 No poster: Wikipedia returned an error page on the one request. Flags for Hexed (v3 s1 l2 d0, no bumps) go in a separate PR. CSM requests used: 2 pages, none blocked.
 
 Co-authored with Claude.
+
+11/25/2026 (later) — tokim25 approved Tenzing, held since 11/19. Added 1186 Tenzing (2026), CSM 10+, PG, 126 min (CSM), Apple Original Films, `addedVia: "request"`. CSM age 10 makes it a flag hold-out, so it stays unflagged and the hold is recorded in `data-flag-basis.json`. Added it to Real-life adventures, and added Hexed (1185) to Girls lead the way as tokim25 asked. No poster (Wikipedia still blocked).
+
+Co-authored with Claude.

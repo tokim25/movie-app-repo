@@ -230,7 +230,7 @@ const MOVIE_LISTS = Object.freeze([
     name: 'Girls lead the way',
     copy: 'Brave choices and big ideas.',
     blurb: 'Girls taking the lead with courage, curiosity and their own point of view.',
-    pins: [303, 286, 48, 491, 118, 125, 80, 104, 650, 93, 1184]
+    pins: [303, 286, 48, 491, 118, 125, 80, 104, 650, 93, 1184, 1185]
   },
   {
     id: 'food-family-and-the-table',
@@ -353,7 +353,7 @@ const MOVIE_LISTS = Object.freeze([
     name: 'Real-life adventures',
     copy: 'Penguins, polar bears, true stories.',
     blurb: 'True stories and nature documentaries, from penguins and polar bears to a girl who hunts with an eagle.',
-    pins: [21, 471, 470, 446, 455, 478, 16, 17, 66, 61, 63, 58, 86, 85, 60, 83]
+    pins: [21, 471, 470, 446, 455, 478, 16, 17, 66, 61, 63, 58, 86, 85, 60, 83, 1186]
   },
   {
     id: 'sing-along-musicals',
