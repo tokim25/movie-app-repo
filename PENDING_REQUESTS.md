@@ -527,3 +527,31 @@ Posters were verified and added for Galaxy Quest, Good Night Oppy, October Sky, 
 Checks on both branches: bundle and DATA_VERSION regenerated; `node scripts/validate-data.mjs` passed (1,198 movies, 1,122 poster entries); `node scripts/validate-guidance.mjs` passed; 21 unit tests passed; Playwright passed with 305 tests and 1 expected skip. Pull requests: [titles PR](https://github.com/tokim25/movie-app-repo/pull/226) and [flags PR](https://github.com/tokim25/movie-app-repo/pull/227). Neither was merged.
 
 Co-authored with ChatGPT.
+
+11/25/2026 (Codex catalog batch 3) — Added 15 backlog titles, nums 1217–1231, all with real CSM reviews and `addedVia: "discovery"`:
+
+- 1217 A Tooth Fairy Tale (2025), CSM 6+, 90 min, Shout! Studios
+- 1218 Alex & Me (2018), CSM 8+, 80 min, Warner Bros.
+- 1219 All In: The Fight for Democracy (2020), CSM 11+, 102 min, Amazon Studios
+- 1220 Amazing Grace (2018), CSM 8+, 87 min, StudioCanal
+- 1221 Angela's Christmas Wish (2020), CSM 6+, 47 min, Netflix
+- 1222 Apollo 13 (1995), CSM 11+, 140 min, Universal Pictures
+- 1223 Arco (2025), CSM 8+, 89 min, Neon
+- 1224 Arrival (2016), CSM 11+, 116 min, Paramount Pictures
+- 1225 Backyard Wilderness (2018), CSM 6+, 45 min, SK Films
+- 1226 Barbie Dolphin Magic (2017), CSM 5+, 63 min, Netflix
+- 1227 Batkid Begins (2015), CSM 7+, 87 min, Warner Bros.
+- 1228 Be My Valentine, Charlie Brown (1975), CSM 3+, 25 min, Warner Bros.
+- 1229 Blue's Big City Adventure (2022), CSM 3+, 74 min, Paramount Pictures
+- 1230 Boy and the World (2013), CSM 7+, 80 min, GKIDS
+- 1231 Chak De! India (2007), CSM 9+, 149 min, Yash Raj Films
+
+New releases were checked first against CSM's current New Kids' Movies list. Every uncataloged listing was either already present under a normalized title or previously logged as an older/nonqualifying release, so this run added no new-release title and continued through the queue.
+
+No backlog candidate was skipped or held during title selection. The documented flag rule derived flags for 12 titles and held All In: The Fight for Democracy and Apollo 13 because CSM violence is 4, and Arrival because its CSM age is 11.
+
+Posters were verified and added for every title except A Tooth Fairy Tale and Backyard Wilderness, which have no exact Wikipedia page with a usable infobox poster. CSM requests used: 16 (one new-release list and fifteen ordered backlog reviews), with no block, CAPTCHA, 403 or 429. Wikipedia and Wikimedia requests were serial, guarded and normal. Queue status: 1,537 unchecked candidates remain; `read` is empty.
+
+Checks on the titles branch: bundle and DATA_VERSION regenerated; `node scripts/validate-data.mjs` passed (1,213 movies, 1,135 poster entries); `node scripts/validate-guidance.mjs` passed; 21 unit tests passed. The first full Playwright run did not pass: 303 tests passed, 1 expected skip, and two tests in `tests/curated-lists.spec.js` (lines 225 and 251) timed out after 30 seconds while `page.goto('/')` waited for load. Those exact two tests passed 2/2 on clean `origin/master`. After correcting Arrival's off-camera-death wording and removing an unsupported Angela's Christmas Wish book-adaptation pin, a full rerun reached passing build, validators and unit tests; its Playwright phase was interrupted at the requested pause and remained incomplete. After the user explicitly resumed the batch, the exact full six-command sequence passed cleanly on both titles and flags branches: 305 Playwright tests passed and 1 expected test was skipped on each branch. Pull requests: [titles PR](https://github.com/tokim25/movie-app-repo/pull/228) and [flags PR](https://github.com/tokim25/movie-app-repo/pull/229). Neither was merged.
+
+Co-authored with ChatGPT.
