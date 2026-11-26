@@ -24,14 +24,15 @@ test('visible poster images are requested eagerly', async ({ page }) => {
   await expect.poll(() => posterRequests).toBeGreaterThan(0);
 });
 
-test('movies without mapped artwork render their title and year in the poster slot', async ({ page }) => {
+test('movies without mapped artwork show a decorative placeholder beside the title and year', async ({ page }) => {
   await page.goto('/');
   await switchToFlatView(page);
   await page.locator('#search').fill('Jett Jackson: The Movie');
 
   const row = rows(page).filter({ hasText: 'Jett Jackson: The Movie' });
-  await expect(row.locator('.posterFallbackTitle')).toHaveText('Jett Jackson: The Movie');
-  await expect(row.locator('.posterFallbackYear')).toHaveText('2001');
+  await expect(row.locator('.title')).toHaveText('Jett Jackson: The Movie (2001)');
+  await expect(row.locator('.posterFallback')).toBeVisible();
+  await expect(row.locator('.posterFallback')).toBeEmpty();
 });
 
 test('a failed remote poster request keeps the poster slot and shows the fallback', async ({ page }) => {
@@ -41,8 +42,8 @@ test('a failed remote poster request keeps the poster slot and shows the fallbac
 
   await page.locator('#search').fill('Toy Story');
   const row = rows(page).filter({ hasText: 'Toy Story (1995)' });
-  await expect(row.locator('.posterFallbackTitle')).toHaveText('Toy Story');
-  await expect(row.locator('.posterFallbackYear')).toHaveText('1995');
+  await expect(row.locator('.title')).toHaveText('Toy Story (1995)');
+  await expect(row.locator('.posterFallback')).toBeVisible();
   await expect(row.locator('.posterZoom')).toHaveCount(0);
 });
 

@@ -214,9 +214,13 @@ test('passport cards show poster fans while compact seasonal contexts keep decor
   const passportCount = await passports.count();
   expect(passportCount).toBeGreaterThan(10);
   await expect(page.locator('#listsBody .passport .ppFan[aria-hidden="true"]')).toHaveCount(passportCount);
-  const fanSizes = await page.locator('#listsBody .passport .ppFan').evaluateAll(fans => fans.map(fan => fan.querySelectorAll('.ppFanPoster').length));
-  expect(fanSizes.every(size => size === 2 || size === 3)).toBe(true);
-  const frameCount = fanSizes.reduce((sum, size) => sum + size, 0);
+  const fanSizes = await passports.evaluateAll(cards => cards.map(card => ({
+    actual: card.querySelectorAll('.ppFanPoster').length,
+    expected: Math.min(3, listIndices(listById(card.dataset.list)).filter(idx => MOVIE_POSTERS[MOVIES[idx].num]?.u).length),
+  })));
+  for (const { actual, expected } of fanSizes) expect(actual).toBe(expected);
+  const frameCount = fanSizes.reduce((sum, fan) => sum + fan.expected, 0);
+  expect(frameCount).toBeGreaterThan(0);
   await expect(page.locator('#listsBody .passport .ppFanPoster img')).toHaveCount(frameCount);
   const returnCards = page.locator('#listsBody .returnCalendar');
   const returnCount = await returnCards.count();
@@ -260,7 +264,7 @@ test('collections show themed artwork when posters are unmapped or all requests 
   const thanksgiving = page.locator('#listsBody .passport[data-list="thanksgiving"]');
   await expect(thanksgiving.locator('.ppCollectionArt [data-list-icon="thanksgiving"] svg')).toBeVisible();
   await expect(thanksgiving.locator('.ppBadge')).toHaveText('Now showing');
-  await expect(thanksgiving.locator('.ppFanPoster').first()).toHaveCSS('opacity', '0');
+  await expect(thanksgiving.locator('.ppFanPoster')).toHaveCount(0);
 
   const christmas = page.locator('#listsBody .passport[data-list="christmas"]');
   await expect(christmas.locator('.ppFan img')).toHaveCount(0);
@@ -270,7 +274,7 @@ test('collections show themed artwork when posters are unmapped or all requests 
   await expect(page.locator('#listOpen .ppCollectionArt [data-list-icon="thanksgiving"] svg')).toBeVisible();
 });
 
-test('the first successful poster replaces themed artwork and failed slots keep their titles', async ({ page }) => {
+test('the first successful poster replaces themed artwork and failed posters leave the fan', async ({ page }) => {
   await page.route('https://upload.wikimedia.org/**', route => route.abort('failed'));
   let releasePoster;
   const posterReady = new Promise(resolve => {
@@ -287,14 +291,48 @@ test('the first successful poster replaces themed artwork and failed slots keep 
     await openLists(page);
     const christmas = page.locator('#listsBody .passport[data-list="christmas"]');
     await expect(christmas.locator('.ppCollectionArt')).toBeVisible();
+    await expect(christmas.locator('.ppFanPoster')).toHaveCount(1);
+    await expect(christmas.locator('.ppFanPoster')).toHaveCSS('opacity', '0');
     releasePoster();
 
     await expect(christmas.locator('.ppFanPoster.hasLoadedPoster img')).toBeVisible();
     await expect(christmas.locator('.ppCollectionArt')).toBeHidden();
-    await expect(christmas.locator('.ppFan img')).toHaveCount(1);
-    await expect(christmas.locator('.ppFan .posterFallbackTitle')).toHaveCount(2);
+    await expect(christmas.locator('.ppFanPoster')).toHaveCount(1);
   } finally {
     releasePoster();
+  }
+});
+
+test('Passover centers its only poster and shows decorative placeholders beside the full movie titles', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await stubPosters(page);
+  await startOn(page, '2026-11-26T19:00:00');
+  await watchAsAdultsOnly(page);
+  await openLists(page);
+  await page.locator('#listsBody .returnCalendar[data-list="passover"]').click();
+
+  const fan = page.locator('#listOpen .ppFan');
+  const poster = fan.locator('.ppFanPoster.hasLoadedPoster');
+  await expect(fan.locator('.ppFanPoster')).toHaveCount(1);
+  await expect(poster.locator('img')).toHaveAttribute('src', /Prince_of_egypt_ver2\.jpg$/);
+  await expect(poster).toHaveCSS('transform', 'none');
+  const centerOffset = await poster.evaluate(element => {
+    const frame = element.getBoundingClientRect();
+    const fan = element.parentElement.getBoundingClientRect();
+    return Math.abs(frame.left + frame.width / 2 - (fan.left + fan.width / 2));
+  });
+  expect(centerOffset).toBeLessThan(1);
+
+  const rows = page.locator('#openListRows > li.row');
+  await expect(rows.locator('.title')).toHaveText([
+    "Passover at Bubbe's (1998)", 'The Prince of Egypt (1998)', 'The Ten Commandments (1956)',
+  ]);
+  const placeholders = rows.locator('.posterFallback');
+  await expect(placeholders).toHaveCount(2);
+  for (const placeholder of await placeholders.all()) {
+    await expect(placeholder).toBeVisible();
+    await expect(placeholder).toBeEmpty();
+    await expect(placeholder).toHaveAttribute('aria-hidden', 'true');
   }
 });
 
@@ -305,9 +343,10 @@ test('the Now showing badge sits outside the poster fan, so the fan keeps all th
   const hero = page.locator('#listsBody .passport.hero');
   await expect(hero.locator('.ppArt > .ppBadge')).toHaveText('Now showing');
   await expect(hero.locator('.ppFan .ppBadge')).toHaveCount(0);
-  const posters = hero.locator('.ppFan .ppFanPoster');
+  const posters = hero.locator('.ppFan .ppFanPoster.hasLoadedPoster');
   await expect(posters).toHaveCount(3);
-  const lefts = await posters.evaluateAll(els => els.map(el => parseFloat(getComputedStyle(el).left)));
+  const lefts = await posters.evaluateAll(els => els.map(el => el.getBoundingClientRect().left));
+  expect(lefts[1]).toBeGreaterThan(lefts[0]);
   expect(lefts[2]).toBeGreaterThan(lefts[1]);
   const badgeZ = await hero.locator('.ppBadge').evaluate(el => Number(getComputedStyle(el).zIndex));
   expect(badgeZ).toBeGreaterThan(2);
