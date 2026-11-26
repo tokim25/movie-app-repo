@@ -272,9 +272,12 @@ test('collections show themed artwork when posters are unmapped or all requests 
 
 test('the first successful poster replaces themed artwork and failed slots keep their titles', async ({ page }) => {
   await page.route('https://upload.wikimedia.org/**', route => route.abort('failed'));
-  const { promise: releasePoster, resolve } = Promise.withResolvers();
+  let releasePoster;
+  const posterReady = new Promise(resolve => {
+    releasePoster = resolve;
+  });
   await page.route('https://upload.wikimedia.org/**/Charlie_Brown_Christmas.jpg', async route => {
-    await releasePoster;
+    await posterReady;
     await route.fulfill({ status: 200, contentType: 'image/png', body: posterPixel });
   });
   try {
@@ -284,14 +287,14 @@ test('the first successful poster replaces themed artwork and failed slots keep 
     await openLists(page);
     const christmas = page.locator('#listsBody .passport[data-list="christmas"]');
     await expect(christmas.locator('.ppCollectionArt')).toBeVisible();
-    resolve();
+    releasePoster();
 
     await expect(christmas.locator('.ppFanPoster.hasLoadedPoster img')).toBeVisible();
     await expect(christmas.locator('.ppCollectionArt')).toBeHidden();
     await expect(christmas.locator('.ppFan img')).toHaveCount(1);
     await expect(christmas.locator('.ppFan .posterFallbackTitle')).toHaveCount(2);
   } finally {
-    resolve();
+    releasePoster();
   }
 });
 
