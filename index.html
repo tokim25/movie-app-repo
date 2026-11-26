@@ -770,34 +770,20 @@ function reportError(err){
   .posterFallback{
     position:absolute;
     inset:0;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:4px;
-    padding:4px;
+    display:grid;
+    place-items:center;
     background:linear-gradient(150deg, var(--accent-soft), var(--bg-sub));
     color:var(--ink-soft);
-    font-size:9px;
-    font-weight:700;
-    line-height:1.15;
-    text-align:center;
   }
-  .posterFallbackTitle{
-    display:-webkit-box;
-    -webkit-box-orient:vertical;
-    -webkit-line-clamp:3;
-    overflow:hidden;
-    overflow-wrap:anywhere;
-  }
-  .posterFallbackYear{
-    color:var(--ink-soft);
-    font-size:8px;
-    font-weight:600;
-    font-variant-numeric:tabular-nums;
-  }
-  .pickPoster .posterFallbackTitle{
-    font-size:14px;
+  .posterFallback::before{
+    content:"";
+    width:18px;
+    height:24px;
+    border:1px solid currentColor;
+    border-radius:4px;
+    background:
+      repeating-linear-gradient(currentColor 0 2px, transparent 2px 5px) left 3px center / 2px 17px no-repeat,
+      repeating-linear-gradient(currentColor 0 2px, transparent 2px 5px) right 3px center / 2px 17px no-repeat;
   }
   .poster.safeBetPoster{
     width:48px;
@@ -873,8 +859,7 @@ function reportError(err){
   }
   /* Reserve the top of the fallback for the New ribbon (#145). */
   .poster:has(.ribbon) .posterFallback{
-    justify-content:flex-end;
-    padding-bottom:6px;
+    padding-top:18px;
   }
 
   .num{
@@ -3240,32 +3225,29 @@ function reportError(err){
   .ppId{ display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center; min-width:0; }
   .ppFan{
     position:relative;
-    display:block;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     width:112px;
     height:88px;
     flex:none;
   }
   .ppFanPoster{
-    position:absolute;
-    top:9px;
-    left:31px;
     width:50px;
     aspect-ratio:2 / 3;
+    flex:none;
     overflow:hidden;
     border:2px solid var(--surface);
     border-radius:7px;
     background:var(--bg-sub);
     box-shadow:0 6px 12px rgba(var(--shadow-rgb),0.20);
-    transform:rotate(0deg);
   }
-  .ppFanPoster:first-child{ left:5px; top:14px; transform:rotate(-7deg); }
-  .ppFanPoster:last-child{ left:57px; top:14px; transform:rotate(7deg); }
-  .ppFanPoster:nth-child(2){ z-index:2; }
-  .ppFanPoster:first-child:nth-last-child(2){ left:17px; top:13px; transform:rotate(-6deg); }
-  .ppFanPoster:first-child:nth-last-child(2) + .ppFanPoster{ left:45px; top:8px; transform:rotate(6deg); z-index:2; }
-  .ppFanPoster img{ position:relative; width:100%; height:100%; display:block; object-fit:cover; }
-  .ppFan:not(.hasLoadedPoster) .ppFanPoster,
-  .ppFanPoster:not(.hasLoadedPoster) img{ opacity:0; }
+  /* Keep pending images eligible for lazy loading and outside the visible fan. */
+  .ppFanPoster:not(.hasLoadedPoster){ position:absolute; opacity:0; pointer-events:none; }
+  .ppFanPoster.hasLoadedPoster:has(~ .hasLoadedPoster){ transform:translateY(3px) rotate(-7deg); }
+  .ppFanPoster.hasLoadedPoster ~ .hasLoadedPoster{ margin-left:-23px; transform:translateY(3px) rotate(7deg); }
+  .ppFanPoster.hasLoadedPoster ~ .hasLoadedPoster:has(~ .hasLoadedPoster){ transform:none; z-index:1; }
+  .ppFanPoster img{ width:100%; height:100%; display:block; object-fit:cover; }
   .ppCollectionArt{
     position:absolute;
     inset:0;
@@ -3273,7 +3255,7 @@ function reportError(err){
     place-items:center;
     pointer-events:none;
   }
-  .ppFan.hasLoadedPoster + .ppCollectionArt{ display:none; }
+  .ppFan:has(.hasLoadedPoster) + .ppCollectionArt{ display:none; }
   .ppCollectionArt .medal{
     width:72px;
     height:64px;
@@ -3409,8 +3391,6 @@ function reportError(err){
      putting the two actions side by side. The row itself settles near 64px. */
   #list.shelfCompact .rowLine{ gap:8px; min-height:64px; padding:8px 0; }
   #list.shelfCompact .poster.rowPoster{ width:32px; }
-  #list.shelfCompact .posterFallbackTitle{ font-size:8px; -webkit-line-clamp:2; }
-  #list.shelfCompact .poster:has(.ribbon) .posterFallbackTitle{ -webkit-line-clamp:1; }
   #list.shelfCompact .rowMain{
     display:grid;
     grid-template-columns:minmax(0, 1fr) auto;
@@ -3473,11 +3453,8 @@ function reportError(err){
   @media (max-width:360px){
     .passport{ padding:14px 12px 14px 8px; }
     .ppFan{ width:96px; height:76px; }
-    .ppFanPoster{ width:42px; left:27px; top:6px; }
-    .ppFanPoster:first-child{ left:5px; top:10px; }
-    .ppFanPoster:last-child{ left:49px; top:10px; }
-    .ppFanPoster:first-child:nth-last-child(2){ left:15px; top:10px; }
-    .ppFanPoster:first-child:nth-last-child(2) + .ppFanPoster{ left:39px; top:6px; }
+    .ppFanPoster{ width:42px; }
+    .ppFanPoster.hasLoadedPoster ~ .hasLoadedPoster{ margin-left:-18px; }
     .ppName{ font-size:17px; }
     .ppNum{ font-size:18px; white-space:nowrap; }
     .calendarRow{ gap:8px; }
@@ -5080,21 +5057,14 @@ function displayTitle(m){
   return m.y && !String(m.t).includes(String(m.y)) ? `${m.t} (${m.y})` : m.t;
 }
 
-function createPosterFallback(movie){
-  const fallback = spanText('posterFallback', '');
-  fallback.setAttribute('aria-hidden', 'true');
-  fallback.appendChild(spanText('posterFallbackTitle', movie.t));
-  if(movie.y) fallback.appendChild(spanText('posterFallbackYear', movie.y));
-  return fallback;
-}
-
 function createPoster(m, className, isNew){
   const posters = typeof MOVIE_POSTERS !== 'undefined' ? MOVIE_POSTERS : {};
   const poster = posters[m.num];
 
   const wrap = document.createElement('div');
   wrap.className = 'poster' + (className ? ' ' + className : '');
-  const fallback = createPosterFallback(m);
+  const fallback = spanText('posterFallback', '');
+  fallback.setAttribute('aria-hidden', 'true');
   wrap.appendChild(fallback);
 
   if(poster && poster.u){
@@ -5573,13 +5543,10 @@ function createListIcon(id){
   icon.innerHTML = svg;
   return icon;
 }
-// The two or three films a list's poster fan shows, in curated order,
-// preferring films that have artwork.
+// Up to three films with mapped posters, in curated order.
 function listFanMovies(list){
-  const orderedMovies = listIndices(list).map(idx => MOVIES[idx]);
-  const moviesWithArt = orderedMovies.filter(movie => typeof MOVIE_POSTERS !== 'undefined' && MOVIE_POSTERS[movie.num]?.u);
-  const moviesWithoutArt = orderedMovies.filter(movie => !moviesWithArt.includes(movie));
-  return (moviesWithArt.length >= 2 ? moviesWithArt : moviesWithArt.concat(moviesWithoutArt)).slice(0, 3);
+  if(typeof MOVIE_POSTERS === 'undefined') return [];
+  return listIndices(list).map(idx => MOVIES[idx]).filter(movie => MOVIE_POSTERS[movie.num]?.u).slice(0, 3);
 }
 // How many of the next fans to build load their posters right away at high
 // priority (the cards at the top of the screen). The rest load as they scroll in.
@@ -5591,29 +5558,21 @@ function createListPosterFan(list){
   const eager = listFanEagerBudget > 0;
   if(eager) listFanEagerBudget -= 1;
   listFanMovies(list).forEach(movie => {
+    const art = MOVIE_POSTERS[movie.num];
     const frame = document.createElement('span');
     frame.className = 'ppFanPoster';
-    const fallback = createPosterFallback(movie);
-    frame.appendChild(fallback);
+    const img = document.createElement('img');
+    img.alt = '';
+    img.loading = eager ? 'eager' : 'lazy';
+    img.decoding = 'async';
+    img.fetchPriority = eager ? 'high' : 'auto';
+    img.width = art.w || 200;
+    img.height = art.h || 300;
+    img.onload = () => frame.classList.add('hasLoadedPoster');
+    img.onerror = () => frame.remove();
+    frame.appendChild(img);
     fan.appendChild(frame);
-    const art = typeof MOVIE_POSTERS !== 'undefined' ? MOVIE_POSTERS[movie.num] : null;
-    if(art && art.u){
-      const img = document.createElement('img');
-      img.alt = '';
-      img.loading = eager ? 'eager' : 'lazy';
-      img.decoding = 'async';
-      img.fetchPriority = eager ? 'high' : 'auto';
-      img.width = art.w || 200;
-      img.height = art.h || 300;
-      img.onload = () => {
-        fallback.remove();
-        frame.classList.add('hasLoadedPoster');
-        fan.classList.add('hasLoadedPoster');
-      };
-      img.onerror = () => img.remove();
-      frame.appendChild(img);
-      img.src = art.u;
-    }
+    img.src = art.u;
   });
   return fan;
 }
@@ -10011,7 +9970,6 @@ function warmListPosters(){
   try{
     topListsForWarmup().forEach(list => listFanMovies(list).forEach(movie => {
       const art = MOVIE_POSTERS[movie.num];
-      if(!art || !art.u) return;
       const img = new Image();
       img.decoding = 'async';
       img.src = art.u;

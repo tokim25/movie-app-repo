@@ -19,7 +19,7 @@ test('app shell reloads offline once the service worker is installed', async ({ 
   }
 });
 
-test('an uncached remote poster keeps its stable title-year fallback offline (#119)', async ({ page, context }) => {
+test('an uncached remote poster keeps its decorative placeholder offline (#119)', async ({ page, context }) => {
   await page.goto('/');
   await setupSampleFamily(page);
   await page.waitForFunction(() => navigator.serviceWorker.controller !== null, null, { timeout: 15000 });
@@ -32,8 +32,8 @@ test('an uncached remote poster keeps its stable title-year fallback offline (#1
 
     const row = page.locator('#list > li.row').filter({ hasText: 'Toy Story (1995)' });
     await expect(row.locator('.poster')).toBeVisible();
-    await expect(row.locator('.posterFallbackTitle')).toHaveText('Toy Story');
-    await expect(row.locator('.posterFallbackYear')).toHaveText('1995');
+    await expect(row.locator('.posterFallback')).toBeVisible();
+    await expect(row.locator('.title')).toHaveText('Toy Story (1995)');
   } finally {
     await context.setOffline(false);
   }
