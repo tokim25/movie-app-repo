@@ -90,7 +90,7 @@ Every new title touches these files. Missing any one of them is a failed run.
 - `y` is a string. `la` and `ca` are both the CSM age, such as `"8+"`.
 - `addedAt` is today's date. It is what puts the title on the What's new tab.
 - `runtimeMinutes` comes from Wikipedia's infobox (`runtimeSourceId: "wikipedia:<Page title>"`) or, if Wikipedia has none, from the CSM page (`"commonsensemedia:<slug>"`). If neither has a runtime, skip the title and record why in `skipped`.
-- `genre` uses only the closed list in SKILL.md and always includes `Animation` or `Live-Action`. `studio` uses SKILL.md's canonical names (for example `Disney`, not `Walt Disney Pictures`).
+- `genre` uses only the closed list in SKILL.md and always includes `Animation` or `Live-Action`. `studio` uses SKILL.md's canonical names (for example `Disney`, not `Walt Disney Pictures`). For a franchise already in the catalog, match the studio its existing entries use (the Peanuts TV specials all use `CBS`), so the badge stays consistent.
 - Do not add `flags`, `csmRecheckedAt` or `csmRecheckVersion` here. The flags PR adds them.
 
 **Writing `full`.** This is the description parents read, and it is the only place sad content reaches them. Write it in your own words: no copied run of more than about five words. Cover what the film is about, then the specific scary, violent and sad moments, then language, romance and drinking where CSM mentions them, then the positive themes, and end with "Common Sense Media recommends it for ages N and up." State grief, death, a lost parent or a hurt animal plainly. Invent nothing the review does not say. Use plain sentences and no em dashes. Match the tone of the recent entries at the end of `data-extra.js`.

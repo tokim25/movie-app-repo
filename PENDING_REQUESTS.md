@@ -585,3 +585,11 @@ Verified 10 posters. No poster: Charlie Brown's All Stars! (Wikipedia has a titl
 The full local titles sequence passed: bundle and data version regenerated, 1,228 movies and 1,145 posters validated, complete guidance, 21 unit tests passed, and Playwright reported 305 passed with one expected skip. Flags derivation and the flags build, data and guidance validators, and 21 unit tests passed. The flags Playwright run reported 303 passes, one expected skip, and two failures: `tests/curated-lists.spec.js:206` (64 poster images instead of 71) and `tests/google-sync.spec.js:143` (reconnect message stayed empty after a mocked 401). Both tests passed when compared against clean `origin/master`. Flags are paused with the failures documented. Pull requests: [titles PR](https://github.com/tokim25/movie-app-repo/pull/230) and [draft flags PR](https://github.com/tokim25/movie-app-repo/pull/231).
 
 Co-authored with ChatGPT.
+
+11/26/2026 — Weekly run. Codex's four batches from 11/25 (nums 1187–1246, PRs #224–#231) are on master and validate cleanly: 1,228 movies, guidance complete, unit tests green, no duplicate titles. Fixed three studio names from those batches to match existing entries: 1228 Be My Valentine, Charlie Brown and 1232 Charlie Brown's All Stars! now use `CBS` like the other Peanuts specials, and 1215 A Monster in Paris uses `Shout! Studios` instead of the company's old name. Added a line to `docs/codex-catalog-batch.md` so future batches match a franchise's existing studio name.
+
+New releases: the request sheet has nothing after 9/25. CSM's "New Kids' Movies" list has one title not seen before, Hershey (2026), a PG biopic of Milton Hershey, CSM 10+, 108 min. A child dies on screen and the review mentions seizures and a war injury. Held for tokim25's call, as Tenzing was. Everything else on the list is already in the catalog or was skipped earlier.
+
+Posters: Wikipedia still returns 429 from this environment, so 1152–1186 and 24 of Codex's 60 titles still have no poster. CSM requests used: 2.
+
+Co-authored with Claude.
