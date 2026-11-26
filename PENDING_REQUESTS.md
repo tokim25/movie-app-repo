@@ -555,3 +555,33 @@ Posters were verified and added for every title except A Tooth Fairy Tale and Ba
 Checks on the titles branch: bundle and DATA_VERSION regenerated; `node scripts/validate-data.mjs` passed (1,213 movies, 1,135 poster entries); `node scripts/validate-guidance.mjs` passed; 21 unit tests passed. The first full Playwright run did not pass: 303 tests passed, 1 expected skip, and two tests in `tests/curated-lists.spec.js` (lines 225 and 251) timed out after 30 seconds while `page.goto('/')` waited for load. Those exact two tests passed 2/2 on clean `origin/master`. After correcting Arrival's off-camera-death wording and removing an unsupported Angela's Christmas Wish book-adaptation pin, a full rerun reached passing build, validators and unit tests; its Playwright phase was interrupted at the requested pause and remained incomplete. After the user explicitly resumed the batch, the exact full six-command sequence passed cleanly on both titles and flags branches: 305 Playwright tests passed and 1 expected test was skipped on each branch. Pull requests: [titles PR](https://github.com/tokim25/movie-app-repo/pull/228) and [flags PR](https://github.com/tokim25/movie-app-repo/pull/229). Neither was merged.
 
 Co-authored with ChatGPT.
+
+11/25/2026 (Codex catalog batch 4) — Added 15 films from the ordered backlog, nums 1232–1246. The 100-title screening pass supplied the full Common Sense Media reviews and this batch independently verified final metadata.
+
+- 1232 Charlie Brown's All Stars! (1966), CSM 4+, 25 min, Bill Melendez Productions
+- 1233 Close Encounters of the Third Kind (1977), CSM 8+, 135 min, Sony Pictures
+- 1234 Curious George: Royal Monkey (2019), CSM 3+, 86 min, Universal Pictures
+- 1235 Dance Dreams: Hot Chocolate Nutcracker (2020), CSM 8+, 80 min, Netflix
+- 1236 Dear Zindagi (2016), CSM 10+, 150 min, Red Chillies Entertainment
+- 1237 Dora and the Search for Sol Dorado (2025), CSM 8+, 96 min, Nickelodeon
+- 1238 Everybody Dance (2022), CSM 8+, 85 min, Kandoo Films
+- 1239 Freakier Friday (2025), CSM 8+, 111 min, Disney
+- 1240 Go! Go! Cory Carson: Summer Camp (2020), CSM 4+, 20 min, Netflix
+- 1241 Ice Age: The Meltdown (2006), CSM 6+, 90 min, Blue Sky Studios
+- 1242 In the Heights (2021), CSM 11+, 143 min, Warner Bros.
+- 1243 Inside the Mind of a Dog (2024), CSM 6+, 75 min, Netflix
+- 1244 Island of Lemurs: Madagascar (2014), CSM 5+, 41 min, Warner Bros.
+- 1245 It's a Wonderful Life (1946), CSM 9+, 131 min, Liberty Films
+- 1246 Jingle Jangle: A Christmas Journey (2020), CSM 8+, 122 min, Netflix
+
+New releases checked first using the current CSM list. It matched the earlier same-day snapshot, with 17 already cataloged or matched by title and 3 previously documented older or nonqualifying releases. No new release was added.
+
+Skipped: CODA (CSM age 13 exceeds the 12+ catalog ceiling); Conclave (CSM age 13 exceeds the 12+ catalog ceiling); Dead Poets Society (CSM age 13 exceeds the 12+ catalog ceiling); Dr. Seuss’ Horton Hears a Who! (already in the catalog as Horton Hears a Who! (#1132)); Elephant (already in the catalog as Elephant (2020) (#470)); Glass Onion: A Knives Out Mystery (CSM age 13 exceeds the 12+ catalog ceiling); Hamnet (CSM age 13 exceeds the 12+ catalog ceiling); Indiana Jones and the Raiders of the Lost Ark (already in the catalog as Raiders of the Lost Ark (#130)).
+
+Held in the backlog for review: Gandhi (CSM 12+ with violence scored 4. The review describes assassination, brutal beatings and a massacre.); Dear Dracula (CSM and Apple TV list 60 minutes while Prime Video lists 43 minutes. The sources do not identify which cut CSM reviewed, and no exact Wikipedia infobox resolves the discrepancy.). Automatic flags held for Dear Zindagi and In the Heights.
+
+Verified 10 posters. No poster: Charlie Brown's All Stars! (Wikipedia has a title card instead); Curious George: Royal Monkey (no usable film-specific infobox poster); Everybody Dance (no usable film-specific infobox poster); Go! Go! Cory Carson: Summer Camp (no usable film-specific infobox poster); Inside the Mind of a Dog (no usable film-specific infobox poster). One new CSM request was used for release discovery. The selected titles reused their full cached reviews from the 95-request screening pass. Wikipedia and Wikimedia checks used the shared guard with no block. Queue: 1,514 unchecked candidates remain, including the two holds. The read list is empty.
+
+The full local titles sequence passed: bundle and data version regenerated, 1,228 movies and 1,145 posters validated, complete guidance, 21 unit tests passed, and Playwright reported 305 passed with one expected skip. Flags derivation and the flags build, data and guidance validators, and 21 unit tests passed. The flags Playwright run reported 303 passes, one expected skip, and two failures: `tests/curated-lists.spec.js:206` (64 poster images instead of 71) and `tests/google-sync.spec.js:143` (reconnect message stayed empty after a mocked 401). Both tests passed when compared against clean `origin/master`. Flags are paused with the failures documented. Pull requests: [titles PR](https://github.com/tokim25/movie-app-repo/pull/230) and [draft flags PR](https://github.com/tokim25/movie-app-repo/pull/231).
+
+Co-authored with ChatGPT.
