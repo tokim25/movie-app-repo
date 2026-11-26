@@ -8372,7 +8372,22 @@
   "be-my-valentine-charlie-brown",
   "blues-big-city-adventure",
   "boy-and-the-world",
-  "chak-de-india"
+  "chak-de-india",
+  "charlie-browns-all-stars",
+  "close-encounters-of-the-third-kind",
+  "curious-george-royal-monkey",
+  "dance-dreams-hot-chocolate-nutcracker",
+  "dear-zindagi",
+  "dora-and-the-search-for-sol-dorado",
+  "everybody-dance",
+  "freakier-friday",
+  "go-go-cory-carson-summer-camp",
+  "ice-age-the-meltdown",
+  "in-the-heights",
+  "inside-the-mind-of-a-dog",
+  "island-of-lemurs-madagascar",
+  "its-a-wonderful-life",
+  "jingle-jangle-a-christmas-journey"
  ],
  "skipped": [
   {
@@ -8450,6 +8465,38 @@
   {
    "slug": "10-years-of-thomas-the-tank-engine-and-friends",
    "reason": "a collection of TV episodes, not a film, TV movie or special"
+  },
+  {
+   "slug": "coda-0",
+   "reason": "CSM age 13 exceeds the 12+ catalog ceiling"
+  },
+  {
+   "slug": "conclave",
+   "reason": "CSM age 13 exceeds the 12+ catalog ceiling"
+  },
+  {
+   "slug": "dead-poets-society",
+   "reason": "CSM age 13 exceeds the 12+ catalog ceiling"
+  },
+  {
+   "slug": "dr-seuss-horton-hears-a-who",
+   "reason": "already in the catalog as Horton Hears a Who! (#1132)"
+  },
+  {
+   "slug": "elephant-0",
+   "reason": "already in the catalog as Elephant (2020) (#470)"
+  },
+  {
+   "slug": "glass-onion-a-knives-out-mystery",
+   "reason": "CSM age 13 exceeds the 12+ catalog ceiling"
+  },
+  {
+   "slug": "hamnet",
+   "reason": "CSM age 13 exceeds the 12+ catalog ceiling"
+  },
+  {
+   "slug": "indiana-jones-and-the-raiders-of-the-lost-ark",
+   "reason": "already in the catalog as Raiders of the Lost Ark (#130)"
   }
  ],
  "notes": "210 of 216 lists read (the remaining 6 are re-found from the sitemap next time, one request). Score = how many lists read so far include the title. Titles are slug-derived placeholders. The catalog filter at crawl time matched on title text only, so already-catalogued films under different spellings can still appear; check each against every data-*.js file (match on key words, not just the full title) before reading its CSM page. Many entries are adult films, documentaries or concerts; they drop out at the CSM age check. \"read\" lists titles whose CSM page was read on 11/9 and qualify; they still need Wikipedia facts, an entry and flags.",

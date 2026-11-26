@@ -221,4 +221,6 @@ const MOVIE_PREREQUISITES = Object.freeze({
   1120: 1119,
   1123: 1122,
   1134: 13, // Zootopia 2 (2025) <- Zootopia (2016)
+  1239: 412, // Freakier Friday (2025) <- Freaky Friday (2003)
+  1241: 645, // Ice Age: The Meltdown (2006) <- Ice Age (2002)
 });
