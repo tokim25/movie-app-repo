@@ -768,29 +768,42 @@ function reportError(err){
     object-fit:cover;
   }
   .posterFallback{
-    width:100%;
-    height:100%;
+    position:absolute;
+    inset:0;
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    gap:3px;
-    background:var(--accent-soft);
+    gap:4px;
+    padding:4px;
+    background:linear-gradient(150deg, var(--accent-soft), var(--bg-sub));
     color:var(--ink-soft);
-    font-size:8px;
+    font-size:9px;
     font-weight:700;
-    line-height:1;
-    text-transform:uppercase;
+    line-height:1.15;
+    text-align:center;
+  }
+  .posterFallbackTitle{
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:3;
+    overflow:hidden;
+    overflow-wrap:anywhere;
   }
   .posterFallbackYear{
-    color:var(--ink-faint);
-    font-size:9px;
+    color:var(--ink-soft);
+    font-size:8px;
     font-weight:600;
+    font-variant-numeric:tabular-nums;
+  }
+  .pickPoster .posterFallbackTitle{
+    font-size:14px;
   }
   .poster.safeBetPoster{
     width:48px;
   }
   .posterZoom{
+    position:relative;
     display:block;
     width:100%;
     height:100%;
@@ -798,6 +811,10 @@ function reportError(err){
     border:0;
     background:none;
     cursor:zoom-in;
+  }
+  .posterZoom:disabled{
+    opacity:0;
+    pointer-events:none;
   }
   .posterViewer{
     border:0;
@@ -854,14 +871,7 @@ function reportError(err){
     border-radius:4px;
     line-height:1.2;
   }
-  /* Issue #145: the ribbon is meant to sit in the corner of a real poster
-     image, but a movie with no poster art yet shows the "Movie"/year
-     fallback text centered in that same small box instead -- at the
-     narrower poster sizes used on phones (and a folded foldable's
-     cover-screen width), that centered text collides with the ribbon
-     and the two render as illegible overlapping text. Anchoring the
-     fallback text to the bottom when a ribbon is present leaves the
-     ribbon's corner clear without needing to touch its own sizing. */
+  /* Reserve the top of the fallback for the New ribbon (#145). */
   .poster:has(.ribbon) .posterFallback{
     justify-content:flex-end;
     padding-bottom:6px;
@@ -3253,16 +3263,32 @@ function reportError(err){
   .ppFanPoster:nth-child(2){ z-index:2; }
   .ppFanPoster:first-child:nth-last-child(2){ left:17px; top:13px; transform:rotate(-6deg); }
   .ppFanPoster:first-child:nth-last-child(2) + .ppFanPoster{ left:45px; top:8px; transform:rotate(6deg); z-index:2; }
-  .ppFanPoster img{ width:100%; height:100%; display:block; object-fit:cover; }
-  .ppFanPoster.isFallback{
+  .ppFanPoster img{ position:relative; width:100%; height:100%; display:block; object-fit:cover; }
+  .ppFan:not(.hasLoadedPoster) .ppFanPoster,
+  .ppFanPoster:not(.hasLoadedPoster) img{ opacity:0; }
+  .ppCollectionArt{
+    position:absolute;
+    inset:0;
     display:grid;
     place-items:center;
-    padding:4px;
-    color:var(--ink-soft);
-    font-size:9px;
-    font-weight:700;
-    line-height:1.1;
-    text-align:center;
+    pointer-events:none;
+  }
+  .ppFan.hasLoadedPoster + .ppCollectionArt{ display:none; }
+  .ppCollectionArt .medal{
+    width:72px;
+    height:64px;
+    border-radius:20px;
+    background:color-mix(in oklab, var(--icon-3, var(--accent-soft)) 44%, var(--surface));
+    box-shadow:inset 0 0 0 1px var(--pp-line), 0 6px 12px rgba(var(--shadow-rgb),0.16);
+  }
+  .ppCollectionArt svg{ width:40px; height:40px; }
+  .ppCollectionArt .medal:empty::after{
+    content:"";
+    width:24px;
+    height:30px;
+    border:2px solid currentColor;
+    border-radius:4px;
+    box-shadow:inset 0 -7px 0 var(--cv-bg, var(--accent-soft));
   }
   /* The fan and its "Now showing" badge share a wrapper, so the badge is not
      counted among the fan's posters and sits above them. */
@@ -3383,6 +3409,8 @@ function reportError(err){
      putting the two actions side by side. The row itself settles near 64px. */
   #list.shelfCompact .rowLine{ gap:8px; min-height:64px; padding:8px 0; }
   #list.shelfCompact .poster.rowPoster{ width:32px; }
+  #list.shelfCompact .posterFallbackTitle{ font-size:8px; -webkit-line-clamp:2; }
+  #list.shelfCompact .poster:has(.ribbon) .posterFallbackTitle{ -webkit-line-clamp:1; }
   #list.shelfCompact .rowMain{
     display:grid;
     grid-template-columns:minmax(0, 1fr) auto;
@@ -5052,29 +5080,22 @@ function displayTitle(m){
   return m.y && !String(m.t).includes(String(m.y)) ? `${m.t} (${m.y})` : m.t;
 }
 
+function createPosterFallback(movie){
+  const fallback = spanText('posterFallback', '');
+  fallback.setAttribute('aria-hidden', 'true');
+  fallback.appendChild(spanText('posterFallbackTitle', movie.t));
+  if(movie.y) fallback.appendChild(spanText('posterFallbackYear', movie.y));
+  return fallback;
+}
+
 function createPoster(m, className, isNew){
   const posters = typeof MOVIE_POSTERS !== 'undefined' ? MOVIE_POSTERS : {};
   const poster = posters[m.num];
 
   const wrap = document.createElement('div');
   wrap.className = 'poster' + (className ? ' ' + className : '');
-
-  const showFallback = () => {
-    const existingZoom = wrap.querySelector('.posterZoom');
-    if(existingZoom) existingZoom.remove();
-    if(wrap.querySelector('.posterFallback')) return;
-    const fallback = document.createElement('div');
-    fallback.className = 'posterFallback';
-    fallback.setAttribute('aria-hidden', 'true');
-    const label = document.createElement('span');
-    label.textContent = 'Movie';
-    const year = document.createElement('span');
-    year.className = 'posterFallbackYear';
-    year.textContent = m.y || '';
-    fallback.appendChild(label);
-    fallback.appendChild(year);
-    wrap.prepend(fallback);
-  };
+  const fallback = createPosterFallback(m);
+  wrap.appendChild(fallback);
 
   if(poster && poster.u){
     const shouldLoadEagerly = posterEagerBudget > 0;
@@ -5086,17 +5107,20 @@ function createPoster(m, className, isNew){
     img.fetchPriority = shouldLoadEagerly ? 'high' : 'low';
     img.width = poster.w || 200;
     img.height = poster.h || 300;
-    img.onerror = showFallback;
-    img.src = poster.u;
     const zoom = document.createElement('button');
     zoom.type = 'button';
     zoom.className = 'posterZoom';
+    zoom.disabled = true;
     zoom.setAttribute('aria-label', `View larger poster for ${m.t}`);
     zoom.onclick = () => openPosterViewer(m, poster.u);
+    img.onload = () => {
+      fallback.remove();
+      zoom.disabled = false;
+    };
+    img.onerror = () => zoom.remove();
     zoom.appendChild(img);
     wrap.appendChild(zoom);
-  }else{
-    showFallback();
+    img.src = poster.u;
   }
 
   if(isNew){
@@ -5569,6 +5593,9 @@ function createListPosterFan(list){
   listFanMovies(list).forEach(movie => {
     const frame = document.createElement('span');
     frame.className = 'ppFanPoster';
+    const fallback = createPosterFallback(movie);
+    frame.appendChild(fallback);
+    fan.appendChild(frame);
     const art = typeof MOVIE_POSTERS !== 'undefined' ? MOVIE_POSTERS[movie.num] : null;
     if(art && art.u){
       const img = document.createElement('img');
@@ -5578,18 +5605,15 @@ function createListPosterFan(list){
       img.fetchPriority = eager ? 'high' : 'auto';
       img.width = art.w || 200;
       img.height = art.h || 300;
-      img.src = art.u;
-      img.onerror = () => {
-        img.remove();
-        frame.classList.add('isFallback');
-        frame.textContent = movie.y || 'Movie';
+      img.onload = () => {
+        fallback.remove();
+        frame.classList.add('hasLoadedPoster');
+        fan.classList.add('hasLoadedPoster');
       };
+      img.onerror = () => img.remove();
       frame.appendChild(img);
-    }else{
-      frame.classList.add('isFallback');
-      frame.textContent = movie.y || 'Movie';
+      img.src = art.u;
     }
-    fan.appendChild(frame);
   });
   return fan;
 }
@@ -5620,6 +5644,10 @@ function createPassport(list, opts = {}){
   id.className = 'ppId';
   const art = spanText('ppArt', '');
   art.appendChild(createListPosterFan(list));
+  const collectionArt = spanText('ppCollectionArt', '');
+  collectionArt.setAttribute('aria-hidden', 'true');
+  collectionArt.appendChild(createListMedal(list.id));
+  art.appendChild(collectionArt);
   if(opts.badge) art.appendChild(spanText('ppBadge', opts.badge));
   id.appendChild(art);
   id.appendChild(opts.nameEl || spanText('ppName', list.name));
@@ -6831,10 +6859,7 @@ function showTonightPick(candidateOverride){
   document.getElementById('tonightPickTitle').textContent = `${displayTitle(movie)}`;
   const facts = [movie.studio && movie.studio !== 'Other' ? movie.studio : '', Number.isInteger(movie.runtimeMinutes) ? formatRuntime(movie.runtimeMinutes) : '', parseAge(movie.ca) === null ? 'No CSM age' : `CSM ${movie.ca}`].filter(Boolean);
   document.getElementById('tonightPickFacts').textContent = facts.join(' · ');
-  // Only stage real art. createPoster() falls back to a bordered "Movie/year"
-  // box, which reads fine at Shelf's 42px but becomes an empty rectangle
-  // beside the title for the titles that have none. .pickStage:empty
-  // collapses the gap.
+  // If there's no mapped art, leave the stage empty so the title gets the full width.
   const stage = document.getElementById('tonightPickStage');
   if(stage){
     stage.textContent = '';

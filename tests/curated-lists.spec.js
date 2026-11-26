@@ -204,6 +204,7 @@ test('Shelf points to the Lists tab', async ({ page }) => {
 });
 
 test('passport cards show poster fans while compact seasonal contexts keep decorative icons', async ({ page }) => {
+  await stubPosters(page);
   await startOn(page, '2026-12-18T19:00:00');
   await page.locator('#tabHome').click();
   await expect(page.locator('#tonightSeasonCards .seasonCard')).toHaveCount(2);
@@ -223,6 +224,7 @@ test('passport cards show poster fans while compact seasonal contexts keep decor
 });
 
 test('a poster fan follows the collection lead-title order', async ({ page }) => {
+  await stubPosters(page);
   await startOn(page, '2026-11-16T19:00:00');
   await watchAsAdultsOnly(page);
   await openLists(page);
@@ -236,17 +238,62 @@ test('a poster fan follows the collection lead-title order', async ({ page }) =>
   expect(await card.locator('.ppFanPoster img').evaluateAll(images => images.map(image => image.getAttribute('alt')))).toEqual(['', '', '']);
 });
 
+const posterPixel = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==', 'base64');
+
 // Serve every Wikimedia poster as a 1x1 PNG so poster behaviour can be
 // checked without the network, and record which poster URLs were asked for.
 async function stubPosters(page){
-  const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==', 'base64');
   const requested = [];
   await page.route('https://upload.wikimedia.org/**', route => {
     requested.push(route.request().url());
-    return route.fulfill({ status: 200, contentType: 'image/png', body: png });
+    return route.fulfill({ status: 200, contentType: 'image/png', body: posterPixel });
   });
   return requested;
 }
+
+test('collections show themed artwork when posters are unmapped or all requests fail', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.route('https://upload.wikimedia.org/**', route => route.abort('failed'));
+  await startOn(page, '2026-11-26T19:00:00');
+  await openLists(page);
+
+  const thanksgiving = page.locator('#listsBody .passport[data-list="thanksgiving"]');
+  await expect(thanksgiving.locator('.ppCollectionArt [data-list-icon="thanksgiving"] svg')).toBeVisible();
+  await expect(thanksgiving.locator('.ppBadge')).toHaveText('Now showing');
+  await expect(thanksgiving.locator('.ppFanPoster').first()).toHaveCSS('opacity', '0');
+
+  const christmas = page.locator('#listsBody .passport[data-list="christmas"]');
+  await expect(christmas.locator('.ppFan img')).toHaveCount(0);
+  await expect(christmas.locator('.ppCollectionArt [data-list-icon="christmas"] svg')).toBeVisible();
+
+  await thanksgiving.click();
+  await expect(page.locator('#listOpen .ppCollectionArt [data-list-icon="thanksgiving"] svg')).toBeVisible();
+});
+
+test('the first successful poster replaces themed artwork and failed slots keep their titles', async ({ page }) => {
+  await page.route('https://upload.wikimedia.org/**', route => route.abort('failed'));
+  const { promise: releasePoster, resolve } = Promise.withResolvers();
+  await page.route('https://upload.wikimedia.org/**/Charlie_Brown_Christmas.jpg', async route => {
+    await releasePoster;
+    await route.fulfill({ status: 200, contentType: 'image/png', body: posterPixel });
+  });
+  try {
+    await page.clock.setFixedTime(new Date('2026-11-26T19:00:00'));
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    await setupSampleFamily(page);
+    await openLists(page);
+    const christmas = page.locator('#listsBody .passport[data-list="christmas"]');
+    await expect(christmas.locator('.ppCollectionArt')).toBeVisible();
+    resolve();
+
+    await expect(christmas.locator('.ppFanPoster.hasLoadedPoster img')).toBeVisible();
+    await expect(christmas.locator('.ppCollectionArt')).toBeHidden();
+    await expect(christmas.locator('.ppFan img')).toHaveCount(1);
+    await expect(christmas.locator('.ppFan .posterFallbackTitle')).toHaveCount(2);
+  } finally {
+    resolve();
+  }
+});
 
 test('the Now showing badge sits outside the poster fan, so the fan keeps all three posters in place', async ({ page }) => {
   await stubPosters(page);

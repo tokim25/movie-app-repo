@@ -32,7 +32,7 @@ test('an uncached remote poster keeps its stable title-year fallback offline (#1
 
     const row = page.locator('#list > li.row').filter({ hasText: 'Toy Story (1995)' });
     await expect(row.locator('.poster')).toBeVisible();
-    await expect(row.locator('.posterFallback')).toContainText('Movie');
+    await expect(row.locator('.posterFallbackTitle')).toHaveText('Toy Story');
     await expect(row.locator('.posterFallbackYear')).toHaveText('1995');
   } finally {
     await context.setOffline(false);
