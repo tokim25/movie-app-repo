@@ -1,7 +1,10 @@
 import { test, expect } from '@playwright/test';
-import { setupSampleFamily } from './helpers.js';
+import { blockOptionalGoogleAssets, setupSampleFamily } from './helpers.js';
 
 test.beforeEach(async ({ page }) => {
+  // The Tonight behavior can be tested without these optional network assets.
+  await blockOptionalGoogleAssets({ page });
+  await page.route('https://browser.sentry-cdn.com/**', route => route.abort());
   await page.goto('/');
   await setupSampleFamily(page);
 });
