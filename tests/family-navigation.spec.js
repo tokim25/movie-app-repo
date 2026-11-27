@@ -98,6 +98,14 @@ test('mobile tab bar stays horizontal after setup', async ({ page }) => {
     return box.y + box.height / 2;
   }));
   expect(Math.max(...iconCenters) - Math.min(...iconCenters)).toBeLessThan(1);
+
+  await page.getByRole('button', { name: 'Family', exact: true }).click();
+  await expect(page.locator('#tabFamily')).toHaveAttribute('aria-current', 'page');
+  const [tonightArtworkY, familyArtworkY] = await page.locator('#tabHome > svg, #tabFamily > svg').evaluateAll(icons => icons.map(icon => {
+    const artwork = icon.getBBox();
+    return artwork.y + artwork.height / 2 - icon.viewBox.baseVal.y;
+  }));
+  expect(Math.abs(familyArtworkY - tonightArtworkY)).toBeLessThan(1);
 });
 
 test('first-run setup copy is parent-facing, and the sample-family option is clearly a shortcut (#50)', async ({ page }) => {

@@ -9,7 +9,7 @@
 // was stale. Bump the version/date prefix by hand for a real code
 // change to this file; DATA_VERSION takes care of itself.
 const DATA_VERSION = 'b094a0994f';
-const CACHE_VERSION = `family-feature-v30-20261127-${DATA_VERSION}`;
+const CACHE_VERSION = `family-feature-v31-20261127-${DATA_VERSION}`;
 const APP_SHELL = [
   '/',
   '/index.html',

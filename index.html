@@ -300,24 +300,23 @@ function reportError(err){
     white-space:nowrap !important;
     border:0 !important;
   }
-  /* touch-action on the root reaches every element, so a quick double tap
-     anywhere (a title, the gap beside an icon, a row that re-renders between
-     the two taps) never triggers iOS double-tap zoom. Pinch zoom still works. */
   html{
+    --page-touch-action:pan-x pan-y;
     -webkit-text-size-adjust:100%;
     text-size-adjust:100%;
-    touch-action:manipulation;
   }
+  /* iOS WebKit uses manipulation to suppress double-tap zoom. The gesture
+     listeners below handle its separate pinch zoom events. */
+  @supports (-webkit-touch-callout:none){
+    html{ --page-touch-action:manipulation; }
+  }
+  html,button,a,.sheet,.worryTableWrap{ touch-action:var(--page-touch-action); }
   html,body{margin:0;padding:0;}
   input,
   select,
   textarea,
   button{
     font-size:16px;
-  }
-  button,
-  a{
-    touch-action:manipulation;
   }
   /* Issue #142: iOS Safari auto-zooms the page when a focused input's computed
      font-size is under 16px. The app's own inputs are already 16px (see the base
@@ -3961,7 +3960,7 @@ function reportError(err){
     <span class="qbCount" id="whatsNewTabCount" hidden></span>
   </button>
   <button type="button" class="qbBtn" id="tabFamily">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 11a4 4 0 1 0-8 0v3a4 4 0 0 0 8 0v-3z"/><path d="M7 21a7 7 0 0 1 10 0"/><path d="M4 12a3 3 0 0 1 2-2.8"/><path d="M20 12a3 3 0 0 0-2-2.8"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(0 -2)"><path d="M16 11a4 4 0 1 0-8 0v3a4 4 0 0 0 8 0v-3z"/><path d="M7 21a7 7 0 0 1 10 0"/><path d="M4 12a3 3 0 0 1 2-2.8"/><path d="M20 12a3 3 0 0 0-2-2.8"/></g></svg>
     <span>Family</span>
   </button>
 </nav>
@@ -9824,6 +9823,13 @@ document.addEventListener('click', event=>{
   if(sheet.contains(event.target) || event.target.closest('#filterSheetBtn')) return;
   closeFilterSheet({ restoreFocus:false });
 });
+
+// Safari dispatches these events for pinch gestures on touch devices.
+if(navigator.maxTouchPoints > 0 || 'ontouchstart' in window){
+  const preventPagePinch = event => event.preventDefault();
+  document.addEventListener('gesturestart', preventPagePinch, { passive:false });
+  document.addEventListener('gesturechange', preventPagePinch, { passive:false });
+}
 
 // The mobile keyboard resizing the viewport makes a raw `position:fixed` bar
 // jump/glitch unpredictably. Hide it on purpose with a real transition instead,
