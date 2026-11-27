@@ -621,3 +621,31 @@ Verified 10 posters, including the John Lewis poster that had rate-limited the e
 Both full local check sequences passed on Node.js 20. The bundle and data version were regenerated for each branch. Data validation covered 1,243 films and 1,155 posters, guidance was complete, and each branch had 21 unit test passes and 309 Playwright passes with one existing conditional skip. Pull requests: [titles PR](https://github.com/tokim25/movie-app-repo/pull/236) and [flags PR](https://github.com/tokim25/movie-app-repo/pull/237).
 
 Co-authored with ChatGPT.
+
+11/26/2026 (Codex catalog batch 6) — Added 15 films and specials from the ordered backlog, nums 1262–1276. The full reviews came from the November 25 screening pass.
+
+- 1262 Scooby-Doo! & Batman: The Brave and the Bold (2018), CSM 7+, 75 min, Warner Bros.
+- 1263 Selena (1997), CSM 10+, 127 min, Warner Bros.
+- 1264 Sherlock Holmes and the Great Escape (2019), CSM 8+, 84 min, All Rights Entertainment
+- 1265 Sherlock Jr. (1924), CSM 8+, 45 min, MGM
+- 1266 Snoopy Presents: For Auld Lang Syne (2021), CSM 3+, 38 min, CBS
+- 1267 Soul Surfer (2011), CSM 10+, 106 min, Sony Pictures
+- 1268 Stellaluna (2004), CSM 3+, 41 min, MGM
+- 1269 Super Monsters Save Halloween (2018), CSM 4+, 24 min, Netflix
+- 1270 Thabo and the Rhino Case (2023), CSM 8+, 97 min, Purdie Distribution
+- 1271 The Emperor's Newest Clothes (2018), CSM 5+, 27 min, HBO
+- 1272 The Great Escape (1963), CSM 8+, 172 min, MGM
+- 1273 The Great Race (1965), CSM 6+, 160 min, Warner Bros.
+- 1274 The Gruffalo (2009), CSM 3+, 27 min, Magic Light Pictures
+- 1275 The Magical Wand Chase: A Sesame Street Special (2017), CSM 4+, 44 min, Sesame Workshop
+- 1276 The Short Game (2013), CSM 7+, 99 min, Phase 4 Films
+
+The current CSM New Kids’ Movies list was checked first. It was unchanged and had no newly eligible release. Hershey remains held for review.
+
+Skipped Sing Street (CSM 13+) and Super Monsters: Dia de los Monsters (already in the catalog as #1182). Backlog holds remain for Dear Dracula, Gandhi, Meet the Small Potatoes, Simon Birch, Star Trek (2009), The Bride of Frankenstein, The League, The Lord of the Rings: The Fellowship of the Ring. Automatic flags are held for Selena and Soul Surfer.
+
+Verified 10 clean poster URLs. No usable Wikipedia infobox poster was available for Stellaluna, Super Monsters Save Halloween, Thabo and the Rhino Case, The Emperor's Newest Clothes, The Magical Wand Chase: A Sesame Street Special. This batch made one CSM request, three Wikipedia metadata requests and twenty Wikimedia HEAD checks, including checks with and without the image API’s attribution parameters. No guard block occurred. The queue has 1,481 unchecked candidates, and the read list is empty.
+
+The full titles sequence passed locally on Node.js 20 with 309 Playwright passes and one existing conditional skip. The flags derivation, build, data and guidance verification, and 21 unit tests passed. The flags Playwright run reported 306 passes, one existing conditional skip, and three initial page-load timeouts at `tests/offline-shell.spec.js:47`, `tests/offline-shell.spec.js:67`, and `tests/pagination.spec.js:8`. All three tests passed in a comparison on clean master. The flags PR is a draft with the failures documented. Pull requests: [titles PR](https://github.com/tokim25/movie-app-repo/pull/238) and [flags PR](https://github.com/tokim25/movie-app-repo/pull/239).
+
+Co-authored with ChatGPT.
