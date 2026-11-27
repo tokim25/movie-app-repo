@@ -4,6 +4,15 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
+// These optional assets can delay the window load event even when the app UI
+// is ready. Keep the real load event for service-worker registration and leave
+// dedicated Google sync and typography tests in control of their own requests.
+export async function blockOptionalGoogleAssets({ page }) {
+  await page.route('https://accounts.google.com/gsi/client', route => route.abort());
+  await page.route('https://fonts.googleapis.com/**', route => route.abort());
+  await page.route('https://fonts.gstatic.com/**', route => route.abort());
+}
+
 // The real catalog's most recent `addedAt` across every data-*.js file (plus
 // the base data.js), as an ISO "YYYY-MM-DD" string. Used to pin a test clock
 // inside the app's "this week or last week" window instead of depending on real
