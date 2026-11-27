@@ -8539,6 +8539,130 @@
   {
    "slug": "super-monsters-dia-de-los-monsters",
    "reason": "Already cataloged as Super Monsters: Dia de los Monsters (#1182)."
+  },
+  {
+   "slug": "a-charlie-brown-thanksgiving",
+   "reason": "Already cataloged as A Charlie Brown Thanksgiving (#1179) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "hop",
+   "reason": "Already cataloged as Hop (#1172) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "ice-age-the-great-egg-scapade",
+   "reason": "Already cataloged as Ice Age: The Great Egg-scapade (#1176) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "its-the-easter-beagle-charlie-brown",
+   "reason": "Already cataloged as It's the Easter Beagle, Charlie Brown (#1174) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "lilo-stitch-0",
+   "reason": "Already cataloged as Lilo & Stitch (#292) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "super-charlie",
+   "reason": "Already cataloged as Super-Charlie (#1154) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "the-secret-world-of-arrietty",
+   "reason": "Already cataloged as Arrietty (#831) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "tinker-bell-and-the-secret-of-the-wings",
+   "reason": "Already cataloged as Secret of the Wings (#332) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "wadjda",
+   "reason": "Already cataloged as Wadjda (#1158) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "winnie-the-pooh-seasons-of-giving",
+   "reason": "Already cataloged as Winnie the Pooh: Seasons of Giving (#1181) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "a-dogs-perfect-christmas",
+   "reason": "Already cataloged as A Dog's Perfect Christmas (#1149) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "avatar-aang-the-last-airbender",
+   "reason": "Already cataloged as Avatar Aang: The Last Airbender (#1150) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "disney-animation-collection-7-mickeys-christmas-carol",
+   "reason": "Already cataloged as Mickey's Christmas Carol (#917) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "dreamer-inspired-by-a-true-story",
+   "reason": "Already cataloged as Dreamer (#1085) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "drummer-boy",
+   "reason": "Already cataloged as Drummer Boy (#1151) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "easter-parade",
+   "reason": "Already cataloged as Easter Parade (#1178) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "flora-ulysses",
+   "reason": "Already cataloged as Flora & Ulysses (#57) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "here-comes-peter-cottontail",
+   "reason": "Already cataloged as Here Comes Peter Cottontail (#1173) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "in-the-company-of-wolves-an-american-journey",
+   "reason": "Already cataloged as In the Company of Wolves: An American Journey (#1152) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "lights",
+   "reason": "Already cataloged as Lights (#1155) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "not-my-dog",
+   "reason": "Already cataloged as Not My Dog (#1153) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "oliver-company",
+   "reason": "Already cataloged as Oliver & Company (#278) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "phineas-and-ferb-across-the-2nd-dimension",
+   "reason": "Already cataloged as Phineas and Ferb the Movie: Across the 2nd Dimension (#227) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "rugrats-in-paris",
+   "reason": "Already cataloged as Rugrats in Paris: The Movie (#547) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "superman-the-movie",
+   "reason": "Already cataloged as Superman (#681) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "the-breadwinner",
+   "reason": "Already cataloged as The Breadwinner (#1159) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "the-dog-who-saved-easter",
+   "reason": "Already cataloged as The Dog Who Saved Easter (#1177) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "the-land-before-time-iii-the-time-of-great-giving",
+   "reason": "Already cataloged as The Land Before Time III: The Time of the Great Giving (#945) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "to-all-the-boys-ive-loved-before",
+   "reason": "Already cataloged as To All the Boys I've Loved Before (#1162) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "wallace-gromit-the-curse-of-the-were-rabbit",
+   "reason": "Already cataloged as Wallace & Gromit: The Curse of the Were-Rabbit (#508) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "winnie-the-pooh-springtime-with-roo",
+   "reason": "Already cataloged as Winnie the Pooh: Springtime with Roo (#1175) with the same Common Sense Media review URL."
   }
  ],
  "notes": "210 of 216 lists read (the remaining 6 are re-found from the sitemap next time, one request). Score = how many lists read so far include the title. Titles are slug-derived placeholders. The catalog filter at crawl time matched on title text only, so already-catalogued films under different spellings can still appear; check each against every data-*.js file (match on key words, not just the full title) before reading its CSM page. Many entries are adult films, documentaries or concerts; they drop out at the CSM age check. \"read\" lists titles whose CSM page was read on 11/9 and qualify; they still need Wikipedia facts, an entry and flags.",
