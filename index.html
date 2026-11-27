@@ -3631,7 +3631,7 @@ function reportError(err){
         <div class="pickMeta" id="tonightNoMatchHeading">No confident match for these settings.</div>
         <p id="tonightNoMatchReason"></p>
         <div class="setupActions">
-          <button type="button" class="secondaryBtn" id="tonightNoMatchChangeBtn">Change who's watching</button>
+          <button type="button" class="secondaryBtn" id="tonightNoMatchChangeBtn" aria-controls="tonightWhoPop">Change who's watching</button>
           <button type="button" class="secondaryBtn" id="tonightNoMatchFamilyBtn">Review content settings</button>
           <button type="button" class="secondaryBtn" id="tonightNoMatchShelfBtn">Browse Shelf manually</button>
         </div>
@@ -6541,11 +6541,16 @@ function prerequisiteWatched(idx){
   return !!markValue(state.checked, prereqIdx);
 }
 
-function isTonightEligible(idx, kids, includeSkipped, requireGreen){
+function tonightRuntimeBlock(movie, timeLimit){
+  if(timeLimit === 999) return null;
+  if(!Number.isInteger(movie.runtimeMinutes)) return 'unknown';
+  return movie.runtimeMinutes > timeLimit ? 'too-long' : null;
+}
+
+function isTonightEligible(idx, kids, includeSkipped, requireGreen, timeLimit = tonightSelection.time){
   const movie = MOVIES[idx];
   if(!meetsAgePolicyForAllKids(movie, kids)) return false;
-  if(tonightSelection.time !== 999 &&
-      (!Number.isInteger(movie.runtimeMinutes) || movie.runtimeMinutes > tonightSelection.time)) return false;
+  if(tonightRuntimeBlock(movie, timeLimit)) return false;
   if(markValue(state.checked, idx) && tonightSelection.mood !== 'favorite') return false;
   if(!includeSkipped && tonightSelection.skippedMovieNums.has(movieKey(idx))) return false;
   // Remembers recent picks across sessions (not just this sitting's skips)
@@ -6710,10 +6715,23 @@ function findTonightCandidate(){
   // bypassing isTonightEligible() (age, watched-state, content-fit, and any
   // future runtime/certification gate) entirely -- an ineligible title could
   // be recommended with no evaluation at all. A typed no-match result is the
-  // only terminal path now; every idx this function ever returns has passed
-  // the same eligibility check as any other candidate. showTonightPick()
-  // renders this as the dedicated "No confident match" state.
-  return { idx: null, source: null, noMatch: true };
+  // only terminal path now. The unbounded time check below is diagnostic
+  // only. Every idx returned still passes the selected time limit.
+  const runtimeBlocks = new Set();
+  for(const { idx } of pool){
+    const block = tonightRuntimeBlock(MOVIES[idx], tonightSelection.time);
+    if(block && isTonightEligible(idx, kids, true, false, 999)) runtimeBlocks.add(block);
+  }
+  return { idx: null, source: null, noMatch: true, runtimeBlocks };
+}
+
+function tonightNoMatchReason(runtimeBlocks){
+  if(!MOVIES.length) return 'There are no movies in the catalog yet.';
+  if(!runtimeBlocks.size) return 'No movie on the Shelf passed Tonight’s checks for these choices and the information available.';
+  const limit = `${tonightSelection.time} minutes`;
+  if(!runtimeBlocks.has('too-long')) return `The remaining movies have no recorded runtime, so we can’t tell if they fit in ${limit}.`;
+  const unknown = runtimeBlocks.has('unknown') ? ' or have no recorded runtime' : '';
+  return `The remaining movies run longer than ${limit}${unknown}.`;
 }
 
 // Issue #78: whether tonight's pick card is showing its full CSM-style
@@ -6789,10 +6807,14 @@ function showTonightPick(candidateOverride){
     document.getElementById('tonightPickCard').style.display = 'none';
     const noMatchCard = document.getElementById('tonightNoMatchCard');
     noMatchCard.style.display = 'block';
-    document.getElementById('tonightNoMatchReason').textContent = MOVIES.length
-      ? "Nothing on the shelf fits tonight's crew and your content limits right now. That's the filter doing its job, not a glitch."
-      : 'There are no movies in the catalog yet.';
-    document.getElementById('tonightPickStatus').textContent = `No confident match. ${document.getElementById('tonightNoMatchReason').textContent}`;
+    const reason = tonightNoMatchReason(candidate.runtimeBlocks);
+    const timeBlocked = candidate.runtimeBlocks.size > 0;
+    const change = document.getElementById('tonightNoMatchChangeBtn');
+    change.textContent = timeBlocked ? 'Change time limit' : "Change who's watching";
+    change.setAttribute('aria-controls', timeBlocked ? 'tonightTimePop' : 'tonightWhoPop');
+    document.getElementById('tonightNoMatchFamilyBtn').hidden = timeBlocked;
+    document.getElementById('tonightNoMatchReason').textContent = reason;
+    document.getElementById('tonightPickStatus').textContent = `No confident match. ${reason}`;
     setFindPickMode('find');
     return;
   }
@@ -9478,9 +9500,10 @@ document.getElementById('tonightShelfBtn').addEventListener('click', ()=>{
   showScreen('browse');
 });
 
-document.getElementById('tonightNoMatchChangeBtn').addEventListener('click', ()=>{
+document.getElementById('tonightNoMatchChangeBtn').addEventListener('click', event=>{
   window.scrollTo({ top: 0, behavior: scrollBehavior() });
-  toggleTonightPop('tonightWhoPill');
+  const timeBlocked = event.currentTarget.getAttribute('aria-controls') === 'tonightTimePop';
+  toggleTonightPop(timeBlocked ? 'tonightTimePill' : 'tonightWhoPill');
 });
 
 document.getElementById('tonightNoMatchFamilyBtn').addEventListener('click', ()=>{
