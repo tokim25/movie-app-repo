@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { parseArgs } from 'node:util';
@@ -140,7 +141,12 @@ for (const [file,contents] of edits) if (file.endsWith('.js')) new vm.Script(con
 const output=path.resolve(options.output);
 fs.mkdirSync(output,{recursive:true});
 const write=(file,lines)=>fs.writeFileSync(path.join(output,file),`${lines.join('\n')}\n`);
-write('flags.json',[str(batch.map(row=>row.flag),null,2)]);
+const flagRows = str(batch.map(row => row.flag), null, 2);
+write('flags.json',[flagRows]);
+write('batch-identities.json',[str({
+  flagsSha256: createHash('sha256').update(`${flagRows}\n`).digest('hex'),
+  titles: batch.map(({movie:{num,t,y,srcUrl,full}}) => ({num,t,y,srcUrl,full})),
+}, null, 2)]);
 write('titles-table.md',[
   '| Num | Title | Year | CSM age | Runtime | Studio | Curated lists | Poster |',
   '| --- | --- | --- | --- | --- | --- | --- | --- |',
@@ -159,7 +165,8 @@ write('batch-log.md',[
   ...batch.map(({movie,poster})=>`- ${movie.num} ${movie.t} (${movie.y}), CSM ${movie.ca}, ${movie.runtimeMinutes} min, ${movie.studio}. Poster ${poster?'verified':'unavailable'}.`),
   '', ...[...held,...skipped].map(item=>`- **${item.title||item.slug}.** ${item.reason}`),
   '', `The backlog has ${remaining.toLocaleString('en-US')} unchecked candidates.`, '',
-  'Add the release scan, request count, check results, and both PR links before appending this entry to PENDING_REQUESTS.md.', '',
+  ...(manifest.releaseScan ? [`New-release scan (${manifest.releaseScan.requestsUsed} requests): ${manifest.releaseScan.note}`, ''] : []),
+  'Add the total request count, check results, and both PR links before appending this entry to PENDING_REQUESTS.md.', '',
   'Co-authored with ChatGPT.',
 ]);
 if (options.apply) for (const [file,contents] of edits) fs.writeFileSync(file,contents);
