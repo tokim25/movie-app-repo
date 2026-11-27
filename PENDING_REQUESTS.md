@@ -593,3 +593,31 @@ New releases: the request sheet has nothing after 9/25. CSM's "New Kids' Movies"
 Posters: Wikipedia still returns 429 from this environment, so 1152–1186 and 24 of Codex's 60 titles still have no poster. CSM requests used: 2.
 
 Co-authored with Claude.
+
+11/26/2026 (Codex catalog batch 5) — Added 15 titles from the ordered backlog, nums 1247–1261. The full reviews came from the November 25 screening pass.
+
+- 1247 John Lewis: Good Trouble (2020), CSM 10+, 96 min, Magnolia Pictures
+- 1248 Kensuke's Kingdom (2023), CSM 8+, 85 min, Blue Fox Entertainment
+- 1249 Kitten Party (2010), CSM 2+, 39 min, LongNeedle Entertainment
+- 1250 Knight Rusty (2013), CSM 5+, 84 min, Universal Pictures
+- 1251 Lindsey Vonn: In the Moment (2011), CSM 9+, 59 min, Fine Films
+- 1252 Lucky Duck (2014), CSM 4+, 43 min, Disney
+- 1253 Mad Hot Ballroom (2005), CSM 8+, 106 min, Paramount Classics
+- 1254 Maika: The Girl from Another Galaxy (2022), CSM 10+, 105 min, Well Go USA Entertainment
+- 1255 Maya the Bee 2: The Honey Games (2018), CSM 4+, 85 min, Shout! Studios
+- 1256 Mercury 13 (2018), CSM 10+, 78 min, Netflix
+- 1257 Mr. Holland's Opus (1995), CSM 10+, 143 min, Disney
+- 1258 National Velvet (1944), CSM 7+, 123 min, MGM
+- 1259 Pangolin: Kulu's Journey (2025), CSM 8+, 90 min, Netflix
+- 1260 Pixie Hollow Games (2011), CSM 4+, 23 min, Disney
+- 1261 Roxy Hunter and the Myth of the Mermaid (2008), CSM 8+, 91 min, Nickelodeon
+
+The fresh CSM New Kids’ Movies list was checked first. Hershey remains held for review as recorded in the weekly run. The other listings were already cataloged or previously ruled out.
+
+Skipped Knives Out because CSM recommends ages 13+. Backlog holds: Dear Dracula, Gandhi, Meet the Small Potatoes. Automatic flags are held for John Lewis: Good Trouble, Maika: The Girl from Another Galaxy, Mercury 13, Mr. Holland's Opus.
+
+Verified 10 posters, including the John Lewis poster that had rate-limited the earlier run. No film-specific Wikipedia infobox poster was available for Kitten Party, Knight Rusty, Lindsey Vonn: In the Moment, Maika: The Girl from Another Galaxy, Roxy Hunter and the Myth of the Mermaid. One new CSM request was used, plus one Wikipedia metadata request and ten Wikimedia poster checks. All twelve guarded requests succeeded. The queue has 1,498 unchecked candidates, including the unresolved backlog holds. The read list is empty.
+
+Checks: pending local verification. Pull requests: [titles PR](pending) and [flags PR](pending).
+
+Co-authored with ChatGPT.

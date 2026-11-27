@@ -8387,7 +8387,22 @@
   "inside-the-mind-of-a-dog",
   "island-of-lemurs-madagascar",
   "its-a-wonderful-life",
-  "jingle-jangle-a-christmas-journey"
+  "jingle-jangle-a-christmas-journey",
+  "john-lewis-good-trouble",
+  "kensukes-kingdom",
+  "kitten-party",
+  "knight-rusty",
+  "lindsey-vonn-in-the-moment",
+  "lucky-duck",
+  "mad-hot-ballroom",
+  "maika-the-girl-from-another-galaxy",
+  "maya-the-bee-2-the-honey-games",
+  "mercury-13",
+  "mr-hollands-opus",
+  "national-velvet",
+  "pangolin-kulus-journey",
+  "pixie-hollow-games",
+  "roxy-hunter-and-the-myth-of-the-mermaid"
  ],
  "skipped": [
   {
@@ -8497,6 +8512,10 @@
   {
    "slug": "indiana-jones-and-the-raiders-of-the-lost-ark",
    "reason": "already in the catalog as Raiders of the Lost Ark (#130)"
+  },
+  {
+   "slug": "knives-out",
+   "reason": "Common Sense Media recommends ages 13+, above the 12+ catalog ceiling."
   }
  ],
  "notes": "210 of 216 lists read (the remaining 6 are re-found from the sitemap next time, one request). Score = how many lists read so far include the title. Titles are slug-derived placeholders. The catalog filter at crawl time matched on title text only, so already-catalogued films under different spellings can still appear; check each against every data-*.js file (match on key words, not just the full title) before reading its CSM page. Many entries are adult films, documentaries or concerts; they drop out at the CSM age check. \"read\" lists titles whose CSM page was read on 11/9 and qualify; they still need Wikipedia facts, an entry and flags.",
