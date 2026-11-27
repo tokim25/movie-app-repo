@@ -687,6 +687,55 @@ test.describe('typed no-match state instead of an unvalidated fallback pick (#93
     await expect(page.locator('#tonightPickCard')).toBeVisible();
   });
 
+  for (const { name, durations, reason } of [
+    { name: 'longer movies', durations: [105], reason: 'The remaining movies run longer than 90 minutes.' },
+    { name: 'unknown runtimes', durations: [null], reason: 'The remaining movies have no recorded runtime, so we can’t tell if they fit in 90 minutes.' },
+    { name: 'longer movies and unknown runtimes', durations: [105, null], reason: 'The remaining movies run longer than 90 minutes or have no recorded runtime.' },
+    { name: 'no movies that pass the other checks', durations: [], reason: 'No movie on the Shelf passed Tonight’s checks for these choices and the information available.' },
+  ]) {
+    test(`no-match explains the time limit accurately for ${name}`, async ({ page }) => {
+      await page.evaluate((runtimes) => {
+        const indices = [];
+        const addMovie = (title, age, runtime, num) => {
+          const movie = { t: title, y: '2005', ca: age, genre: [], num, flags: { violence: 1, language: 1, romance: 1, drinking: 1 } };
+          if (runtime !== null) movie.runtimeMinutes = runtime;
+          indices.push(MOVIES.push(movie) - 1);
+        };
+        addMovie('Too Old for Tonight', '14+', 110, 9000300);
+        runtimes.forEach((runtime, i) => addMovie(`Otherwise Eligible Film ${i}`, '3+', runtime, 9000301 + i));
+        tonightSourceTiers = () => [{ source: 'Shelf', indices }];
+        resetTonightSkips();
+      }, durations);
+
+      await page.locator('#findTonightPickBtn').click();
+
+      const card = page.locator('#tonightNoMatchCard');
+      await expect(card).toBeVisible();
+      await expect(page.locator('#tonightNoMatchReason')).toHaveText(reason);
+      await expect(page.locator('#tonightPickStatus')).toHaveText(`No confident match. ${reason}`);
+      await expect(page.locator('#tonightPickCard')).toBeHidden();
+      const change = card.getByRole('button', { name: durations.length ? 'Change time limit' : "Change who's watching" });
+      await expect(change).toBeVisible();
+
+      if (name === 'longer movies') {
+        await expect(change).toHaveAttribute('aria-controls', 'tonightTimePop');
+        await expect(card.getByRole('button', { name: 'Review content settings' })).toBeHidden();
+        await change.focus();
+        await page.keyboard.press('Enter');
+        const timePop = page.locator('#tonightTimePop');
+        await expect(timePop).toBeVisible();
+        await expect(timePop.getByRole('button', { name: 'About 90 minutes' })).toBeFocused();
+        await page.keyboard.press('Escape');
+        await expect(page.locator('#tonightTimePill')).toBeFocused();
+        await change.click();
+        await expect(timePop).toBeVisible();
+        await chooseTime(page, 'Up to 2 hours');
+        await expect(card).toBeHidden();
+        await expect(page.locator('#tonightPickTitle')).toHaveText(/Otherwise Eligible Film 0/);
+      }
+    });
+  }
+
   test('no-match recovery actions open the Who popover and Browse', async ({ page }) => {
     await page.evaluate(() => {
       tonightSourceTiers = () => [{ source: 'Shelf', indices: [] }];

@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
-import { setupSampleFamily, switchToFlatView } from './helpers.js';
+import { blockOptionalGoogleAssets, setupSampleFamily, switchToFlatView } from './helpers.js';
+
+test.beforeEach(blockOptionalGoogleAssets);
 
 test('app shell reloads offline once the service worker is installed', async ({ page, context }) => {
   await page.goto('/');
