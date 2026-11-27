@@ -8663,6 +8663,70 @@
   {
    "slug": "winnie-the-pooh-springtime-with-roo",
    "reason": "Already cataloged as Winnie the Pooh: Springtime with Roo (#1175) with the same Common Sense Media review URL."
+  },
+  {
+   "slug": "a-love-song-for-latasha",
+   "reason": "A Love Song for Latasha: CSM 13+ exceeds the catalog limit of 12+. Cached review: https://www.commonsensemedia.org/movie-reviews/a-love-song-for-latasha"
+  },
+  {
+   "slug": "a-quiet-place",
+   "reason": "A Quiet Place: CSM 14+ exceeds the catalog limit of 12+. Cached review: https://www.commonsensemedia.org/movie-reviews/a-quiet-place"
+  },
+  {
+   "slug": "aftersun",
+   "reason": "Aftersun: R rating. Cached review: https://www.commonsensemedia.org/movie-reviews/aftersun"
+  },
+  {
+   "slug": "anatomy-of-a-fall",
+   "reason": "Anatomy of a Fall: R rating. Cached review: https://www.commonsensemedia.org/movie-reviews/anatomy-of-a-fall"
+  },
+  {
+   "slug": "better-man",
+   "reason": "Better Man: R rating. Cached review: https://www.commonsensemedia.org/movie-reviews/better-man"
+  },
+  {
+   "slug": "beyond-the-lights",
+   "reason": "Beyond the Lights: CSM 14+ exceeds the catalog limit of 12+. Cached review: https://www.commonsensemedia.org/movie-reviews/beyond-the-lights"
+  },
+  {
+   "slug": "bohemian-rhapsody",
+   "reason": "Bohemian Rhapsody: CSM 13+ exceeds the catalog limit of 12+. Cached review: https://www.commonsensemedia.org/movie-reviews/bohemian-rhapsody"
+  },
+  {
+   "slug": "breaking",
+   "reason": "Breaking: CSM 13+ exceeds the catalog limit of 12+. Cached review: https://www.commonsensemedia.org/movie-reviews/breaking"
+  },
+  {
+   "slug": "bridge-of-spies",
+   "reason": "Bridge of Spies: CSM 13+ exceeds the catalog limit of 12+. Cached review: https://www.commonsensemedia.org/movie-reviews/bridge-of-spies"
+  },
+  {
+   "slug": "bring-it-on",
+   "reason": "Bring It On: CSM 13+ exceeds the catalog limit of 12+. Cached review: https://www.commonsensemedia.org/movie-reviews/bring-it-on"
+  },
+  {
+   "slug": "brooklyn",
+   "reason": "Brooklyn: CSM 14+ exceeds the catalog limit of 12+. Cached review: https://www.commonsensemedia.org/movie-reviews/brooklyn"
+  },
+  {
+   "slug": "butch-cassidy-and-the-sundance-kid",
+   "reason": "Butch Cassidy and the Sundance Kid: CSM 13+ exceeds the catalog limit of 12+. Cached review: https://www.commonsensemedia.org/movie-reviews/butch-cassidy-and-the-sundance-kid"
+  },
+  {
+   "slug": "clueless",
+   "reason": "Clueless: CSM 13+ exceeds the catalog limit of 12+. Cached review: https://www.commonsensemedia.org/movie-reviews/clueless"
+  },
+  {
+   "slug": "coming-2-america",
+   "reason": "Coming 2 America: CSM 13+ exceeds the catalog limit of 12+. Cached review: https://www.commonsensemedia.org/movie-reviews/coming-2-america"
+  },
+  {
+   "slug": "devotion",
+   "reason": "Devotion: CSM 13+ exceeds the catalog limit of 12+. Cached review: https://www.commonsensemedia.org/movie-reviews/devotion"
+  },
+  {
+   "slug": "dune",
+   "reason": "Dune: CSM 13+ exceeds the catalog limit of 12+. Cached review: https://www.commonsensemedia.org/movie-reviews/dune"
   }
  ],
  "notes": "210 of 216 lists read (the remaining 6 are re-found from the sitemap next time, one request). Score = how many lists read so far include the title. Titles are slug-derived placeholders. The catalog filter at crawl time matched on title text only, so already-catalogued films under different spellings can still appear; check each against every data-*.js file (match on key words, not just the full title) before reading its CSM page. Many entries are adult films, documentaries or concerts; they drop out at the CSM age check. \"read\" lists titles whose CSM page was read on 11/9 and qualify; they still need Wikipedia facts, an entry and flags.",
