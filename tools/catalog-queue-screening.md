@@ -14,6 +14,8 @@ The scanner resolves exact review URL duplicates locally. Possible title matches
 
 The main checkout’s gitignored `.scratch-csm-cache/` holds the full reviews and per-window JSON reports. Rerun the same command with the same cache to resume. A blocked or malformed response stops the scan and preserves the completed work. The scanner uses the shared CSM rate guard and spaces requests at least 7.1 seconds apart. `--offline` performs the same local checks and writes a separate report without making source requests.
 
+Each window also writes a `-next-15.json` packet in queue order. It contains the first 15 records requiring editorial or metadata review. The packet’s `complete` field indicates whether the full window was screened.
+
 ## Prepare a titles batch
 
 Review the candidate’s actual source and confirm the release, runtime, credits, and poster before approving it. Use the compact record’s labeled excerpts for the parent-facing notes. The cached full review is available for context and for checking a proposed flag adjustment.

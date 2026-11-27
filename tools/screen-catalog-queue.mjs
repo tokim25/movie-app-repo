@@ -257,5 +257,8 @@ try {
 } finally {
   if (locked) fs.rmSync(lock,{force:true});
 }
-const {results:_rows,...summary}=saveReport();
-console.log(JSON.stringify({...summary,reportFile},null,2));
+const {results:rows,...summary}=saveReport();
+const packetFile=reportFile.replace(/\.json$/,'-next-15.json');
+const packet=rows.filter(row=>['editorial-candidate','review-metadata'].includes(row.status)).slice(0,15);
+writeAtomic(packetFile,`${JSON.stringify({revision,offset,complete:rows.length===window.length&&!stopped,results:packet},null,2)}\n`);
+console.log(JSON.stringify({...summary,reportFile,packetFile},null,2));
