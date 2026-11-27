@@ -1,17 +1,14 @@
-import { execFileSync, spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
-import { setTimeout } from 'node:timers/promises';
-import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 import vm from 'node:vm';
 import { dataFiles } from '../scripts/data-version.mjs';
 
-const repo = fileURLToPath(new URL('../', import.meta.url));
+import { catalogCacheDirectory, git, pendingQueue, readEvidence, slugPattern, writeAtomic, writeEvidence } from './catalog-evidence.mjs';
+import { catalogSourceRequests } from './catalog-source-requests.mjs';
 const site = 'https://www.commonsensemedia.org';
-const slugPattern = /^[a-z0-9-]+$/;
 const reviewPath = /^\/(movie|tv)-reviews\/([a-z0-9-]+)\/?$/;
-const interval = 7100;
 const categories = ['violence','sex','language','drugs'];
 const excerptCategories = new Set([...categories,'message','role_model','diversity','education']);
 const mediaTypes = ['Movie','TVSeries','TVEpisode','TVSeason','VideoObject'];
@@ -22,33 +19,40 @@ const { values: options } = parseArgs({ options: {
   cache: { type:'string' },
   'import-cache': { type:'string', multiple:true, default:[] },
   held: { type:'string', multiple:true, default:[] },
+  'hold-reason': { type:'string' },
+  'clear-hold': { type:'string', multiple:true, default:[] },
+  'release-slug': { type:'string', multiple:true, default:[] },
+  'request-budget': { type:'string', default:'1000' },
   offline: { type:'boolean' },
   help: { type:'boolean' },
 }});
 if (options.help) {
-  console.log('Usage: node tools/screen-catalog-queue.mjs [--ref origin/master] [--limit 100] [--offset 0] [--cache DIR] [--import-cache DIR] [--held SLUG] [--offline]');
+  console.log('Usage: node tools/screen-catalog-queue.mjs [--ref origin/master] [--limit 100] [--offset 0] [--cache DIR] [--import-cache DIR] [--held SLUG --hold-reason REASON] [--clear-hold SLUG] [--release-slug SLUG --request-budget N] [--offline]');
   process.exit(0);
 }
 const limit = Number(options.limit);
 const offset = Number(options.offset);
 if (!Number.isSafeInteger(limit) || limit < 1 || !Number.isSafeInteger(offset) || offset < 0) throw new Error('Use a positive integer limit and a nonnegative integer offset.');
 
-const git = (...args) => execFileSync('git', args, { cwd:repo, encoding:'utf8', maxBuffer:16*1024*1024 }).trimEnd();
 const revision = git('rev-parse','--verify','--end-of-options',`${options.ref}^{commit}`);
-const mainWorktree = path.dirname(git('rev-parse','--path-format=absolute','--git-common-dir'));
-const cache = path.resolve(options.cache ?? path.join(mainWorktree,'.scratch-csm-cache'));
+const cache = catalogCacheDirectory(options.cache);
 const sources = [...new Set(options['import-cache'].map(directory => path.resolve(directory)))];
-const rateState = path.resolve(process.env.CSM_RATE_STATE_FILE || path.join(mainWorktree,'.csm-rate-state.json'));
-const guardEnv = {...process.env, CSM_RATE_STATE_FILE:rateState};
+const requests = catalogSourceRequests();
 const held = new Set(options.held);
-const atRevision = file => git('show', `${revision}:${file}`);
-const queue = JSON.parse(atRevision('tools/csm-sweep-queue.json'));
-const resolved = new Set([...queue.done,...queue.skipped.map(row=>row.slug)]);
-const unchecked = new Map();
-for (const row of [...queue.read,...queue.candidates]) {
-  if (!resolved.has(row.slug) && !unchecked.has(row.slug)) unchecked.set(row.slug,row);
+const releases = [...new Set(options['release-slug'])];
+const budget = Number(options['request-budget']);
+const reviewParserVersion = 1;
+if (!Number.isSafeInteger(budget) || budget < 0 || releases.length > 15 || (releases.length && budget > 15)) {
+  throw new Error('Use a nonnegative request budget. Release mode allows at most 15 nominations and requires a budget of 15 or less.');
 }
-const window = [...unchecked.values()].slice(offset,offset+limit);
+for (const slug of [...held, ...options['clear-hold'], ...releases]) {
+  if (!slugPattern.test(slug)) throw new Error(`Invalid catalog slug: ${slug}`);
+}
+const atRevision = file => git('show', `${revision}:${file}`);
+const { resolved, unchecked } = pendingQueue(JSON.parse(atRevision('tools/csm-sweep-queue.json')));
+const window = releases.length
+  ? releases.filter(slug => !resolved.has(slug)).map(slug => ({ slug }))
+  : [...unchecked.values()].slice(offset,offset+limit);
 const catalog = dataFiles.flatMap(file => {
   const source = atRevision(file);
   const array = /\bconst (MOVIES_[A-Z_]+)\s*=\s*\[/.exec(source)?.[1];
@@ -56,14 +60,14 @@ const catalog = dataFiles.flatMap(file => {
 });
 if (!catalog.length) throw new Error(`No catalog entries found on ${revision}`);
 
-function reviewSlug(address) {
+function reviewIdentity(address) {
   if (!address) return null;
   try {
     const url = new URL(address,site);
-    return url.origin === site ? reviewPath.exec(url.pathname)?.[2] ?? null : null;
+    return url.origin === site && !url.username && !url.password && reviewPath.test(url.pathname) ? url.pathname.replace(/\/$/, '') : null;
   } catch { return null; }
 }
-const bySlug = new Map(catalog.filter(movie => reviewSlug(movie.srcUrl)).map(movie=>[reviewSlug(movie.srcUrl),movie]));
+const byReview = new Map(catalog.filter(movie => reviewIdentity(movie.srcUrl)).map(movie=>[reviewIdentity(movie.srcUrl),movie]));
 const normalize = text => text.normalize('NFKD').replace(/\p{M}|[’']/gu,'').toLowerCase().replace(/&/g,' and ')
   .replace(/[^\p{L}\p{N}]+/gu,' ').trim().replace(/^(a|an|the)\s+/,'');
 const omit = new Set(['and','of','in','on','for','to','a','the']);
@@ -95,7 +99,7 @@ function parseReview(html, fallbackUrl) {
   const media=nodes.find(node=>mediaTypes.includes(node?.['@type']));
   const canonical=html.match(/<link\s+rel=["']canonical["']\s+href=["']([^"']+)["']/i)?.[1] ?? fallbackUrl;
   const title=clean(media?.name ?? html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)?.[1]);
-  if (!title || !reviewSlug(canonical) || (!media && !/\bcsm_review_target_title\b|Parents Need to Know/i.test(html))) return null;
+  if (!title || !reviewIdentity(canonical) || (!media && !/\bcsm_review_target_title\b|Parents Need to Know/i.test(html))) return null;
   const age=Number(media?.audience?.suggestedMinAge ?? html.match(/"csm_review_rating_age"\s*:\s*"?(\d+)/)?.[1]);
   const scores=Object.fromEntries(categories.map(key=>[key,Number(html.match(new RegExp(`"csm_review_rating_details_${key}"\\s*:\\s*"?(\\d+)`))?.[1])]));
   const duration=/^PT(?:(\d+)H)?(?:(\d+)M)?$/i.exec(media?.duration ?? '');
@@ -118,72 +122,40 @@ function parseReview(html, fallbackUrl) {
   };
 }
 
-function writeAtomic(file,data) {
-  const temporary=`${file}.${process.pid}.tmp`;
-  fs.writeFileSync(temporary,data);
-  fs.renameSync(temporary,file);
-}
-function guard(verb,...args) {
-  const result=spawnSync(process.execPath,['scripts/csm-rate-guard.mjs',verb,...args],{cwd:repo,env:guardEnv,encoding:'utf8'});
-  if (result.status!==0) throw new Error((result.stderr||result.error?.message||`Cannot ${verb} rate guard`).trim());
-}
 let fetched=0;
 let reused=0;
 let stopped='';
 let interrupted=false;
 const results=[];
-const reportFile=path.join(cache,`screen-${revision.slice(0,10)}-${offset}-${limit}${options.offline?'-offline':''}.json`);
-const lastRequest=path.join(path.dirname(rateState),`.scratch-${path.basename(rateState)}-last-request`);
-const lock=`${rateState}.screen.lock`;
-function enterLock() {
-  try { fs.writeFileSync(lock,String(process.pid),{flag:'wx'}); }
-  catch (error) {
-    if (error.code!=='EEXIST') throw error;
-    const owner=Number(fs.readFileSync(lock,'utf8'));
-    if (!Number.isInteger(owner) || owner<=0) throw error;
-    try { process.kill(owner,0); }
-    catch (probe) {
-      if (probe.code!=='ESRCH') throw probe;
-      fs.unlinkSync(lock);
-      fs.writeFileSync(lock,String(process.pid),{flag:'wx'});
-      return;
-    }
-    throw new Error(`A catalog screen is already running (PID ${owner}).`);
-  }
-}
-function block(message) {
-  guard('signal-block',message);
-  throw new Error(message);
-}
+const reportKey = releases.length ? `releases-${createHash('sha256').update(releases.join('|')).digest('hex').slice(0, 12)}` : `${offset}-${limit}`;
+const reportFile=path.join(cache,`screen-${revision.slice(0,10)}-${reportKey}${options.offline?'-offline':''}.json`);
 const fetchUrl = slug => `${site}/movie-reviews/${slug}`;
 async function fetchReview(slug, index) {
-  guard('checkpoint',`catalog screen ${index+1}/${window.length}: ${slug}`);
+  requests.checkpoint(`catalog screen ${index+1}/${window.length}: ${slug}`);
   let url=fetchUrl(slug);
   const htmlFile=path.join(cache,`${slug}.html`);
   const temporary=`${htmlFile}.${process.pid}.download`;
   try {
     for (let redirects=0; redirects<=2; redirects++) {
-      const last=fs.existsSync(lastRequest) ? Number(fs.readFileSync(lastRequest,'utf8')) : 0;
-      await setTimeout(Math.max(0,interval+last-Date.now()));
-      if (interrupted) throw new Error('Interrupted before the next source request.');
-      guard('acquire');
-      writeAtomic(lastRequest,String(Date.now()));
-      fetched++;
-      saveReport();
-      const response=spawnSync('curl',['--silent','--show-error','--compressed','--connect-timeout','12','--max-time','28',
-        '--user-agent','movie-catalog-research/1.0','--output',temporary,'--write-out','%{http_code}\n%{redirect_url}',url],{encoding:'utf8'});
-      if (response.status!==0) throw new Error(`Transport error for ${slug}: ${response.stderr || response.error?.message}`);
-      const [status,redirect]=response.stdout.trim().split('\n');
-      if (/^30[1278]$/.test(status)&&reviewSlug(redirect)&&redirects<2) { url=new URL(redirect,site).href; continue; }
-      if (status!=='200') block(`CSM HTTP ${status} for ${slug}`);
+      if (fetched >= budget) throw new Error(`Configured request budget reached (${fetched}/${budget}).`);
+      const { status, redirect } = await requests.request(url, {
+        kind: 'csm', body: temporary, interrupted: () => interrupted,
+        started: () => { fetched++; },
+      });
+      if (/^30[1278]$/.test(status)&&reviewIdentity(redirect)&&redirects<2) { url=new URL(redirect,site).href; continue; }
+      if (status!=='200') requests.block(`CSM HTTP ${status} for ${slug}`);
       const review=parseReview(fs.readFileSync(temporary,'utf8'),url);
-      if (!review) block(`CSM returned an unrecognized review page for ${slug}`);
+      if (!review) requests.block(`CSM returned an unrecognized review page for ${slug}`);
       fs.renameSync(temporary,htmlFile);
       return review;
     }
   } finally { fs.rmSync(temporary,{force:true}); }
 }
-function cachedReview(slug) {
+function cachedReview(slug, evidence) {
+  if (evidence?.review?.parserVersion === reviewParserVersion && fs.existsSync(evidence.review.rawPath)) {
+    const mtime = fs.statSync(evidence.review.rawPath).mtimeMs;
+    if (mtime === evidence.review.mtime) return evidence.review;
+  }
   const filename=`${slug}.html`;
   for (const directory of [cache,...sources]) {
     const file=path.join(directory,filename);
@@ -197,28 +169,34 @@ function cachedReview(slug) {
       writeAtomic(destination,html);
       fs.utimesSync(destination,new Date(fetchedAt),new Date(fetchedAt));
     }
-    return {review,fetchedAt};
+    const rawPath=path.join(cache,filename);
+    return {review,fetchedAt,rawPath,mtime:fs.statSync(rawPath).mtimeMs,parserVersion:reviewParserVersion};
   }
   return null;
 }
 async function screen(row,index) {
   const {slug}=row;
   if (!slugPattern.test(slug)) throw new Error(`Invalid queue slug ${slug}`);
-  const existing=bySlug.get(slug);
+  const existing=byReview.get(reviewIdentity(fetchUrl(slug)));
   if (existing) return {status:'duplicate',num:existing.num,title:existing.t};
-  if (held.has(slug)) return {status:'held',reason:'Previously held for editorial review.'};
+  const evidence = readEvidence(cache, slug);
+  if (evidence?.decision?.action === 'held') return {status:'held',reason:evidence.decision.reason};
   const possible=titleMatches(row.title || slug);
-  const saved=cachedReview(slug);
+  const saved=cachedReview(slug,evidence);
   if (!saved && options.offline) return {status:'needs-fetch',...(possible.length ? {possible} : {})};
   if (saved) reused++;
   const review=saved?.review ?? await fetchReview(slug,index);
-  const fetchedAt=saved?.fetchedAt ?? new Date().toISOString();
-  const duplicate=bySlug.get(reviewSlug(review.url));
+  const rawPath = path.join(cache, `${slug}.html`);
+  const fetchedAt=saved?.fetchedAt ?? fs.statSync(rawPath).mtime.toISOString();
+  if (saved !== evidence?.review || !saved) {
+    writeEvidence(cache, slug, 'review', saved ?? { review, fetchedAt, rawPath, mtime: fs.statSync(rawPath).mtimeMs, parserVersion: reviewParserVersion });
+  }
+  const duplicate=byReview.get(reviewIdentity(review.url));
   if (duplicate) return {status:'duplicate',num:duplicate.num,title:duplicate.t};
   const source={title:review.title,url:review.url,fetchedAt,age:review.age,rating:review.rating,type:review.type};
   if (/^(R|NC[-– ]?17)$/i.test(review.rating.trim())) return {status:'ineligible',reason:'R or NC-17 rating.',...source};
   if (review.age>12) return {status:'ineligible',reason:'CSM age above 12.',...source};
-  if (['TVSeries','TVSeason'].includes(review.type)) return {status:'ineligible',reason:'Series or season.',...source};
+  if (['TVSeries','TVSeason','TVEpisode'].includes(review.type)) return {status:'ineligible',reason:'Series, season, or episode.',...source};
   const matches=titleMatches(review.title);
   const dates=[review.release.theatrical,review.release.streaming].map(value=>Date.parse(value)).filter(Number.isFinite);
   const reasons=[];
@@ -230,24 +208,30 @@ async function screen(row,index) {
   if (matches.length) reasons.push('Possible catalog match.');
   return {status:reasons.length?'review-metadata':'editorial-candidate',reasons,...review,fetchedAt,possible:matches};
 }
-function saveReport() {
+function summarize() {
   const counts={};
   for (const row of results) counts[row.status]=(counts[row.status]??0)+1;
   const report={revision,offset,limit,unchecked:unchecked.size,window:window.length,processed:results.length,fetched,reused,counts,stopped:stopped||null,results};
-  writeAtomic(reportFile,`${JSON.stringify(report,null,2)}\n`);
   return report;
 }
 
 fs.mkdirSync(cache,{recursive:true,mode:0o700});
-let locked=false;
 try {
-  if (!options.offline) { enterLock(); locked=true; }
+  if (!options.offline) requests.enter();
+  for (const slug of held) {
+    if (readEvidence(cache, slug)?.decision?.action === 'held' && !options['hold-reason']) continue;
+    writeEvidence(cache, slug, 'decision', { action: 'held', at: new Date().toISOString(), reason: options['hold-reason']?.trim() || 'Previously held for editorial review.' });
+  }
+  for (const slug of options['clear-hold']) {
+    writeEvidence(cache, slug, 'decision', { action: 'cleared', at: new Date().toISOString() });
+  }
   for (const signal of ['SIGINT','SIGTERM']) process.once(signal,()=>{interrupted=true;});
   for (const [index,row] of window.entries()) {
     if (interrupted) throw new Error('Interrupted before the next candidate.');
     const result=await screen(row,index);
-    results.push({slug:row.slug,...result});
-    saveReport();
+    const screened = {slug:row.slug,...result};
+    if (result.status !== 'needs-fetch' || readEvidence(cache, row.slug)?.screen) writeEvidence(cache, row.slug, 'screen', { revision, checkedAt: new Date().toISOString(), row: screened });
+    results.push(screened);
     if (!options.offline) console.log(`${index+1}/${window.length} ${row.slug} ${result.status}`);
   }
 } catch (error) {
@@ -255,9 +239,11 @@ try {
   console.error(stopped);
   process.exitCode=2;
 } finally {
-  if (locked) fs.rmSync(lock,{force:true});
+  requests.close();
 }
-const {results:rows,...summary}=saveReport();
+const report = summarize();
+writeAtomic(reportFile,`${JSON.stringify(report,null,2)}\n`);
+const {results:rows,...summary}=report;
 const packetFile=reportFile.replace(/\.json$/,'-next-15.json');
 const packet=rows.filter(row=>['editorial-candidate','review-metadata'].includes(row.status)).slice(0,15);
 writeAtomic(packetFile,`${JSON.stringify({revision,offset,complete:rows.length===window.length&&!stopped,results:packet},null,2)}\n`);
