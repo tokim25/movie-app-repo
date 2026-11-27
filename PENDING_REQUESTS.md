@@ -646,6 +646,6 @@ Skipped Sing Street (CSM 13+) and Super Monsters: Dia de los Monsters (already i
 
 Verified 10 clean poster URLs. No usable Wikipedia infobox poster was available for Stellaluna, Super Monsters Save Halloween, Thabo and the Rhino Case, The Emperor's Newest Clothes, The Magical Wand Chase: A Sesame Street Special. This batch made one CSM request, three Wikipedia metadata requests and twenty Wikimedia HEAD checks, including checks with and without the image API’s attribution parameters. No guard block occurred. The queue has 1,481 unchecked candidates, and the read list is empty.
 
-Checks: pending local verification. Pull requests: [titles PR](pending) and [flags PR](pending).
+The full titles sequence passed locally on Node.js 20 with 309 Playwright passes and one existing conditional skip. The flags derivation, build, data and guidance verification, and 21 unit tests passed. The flags Playwright run reported 306 passes, one existing conditional skip, and three initial page-load timeouts at `tests/offline-shell.spec.js:47`, `tests/offline-shell.spec.js:67`, and `tests/pagination.spec.js:8`. All three tests passed in a comparison on clean master. The flags PR is a draft with the failures documented. Pull requests: [titles PR](https://github.com/tokim25/movie-app-repo/pull/238) and [flags PR](https://github.com/tokim25/movie-app-repo/pull/239).
 
 Co-authored with ChatGPT.
