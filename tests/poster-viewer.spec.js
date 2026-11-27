@@ -45,6 +45,21 @@ test('tapping a Shelf poster opens a larger view that closes on tap or Escape', 
   await expect(viewer).toBeHidden();
 });
 
+test('the enlarged poster can be closed on a landscape phone', async ({ page }) => {
+  await page.setViewportSize({ width: 844, height: 390 });
+  await page.locator('#tabBrowse').click();
+  const zoom = page.locator('#list .posterZoom').first();
+  await zoom.click();
+
+  const viewer = page.locator('#posterViewer');
+  await expect(viewer.locator('img')).toHaveJSProperty('naturalWidth', 1);
+  const close = viewer.getByRole('button', { name: 'Close poster' });
+  await expect(close).toBeInViewport({ ratio: 1 });
+  await close.click();
+  await expect(viewer).toBeHidden();
+  await expect(zoom).toBeFocused();
+});
+
 test('the Tonight pick poster can be enlarged too', async ({ page }) => {
   await page.locator('#tabHome').click();
   await page.locator('#findTonightPickBtn').click();
