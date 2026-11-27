@@ -8402,7 +8402,22 @@
   "national-velvet",
   "pangolin-kulus-journey",
   "pixie-hollow-games",
-  "roxy-hunter-and-the-myth-of-the-mermaid"
+  "roxy-hunter-and-the-myth-of-the-mermaid",
+  "scooby-doo-batman-the-brave-and-the-bold",
+  "selena",
+  "sherlock-holmes-and-the-great-escape",
+  "sherlock-jr",
+  "snoopy-presents-for-auld-lang-syne",
+  "soul-surfer",
+  "stellaluna",
+  "super-monsters-save-halloween",
+  "thabo-and-the-rhino-case",
+  "the-emperors-newest-clothes",
+  "the-great-escape",
+  "the-great-race",
+  "the-gruffalo",
+  "the-magical-wand-chase-a-sesame-street-special",
+  "the-short-game"
  ],
  "skipped": [
   {
@@ -8516,6 +8531,14 @@
   {
    "slug": "knives-out",
    "reason": "Common Sense Media recommends ages 13+, above the 12+ catalog ceiling."
+  },
+  {
+   "slug": "sing-street",
+   "reason": "CSM recommends ages 13+, above the 12+ catalog ceiling."
+  },
+  {
+   "slug": "super-monsters-dia-de-los-monsters",
+   "reason": "Already cataloged as Super Monsters: Dia de los Monsters (#1182)."
   }
  ],
  "notes": "210 of 216 lists read (the remaining 6 are re-found from the sitemap next time, one request). Score = how many lists read so far include the title. Titles are slug-derived placeholders. The catalog filter at crawl time matched on title text only, so already-catalogued films under different spellings can still appear; check each against every data-*.js file (match on key words, not just the full title) before reading its CSM page. Many entries are adult films, documentaries or concerts; they drop out at the CSM age check. \"read\" lists titles whose CSM page was read on 11/9 and qualify; they still need Wikipedia facts, an entry and flags.",
