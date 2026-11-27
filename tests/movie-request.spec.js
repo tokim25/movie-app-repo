@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
-import { setupSampleFamily } from './helpers.js';
+import { blockOptionalGoogleAssets, setupSampleFamily } from './helpers.js';
+
+test.beforeEach(blockOptionalGoogleAssets);
 
 async function submitRequest(page, selector, title = 'The Test Movie') {
   const input = page.locator(selector);

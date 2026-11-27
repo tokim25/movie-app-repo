@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
-import { setupSampleFamily } from './helpers.js';
+import { blockOptionalGoogleAssets, setupSampleFamily } from './helpers.js';
+
+test.beforeEach(blockOptionalGoogleAssets);
 
 // Shelf grows in place: "Show 50 more" adds the next 50 below the ones
 // already shown (replacing the old Previous / Next pages, issue #143), and
