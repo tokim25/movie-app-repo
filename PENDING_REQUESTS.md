@@ -649,3 +649,7 @@ Verified 10 clean poster URLs. No usable Wikipedia infobox poster was available 
 The full titles sequence passed locally on Node.js 20 with 309 Playwright passes and one existing conditional skip. The flags derivation, build, data and guidance verification, and 21 unit tests passed. The flags Playwright run reported 306 passes, one existing conditional skip, and three initial page-load timeouts at `tests/offline-shell.spec.js:47`, `tests/offline-shell.spec.js:67`, and `tests/pagination.spec.js:8`. All three tests passed in a comparison on clean master. The flags PR is a draft with the failures documented. Pull requests: [titles PR](https://github.com/tokim25/movie-app-repo/pull/238) and [flags PR](https://github.com/tokim25/movie-app-repo/pull/239).
 
 Co-authored with ChatGPT.
+
+11/27/2026 (Codex backlog cleanup) — Marked 31 queued candidates as duplicates after verifying exact Common Sense Media movie-review URLs against the catalog on master. Each skip records the existing movie number and title. The unchecked queue fell from 1,481 to 1,450. This pass used local data and made zero source requests.
+
+Co-authored with ChatGPT.
