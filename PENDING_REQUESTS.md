@@ -618,6 +618,6 @@ Skipped Knives Out because CSM recommends ages 13+. Backlog holds: Dear Dracula,
 
 Verified 10 posters, including the John Lewis poster that had rate-limited the earlier run. No film-specific Wikipedia infobox poster was available for Kitten Party, Knight Rusty, Lindsey Vonn: In the Moment, Maika: The Girl from Another Galaxy, Roxy Hunter and the Myth of the Mermaid. One new CSM request was used, plus one Wikipedia metadata request and ten Wikimedia poster checks. All twelve guarded requests succeeded. The queue has 1,498 unchecked candidates, including the unresolved backlog holds. The read list is empty.
 
-Checks: pending local verification. Pull requests: [titles PR](pending) and [flags PR](pending).
+Both full local check sequences passed on Node.js 20. The bundle and data version were regenerated for each branch. Data validation covered 1,243 films and 1,155 posters, guidance was complete, and each branch had 21 unit test passes and 309 Playwright passes with one existing conditional skip. Pull requests: [titles PR](https://github.com/tokim25/movie-app-repo/pull/236) and [flags PR](https://github.com/tokim25/movie-app-repo/pull/237).
 
 Co-authored with ChatGPT.
