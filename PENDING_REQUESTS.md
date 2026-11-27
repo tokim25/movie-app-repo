@@ -653,3 +653,7 @@ Co-authored with ChatGPT.
 11/27/2026 (Codex backlog cleanup) — Marked 31 queued candidates as duplicates after verifying exact Common Sense Media movie-review URLs against the catalog on master. Each skip records the existing movie number and title. The unchecked queue fell from 1,481 to 1,450. This pass used local data and made zero source requests.
 
 Co-authored with ChatGPT.
+
+11/27/2026 (Codex backlog cleanup) — Verified 16 pending candidates against saved Common Sense Media reviews. Thirteen exceed the CSM age cap and three are rated R. Appended the review URLs and reasons to the queue. The unchecked count fell from 1,450 to 1,434. A Haunting in Venice stays in the Batch 7 draft. This pass made zero source requests.
+
+Co-authored with ChatGPT.
