@@ -11,6 +11,7 @@ import {
   isInVerifiedForFamilyFitSubset
 } from './catalog-schema.mjs';
 import { validateGuidance } from './validate-guidance.mjs';
+import { isTmdbPoster } from './poster-sources.mjs';
 
 const movieArrays = [
   'MOVIES_BASE',
@@ -194,13 +195,17 @@ for (const key of posterKeys) {
 
 for (const movie of movies) {
   const poster = context.__POSTERS__ && context.__POSTERS__[movie.num];
-  if (poster) {
+  if (!poster) continue;
+  if (poster.u !== undefined || poster.tmdb === undefined) {
     try {
       const url = new URL(poster.u);
       if (url.protocol !== 'https:') errors.push(`${movie.num} ${movie.t}: poster URL must use https`);
     } catch {
       errors.push(`${movie.num} ${movie.t}: invalid poster URL`);
     }
+  }
+  if (poster.tmdb !== undefined && !isTmdbPoster(poster.tmdb)) {
+    errors.push(`${movie.num} ${movie.t}: invalid TMDB poster URL, dimensions, or movie ID`);
   }
 }
 

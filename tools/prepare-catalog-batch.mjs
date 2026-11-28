@@ -6,6 +6,7 @@ import { parseArgs } from 'node:util';
 import vm from 'node:vm';
 import { dataFiles } from '../scripts/data-version.mjs';
 import { deriveFlags, holdReason } from '../scripts/flag-rule.mjs';
+import { verifyTmdbPoster } from './tmdb-poster-evidence.mjs';
 
 const {values:options}=parseArgs({options:{
   manifest:{type:'string'}, output:{type:'string'}, apply:{type:'boolean'}, help:{type:'boolean'},
@@ -47,7 +48,7 @@ function reserve(slug) {
 let lastPosition=-1;
 let inBacklog=false;
 const batch=entries.map((entry,index)=>{
-  const {slug,t,genre,studio,runtimeMinutes,runtimeSourceId,srcUrl,rating,csm,reviewDate,pins=[],poster,predecessor,bumps={}}=entry;
+  const {slug,t,genre,studio,runtimeMinutes,runtimeSourceId,srcUrl,rating,csm,reviewDate,pins=[],poster,tmdbPoster,tmdbPosterHeaders,predecessor,bumps={}}=entry;
   const y=String(entry.y);
   reserve(slug);
   const source=new URL(srcUrl);
@@ -96,11 +97,16 @@ const batch=entries.map((entry,index)=>{
     const headers=read(path.resolve(path.dirname(options.manifest),entry.posterHeaders));
     assert(/^HTTP\/(?:2|1\.1) 200\b/m.test(headers)&&/^content-type: image\//im.test(headers),`Unverified poster headers for ${t}`);
   }
+  if (tmdbPoster !== undefined || tmdbPosterHeaders !== undefined) {
+    const receipt=tmdbPosterHeaders && path.resolve(path.dirname(options.manifest),tmdbPosterHeaders);
+    verifyTmdbPoster(tmdbPoster,receipt,t);
+  }
+  const artwork=tmdbPoster ? {...poster,tmdb:tmdbPoster} : poster;
   const hold=holdReason(csm);
   for (const [category,bump] of Object.entries(bumps)) {
     assert(!hold&&['violence','language','romance','drinking'].includes(category)&&bump.quote.length>=20&&full.includes(bump.quote)&&bump.why.trim().length>=10,`Invalid flag adjustment for ${t}`);
   }
-  return {movie,slug,pins,poster,prior,guidance:{concerns,preShow},flag:{num,on:reviewDate,csm,bumps},hold};
+  return {movie,slug,pins,poster:artwork,prior,guidance:{concerns,preShow},flag:{num,on:reviewDate,csm,bumps},hold};
 });
 for (const item of skipped) { reserve(item.slug); assert(order.has(item.slug)&&item.reason?.trim()); }
 queue.done.push(...batch.map(row=>row.slug));
@@ -150,7 +156,7 @@ write('batch-identities.json',[str({
 write('titles-table.md',[
   '| Num | Title | Year | CSM age | Runtime | Studio | Curated lists | Poster |',
   '| --- | --- | --- | --- | --- | --- | --- | --- |',
-  ...batch.map(({movie,pins,poster})=>`| ${movie.num} | ${movie.t} | ${movie.y} | ${movie.ca} | ${movie.runtimeMinutes} min | ${movie.studio} | ${pins.map(id=>listNames.get(id)).join(', ')||'—'} | ${poster?'Yes':'No'} |`),
+  ...batch.map(({movie,pins,poster})=>`| ${movie.num} | ${movie.t} | ${movie.y} | ${movie.ca} | ${movie.runtimeMinutes} min | ${movie.studio} | ${pins.map(id=>listNames.get(id)).join(', ')||'—'} | ${poster?.tmdb?'Yes (TMDB fallback)':poster?'Yes':'No'} |`),
   '', '## Held and skipped', '', ...[...held,...skipped].map(item=>`- **${item.title||item.slug}.** ${item.reason}`),
   '', '## Possible list fits', '', ...possibleLists.map(item=>`- **${item.title}** could fit **${listNames.get(item.list)||item.list}**. ${item.reason}`),
 ]);
@@ -162,7 +168,7 @@ write('flags-table.md',[
 ]);
 write('batch-log.md',[
   `${date} (Codex catalog batch) — Added ${batch.length} titles, nums ${firstNum}–${firstNum+batch.length-1}.`, '',
-  ...batch.map(({movie,poster})=>`- ${movie.num} ${movie.t} (${movie.y}), CSM ${movie.ca}, ${movie.runtimeMinutes} min, ${movie.studio}. Poster ${poster?'verified':'unavailable'}.`),
+  ...batch.map(({movie,poster})=>`- ${movie.num} ${movie.t} (${movie.y}), CSM ${movie.ca}, ${movie.runtimeMinutes} min, ${movie.studio}. Poster ${poster?.tmdb?'verified with TMDB fallback':poster?'verified':'unavailable'}.`),
   '', ...[...held,...skipped].map(item=>`- **${item.title||item.slug}.** ${item.reason}`),
   '', `The backlog has ${remaining.toLocaleString('en-US')} unchecked candidates.`, '',
   ...(manifest.releaseScan ? [`New-release scan (${manifest.releaseScan.requestsUsed} requests): ${manifest.releaseScan.note}`, ''] : []),

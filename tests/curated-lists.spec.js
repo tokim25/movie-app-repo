@@ -216,7 +216,7 @@ test('passport cards show poster fans while compact seasonal contexts keep decor
   await expect(page.locator('#listsBody .passport .ppFan[aria-hidden="true"]')).toHaveCount(passportCount);
   const fanSizes = await passports.evaluateAll(cards => cards.map(card => ({
     actual: card.querySelectorAll('.ppFanPoster').length,
-    expected: Math.min(3, listIndices(listById(card.dataset.list)).filter(idx => MOVIE_POSTERS[MOVIES[idx].num]?.u).length),
+    expected: Math.min(3, listIndices(listById(card.dataset.list)).filter(idx => MOVIE_POSTERS[MOVIES[idx].num]).length),
   })));
   for (const { actual, expected } of fanSizes) expect(actual).toBe(expected);
   const frameCount = fanSizes.reduce((sum, fan) => sum + fan.expected, 0);
@@ -236,7 +236,7 @@ test('a poster fan follows the collection lead-title order', async ({ page }) =>
   const actual = await card.locator('.ppFanPoster img').evaluateAll(images => images.map(image => image.getAttribute('src')));
   const expected = await page.evaluate(() => {
     const list = listById('black-joy-family-big-dreams');
-    return list.pins.filter(num => MOVIE_POSTERS[num]?.u).slice(0, 3).map(num => MOVIE_POSTERS[num].u);
+    return list.pins.map(num => MOVIE_POSTERS[num]).filter(Boolean).slice(0, 3).map(art => art.u ?? art.tmdb.u);
   });
   expect(actual).toEqual(expected);
   expect(await card.locator('.ppFanPoster img').evaluateAll(images => images.map(image => image.getAttribute('alt')))).toEqual(['', '', '']);
@@ -306,6 +306,7 @@ test('the first successful poster replaces themed artwork and failed posters lea
 test('Passover centers its only poster and shows decorative placeholders beside the full movie titles', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await stubPosters(page);
+  await page.route('https://image.tmdb.org/**', route => route.abort('failed'));
   await startOn(page, '2026-11-26T19:00:00');
   await watchAsAdultsOnly(page);
   await openLists(page);
@@ -334,6 +335,34 @@ test('Passover centers its only poster and shows decorative placeholders beside 
     await expect(placeholder).toBeEmpty();
     await expect(placeholder).toHaveAttribute('aria-hidden', 'true');
   }
+});
+
+test('Passover uses TMDB for unmapped and failed Wikimedia artwork in the fan, rows, and viewer', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await stubPosters(page);
+  await page.route('https://upload.wikimedia.org/**/Prince_of_egypt_ver2.jpg', route => route.abort('failed'));
+  await page.route('https://image.tmdb.org/t/p/w500/**', route =>
+    route.fulfill({ status: 200, contentType: 'image/png', body: posterPixel }));
+  await startOn(page, '2026-11-26T19:00:00');
+  await watchAsAdultsOnly(page);
+  await openLists(page);
+  await page.locator('#listsBody .returnCalendar[data-list="passover"]').click();
+
+  const tmdb = /^https:\/\/image\.tmdb\.org\/t\/p\/w500\//;
+  const fan = page.locator('#listOpen .ppFanPoster.hasLoadedPoster img');
+  await expect(fan).toHaveCount(3);
+  for (const poster of await fan.all()) await expect(poster).toHaveAttribute('src', tmdb);
+
+  const rows = page.locator('#openListRows > li.row');
+  await expect(rows.locator('.posterZoom:enabled img')).toHaveCount(3);
+  await expect(rows.locator('.posterFallback')).toHaveCount(0);
+  const princePoster = rows.filter({ hasText: 'The Prince of Egypt' }).locator('.posterZoom');
+  const src = await princePoster.locator('img').getAttribute('src');
+  expect(src).toMatch(tmdb);
+  await expect(princePoster.locator('img')).toHaveAttribute('referrerpolicy', 'no-referrer');
+  await princePoster.click();
+  await expect(page.locator('#posterViewer')).toBeVisible();
+  await expect(page.locator('#posterViewerImg')).toHaveAttribute('src', src);
 });
 
 test('the Now showing badge sits outside the poster fan, so the fan keeps all three posters in place', async ({ page }) => {

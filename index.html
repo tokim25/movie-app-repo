@@ -196,7 +196,7 @@ function reportError(err){
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Every poster comes from Wikimedia; open the connection before the first one is asked for. -->
+<!-- Wikimedia hosts most posters; connect before the first image is requested. -->
 <link rel="preconnect" href="https://upload.wikimedia.org">
 <!-- Load-time fix: a plain <link rel="stylesheet"> here blocks first paint on
      fonts.googleapis.com responding, even though display=swap already means
@@ -2657,6 +2657,7 @@ function reportError(err){
     font-size:14px;
     line-height:1.48;
   }
+  .posterCredits img{ display:block; margin-bottom:6px; }
   .scrim{
     position:fixed;
     inset:0;
@@ -3864,6 +3865,10 @@ function reportError(err){
         <li>CSM means Common Sense Media. DCOM means Disney Channel Original Movie.</li>
       </ul>
       <p>Your family data stays in this browser unless you turn on sync. Google sync stores a small app-only file in your Google Drive.</p>
+      <p class="posterCredits">
+        <a href="https://www.themoviedb.org"><img src="/assets/tmdb-logo.svg" width="100" height="13" loading="lazy" alt="The Movie Database (TMDB)"></a>
+        This product uses the TMDB API but is not endorsed or certified by TMDB.
+      </p>
     </div>
   </div>
 </main>
@@ -5057,9 +5062,29 @@ function displayTitle(m){
   return m.y && !String(m.t).includes(String(m.y)) ? `${m.t} (${m.y})` : m.t;
 }
 
+function moviePoster(movie){
+  return typeof MOVIE_POSTERS === 'undefined' ? undefined : MOVIE_POSTERS[movie.num];
+}
+
+function loadPosterImage(img, poster, onUnavailable){
+  const show = art => {
+    img.width = art.w || 200;
+    img.height = art.h || 300;
+    img.src = art.u;
+  };
+  img.referrerPolicy = 'no-referrer';
+  img.onerror = () => {
+    if(poster.u && poster.tmdb && img.getAttribute('src') === poster.u){
+      show(poster.tmdb);
+    }else{
+      onUnavailable();
+    }
+  };
+  show(poster.u ? poster : poster.tmdb);
+}
+
 function createPoster(m, className, isNew){
-  const posters = typeof MOVIE_POSTERS !== 'undefined' ? MOVIE_POSTERS : {};
-  const poster = posters[m.num];
+  const poster = moviePoster(m);
 
   const wrap = document.createElement('div');
   wrap.className = 'poster' + (className ? ' ' + className : '');
@@ -5067,7 +5092,7 @@ function createPoster(m, className, isNew){
   fallback.setAttribute('aria-hidden', 'true');
   wrap.appendChild(fallback);
 
-  if(poster && poster.u){
+  if(poster?.u || poster?.tmdb?.u){
     const shouldLoadEagerly = posterEagerBudget > 0;
     if(shouldLoadEagerly) posterEagerBudget -= 1;
     const img = document.createElement('img');
@@ -5075,22 +5100,19 @@ function createPoster(m, className, isNew){
     img.loading = shouldLoadEagerly ? 'eager' : 'lazy';
     img.decoding = 'async';
     img.fetchPriority = shouldLoadEagerly ? 'high' : 'low';
-    img.width = poster.w || 200;
-    img.height = poster.h || 300;
     const zoom = document.createElement('button');
     zoom.type = 'button';
     zoom.className = 'posterZoom';
     zoom.disabled = true;
     zoom.setAttribute('aria-label', `View larger poster for ${m.t}`);
-    zoom.onclick = () => openPosterViewer(m, poster.u);
+    zoom.onclick = () => openPosterViewer(m, img.src);
     img.onload = () => {
       fallback.remove();
       zoom.disabled = false;
     };
-    img.onerror = () => zoom.remove();
     zoom.appendChild(img);
     wrap.appendChild(zoom);
-    img.src = poster.u;
+    loadPosterImage(img, poster, () => zoom.remove());
   }
 
   if(isNew){
@@ -5106,6 +5128,7 @@ function createPoster(m, className, isNew){
 function openPosterViewer(m, url){
   const viewer = document.getElementById('posterViewer');
   const img = document.getElementById('posterViewerImg');
+  img.referrerPolicy = 'no-referrer';
   img.src = url;
   img.alt = `Poster for ${m.t}`;
   document.getElementById('posterViewerTitle').textContent = `${displayTitle(m)}`;
@@ -5545,8 +5568,7 @@ function createListIcon(id){
 }
 // Up to three films with mapped posters, in curated order.
 function listFanMovies(list){
-  if(typeof MOVIE_POSTERS === 'undefined') return [];
-  return listIndices(list).map(idx => MOVIES[idx]).filter(movie => MOVIE_POSTERS[movie.num]?.u).slice(0, 3);
+  return listIndices(list).map(idx => MOVIES[idx]).filter(movie => moviePoster(movie)).slice(0, 3);
 }
 // How many of the next fans to build load their posters right away at high
 // priority (the cards at the top of the screen). The rest load as they scroll in.
@@ -5558,7 +5580,7 @@ function createListPosterFan(list){
   const eager = listFanEagerBudget > 0;
   if(eager) listFanEagerBudget -= 1;
   listFanMovies(list).forEach(movie => {
-    const art = MOVIE_POSTERS[movie.num];
+    const art = moviePoster(movie);
     const frame = document.createElement('span');
     frame.className = 'ppFanPoster';
     const img = document.createElement('img');
@@ -5566,13 +5588,10 @@ function createListPosterFan(list){
     img.loading = eager ? 'eager' : 'lazy';
     img.decoding = 'async';
     img.fetchPriority = eager ? 'high' : 'auto';
-    img.width = art.w || 200;
-    img.height = art.h || 300;
     img.onload = () => frame.classList.add('hasLoadedPoster');
-    img.onerror = () => frame.remove();
     frame.appendChild(img);
     fan.appendChild(frame);
-    img.src = art.u;
+    loadPosterImage(img, art, () => frame.remove());
   });
   return fan;
 }
@@ -6844,8 +6863,7 @@ function showTonightPick(candidateOverride){
   const stage = document.getElementById('tonightPickStage');
   if(stage){
     stage.textContent = '';
-    const art = typeof MOVIE_POSTERS !== 'undefined' && MOVIE_POSTERS[movie.num];
-    if(art && art.u) stage.appendChild(createPoster(movie, 'pickPoster', false));
+    if(moviePoster(movie)) stage.appendChild(createPoster(movie, 'pickPoster', false));
   }
   renderTonightHeadsUp(movie);
   // Issue #78: a new pick showing (including via Skip) always starts with its
@@ -9999,10 +10017,11 @@ function warmListPosters(){
   if(navigator.connection && navigator.connection.saveData) return;
   try{
     topListsForWarmup().forEach(list => listFanMovies(list).forEach(movie => {
-      const art = MOVIE_POSTERS[movie.num];
+      const art = moviePoster(movie);
       const img = new Image();
       img.decoding = 'async';
-      img.src = art.u;
+      img.referrerPolicy = 'no-referrer';
+      img.src = art.u || art.tmdb.u;
     }));
   }catch(err){ /* warming is best-effort */ }
 }
