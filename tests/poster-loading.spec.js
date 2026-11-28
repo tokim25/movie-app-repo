@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { switchToFlatView, rows } from './helpers.js';
+import { omitMappedPosters, switchToFlatView, rows } from './helpers.js';
 
 const pixelPng = Buffer.from(
   'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==',
@@ -25,6 +25,7 @@ test('visible poster images are requested eagerly', async ({ page }) => {
 });
 
 test('movies without mapped artwork show a decorative placeholder beside the title and year', async ({ page }) => {
+  await omitMappedPosters(page, [182]); // Jett Jackson
   await page.goto('/');
   await switchToFlatView(page);
   await page.locator('#search').fill('Jett Jackson: The Movie');
