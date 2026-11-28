@@ -700,6 +700,8 @@ The same-day release scan used one CSM request. The full title reviews and film 
 
 The titles bundle, data version, catalog and guidance validators, and all 21 unit tests passed on Node.js 20. Playwright reported 317 passes, 0 passed on retry, and 0 skipped. Automatic flags are held for 23 Blast and A League of Their Own.
 
-Batch 7 pull request links will be added after the flags PR opens.
+The flags derivation and its own build, validators, and 21 unit tests also passed. Flags Playwright reported 317 passes, 0 passed on retry, and 0 skipped.
+
+Pull requests: [titles PR](https://github.com/tokim25/movie-app-repo/pull/250) and [flags PR](https://github.com/tokim25/movie-app-repo/pull/251).
 
 Co-authored with ChatGPT.
