@@ -2178,5 +2178,194 @@
    "on": "2026-11-25"
   },
   "rule": 1
+ },
+ "1277": {
+  "csm": {
+   "v": 0,
+   "s": 0,
+   "l": 0,
+   "d": 0,
+   "age": 8,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
+ },
+ "1278": {
+  "csm": {
+   "v": 1,
+   "s": 0,
+   "l": 0,
+   "d": 0,
+   "age": 3,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
+ },
+ "1279": {
+  "csm": {
+   "v": 0,
+   "s": 0,
+   "l": 3,
+   "d": 3,
+   "age": 8,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
+ },
+ "1280": {
+  "csm": {
+   "v": 0,
+   "s": 0,
+   "l": 0,
+   "d": 0,
+   "age": 3,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
+ },
+ "1281": {
+  "csm": {
+   "v": 3,
+   "s": 0,
+   "l": 1,
+   "d": 1,
+   "age": 8,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
+ },
+ "1282": {
+  "csm": {
+   "v": 3,
+   "s": 0,
+   "l": 0,
+   "d": 0,
+   "age": 8,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
+ },
+ "1283": {
+  "csm": {
+   "v": 2,
+   "s": 1,
+   "l": 3,
+   "d": 1,
+   "age": 9,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1,
+  "adj": {
+   "violence": {
+    "kind": "depicted",
+    "quote": "An animated sequence shows a police officer aiming a gun at a Black man",
+    "why": "The documentary depicts the armed threat in animation. The Orlando shooting is mentioned in news audio."
+   }
+  }
+ },
+ "1284": {
+  "csm": {
+   "v": 0,
+   "s": 0,
+   "l": 0,
+   "d": 0,
+   "age": 3,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
+ },
+ "1285": {
+  "csm": {
+   "v": 3,
+   "s": 1,
+   "l": 3,
+   "d": 0,
+   "age": 8,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
+ },
+ "1286": {
+  "csm": {
+   "v": 2,
+   "s": 0,
+   "l": 2,
+   "d": 0,
+   "age": 8,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
+ },
+ "1287": {
+  "csm": {
+   "v": 2,
+   "s": 0,
+   "l": 0,
+   "d": 3,
+   "age": 10,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1,
+  "held": true
+ },
+ "1288": {
+  "csm": {
+   "v": 1,
+   "s": 0,
+   "l": 1,
+   "d": 0,
+   "age": 4,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
+ },
+ "1289": {
+  "csm": {
+   "v": 3,
+   "s": 1,
+   "l": 1,
+   "d": 0,
+   "age": 8,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
+ },
+ "1290": {
+  "csm": {
+   "v": 3,
+   "s": 1,
+   "l": 0,
+   "d": 0,
+   "age": 8,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1
+ },
+ "1291": {
+  "csm": {
+   "v": 2,
+   "s": 3,
+   "l": 3,
+   "d": 3,
+   "age": 10,
+   "src": "page",
+   "on": "2026-11-25"
+  },
+  "rule": 1,
+  "held": true
  }
 }
