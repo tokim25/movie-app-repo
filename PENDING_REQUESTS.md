@@ -657,3 +657,51 @@ Co-authored with ChatGPT.
 11/27/2026 (Codex backlog cleanup) — Verified 16 pending candidates against saved Common Sense Media reviews. Thirteen exceed the CSM age cap and three are rated R. Appended the review URLs and reasons to the queue. The unchecked count fell from 1,450 to 1,434. A Haunting in Venice stays in the Batch 7 draft. This pass made zero source requests.
 
 Co-authored with ChatGPT.
+
+11/27/2026 (Codex catalog batch 7) — Added 15 family films and specials from the ordered backlog, nums 1277–1291.
+
+- 1277 The Speed Cubers (2020), CSM 8+, 40 min, Netflix. Poster verified with TMDB fallback.
+- 1278 The Tigger Movie (2000), CSM 3+, 77 min, Disney. Poster verified with TMDB fallback.
+- 1279 The Year of the Yao (2004), CSM 8+, 88 min, Fine Line Features. Poster verified with TMDB fallback.
+- 1280 Thomas & Friends: The Adventure Begins (2015), CSM 3+, 45 min, HIT Entertainment. Poster verified with TMDB fallback.
+- 1281 Unleashing Hope: The Power of Service Dogs for Autism (2025), CSM 8+, 42 min, Hulu. Poster unavailable.
+- 1282 We Are the Dream: The Kids of the Oakland MLK Oratorical Fest (2020), CSM 8+, 58 min, HBO. Poster verified with TMDB fallback.
+- 1283 We Are the Radical Monarchs (2019), CSM 9+, 95 min, Ladylike Films. Poster verified with TMDB fallback.
+- 1284 Winnie the Pooh: A Very Merry Pooh Year (2002), CSM 3+, 70 min, Disney. Poster verified with TMDB fallback.
+- 1285 10 Lives (2024), CSM 8+, 88 min, Sky Cinema. Poster verified with TMDB fallback.
+- 1286 100 Meters (2025), CSM 8+, 106 min, GKIDS. Poster verified with TMDB fallback.
+- 1287 23 Blast (2013), CSM 10+, 98 min, Ocean Avenue Entertainment. Poster verified with TMDB fallback.
+- 1288 A Boy Named Charlie Brown (1969), CSM 4+, 85 min, CBS. Poster verified with TMDB fallback.
+- 1289 A Cat's Life (2023), CSM 8+, 82 min, Orange Studio. Poster verified with TMDB fallback.
+- 1290 A Gorilla Story: Told by David Attenborough (2026), CSM 8+, 90 min, Netflix. Poster verified with TMDB fallback.
+- 1291 A League of Their Own (1992), CSM 10+, 128 min, Sony Pictures. Poster verified with TMDB fallback.
+
+- **Hershey.** The weekly log holds this release after its review described a depicted child death.
+- **Dear Dracula.** Conflicting source runtimes for the U.S. edition.
+- **Gandhi.** CSM 12+ and violence scored 4, including a massacre and an assassination.
+- **Meet the Small Potatoes.** Conflicting runtimes for the standalone U.S. film.
+- **Simon Birch.** CSM 10+ with a fatal accident and a child’s death during a rescue.
+- **Star Trek (2009).** CSM 12+, violence and language scored 4.
+- **The Bride of Frankenstein.** The horror and depicted violence need closer review.
+- **The League.** The historical footage includes descriptions and images of racist violence.
+- **The Lord of the Rings: The Fellowship of the Ring.** CSM violence scored 4, with intense fantasy battles.
+- **The Snowy Day.** CSM gives 59 minutes and Karrot, the producer, gives 38. Wikipedia has no exact film infobox.
+- **Wallace & Gromit: Vengeance Most Fowl.** The existing franchise entry uses DreamWorks. This film’s different production credit needs a studio choice.
+- **What Rhymes with Reason.** The film depicts injuries and discusses suicidal thoughts.
+- **13 Going on 30.** CSM 11+ with recurring sexual references and an underage drinking storyline.
+- **A Call to Spy.** CSM 12+ with both violence and substance use scored 4.
+- **A Haunting in Venice.** CSM age above 12.
+
+The backlog has 1,418 unchecked candidates.
+
+The same-day CSM New Kids’ Movies list had no newly eligible release. Hershey remains held as recorded above.
+
+The same-day release scan used one CSM request. The full title reviews and film metadata came from saved evidence. At the owner’s direction, this batch used exact TMDB images in place of eight pending Wikimedia image checks after an HTTP 429. Verified TMDB posters for 14 titles. No usable image was verified for Unleashing Hope: The Power of Service Dogs for Autism. The shared Wikimedia stop remains in effect.
+
+The titles bundle, data version, catalog and guidance validators, and all 21 unit tests passed on Node.js 20. Playwright reported 317 passes, 0 passed on retry, and 0 skipped. Automatic flags are held for 23 Blast and A League of Their Own.
+
+The flags derivation and its own build, validators, and 21 unit tests also passed. Flags Playwright reported 317 passes, 0 passed on retry, and 0 skipped.
+
+Pull requests: [titles PR](https://github.com/tokim25/movie-app-repo/pull/250) and [flags PR](https://github.com/tokim25/movie-app-repo/pull/251).
+
+Co-authored with ChatGPT.

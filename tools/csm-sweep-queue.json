@@ -8417,7 +8417,22 @@
   "the-great-race",
   "the-gruffalo",
   "the-magical-wand-chase-a-sesame-street-special",
-  "the-short-game"
+  "the-short-game",
+  "the-speed-cubers",
+  "the-tigger-movie",
+  "the-year-of-the-yao",
+  "thomas-friends-the-adventure-begins",
+  "unleashing-hope-the-power-of-service-dogs-for-autism",
+  "we-are-the-dream-the-kids-of-the-oakland-mlk-oratorical-fest",
+  "we-are-the-radical-monarchs",
+  "winnie-the-pooh-a-very-merry-pooh-year",
+  "10-lives",
+  "100-meters",
+  "23-blast",
+  "a-boy-named-charlie-brown",
+  "a-cats-life",
+  "a-gorilla-story-told-by-david-attenborough",
+  "a-league-of-their-own"
  ],
  "skipped": [
   {
@@ -8727,6 +8742,10 @@
   {
    "slug": "dune",
    "reason": "Dune: CSM 13+ exceeds the catalog limit of 12+. Cached review: https://www.commonsensemedia.org/movie-reviews/dune"
+  },
+  {
+   "slug": "a-haunting-in-venice",
+   "reason": "CSM age above 12."
   }
  ],
  "notes": "210 of 216 lists read (the remaining 6 are re-found from the sitemap next time, one request). Score = how many lists read so far include the title. Titles are slug-derived placeholders. The catalog filter at crawl time matched on title text only, so already-catalogued films under different spellings can still appear; check each against every data-*.js file (match on key words, not just the full title) before reading its CSM page. Many entries are adult films, documentaries or concerts; they drop out at the CSM age check. \"read\" lists titles whose CSM page was read on 11/9 and qualify; they still need Wikipedia facts, an entry and flags.",
