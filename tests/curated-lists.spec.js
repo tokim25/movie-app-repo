@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { setupSampleFamily } from './helpers.js';
+import { omitMappedPosters, setupSampleFamily } from './helpers.js';
 import { expectNoA11yViolations } from './a11y.js';
 
 // Curated lists (data-lists.js) live on their own Lists tab as passport
@@ -244,11 +244,12 @@ test('a poster fan follows the collection lead-title order', async ({ page }) =>
 
 const posterPixel = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==', 'base64');
 
-// Serve every Wikimedia poster as a 1x1 PNG so poster behaviour can be
-// checked without the network, and record which poster URLs were asked for.
+const posterUrl = /^https:\/\/(?:upload\.wikimedia\.org|image\.tmdb\.org)\//;
+
+// Serve poster images from both hosts as a 1x1 PNG and record the URLs.
 async function stubPosters(page){
   const requested = [];
-  await page.route('https://upload.wikimedia.org/**', route => {
+  await page.route(posterUrl, route => {
     requested.push(route.request().url());
     return route.fulfill({ status: 200, contentType: 'image/png', body: posterPixel });
   });
@@ -257,7 +258,8 @@ async function stubPosters(page){
 
 test('collections show themed artwork when posters are unmapped or all requests fail', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.route('https://upload.wikimedia.org/**', route => route.abort('failed'));
+  await omitMappedPosters(page, [1179, 1180, 1181]); // Thanksgiving films
+  await page.route(posterUrl, route => route.abort('failed'));
   await startOn(page, '2026-11-26T19:00:00');
   await openLists(page);
 
@@ -275,7 +277,7 @@ test('collections show themed artwork when posters are unmapped or all requests 
 });
 
 test('the first successful poster replaces themed artwork and failed posters leave the fan', async ({ page }) => {
-  await page.route('https://upload.wikimedia.org/**', route => route.abort('failed'));
+  await page.route(posterUrl, route => route.abort('failed'));
   let releasePoster;
   const posterReady = new Promise(resolve => {
     releasePoster = resolve;
@@ -398,7 +400,10 @@ test('the top two list cards load their posters first, and the rest wait until s
 test('after load, the app warms the top list posters before Lists is opened', async ({ page }) => {
   const requested = await stubPosters(page);
   await startOn(page, '2026-12-18T19:00:00');
-  const expected = await page.evaluate(() => topListsForWarmup().flatMap(list => listFanMovies(list)).map(movie => MOVIE_POSTERS[movie.num]?.u).filter(Boolean));
+  const expected = await page.evaluate(() => topListsForWarmup()
+    .flatMap(list => listFanMovies(list))
+    .map(movie => MOVIE_POSTERS[movie.num])
+    .map(art => art.u ?? art.tmdb.u));
   expect(expected.length).toBeGreaterThan(0);
   await page.evaluate(() => warmListPosters());
   await expect.poll(() => expected.every(url => requested.includes(url))).toBe(true);

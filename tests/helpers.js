@@ -82,6 +82,25 @@ export async function openSyncSettings(page) {
   await page.locator('#syncPanel').waitFor({ state: 'visible' });
 }
 
+export async function omitMappedPosters(page, movieNums) {
+  await page.route('**/data-bundle.js', async route => {
+    const response = await route.fetch();
+    const source = await response.text();
+    const body = source.replace(
+      /(const MOVIE_POSTERS = Object\.freeze\(\{\n)([\s\S]*?)(\n\}\);)/,
+      (_match, opening, entries, closing) => {
+        const retained = entries.split('\n').filter(line => {
+          const num = Number(/^\s*(\d+):/.exec(line)?.[1]);
+          return !movieNums.includes(num);
+        });
+        return opening + retained.join('\n') + closing;
+      },
+    );
+    if (body === source) throw new Error('The unmapped-poster fixture removed no mapped posters.');
+    await route.fulfill({ response, body });
+  });
+}
+
 export function rows(page) {
   return page.locator('#list > li.row');
 }
