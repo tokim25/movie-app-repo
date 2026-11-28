@@ -1,4 +1,4 @@
-// Movie poster artwork resolved from public Wikipedia page thumbnails.
+// Movie posters from Wikipedia infoboxes and verified TMDB fallbacks.
 // Keyed by the catalog movie num; values reference externally hosted images only.
 const MOVIE_POSTERS = Object.freeze({
   1: {"u":"https://upload.wikimedia.org/wikipedia/en/0/02/My_Neighbor_Totoro_-_Tonari_no_Totoro_%28Movie_Poster%29.jpg","w":268,"h":371,"p":"My Neighbor Totoro"},
@@ -489,7 +489,7 @@ const MOVIE_POSTERS = Object.freeze({
   497: {"u":"https://upload.wikimedia.org/wikipedia/en/9/9e/Turning_Red_poster.jpg","w":250,"h":370,"p":"Turning Red"},
   498: {"u":"https://upload.wikimedia.org/wikipedia/en/f/f7/Inside_Out_2_poster.jpg","w":260,"h":385,"p":"Inside Out 2"},
   499: {"u":"https://upload.wikimedia.org/wikipedia/en/e/ef/Antz-Poster.jpg","w":258,"h":387,"p":"Antz"},
-  500: {"u":"https://upload.wikimedia.org/wikipedia/en/6/6c/Prince_of_egypt_ver2.jpg","w":258,"h":384,"p":"The Prince of Egypt"},
+  500: {"u":"https://upload.wikimedia.org/wikipedia/en/6/6c/Prince_of_egypt_ver2.jpg","w":258,"h":384,"p":"The Prince of Egypt","tmdb":{"u":"https://image.tmdb.org/t/p/w500/2xUjYwL6Ol7TLJPPKs7sYW5PWLX.jpg","w":500,"h":750,"id":9837}},
   501: {"u":"https://upload.wikimedia.org/wikipedia/en/4/48/Joseph_king_dreams.jpg","w":259,"h":388,"p":"Joseph: King of Dreams"},
   502: {"u":"https://upload.wikimedia.org/wikipedia/en/7/7b/Shrek_%282001_animated_feature_film%29.jpg","w":260,"h":389,"p":"Shrek"},
   503: {"u":"https://upload.wikimedia.org/wikipedia/en/3/3b/Spirit_Stallion_of_the_Cimarron_poster.jpg","w":260,"h":383,"p":"Spirit: Stallion of the Cimarron"},
@@ -1116,6 +1116,8 @@ const MOVIE_POSTERS = Object.freeze({
   1148: {"u":"https://upload.wikimedia.org/wikipedia/en/f/f5/Barbie_Princess_Adventure_Film.jpg","w":316,"h":316,"p":"Barbie: Princess Adventure"},
   1150: {"u":"https://upload.wikimedia.org/wikipedia/en/c/ca/Avatar_Aang_The_Last_Airbender_poster.jpg","w":258,"h":387,"p":"Avatar Aang: The Last Airbender"},
   1151: {"u":"https://upload.wikimedia.org/wikipedia/en/0/08/DrummerBoy.jpeg","w":260,"h":385,"p":"Drummer Boy (film)"},
+  1170: {"tmdb":{"u":"https://image.tmdb.org/t/p/w500/j4hAhcATlIZ6ecHLvNSaR1i0C99.jpg","w":500,"h":750,"id":1662192}},
+  1171: {"tmdb":{"u":"https://image.tmdb.org/t/p/w500/3Ei59AR64x6dMZfWobPCkZjbqTL.jpg","w":500,"h":750,"id":6844}},
   1193: {"u":"https://upload.wikimedia.org/wikipedia/en/a/a8/Chupa_movie_poster.jpg","w":259,"h":384,"p":"Chupa (film)"},
   1195: {"u":"https://upload.wikimedia.org/wikipedia/en/9/91/A_Ballerina%27s_Tale_poster.jpg","w":260,"h":384,"p":"A Ballerina's Tale"},
   1196: {"u":"https://upload.wikimedia.org/wikipedia/en/c/c9/A_Million_Miles_Away_film_poster.png","w":250,"h":370,"p":"A Million Miles Away (film)"},

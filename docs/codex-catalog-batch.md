@@ -22,7 +22,8 @@ The Codex environment needs internet access for these hosts, and nothing else is
 
 - `www.commonsensemedia.org` (reviews and ages)
 - `en.wikipedia.org` (year, runtime, studio, poster page)
-- `upload.wikimedia.org` (poster images)
+- `upload.wikimedia.org` (primary poster images)
+- `www.themoviedb.org` and `image.tmdb.org` (optional TMDB poster verification)
 - the npm registry (for `npm ci` and Playwright's browser download)
 
 Install with `npm ci` and `npx playwright install chromium`. Check the setup by running `node scripts/validate-data.mjs`, `node --test tests-unit/*.test.mjs` and `npx playwright test` on a clean checkout of `master` before your first batch, and note which tests fail before you change anything.
@@ -115,7 +116,17 @@ Take the poster from the film's Wikipedia infobox, check that the image URL retu
   1184: {"u":"https://upload.wikimedia.org/…","w":220,"h":326,"p":"Steps (film)"},
 ```
 
-`w` and `h` are the image size and `p` is the Wikipedia page title. If no usable poster exists, leave it out and say so in the log. The app copes without one.
+`w` and `h` are the image size and `p` is the Wikipedia page title.
+
+After completing the Wikipedia evidence pass, you may add a TMDB poster for the same film. Check the title and release year on the TMDB movie page, then confirm that the exact `https://image.tmdb.org/t/p/w500/…` image returns HTTP 200 and an `image/*` content type. Check the displayed image and record its actual dimensions. Keep the normal stop rule if any guarded request is blocked.
+
+For the editorial decision or reviewed manifest, put the TMDB image in `tmdbPoster: { u, w, h, id }`, where `id` is the TMDB movie ID. Save an exact URL and header receipt as `tmdbPosterHeaders` (use an absolute file path in an editorial decision):
+
+```sh
+curl -qfsSI --max-time 20 "$tmdb_image_url" --write-out '\n%{url_effective}\n' > "$tmdb_poster_headers"
+```
+
+The builder stores this as a `tmdb` member on the poster entry. The app tries Wikimedia first when mapped, then TMDB when Wikimedia is missing or fails. If neither provider has a verified poster, omit the entry and say so in the log.
 
 ### 4. Sequels, in `data-series.js`
 

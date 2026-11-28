@@ -47,6 +47,20 @@ test('a failed remote poster request keeps the poster slot and shows the fallbac
   await expect(row.locator('.posterZoom')).toHaveCount(0);
 });
 
+test('a failed Wikimedia and TMDB pair leaves the decorative placeholder', async ({ page }) => {
+  await page.route('https://upload.wikimedia.org/**', route => route.abort('failed'));
+  await page.route('https://image.tmdb.org/**', route => route.abort('failed'));
+  await page.goto('/');
+  await switchToFlatView(page);
+
+  const fallbackRequest = page.waitForRequest('https://image.tmdb.org/t/p/w500/2xUjYwL6Ol7TLJPPKs7sYW5PWLX.jpg');
+  await page.locator('#search').fill('The Prince of Egypt');
+  await fallbackRequest;
+  const row = rows(page).filter({ hasText: 'The Prince of Egypt (1998)' });
+  await expect(row.locator('.posterFallback')).toBeVisible();
+  await expect(row.locator('.posterZoom')).toHaveCount(0);
+});
+
 test('verified runtime appears in shelf metadata across the catalog', async ({ page }) => {
   await page.goto('/');
   await switchToFlatView(page);

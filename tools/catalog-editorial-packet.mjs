@@ -4,6 +4,7 @@ import path from 'node:path';
 import { parseArgs } from 'node:util';
 import { catalogCacheDirectory, git, pendingQueue, readEvidence, readJson, slugPattern, writeAtomic, writeEvidence, writeJson } from './catalog-evidence.mjs';
 import { hasVerifiedImageHeaders } from './enrich-catalog-candidates.mjs';
+import { verifyTmdbPoster } from './tmdb-poster-evidence.mjs';
 
 const candidateStatuses = new Set(['editorial-candidate', 'review-metadata']);
 const aliases = new Map(Object.entries({ 'Walt Disney Pictures': 'Disney', 'Pixar Animation Studios': 'Pixar',
@@ -151,6 +152,11 @@ function approve(record, decision, date) {
     if (!wiki.posterHeaders || !hasVerifiedImageHeaders(fs.readFileSync(wiki.posterHeaders, 'utf8'))) throw new Error(`Poster receipt is absent or invalid for ${slug}.`);
     entry.poster = wiki.poster;
     entry.posterHeaders = path.resolve(wiki.posterHeaders);
+  }
+  if (decision.tmdbPoster !== undefined || decision.tmdbPosterHeaders !== undefined) {
+    verifyTmdbPoster(decision.tmdbPoster, decision.tmdbPosterHeaders, slug);
+    entry.tmdbPoster = decision.tmdbPoster;
+    entry.tmdbPosterHeaders = path.resolve(decision.tmdbPosterHeaders);
   }
   return entry;
 }

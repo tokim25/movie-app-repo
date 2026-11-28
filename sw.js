@@ -8,8 +8,8 @@
 // cached catalog for a full extra page load with no indication anything
 // was stale. Bump the version/date prefix by hand for a real code
 // change to this file; DATA_VERSION takes care of itself.
-const DATA_VERSION = 'b094a0994f';
-const CACHE_VERSION = `family-feature-v31-20261127-${DATA_VERSION}`;
+const DATA_VERSION = 'efefa50074';
+const CACHE_VERSION = `family-feature-v32-20261127-${DATA_VERSION}`;
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -24,6 +24,7 @@ const APP_SHELL = [
   '/assets/icons/icon-192-maskable.png',
   '/assets/icons/icon-512-maskable.png',
   '/assets/icons/movie-night-icon.svg',
+  '/assets/tmdb-logo.svg',
   '/data-bundle.js'
 ];
 

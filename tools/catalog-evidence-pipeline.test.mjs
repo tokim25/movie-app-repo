@@ -123,7 +123,18 @@ if (url.startsWith('https://en.wikipedia.org/wiki/')) {
   writeJson(decisions, [{ ...editorialDecision, evidenceId: 'outdated' }]);
   assert.equal(tool('catalog-editorial-packet.mjs', join).status, 2);
   assert.equal(fs.existsSync(manifest), false);
-  writeJson(decisions, [editorialDecision]);
+  const tmdbPoster = { u: 'https://image.tmdb.org/t/p/w500/fixture.jpg', w: 500, h: 750, id: 42 };
+  const tmdbPosterHeaders = path.join(directory, 'tmdb.headers');
+  writeJson(decisions, [{ ...editorialDecision, tmdbPoster, tmdbPosterHeaders }]);
+  fs.writeFileSync(tmdbPosterHeaders, `${imageHeaders}
+${tmdbPoster.u.replace('fixture', 'different')}
+`);
+  const wrongTmdbReceipt = tool('catalog-editorial-packet.mjs', join);
+  assert.equal(wrongTmdbReceipt.status, 2);
+  assert.match(wrongTmdbReceipt.stderr, /Unverified TMDB poster URL or image headers/);
+  fs.writeFileSync(tmdbPosterHeaders, `${imageHeaders}
+${tmdbPoster.u}
+`);
   passed(tool('catalog-editorial-packet.mjs', join));
   const [entry] = readJson(manifest).entries;
   assert.equal(entry.runtimeMinutes, 97);
@@ -131,12 +142,16 @@ if (url.startsWith('https://en.wikipedia.org/wiki/')) {
   assert.equal(entry.studio, 'Netflix');
   assert.equal(entry.reviewDate, '2026-01-11');
   assert.deepEqual(entry.pins, ['sibling-teams']);
+  assert.deepEqual(entry.tmdbPoster, tmdbPoster);
+  assert.equal(entry.tmdbPosterHeaders, tmdbPosterHeaders);
   assert.equal(readEvidence(cache, slug).decision.evidenceId, evidenceId);
 
   const reports = path.join(directory, 'reports');
   const prep = tool('run-catalog-batch.mjs', ['titles', '--manifest', manifest, '--output', reports]);
   assert.equal(prep.status, 0, `${prep.stdout}\n${prep.stderr}`);
-  assert.match(fs.readFileSync(path.join(reports, 'titles-pr.md'), 'utf8'), /Full build and validation are pending/);
+  const titlesPr = fs.readFileSync(path.join(reports, 'titles-pr.md'), 'utf8');
+  assert.match(titlesPr, /Full build and validation are pending/);
+  assert.match(titlesPr, /Yes \(TMDB fallback\)/);
   assert.equal(readJson(path.join(reports, 'batch-identities.json')).titles[0].srcUrl, review);
   const flags = tool('run-catalog-batch.mjs', ['flags', '--output', reports, '--titles-pr', 'https://github.com/example/fixture/pull/1']);
   assert.equal(flags.status, 1);
